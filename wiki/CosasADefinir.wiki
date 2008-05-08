@@ -1,5 +1,6 @@
 #summary Cosas a definir
 
-  * Enconding de los documentos y ćodigo (utf8 o isoXXXX)
-  * Formato de la documentación (oo o ms)
+  * Enconding de los documentos y código (utf8 o iso 8859-1, mientras uso utf8)
+  * Formato de la documentación (oo o ms, mientras uso txt)
+    quizas podemos usar txt ahora y convertir cuando esten mas poblados
   * Herramienta uml (Carlos propone jude)
