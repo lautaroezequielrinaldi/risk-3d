@@ -1,6 +1,11 @@
 #summary Cosas a definir
 
-  * Enconding de los documentos y código (utf8 o iso 8859-1, mientras uso utf8)
-  * Formato de la documentación (oo o ms, mientras uso txt)
+  * Enconding de los documentos y código (utf8 o iso 8859-1, Ch mientras usa utf8)
+  * Formato de la documentación (oo o ms, Ch mientras usa txt)
     quizas podemos usar txt ahora y convertir cuando esten mas poblados
-  * Herramienta uml (Carlos propone jude)
+  * Herramienta uml (Ch propone jude)
+  * Entorno de desarrollo, hace falta unificar?
+  * Arquitectura de despliegue
+  * xDoc?
+  * TDD?
+  
