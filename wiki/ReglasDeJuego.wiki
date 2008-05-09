@@ -1,0 +1,5 @@
+#summary Comentarios acerca de las reglas del juego
+
+= Details =
+
+Que pasa con los objetivos? para que hace falta editarlos si bien se pueden generar al azar?
