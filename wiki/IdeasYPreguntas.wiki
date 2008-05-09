@@ -1,0 +1,17 @@
+Hay que mostrar las dos vistas? la plana y la esferica?
+
+El editor se conecta al servidor durante el proceso de edición o es autónomo y envia al terminar?
+
+Que el editor comparta mucho, mucho, mucho del cliente.
+
+Que el editor reciba una imagen y la proyecte sobre la esfera, al igual que el cliente.
+
+Que el editor permita manipular la esfera como el cliente.
+
+Que el editor permita agregar ciudades haciendo click sobre la esfera.
+
+Que el editor permita relacionar mediante flechas ciudades para marcar las relaciones de limites.
+
+Que los jugadores conectados vean el proceso de edicion.
+
+
