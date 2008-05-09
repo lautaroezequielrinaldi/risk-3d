@@ -1,0 +1,15 @@
+Crear un mapa
+
+Editar un mapa
+
+Iniciar un juego
+
+Conectar a un juego
+
+Distribuir ejercitos al iniciar el juego
+
+Distribuir ejercitos al iniciar el turno
+
+Convertir unidades
+
+Atacar
