@@ -1,0 +1,15 @@
+Manual de Usuario
+
+1. Instalación
+	1.1. Requerimientos de software (*)
+		OS, bibliotecas y herramientas necesarias para instalar el programa
+	1.2. Requerimientos de hardware
+		Aproximados
+	1.3. Proceso de Instación (*)
+		Eventualmente puede requerir también la compilación
+2. Configuración (*)
+	Archivos de configuración y configuración general de la aplicacion)
+3. Forma de uso (*)
+	A criterio del alumno, debe explicar como usar la aplicación de forma completa y desde la perspectiva del usuario final, incluyendo capturas de pantalla
+4. Apéndice de errores
+	Si la aplicación tiene códigos de error, poner aquí su descripción, posible causa y posible solución

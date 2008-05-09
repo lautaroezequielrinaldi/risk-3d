@@ -1,0 +1,24 @@
+Documentación Técnica
+
+1. Requerimientos de software (*)
+	OS, bibliotecas y herramientas necesarias para compilar, desarrollar, probar y depurar el programa
+2. Descripción general (*)
+	Arquitectura general del proyecto, qué módules tiene, etc
+3. Módulo N (*)
+	Una sección por módulo, que puede ser una aplicación, explicando más en detalle los ítems a continuación
+	3.1. Descripción general
+	3.2. Clases
+		Breve descripción de cada una que incluya responsabilidad y métodos principales, como mínimo
+	3.3. Diagramas UML
+		De clases como mínimo, en lo posible diagramas de secuencia para operaciones más complejas
+	3.4. Descripción de archivos y protocolos
+		Formato de archivos y protocolos de red utilizados, si son compartidos por varias aplicaciones pueden ponerlo en una sección aparte de este manual y hacer referencia a esa sección en cada módulo que lo use
+4. Programas intermedios y de prueba
+	Programas 'intermedios' que hayan usado para probar porciones del tp
+5. Código Fuente (*)
+	Código fuente documentado e impreso con las siguientes características:
+	* Letra monoespaciada de tamaño más bien chico (10 pts aproximadamente)
+	* Organizado (por módulo, alfabéticamente u otra forma que crea conveniente)
+	* Encabezados o pie de página que identifique al archivo impreso.
+	* Encabezados o pie de página con número de página.
+	* Índice (ya sea global o por módulo, que diga cada archivo en qué página está impreso)
