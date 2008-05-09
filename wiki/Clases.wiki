@@ -4,8 +4,6 @@ EvaluadorDeConfrontacion
 
 ReglaDeRefuerzo
 
-
-
 ProxyJugador
 
 ProxyServer
@@ -13,6 +11,10 @@ ProxyServer
 Continente
 
 Pais
+
+Ciudad
+
+Limite
 
 Ejercito
 
