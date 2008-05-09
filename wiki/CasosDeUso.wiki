@@ -9,18 +9,40 @@
  ===Editar un mapa===
  * Elegir el mapa
  * igual Crear un mapa
-Iniciar un juego
 
-Conectar a un juego
+ ===Iniciar un juego===
+ * Conectar al servidor
+ * Seleccionar un mapa
+ * continuar con Distribuir ejercitos al iniciar el juego
 
-Distribuir ejercitos al iniciar el juego
+ ===Conectar a un juego===
+ * Conectar al servidor
+ * continuar con Distribuir ejercitos al iniciar el juego
 
-Distribuir ejercitos al iniciar el turno
+ ===Distribuir ejercitos al iniciar el juego===
+ * Seleccionar unidad
+ * Seleccionar pais
 
-Convertir unidades
+ ===Distribuir ejercitos al iniciar el turno===
+ * Seleccionar unidad
+ * Seleccionar pais
 
-Atacar
+ ===Convertir unidades===
+ * Seleccionar pais
+ * Seleccionar unidad origen
+ * Seleccionar tipo destino
 
-Abandonar
+ ===Atacar===
+ (completar)
 
-Conversar
+ ===Abandonar===
+
+ ===Cliente Conversar===
+ * Seleccionar conversar
+ * Escribir mensaje
+ * Enviar mensaje
+
+ ===Server Conversar===
+ * Recibir mensaje
+ * Agregar sender
+ * Broadcast
