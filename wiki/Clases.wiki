@@ -29,3 +29,12 @@ Juego
 SecuenciadorTurnos
 
 Turno
+
+Clases del Editor:
+Editor?
+
+EstadoEditor?
+
+Mapa?
+
+VentanaEditor?
