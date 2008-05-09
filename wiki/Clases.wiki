@@ -31,10 +31,10 @@ SecuenciadorTurnos
 Turno
 
 Clases del Editor:
-Editor?
+Editor
 
-EstadoEditor?
+EstadoEditor
 
-Mapa?
+Mapa
 
-VentanaEditor?
+VentanaEditor
