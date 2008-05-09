@@ -1,5 +1,8 @@
- ===Crear un mapa===
+ ===Modo edicion==
+ * ABM mapas
+ * ABM reglas distribucion?
 
+ ===Alta mapa===
  * Definir imagen
  * ABM continente
  * ABM ciudad
@@ -8,7 +11,11 @@
  * Conectar ciudades
  * Desconectar ciudades
 
- ===Editar un mapa===
+ ===Baja mapa===
+ * Elegir el mapa
+ * Eliminarlo
+
+ ===Modidificacion mapa===
  * Elegir el mapa
  * igual Crear un mapa
 
