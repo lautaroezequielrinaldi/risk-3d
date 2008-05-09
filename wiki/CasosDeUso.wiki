@@ -1,8 +1,10 @@
  ===Crear un mapa===
 
  * Definir imagen
- * Crear ciudad
- * Eliminar ciudad
+ * ABM continente
+ * ABM ciudad
+ * Conectar ciudad con continente
+ * Desconectar ciudad con continente
  * Conectar ciudades
  * Desconectar ciudades
 
