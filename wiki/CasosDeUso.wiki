@@ -1,7 +1,14 @@
-Crear un mapa
+ ===Crear un mapa===
 
-Editar un mapa
+ * Definir imagen
+ * Crear ciudad
+ * Eliminar ciudad
+ * Conectar ciudades
+ * Desconectar ciudades
 
+ ===Editar un mapa===
+ * Elegir el mapa
+ * igual Crear un mapa
 Iniciar un juego
 
 Conectar a un juego
@@ -13,3 +20,7 @@ Distribuir ejercitos al iniciar el turno
 Convertir unidades
 
 Atacar
+
+Abandonar
+
+Conversar
