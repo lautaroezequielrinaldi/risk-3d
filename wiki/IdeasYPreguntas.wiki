@@ -15,3 +15,5 @@ Que el editor permita relacionar mediante flechas ciudades para marcar las relac
 Que los jugadores conectados vean el proceso de edicion.
 
 El editor deberia dar posibilidad de deshacer los comandos ejecutados durante la edicion del mapa? En caso de que el usuario se equivoque?
+
+Hay que hacer dos sockets por jugador, uno para el juego y otro para el chat.
