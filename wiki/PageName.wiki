@@ -1,8 +1,0 @@
-#summary Distribución de tareas
-
-||           || Ani     || Pabli   || Charli             ||
-||Fortaleza  || logica  || grafica ||                    ||
-||           ||         || logica  ||                    ||
-||Debilidad  || grafica ||         || grafica            ||
-||           ||         ||         || punteros y casteos ||
-||Deseo      || logica  ||         || grafica            ||
