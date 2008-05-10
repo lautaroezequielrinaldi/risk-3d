@@ -1,0 +1,42 @@
+#summary Secuencia general
+
+{{{
+
+Cliente                   Servidor
+-------      conecta      --------
+   |------------------------->|
+   |      info + mapa         |
+   |<-------------------------|
+   |                          |
+
+        tu turno para ubicar
+   |<-------------------------|
+   |     mi ubicacion         |
+   |------------------------->|
+   |  broadcast actualizacion |
+   |<------------------------>|
+
+   |    tu turno atacar       |
+   |<-------------------------|
+   |     mi ataque            |
+   |------------------------->|
+   |   broadcast accion       |
+   |<-------------------------|
+   |     defendete            |
+   |<-------------------------|
+   |     mi defensa           |
+   |------------------------->|
+   |  broadcast actualizacion |
+   |<-------------------------|
+
+
+   |   tu turno repoblacion   |
+   |<-------------------------|
+   |    mi repoblacion        |
+   |------------------------->|
+   |  broadcast actualizacion |
+   |<-------------------------|
+
+
+
+}}}
