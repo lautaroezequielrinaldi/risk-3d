@@ -6,8 +6,8 @@
   * Entorno de desarrollo: eclipse cdt
   * Arquitectura de despliegue
   * xDoc: doxygen
-  * TDD: en la medida de lo posible
-  * Integración continua (diaria): si, Pablo monta servidor 
+  * TDD: en la medida de lo posible // Con respecto a TDD yo (Pablo) hice ya pruebas de concepto con la libreria CppUnit, es muy facil de usar y de crear unit tests pero requiere cierto SetUp y un makefile especial, o algunoe xistente con modificaciones, para que nos compile todo el codigo fuente menos el main y crear un main secundario que es el que va a correr los unit tests. Si vamos a usar Eclipse CDT o definimos un makefile y le decimoss a Eclipse CDT que usamos el nuestro, o modificamos el que nos crea Eclipse CDT.
+  * Integración continua (diaria): si, Pablo monta servidor.  // Con respecto a esto... En estos dias Monto servidor (Pablo) y les paso la URL con la cual acceder asi lo van viendo, les voy a crear una cuenta dummy para que usen y se puedan conectar y que vean como se maneja, pero para poder usarlo con proyectos C++ hay que tener un makefile custom y crear algunos scripts de bash que corran al make y al valgrind.
   * Idioma en el código: inglés
   * Nombres: java way
 
