@@ -16,4 +16,4 @@ Que los jugadores conectados vean el proceso de edicion.
 
 El editor deberia dar posibilidad de deshacer los comandos ejecutados durante la edicion del mapa? En caso de que el usuario se equivoque?
 
-Hay que hacer dos sockets por jugador, uno para el juego y otro para el chat.
+Hay que hacer dos sockets por jugador, uno para el juego y otro para el chat. //// Con respecto a esto creo que habria que analizar la posibilidad de o bien mantener la conexion abierta todo el tiempo con cada juagdor en un segundo socket o tener la posibilidad de que el servidor tenga los datos de ip y puerto para abrir una conexion cuando sea necesario, y luego el cliente debe tener un "socket en modo servidor" al escucha conexiones.
