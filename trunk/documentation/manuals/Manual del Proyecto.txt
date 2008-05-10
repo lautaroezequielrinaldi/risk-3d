@@ -1,7 +1,7 @@
 Manual del Proyecto
 
 1. Integrantes (*)
-	Analía Hojman ()
+	Analía Hojman (83.020)
 	Pablo Martín Viva ()
 	Carlos Federico Pantelides (74901)
 2. Enunciado
