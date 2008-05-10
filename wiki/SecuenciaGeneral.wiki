@@ -9,12 +9,15 @@ Cliente                   Servidor
    |<-------------------------|
    |                          |
 
+
         tu turno para ubicar
    |<-------------------------|
    |     mi ubicacion         |
    |------------------------->|
    |  broadcast actualizacion |
    |<------------------------>|
+
+
 
    |    tu turno atacar       |
    |<-------------------------|
@@ -28,6 +31,7 @@ Cliente                   Servidor
    |------------------------->|
    |  broadcast actualizacion |
    |<-------------------------|
+
 
 
    |   tu turno repoblacion   |
