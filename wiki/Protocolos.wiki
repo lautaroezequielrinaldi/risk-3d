@@ -15,9 +15,12 @@ Hacemos entonces socket_read(buffer_header, 100) y obtenemos esa linea, el proxi
 </header>
 
 <body type="chat">
-  ....lo que sea
+  <chat version="1.0">
+    me ganaste, come @#$#%#$% y morite $%#$%#%
+  </chat>
 </body>
 }}}
+
 usamos la version para, por ejemplo introducir el tipo pero fuera del body.
 
 
@@ -41,8 +44,12 @@ usamos la version para, por ejemplo introducir el tipo pero fuera del body.
 <message-type>
 
 <body>
-  ....lo que sea
+  <chat version="1.0">
+    me ganaste, come @#$#%#$% y morite $%#$%#%
+  </chat>
 </body>
 }}}
 
 La ventaja de tener el tipo separado del mensaje (aunque el tipo de todos modos este en el mensaje) es que nos permite elegir la estrategia de carga "desde afuera", no tenemos que parsear una parte con el mensaje ya abierto, no tenemos que tratar de modo especial el end tag.
+
+De este modo podemos ir encapsulando de modo "encadenado"
