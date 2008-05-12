@@ -114,23 +114,17 @@ CalculadoraTest::CalculadoraTest(std::string name) : CppUnit::TestCase(name) {
 }
 
 void CalculadoraTest::testSumar() {
-     Calculadora calc;
-
-     int resultado = calc.sumar(5,2);
+     int resultado = Calculadora::sumar(5,2);
      CPPUNIT_ASSERT( 7 == resultado);
 }
 
 void CalculadoraTest::testRestar() {
-     Calculadora calc;
-
-     int resultado = calc.restar(5,2);
+     int resultado = Calculadora::restar(5,2);
      CPPUNIT_ASSERT(3 == resultado);
 }
 
 void CalculadoraTest::testMultiplicar() {
-     Calculadora calc;
-
-     int resultado = calc.multiplicar(5,2);
+     int resultado = Calculadora::multiplicar(5,2);
      CPPUNIT_ASSERT(10 == resultado);
 }
 
