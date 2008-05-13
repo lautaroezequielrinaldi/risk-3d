@@ -1,0 +1,38 @@
+#summary Temas a tratar proximo encuentro
+
+==Para que "Pais::contienePaisAdyacente(string/coord)"?==
+Si vamos a utilizar una interfaz grafica, el usuario no manipula los nombres ni las coordenadas.
+
+==Para que "Pais::contiene/obtiene"? ==
+{{{
+
+if (pais->contiene(otro)) {
+  otro = pais->obtener(....)
+  otro->accion
+}
+
+}}}
+
+es equivalente a
+
+{{{
+otro=pais->obtener(...)
+if (otro) {
+  otro->accion()
+}
+
+
+}}}
+
+la segunda forma permite utilizar ademas null object
+
+{{{
+
+otro=pais->obtener(...)
+otro->accion()
+
+}}}
+
+==Undo/redo==
+
+Estoy de acuerdo en incorporarlo como desafio, me parece un estorbo en la usabilidad
