@@ -33,6 +33,16 @@ otro->accion()
 
 }}}
 
+En general me parece que hay metodos de mas
+
+==Nombres de metodos==
+
+Agregar/RemoverUnidad no necesita Infanteria/Artilleria/Caballeria, lo obtiene de la firma
+
 ==Undo/redo==
 
 Estoy de acuerdo en incorporarlo como desafio, me parece un estorbo en la usabilidad
+
+==Lectura de Sockets==
+
+Si va a ser un preambulo de tamaño fijo que determina el tamaño del resto o leeremos hasta consumir todo. Me inclino por lo primero.
