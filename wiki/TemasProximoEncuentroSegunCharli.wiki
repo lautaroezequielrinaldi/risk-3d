@@ -3,6 +3,10 @@
 ==Para que "Pais::contienePaisAdyacente(string/coord)"?==
 Si vamos a utilizar una interfaz grafica, el usuario no manipula los nombres ni las coordenadas.
 
+Ademas solo nos interesa si es adyacente, con bool Pais::esAdyacente(Pais) nos alcanza
+
+Solo si metemos un bot puede servirnos explorar los adyacentes.
+
 ==Para que "Pais::contiene/obtiene"? ==
 {{{
 
