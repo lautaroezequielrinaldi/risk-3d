@@ -48,7 +48,7 @@ class UrlParser {
         /**
          * Parsea la url provista en protocolo, domain y resource.
          */
-        void parse_url(const std::string& url);
+        void parseUrl(const std::string& url);
 
     /**
      * Mètodos pùblicos de la clase UrlParser.
@@ -68,19 +68,19 @@ class UrlParser {
          * Mètodo cuyo propòsito es devolver el protocolo parseado de la url.
          * Devuelve un string vacìo si no tiene protocolo la url.
          */
-        std::string get_protocol();
+        std::string getProtocol();
 
         /**
          * Mètodo cuyo propòsito es devolver el domain parseado de la url.
          * Devuelve un string vacìo si no tiene domain la url.
          */
-        std::string get_domain();
+        std::string getDomain();
 
         /**
          * Mètodo cuyo propòsito es devolver el resource parseado de la url.
          * Devuelve un string vacìo si no tiene resource la url.
          */
-        std::string get_resource();
+        std::string getResource();
 
         /**
          * Destructor virtual de la clase UrlParser.

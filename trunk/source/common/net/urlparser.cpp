@@ -8,15 +8,15 @@ UrlParser::UrlParser(const char* url) {
     std::string stringUrl(url);
 
     // Parsea la url.
-    this->parse_url(stringUrl);
+    this->parseUrl(stringUrl);
 }
 
 UrlParser::UrlParser(const std::string& url) {
     // Parsea la url.
-    this->parse_url(url);
+    this->parseUrl(url);
 }
 
-void UrlParser::parse_url(const std::string& url) {
+void UrlParser::parseUrl(const std::string& url) {
     // Defino posicion del separador de protocolo.
     int protocolSeparatorIndex;
     // Defino posiciòn del separador de resource.
@@ -68,15 +68,15 @@ void UrlParser::parse_url(const std::string& url) {
     }
 }
 
-std::string UrlParser::get_protocol() {
+std::string UrlParser::getProtocol() {
     return this->protocol;
 }
 
-std::string UrlParser::get_domain() {
+std::string UrlParser::getDomain() {
     return this->domain;
 }
 
-std::string UrlParser::get_resource() {
+std::string UrlParser::getResource() {
     return this->resource;
 }
 
