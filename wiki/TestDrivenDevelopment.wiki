@@ -156,3 +156,11 @@ int main(int argc, char** argv) {
     }
 }
 }}}
+
+Para correr los test unitarios simplemente tendràn que ejecutar esto desde la base del proyecto...
+{{{
+make test
+test/risk3d-unit-test
+}}}
+
+Suponiendo que hay una funcion main que corre los unit tests y que hay unit test para ser ejecutados y corridos.
