@@ -64,3 +64,7 @@ Estoy de acuerdo en incorporarlo como desafio, me parece un estorbo en la usabil
 ==Lectura de Sockets==
 
 Si va a ser un preambulo de tamaño fijo que determina el tamaño del resto o leeremos hasta consumir todo. Me inclino por lo primero.
+
+==Organizacion de fuentes y paquetes logicos de codigo==
+Vamos a usar namespaces para denotar los diferentes modulos de nuestra aplicacion? Si es asi o en caso de no serlo tambien vamos a separar en "paquetes" a nuestros fuentes, es decir toda la funcionalidad de sockets y de networking dentro de source/common/net, toda la de threading a source/common/threading o dejaremos todos los fuenets en un mismo directorio?
+Yo me inclinaria por tener todo separado por paquetes, me parece mas organizado y es mas facil de entender las clases que componen a un modulo en particular con simplemente ver las clases que estan en su paquete...
