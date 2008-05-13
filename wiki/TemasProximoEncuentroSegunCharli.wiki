@@ -39,6 +39,20 @@ En general me parece que hay metodos de mas
 
 Agregar/RemoverUnidad no necesita Infanteria/Artilleria/Caballeria, lo obtiene de la firma
 
+==Composicion mapa-continente-pais==
+
+El continente es solo una agrupacion lógica que tiene sentido a la hora de los objetivos y la repoblacion. 
+
+{{{
+
+  mapa ---- continente
+   |           |
+ pais----------+
+
+}}}
+
+Cuando hagamos click sobre la esfera, obtendremos un Pais, no un continente.
+
 ==Undo/redo==
 
 Estoy de acuerdo en incorporarlo como desafio, me parece un estorbo en la usabilidad
