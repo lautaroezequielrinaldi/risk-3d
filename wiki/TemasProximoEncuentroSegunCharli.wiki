@@ -80,3 +80,7 @@ Interfaz "reducida" para Editor y Player
 Ultra alta reutilizacion Editor/Player
 
 Mismas clases en Server/Client con mensajes de sincronizacion de estado o clases adaptadas a cada contexto?
+
+El cliente posee logica? Aunque sea logica minima de validacion, por ejemplo no nos deberia permitir atacar a una ciudad o pais que es nuestro.
+
+En caso de errores en las oepraciones, como vamos a noticiar a cada cliente? Por ejemplo supongamos que estamos atacando a un jugador y este se desconecta en el medio del ataque, como se le notifica al cliente que el contrincante se desconecto? Lo mismo apsa para cuando hay problemas de conexion o no recibimos nunca una respuesta del servidor.
