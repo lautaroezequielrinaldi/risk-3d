@@ -68,3 +68,15 @@ Si va a ser un preambulo de tamaño fijo que determina el tamaño del resto o le
 ==Organizacion de fuentes y paquetes logicos de codigo==
 Vamos a usar namespaces para denotar los diferentes modulos de nuestra aplicacion? Si es asi o en caso de no serlo tambien vamos a separar en "paquetes" a nuestros fuentes, es decir toda la funcionalidad de sockets y de networking dentro de source/common/net, toda la de threading a source/common/threading o dejaremos todos los fuenets en un mismo directorio?
 Yo me inclinaria por tener todo separado por paquetes, me parece mas organizado y es mas facil de entender las clases que componen a un modulo en particular con simplemente ver las clases que estan en su paquete...
+
+==Varios==
+
+El atacado participa de la defensa?
+
+Qué pasa si alguien abandona o se cae la conexión? republicas independientes?
+
+Interfaz "reducida" para Editor y Player
+
+Ultra alta reutilizacion Editor/Player
+
+Mismas clases en Server/Client con mensajes de sincronizacion de estado o clases adaptadas a cada contexto?
