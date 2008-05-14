@@ -69,6 +69,10 @@ Si va a ser un preambulo de tamaño fijo que determina el tamaño del resto o le
 Vamos a usar namespaces para denotar los diferentes modulos de nuestra aplicacion? Si es asi o en caso de no serlo tambien vamos a separar en "paquetes" a nuestros fuentes, es decir toda la funcionalidad de sockets y de networking dentro de source/common/net, toda la de threading a source/common/threading o dejaremos todos los fuenets en un mismo directorio?
 Yo me inclinaria por tener todo separado por paquetes, me parece mas organizado y es mas facil de entender las clases que componen a un modulo en particular con simplemente ver las clases que estan en su paquete...
 
+==YAGNI==
+
+quien sabe puede llegar a ser necesario mostrrar algun label o algun "link
+
 ==Varios==
 
 El atacado participa de la defensa?
