@@ -16,7 +16,7 @@ class UISupport {
          * Mètodo para verificar si el mouse se encuentra sobre una posiciòn
          * determinada de la pantalla, delimitada por x, y, width, height.
          */
-        bool isMouseOver(const UIMouseInformation& mouseInformation, int x,
+        static bool isMouseOver(const UIMouseInformation& mouseInformation, int x,
             int y, int width, int height);
 };
 
