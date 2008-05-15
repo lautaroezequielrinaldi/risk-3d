@@ -1,6 +1,8 @@
 #ifndef __UICONTEXT_H__
 #define __UICONTEXT_H__
 
+#include "../../common/smartptr/referencecountptr.h" // Para definicion de 
+//ReferenceCountPtr
 #include "uihandler.h" // Para definiciòn de UIHandler
 #include "uimouseinformation.h" // Para definiciòn de UIMouseInformation
 #include "uikeyboardinformation.h" // Para definiciòn de UIKeyboardInformation
@@ -19,19 +21,19 @@ class UIContext {
          * Almacena el item sobre el cual el usuario actualmente esta apunto de
          * interactuar.
          */
-        UIHandler hotItem;
+        ReferenceCountPtr<UIHandler> hotItem;
         /**
          * Almacena el item activo con el cual el usuario esta interactuando.
          */
-        UIHandler activeItem;
+        ReferenceCountPtr<UIHandler> activeItem;
         /**
          * Almacena la informaciòn del mouse.
          */
-        UIMouseInformation mouseInformation;
+        ReferenceCountPtr<UIMouseInformation> mouseInformation;
         /**
          * Almacena la informaciòn del keyboard.
          */
-        UIKeyboardInformation keyboardInformation;
+        ReferenceCountPtr<UIKeyboardInformation> keyboardInformation;
 
     /**
      * Mètodos privados de la clase UIContext.
@@ -58,39 +60,39 @@ class UIContext {
          * Mètodo cuyo propòsito es obtener el item sobre el cual el usuario
          * està a punto de interactuar.
          */
-        UIHandler& getHotItem();
+        ReferenceCountPtr<UIHandler> getHotItem();
         /**
          * Mètodo cuyo propòsito es establecer el item sobre el cual el usuario
          * està a punto de interactuar.
          */
-        void setHotItem(const UIHandler& hotItem);
+        void setHotItem(ReferenceCountPtr<UIHandler> hotItem);
         /**
          * Mètodo cuyo propòsito es obtener el item activo con el cual el
          * usuario està interactuando.
          */
-        UIHandler& getActiveItem();
+        ReferenceCountPtr<UIHandler> getActiveItem();
         /**
          * Mètodo cuyo propòsito es devolver el item activo con el cual el
          * usuario està interactuando.
          */
-        void setActiveItem(const UIHandler& activeItem);
+        void setActiveItem(ReferenceCountPtr<UIHandler> activeItem);
         /**
          * Mètodo cuyo propòsito es obtener la informaciòn del mouse.
          */
-        UIMouseInformation& getMouseInformation();
+        ReferenceCountPtr<UIMouseInformation> getMouseInformation();
         /**
          * Mètodo cuyo propòsito es establecer la informaciòn del mouse.
          */
-        void setMouseInformation(const UIMouseInformation& mouseInformation);
+        void setMouseInformation(ReferenceCountPtr<UIMouseInformation> mouseInformation);
         /**
          * Mètodo cuyo propòsito es obtener la informaciòn del teclado.
          */
-        UIKeyboardInformation& getKeyboardInformation();
+        ReferenceCountPtr<UIKeyboardInformation> getKeyboardInformation();
         /**
          * Mètodo cuyo propòsito es establecer la informaciòn del teclado.
          */
         void setKeyboardInformation(
-            const UIKeyboardInformation& keyboardInformation);
+            ReferenceCountPtr<UIKeyboardInformation> keyboardInformation);
         /**
          * Destructor virtual de la clase UIContext.
          */
