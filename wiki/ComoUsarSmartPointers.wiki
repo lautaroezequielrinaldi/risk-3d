@@ -118,6 +118,7 @@ int main(int argc, char** argv) {
 En este caso es cuando una funcion o metodo de instancia o clase debe devolver un puntero a un objeto alocado en el HEAP, usando Smart Pointers indicamos al que llama la funciòn que nosotros, mejor dicho el Smart Pointer se hace cargo de la liberacion del puntero alojado en el HEAP y el no tiene que hacer delete.
 
 == Cuando NO!!! usar Smart Pointers ==
+{{{
 int numero = 5;
 
 ReferenceCountPtr<int> puntero(&numero);
