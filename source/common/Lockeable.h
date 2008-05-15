@@ -1,6 +1,8 @@
 #ifndef __LOCKEABLE__
 #define __LOCKEABLE__
 
+#include<string> // Para definiciòn de std::string
+
 /*
  * @todo convertir ese private mutex a map<string,Mutex*>
  * @todo convertir getMutex() a getMutex(string)
@@ -12,7 +14,7 @@ class Lockeable {
         public:
         Lockeable();
         Mutex * getMutex();
-	void addMutex(const string & name);
+	void addMutex(const std::string & name);
 
         ~Lockeable();
 
