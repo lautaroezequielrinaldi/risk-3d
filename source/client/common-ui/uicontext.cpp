@@ -1,40 +1,44 @@
 #include "uicontext.h"
 
-UIContext::UIContext() {
-    // No realiza ninguna acciÃ²n.
+UIContext::UIContext():
+	hotItem(new UIHandler),
+	activeItem(new UIHandler)
+	mouseInformation(new UIMouseInformation),
+	keyboardInformation(new UIKeyboardInformation) {
+	// No realiza ninguna acción
 }
 
-UIHandler& UIContext::getHotItem() {
+ReferenceCountPtr<UIHandler> UIContext::getHotItem() {
     return this->hotItem;
 }
 
-void UIContext::setHotItem(const UIHandler& hotItem) {
+void UIContext::setHotItem(ReferenceCoutnPtr<UIHandler> hotItem) {
     this->hotItem = hotItem;
 }
 
-UIHandler& UIContext::getActiveItem() {
+ReferenceCountPtr<UIHandler> UIContext::getActiveItem() {
     return this->activeItem;
 }
 
-void UIContext::setActiveItem(const UIHandler& activeItem) {
+void UIContext::setActiveItem(ReferenceCountPtr<UIHandler> activeItem) {
     this->activeItem = activeItem;
 }
 
-UIMouseInformation& UIContext::getMouseInformation() {
+ReferenceCountPtr<UIMouseInformation> UIContext::getMouseInformation() {
     return this->mouseInformation;
 }
 
 void UIContext::setMouseInformation(
-    const UIMouseInformation& mouseInformation) {
+    ReferenceCountPtr<UIMouseInformation> mouseInformation) {
     this->mouseInformation = mouseInformation;
 }
 
-UIKeyboardInformation& UIContext::getKeyboardInformation() {
+ReferenceCountPtr<UIKeyboardInformation> UIContext::getKeyboardInformation() {
     return this->keyboardInformation;
 }
 
 void UIContext::setKeyboardInformation(
-    const UIKeyboardInformation& keyboardInformation) {
+    ReferenceCountPtr<UIKeyboardInformation> keyboardInformation) {
     this->keyboardInformation = keyboardInformation;
 }
 
