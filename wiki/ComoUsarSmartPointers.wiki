@@ -62,7 +62,11 @@ ReferenceCountPtr<int> puntero(new int(10));
 
 std::cout << "El elemento apuntado es: " << *puntero << std::endl;
 }}}
-Como se puede ver si usamos el operador de indireccion (operador *) accederemos al elemento apuntado por el Smart Pointer. De esta forma nos permite intercambiar Smart Pointers y punteros normal en el codigo y no se notarà la diferencia en uso.
+Como se puede ver si usamos el operador de indireccion
+{{{
+(operador *)
+}}}
+accederemos al elemento apuntado por el Smart Pointer. De esta forma nos permite intercambiar Smart Pointers y punteros normal en el codigo y no se notarà la diferencia en uso.
 
 == Como usar clases derivadas y Smart Pointers ==
 {{{
