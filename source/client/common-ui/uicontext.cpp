@@ -2,7 +2,7 @@
 
 UIContext::UIContext():
 	hotItem(new UIHandler),
-	activeItem(new UIHandler)
+	activeItem(new UIHandler),
 	mouseInformation(new UIMouseInformation),
 	keyboardInformation(new UIKeyboardInformation) {
 	// No realiza ninguna acción
@@ -12,7 +12,7 @@ ReferenceCountPtr<UIHandler> UIContext::getHotItem() {
     return this->hotItem;
 }
 
-void UIContext::setHotItem(ReferenceCoutnPtr<UIHandler> hotItem) {
+void UIContext::setHotItem(ReferenceCountPtr<UIHandler> hotItem) {
     this->hotItem = hotItem;
 }
 

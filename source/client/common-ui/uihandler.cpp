@@ -1,6 +1,6 @@
 #include "uihandler.h"
 
-UIHandler::UIHandler(int elementId = GEN_ID):
+UIHandler::UIHandler(int elementId):
     ownerId(0),
     elementId(elementId),
     arrayIndex(0) {
@@ -24,7 +24,7 @@ void UIHandler::setElementId(int elementId) {
 }
 
 int UIHandler::getArrayIndex() {
-    return this->arrayIdex;
+    return this->arrayIndex;
 }
 
 void UIHandler::setArrayIndex(int arrayIndex) {

@@ -1,6 +1,8 @@
 #ifndef __UISUPPORT_H__
 #define __UISUPPORT_H__
 
+#include "uimouseinformation.h" // Para definiciòn de UIMouseInformation.
+
 /**
  * Clase cuyo propòsito es brindar soporte y facilidades a còdigo de interfaz
  * grafica de usuario. Proveyendo metodos para saber si el mouse se encuentra

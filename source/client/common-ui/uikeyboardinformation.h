@@ -1,7 +1,7 @@
 #ifndef __UIKEYBOARDINFORMATION_H__
 #define __UIKEYBOARDINFORMATION_H__
 
-#include<SDL/SDL.h> // Para definiciòn de
+#include<SDL/SDL.h> // Para definiciòn de SDLKey y SDLK_LAST.
 
 /**
  * Clase cuyo propòsito es almacenar informaciòn del estado del
@@ -17,7 +17,7 @@ class UIKeyboardInformation {
          * Almacena un vector de teclas indicando true si esta presionada y
          * false si no lo està.
          */
-        bool keyboard[SDLK_MAX];
+        bool keyboard[SDLK_LAST];
 
     /**
      * Mètodos pùblicos de la clase UIKeyboardInformation.
@@ -31,21 +31,21 @@ class UIKeyboardInformation {
          * Mètodo cuyo propòsito es marcar una tecla del teclado como
          * presionada.
          */
-        void markKeyPressed(int key);
+        void markKeyPressed(SDLKey key);
         /**
          * Mètodo cuyo propòsito es marcar una tecla del teclado como
          * no presionada.
          */
-        void markKeyUnpressed(int key);
+        void markKeyUnpressed(SDLKey key);
         /**
          * Mètodo cuyo propòsito es obtener el estado de presion de una tecla
          * del teclado.
          */
-        bool isKeyPressed(int key);
+        bool isKeyPressed(SDLKey key);
         /**
          * Destructor virtual de la clase UIKeyboardInformation.
          */
-        ~UIKeyboardInformation();
+        virtual ~UIKeyboardInformation();
 };
 
 #endif /** __UIKEYBOARDINFORMATION_H__ */

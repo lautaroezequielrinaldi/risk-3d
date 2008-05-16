@@ -1,11 +1,11 @@
 #ifndef __UICONTEXT_H__
 #define __UICONTEXT_H__
 
-#include "../../common/smartptr/referencecountptr.h" // Para definicion de 
-//ReferenceCountPtr
-#include "uihandler.h" // Para definiciòn de UIHandler
-#include "uimouseinformation.h" // Para definiciòn de UIMouseInformation
-#include "uikeyboardinformation.h" // Para definiciòn de UIKeyboardInformation
+#include "uihandler.h" // Para definiciòn de UIHandler.
+#include "uimouseinformation.h" // Para definiciòn de UIMouseInformation.
+#include "uikeyboardinformation.h" // Para definiciòn de UIKeyboardInformation.
+#include "../../common/smartpointer/referencecountptr.h" // Para definicion de 
+// ReferenceCountPtr.
 
 /**
  * Clase cuyo propòsito es almacenar informaciòn del contexto de la interfaz
@@ -96,7 +96,7 @@ class UIContext {
         /**
          * Destructor virtual de la clase UIContext.
          */
-        ~UIContext();
+        virtual ~UIContext();
 };
 
 #endif /** __UICONTEXT_H__ */
