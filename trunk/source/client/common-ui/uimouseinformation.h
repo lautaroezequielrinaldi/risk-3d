@@ -1,61 +1,13 @@
 #ifndef __UIMOUSEINFORMATION_H__
 #define __UIMOUSEINFORMATION_H__
 
+#include<SDL/SDL.h> // Para definiciòn de Uint8, Uint16
+
 /**
  * Clase cuyo propòsito es almacenar informaciòn del estado del mouse
  * como su posiciòn X e Y, como que boton fue presionado.
  */
 class UIMouseInformation {
-    /**
-     * Constantes y enumeraciones pùblicas de la clase UIMouseInformation.
-     */
-    public:
-        /**
-         * Enumeraciòn que representa si fue presionado el mouse o fue
-         * soltado.
-         */
-        enum MouseReleaseStatus {
-            /**
-             * Enumeraciòn que representa que el mouse no tuvo
-             * interacciòn.
-             */
-            MOUSE_RELEASE_NONE,
-            /**
-             * Enumeraciòn que representa que el mouse fue presionado.
-             */
-            MOUSE_RELEASE_PRESSED,
-            /**
-             * Enumeraciòn que representa que el mouse fue soltado.
-             */
-            MOUSE_RELEASE_RELEASED
-        };
-        /**
-         * Enumeraciòn que representa el botòn del mouse que fue presionado
-         * o fue soltado.
-         */
-        enum MouseButtonStatus {
-            /**
-             * Enumeraciòn que representa que ningùn boton del mouse
-             * fue presionado o soltado.
-             */
-            MOUSE_BUTTON_NONE,
-            /**
-             * Enumeraciòn que representa que el botòn izquierdo del mouse
-             * fue presionado o soltado.
-             */
-            MOUSE_BUTTON_LEFT,
-            /**
-             * Enumeraciòn que representa que el botòn central del mouse
-             * fue presionado o soltado.
-             */
-            MOUSE_BUTTON_CENTER,
-            /**
-             * Enumeraciòn que representa que el botòn derecho del mouse
-             * fue presionado o soltado.
-             */
-            MOUSE_BUTTON_RIGHT
-        };
-
     /**
      * Atributos privados de la clase UIMouseInformation.
      */
@@ -63,19 +15,19 @@ class UIMouseInformation {
         /**
          * Almacena el estado de presiòn del mouse.
          */
-        MouseReleaseStatus releaseStatus;
+        Uint8 releaseStatus;
         /**
          * Almacena el estado de los botones del mouse.
          */
-        MouseButtonStatus buttonStatus;
+        Uint8 buttonStatus;
         /**
          * Almacena la posiciòn X del mouse.
          */
-        int x;
+        Uint16 x;
         /**
          * Almacena la posiciòn Y del mouse;
          */
-        int y;
+        Uint16 y;
 
     /**
      * Mètodos pùblicos de la clase UIMouseInformation.
@@ -88,40 +40,40 @@ class UIMouseInformation {
         /**
          * Mètodo cuyo propòsito es obtener el estado de presiòn del mouse.
          */
-        MouseReleaseStatus& getReleaseStatus();
+        Uint8 getReleaseStatus() const;
         /**
          * Mètodo cuyo propòsito es establecer el estado de presiòn del mouse.
          */
-        void setReleaseStatus(const MouseReleaseStatus& releaseStatus);
+        void setReleaseStatus(const Uint8& releaseStatus);
         /**
          * Mètodo cuyo propòsito es obtener el estado de los botones del mouse.
          */
-        MouseButtonStatus& getButtonStatus();
+        Uint8 getButtonStatus() const;
         /**
          * Mètodo cuyo propòsito es establecer el estado de los botones del
          * mouse.
          */
-        void setButtonStatus(const MouseButtonStatus& buttonStatus);
+        void setButtonStatus(const Uint8& buttonStatus);
         /**
          * Mètodo cuyo propòsito es obtener la posiciòn X del mouse.
          */
-        int getX();
+        Uint16 getX() const;
         /**
          * Mètodo cuyo propòsito es establecer la posicion X del mouse.
          */
-        void setX(int x);
+        void setX(const Uint16& x);
         /**
          * Mètodo cuyo propòstio es obtener la posiciòn Y del mouse.
          */
-        int getY();
+        Uint16 getY() const;
         /**
          * Mètodo cuyo propòsito es establecer la posiciòn Y del mouse.
          */
-        void setY(int y);
+        void setY(const Uint16& y);
         /**
          * Destructor virtual de la clase UIMouseInformation.
          */
-        ~UIMouseInformation();
+        virtual ~UIMouseInformation();
 };
 
 #endif /** __UIMOUSEINFORMATION_H__ */

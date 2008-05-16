@@ -31,6 +31,10 @@ CLIENT_DIRS = $(shell find $(CLIENT_DIR) -type d -print)
 EDITOR_DIR = source/client/editor
 EDITOR_DIRS = $(shell find $(EDITOR_DIR) -type d -print)
 
+# Directorio del mòdulo common-ui
+COMMON_UI_DIR = source/client/common-ui
+COMMON_UI_DIRS = $(shell find $(COMMON_UI_DIR) -type d -print)
+
 # Directorio del mòdulo server
 SERVER_DIR = source/server
 SERVER_DIRS = $(shell find $(SERVER_DIR) -type d -print)
@@ -110,6 +114,9 @@ CLIENT_SOURCES = $(foreach DIR,$(CLIENT_DIRS),$(FIND_SOURCES_DIRECTIVE))
 # Archivos fuente del editor
 EDITOR_SOURCES = $(foreach DIR,$(EDITOR_DIRS),$(FIND_SOURCES_DIRECTIVE))
 
+# Archivos fuente de common-ui
+COMMON_UI_SOURCES = $(foreach DIR,$(COMMON_UI_DIRS),$(FIND_SOURCES_DIRECTIVE))
+
 # Archivos fuente del server
 SERVER_SOURCES = $(foreach DIR,$(SERVER_DIRS),$(FIND_SOURCES_DIRECTIVE))
 
@@ -133,14 +140,17 @@ UNITTEST_SOURCES ?= $(filter-out $(SERVER_DIR)/main.$(FILE_EXTENSION),$(UNITTEST
 # Archivos objeto de common
 OBJECT_COMMON_FILES = $(patsubst %.$(FILE_EXTENSION),%.o,$(COMMON_SOURCES))
 
+# Archivos objeto de common-ui
+OBJECT_COMMON_UI_FILES = $(patsubst %.$(FILE_EXTENSION),%.o,$(COMMON_UI_SOURCES))
+
 # Archivos objeto de protocols
 OBJECT_PROTOCOLS_FILES = $(patsubst %.$(FILE_EXTENSION),%.o,$(PROTOCOLS_SOURCES))
 
 # Archivos objeto de client
-OBJECT_CLIENT_FILES = $(patsubst %.$(FILE_EXTENSION),%.o,$(CLIENT_SOURCES)) $(OBJECT_COMMON_FILES) $(OBJECT_PROTOCOLS_FILES)
+OBJECT_CLIENT_FILES = $(patsubst %.$(FILE_EXTENSION),%.o,$(CLIENT_SOURCES)) $(OBJECT_COMMON_FILES) $(OBJECT_COMMON_UI_FILES) $(OBJECT_PROTOCOLS_FILES)
 
 # Archivos objeto de editor
-OBJECT_EDITOR_FILES = $(patsubst %.$(FILE_EXTENSION),%.o,$(EDITOR_SOURCES)) $(OBJECT_COMMON_FILES)
+OBJECT_EDITOR_FILES = $(patsubst %.$(FILE_EXTENSION),%.o,$(EDITOR_SOURCES)) $(OBJECT_COMMON_FILES) $(OBJECT_COMMON_UI_FILES)
 
 # Archivos objeto de server
 OBJECT_SERVER_FILES = $(patsubst %.$(FILE_EXTENSION),%.o,$(SERVER_SOURCES)) $(OBJECT_COMMON_FILES) $(OBJECT_PROTOCOlS_FILES)
