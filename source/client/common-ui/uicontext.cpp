@@ -1,26 +1,26 @@
 #include "uicontext.h"
 
 UIContext::UIContext():
-	hotItem(new UIHandler),
-	activeItem(new UIHandler),
+	hotItem(0),
+	activeItem(0),
 	mouseInformation(new UIMouseInformation),
 	keyboardInformation(new UIKeyboardInformation) {
 	// No realiza ninguna acción
 }
 
-ReferenceCountPtr<UIHandler> UIContext::getHotItem() {
+UIHandler UIContext::getHotItem() {
     return this->hotItem;
 }
 
-void UIContext::setHotItem(ReferenceCountPtr<UIHandler> hotItem) {
+void UIContext::setHotItem(UIHandler hotItem) {
     this->hotItem = hotItem;
 }
 
-ReferenceCountPtr<UIHandler> UIContext::getActiveItem() {
+UIHandler UIContext::getActiveItem() {
     return this->activeItem;
 }
 
-void UIContext::setActiveItem(ReferenceCountPtr<UIHandler> activeItem) {
+void UIContext::setActiveItem(UIHandler activeItem) {
     this->activeItem = activeItem;
 }
 

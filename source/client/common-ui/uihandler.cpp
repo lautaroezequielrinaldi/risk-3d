@@ -1,18 +1,9 @@
 #include "uihandler.h"
 
 UIHandler::UIHandler(int elementId):
-    ownerId(0),
     elementId(elementId),
     arrayIndex(0) {
     // No realiza ninguna acciòn.
-}
-
-int UIHandler::getOwnerId() {
-    return this->ownerId;
-}
-
-void UIHandler::setOwnerId(int ownerId) {
-    this->ownerId = ownerId;
 }
 
 int UIHandler::getElementId() {
@@ -29,6 +20,18 @@ int UIHandler::getArrayIndex() {
 
 void UIHandler::setArrayIndex(int arrayIndex) {
     this->arrayIndex = arrayIndex;
+}
+
+bool UIHandler::operator==(const UIHandler& otherInstance) {
+    bool result = (this->elementId == otherInstance.elementId) &&
+                  (this->arrayIndex == otherInstance.arrayIndex);
+
+    return result;
+}
+
+bool UIHandler::operator!=(const UIHandler& otherInstance) {
+    bool result = (*this == otherInstance);
+    return !result;
 }
 
 UIHandler::~UIHandler() {

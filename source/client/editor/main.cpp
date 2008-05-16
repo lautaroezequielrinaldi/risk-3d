@@ -1,4 +1,11 @@
+#include "application.h"
+
 int main (int argc, char ** argv){
+    Application app;
+
+    app.execute();
+
+    return 0;
 	// estados
 	// nada -> click en un lugar virgen -> crea ciudad
 	// nada -> click en una ciudad -> relacionando ciudad

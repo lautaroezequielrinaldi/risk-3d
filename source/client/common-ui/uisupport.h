@@ -1,6 +1,7 @@
 #ifndef __UISUPPORT_H__
 #define __UISUPPORT_H__
 
+#include "../../common/smartpointer/referencecountptr.h"
 #include "uimouseinformation.h" // Para definiciòn de UIMouseInformation.
 
 /**
@@ -18,8 +19,15 @@ class UISupport {
          * Mètodo para verificar si el mouse se encuentra sobre una posiciòn
          * determinada de la pantalla, delimitada por x, y, width, height.
          */
-        static bool isMouseOver(const UIMouseInformation& mouseInformation, int x,
+        static bool isMouseOver(
+            ReferenceCountPtr<UIMouseInformation> mouseInformation, int x,
             int y, int width, int height);
+        /**
+         * Mètodo para dibujar un rectangulo de x, y width, height en la
+         * superficie recibida como primer parametro,
+         */
+        static void drawRectangle(SDL_Surface* surface, int x, int y,
+            int width, int height, int color);
 };
 
 #endif /** __UISUPPORT_H__ */
