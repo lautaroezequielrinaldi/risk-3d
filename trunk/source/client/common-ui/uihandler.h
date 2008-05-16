@@ -17,12 +17,6 @@ class UIHandler {
      */
     private:
         /**
-         * Almacena el ID parent o ID owner del elemento gràfico actual.
-         * Almacena 0 si el elemento gràfico actual no tiene elemento gràfico
-         * parent o elemento gràfico owner.
-         */
-        int ownerId;
-        /**
          * Almacena el ID del elemento gràfico actual.
          */
         int elementId;
@@ -43,16 +37,6 @@ class UIHandler {
          */
         UIHandler(int elementId = GEN_ID);
         /**
-         * Mètodo cuyo propòsito es obtener el ID parent o ID owner del elemento
-         * gràfico actual.
-         */
-        int getOwnerId();
-        /**
-         * Mètodo cuyo propòsito es establecer el ID parent o ID owner del
-         * elemento gràfico actual.
-         */
-        void setOwnerId(int ownerId);
-        /**
          * Mètodo cuyo propòsito es obtener el ID del elemento gràfico actual.
          */
         int getElementId();
@@ -71,6 +55,14 @@ class UIHandler {
          * actual dentro del array de elementos gràficos.
          */
         void setArrayIndex(int arrayIndex);
+        /**
+         * Operador de comparaciòn de la clase UIHandler.
+         */
+        bool operator==(const UIHandler& otherInstance);
+        /**
+         * Operador de comparaciòn de la clase UIHandler.
+         */
+        bool operator!=(const UIHandler& otherInstance);
         /**
          * Destructor virtual de la clase UIHandler.
          */
