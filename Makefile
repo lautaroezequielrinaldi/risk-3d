@@ -84,10 +84,10 @@ UNITTESTCFLAGS =
 # LIBRERÌAS DE TARGETS A CONSTRUIR
 ###################################
 # Librerìas usadas por el cliente
-CLIENTLIB =
+CLIENTLIB = $(shell  pkg-config --libs sdl) -lGL -lGLU
 
 # Librerìas usadas por el editor
-EDITORLIB = 
+EDITORLIB = $(shell  pkg-config --libs sdl) -lGL -lGLU
 
 # Librerìas usadas por el server
 SERVERLIB = 
