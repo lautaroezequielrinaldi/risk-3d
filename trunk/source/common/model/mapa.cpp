@@ -2,7 +2,7 @@
 
 Mapa::Mapa():
     paises(),
-    continentes(), {
+    continentes() {
     // No realiza ninguna acciòn.
 }
 
@@ -14,13 +14,17 @@ void Mapa::removerPais(const ReferenceCountPtr<Pais>& pais) {
     this->paises.remove(pais);
 }
 
-ReferenceCountPtr<Pais> Pais::obtenerPais(const std::string& nombre) {
+ReferenceCountPtr<Pais> Mapa::obtenerPais(const std::string& nombre) {
+    // Defino contador.
+    IteradorPais iter;
+
     // Itero por cada pais adyacente.
-    for (int counter = 0; counter < this->paises.size(); ++counter) {
+    for (iter = this->primerPais(); iter != this->ultimoPais(); ++iter) {
         // Obtengo pais actual.
-        ReferenceCountPtr<Pais> actual = this->paises[counter];
-        // SI el nombre del pais actual coincide, devuelvo pais.
-        if (*actual.getNombre() == nombre) {
+        ReferenceCountPtr<Pais> actual = *iter;
+        // SI el nombre del pais actual coincide.
+        if (actual->getNombre() == nombre) {
+            // Retorno actual.
             return actual;
         }
     }
@@ -36,13 +40,19 @@ void Mapa::removerContinente(const ReferenceCountPtr<Continente>& continente) {
     this->continentes.remove(continente);
 }
 
-ReferenceCountPtr<Pais> Pais::obtenerContinente(const std::string& nombre) {
+ReferenceCountPtr<Continente> Mapa::obtenerContinente(
+    const std::string& nombre) {
+    // Defino contador.
+   IteradorContinente iter;
+
     // Itero por cada pais adyacente.
-    for (int counter = 0; counter < this->continentes.size(); ++counter) {
+    for (iter = this->primerContinente(); iter != this->ultimoContinente();
+        ++iter) {
         // Obtengo continente actual.
-        ReferenceCountPtr<Continente> actual = this->paisesAdyacentes[counter];
-        // SI el nombre del continente actual coincide, devuelvo continente.
-        if (*actual.getNombre() == nombre) {
+        ReferenceCountPtr<Continente> actual = *iter;
+        // SI el nombre del continente actual coincide.
+        if (actual->getNombre() == nombre) {
+            // Retorno actual.
             return actual;
         }
     }
@@ -50,19 +60,19 @@ ReferenceCountPtr<Pais> Pais::obtenerContinente(const std::string& nombre) {
     return NULL;
 }
 
-IteradorPais Mapa::primerPais() {
+Mapa::IteradorPais Mapa::primerPais() {
     return this->paises.begin();
 }
 
-IteradorPais Mapa::ultimoPais() {
+Mapa::IteradorPais Mapa::ultimoPais() {
     return this->paises.end();
 }
 
-IteradorContinente Mapa::primerContinente() {
+Mapa::IteradorContinente Mapa::primerContinente() {
     return this->continentes.begin();
 }
 
-IteradorContinente Mapa::ultimoContinente() {
+Mapa::IteradorContinente Mapa::ultimoContinente() {
     return this->continentes.end();
 }
 

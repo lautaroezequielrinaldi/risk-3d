@@ -9,7 +9,8 @@ void MapaParser::saveMap(const std::string& fileName,
     // No realiza ninguna acciòn todavia.
 }
 
-ReferenceCountPtr<Mapa> MapaParser::loadMap(const std::string& fileName) {
+ReferenceCountPtr<Mapa> MapaParser::loadMap(
+    const std::string& fileName) {
     // No realiza ninguna acciòn todavia.
 }
 

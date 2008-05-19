@@ -77,13 +77,14 @@ class Mapa {
         */
         void agregarContinente(const ReferenceCountPtr<Continente>& continente);
         /**
-         * Mètodo cuyo propòsito es remover un pais del Mapa.
+         * Mètodo cuyo propòsito es remover un continente del Mapa.
          */
         void removerContinente(const ReferenceCountPtr<Continente>& continente);
         /**
-         * Mètodo cuyo propòsito es obtener un pais del Mapa.
+         * Mètodo cuyo propòsito es obtener un continente del Mapa.
          */
-        ReferenceCountPtr<Continente> obtenerPais(const std::string& nombre);
+        ReferenceCountPtr<Continente> obtenerContinente(
+            const std::string& nombre);
         /**
          * Mètodo cuyo propòsito es obtener un iterador apuntando al primer
          * paìs del Mapa.
@@ -110,5 +111,5 @@ class Mapa {
         virtual ~Mapa();
 };
 
-#endif __MAPA_H__
+#endif /** __MAPA_H__ */
 
