@@ -2,7 +2,7 @@
 #define __CONTINENTE_H__
 
 #include<string> // Para definiciòn de std::string.
-#include<vector> // Para definiciòn de std::vector.
+#include<list> // Para definiciòn de std::list.
 #include "pais.h" // Para definiciòn de Pais.
 #include "../smartpointer/referencecountptr.h" // Para definiciòn de
 // ReferenceCountPtr.
@@ -23,7 +23,7 @@ class Continente {
         /**
          * Almacena la lista de paises del Continente.
          */
-        std::vector< ReferenceCountPtr<Pais> > paises;
+        std::list< ReferenceCountPtr<Pais> > paises;
 
     /**
      * Mètodos privados de la clase Continente.
