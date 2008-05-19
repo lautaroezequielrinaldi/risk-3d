@@ -70,7 +70,7 @@ class Continente {
         /**
          * Destructor virtual de la clase Continente.
          */
-        ~Continente();
+        virtual ~Continente();
 };
 
 #endif /** __CONTINENTE_H__ */

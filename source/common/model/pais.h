@@ -68,7 +68,7 @@ class Pais {
         /**
          * Destructor virtual de la clase Pais.
          */
-        ~Pais();
+        virtual ~Pais();
 };
 
 #endif /** __PAIS_H__ */
