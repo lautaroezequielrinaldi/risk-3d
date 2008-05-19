@@ -2,7 +2,7 @@
 #define __PAIS_H__
 
 #include<string> // Para definiciòn de std::string.
-#include<vector> // Para definiciòn de std::vector.
+#include<list> // Para definiciòn de std::list.
 #include "../smartpointer/referencecountptr.h" // Para definiciòn de
 // ReferenceCountPtr.
 
@@ -21,7 +21,7 @@ class Pais {
         /**
          * Almacena la lista de paises adyacentes,
          */
-        std::vector< ReferenceCountPtr<Pais> > paisesAdyacentes;
+        std::list< ReferenceCountPtr<Pais> > paisesAdyacentes;
 
     /**
      * Mètodos privados de la clase Pais.

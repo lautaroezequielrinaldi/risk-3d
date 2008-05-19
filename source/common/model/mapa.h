@@ -2,7 +2,7 @@
 #define __MAPA_H__
 
 #include<string> // Para definiciòn de std::string
-#include<vector> // Para definiciòn de std::vector.
+#include<list> // Para definiciòn de std::list
 #include "pais.h" // Para definiciòn de Pais.
 #include "continente.h" // Para definiciòn de Continente.
 #include "../smartpointer/referencecountptr.h" // Para definiciòn de
@@ -19,11 +19,11 @@ class Mapa {
         /**
          * Almacena la lista de paises del Mapa.
          */
-        std::vector< ReferenceCountPtr<Pais> > paises;
+        std::list< ReferenceCountPtr<Pais> > paises;
         /**
          * Almacena la lista de continentes del Mapa.
          */
-        std::vector< ReferenceCountPtr<Continente> > continentes;
+        std::list< ReferenceCountPtr<Continente> > continentes;
 
     /**
      * Mètodos privados de la clase Mapa.
