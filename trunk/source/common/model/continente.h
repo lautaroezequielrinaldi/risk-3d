@@ -13,6 +13,14 @@
  */
 class Continente {
     /**
+     * Tipos de datos pùblicos de la clase Continente.
+     */
+    public:
+        /**
+         * Defino el tipo de dato Iterador de la clase Continente.
+         */
+        typedef std::list< ReferenceCountPtr<Pais> >::iterator Iterador;
+    /**
      * Atributos privados de la clase Continente.
      */
     private:
@@ -67,6 +75,16 @@ class Continente {
          * NULL si el pais no se encuentra.
          */
         ReferenceCountPtr<Pais> obtenerPais(const std::string& nombre);
+        /**
+         * Mètodo cuyo propòsito es obtener un iterador apuntando
+         * al primer pais del continente.
+         */
+        Iterador primerPais();
+        /**
+         * Mètodo cuyo propòsito es obtene run iterador apuntando
+         * al ultimo pais del continente.
+         */
+        Iterador ultimoPais();
         /**
          * Destructor virtual de la clase Continente.
          */

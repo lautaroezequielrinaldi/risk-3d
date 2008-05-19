@@ -50,6 +50,22 @@ ReferenceCountPtr<Pais> Pais::obtenerContinente(const std::string& nombre) {
     return NULL;
 }
 
+IteradorPais Mapa::primerPais() {
+    return this->paises.begin();
+}
+
+IteradorPais Mapa::ultimoPais() {
+    return this->paises.end();
+}
+
+IteradorContinente Mapa::primerContinente() {
+    return this->continentes.begin();
+}
+
+IteradorContinente Mapa::ultimoContinente() {
+    return this->continentes.end();
+}
+
 Mapa::~Mapa() {
     // No realiza ninguna acciòn.
 }

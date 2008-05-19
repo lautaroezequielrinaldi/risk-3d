@@ -13,6 +13,20 @@
  */
 class Mapa {
     /**
+     * Tipos de datos pùblicos de la clase Mapa.
+     */
+    public:
+        /**
+         * Defino el tipo de dato IteradorPais de la clase Mapa.
+         */
+        typedef std::list< ReferenceCountPtr<Pais> >::iterator IteradorPais;
+        /**
+         * Defino el tipo de dato IteradorContinente de la clase Mapa.
+         */
+        typedef std::list< ReferenceCountPtr<Continente> >::iterator
+            IteradorContinente;
+
+    /**
      * Atributos privados de la clase Mapa.
      */
     private:
@@ -70,6 +84,26 @@ class Mapa {
          * Mètodo cuyo propòsito es obtener un pais del Mapa.
          */
         ReferenceCountPtr<Continente> obtenerPais(const std::string& nombre);
+        /**
+         * Mètodo cuyo propòsito es obtener un iterador apuntando al primer
+         * paìs del Mapa.
+         */
+        IteradorPais primerPais();
+        /**
+         * Mètodo cuyo propòsito es obtener un iterador apuntando al ùltimo
+         * paìs del Mapa.
+         */
+        IteradorPais ultimoPais();
+        /**
+         * Mètodo cuyo propòsito es obtener un iterador apuntando al primer
+         * continente del Mapa.
+         */
+        IteradorContinente primerContinente();
+        /**
+         * Mètodo cuyo propòsito es obtener un iterador apuntando al ùltimo
+         * continente del Mapa.
+         */
+        IteradorContinente ultimoContinente();
         /**
          * Destructor virtual de la clase Mapa.
          */
