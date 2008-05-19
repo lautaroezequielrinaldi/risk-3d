@@ -61,7 +61,7 @@ class Continente {
         /**
          * Mètodo cuyo propósito es establecer el nombre del Continente.
          */
-        void setNombre();
+        void setNombre(const std::string& nombre);
         /**
          * Mètodo cuyo propòsito es agregar un pais al Continente.
          */

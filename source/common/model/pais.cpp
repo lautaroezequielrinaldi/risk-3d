@@ -10,7 +10,7 @@ std::string Pais::getNombre() {
     return this->nombre;
 }
 
-void Pais::setNombre(const std::stirng& nombre) {
+void Pais::setNombre(const std::string& nombre) {
     this->nombre = nombre;
 }
 
@@ -18,17 +18,22 @@ void Pais::agregarAdyacente(const ReferenceCountPtr<Pais>& adyacente) {
     this->adyacentes.push_back(adyacente);
 }
 
-void Pais::removerAdyacente(const ReferenceCountPtr<Pais> adyacente) {
+void Pais::removerAdyacente(const ReferenceCountPtr<Pais>& adyacente) {
     this->adyacentes.remove(adyacente);
 }
 
 ReferenceCountPtr<Pais> Pais::obtenerAdyacente(const std::string& nombre) {
+    // Defino contador
+    Iterador iter;
+
     // Itero por cada pais adyacente.
-    for (int counter = 0; counter < this->adyacentes.size(); ++counter) {
+    for (iter = this->primerAdyacente(); iter != this->ultimoAdyacente();
+        ++iter) {
         // Obtengo pais actual.
-        ReferenceCountPtr<Pais> actual = this->adyacentes[counter];
-        // SI el nombre del pais actual coincide, devuelvo pais.
-        if (*actual.getNombre() == nombre) {
+        ReferenceCountPtr<Pais> actual = *iter;
+        // Verifico que el nombre del pais adyacente coincida.
+        if (actual->getNombre() == nombre) {
+            // Retorno actual.
             return actual;
         }
     }
@@ -36,11 +41,11 @@ ReferenceCountPtr<Pais> Pais::obtenerAdyacente(const std::string& nombre) {
     return NULL;
 }
 
-Iterador Pais::primerAdyacente() {
+Pais::Iterador Pais::primerAdyacente() {
     return this->adyacentes.begin();
 }
 
-Iterador Pais::ultimoAdyacente() {
+Pais::Iterador Pais::ultimoAdyacente() {
     return this->adyacentes.end();
 }
 

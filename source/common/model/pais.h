@@ -52,7 +52,7 @@ class Pais {
         /**
          * Constructor de la clase Pais.
          */
-        Pais(const std::string nombre);
+        Pais(const std::string& nombre);
         /**
          * Mètodo cuyo propòsito es obtiener el nombre del Pais.
          */
@@ -73,7 +73,7 @@ class Pais {
          * Mètodo cuyo propòsito es obtener un pais adyacente.
          * NULL si no se encuentra dicho pais adyacente.
          */
-        ReferenceCountPtr<Pais> obtenerAdyacente(std::string nombre);
+        ReferenceCountPtr<Pais> obtenerAdyacente(const std::string& nombre);
         /**
          * Mètodo cuyo propòsito es obtener un iterador apuntando al
          * primer pais adytacente.
