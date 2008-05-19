@@ -11,6 +11,15 @@
  */
 class Pais {
     /**
+     * Tipos de nombre pùblicos de la clase Pais.
+     */
+    public:
+        /**
+         * Define el tipo de dato Iterador de la clase Pais.
+         */
+        typedef std::list< ReferenceCountPtr<Pais> >::iterator Iterador;
+
+    /**
      * Atributos privaods de la clase Pais.
      */
     private:
@@ -21,7 +30,7 @@ class Pais {
         /**
          * Almacena la lista de paises adyacentes,
          */
-        std::list< ReferenceCountPtr<Pais> > paisesAdyacentes;
+        std::list< ReferenceCountPtr<Pais> > adyacentes;
 
     /**
      * Mètodos privados de la clase Pais.
@@ -65,6 +74,16 @@ class Pais {
          * NULL si no se encuentra dicho pais adyacente.
          */
         ReferenceCountPtr<Pais> obtenerAdyacente(std::string nombre);
+        /**
+         * Mètodo cuyo propòsito es obtener un iterador apuntando al
+         * primer pais adytacente.
+         */
+        Iterador primerAdyacente();
+        /**
+         * Mètodo cuyo propòsito es obtener un iterador apuntando al
+         * ùltimo pais adyacente,
+         */
+        Iterador ultimoAdyacente();
         /**
          * Destructor virtual de la clase Pais.
          */
