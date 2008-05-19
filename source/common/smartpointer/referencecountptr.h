@@ -121,6 +121,30 @@ class ReferenceCountPtr {
         bool isNull();
 
         /**
+         * Operador de comparaciòn de la clase ReferenceCounPtr.
+         * Compara el smart pointer contra un puntero regular de C / C++
+         */
+        bool operator == ( const T* pointer );
+
+        /**
+         * Operador de comparaciòn de la clase ReferenceCountPtr.
+         * Compara el smart pointer contra otro smart pointer.
+         */
+        bool operator==( const ReferenceCountPtr<T>& otherInstance);
+
+        /**
+         * Operador de comparaciòn de la clase ReferenceCountPtr.
+         * Compara el smart pointer contra un puntero recular de C / C++
+         */
+        bool operator!=( const T* pointer);
+
+        /**
+         * Operador de comparaciòn de la clase ReferenceCountPtr.
+         * Compara el smart pointer contra otro smart pointer.
+         */
+        bool operator!=( const ReferenceCountPtr<T>& otherInstance);
+
+        /**
          * Destructor virtual de la clase ReferenceCountPtr.
          * Destruye una instancia existente de la clase ReferenceCountPtr.
          */
@@ -222,6 +246,28 @@ T& ReferenceCountPtr<T>::operator*() {
 template<class T>
 bool ReferenceCountPtr<T>::isNull() {
     return this->pointer == NULL;
+}
+
+template<class T>
+bool ReferenceCountPtr<T>::operator==( const T* pointer ) {
+    return this->pointer == pointer;
+}
+
+template<class T>
+bool ReferenceCountPtr<T>::operator==(
+    const ReferenceCountPtr<T>& otherInstance) {
+    return this->pointer == otherInstance.pointer;
+}
+
+template<class T>
+bool ReferenceCountPtr<T>::operator!=( const T* pointer )  {
+    return this->pointer != pointer;
+}
+
+template<class T>
+bool ReferenceCountPtr<T>::operator!=(
+    const ReferenceCountPtr<T>& otherInstance) {
+    return this->pointer != otherInstance.pointer;
 }
 
 template<class T>

@@ -93,7 +93,7 @@ EDITORLIB = $(shell  pkg-config --libs sdl) -lGL -lGLU
 SERVERLIB = 
 
 # Librerìas usadas por common
-COMMONLIB = -lpthread 
+COMMONLIB = -lpthread -lxml2 
 
 # Librerìas usadas por los test unitarios
 UNITTESTLIB = -lcppunit
