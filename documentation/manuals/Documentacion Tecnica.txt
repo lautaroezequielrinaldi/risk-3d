@@ -2,6 +2,13 @@ Documentación Técnica
 
 1. Requerimientos de software (*)
 	OS, bibliotecas y herramientas necesarias para compilar, desarrollar, probar y depurar el programa
+	sdl_devel
+	sdl_image-devel
+	sdl_ttf-devel
+	pthreads
+	libxml2
+
+
 2. Descripción general (*)
 	Arquitectura general del proyecto, qué módules tiene, etc
 3. Módulo N (*)
