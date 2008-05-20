@@ -5,8 +5,8 @@
  * Macro GEN_ID que devuelve o genera un ID de elemento grafico ùnico.
  */
 #define STRINGERMACRO( x ) #x 
-#define GEN_ID (int)(__FILE__ STRINGERMACRO(__LINE__))
-
+//#define GEN_ID (int)(__FILE__ STRINGERMACRO(__LINE__))
+#define GEN_ID 1
 /**
  * Clase cuyo propòsito es identificar a un control grafico dentro de una
  * interfaz grafica Inmediate Mode GUI.
