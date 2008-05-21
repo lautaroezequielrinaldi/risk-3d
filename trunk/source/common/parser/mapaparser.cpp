@@ -7,6 +7,8 @@ MapaParser::MapaParser():
 
 void MapaParser::persistirPaises(xmlNodePtr& nodoMapa,
     ReferenceCountPtr<Mapa>& mapa) {
+    // Define el nodo de lista de paises a persistir.
+    xmlNodePtr nodoListaPaises;
     // Define el nodo del pais a persistir.
     xmlNodePtr nodoPais;
     // Define el nodo del pais adyacente a persistir.
@@ -16,13 +18,16 @@ void MapaParser::persistirPaises(xmlNodePtr& nodoMapa,
     // Defino el contador de adyacente.
     Pais::Iterador iterAdyacente;
 
+    // Creo el nodo de lista de paises a persistir.
+    nodoListaPaises = xmlNewChild(nodoMapa, NULL, BAD_CAST "lista-paises",
+        NULL);
     // Itero por cada pais.
     for (iterPais = mapa->primerPais(); iterPais != mapa->ultimoPais();
         ++iterPais) {
         // Obtengo pais actual.
         ReferenceCountPtr<Pais> actual = *iterPais;
         // Creo el nodo del pais a persistir.
-        nodoPais = xmlNewChild(nodoMapa, NULL, BAD_CAST "pais", NULL);
+        nodoPais = xmlNewChild(nodoListaPaises, NULL, BAD_CAST "pais", NULL);
         // Agrego el atributo nombre del pais a persistir.
         xmlNewProp(nodoPais, BAD_CAST "nombre",
             BAD_CAST (const xmlChar*) actual->getNombre().c_str());
@@ -40,33 +45,38 @@ void MapaParser::persistirPaises(xmlNodePtr& nodoMapa,
 
 void MapaParser::persistirContinentes(xmlNodePtr& nodoMapa,
     ReferenceCountPtr<Mapa>& mapa) {
+    // Define el nodo de lista de continentes a persistir.
+    xmlNodePtr nodoListaContinentes;
     // Define el nodo del continente a persistir.
     xmlNodePtr nodoContinente;
     // Define el nodo del pais a persistir.
     xmlNodePtr nodoPais;
     // Defino el contador de continente.
-    Mapa::IteradorPais iterContinente;
+    Mapa::IteradorContinente iterContinente;
     // Defino el contador de adyacente.
     Pais::Iterador iterPais;
 
+    // Creo en nodo de lista de continentes a persistir.
+    nodoListaContinentes = xmlNewChild(nodoMapa, NULL,
+        BAD_CAST "lista-continentes", NULL);
     // Itero por cada continente.
     for (iterContinente = mapa->primerContinente();
         iterContinente != mapa->ultimoContinente(); ++iterContinente) {
         // Obtengo continente actual.
         ReferenceCountPtr<Continente> actual = *iterContinente;
         // Creo el nodo del continente a persistir.
-        nodoContinente = xmlNewChild(nodoMapa, NULL, BAD_CAST "continente",
-          NULL);
+        nodoContinente = xmlNewChild(nodoListaContinentes, NULL,
+            BAD_CAST "continente", NULL);
         // Agrego el atributo nombre del continente a persistir.
         xmlNewProp(nodoContinente, BAD_CAST "nombre",
             BAD_CAST (const xmlChar*) actual->getNombre().c_str());
         // Itero por cada pais.
         for (iterPais = actual->primerPais(); 
-            iterPais != actual->ultimoAPais(); ++iterPais) {
+            iterPais != actual->ultimoPais(); ++iterPais) {
             // Obtengo pais pais actual.
             ReferenceCountPtr<Pais> paisActual = *iterPais;
-            // Creo el nodo del pais adyacente a persistir.
-            nodoAdyacente = xmlNewChild(nodoContinente, NULL, BAD_CAST "pais",
+            // Creo el nodo del pais a persistir.
+            nodoPais = xmlNewChild(nodoContinente, NULL, BAD_CAST "pais",
                 BAD_CAST (const xmlChar*) paisActual->getNombre().c_str());
         }
     }

@@ -5,6 +5,8 @@
 #include<libxml/parser.h> // Para definiciòn de la libreria libxml parser.
 #include<libxml/tree.h> // Para definiciòn de la libreria libxml tree.
 #include "../model/mapa.h" // Para definiciòn de Mapa.
+#include "../model/pais.h" // Para definiciòn de Pais.
+#include "../model/continente.h" // Para definiciòn de Continente.
 #include "../smartpointer/referencecountptr.h" // Para definiciòn de
 // ReferenceCountPtr.
 
