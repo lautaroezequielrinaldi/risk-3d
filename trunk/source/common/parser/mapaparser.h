@@ -2,8 +2,12 @@
 #define __MAPAPARSER_H__
 
 #include<string> // Para definiciòn de std::string.
+#include<map> // Para definiciòn de std::map
 #include<libxml/parser.h> // Para definiciòn de la libreria libxml parser.
 #include<libxml/tree.h> // Para definiciòn de la libreria libxml tree.
+#include<libxml/xpath.h> // Para definiciòn de la libreria libxml xpath.
+#include<libxml/xpathInternals.h> // Para definiciòn de la libreria libxml
+// xpath internals.
 #include "../model/mapa.h" // Para definiciòn de Mapa.
 #include "../model/pais.h" // Para definiciòn de Pais.
 #include "../model/continente.h" // Para definiciòn de Continente.
@@ -23,6 +27,10 @@ class MapaParser {
          * Almacena el documento XML sobre el cual se va a trabajar.
          */
         xmlDocPtr document;
+        /**
+         * Almacena los paises cargados hasta el momento.
+         */
+        std::map< std::string, ReferenceCountPtr<Pais> > paisesCargados;
 
     /**
      * Mètodos privados de la clase MapaParser.
@@ -51,6 +59,22 @@ class MapaParser {
          */
         void persistirReglas(xmlNodePtr& nodoMapa,
             ReferenceCountPtr<Mapa>& mapa);
+        /**
+         * Carga los paises del mapa.
+         */
+        void cargarPaises(xmlNodePtr& nodoMapa,
+            ReferenceCountPtr<Mapa>& mapa);
+        /**
+         * Carga los continentes del mapa.
+         */
+        void cargarContinentes(xmlNodePtr& nodoMapa,
+            ReferenceCountPtr<Mapa>& mapa);
+        /**
+         * Carga las reglas del mapa.
+         */
+        void cargarReglas(xmlNodePtr& nodoMapa,
+            ReferenceCountPtr<Mapa>& mapa);
+
     /**
      * Mètodos pùblicos de la clase MapaParser.
      */
