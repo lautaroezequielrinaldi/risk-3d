@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapa>
+  <lista-paises>
+    <pais nombre="ARGENTINA">
+      <adyacente>BOLIVIA</adyacente>
+    </pais>
+    <pais nombre="BOLIVIA"/>
+  </lista-paises>
+  <lista-continentes>
+    <continente nombre="AMERICA">
+      <pais>ARGENTINA</pais>
+    </continente>
+    <continente nombre="ASIA"/>
+    <continente nombre="EUROPA"/>
+  </lista-continentes>
+</mapa>
