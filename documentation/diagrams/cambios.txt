@@ -1,0 +1,13 @@
+* Elimine clases jugador, controladores, partida que me parece que no concordaban con el diseño que decidimos hacer.
+* Elimine la clase Ejercito y sus derivadas ya que no vamos a usar denominaciones ( infanteria, caballeria, artilleria ) y me parece que el Ejercito como objeto no tiene ningun sentido, mas bien tiene sentido que el pais conozca la CANTIDAD de ejercitos que tiene, pero me parece que solo como numero.
+* Modifique la clase Pais para que quede compatible a los cambios antes dichos: 
+	- deja de tener sentido la lista de ejercitos, me parece que con tener la cantidad de ejercitos alcanza
+	- elimine metodos que tenian que ver con las denominaciones
+	- agregue metodos como: agregarEjercito ( cant ) , eliminarEjercito( cant) y obtenerCantidadEjercitos: int.
+
+* Agregue la relacion entre Mapa y Paises para dejar el diagrama consistente ya que en la implementacion que hay hasta el momento, el Mapa contiene una lista de Continentes Y una lista de paises . ( esto se supone que cambia a grafo , luego)
+* Agregue en Pais un metodo: esAdyacente al cual se le pasa el nombre del pais2 y devuelve bool.
+*Agregue en Mapa un metodo obtenerPais ( nombre ) para poder, a partir del nombre obtener un pais del mapa .
+
+* Agregue la jerarquia de clases correspondiente al manejo de los comandos y serializaciones que hablamos ayer.
+* Agregue clases vacias que se iran completando y asociando.
