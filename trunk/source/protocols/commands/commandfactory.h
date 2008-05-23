@@ -1,5 +1,5 @@
-#ifndef __MESSAGEFACTORY__
-#define __MESSAGEFACTORY__
+#ifndef __COMMANDFACTORY__
+#define __COMMANDFACTORY__
 
 
-#endif /*__MESSAGEFACTORY__*/
+#endif /*__COMMANDFACTORY__*/
