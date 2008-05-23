@@ -2,7 +2,7 @@
 
 
 /*
- * esto es muy borrador
+ * esto es muy borrador, tambien se puede usar un switch
  *
  *
  *
@@ -19,7 +19,7 @@ CommandFactoryFactory::CommandFactoryFactory() {
 
 }	
 /*
- * Esto es muy borrador
+ * Esto es muy borrador, tambien se puede usar un switch
  *
  */
 
