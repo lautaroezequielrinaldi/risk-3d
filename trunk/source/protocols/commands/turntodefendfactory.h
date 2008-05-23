@@ -1,6 +1,6 @@
 #ifndef __TURNTODEFENDFACTORY__
 #define __TURNTODEFENDFACTORY__
-#include "CommandFactory.h"
-#include "TurnToDefend.h"
+#include "commandfactory.h"
+#include "turntodefend.h"
 
 #endif /* __TURNTODEFENDFACTORY__*/

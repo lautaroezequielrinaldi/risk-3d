@@ -1,4 +1,6 @@
 #ifndef __INIT__
 #define __INIT__
-#include "Command.h"
+#include "command.h"
+
+
 #endif /* __INIT__*/

@@ -1,6 +1,6 @@
 #ifndef __KEEPALIVEFACTORY__
 #define __KEEPALIVEFACTORY__
-#include "CommandFactory.h"
-#include "KeepAlive.h"
+#include "commandfactory.h"
+#include "keepalive.h"
 
 #endif /* __KEEPALIVEFACTORY__*/

@@ -1,20 +1,5 @@
-#include "Attack.h"
-#include "ChatCommand.h"
-#include "Defend.h"
-#include "Init.h"
-#include "Join.h"
-#include "KeepAlive.h"
-#include "Lose.h"
-#include "MapReceive.h"
-#include "MapSend.h"
-#include "CommandFactoryFactory.h"
+#include "commandfactoryfactory.h"
 
-#include "Populate.h"
-#include "Surrender.h"
-#include "TurnToAttack.h"
-#include "TurnToDefend.h"
-#include "TurnToPopulate.h"
-#include "Win.h"
 
 /*
  * 

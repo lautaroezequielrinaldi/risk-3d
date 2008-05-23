@@ -1,6 +1,6 @@
 #ifndef __ATTACKFACTORY__
 #define __ATTACKFACTORY__
-#include "CommandFactory.h"
-#include "Attack.h"
+#include "commandfactory.h"
+#include "attack.h"
 
 #endif /* __ATTACKFACTORY__*/

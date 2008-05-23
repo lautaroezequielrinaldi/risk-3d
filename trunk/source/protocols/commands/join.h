@@ -1,4 +1,6 @@
 #ifndef __JOIN__
 #define __JOIN__
-#include "Command.h"
+#include "command.h"
+
+
 #endif /* __JOIN__*/

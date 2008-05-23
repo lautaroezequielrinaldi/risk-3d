@@ -1,6 +1,6 @@
 #ifndef __LOSEFACTORY__
 #define __LOSEFACTORY__
-#include "CommandFactory.h"
-#include "Lose.h"
+#include "commandfactory.h"
+#include "lose.h"
 
 #endif /* __LOSEFACTORY__*/
