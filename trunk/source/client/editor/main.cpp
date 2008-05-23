@@ -1,4 +1,20 @@
+#include<cstdlib> // Para definiciòn de EXIT_SUCCESS.
+#include<gtkmm/main.h> // Para definiciòn de Gtk::Main.
+#include "mainwindow.h" // Para definiciòn de MainWindow.
+
 int main (int argc, char ** argv){
+	// Inicializa Gtkmm.
+	Gtk::Main main(argc, argv);
+
+	// Crea ventana principal.
+	MainWindow mainWindow;
+
+	// Ejecuta la aplicacion Gtkmm.
+	main.run(mainWindow);
+
+	// Retorna EXIT_SUCCESS
+	return EXIT_SUCCESS;
+
 	// estados
 	// nada -> click en un lugar virgen -> crea ciudad
 	// nada -> click en una ciudad -> relacionando ciudad
