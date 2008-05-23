@@ -66,37 +66,46 @@ CFLAGS += -ggdb -DDEBUG -fno-inline
 # Flags de compilaciòn de C++ igual a las de C
 CXXFLAGS += $(CFLAGS)
 
+# Flags de compilaciòn usadas por common
+COMMONCFLAGS = $(shell xml2-config --cflags)
+ 
 # Flags de compilacìn usadas por el cliente
-CLIENTCFLAGS =
+CLIENTCFLAGS = $(COMMONCFLAGS)
 
 # Flags de compilaciòn usadas por el editor
-EDITORCFLAGS =
+EDITORCFLAGS = $(COMMONCFLAGS)
 
 # Flags de compilaciòn usadas por el server
-SERVERCFLAGS = 
-
-# Flags de compilaciòn usadas por common
-COMMONCFLAGS =
+SERVERCFLAGS = $(COMMONCFLAGS)
 
 # Flags de compilaciòn usadas por los test unitarios
-UNITTESTCFLAGS =
+UNITTESTCFLAGS = $(COMMONCFLAGS)
+UNITTESTCFLAGS += $(CLIENTCFLAGS)
+UNITTESTCFLAGS += $(EDITORCFLAGS)
+UNITTESTCFLAGS += $(SERVERCFLAGS)
 
 # LIBRERÌAS DE TARGETS A CONSTRUIR
 ###################################
+# Librerias usadas por common
+COMMONLIB = $(shell xml2-config --libs)
+COMMONLIB += -lpthread
+
 # Librerìas usadas por el cliente
-CLIENTLIB = $(shell  pkg-config --libs sdl) -lGL -lGLU
+CLIENTLIB = $(COMMONLIB)
+CLIENTLIB += $(shell  pkg-config --libs sdl) -lGL -lGLU
 
 # Librerìas usadas por el editor
-EDITORLIB = $(shell  pkg-config --libs sdl) -lGL -lGLU
+EDITORLIB = $(COMMONLIB)
+EDITORLIB += $(shell  pkg-config --libs sdl) -lGL -lGLU
 
 # Librerìas usadas por el server
-SERVERLIB = 
-
-# Librerìas usadas por common
-COMMONLIB = -lpthread -lxml2 
+SERVERLIB = $(COMMONLIB)
 
 # Librerìas usadas por los test unitarios
-UNITTESTLIB = -lcppunit
+UNITTESTLIB = $(COMMONLIB)
+UNITTESTLIB += $(CLIENTLIB)
+UNITTESTLIB += $(SERVERLIB)
+UNITTESTLIB += -lcppunit
 
 # ESTANDARD A USAR
 ###################
@@ -160,24 +169,27 @@ OBJECT_UNITTEST_FILES = $(patsubst %.$(FILE_EXTENSION),%.o,$(UNITTEST_SOURCES))
 
 # REGLAS DE COMPILACION
 ########################
-.PHONY: all test clean
+.PHONY: all clean
 
 all: CLIENT_TARGET EDITOR_TARGET SERVER_TARGET
 
+CLIENT_TARGET: CXXFLAGS += $(CLIENTCFLAGS)
+CLIENT_TARGET: LDFLAGS += $(CLIENTLIB)
 CLIENT_TARGET: $(OBJECT_CLIENT_FILES)
-	$(CXX) $(CXXFLAGS) $(CLIENTCFLAGS) $(COMMONCFLAGS) $(LDFLAGS) $(CLIENTLIB) $(COMMONLIB) $(OBJECT_CLIENT_FILES) $(LOADLIBS) $(LDLIBS) -o $(CLIENT_DIR)/$(target_client)
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) $(OBJECT_CLIENT_FILES) $(LOADLIBS) $(LDLIBS) -o $(CLIENT_DIR)/$(target_client)
 
+EDITOR_TARGET: CXXFLAGS += $(EDITORCFLAGS)
+EDITOR_TARGET: LDFLAGS += $(EDITORLIB)
 EDITOR_TARGET: $(OBJECT_EDITOR_FILES)
-	$(CXX) $(CXXFLAGS) $(EDITORCFLAGS) $(COMMONCFLAGS) $(LDFLAGS) $(EDITORLIB) $(COMMONLIB) $(OBJECT_EDITOR_FILES) $(LOADLIBS) $(LDLIBS) -o $(EDITOR_DIR)/$(target_editor)
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) $(OBJECT_EDITOR_FILES) $(LOADLIBS) $(LDLIBS) -o $(EDITOR_DIR)/$(target_editor)
 
+SERVER_TARGET: CXXFLAGS += $(SERVERCFLAGS)
+SERVER_TARGET: LDFLAGS += $(SERVERLIB)
 SERVER_TARGET: $(OBJECT_SERVER_FILES)
-	$(CXX) $(CXXFLAGS) $(SERVERCFLAGS) $(COMMONCFLAGS) $(LDFLAGS) $(SERVERLIB) $(COMMONLIB) $(OBJECT_SERVER_FILES) $(LOADLIBS) $(LDLIBS) -o $(SERVER_DIR)/$(target_server)
-
-test: $(OBJECT_UNITTEST_FILES)
-	$(CXX) $(CXXFLAGS) $(UNITTESTCFLAGS) $(LDFLAGS) $(UNITTESTLIB) $(OBJECT_UNITTEST_FILES) $(LOADLIBS) $(LDLIBS) -o $(UNITTEST_DIR)/$(target_unit_test)
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) $(OBJECT_SERVER_FILES) $(LOADLIBS) $(LDLIBS) -o $(SERVER_DIR)/$(target_server)
 
 clean:
-#	@echo $(OBJECT_SERVER_FILES)
+
 	@$(RM) -fv $(OBJECT_CLIENT_FILES) \
 	$(OBJECT_EDITOR_FILES) \
 	$(OBJECT_SERVER_FILES) \
