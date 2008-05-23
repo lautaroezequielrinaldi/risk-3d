@@ -1,4 +1,5 @@
 #ifndef __MAPSEND__
 #define __MAPSEND__
-#include "Command.h"
+#include "command.h"
+
 #endif /* __MAPSEND__*/

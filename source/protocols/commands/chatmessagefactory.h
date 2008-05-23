@@ -1,6 +1,6 @@
 #ifndef __CHATMESSAGEFACTORY__
 #define __CHATMESSAGEFACTORY__
-#include "CommandFactory.h"
-#include "ChatMessage.h"
+#include "commandfactory.h"
+#include "chatmessage.h"
 
 #endif /* __CHATMESSAGEFACTORY__*/

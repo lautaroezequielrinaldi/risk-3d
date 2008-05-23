@@ -1,6 +1,6 @@
 #ifndef __MAPSENDFACTORY__
 #define __MAPSENDFACTORY__
-#include "CommandFactory.h"
-#include "MapSend.h"
+#include "commandfactory.h"
+#include "mapsend.h"
 
 #endif /* __MAPSENDFACTORY__*/

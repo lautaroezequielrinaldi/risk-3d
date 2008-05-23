@@ -1,7 +1,7 @@
 #ifndef __MESSAGEFACTORY__
 #define __MESSAGEFACTORY__
 
-#include "CommandFactory.h"
+#include "commandfactory.h"
 #include "../../common/smartpointer/referencecountptr.h"
 
 

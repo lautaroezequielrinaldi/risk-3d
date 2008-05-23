@@ -1,6 +1,6 @@
 #ifndef __MAPRECEIVEFACTORY__
 #define __MAPRECEIVEFACTORY__
-#include "CommandFactory.h"
-#include "MapReceive.h"
+#include "commandfactory.h"
+#include "mapreceive.h"
 
 #endif /* __MAPRECEIVEFACTORY__*/

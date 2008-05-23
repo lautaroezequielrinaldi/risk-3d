@@ -1,4 +1,6 @@
 #ifndef __SURRENDER__
 #define __SURRENDER__
-#include "Command.h"
+#include "command.h"
+
+
 #endif /* __SURRENDER__*/
