@@ -1,4 +1,4 @@
 #ifndef __DEFEND__
 #define __DEFEND__
-#include "Message.h"
+#include "Command.h"
 #endif /* __DEFEND__*/

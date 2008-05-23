@@ -1,4 +1,4 @@
 #ifndef __SURRENDER__
 #define __SURRENDER__
-#include "Message.h"
+#include "Command.h"
 #endif /* __SURRENDER__*/

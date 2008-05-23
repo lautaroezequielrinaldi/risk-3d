@@ -1,4 +1,4 @@
 #ifndef __CHATMESSAGE}__
 #define __CHATMESSAGE}__
-#include "Message.h"
+#include "Command.h"
 #endif /* __CHATMESSAGE__*/

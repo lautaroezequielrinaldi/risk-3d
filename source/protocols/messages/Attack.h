@@ -1,5 +1,5 @@
 #ifndef __ATTACK__
 #define __ATTACK__
-#include "Message.h"
+#include "Command.h"
 
 #endif /* __ATTACK__*/

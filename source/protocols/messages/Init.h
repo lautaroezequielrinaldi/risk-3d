@@ -1,4 +1,4 @@
 #ifndef __INIT__
 #define __INIT__
-#include "Message.h"
+#include "Command.h"
 #endif /* __INIT__*/

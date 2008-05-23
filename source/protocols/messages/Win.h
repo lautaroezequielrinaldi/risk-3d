@@ -1,4 +1,4 @@
 #ifndef __WIN__
 #define __WIN__
-#include "Message.h"
+#include "Command.h"
 #endif /* __WIN__*/

@@ -1,4 +1,4 @@
 #ifndef __KEEPALIVE__
 #define __KEEPALIVE__
-#include "Message.h"
+#include "Command.h"
 #endif /* __KEEPALIVE__*/

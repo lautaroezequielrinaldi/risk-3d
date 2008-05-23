@@ -1,4 +1,4 @@
 #ifndef __TURNTOATTACK__
 #define __TURNTOATTACK__
-#include "Message.h"
+#include "Command.h"
 #endif /* __TURNTOATTACK__ */
