@@ -71,9 +71,11 @@ COMMONCFLAGS = $(shell xml2-config --cflags)
  
 # Flags de compilacìn usadas por el cliente
 CLIENTCFLAGS = $(COMMONCFLAGS)
+CLIENTCFLAGS += $(shell sdl-config --cflags)
 
 # Flags de compilaciòn usadas por el editor
 EDITORCFLAGS = $(COMMONCFLAGS)
+EDITORCFLAGS += $(shell pkg-config --cflags gtkmm-2.4)
 
 # Flags de compilaciòn usadas por el server
 SERVERCFLAGS = $(COMMONCFLAGS)
@@ -92,11 +94,13 @@ COMMONLIB += -lpthread
 
 # Librerìas usadas por el cliente
 CLIENTLIB = $(COMMONLIB)
-CLIENTLIB += $(shell  pkg-config --libs sdl) -lGL -lGLU
+CLIENTLIB += $(shell  pkg-config --libs sdl)
+CLIENTLIB += -lGL
+CLIENTLIB += -lGLU
 
 # Librerìas usadas por el editor
 EDITORLIB = $(COMMONLIB)
-EDITORLIB += $(shell  pkg-config --libs sdl) -lGL -lGLU
+EDITORLIB += $(shell  pkg-config --libs gtkmm-2.4)
 
 # Librerìas usadas por el server
 SERVERLIB = $(COMMONLIB)
@@ -159,7 +163,7 @@ OBJECT_PROTOCOLS_FILES = $(patsubst %.$(FILE_EXTENSION),%.o,$(PROTOCOLS_SOURCES)
 OBJECT_CLIENT_FILES = $(patsubst %.$(FILE_EXTENSION),%.o,$(CLIENT_SOURCES)) $(OBJECT_COMMON_FILES) $(OBJECT_COMMON_UI_FILES) $(OBJECT_PROTOCOLS_FILES)
 
 # Archivos objeto de editor
-OBJECT_EDITOR_FILES = $(patsubst %.$(FILE_EXTENSION),%.o,$(EDITOR_SOURCES)) $(OBJECT_COMMON_FILES) $(OBJECT_COMMON_UI_FILES)
+OBJECT_EDITOR_FILES = $(patsubst %.$(FILE_EXTENSION),%.o,$(EDITOR_SOURCES)) $(OBJECT_COMMON_FILES)
 
 # Archivos objeto de server
 OBJECT_SERVER_FILES = $(patsubst %.$(FILE_EXTENSION),%.o,$(SERVER_SOURCES)) $(OBJECT_COMMON_FILES) $(OBJECT_PROTOCOlS_FILES)
