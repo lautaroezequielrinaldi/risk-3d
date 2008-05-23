@@ -1,4 +1,4 @@
 #ifndef __LOSE__
 #define __LOSE__
-#include "Message.h"
+#include "Command.h"
 #endif /* __LOSE__*/

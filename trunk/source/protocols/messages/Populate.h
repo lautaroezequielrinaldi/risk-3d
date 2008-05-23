@@ -1,4 +1,4 @@
 #ifndef __POPULATE__
 #define __POPULATE__
-#include "Message.h"
+#include "Command.h"
 #endif /* __POPULATE__*/
