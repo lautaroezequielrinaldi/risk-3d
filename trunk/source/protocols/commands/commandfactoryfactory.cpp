@@ -9,7 +9,7 @@
  */
 
 
-CommandFactoryFactory::CommandFactoryFactory() {
+//CommandFactoryFactory::CommandFactoryFactory() {
 /*	// crea una instancia de cada objeto y
 	//  lo guarda en un map con el nombre de la clase
 	//  como clave
@@ -23,7 +23,7 @@ CommandFactoryFactory::CommandFactoryFactory() {
  *
  */
 
-ReferenceCountPtr<CommandFactory> CommandFactoryFactory::build(const std::string& type, const std::string& xml) {
+//ReferenceCountPtr<CommandFactory> CommandFactoryFactory::build(const std::string& type, const std::string& xml) {
 /*	dom=libxml(xml);
 	commandfactory = objectmap->get(type); 
 	commandfactory->getCommand(type,dom);
