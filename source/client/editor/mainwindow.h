@@ -4,9 +4,13 @@
 #include<gtkmm/main.h> // Para definiciòn de Gtk::Main.
 #include<gtkmm/window.h> // Para definiciòn de Gtk::Window.
 #include<gtkmm/box.h> // Para definicion de Gtk::VBox.
-#include<gtkmm/filechooserdialog.h> // Para definiciòn de Gtk::FileChooserDialog.
-#include<gtkmm/stock.h> // Para definiciòn de Gtk::Stock::CANCEL y Gtk::Stock::OK.
+#include<gtkmm/filechooserdialog.h> // Para definiciòn de
+// Gtk::FileChooserDialog.
+#include<gtkmm/stock.h> // Para definiciòn de Gtk::Stock::CANCEL y
+// Gtk::Stock::OK.
 #include "mainmenubar.h" // Para definiciòn de MainMenuBar.
+//#include "maintoolbar.h" // Para definiciòn de MainToolBar.
+#include "editiontoolbar.h" // Para definiciòn de EditionToolBar.
 #include "mapview.h" // Para definiciòn de MapView.
 
 /**
@@ -26,6 +30,10 @@ class MainWindow : public Gtk::Window {
          * Almacena la barra de menues.
          */
         MainMenuBar menuBar;
+        /**
+         * Almacena la barra de herramientas de edicion.
+         */
+        EditionToolBar editionToolBar;
 
 	/**
  	 * Mètodos privados de la clase MainWindow.
@@ -50,6 +58,11 @@ class MainWindow : public Gtk::Window {
          */
         void createMenuBar();
         /**
+         * Mètodo cuyo propòsito es crear la barra de ediciòn de la ventana
+         * principal.
+         */
+        void createEditionToolBar();
+        /**
          * Manejador de la señal signal_activate del item de menu nuevo mapa.
          */
         void onNewMapSelected();
@@ -65,6 +78,14 @@ class MainWindow : public Gtk::Window {
          * Manejador de la señal signal_activate del item de menu salir.
          */
         void onQuitSelected();
+        /**
+         * Manejador de la señal signal_clicked del boton de seleccion de pais.
+         */
+        void onSelectionClicked();
+        /**
+         * Manejador de la señal signal_clicked del boton de creacion de pais.
+         */
+        void onCreationClicked();
 	/**
  	 * Mètodos pùblicos de la clase MainWindow.
  	 */
