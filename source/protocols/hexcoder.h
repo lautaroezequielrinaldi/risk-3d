@@ -1,3 +1,3 @@
-#ifndef __
-#define __
-#include "Message.h"
+#ifndef __HEXCODER__
+#define __HEXCODER__
+#endif
