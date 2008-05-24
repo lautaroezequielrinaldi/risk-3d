@@ -11,7 +11,7 @@
 #include "mainmenubar.h" // Para definiciòn de MainMenuBar.
 //#include "maintoolbar.h" // Para definiciòn de MainToolBar.
 #include "editiontoolbar.h" // Para definiciòn de EditionToolBar.
-#include "mapview.h" // Para definiciòn de MapView.
+//#include "mapview.h" // Para definiciòn de MapView.
 
 /**
  * Definiciòn de la clase MainWindow que encapsula la ventana principal de la
