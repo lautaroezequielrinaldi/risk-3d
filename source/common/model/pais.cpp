@@ -41,6 +41,27 @@ ReferenceCountPtr<Pais> Pais::obtenerAdyacente(const std::string& nombre) {
     return NULL;
 }
 
+bool Pais::esAdyacente(const std::string& nombre){
+	
+ // Defino contador
+    Iterador iter;
+
+    // Itero por cada pais adyacente.
+    for (iter = this->primerAdyacente(); iter != this->ultimoAdyacente();
+        ++iter) {
+        // Obtengo pais actual.
+        ReferenceCountPtr<Pais> actual = *iter;
+        // Verifico que el nombre del pais adyacente coincida.
+        if (actual->getNombre() == nombre) {
+            // Retorno true.
+            return true;
+        }
+    }
+    // Si no encontre pais, devuelvo false.
+    return false;
+	
+}
+
 Pais::Iterador Pais::primerAdyacente() {
     return this->adyacentes.begin();
 }

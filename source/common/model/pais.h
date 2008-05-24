@@ -75,6 +75,13 @@ class Pais {
          */
         ReferenceCountPtr<Pais> obtenerAdyacente(const std::string& nombre);
         /**
+         * Metodo cuyo proposito es verificar si un pais es adyacente a otro.
+         * Devuelve true si los paises son adyacentes, caso contrario devuelve false.
+         */
+        bool esAdyacente(const std::string& nombre);
+        
+        
+        /**
          * Mètodo cuyo propòsito es obtener un iterador apuntando al
          * primer pais adytacente.
          */
