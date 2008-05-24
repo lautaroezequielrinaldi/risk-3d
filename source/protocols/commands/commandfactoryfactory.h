@@ -31,13 +31,13 @@
 
 
 class CommandFactoryFactory {
-	public:
+/*	public:
 	CommandFactoryFactory();
 	ReferenceCountPtr<CommandFactory> CommandFactoryFactory::build(const std::String& type, const std::String& xml);
 
 
 	private:
 	std::map<std::string,ReferenceCountPtr<CommandFactory> > * list;
-
+*/
 };
 #endif /*__MESSAGEFACTORY__*/
