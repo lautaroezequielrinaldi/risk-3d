@@ -16,8 +16,8 @@
 	ReferenceCountPtr<CommandFactory> attackfactory();
 	objectmap->put("Attack", attackfactory);
 
-*/
-}	
+/
+//}	
 /*
  * Esto es muy borrador, tambien se puede usar un switch
  *
@@ -29,5 +29,5 @@
 	commandfactory->getCommand(type,dom);
 	return commandfactory;
 */
-}
+//}
 
