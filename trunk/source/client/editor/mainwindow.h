@@ -4,9 +4,8 @@
 #include<gtkmm/main.h> // Para definiciòn de Gtk::Main.
 #include<gtkmm/window.h> // Para definiciòn de Gtk::Window.
 #include<gtkmm/box.h> // Para definicion de VBox.
-#include<gtkmm/menubar.h> // Para definicion de Gtk::MenuBar.
-#include<gtkmm/menu.h> // Para definiciòn de Gtk::Menu.
-#include<gtkmm/menuitem.h> // Para definiciòn de Gtk::MenuItem.
+#include "mainmenubar.h" // Para definiciòn de MainMenuBar.
+#include "mapview.h" // Para definiciòn de MapView.
 
 /**
  * Definiciòn de la clase MainWindow que encapsula la ventana principal de la
@@ -24,31 +23,7 @@ class MainWindow : public Gtk::Window {
 		/**
          * Almacena la barra de menues.
          */
-        Gtk::MenuBar barraMenu;
-        /**
-         * Almacena el item de menu archivo.
-         */
-        Gtk::MenuItem archivoMenuItem;
-        /**
-         * Almacena el menu archivo.
-         */
-        Gtk::Menu archivoMenu;
-        /**
-         * Almacena el item de menu nuevo mapa.
-         */
-        Gtk::MenuItem nuevoMapaMenuItem;
-        /**
-         * Almacena el item de menu abrir mapa.
-         */
-        Gtk::MenuItem abrirMapaMenuItem;
-        /**
-         * Almacena el item de menu guardar mapa.
-         */
-        Gtk::MenuItem guardarMapaMenuItem;
-        /**
-         * Almacena el item de menu salir.
-         */
-        Gtk::MenuItem salirMenuItem;
+        MainMenuBar menuBar;
 
 	/**
  	 * Mètodos privados de la clase MainWindow.
@@ -63,26 +38,31 @@ class MainWindow : public Gtk::Window {
  		 */
 		MainWindow& operator=(const MainWindow& otherInstance);
         /**
-         * Mètodo cuyo propòsito es crear la barra de menues.
+         * Mètodo cuyo propòsito es crear el layout vertial de la ventana
+         * principal.
+         */
+        void createVerticalLayout();
+        /**
+         * Mètodo cuyo propòsito es crear la barra de menu de la ventana
+         * principal.
          */
         void createMenuBar();
         /**
-         * Manejador del evento on_select del item de menu nuevo mapa.
+         * Manejador de la señal signal_activate del item de menu nuevo mapa.
          */
-        void onNuevoMapaSelected();
+        void onNewMapSelected();
         /**
-         * Manejador del evento on_select del item de menu cargar mapa.
+         * Manejador de la señal signal_activate del item de menu salir.
          */
-        void onCargarMapaSelected();
+        void onLoadMapSelected();
         /**
-         * Manejador del evento on_select del item de menu guardar mapa.
-         */
-        void onGuardarMapaSelected();
+         * Manejador de la señal signal_activate del item de menu salir.
+        */
+        void onSaveMapSelected();
         /**
-         * Manejador del evento on_select del item de menu salir.
+         * Manejador de la señal signal_activate del item de menu salir.
          */
-        void onSalirSelected();
-
+        void onQuitSelected();
 	/**
  	 * Mètodos pùblicos de la clase MainWindow.
  	 */

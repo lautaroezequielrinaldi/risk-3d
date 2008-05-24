@@ -1,46 +1,57 @@
 #include "mainwindow.h"
-
+#include<iostream>
 MainWindow::MainWindow():
 	Gtk::Window() {
 	// Establece el titulo de la ventana.
 	this->set_title("Editor de Mapas Risk-3D");
-    // Agrega el layout vertical
-    this->add(this->verticalLayout);
-    // Crea la barra de menues.
+    // Cra el layout vertical de la ventana principal.
+    this->createVerticalLayout();
+    // Crea la barra de menu de la ventana principal.
     this->createMenuBar();
     // Muestro todos los widgets hijos.
     this->show_all_children();
 }
 
-void MainWindow::createMenuBar() {
-    // Inicializo el item de menu salir.
-    this->salirMenuItem.add_label("Salir");
-    //this->salirMenuItem.signal_activate.connect(sigc::mem_fun(*this,
-    //    &MainWindow::onSalirSelected));
-
-    // Inicializo el item de menu guardar mapa.
-    this->guardarMapaMenuItem.add_label("Guardar Mapa");
-
-    // Inicializo el item de menu nuevo mapa.
-    this->nuevoMapaMenuItem.add_label("Nuevo Mapa");
-
-    // Inicializo el menu archivo.
-    this->archivoMenu.append(this->nuevoMapaMenuItem);
-    this->archivoMenu.append(this->guardarMapaMenuItem);
-    this->archivoMenu.append(this->salirMenuItem);
-
-    // Inicialzo el item de menu archivo.
-    this->archivoMenuItem.add_label("Archivo");
-    this->archivoMenuItem.set_submenu(this->archivoMenu);
-
-    // Inicializo la barra de menues.
-    this->barraMenu.append(this->archivoMenuItem);
-
-    // Agrego la barra de menues a la ventana.
-    this->verticalLayout.pack_start(this->barraMenu, Gtk::PACK_SHRINK);
+void MainWindow::createVerticalLayout() {
+    // Agrega el layout vertical de la ventana principal a la ventana principal.
+    this->add(this->verticalLayout);
 }
 
-void MainWindow::onSalirSelected() {
+void MainWindow::createMenuBar() {
+    // Establece el manejador de la señal signal_activate del item de menu
+    // nuevo mapa.
+    this->menuBar.newMapSignalActivate().connect(sigc::mem_fun(*this,
+        &MainWindow::onNewMapSelected));
+    // Establece el manejador de la señal signal_activate del item de menu
+    // cargar mapa.
+    this->menuBar.loadMapSignalActivate().connect(sigc::mem_fun(*this,
+        &MainWindow::onLoadMapSelected));
+     // Establece el manejador de la señal signal_activate del item de menu
+     // guardar mapa.
+     this->menuBar.saveMapSignalActivate().connect(sigc::mem_fun(*this,
+        &MainWindow::onSaveMapSelected));
+    // Establece el manejador de la señal signal_activate del item de menu
+    // salir.
+    this->menuBar.quitSignalActivate().connect(sigc::mem_fun(*this,
+        &MainWindow::onQuitSelected));
+
+    // Agrega la barra de menu al layout vertical de la ventana principal.
+    this->verticalLayout.pack_start(this->menuBar, Gtk::PACK_SHRINK);
+}
+
+void MainWindow::onNewMapSelected() {
+std::cout << "Apreto nuevo mapa" << std::endl;
+}
+
+void MainWindow::onLoadMapSelected() {
+std::cout << "Apreto cargar mapa" << std::endl;
+}
+
+void MainWindow::onSaveMapSelected() {
+std::cout << "Apreto guardar mapa" << std::endl;
+}
+
+void MainWindow::onQuitSelected() {
     Gtk::Main::quit();
 }
 
