@@ -8,8 +8,12 @@ MainWindow::MainWindow():
     this->createVerticalLayout();
     // Crea la barra de menu de la ventana principal.
     this->createMenuBar();
+    // Crea la barra de herramientas de ediciòn de la ventana principal.
+    this->createEditionToolBar();
     // Muestro todos los widgets hijos.
     this->show_all_children();
+    // Muevo la ventana a un estado maximizado.
+    this->maximize();
 }
 
 void MainWindow::createVerticalLayout() {
@@ -37,6 +41,21 @@ void MainWindow::createMenuBar() {
 
     // Agrega la barra de menu al layout vertical de la ventana principal.
     this->verticalLayout.pack_start(this->menuBar, Gtk::PACK_SHRINK);
+}
+
+void MainWindow::createEditionToolBar() {
+    // Establece el manejador de la señal signal_clicked del boton de seleccion
+    // de pais.
+    this->editionToolBar.selectionSignalClicked().connect(sigc::mem_fun(*this,
+        &MainWindow::onSelectionClicked));
+    // Establece el manejador de la señal signal_clicked del boton de creacion
+    // de pais.
+    this->editionToolBar.creationSignalClicked().connect(sigc::mem_fun(*this,
+        &MainWindow::onCreationClicked));
+
+    // Agrega la barra de herramientas de selecciòn al layout vertical
+    // de la ventana principal.
+    this->verticalLayout.pack_start(this->editionToolBar, Gtk::PACK_SHRINK);
 }
 
 void MainWindow::onNewMapSelected() {
@@ -91,6 +110,14 @@ void MainWindow::onSaveMapSelected() {
 
 void MainWindow::onQuitSelected() {
     Gtk::Main::quit();
+}
+
+void MainWindow::onSelectionClicked() {
+
+}
+
+void MainWindow::onCreationClicked() {
+
 }
 
 MainWindow::~MainWindow() {
