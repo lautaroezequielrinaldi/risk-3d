@@ -3,7 +3,9 @@
 
 #include<gtkmm/main.h> // Para definiciòn de Gtk::Main.
 #include<gtkmm/window.h> // Para definiciòn de Gtk::Window.
-#include<gtkmm/box.h> // Para definicion de VBox.
+#include<gtkmm/box.h> // Para definicion de Gtk::VBox.
+#include<gtkmm/filechooserdialog.h> // Para definiciòn de Gtk::FileChooserDialog.
+#include<gtkmm/stock.h> // Para definiciòn de Gtk::Stock::CANCEL y Gtk::Stock::OK.
 #include "mainmenubar.h" // Para definiciòn de MainMenuBar.
 #include "mapview.h" // Para definiciòn de MapView.
 
