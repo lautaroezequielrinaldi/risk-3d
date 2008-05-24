@@ -40,7 +40,26 @@ void MainWindow::createMenuBar() {
 }
 
 void MainWindow::onNewMapSelected() {
-std::cout << "Apreto nuevo mapa" << std::endl;
+    // Creo un dialogo de seleccion de archivos.
+    Gtk::FileChooserDialog dialog(*this, "Abrir Mapa Existente");
+    // Agrego boton Cancelar al dialogo.
+    dialog.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
+    // Agrego boton Ok al dialogo.
+    dialog.add_button("Select", Gtk::RESPONSE_OK);
+
+    // Muestro el dialogo.
+    dialog.show();
+    // Ejecuto el dialogo.
+    int result = dialog.run();
+    
+    // Verifico la respuesta del usuario.
+    switch (result) {
+        case Gtk::RESPONSE_OK:
+            std::cout << dialog.get_filename() << std::endl;
+            break;
+        case Gtk::RESPONSE_CANCEL:
+            break;
+    }
 }
 
 void MainWindow::onLoadMapSelected() {
