@@ -86,9 +86,9 @@ class Continente {
          */
         Iterador ultimoPais();
         /**
-         * Destructor virtual de la clase Continente.
+         * Destructor de la clase Continente.
          */
-        virtual ~Continente();
+        ~Continente();
 };
 
 #endif /** __CONTINENTE_H__ */
