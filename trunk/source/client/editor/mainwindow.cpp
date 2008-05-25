@@ -10,6 +10,8 @@ MainWindow::MainWindow():
     this->createMenuBar();
     // Crea la barra de herramientas de ediciòn de la ventana principal.
     this->createEditionToolBar();
+    // Crea la vista del mapa de la ventana principal.
+    this->createMapView();
     // Muestro todos los widgets hijos.
     this->show_all_children();
     // Muevo la ventana a un estado maximizado.
@@ -56,6 +58,11 @@ void MainWindow::createEditionToolBar() {
     // Agrega la barra de herramientas de selecciòn al layout vertical
     // de la ventana principal.
     this->verticalLayout.pack_start(this->editionToolBar, Gtk::PACK_SHRINK);
+}
+
+void MainWindow::createMapView() {
+    this->mapView.modify_bg_pixmap(Gtk::STATE_NORMAL, "mapa.jpg");
+    this->verticalLayout.pack_start(this->mapView ,Gtk::PACK_EXPAND_WIDGET);
 }
 
 void MainWindow::onNewMapSelected() {

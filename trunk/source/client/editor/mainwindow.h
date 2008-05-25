@@ -11,7 +11,7 @@
 #include "mainmenubar.h" // Para definiciòn de MainMenuBar.
 //#include "maintoolbar.h" // Para definiciòn de MainToolBar.
 #include "editiontoolbar.h" // Para definiciòn de EditionToolBar.
-//#include "mapview.h" // Para definiciòn de MapView.
+#include "mapview.h" // Para definiciòn de MapView.
 
 /**
  * Definiciòn de la clase MainWindow que encapsula la ventana principal de la
@@ -34,6 +34,10 @@ class MainWindow : public Gtk::Window {
          * Almacena la barra de herramientas de edicion.
          */
         EditionToolBar editionToolBar;
+        /**
+         * Almacena la vista del mapa.
+         */
+        MapView mapView;
 
 	/**
  	 * Mètodos privados de la clase MainWindow.
@@ -62,6 +66,11 @@ class MainWindow : public Gtk::Window {
          * principal.
          */
         void createEditionToolBar();
+        /**
+         * Mètodo cuyo propòsito es crear la vista del mapa de la ventana
+         * principal.
+         */
+        void createMapView(); 
         /**
          * Manejador de la señal signal_activate del item de menu nuevo mapa.
          */
