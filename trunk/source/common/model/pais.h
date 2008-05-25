@@ -31,6 +31,11 @@ class Pais {
          * Almacena la lista de paises adyacentes,
          */
         std::list< ReferenceCountPtr<Pais> > adyacentes;
+        
+        /**
+         * Almacena la cantidad de ejercitos que hay en el pais
+         */
+         int cantidadEjercitos;
 
     /**
      * Mètodos privados de la clase Pais.
@@ -91,10 +96,26 @@ class Pais {
          * ùltimo pais adyacente,
          */
         Iterador ultimoAdyacente();
-        /**
-         * Destructor virtual de la clase Pais.
-         */
-        virtual ~Pais();
+         
+         /**
+          * Metodo cuyo proposito es obtener la cantidad de ejercitos que hay en el pais.
+          */
+		int getArmyCount();
+
+		/**
+		 * Metodo cuyo proposito es agregar la cantidad de ejercitos indicada al pais.
+		 */
+		void addArmies( int armyCount );
+		
+		/**
+		 * Metodo cuyo proposito es remover la cantidad de ejercitos indicada del pais.
+		 */
+		void removeArmies ( int armyCount );
+				     
+		 /**
+         * Destructor de la clase Pais.
+         */				      
+        ~Pais();
 };
 
 #endif /** __PAIS_H__ */

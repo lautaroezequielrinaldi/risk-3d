@@ -106,9 +106,9 @@ class Mapa {
          */
         IteradorContinente ultimoContinente();
         /**
-         * Destructor virtual de la clase Mapa.
+         * Destructor de la clase Mapa.
          */
-        virtual ~Mapa();
+        ~Mapa();
 };
 
 #endif /** __MAPA_H__ */

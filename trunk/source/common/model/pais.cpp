@@ -70,6 +70,21 @@ Pais::Iterador Pais::ultimoAdyacente() {
     return this->adyacentes.end();
 }
 
+int Pais::getArmyCount(){
+	return this->cantidadEjercitos;
+
+}
+
+void Pais::addArmies( int armyCount ){
+	
+	this->cantidadEjercitos += armyCount; 
+}	
+
+void Pais::removeArmies ( int armyCount ){
+	
+	this->cantidadEjercitos -= armyCount;
+}
+
 Pais::~Pais() {
     // No realiza ninguna acciòn.
 }
