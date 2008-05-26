@@ -6,11 +6,11 @@ Subject::Subject():
     // No realiza ninguna acciòn.
 }
  
-void Subject::registerObserver(Observer*& observer) {
+void Subject::registerObserver(Observer* observer) {
     this->observerList.push_back(observer);
 }
 
-void Subject::unregisterObserver(Observer*& observer) {
+void Subject::unregisterObserver(Observer* observer) {
     this->observerList.remove(observer);
 }
 
