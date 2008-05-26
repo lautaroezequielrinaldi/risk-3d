@@ -3,6 +3,7 @@
 
 #include<gtkmm/frame.h> // Para definiciòn de Gtk::Frame.
 #include<gtkmm/box.h> // Para definiciòn de Gtk::HBox y Gtk::VBox.
+#include<gtkmm/label.h> // Para definiciòn de Gfk::Label.
 #include<gtkmm/entry.h> // Para definiciòn de Gtk::Entry.
 #include<gtkmm/spinbutton.h> // Para definiciòn de Gtk::SpinButton.
 #include<gtkmm/button.h> // Para definiciòn de Gtk::Button.
@@ -44,10 +45,20 @@ class AddContinentFrame: public Gtk::Frame {
          */
         Gtk::HBox continentButtonBox;
         /**
+         * Almacena el label para indicar al usuario que ingrese nombre del
+         * continente.
+         */
+        Gtk::Label continentNameLabel;
+        /**
          * Almacena el entry donde el usuario ingresarà el nombre del
          * continente.
          */
         Gtk::Entry continentNameEntry;
+        /**
+         * Almacena el label para indicar al usuario que ingrese el bonus del
+         * continente.
+         */
+        Gtk::Label continentBonusLabel;
         /**
          * Almacena el entry donde el usuario ingresarà el bonus del continente.
          */

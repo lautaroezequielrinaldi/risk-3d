@@ -7,10 +7,20 @@ AddContinentFrame::AddContinentFrame():
     continentNameBox(),
     continentBonusBox(),
     continentButtonBox(),
+    continentNameLabel(),
     continentNameEntry(),
+    continentBonusLabel(),
     continentBonusEntry(),
     addContinentButton(),
     resetContinentButton() {
+
+    // Establece el texto del label para indicarle al usuario que ingrese
+    // el nombre del continente.
+    this->continentNameLabel.set_text("Nombre de Continente:");
+
+    // Establece el texto del label para indicarle al usuario que ingrese
+    // el bonus del continente.
+    this->continentBonusLabel.set_text("Bonus de Continente:");
 
     // Establece el rango de valores del entry para ignresar el bono del
     // continente.
@@ -28,10 +38,14 @@ AddContinentFrame::AddContinentFrame():
     // Establece el label del boton reset continente.
     this->resetContinentButton.set_label("Reset");
 
+    // Agrego el label del nombre del continente.
+    this->continentNameBox.add(this->continentNameLabel);
     // Agrego el entry para ingresar el nombre del continente a su box
     // horizontal.
     this->continentNameBox.add(this->continentNameEntry);
 
+    // Agrego el label del bonus del continente.
+    this->continentBonusBox.add(this->continentBonusLabel);
     // Agrego el entry para ingresar el bonus del continente en su box.
     this->continentBonusBox.add(this->continentBonusEntry);
 
