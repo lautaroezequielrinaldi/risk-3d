@@ -83,8 +83,7 @@ class Mapa {
         /**
          * Mètodo cuyo propòsito es obtener un continente del Mapa.
          */
-        ReferenceCountPtr<Continente> obtenerContinente(
-            const std::string& nombre);
+        ReferenceCountPtr<Continente> obtenerContinente(const std::string& nombre);
         /**
          * Mètodo cuyo propòsito es obtener un iterador apuntando al primer
          * paìs del Mapa.

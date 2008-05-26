@@ -28,6 +28,12 @@ class Continente {
          * Almacena el nombre del Continente.
          */
         std::string nombre;
+        
+        /**
+         * Almacena numero de tropas extra ( bonus ) que proporcionara el continente
+         */
+		int armyBonus;
+        
         /**
          * Almacena la lista de paises del Continente.
          */
@@ -53,7 +59,7 @@ class Continente {
         /**
          * Constructor de la clase Continente.
          */
-        Continente(const std::string& nombre);
+        Continente(const std::string& name, int armyBonus);
         /**
          * Mètodo cuyo propòsito es obtener el nombre del Continente.
          */
@@ -62,6 +68,17 @@ class Continente {
          * Mètodo cuyo propósito es establecer el nombre del Continente.
          */
         void setNombre(const std::string& nombre);
+        
+        /**
+         * Metodo cuyo proposito es obtener el bonus en tropas que proporciona el continente
+         */
+         int getArmyBonus();
+         
+         /**
+          * Metodo cuyo proposito es establecer la cantidad de tropas extras ( bonus ) que proporcionara el continente
+          */
+        void setArmyBonus( int armyBonus );
+        
         /**
          * Mètodo cuyo propòsito es agregar un pais al Continente.
          */
