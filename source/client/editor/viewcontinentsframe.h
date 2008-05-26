@@ -2,9 +2,11 @@
 #define __VIEWCONTINENTSFRAME_H__
 
 #include<gtkmm/frame.h> // Para definiciòn de Gtk::Frame.
-#include<gtkmm/treemodel.h> // Para definiciòn de Gtk::TreeModel.
-#include<gtkmm/treeview.h> // Para definiciòn de Gtk::View.
+#include<gtkmm/liststore.h> // Para definiciòn de Gtk::ListStore.
+#include<gtkmm/treeview.h> // Para definiciòn de Gtk::TreeView.
 #include<glibmm/refptr.h> // Para definiciòn de Glib::RefPtr.
+
+#include "viewcontinentscolumns.h" // Para definiciòn de ViewContinentsColumns.
 
 #include "observer.h" // Para definiciòn de Observer.
 #include "subject.h" // Para definiciòn de Subject.
@@ -26,9 +28,13 @@ class ViewContinentsFrame: public Observer, public  Gtk::Frame {
          */
         ReferenceCountPtr<Editor> editor;
         /**
+         * Almacena el registro de columnas usado para la lista de continentes.
+         */
+        ViewContinentsColumns columns;
+        /**
          * Almacena el modelo de tree usado para la lista de continentes.
          */
-        Glib::RefPtr<Gtk::TreeModel> treeModel;
+        Glib::RefPtr<Gtk::ListStore> treeModel;
         /**
          * Almacena la vista de tree usado para la lista de continentes.
          */
@@ -47,7 +53,14 @@ class ViewContinentsFrame: public Observer, public  Gtk::Frame {
          */
         ViewContinentsFrame& operator=(
             const ViewContinentsFrame& otherInstance);
-
+        /**
+         * Inicializa el modelo de la lista de continentes.
+         */
+        void initializeTreeModel(); 
+        /**
+         * Inicializa la lista de continentes.
+         */
+        void initializeTreeView();
     /**
      * Mètodos pùblicos de la clase ViewContinentesFrame.
      */
@@ -71,7 +84,7 @@ class ViewContinentsFrame: public Observer, public  Gtk::Frame {
         /**
          *
          */
-        void update(const Subject* subject);
+        void update(Subject* subject);
         /**
          * Destructor virtual de la clase ViewContinentsFrame.
          */

@@ -34,12 +34,12 @@ class Subject {
         /**
          * Registra un observador a la lista de observadores a ser notificados.
          */
-        void registerObserver(Observer*& observer);
+        void registerObserver(Observer* observer);
         /**
          * Desregistra un observador a la lista de observadores a ser
          * notificados.
          */
-        void unregisterObserver(Observer*& observer);
+        void unregisterObserver(Observer* observer);
         /**
          * Notifica a todos los observadores de un cambio en el sujeto.
          */

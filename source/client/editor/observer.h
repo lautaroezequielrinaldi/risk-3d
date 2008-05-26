@@ -28,7 +28,7 @@ class Observer {
         /**
          * Se actualiza en base a cambios realizados en el sujeto observado.
          */
-        virtual void update(const Subject* subject) = 0;
+        virtual void update(Subject* subject) = 0;
         /**
          * Destructor virtual de la clase Observer.
          */
