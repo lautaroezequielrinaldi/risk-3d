@@ -3,6 +3,7 @@
 
 #include "../parser/serializable.h"
 #include "../model/mapa.h"
+#include "../model/player.h"
 
 /**
  * Clase abstracta cuyo proposito es brindar la interfaz de un comando serializable.
@@ -11,8 +12,16 @@ class Command : public Serializable
 {
 	
 	protected:
-	
+		
+		/**
+		 * Referencia al mapa del juego
+		 */
 		Mapa &mapa;
+		
+		/**
+		 * Referencia al jugador que posee el turno
+		 */
+		Player& jugador;
 		
 	public:
 		

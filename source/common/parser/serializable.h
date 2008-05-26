@@ -2,6 +2,11 @@
 #define SERIALIZABLE_H_
 
 #include<string>
+#include<libxml/parser.h> // Para definiciòn de la libreria libxml parser.
+#include<libxml/tree.h> // Para definiciòn de la libreria libxml tree.
+#include<libxml/xpath.h> // Para definiciòn de la libreria libxml xpath.
+#include<libxml/xpathInternals.h> // Para definiciòn de la libreria libxml
+
 #include "../smartpointer/referencecountptr.h"
 #include "../model/mapa.h"
 
@@ -27,7 +32,7 @@ class Serializable
 		/**
 		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.
 		 */
-		virtual std::string& serialize() = 0;
+		virtual std::string serialize() = 0;
 		/**
 		 * Metodo cuyo proposito es hidratar un archivo XML y construir un objeto a partir de el.
 		 */

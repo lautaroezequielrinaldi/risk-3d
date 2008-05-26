@@ -13,12 +13,12 @@ Attack::~Attack()
 {
 }
 
-std::string& Attack::serialize(){
+std::string Attack::serialize(){
 	
 	
-	std::string s;
-	
-	return s;
+  std::string s;
+  return s;
+
 }
 
 void* Attack::hydrate(ReferenceCountPtr<Mapa>& mapa,std::string fileName){

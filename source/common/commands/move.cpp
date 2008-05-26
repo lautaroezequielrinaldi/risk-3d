@@ -12,7 +12,7 @@ Move::~Move()
 {
 }
 
-std::string& Move::serialize(){
+std::string Move::serialize(){
 	
 	
 	std::string s;

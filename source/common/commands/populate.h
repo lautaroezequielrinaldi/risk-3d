@@ -7,6 +7,11 @@
 class Populate : public Command
 {
 	
+	private:
+	
+		std::string paisDestino;
+		int cantidadEjercitos;
+	
 	public:
 	
 		/*
@@ -21,7 +26,7 @@ class Populate : public Command
 		/**
 		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.
 		 */
-		std::string& serialize();
+		std::string serialize();
 		/**
 		 * Metodo cuyo proposito es hidratar un archivo XML y construir un objeto a partir de el.
 		 */

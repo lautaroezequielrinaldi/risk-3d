@@ -11,7 +11,7 @@ Defend::~Defend()
 {
 }
 
-std::string& Defend::serialize(){
+std::string Defend::serialize(){
 	
 	
 	std::string s;
