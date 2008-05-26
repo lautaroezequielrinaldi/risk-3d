@@ -15,17 +15,6 @@ ViewContinentsFrame::ViewContinentsFrame():
     this->add(this->treeView);
 }
 
-ViewContinentsFrame::ViewContinentsFrame(
-    const ReferenceCountPtr<Editor>& editor):
-    Observer(),
-    Gtk::Frame(),
-    editor(editor),
-    columns(),
-    treeModel(),
-    treeView() {
-    // No realiza ninguna opciòn.
-}
-
 void ViewContinentsFrame::initializeTreeModel() {
     this->treeModel = Gtk::ListStore::create(columns);
 }

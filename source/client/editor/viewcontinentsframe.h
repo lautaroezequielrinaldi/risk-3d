@@ -70,10 +70,6 @@ class ViewContinentsFrame: public Observer, public  Gtk::Frame {
          */
         ViewContinentsFrame();
         /**
-         * Constructor de la clase ViewContinentsFrame.
-         */
-        ViewContinentsFrame(const ReferenceCountPtr<Editor>& editor);
-        /**
          * Establece el editor del cual va a tomar la lista de continentes.
          */
         void setEditor(const ReferenceCountPtr<Editor>& editor);
