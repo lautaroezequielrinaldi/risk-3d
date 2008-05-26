@@ -66,14 +66,34 @@ AddContinentFrame::AddContinentFrame():
 
     // Agrego el vertical box al frame.
     this->add(this->verticalBox);
+
+    // Conecto la señal signal_clicked del boton addContinentButton con el
+    // manejador.
+    this->addContinentButton.signal_clicked().connect(sigc::mem_fun(*this,
+        &AddContinentFrame::onAddContinentButtonClicked));
+
+    // Conecto la señal signal_clicked del boton resetContinentButton con el
+    // maneajdor.
+    this->resetContinentButton.signal_clicked().connect(sigc::mem_fun(*this,
+        &AddContinentFrame::onResetContinentButtonClicked));
 }
 
 void AddContinentFrame::onAddContinentButtonClicked() {
-    // No realiza ninguna acciòn.
+    if (this->editor != NULL && this->editor->getMapa() != NULL) {
+        std::string name = this->continentNameEntry.get_text();
+        int bonus = this->continentBonusEntry.get_value_as_int();
+        ReferenceCountPtr<Continente> continente(new Continente(name, bonus));
+        
+        this->editor->getMapa()->agregarContinente(continente);
+        this->editor->notify();
+    }
 }
 
 void AddContinentFrame::onResetContinentButtonClicked() {
-    // No realiza ninguna acciòn.
+    // Reseteo texto del entry para ingresar nombre del continente.
+    this->continentNameEntry.set_text("");
+    // Reseteo valor del etry para ingresar bonus del continente.
+    this->continentBonusEntry.set_value(0.00);
 }
 
 void AddContinentFrame::setEditor(const ReferenceCountPtr<Editor>& editor) {

@@ -1,5 +1,4 @@
 #include "viewcontinentsframe.h"
-
 ViewContinentsFrame::ViewContinentsFrame():
     Observer(),
     Gtk::Frame(),
@@ -34,8 +33,31 @@ ReferenceCountPtr<Editor> ViewContinentsFrame::getEditor() {
 }
 
 void ViewContinentsFrame::update(Subject* subject) {
-    // Borra todas las filas del tree view.
+    // Borro la lista de continentes.
     this->treeModel->clear();
+
+    if (this->editor != NULL && this->editor->getMapa() != NULL) {
+        // Obtengo el mapa del editor
+        ReferenceCountPtr<Mapa> mapa = this->editor->getMapa();
+
+        // Defino iterador de continentes.
+        Mapa::IteradorContinente continenteIter;
+
+        // Itero por cada continente.
+        for (continenteIter = mapa->primerContinente();
+            continenteIter != mapa->ultimoContinente(); ++continenteIter) {
+
+            // Obtengo continente actual.
+            ReferenceCountPtr<Continente> continente = *continenteIter;
+
+            // Creo fila de lista de continentes.
+            Gtk::TreeModel::Row row = *(this->treeModel->append());
+
+            // Lleno la fila
+            row[columns.continentName] = continente->getNombre();
+            row[columns.continentBonus] = continente->getArmyBonus();
+        }
+    }
 }
 
 ViewContinentsFrame::~ViewContinentsFrame() {

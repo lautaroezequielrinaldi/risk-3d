@@ -11,6 +11,8 @@
 #include "observer.h" // Para definiciòn de Observer.
 #include "subject.h" // Para definiciòn de Subject.
 #include "editor.h" // Para definiciòn de Editor.
+#include "../../common/model/mapa.h" // Para definiciòn de Mapa.
+#include "../../common/model/continente.h" // Para definiciòn de Continente.
 #include "../../common/smartpointer/referencecountptr.h" // Para definiciòn de
 // ReferenceCountPtr.
 
