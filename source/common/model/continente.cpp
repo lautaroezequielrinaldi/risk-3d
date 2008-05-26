@@ -1,7 +1,8 @@
 #include "continente.h"
 
-Continente::Continente(const std::string& nombre):
-    nombre(nombre),
+Continente::Continente(const std::string& name, int armyBonus):
+    nombre(name),
+    armyBonus (armyBonus),
     paises() {
     // No realiza ninguna acciòn.
 }
@@ -12,6 +13,16 @@ std::string Continente::getNombre() {
 
 void Continente::setNombre(const std::string& nombre) {
     this->nombre = nombre;
+}
+
+int Continente::getArmyBonus(){
+	return this->armyBonus;
+         
+}
+
+void Continente::setArmyBonus( int armyBonus ){
+	
+	this->armyBonus = armyBonus;	
 }
 
 void Continente::agregarPais(const ReferenceCountPtr<Pais>& pais) {

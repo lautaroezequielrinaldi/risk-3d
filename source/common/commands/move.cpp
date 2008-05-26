@@ -2,6 +2,10 @@
 
 Move::Move(std::vector<std::string> &parameterList, Mapa &mapa): Command ( mapa )
 {
+	this->paisOrigen = parameterList[0];
+	this->paisDestino = parameterList[1];
+	this->cantidadEjercitos = atoi( parameterList[2].c_str() );
+	
 }
 
 Move::~Move()

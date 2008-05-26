@@ -2,6 +2,9 @@
 
 Defend::Defend(std::vector<std::string> &parameterList, Mapa &mapa) : Command (mapa)
 {
+	this->paisDefensor = parameterList[0];
+	this->cantidadEjercitos = atoi ( parameterList[1].c_str() );
+	
 }
 
 Defend::~Defend()
