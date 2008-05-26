@@ -3,25 +3,27 @@ ViewContinentsFrame::ViewContinentsFrame():
     Observer(),
     Gtk::Frame(),
     editor(),
-    columns(),
-    treeModel(),
-    treeView() {
+    continentColumns(),
+    continentTreeModel(),
+    continentTreeView() {
     // Inicializa el modelo de la lista de continentes.
-    this->initializeTreeModel();
+    this->initializeContinentTreeModel();
     // Inicializa la lista de continentes.
-    this->initializeTreeView();
+    this->initializeContinentTreeView();
     // Agrega como widget hijo a la lista de continentes.
-    this->add(this->treeView);
+    this->add(this->continentTreeView);
 }
 
-void ViewContinentsFrame::initializeTreeModel() {
-    this->treeModel = Gtk::ListStore::create(columns);
+void ViewContinentsFrame::initializeContinentTreeModel() {
+    this->continentTreeModel = Gtk::ListStore::create(continentColumns);
 }
 
-void ViewContinentsFrame::initializeTreeView() {
-    this->treeView.append_column("Nombre", columns.continentName);
-    this->treeView.append_column("Bonus", columns.continentBonus);
-    this->treeView.set_model(this->treeModel);
+void ViewContinentsFrame::initializeContinentTreeView() {
+    this->continentTreeView.append_column("Nombre",
+        continentColumns.continentName);
+    this->continentTreeView.append_column("Bonus",
+        continentColumns.continentBonus);
+    this->continentTreeView.set_model(this->continentTreeModel);
 }
 
 void ViewContinentsFrame::setEditor(const ReferenceCountPtr<Editor>& editor) {
@@ -34,7 +36,7 @@ ReferenceCountPtr<Editor> ViewContinentsFrame::getEditor() {
 
 void ViewContinentsFrame::update(Subject* subject) {
     // Borro la lista de continentes.
-    this->treeModel->clear();
+    this->continentTreeModel->clear();
 
     if (this->editor != NULL && this->editor->getMapa() != NULL) {
         // Obtengo el mapa del editor
@@ -51,11 +53,11 @@ void ViewContinentsFrame::update(Subject* subject) {
             ReferenceCountPtr<Continente> continente = *continenteIter;
 
             // Creo fila de lista de continentes.
-            Gtk::TreeModel::Row row = *(this->treeModel->append());
+            Gtk::TreeModel::Row row = *(this->continentTreeModel->append());
 
             // Lleno la fila
-            row[columns.continentName] = continente->getNombre();
-            row[columns.continentBonus] = continente->getArmyBonus();
+            row[continentColumns.continentName] = continente->getNombre();
+            row[continentColumns.continentBonus] = continente->getArmyBonus();
         }
     }
 }

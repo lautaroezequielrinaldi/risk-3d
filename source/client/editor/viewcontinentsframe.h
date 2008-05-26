@@ -6,7 +6,7 @@
 #include<gtkmm/treeview.h> // Para definiciòn de Gtk::TreeView.
 #include<glibmm/refptr.h> // Para definiciòn de Glib::RefPtr.
 
-#include "viewcontinentscolumns.h" // Para definiciòn de ViewContinentsColumns.
+#include "continentcolumns.h" // Para definiciòn de ContinentColumns.
 
 #include "observer.h" // Para definiciòn de Observer.
 #include "subject.h" // Para definiciòn de Subject.
@@ -32,15 +32,15 @@ class ViewContinentsFrame: public Observer, public  Gtk::Frame {
         /**
          * Almacena el registro de columnas usado para la lista de continentes.
          */
-        ViewContinentsColumns columns;
+        ContinentColumns continentColumns;
         /**
          * Almacena el modelo de tree usado para la lista de continentes.
          */
-        Glib::RefPtr<Gtk::ListStore> treeModel;
+        Glib::RefPtr<Gtk::ListStore> continentTreeModel;
         /**
          * Almacena la vista de tree usado para la lista de continentes.
          */
-        Gtk::TreeView treeView;
+        Gtk::TreeView continentTreeView;
 
     /**
      * Mètodos privados de la clase ViewContinentesFrame.
@@ -58,11 +58,11 @@ class ViewContinentsFrame: public Observer, public  Gtk::Frame {
         /**
          * Inicializa el modelo de la lista de continentes.
          */
-        void initializeTreeModel(); 
+        void initializeContinentTreeModel(); 
         /**
          * Inicializa la lista de continentes.
          */
-        void initializeTreeView();
+        void initializeContinentTreeView();
     /**
      * Mètodos pùblicos de la clase ViewContinentesFrame.
      */
