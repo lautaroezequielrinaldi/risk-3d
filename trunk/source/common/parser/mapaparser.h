@@ -90,7 +90,7 @@ class MapaParser {
         void saveMap(const std::string& fileName,
             ReferenceCountPtr<Mapa>& mapa);
         /**
-         * Mètudo cuyo propòsito es cargar el mapa desde un archivo XML en
+         * Mètodo cuyo propòsito es cargar el mapa desde un archivo XML en
          * disco.
          */
         ReferenceCountPtr<Mapa> loadMap(const std::string& fileName);
