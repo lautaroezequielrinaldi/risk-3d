@@ -1,7 +1,7 @@
 #include "../model/armyBonusCalculator.h"
 #include "populate.h"
 
-Populate::Populate(std::vector<std::string> &parameterList, Mapa &mapa) : Command ( mapa)
+Populate::Populate(std::vector<std::string> &parameterList, Mapa &mapa, Player& player) : Command (player,  mapa)
 {
 	this->paisDestino = parameterList[0];
 	this->cantidadEjercitos = atoi( parameterList[1].c_str() );

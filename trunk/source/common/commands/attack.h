@@ -21,7 +21,7 @@ class Attack : public Command
 		 * la idea es que reciba una lista de parametros y con ellos arme el ataque que se validara, en ppio
 		 * sera una lista de strings y en el caso de necesitar convertir un elemento a int usare atoi.
 		 */
-		Attack(std::vector<std::string> &parameterList, Mapa &mapa);
+		Attack(std::vector<std::string> &parameterList, Mapa &mapa, Player& player);
 		/*
 		 * Destructor de la clase
 		 */

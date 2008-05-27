@@ -17,7 +17,7 @@ class Defend : public Command
 		/*
 		 * Constructor de la clase
 		 */
-		Defend(std::vector<std::string> &parameterList, Mapa &mapa);
+		Defend(std::vector<std::string> &parameterList, Mapa &mapa, Player& player);
 		/*
 		 * Destructor de la clase
 		 */

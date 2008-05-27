@@ -1,6 +1,6 @@
 #include "command.h"
 
-Command::Command(Mapa &mapa): mapa ( mapa )
+Command::Command(Player& player, Mapa &mapa): jugador(player), mapa ( mapa )
 {
 }
 

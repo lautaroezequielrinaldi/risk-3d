@@ -28,7 +28,7 @@ class Command : public Serializable
 		/*
 		 * Constructor de la clase
 		 */
-		Command(Mapa &mapa);
+		Command(Player& player, Mapa &mapa);
 		/*
 		 * Destructor de la clase
 		 */
