@@ -33,19 +33,19 @@ std::string Defend::serialize(){
     docDefensa = xmlNewDoc(BAD_CAST "1.0");
     
     //seteo contenido del nodo raiz
-    nodoDefensa = xmlNewNode(NULL, BAD_CAST "defensa");
+    nodoDefensa = xmlNewNode(NULL, BAD_CAST "defender");
     
     //seteo el nodo raiz del documento
     xmlDocSetRootElement(docDefensa, nodoDefensa);
     
-    //seteo hijos de nodoAtaque: nodos pais-atacante y pais-atacado
+    //seteo hijos de nodoDefensa: nodo pais-defensor
     nodoPaisDefensor = xmlNewChild(nodoDefensa, NULL, BAD_CAST "pais-defensor",(const xmlChar*) this->paisDefensor.c_str() );
    
    	//conversion de entero a string para la cantidad de ejercitos
   	std::ostringstream strCantEjercitos;
    	strCantEjercitos << this->cantidadEjercitos;
    
-   //seteo como hijo de nodoAtaque al nodo cantidad-ejercitos
+   //seteo como hijo de nodoDefensa al nodo cantidad-ejercitos
     nodoCantidadEjercitos = xmlNewChild(nodoDefensa, NULL, BAD_CAST "cantidad-ejercitos",(const xmlChar*)(const xmlChar*)strCantEjercitos.str().c_str() );
     
     // dejo el document en un buffer
