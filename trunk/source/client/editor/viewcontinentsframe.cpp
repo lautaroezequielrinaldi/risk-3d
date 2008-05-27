@@ -12,6 +12,9 @@ ViewContinentsFrame::ViewContinentsFrame():
     this->initializeContinentTreeView();
     // Agrega como widget hijo a la lista de continentes.
     this->add(this->continentTreeView);
+
+    // Popula la lista de continentes.
+    this->populate();
 }
 
 void ViewContinentsFrame::initializeContinentTreeModel() {
@@ -28,13 +31,15 @@ void ViewContinentsFrame::initializeContinentTreeView() {
 
 void ViewContinentsFrame::setEditor(const ReferenceCountPtr<Editor>& editor) {
     this->editor = editor;
+    // Popula la lista de continentes.
+    this->populate();
 }
 
 ReferenceCountPtr<Editor> ViewContinentsFrame::getEditor() {
     return this->editor;
 }
 
-void ViewContinentsFrame::update(Subject* subject) {
+void ViewContinentsFrame::populate() {
     // Borro la lista de continentes.
     this->continentTreeModel->clear();
 
@@ -48,18 +53,21 @@ void ViewContinentsFrame::update(Subject* subject) {
         // Itero por cada continente.
         for (continenteIter = mapa->primerContinente();
             continenteIter != mapa->ultimoContinente(); ++continenteIter) {
-
             // Obtengo continente actual.
             ReferenceCountPtr<Continente> continente = *continenteIter;
 
             // Creo fila de lista de continentes.
             Gtk::TreeModel::Row row = *(this->continentTreeModel->append());
-
             // Lleno la fila
             row[continentColumns.continentName] = continente->getNombre();
             row[continentColumns.continentBonus] = continente->getArmyBonus();
         }
     }
+}
+
+void ViewContinentsFrame::update(Subject* subject) {
+    // Popula la lista de continentes.
+    this->populate();
 }
 
 ViewContinentsFrame::~ViewContinentsFrame() {

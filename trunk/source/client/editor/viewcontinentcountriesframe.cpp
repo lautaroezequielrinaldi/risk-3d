@@ -56,11 +56,9 @@ void ViewContinentCountriesFrame::initializeCountryTreeView() {
     this->countryTreeView.set_model(this->countryTreeModel);
 }
 
-void ViewContinentCountriesFrame::populate() {
+void ViewContinentCountriesFrame::populateContinentComboBox() {
     // Limpio la lista de continentes.
     this->continentTreeModel->clear();
-    // Limpio la lista de paises.
-    this->countryTreeModel->clear();
 
     // Si el editor no es null y el mapa no es null.
     if (editor != NULL && editor->getMapa() != NULL) {
@@ -81,9 +79,20 @@ void ViewContinentCountriesFrame::populate() {
             // Agrego nombre de continente a fila de lista de continentes.
             row[continentColumns.continentName] = continent->getNombre();
         }
+    }
+}
 
+void ViewContinentCountriesFrame::populateCountryTreeView() {
+    // Limpio la lista de paises.
+    this->countryTreeModel->clear();
+
+    // Si el editor no es null y el mapa no es null.
+    if (editor != NULL && editor->getMapa() != NULL) {
+        // Obtengo el mapa del modelo.
+        ReferenceCountPtr<Mapa> mapa = editor->getMapa();
         // Obtengo elemento activo del combobox.
-        Gtk::TreeModel::iterator activeContinent = this->continentComboBox.get_active();
+        Gtk::TreeModel::iterator activeContinent =
+            this->continentComboBox.get_active();
 
         // Si hay elemento activo en el combobox.
         if (activeContinent) {
@@ -91,7 +100,8 @@ void ViewContinentCountriesFrame::populate() {
             Gtk::TreeModel::Row activeRow = *activeContinent;
 
             // Obtengo nombre del continente seleccionado.
-            std::string continentName = activeRow[continentColumns.continentName];
+            std::string continentName =
+                activeRow[continentColumns.continentName];
 
             // Obtengo continente con dicho nombre.
             ReferenceCountPtr<Continente> continent =
@@ -115,9 +125,14 @@ void ViewContinentCountriesFrame::populate() {
     }
 }
 
+void ViewContinentCountriesFrame::populate() {
+    this->populateContinentComboBox();
+    this->populateCountryTreeView();
+}
+
 void ViewContinentCountriesFrame::onContinentComboBoxChanged() {
-    // Popula la lista de continentes y la lista de paises.
-    this->populate();
+    // Popula la lista de paises.
+    this->populateCountryTreeView();
 }
 
 void ViewContinentCountriesFrame::setEditor(const ReferenceCountPtr<Editor>& editor) {

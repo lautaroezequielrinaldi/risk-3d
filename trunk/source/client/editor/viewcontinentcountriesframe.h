@@ -91,6 +91,14 @@ class ViewContinentCountriesFrame: public Observer, public Gtk::Frame {
          */
         void initializeCountryTreeView();
         /**
+         * Popula la lista de continentes.
+         */
+        void populateContinentComboBox();
+        /**
+         * Popula la lista de paises.
+         */
+        void populateCountryTreeView();
+        /**
          * Popula la lista de continentes y la lista de paises.
          */
         void populate();

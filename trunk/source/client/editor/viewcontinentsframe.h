@@ -63,6 +63,10 @@ class ViewContinentsFrame: public Observer, public  Gtk::Frame {
          * Inicializa la lista de continentes.
          */
         void initializeContinentTreeView();
+        /**
+         * Popula la lista de continentes.
+         */
+        void populate();
     /**
      * Mètodos pùblicos de la clase ViewContinentesFrame.
      */
