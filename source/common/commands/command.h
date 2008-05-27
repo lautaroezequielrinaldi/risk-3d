@@ -14,21 +14,23 @@ class Command : public Serializable
 	protected:
 		
 		/**
+		 * Referencia al jugador que posee el turno
+		 */
+		Player& jugador;
+		
+		/**
 		 * Referencia al mapa del juego
 		 */
 		Mapa &mapa;
 		
-		/**
-		 * Referencia al jugador que posee el turno
-		 */
-		Player& jugador;
+
 		
 	public:
 		
 		/*
 		 * Constructor de la clase
 		 */
-		Command(Player& player, Mapa &mapa);
+		Command(Player& player, Mapa &map);
 		/*
 		 * Destructor de la clase
 		 */

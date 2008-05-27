@@ -1,5 +1,4 @@
 #include <sstream>
-
 #include "move.h"
 
 Move::Move(std::vector<std::string> &parameterList, Mapa &mapa, Player& player): Command ( player, mapa )
@@ -36,7 +35,7 @@ std::string Move::serialize(){
     docMovimiento = xmlNewDoc(BAD_CAST "1.0");
     
     //seteo contenido del nodo raiz
-    nodoMovimiento = xmlNewNode(NULL, BAD_CAST "ataque");
+    nodoMovimiento = xmlNewNode(NULL, BAD_CAST "mover");
     
     //seteo el nodo raiz del documento
     xmlDocSetRootElement(docMovimiento, nodoMovimiento);

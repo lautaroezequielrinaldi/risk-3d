@@ -35,7 +35,7 @@ std::string Attack::serialize(){
     docAtaque = xmlNewDoc(BAD_CAST "1.0");
     
     //seteo contenido del nodo raiz
-    nodoAtaque = xmlNewNode(NULL, BAD_CAST "ataque");
+    nodoAtaque = xmlNewNode(NULL, BAD_CAST "atacar");
     
     //seteo el nodo raiz del documento
     xmlDocSetRootElement(docAtaque, nodoAtaque);
