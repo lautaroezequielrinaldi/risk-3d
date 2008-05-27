@@ -18,7 +18,7 @@ class Move : public Command
 		/*
 		 * Constructor de la clase
 		 */
-		Move(std::vector<std::string> &parameterList, Mapa &mapa);
+		Move(std::vector<std::string> &parameterList, Mapa &mapa, Player& player);
 		/*
 		 * Destructor de la clase
 		 */		

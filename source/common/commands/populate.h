@@ -17,7 +17,7 @@ class Populate : public Command
 		/*
 		 * Constructor de la clase
 		 */
-		Populate(std::vector<std::string> &parameterList, Mapa &mapa);
+		Populate(std::vector<std::string> &parameterList, Mapa &mapa, Player& player);
 		/*
 		 * Destructor de la clase
 		 */		
