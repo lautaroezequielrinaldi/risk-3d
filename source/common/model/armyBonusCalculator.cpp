@@ -8,9 +8,9 @@ ArmyBonusCalculator::~ArmyBonusCalculator()
 {
 }
 
-unsigned int ArmyBonusCalculator::getArmyBonusPerCountry(){
+int ArmyBonusCalculator::getArmyBonusPerCountry(){
 	
-	unsigned int cantEjercitos=0;
+	int cantEjercitos=0;
 	
 	/*si el jugador tiene menos de 9 paises conquistados*/
 	if ( this->jugador.getConqueredLands() <= 9 )
@@ -31,9 +31,9 @@ unsigned int ArmyBonusCalculator::getArmyBonusPerCountry(){
 }
 		
 
-unsigned int ArmyBonusCalculator::getArmyBonusPerContinent(){
+int ArmyBonusCalculator::getArmyBonusPerContinent(){
 	
-	unsigned int bonus= 0;
+	int bonus= 0;
 	std::list< std::string>::iterator it;
 	ReferenceCountPtr<Continente> continenteActual;
 	
@@ -54,7 +54,7 @@ unsigned int ArmyBonusCalculator::getArmyBonusPerContinent(){
 	
 }
 
-unsigned int ArmyBonusCalculator::ArmyBonusCalculator::getArmyBonus(){
+int ArmyBonusCalculator::ArmyBonusCalculator::getArmyBonus(){
 	
 	return ( getArmyBonusPerCountry()+getArmyBonusPerContinent() );
 

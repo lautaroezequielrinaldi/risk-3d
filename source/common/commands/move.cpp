@@ -9,6 +9,12 @@ Move::Move(std::vector<std::string> &parameterList, Mapa &mapa, Player& player):
 	
 }
 
+Move::Move(Mapa &mapa, Player& player, std::string xml):Command ( player, mapa ){
+
+	// construye el objeto a partir del Xml recibido
+	hydrate(xml);
+}
+
 Move::~Move()
 {
 }
@@ -66,10 +72,89 @@ std::string Move::serialize(){
 	
 }
 
-void* Move::hydrate(ReferenceCountPtr<Mapa>& mapa,std::string fileName){
+void* Move::hydrate(std::string xml){
 	
+		// estructura que almacenara al xml proporcionado
+	xmlTextReaderPtr reader;
+	xmlChar *name, *value;
+    int res;
+    bool salir=false;
+	std::string nomTag,s;
+	int ej=0;
+	int orig=0;
+	int dest =0;
 	
+	//lee de memoria el xml que llega por parametro y lo almacena en reader
+    reader = xmlReaderForMemory(xml.c_str(),xml.size(), NULL,NULL, 0);
+    
+    if (reader != NULL) {
+    	
+    	// mueve el cursor dentro del stream reader parandose en el sig nodo- 
+    	// devuelve 1 si hay nodo,0 si no hay mas nodods .
+        res = xmlTextReaderRead(reader);
+        
+		//mientras haya nodos por leer y no haya seteado el objeto completo
+       	while (res == 1 && !salir) {
+        	
+			//obtengo nombre del tag
+		    name = xmlTextReaderName(reader);
+		  
+			nomTag.assign((char*)name);
+			
+			//si es el tag de pais-defensor
+			if ( nomTag == "pais-origen" && orig==0){
+				
+				//acumulo 1 para que no vuelva a entrar al leer el tag de cierre
+				orig++;
+				//avanzo al proximo nodo
+				res = xmlTextReaderRead(reader);	
+				// obtengo el valor
+				value = xmlTextReaderValue(reader);
+				
+				//seteo el pais defensor
+				this->paisOrigen.assign((char*)value);
+			}
+			else if ( nomTag == "pais-destino" && dest==0){
+				
+				//acumulo 1 para que no vuelva a entrar al leer el tag de cierre
+				dest++;
+				//avanzo al proximo nodo
+				res = xmlTextReaderRead(reader);	
+				// obtengo el valor
+				value = xmlTextReaderValue(reader);
+				
+				//seteo el pais defensor
+				this->paisDestino.assign((char*)value);
+			}
+			else if ( nomTag == "cantidad-ejercitos" && ej==0 ){
+				
+				//acumulo 1 para que no vuelva a entrar al leer el tag de cierre
+				ej++;
+				//avanzo de  nodo
+				res = xmlTextReaderRead(reader);	
+				// obtengo el valor
+				value = xmlTextReaderValue(reader);
+				
+				//seteo el valor en el objeto
+			    this->cantidadEjercitos = atoi((char*)value);
+			 	
+			 	//para terminar el bucle y no seguir leyendo   
+			    salir=true;
+			}
+						
+		    res = xmlTextReaderRead(reader);
+        }
+        
+    }
+	
+	xmlFree(name);
+	xmlFree(value);
+    xmlFreeTextReader(reader);
+    xmlCleanupParser();
+
 	return NULL;
+	
+	
 }
 		
 bool Move::validate(){

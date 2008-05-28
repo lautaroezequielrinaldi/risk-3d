@@ -23,13 +23,13 @@ class ArmyBonusCalculator
 		 * Metodo cuyo proposito es obtener la cantidad de ejercitos bonus que se deben entregar a un jugador.
 		 * El bonus se basa en la cantidad de paises conquistados por el jugador.
 		 */
-		unsigned int getArmyBonusPerCountry();
+		int getArmyBonusPerCountry();
 		
 		/**
 		 * Metodo cuyo proposito es obtener la cantidad de ejercitos bonus que se deben entregar a un jugador.
 		 * El bonus se basa en la cantidad de continentes completos que posee.
 		 */
-		unsigned int getArmyBonusPerContinent();
+		int getArmyBonusPerContinent();
 	
 	public:
 	
@@ -47,7 +47,7 @@ class ArmyBonusCalculator
 		 * Metodo cuyo proposito es obtener la cantidad de ejercitos bonus que se deben entregar a un jugador.
 		 * El bonus se basa en la cantidad de paises conquistados por el jugador y por la cantidad de continentes completos que posee.
 		 */
-		unsigned int getArmyBonus();
+		int getArmyBonus();
 		
 		
 };
