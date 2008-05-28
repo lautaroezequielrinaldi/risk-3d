@@ -2,10 +2,11 @@
 #define SERIALIZABLE_H_
 
 #include<string>
-#include<libxml/parser.h> // Para definiciòn de la libreria libxml parser.
-#include<libxml/tree.h> // Para definiciòn de la libreria libxml tree.
-#include<libxml/xpath.h> // Para definiciòn de la libreria libxml xpath.
-#include<libxml/xpathInternals.h> // Para definiciòn de la libreria libxml
+#include<libxml/parser.h> 
+#include<libxml/tree.h> 
+#include<libxml/xpath.h> 
+#include<libxml/xpathInternals.h> 
+#include<libxml/xmlreader.h> 
 
 #include "../smartpointer/referencecountptr.h"
 #include "../model/mapa.h"
@@ -36,7 +37,7 @@ class Serializable
 		/**
 		 * Metodo cuyo proposito es hidratar un archivo XML y construir un objeto a partir de el.
 		 */
-		virtual void* hydrate(ReferenceCountPtr<Mapa>& mapa,std::string fileName) = 0 ;
+		virtual void* hydrate(std::string xml) = 0 ;
 		
 };
 

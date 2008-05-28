@@ -9,8 +9,15 @@ Attack::Attack(std::vector<std::string> & parameterList, Mapa &mapa, Player& pla
 	this->cantidadEjercitos = atoi (parameterList[2].c_str() );
 }
 
+Attack::Attack(Mapa &mapa, Player& player, std::string xml):Command ( player, mapa ){
+
+	// construye el objeto a partir del Xml recibido
+	hydrate(xml);
+}
+
 Attack::~Attack()
 {
+	//no realiza ninguna accion
 }
 
 std::string Attack::serialize(){
@@ -66,10 +73,89 @@ std::string Attack::serialize(){
   
 }
 
-void* Attack::hydrate(ReferenceCountPtr<Mapa>& mapa,std::string fileName){
+void* Attack::hydrate(std::string xml){
 	
 	
+	// estructura que almacenara al xml proporcionado
+	xmlTextReaderPtr reader;
+	xmlChar *name, *value;
+    int res;
+    bool salir=false;
+	std::string nomTag,s;
+	int ej=0;
+	int at=0;
+	int at2 =0;
+	
+	//lee de memoria el xml que llega por parametro y lo almacena en reader
+    reader = xmlReaderForMemory(xml.c_str(),xml.size(), NULL,NULL, 0);
+    
+    if (reader != NULL) {
+    	
+    	// mueve el cursor dentro del stream reader parandose en el sig nodo- 
+    	// devuelve 1 si hay nodo,0 si no hay mas nodods .
+        res = xmlTextReaderRead(reader);
+        
+		//mientras haya nodos por leer y no haya seteado el objeto completo
+       	while (res == 1 && !salir) {
+        	
+			//obtengo nombre del tag
+		    name = xmlTextReaderName(reader);
+		  
+			nomTag.assign((char*)name);
+			
+			//si es el tag de pais-defensor
+			if ( nomTag == "pais-atacante" && at==0){
+				
+				//acumulo 1 para que no vuelva a entrar al leer el tag de cierre
+				at++;
+				//avanzo al proximo nodo
+				res = xmlTextReaderRead(reader);	
+				// obtengo el valor
+				value = xmlTextReaderValue(reader);
+				
+				//seteo el pais defensor
+				this->paisAtacante.assign((char*)value);
+			}
+			else if ( nomTag == "pais-atacado" && at2==0){
+				
+				//acumulo 1 para que no vuelva a entrar al leer el tag de cierre
+				at2++;
+				//avanzo al proximo nodo
+				res = xmlTextReaderRead(reader);	
+				// obtengo el valor
+				value = xmlTextReaderValue(reader);
+				
+				//seteo el pais defensor
+				this->paisAtacado.assign((char*)value);
+			}
+			else if ( nomTag == "cantidad-ejercitos" && ej==0 ){
+				
+				//acumulo 1 para que no vuelva a entrar al leer el tag de cierre
+				ej++;
+				//avanzo de  nodo
+				res = xmlTextReaderRead(reader);	
+				// obtengo el valor
+				value = xmlTextReaderValue(reader);
+				
+				//seteo el valor en el objeto
+			    this->cantidadEjercitos = atoi((char*)value);
+			 	
+			 	//para terminar el bucle y no seguir leyendo   
+			    salir=true;
+			}
+						
+		    res = xmlTextReaderRead(reader);
+        }
+        
+    }
+	
+	xmlFree(name);
+	xmlFree(value);
+    xmlFreeTextReader(reader);
+    xmlCleanupParser();
+
 	return NULL;
+	
 }
 		
 bool Attack::validate(){
