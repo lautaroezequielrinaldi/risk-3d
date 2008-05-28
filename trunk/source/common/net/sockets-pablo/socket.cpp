@@ -121,6 +121,31 @@ int Socket::write_to_socket(const char* data, int length)
     throw SocketIOException();
 }
 
+std::string Socket::full_read(int length)
+	throw(SocketIOException) {
+
+	char * buffer = new char[length];
+	full_read(buffer,length);
+
+	std::string result;
+	result.append(buffer, length);
+
+	delete[] buffer;
+	return result;
+}
+
+void Socket::full_read(char* data, int length)
+	throw(SocketIOException) {
+
+	int read = 0;
+	int toread = length;
+
+	while (toread) {
+		read = read_from_socket(data + read,toread);
+		toread = length - read;
+	}
+}
+
 int Socket::read_from_socket(char* data, int length)
     throw(SocketIOException) {
     //Valido que el socket es valido.
