@@ -3,6 +3,7 @@
 #include "addcontinentframe.h"
 #include "viewcontinentsframe.h"
 #include "viewcontinentcountriesframe.h"
+#include "addcountrytocontinentframe.h"
 #include "editor.h"
 #include "../../common/smartpointer/referencecountptr.h"
 
@@ -20,20 +21,24 @@ int main(int argc, char** argv) {
     AddContinentFrame addFrame;
     ViewContinentsFrame viewFrame;
     ViewContinentCountriesFrame countryFrame;
+    AddCountryToContinentFrame addCountryFrame;
     Gtk::Window window;
     Gtk::VBox box;
 
     //editor->registerObserver(&addFrame);
     editor->registerObserver(&viewFrame);
     editor->registerObserver(&countryFrame);
+    editor->registerObserver(&addCountryFrame);
 
     addFrame.setEditor(editor);
     viewFrame.setEditor(editor);
     countryFrame.setEditor(editor);
+    addCountryFrame.setEditor(editor);
 
     box.add(addFrame);
     box.add(viewFrame);
     box.add(countryFrame);
+    box.add(addCountryFrame);
 
     window.add(box);
     window.show_all_children();
