@@ -47,7 +47,7 @@ class Socket {
         /**
          * Atributo de tipo int representando el descriptor del socket que se va
          * a encapsular.
-         */ 
+         */
         int socketDescriptor;
 
     /**
@@ -135,6 +135,18 @@ class Socket {
          */
         int read_from_socket(char* data, int length)
             throw(SocketIOException);
+
+        /**
+         * Método cuyo propósito es leer del stram del socket una cadena
+         * de bytes continua. A diferencia de read_from_socket(), del cual
+         * se sirve, lee hasta completar length
+         */
+        void full_read(char* data, int length)
+        	throw(SocketIOException);
+
+
+        std::string full_read(int length)
+        	throw(SocketIOException);
 
         /**
          * Mètodo cuyo propòsito es cerrar la conexiòn del socket.
