@@ -42,7 +42,17 @@ void Socket::initialize_socket() {
 bool Socket::is_valid_socket() {
     return (this->socketDescriptor != INVALID_SOCKET_DESCRIPTOR);
 }
+void Socket::listen(int port, int client_wait){
 
+
+}
+
+
+Socket * Socket::accept(){
+	return 0;
+
+
+}
 void Socket::connect_socket(const char* destination, int port)
     throw(SocketConnectionException) {
     if (this->is_valid_socket() ) {
@@ -102,6 +112,22 @@ void Socket::connect_socket(const std::string& destination, int port)
     // Conecta el socket.
     this->connect_socket(destination.c_str(), port);
 }
+
+void Socket::listen(int port, int client_wait){
+
+
+}
+
+/**
+ *
+ *
+ */
+Socket * Socket::accept(){
+
+
+}
+
+
 
 int Socket::write_to_socket(const char* data, int length)
     throw(SocketIOException) {
