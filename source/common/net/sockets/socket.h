@@ -13,15 +13,15 @@
 /**
  * Standard C Library Includes.
  */
-#include<sys/socket.h> // Para definiciòn de hostent
-#include<netinet/in.h> // Para definiciòn de struct sockaddr_in
-#include<arpa/inet.h> // Para definiciòn de inet_aton
-#include<netdb.h> // Para definiciòn de hostent
+#include <sys/socket.h> // Para definiciòn de hostent
+#include <netinet/in.h> // Para definiciòn de struct sockaddr_in
+#include <arpa/inet.h> // Para definiciòn de inet_aton
+#include <netdb.h> // Para definiciòn de hostent
 
 /**
  * Standard C++ Library Includes.
  */
-#include<string> // Para definiciòn de std::string
+#include <string> // Para definiciòn de std::string
 
 /**
  * Project Includes.
@@ -93,6 +93,7 @@ class Socket {
         Socket(const char* destination, int port)
             throw(SocketConnectionException);
 
+
         /**
          * Constructor de la clase Socket. Lanza excepciòn
          * SocketConnectionException cuando destination no es un hsot valido
@@ -109,6 +110,21 @@ class Socket {
          */
         void connect_socket(const char* destination, int port)
             throw(SocketConnectionException);
+
+
+        /**
+         *
+         *
+         */
+        void listen(int port, int client_wait);
+
+        /**
+         *
+         *
+         */
+        Socket * accept();
+
+
 
         /**
          * Mètodo cuyo propòsito es conectar el socket a una direcciòn destino
