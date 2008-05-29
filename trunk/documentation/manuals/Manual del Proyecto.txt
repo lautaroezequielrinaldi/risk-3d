@@ -14,7 +14,8 @@ Manual del Proyecto
 6. Análisis de puntos pendientes
 	Cosas que faltan o deberían mejorar, cómo y por qué
 7. Herramientas (*)
-	Herramientas auxiliares que utilizaron para hacer el proyecto, como editor de interfaz gráfica, control de versiones, herramienta para generar documentación, herramientas para debug, etc
+	Herramientas auxiliares que utilizaron para hacer el proyecto, como editor de interfaz gráfica, herramienta para generar documentación, herramientas para debug, etc
+	Control de versiones: svn en code.google.com
 8. Conclusiones
 
 

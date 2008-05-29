@@ -42,11 +42,11 @@ void Socket::initialize_socket() {
 bool Socket::is_valid_socket() {
     return (this->socketDescriptor != INVALID_SOCKET_DESCRIPTOR);
 }
-void Socket::listen(int port, int client_wait){
 
 
+Socket::Socket(int port, int client_wait)
+     throw(SocketConnectionException){
 }
-
 
 Socket * Socket::accept(){
 	return 0;
@@ -190,7 +190,7 @@ int Socket::read_from_socket(char* data, int length)
     throw SocketIOException();
 }
 
-void Socket::close_socket() {
+void Socket::close() {
     if (this->is_valid_socket() ) {
         close(this->socketDescriptor);
     }
@@ -198,7 +198,7 @@ void Socket::close_socket() {
 
 Socket::~Socket() {
     if (this->is_valid_socket() ) {
-        close_socket();
+        close();
     }
 }
 
