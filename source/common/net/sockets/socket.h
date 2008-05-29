@@ -111,12 +111,13 @@ class Socket {
         void connect_socket(const char* destination, int port)
             throw(SocketConnectionException);
 
-
+        Socket(int port, int client_wait)
+             throw(SocketConnectionException);
         /**
          *
          *
          */
-        void listen(int port, int client_wait);
+        void listen();
 
         /**
          *
@@ -167,7 +168,7 @@ class Socket {
         /**
          * Mètodo cuyo propòsito es cerrar la conexiòn del socket.
          */
-        void close_socket();
+        void close();
 
         /**
          * Destructor virtual de la clase Socket.
