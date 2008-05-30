@@ -116,8 +116,10 @@ void MapaParser::cargarPaises(xmlNodePtr& nodoMapa,
         std::string nombre = (const char*) xmlGetProp(nodoPais,
             BAD_CAST "nombre");
 
+        // Creo posicion del pais
+        MapPosition position(0,0);
         // Creo objeto pais.
-        ReferenceCountPtr<Pais> pais(new Pais(nombre));
+        ReferenceCountPtr<Pais> pais(new Pais(nombre, position));
 
         // Agrego pais al mapa de paises cargados.
         this->paisesCargados[nombre] = pais;
