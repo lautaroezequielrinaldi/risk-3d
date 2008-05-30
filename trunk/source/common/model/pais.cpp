@@ -1,8 +1,10 @@
 #include "pais.h"
 
-Pais::Pais(const std::string& nombre):
+Pais::Pais(const std::string& nombre, const MapPosition& position):
     nombre(nombre),
-    adyacentes() {
+    adyacentes(),
+    position(position),
+    cantidadEjercitos(0) {
     // No realiza ninguna acciòn.
 }
 
@@ -68,6 +70,14 @@ Pais::Iterador Pais::primerAdyacente() {
 
 Pais::Iterador Pais::ultimoAdyacente() {
     return this->adyacentes.end();
+}
+
+void Pais::setPosition(const MapPosition& position) {
+    this->position = position;
+}
+
+MapPosition& Pais::getPosition() {
+    return this->position;
 }
 
 int Pais::getArmyCount(){
