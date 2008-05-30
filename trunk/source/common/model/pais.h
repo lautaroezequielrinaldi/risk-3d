@@ -3,6 +3,7 @@
 
 #include<string> // Para definiciòn de std::string.
 #include<list> // Para definiciòn de std::list.
+#include "mapposition.h" // Para definiciòn de MapPosition.
 #include "../smartpointer/referencecountptr.h" // Para definiciòn de
 // ReferenceCountPtr.
 
@@ -31,7 +32,10 @@ class Pais {
          * Almacena la lista de paises adyacentes,
          */
         std::list< ReferenceCountPtr<Pais> > adyacentes;
-        
+        /**
+         * Almacena la posiciòn del pais dentro del mapa.
+         */
+        MapPosition position;        
         /**
          * Almacena la cantidad de ejercitos que hay en el pais
          */
@@ -57,7 +61,7 @@ class Pais {
         /**
          * Constructor de la clase Pais.
          */
-        Pais(const std::string& nombre);
+        Pais(const std::string& nombre, const MapPosition& position);
         /**
          * Mètodo cuyo propòsito es obtiener el nombre del Pais.
          */
@@ -96,10 +100,17 @@ class Pais {
          * ùltimo pais adyacente,
          */
         Iterador ultimoAdyacente();
-         
-         /**
-          * Metodo cuyo proposito es obtener la cantidad de ejercitos que hay en el pais.
-          */
+        /**
+         * Mètodo cuyo propòsito es establecer la posicion del pais dentro del mapa.
+         */
+        void setPosition(const MapPosition& position);
+        /**
+         * Mètodo cuyo propòsito es obtener la posiciòn del pais dentro del mapa.
+         */
+        MapPosition& getPosition(); 
+        /**
+         * Metodo cuyo proposito es obtener la cantidad de ejercitos que hay en el pais.
+         */
 		int getArmyCount();
 
 		/**
