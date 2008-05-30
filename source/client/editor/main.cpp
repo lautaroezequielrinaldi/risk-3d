@@ -31,6 +31,7 @@ int main(int argc, char** argv) {
     ViewContinentCountriesFrame countryFrame;
     AddCountryToContinentFrame addCountryFrame;
     MapDrawingArea mapDrawingArea;
+    mapDrawingArea.loadImage("mapa.jpg");
 
     Gtk::Window window;
     Gtk::VBox box;
