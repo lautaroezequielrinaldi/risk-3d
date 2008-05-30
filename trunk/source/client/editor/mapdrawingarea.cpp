@@ -1,12 +1,14 @@
 #include "mapdrawingarea.h"
 MapDrawingArea::MapDrawingArea():
     Observer(),
-    Gtk::DrawingArea(),
+    ImageDrawingArea(),
     editor() {
     // No realiza ninguna acciòn.
 }
 
 bool MapDrawingArea::on_expose_event(GdkEventExpose* event) {
+    // Invoca al manejador de eventos on_expose_event de la clase padre.
+    ImageDrawingArea::on_expose_event(event);
     // Obtengo la ventana del widget.
     Glib::RefPtr<Gdk::Window> window = this->get_window();
     // Obtengo el contexto cairo sobre el cual dibujar.
@@ -20,7 +22,8 @@ bool MapDrawingArea::on_expose_event(GdkEventExpose* event) {
         Mapa::IteradorPais countryIter;
 
         // Itero por cada pais
-        for (countryIter = map->primerPais(); countryIter != map->ultimoPais(); ++countryIter) {
+        for (countryIter = map->primerPais();
+            countryIter != map->ultimoPais(); ++countryIter) {
             // Obtengo pais actual.
             ReferenceCountPtr<Pais> country = *countryIter;
             // Obtengo la posicion del pais dentro del mapa.
@@ -35,7 +38,8 @@ bool MapDrawingArea::on_expose_event(GdkEventExpose* event) {
             context->stroke();
         }
 
-        for (countryIter = map->primerPais(); countryIter != map->ultimoPais(); ++countryIter) {
+        for (countryIter = map->primerPais();
+            countryIter != map->ultimoPais(); ++countryIter) {
             // Obtengo el pais actual.
             ReferenceCountPtr<Pais> country = *countryIter;
             // Obtengo la posicion del pais dentro del mapa.
@@ -44,8 +48,8 @@ bool MapDrawingArea::on_expose_event(GdkEventExpose* event) {
             // Defino iterador de paises adaycentes.
             Pais::Iterador adyacentIter;
             // Itero por cada pais adyacente.
-            for (adyacentIter = country->primerAdyacente(); adyacentIter != country->ultimoAdyacente();
-                ++adyacentIter) {
+            for (adyacentIter = country->primerAdyacente(); 
+                adyacentIter != country->ultimoAdyacente(); ++adyacentIter) {
                 // Obtengo  pais adyacente actual.
                 ReferenceCountPtr<Pais> adyacent = *adyacentIter;
                 // Obtengo la posiciòn del pais adyacente dentro del mapa.
@@ -53,26 +57,14 @@ bool MapDrawingArea::on_expose_event(GdkEventExpose* event) {
                 // Dibujo linea que une ambos paises,
                 context->save();
                 context->move_to(position.getX(), position.getY());
-                context->line_to(adyacentPosition.getX(), adyacentPosition.getY());
+                context->line_to(adyacentPosition.getX(),
+                    adyacentPosition.getY());
                 context->restore();
                 context->stroke();
             }
         }
     }
-    return false;
-}
-
-void MapDrawingArea::redraw() {
-    // Obtengo la ventana de widget.
-    Glib::RefPtr<Gdk::Window> window = this->get_window();
-    // Si existe ventana.    
-    if (window) {
-        // Creo un rectangulo del tamaño de la ventana.
-        Gdk::Rectangle rectangle(0, 0, this->get_allocation().get_width(),
-                    this->get_allocation().get_height());
-        // Invalido el rectangulo de la ventana.
-        window->invalidate_rect(rectangle, false);
-    }
+    return true;
 }
 
 void MapDrawingArea::setEditor(const ReferenceCountPtr<Editor>& editor) {
@@ -85,9 +77,10 @@ ReferenceCountPtr<Editor>& MapDrawingArea::getEditor() {
 }
 
 void MapDrawingArea::update(Subject* subject) {
-    redraw();
+    this->redraw();
 }
 
 MapDrawingArea::~MapDrawingArea() {
     // No realiza ninguna acciòn.
 }
+
