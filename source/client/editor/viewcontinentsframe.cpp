@@ -35,7 +35,7 @@ void ViewContinentsFrame::setEditor(const ReferenceCountPtr<Editor>& editor) {
     this->populate();
 }
 
-ReferenceCountPtr<Editor> ViewContinentsFrame::getEditor() {
+ReferenceCountPtr<Editor>& ViewContinentsFrame::getEditor() {
     return this->editor;
 }
 

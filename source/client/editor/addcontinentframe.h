@@ -109,7 +109,7 @@ class AddContinentFrame: public Gtk::Frame {
         /**
          * Obtiene el editor al cual va agregar un continente.
          */
-        ReferenceCountPtr<Editor> getEditor();
+        ReferenceCountPtr<Editor>& getEditor();
         /**
          * Destructor virtual de la clase AddContinentFrame.
          */
