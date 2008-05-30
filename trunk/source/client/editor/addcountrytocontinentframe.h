@@ -124,7 +124,7 @@ class AddCountryToContinentFrame: public Observer, public Gtk::Frame {
         /**
          * Obtiene el editor del cual se va a tomar los datos a mostrar.
          */
-        ReferenceCountPtr<Editor> getEditor();
+        ReferenceCountPtr<Editor>& getEditor();
         /**
          * 
          */

@@ -141,7 +141,7 @@ void ViewContinentCountriesFrame::setEditor(const ReferenceCountPtr<Editor>& edi
     this->populate();
 }
 
-ReferenceCountPtr<Editor> ViewContinentCountriesFrame::getEditor() {
+ReferenceCountPtr<Editor>& ViewContinentCountriesFrame::getEditor() {
     return this->editor;
 }
 

@@ -100,7 +100,7 @@ void AddContinentFrame::setEditor(const ReferenceCountPtr<Editor>& editor) {
     this->editor = editor;
 }
 
-ReferenceCountPtr<Editor> AddContinentFrame::getEditor() {
+ReferenceCountPtr<Editor>& AddContinentFrame::getEditor() {
     return this->editor;
 }
 

@@ -82,7 +82,7 @@ class ViewContinentsFrame: public Observer, public  Gtk::Frame {
         /**
          * Obtiene el editor del cual va a tomar la lista de continentes.
          */
-        ReferenceCountPtr<Editor> getEditor();
+        ReferenceCountPtr<Editor>& getEditor();
         /**
          *
          */
