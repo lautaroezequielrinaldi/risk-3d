@@ -7,7 +7,7 @@
 #include "viewcontinentsframe.h"
 #include "viewcontinentcountriesframe.h"
 #include "addcountrytocontinentframe.h"
-#include "mapdrawingarea.h"
+#include "mapdrawingareaframe.h"
 #include "editor.h"
 #include "../../common/smartpointer/referencecountptr.h"
 
@@ -29,38 +29,20 @@ int main(int argc, char** argv) {
     editor->getMapa()->agregarPais(china);
     editor->getMapa()->agregarPais(birmania);
 
-    Gtk::Adjustment vadjustment(30.0, 0.0, 50.0);
-    Gtk::Adjustment hadjustment(30.0, 0.0, 50.0);
-    Gtk::Viewport viewport(hadjustment, vadjustment);
-    Gtk::ScrolledWindow scrolled;
-
-    AddContinentFrame addFrame;
-    ViewContinentsFrame viewFrame;
-    ViewContinentCountriesFrame countryFrame;
-    AddCountryToContinentFrame addCountryFrame;
-    MapDrawingArea mapDrawingArea;
+    AddContinentFrame addFrame(editor);
+    ViewContinentsFrame viewFrame(editor);
+    ViewContinentCountriesFrame countryFrame(editor);
+    AddCountryToContinentFrame addCountryFrame(editor);
+    MapDrawingAreaFrame mapDrawingArea(editor);
     mapDrawingArea.loadImage("/home/pablo/Workspace/risk-3d/mapa.jpg");
-    scrolled.add(mapDrawingArea);
     Gtk::Window window;
     Gtk::VBox box;
-
-    //editor->registerObserver(&addFrame);
-    editor->registerObserver(&viewFrame);
-    editor->registerObserver(&countryFrame);
-    editor->registerObserver(&addCountryFrame);
-    editor->registerObserver(&mapDrawingArea);
-
-    addFrame.setEditor(editor);
-    viewFrame.setEditor(editor);
-    countryFrame.setEditor(editor);
-    addCountryFrame.setEditor(editor);
-    mapDrawingArea.setEditor(editor);
 
 //    box.add(addFrame);
 //    box.add(viewFrame);
 //    box.add(countryFrame);
 //    box.add(addCountryFrame);
-    box.pack_start(scrolled);
+    box.pack_start(mapDrawingArea);
 
     window.add(box);
     window.show_all_children();

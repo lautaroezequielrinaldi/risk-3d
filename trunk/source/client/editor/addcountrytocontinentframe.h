@@ -116,7 +116,8 @@ class AddCountryToContinentFrame: public Observer, public Gtk::Frame {
         /**
          * Constructor de la clase AddCountryToContinentFrame.
          */
-        AddCountryToContinentFrame();
+        AddCountryToContinentFrame(
+            const ReferenceCountPtr<Editor>& editor = NULL);
         /**
          * Establece el editor del cual va a tomar los datos a mostrar.
          */

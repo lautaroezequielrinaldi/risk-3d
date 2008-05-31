@@ -1,9 +1,10 @@
 #include "addcountrytocontinentframe.h"
 
-AddCountryToContinentFrame::AddCountryToContinentFrame():
+AddCountryToContinentFrame::AddCountryToContinentFrame(
+    const ReferenceCountPtr<Editor>& editor):
     Observer(),
     Gtk::Frame(),
-    editor(),
+    editor(editor),
     verticalBox(),
     continentColumns(),
     countryColumns(),
@@ -14,6 +15,11 @@ AddCountryToContinentFrame::AddCountryToContinentFrame():
     continentComboBox(),
     countryComboBox(),
     addButton() {
+
+    // Se agrega como observer del editor.
+    if (this->editor != NULL) {
+        this->editor->registerObserver(this);
+    }
 
     // Inicializa el modelo de la lista de continentes. 
     this->initializeContinentTreeModel();
@@ -143,7 +149,8 @@ void AddCountryToContinentFrame::onAddButtonClicked() {
                 activeCountryRow[countryColumns.countryName];
 
             // Obtengo continente seleccionado.
-            ReferenceCountPtr<Continente> continent = mapa->obtenerContinente(continentName);
+            ReferenceCountPtr<Continente> continent =
+                mapa->obtenerContinente(continentName);
             // Obtengo pais seleccionado.
             ReferenceCountPtr<Pais> country = mapa->obtenerPais(countryName);
             // Agrego pais a continente.
@@ -154,8 +161,15 @@ void AddCountryToContinentFrame::onAddButtonClicked() {
     }
 }
 
-void AddCountryToContinentFrame::setEditor(const ReferenceCountPtr<Editor>& editor) {
+void AddCountryToContinentFrame::setEditor(
+    const ReferenceCountPtr<Editor>& editor) {
     this->editor = editor;
+
+    // Se agrega como observer del editor.
+    if (this->editor != NULL) {
+        this->editor->registerObserver(this);
+    }
+
     // Popula la lista de continentes y la lista de paises.
     this->populate();
 }

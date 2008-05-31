@@ -1,11 +1,18 @@
 #include "viewcontinentsframe.h"
-ViewContinentsFrame::ViewContinentsFrame():
+ViewContinentsFrame::ViewContinentsFrame(
+    const ReferenceCountPtr<Editor>& editor):
     Observer(),
     Gtk::Frame(),
-    editor(),
+    editor(editor),
     continentColumns(),
     continentTreeModel(),
     continentTreeView() {
+
+    // Se agrega como observer del editor.
+    if (this->editor != NULL) {
+        this->editor->registerObserver(this);
+    }
+
     // Inicializa el modelo de la lista de continentes.
     this->initializeContinentTreeModel();
     // Inicializa la lista de continentes.
@@ -31,6 +38,12 @@ void ViewContinentsFrame::initializeContinentTreeView() {
 
 void ViewContinentsFrame::setEditor(const ReferenceCountPtr<Editor>& editor) {
     this->editor = editor;
+
+    // Se agrega como observer del editor.
+    if (this->editor != NULL) {
+        this->editor->registerObserver(this);
+    }
+
     // Popula la lista de continentes.
     this->populate();
 }

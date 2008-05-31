@@ -1,6 +1,7 @@
 #ifndef __IMAGEDRAWINGAREA_H__
 #define __IMAGEDRAWINGAREA_H__
 
+#include<string> // Para definiciòn de std::string.
 #include<gtkmm/drawingarea.h> // Para definiciòn de Gtk::DrawingArea.
 #include<gdkmm/pixbuf.h> // Para definiciòn de Gdk::Pixbuf.
 #include<gdkmm/general.h> // Para definiciòn del namespace Gdk::Cairo.
