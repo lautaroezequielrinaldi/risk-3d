@@ -1,5 +1,8 @@
 #include<gtkmm/main.h>
 #include<gtkmm/window.h>
+#include<gtkmm/scrolledwindow.h>
+#include<gtkmm/viewport.h>
+#include<gtkmm/adjustment.h>
 #include "addcontinentframe.h"
 #include "viewcontinentsframe.h"
 #include "viewcontinentcountriesframe.h"
@@ -26,13 +29,18 @@ int main(int argc, char** argv) {
     editor->getMapa()->agregarPais(china);
     editor->getMapa()->agregarPais(birmania);
 
+    Gtk::Adjustment vadjustment(30.0, 0.0, 50.0);
+    Gtk::Adjustment hadjustment(30.0, 0.0, 50.0);
+    Gtk::Viewport viewport(hadjustment, vadjustment);
+    Gtk::ScrolledWindow scrolled;
+
     AddContinentFrame addFrame;
     ViewContinentsFrame viewFrame;
     ViewContinentCountriesFrame countryFrame;
     AddCountryToContinentFrame addCountryFrame;
     MapDrawingArea mapDrawingArea;
-    mapDrawingArea.loadImage("mapa.jpg");
-
+    mapDrawingArea.loadImage("/home/pablo/Workspace/risk-3d/mapa.jpg");
+    scrolled.add(mapDrawingArea);
     Gtk::Window window;
     Gtk::VBox box;
 
@@ -52,11 +60,12 @@ int main(int argc, char** argv) {
 //    box.add(viewFrame);
 //    box.add(countryFrame);
 //    box.add(addCountryFrame);
-    box.add(mapDrawingArea);
+    box.pack_start(scrolled);
 
     window.add(box);
     window.show_all_children();
-    window.maximize();
+//    window.set_size_request(500,500);
+//    window.maximize();
 
     Gtk::Main::run(window);
 
