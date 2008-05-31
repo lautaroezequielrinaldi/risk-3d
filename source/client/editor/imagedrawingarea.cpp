@@ -66,6 +66,10 @@ bool ImageDrawingArea::loadImage(const std::string& imageFileName) {
         // Dibuja la imagen en el contexto de la imagen.
         Gdk::Cairo::set_source_pixbuf(this->imageContext, this->image, 0.0,
             0.0);
+
+        // Establece el tamaño minimo del widget.
+        this->set_size_request(this->image->get_width(),
+            this->image->get_height());
         // Marca la imagen como cargada.
         this->imageLoaded = true;
         // Redibuja el widget.
