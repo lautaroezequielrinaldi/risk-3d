@@ -1,9 +1,13 @@
 #include "mapdrawingarea.h"
-MapDrawingArea::MapDrawingArea():
+MapDrawingArea::MapDrawingArea(const ReferenceCountPtr<Editor>& editor):
     Observer(),
     ImageDrawingArea(),
-    editor() {
-    // No realiza ninguna acciòn.
+    editor(editor) {
+
+    // Se agrega como observer del editor.
+    if (this->editor != NULL) {
+        this->editor->registerObserver(this);
+    }
 }
 
 bool MapDrawingArea::on_expose_event(GdkEventExpose* event) {
@@ -69,6 +73,13 @@ bool MapDrawingArea::on_expose_event(GdkEventExpose* event) {
 
 void MapDrawingArea::setEditor(const ReferenceCountPtr<Editor>& editor) {
     this->editor = editor;
+
+    // Se agrega como observer del editor.
+    if (this->editor != NULL) {
+        this->editor->registerObserver(this);
+    }
+
+    // Redibuja el mapa con la informaciòn del nuevo editor.
     this->redraw();
 }
 

@@ -1,9 +1,10 @@
 #include "viewcontinentcountriesframe.h"
 #include<iostream>
-ViewContinentCountriesFrame::ViewContinentCountriesFrame():
+ViewContinentCountriesFrame::ViewContinentCountriesFrame(
+    const ReferenceCountPtr<Editor>& editor):
     Observer(),
     Gtk::Frame(),
-    editor(),
+    editor(editor),
     verticalBox(),
     continentColumns(),
     countryColumns(),
@@ -11,6 +12,12 @@ ViewContinentCountriesFrame::ViewContinentCountriesFrame():
     countryTreeModel(),
     continentComboBox(),
     countryTreeView() {
+
+    // Se agrega como observer del editor.
+    if (this->editor != NULL) {
+        this->editor->registerObserver(this);
+    }
+
     // Inicializa el modelo de la lista de continentes.
     this->initializeContinentTreeModel();
     // Inicializa el modelo de la lista de paises.
@@ -137,6 +144,12 @@ void ViewContinentCountriesFrame::onContinentComboBoxChanged() {
 
 void ViewContinentCountriesFrame::setEditor(const ReferenceCountPtr<Editor>& editor) {
     this->editor = editor;
+
+    // Se agrega como observer del editor.
+    if (this->editor != NULL) {
+        this->editor->registerObserver(this);
+    }
+
     // Popula la lista de continentes y la lista de paises.
     this->populate();
 }

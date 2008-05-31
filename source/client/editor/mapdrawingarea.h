@@ -4,10 +4,14 @@
 #include<gdk/gdkevents.h> // Para definiciòn de GdkEventExpose.
 
 #include "imagedrawingarea.h" // Para definiciòn de ImageDrawingArea.
+
 #include "editor.h" // Para definiciòn de Editor.
 #include "subject.h" // Para definiciòn de Subject.
 #include "observer.h" // Para definiciòn de Observer.
 #include "../../common/model/mapa.h" // Para definiciòn de Mapa.
+#include "../../common/smartpointer/referencecountptr.h" // Para definiciòn de
+// ReferenceCountPtr.
+
 
 /**
  * Clase que representa un area dibujable en pantalla donde se muestra la imagen
@@ -51,7 +55,7 @@ class MapDrawingArea: public Observer, public ImageDrawingArea {
         /**
          * Constructor de la clase MapDrawingArea.
          */
-        MapDrawingArea();
+        MapDrawingArea(const ReferenceCountPtr<Editor>& editor = NULL);
         /**
          * Establece el editor de donde tomar los datos a mostrar.
          */

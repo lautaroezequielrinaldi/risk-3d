@@ -101,7 +101,7 @@ class AddContinentFrame: public Gtk::Frame {
         /**
          * Constructor de la clase AddContinentFrame.
          */
-        AddContinentFrame();
+        AddContinentFrame(const ReferenceCountPtr<Editor>& editor = NULL);
         /**
          * Establece el editor al cual va agregar un continente.
          */

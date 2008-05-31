@@ -1,8 +1,9 @@
 #include "addcontinentframe.h"
 
-AddContinentFrame::AddContinentFrame():
+AddContinentFrame::AddContinentFrame(
+    const ReferenceCountPtr<Editor>& editor):
     Gtk::Frame(),
-    editor(),
+    editor(editor),
     verticalBox(),
     continentNameBox(),
     continentBonusBox(),

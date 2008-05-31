@@ -113,7 +113,8 @@ class ViewContinentCountriesFrame: public Observer, public Gtk::Frame {
         /**
          *  Constructor de la clase ViewContinentCountriesFrame.
          */
-        ViewContinentCountriesFrame();
+        ViewContinentCountriesFrame(
+            const ReferenceCountPtr<Editor>& editor = NULL);
         /**
          * Establece el editor desde el cual se van a tomar los datos.
          */
