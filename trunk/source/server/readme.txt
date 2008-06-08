@@ -6,4 +6,10 @@ cuando llega el mensaje,
    se toma alguna accion, que puede involucrar escribir en todos los demas jugadores
    devuelve el lock 
    y vuelve a bloquearse en lectura
+
+
+
+tiene que haber un thread extra,
+   que pueda obtener un lock tambien y efectuar tareas de "mantenimiento"
+   o mejor aun que pueda
    
