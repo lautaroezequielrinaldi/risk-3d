@@ -12,50 +12,111 @@
  */
 #include "socket.h"
 
-Socket::Socket() {
-    // Inicializa el socket.
-    this->initialize_socket();
+
+
+// pasar a su propio archivo  >>>>>>>>>>>>>>
+
+#ifndef __PROXYPLAYER_H__
+#define __PROXYPLAYER_H__
+#include "../../../common/thread/threaded.h"
+
+
+/**
+ *
+ * @todo usar & en lugar de *
+ */
+class PlayerProxy:public Threaded {
+	private:
+	Socket * socket;
+	// State & state;
+	// GameController & gamecontroller;
+
+	protected:
+	void * run();
+
+	public:
+	PlayerProxy(Socket * socket);
+
+	~PlayerProxy();
+
+};
+#endif /** __PROXYPLAYER_H__ */
+
+//#include "proxyplayer.h"
+void * PlayerProxy::run() {
+	// while jugando {
+	//   se bloquea leyendo el socket
+	//   cuando llega el mensaje,
+	//   se obtiene un lock sobre el estado.
+	//   dependiendo del estado, al cual todos los jugadores acceden
+	//   se toma alguna accion, que puede involucrar escribir en todos los demas jugadores
+	//   devuelve el lock
+	// }
+
+	return 0;
 }
 
-Socket::Socket(const char* destination, int port)
-    throw(SocketConnectionException) {
-    // Inicializa el socket.
-    this->initialize_socket();
-
-    // Conecta el socket.
-    this->connect_socket(destination, port);
+PlayerProxy::PlayerProxy(Socket * socket){
+	this->socket = socket;
 }
 
+PlayerProxy::~PlayerProxy(){
+	delete(socket);
+}
+
+
+// pasar a su propio archivo  <<<<<<<<<<<<<<<<
+
+
+/**
+ * Client socket
+ *
+ *
+ */
 Socket::Socket(const std::string& destination, int port)
     throw(SocketConnectionException) {
     // Inicializa el socket.
-    this->initialize_socket();
+    this->initialize();
 
     // Conecta el socket.
-    this->connect_socket(destination, port);
+    this->connect(destination, port);
 }
 
-void Socket::initialize_socket() {
-   this->socketDescriptor = socket(PF_INET, SOCK_STREAM, 0);
+
+void Socket::initialize() {
+   this->socketDescriptor = ::socket(PF_INET, SOCK_STREAM, 0);
 }
 
-bool Socket::is_valid_socket() {
+bool Socket::is_valid() {
     return (this->socketDescriptor != INVALID_SOCKET_DESCRIPTOR);
 }
 
-
+/**
+ * Server socket
+ *
+ *
+ */
 Socket::Socket(int port, int client_wait)
      throw(SocketConnectionException){
 }
 
-Socket * Socket::accept(){
-	return 0;
+Socket::Socket(const int & socketDescriptor)
+     throw(SocketConnectionException){
+     this->socketDescriptor=socketDescriptor;
+
+}
+
+Socket * Socket::accept()
+     throw(SocketConnectionException){
+     return 0;
 
 
 }
-void Socket::connect_socket(const char* destination, int port)
+
+void Socket::connect(const std::string& destination, int port)
     throw(SocketConnectionException) {
-    if (this->is_valid_socket() ) {
+
+    if (this->is_valid() ) {
         // Defino entidad del host al cual se va a conectar el socket.
         hostent* hostnameInformation;
         // Defino la direcciòn TCP / IP del host al cual se va a conectar el
@@ -71,11 +132,11 @@ void Socket::connect_socket(const char* destination, int port)
         int returnValue;
 
         // Obtengo informaciòn del host al cual se va a conectar el socket.
-        hostnameInformation = gethostbyname(destination);
+        hostnameInformation = gethostbyname(destination.c_str());
 
         // Valido que puedo obtener informaciòn del hostname.
         if (hostnameInformation == NULL) {
-            throw SocketConnectionException();
+            throw SocketConnectionException("no se pudo obtener hostname\n");
         }
 
         // Obtengo la direcciòn TCP / IP del host al cual se va a conectar el
@@ -95,44 +156,30 @@ void Socket::connect_socket(const char* destination, int port)
         inet_aton(hostnameAddress, &address.sin_addr);
 
         // Conecto el socket a la direcciòn TCP / IP.
-        returnValue = connect(this->socketDescriptor, (sockaddr*) &address,
+        returnValue = ::connect(this->socketDescriptor, (sockaddr*) &address,
             sizeof(address));
 
         // Valido que me pude conectar.
         if (returnValue == -1) {
-            throw SocketConnectionException();
+            throw SocketConnectionException("no se pudo conectar\n");
         }
     } else {
-        throw SocketConnectionException();
+        throw SocketConnectionException("connect sobre socket invalido\n");
     }
 }
 
-void Socket::connect_socket(const std::string& destination, int port)
-    throw(SocketConnectionException) {
-    // Conecta el socket.
-    this->connect_socket(destination.c_str(), port);
-}
 
-void Socket::listen(int port, int client_wait){
-
-
-}
-
-/**
- *
- *
- */
-Socket * Socket::accept(){
+void Socket::listen(int port, int client_wait)
+     throw(SocketConnectionException){
 
 
 }
 
 
-
-int Socket::write_to_socket(const char* data, int length)
+int Socket::write(const char* data, int length)
     throw(SocketIOException) {
     // Valido que el socket es valido.
-    if (this->is_valid_socket() ) {
+    if (this->is_valid() ) {
         // Defino valor de retorno de la funcion send.
         int returnValue;
 
@@ -144,7 +191,7 @@ int Socket::write_to_socket(const char* data, int length)
             return returnValue;
         }
     }
-    throw SocketIOException();
+    throw SocketIOException("write sobre socket invalido\n");
 }
 
 std::string Socket::full_read(int length)
@@ -167,38 +214,113 @@ void Socket::full_read(char* data, int length)
 	int toread = length;
 
 	while (toread) {
-		read = read_from_socket(data + read,toread);
+		read = this->read(data + read,toread);
 		toread = length - read;
 	}
 }
 
-int Socket::read_from_socket(char* data, int length)
+int Socket::read(char* data, int length)
     throw(SocketIOException) {
     //Valido que el socket es valido.
-    if (this->is_valid_socket() ) {
+    if (this->is_valid() ) {
         // Defino valor de retorno de la funcion recv.
         int returnValue;
 
         // Recibo mensaje del socket.
-        returnValue = recv(this->socketDescriptor, data, length, 0);
+        returnValue = ::recv(this->socketDescriptor, data, length, 0);
 
         // Verifico que se pudo recibir mensaje.
         if (returnValue != -1) {
             return returnValue;
         }
     }
-    throw SocketIOException();
+    throw SocketIOException("read sobre socket invalido\n");
 }
 
+/**
+ *
+ * @todo evaluar si tiene sentido tener Socket::close() fuera de ~Socket()
+ */
 void Socket::close() {
-    if (this->is_valid_socket() ) {
-        close(this->socketDescriptor);
+    if (this->is_valid() ) {
+        ::close(this->socketDescriptor);
     }
 }
 
 Socket::~Socket() {
-    if (this->is_valid_socket() ) {
-        close();
+    if (this->is_valid() ) {
+        this->close();
     }
 }
 
+/**
+ *
+ * @todo pasar el error a la excepcion
+ */
+std::string Socket::readLine() throw(SocketIOException) {
+        int error = 0;
+        char oneChar;
+        std::string s;
+        while(error != -1) {
+                error = read(&oneChar,1);
+                if (oneChar == 0x0d) {
+                        read(&oneChar,1);
+                        if (oneChar == 0x0a) {
+                                return s;
+                        }
+                        throw SocketIOException("error de protocolo");
+                }
+                s.push_back(oneChar);
+        }
+        throw SocketIOException("indefinido");
+}
+
+
+
+/**
+ *
+ *
+ * Esto se parece mucho al principal de server.cpp
+ *
+ */
+
+
+#include <iostream>
+#include <vector>
+
+int main (int argc, char** argv) {
+/*
+	std::cerr<< "x1x";
+	Socket socket("localhost",25);
+	std::cerr<< "x2x";
+	socket.write("quit\n",6);
+	std::cerr<< "x3x";
+	socket.close();
+	std::cerr<< "x4x";
+*/
+	std::vector<PlayerProxy *> players;
+	Socket socket(2000,4);
+	
+	// mientras 
+	// juego no iniciado
+	// juego no lleno 
+	// aceptar nuevos jugadores
+	for (int i=0; i<4; i++) {
+		PlayerProxy * playerProxy = new PlayerProxy(socket.accept());
+		//echoserver->start();
+		players.push_back(playerProxy);
+	}
+
+
+	// bloquearse esperando a que el juego termine
+
+        std::vector<PlayerProxy *>::iterator players_iterator;
+        players_iterator = players.begin();
+        while( players_iterator != players.end() ) {
+		PlayerProxy * playerProxy =  *players_iterator;
+		playerProxy->join();
+		++players_iterator;
+		delete(playerProxy);
+	}
+	return 0;
+}

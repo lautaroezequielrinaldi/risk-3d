@@ -69,33 +69,19 @@ class Socket {
          * uso comùn entre todos los constructores de la clase Socket. Se usa
          * para no repetir codigo entre constructores.
          */
-        void initialize_socket();
+        void initialize();
 
         /**
          * Mètodo cuyto propòsito es verificar si el socket es vàlido.
          */
-        bool is_valid_socket();
+        bool is_valid();
 
     /**
      * Mètodos pùblicos de la clase Socket.
      */
     public:
         /**
-         * Constructor de la clase Socket.
-         */
-        Socket();
-
-        /**
-         * Constructor de la clase Socket. Lanza excepciòn
-         * SocketConnectionException cuando destination no es un host valido
-         * o cuando no se pudo conectar a dicho host en dicho puerto.
-         */
-        Socket(const char* destination, int port)
-            throw(SocketConnectionException);
-
-
-        /**
-         * Constructor de la clase Socket. Lanza excepciòn
+         * Constructor de la clase Socket, cliente. Lanza excepciòn
          * SocketConnectionException cuando destination no es un hsot valido
          * o cuando no se pudo conectar a dicho host en dicho puerto.
          */
@@ -103,27 +89,27 @@ class Socket {
             throw(SocketConnectionException);
 
         /**
-         * Mètodo cuyo propòsito es conectar el socket a una direcciòn destino
-         * y a un puerto determinado. Lanza excepciòn SocketConnectionException
-         * cuando destination no es un host valido o cuando no se pudo conectar
-         * a dicho host en dicho puerto.
+         * Constructor de la clase Socket, server.
+         *
          */
-        void connect_socket(const char* destination, int port)
-            throw(SocketConnectionException);
-
         Socket(int port, int client_wait)
              throw(SocketConnectionException);
-        /**
-         *
-         *
-         */
-        void listen();
+
 
         /**
-         *
+         * 
          *
          */
-        Socket * accept();
+        Socket * accept()
+             throw(SocketConnectionException);
+
+    private:
+        /**
+         * Crea un socket conectado al descriptor provisto
+         *
+         */
+        Socket(const int & socketDescriptor)
+            throw(SocketConnectionException);
 
 
 
@@ -133,16 +119,24 @@ class Socket {
          * cuando destination no es un host valido o cuando no se pudo conectar
          * a dicho host en dicho puerto.
          */
-        void connect_socket(const std::string& destination, int port)
+        void connect(const std::string& destination, int port)
             throw(SocketConnectionException);
 
+        /**
+         *
+         *
+         */
+        void listen(int port, int client_wait)
+           throw(SocketConnectionException);
+
+   public:
         /**
          * Mètodo cuyo propòsito es escribir en el stream del socket una cadena
          * de bytes contigua. Lanza excepciòn SocketIOException cuando no pudo
          * escribir datos al socket, es decir cuando la funcion send retorna
          * -1.
          */
-        int write_to_socket(const char* data, int length)
+        int write(const char* data, int length)
             throw(SocketIOException);
 
         /**
@@ -150,12 +144,12 @@ class Socket {
          * de bytes contigua. Lanza excepciòn SocketIOExeption cuando no pudo
          * leer datos del socket, es decir cuando la funciòn recv retorna -1.
          */
-        int read_from_socket(char* data, int length)
+        int read(char* data, int length)
             throw(SocketIOException);
 
         /**
          * Método cuyo propósito es leer del stram del socket una cadena
-         * de bytes continua. A diferencia de read_from_socket(), del cual
+         * de bytes continua. A diferencia de read(), del cual
          * se sirve, lee hasta completar length
          */
         void full_read(char* data, int length)
@@ -164,6 +158,9 @@ class Socket {
 
         std::string full_read(int length)
         	throw(SocketIOException);
+
+	std::string readLine()
+              throw(SocketIOException);
 
         /**
          * Mètodo cuyo propòsito es cerrar la conexiòn del socket.
