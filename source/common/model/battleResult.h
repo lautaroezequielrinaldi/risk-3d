@@ -92,7 +92,7 @@ class BattleResult : public Serializable
 		/**
 		 * Metodo cuyo proposito es hidratar un archivo XML y construir un objeto a partir de el.
 		 */
-		void* hydrate(ReferenceCountPtr<Mapa>& mapa,std::string fileName) ;
+		void* hydrate(std::string fileName) ;
 };
 
 #endif /*BATTLERESULT_H_*/

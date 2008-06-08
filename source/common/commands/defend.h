@@ -41,6 +41,11 @@ class Defend : public Command
 		
 		/*Metodo cuyo proposito es validar la accion que realice el comando*/
 		bool validate();
+		
+		std::string getDefenderdLand();
+		
+		int getArmyCount();
+		
 };
 
 #endif /*DEFEND_H_*/

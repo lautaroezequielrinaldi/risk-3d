@@ -76,85 +76,96 @@ std::string Attack::serialize(){
 void* Attack::hydrate(std::string xml){
 	
 	
-	// estructura que almacenara al xml proporcionado
-	xmlTextReaderPtr reader;
-	xmlChar *name, *value;
-    int res;
-    bool salir=false;
-	std::string nomTag,s;
-	int ej=0;
-	int at=0;
-	int at2 =0;
-	
-	//lee de memoria el xml que llega por parametro y lo almacena en reader
-    reader = xmlReaderForMemory(xml.c_str(),xml.size(), NULL,NULL, 0);
+	xmlDocPtr document;
+	xmlNodePtr nodoRaiz;
     
-    if (reader != NULL) {
-    	
-    	// mueve el cursor dentro del stream reader parandose en el sig nodo- 
-    	// devuelve 1 si hay nodo,0 si no hay mas nodods .
-        res = xmlTextReaderRead(reader);
-        
-		//mientras haya nodos por leer y no haya seteado el objeto completo
-       	while (res == 1 && !salir) {
-        	
-			//obtengo nombre del tag
-		    name = xmlTextReaderName(reader);
-		  
-			nomTag.assign((char*)name);
-			
-			//si es el tag de pais-defensor
-			if ( nomTag == "pais-atacante" && at==0){
-				
-				//acumulo 1 para que no vuelva a entrar al leer el tag de cierre
-				at++;
-				//avanzo al proximo nodo
-				res = xmlTextReaderRead(reader);	
-				// obtengo el valor
-				value = xmlTextReaderValue(reader);
-				
-				//seteo el pais defensor
-				this->paisAtacante.assign((char*)value);
-			}
-			else if ( nomTag == "pais-atacado" && at2==0){
-				
-				//acumulo 1 para que no vuelva a entrar al leer el tag de cierre
-				at2++;
-				//avanzo al proximo nodo
-				res = xmlTextReaderRead(reader);	
-				// obtengo el valor
-				value = xmlTextReaderValue(reader);
-				
-				//seteo el pais defensor
-				this->paisAtacado.assign((char*)value);
-			}
-			else if ( nomTag == "cantidad-ejercitos" && ej==0 ){
-				
-				//acumulo 1 para que no vuelva a entrar al leer el tag de cierre
-				ej++;
-				//avanzo de  nodo
-				res = xmlTextReaderRead(reader);	
-				// obtengo el valor
-				value = xmlTextReaderValue(reader);
-				
-				//seteo el valor en el objeto
-			    this->cantidadEjercitos = atoi((char*)value);
-			 	
-			 	//para terminar el bucle y no seguir leyendo   
-			    salir=true;
-			}
-						
-		    res = xmlTextReaderRead(reader);
-        }
-        
-    }
-	
-	xmlFree(name);
-	xmlFree(value);
-    xmlFreeTextReader(reader);
-    xmlCleanupParser();
+    xmlChar* paisAtacan;
+	xmlChar* paisAtacad;
+	xmlChar* cantE;
+    
+    // Defino un contexto de XPath.
+    xmlXPathContextPtr contextoXPath;
+    // Defino 2 objetos de XPath.
+    xmlXPathObjectPtr objetoXPathPaisAtacad,objetoXPathPaisAtacan, objetoXPathEjer ;
+    // Defino el set de nodos devueltos por la expresiòn XPath.(una estructura que tiene un array con los nodos
+    //devueltos por la expresion y el numero de nodos.
+    xmlNodeSetPtr setNodoAtacar;
 
+	//parseo el xml en memoria y se construye el arbol
+	document = xmlParseMemory(xml.c_str(), xml.size());
+	
+	// Obtengo el elemento root del documento XML sobre el cual se va a trabajar.
+    nodoRaiz = xmlDocGetRootElement(document);
+
+    // Creo el contexto de XPath.
+    contextoXPath = xmlXPathNewContext(document);
+
+
+	 // Evaluo la expresiòn XPath para pais origen
+    objetoXPathPaisAtacan = xmlXPathEvalExpression(BAD_CAST "//atacar/pais-atacante", contextoXPath);
+
+	// Obtengo el set de nodos de paises.
+    setNodoAtacar = objetoXPathPaisAtacan->nodesetval;
+
+    //nodeNr = cantidad de nodos que devolvio la expresion xpath - nodeTab = array de nodos devulto
+    // Obtengo el nodo del pais actual.
+	xmlNodePtr nodoAtacante = setNodoAtacar->nodeTab[0];
+
+	// Obtengo el nombre del pais que defiende y lo seteo en objeto.
+	paisAtacan = xmlNodeGetContent(nodoAtacante);
+	this->paisAtacante.assign( (char*) paisAtacan );
+	
+
+	// Evaluo la expresiòn XPath para pais destino
+    objetoXPathPaisAtacad = xmlXPathEvalExpression(BAD_CAST "//atacar/pais-atacado", contextoXPath);
+
+	// Obtengo el set de nodos de paises.
+    setNodoAtacar = objetoXPathPaisAtacad->nodesetval;
+
+    //nodeNr = cantidad de nodos que devolvio la expresion xpath - nodeTab = array de nodos devulto
+    // Obtengo el nodo del pais actual.
+	xmlNodePtr nodoAtacado = setNodoAtacar->nodeTab[0];
+
+	// Obtengo el nombre del pais que defiende y lo seteo en objeto.
+	paisAtacad = xmlNodeGetContent(nodoAtacado);
+	this->paisAtacado.assign( (char*) paisAtacad );
+
+	
+	// Evaluo la expresiòn XPath para la cantidad de ejercitos
+    objetoXPathEjer = xmlXPathEvalExpression(BAD_CAST "//atacar/cantidad-ejercitos",  contextoXPath);
+
+    // Obtengo el set de nodos.
+    setNodoAtacar = objetoXPathEjer->nodesetval;
+
+    //nodeNr = cantidad de nodos que devolvio la expresion xpath
+    //nodeTab = array de nodos devulto
+	// Obtengo el nodo de la cantidad de ejercitos actual
+	xmlNodePtr nodoCantEj = setNodoAtacar->nodeTab[0];
+
+	// Obtengo cantidad de ejercitos y la seteo en objeto
+    cantE = xmlNodeGetContent(nodoCantEj);
+    
+    this->cantidadEjercitos = atoi((char*) cantE );
+
+	
+	/*libero recursos*/
+
+	xmlFree(paisAtacan);
+	xmlFree(paisAtacad);
+	xmlFree (cantE );
+	
+	xmlXPathFreeObject(objetoXPathPaisAtacad);
+	xmlXPathFreeObject(objetoXPathPaisAtacan);
+	xmlXPathFreeObject(objetoXPathEjer);
+	
+	xmlXPathFreeContext(contextoXPath);
+
+    xmlFreeDoc(document);
+
+    xmlCleanupParser();
+	
 	return NULL;
+;
 	
 }
 		
@@ -172,5 +183,18 @@ bool Attack::validate(){
 	
 	return ataqueValido;
 }
+
+std::string Attack::getAttackerLand(){
+	return this->paisAtacante;
+}
+		
+std::string Attack::getAttackedLand(){
+	return this->paisAtacado;
+}
+
+int Attack::getArmyCount(){
+	return this->cantidadEjercitos;	
+}
+
 
 

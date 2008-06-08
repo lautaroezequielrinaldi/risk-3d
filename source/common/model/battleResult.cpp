@@ -12,7 +12,7 @@ std::string BattleResult::serialize(){
 	
 }
 
-void* BattleResult::hydrate(ReferenceCountPtr<Mapa>& mapa,std::string fileName){
+void* BattleResult::hydrate(std::string fileName){
 	
 }
 

@@ -47,6 +47,13 @@ class Attack : public Command
 		/*Metodo cuyo proposito es validar la accion que realice el comando*/
 		bool validate();
 		
+		std::string getAttackerLand();
+		
+		std::string getAttackedLand();
+		
+		int getArmyCount();
+		
+		
 };
 
 #endif /*ATTACK_H_*/
