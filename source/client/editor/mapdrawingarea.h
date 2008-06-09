@@ -52,12 +52,6 @@ class MapDrawingArea: public Observer, public ImageDrawingArea {
          */
         bool on_expose_event(GdkEventExpose* event);
 
-        /**
-         * Manejador de la señal signal_button_press_event que se accionarà
-         * cuando se haga click en la imagen del mapa.
-         */
-        bool onClicked(GdkEventButton* event);
-
     /**
      * Mètodos pùblicos de la clase MapDrawingArea.
      */

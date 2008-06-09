@@ -3,10 +3,7 @@
 #include<gtkmm/scrolledwindow.h>
 #include<gtkmm/viewport.h>
 #include<gtkmm/adjustment.h>
-#include "addcontinentframe.h"
-#include "viewcontinentsframe.h"
-#include "viewcontinentcountriesframe.h"
-#include "addcountrytocontinentframe.h"
+#include "continentpage.h"
 #include "mapdrawingareaframe.h"
 #include "editor.h"
 #include "../../common/smartpointer/referencecountptr.h"
@@ -30,32 +27,25 @@ int main(int argc, char** argv) {
     japon->agregarAdyacente(birmania);
     birmania->agregarAdyacente(japon);
 
-    ReferenceCountPtr<Editor> editor( new Editor());
+    ReferenceCountPtr<Editor> editor = new Editor();
 
     editor->getMapa()->agregarContinente(continente);
     editor->getMapa()->agregarPais(china);
     editor->getMapa()->agregarPais(birmania);
     editor->getMapa()->agregarPais(japon);
 
-    AddContinentFrame addFrame(editor);
-    ViewContinentsFrame viewFrame(editor);
-    ViewContinentCountriesFrame countryFrame(editor);
-    AddCountryToContinentFrame addCountryFrame(editor);
+    ContinentPage continentPage(editor);
     MapDrawingAreaFrame mapDrawingArea(editor);
     mapDrawingArea.loadImage("mapa.jpg");
     Gtk::Window window;
-    Gtk::VBox box;
+    Gtk::HBox box;
 
-//    box.add(addFrame);
-//    box.add(viewFrame);
-//    box.add(countryFrame);
-//    box.add(addCountryFrame);
-    box.pack_start(mapDrawingArea);
+    box.add(mapDrawingArea);
+    box.add(continentPage);
 
     window.add(box);
     window.show_all_children();
-//    window.set_size_request(500,500);
-//    window.maximize();
+    window.maximize();
 
     Gtk::Main::run(window);
 

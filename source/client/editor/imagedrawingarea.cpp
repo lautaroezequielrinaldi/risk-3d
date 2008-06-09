@@ -24,7 +24,7 @@ bool ImageDrawingArea::on_expose_event(GdkEventExpose* event) {
     // Almacena el contenido del contexto.
     context->save();
     // Dibuja la imagen en el contexto del widget.
-    context->set_source(imageSurface, 0.0, 0.0);
+    context->set_source(this->imageSurface, 0.0, 0.0);
     context->rectangle(0.0, 0.0, this->image->get_width(),
         this->image->get_height());
     context->clip();
@@ -66,6 +66,7 @@ bool ImageDrawingArea::loadImage(const std::string& imageFileName) {
         // Dibuja la imagen en el contexto de la imagen.
         Gdk::Cairo::set_source_pixbuf(this->imageContext, this->image, 0.0,
             0.0);
+        this->imageContext->paint();
 
         // Establece el tamaño minimo del widget.
         this->set_size_request(this->image->get_width(),
