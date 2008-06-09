@@ -1,7 +1,11 @@
 #ifndef __MAPDRAWINGAREA_H__
 #define __MAPDRAWINGAREA_H__
 
-#include<gdk/gdkevents.h> // Para definiciòn de GdkEventExpose.
+#include<gtkmm/label.h> // Para definiciòn de Gtk::Label.
+#include<gtkmm/entry.h> // Para definiciòn de Gtk::Entry.
+#include<gtkmm/dialog.h> // Para definiciòn de Gtk::Dialog.
+#include<gtkmm/stock.h> // Para definiciòn de Gtk::Stock::CANCEL y Gtk::Stock::OK.
+#include<gdk/gdkevents.h> // Para definiciòn de GdkEventExpose y GdkEventButton.
 
 #include "imagedrawingarea.h" // Para definiciòn de ImageDrawingArea.
 
@@ -47,6 +51,12 @@ class MapDrawingArea: public Observer, public ImageDrawingArea {
          * Dibuja en pantalla la informaciòn del editor.
          */
         bool on_expose_event(GdkEventExpose* event);
+
+        /**
+         * Manejador de la señal signal_button_press_event que se accionarà
+         * cuando se haga click en la imagen del mapa.
+         */
+        bool onClicked(GdkEventButton* event);
 
     /**
      * Mètodos pùblicos de la clase MapDrawingArea.
