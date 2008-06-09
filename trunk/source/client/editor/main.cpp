@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
     ViewContinentCountriesFrame countryFrame(editor);
     AddCountryToContinentFrame addCountryFrame(editor);
     MapDrawingAreaFrame mapDrawingArea(editor);
-    mapDrawingArea.loadImage("/home/pablo/Workspace/risk-3d/mapa.jpg");
+    mapDrawingArea.loadImage("mapa.jpg");
     Gtk::Window window;
     Gtk::VBox box;
 
