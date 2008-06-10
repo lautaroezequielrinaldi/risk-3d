@@ -1,4 +1,3 @@
-int main (int argc, char ** argv) {
 	// carga de mapas existentes
 	// creacion de server socket
 	// aguardamos una conexion
@@ -40,4 +39,47 @@ int main (int argc, char ** argv) {
 	//	players->broadcast(news)
 	//	if anyobjective is reached...
 
+
+
+#include "proxyplayer.h"
+#include "../common/net/socket/socket.h"
+
+#include <iostream>
+#include <vector>
+
+int main (int argc, char** argv) {
+/*
+	std::cerr<< "x1x";
+	Socket socket("localhost",25);
+	std::cerr<< "x2x";
+	socket.write("quit\n",6);
+	std::cerr<< "x3x";
+	socket.close();
+	std::cerr<< "x4x";
+*/
+	std::vector<PlayerProxy *> players;
+	Socket socket(2000,4);
+	
+	// mientras 
+	// juego no iniciado
+	// juego no lleno 
+	// aceptar nuevos jugadores
+	for (int i=0; i<4; i++) {
+		PlayerProxy * playerProxy = new PlayerProxy(socket.accept());
+		//echoserver->start();
+		players.push_back(playerProxy);
+	}
+
+
+	// bloquearse esperando a que el juego termine
+
+        std::vector<PlayerProxy *>::iterator players_iterator;
+        players_iterator = players.begin();
+        while( players_iterator != players.end() ) {
+		PlayerProxy * playerProxy =  *players_iterator;
+		playerProxy->join();
+		++players_iterator;
+		delete(playerProxy);
+	}
+	return 0;
 }
