@@ -45,7 +45,7 @@ void Game::setPlayerList(
 std::list< ReferenceCountPtr<Player> >& Game::getPlayerList() {
     return this->playerList;
 }
-
+/*
 std::string Game::serialize() {
     std::string resultado;
     return resultado;
@@ -54,7 +54,7 @@ std::string Game::serialize() {
 void* Game::hydrate(std::string filename) {
     return NULL;
 }
-
+*/
 Game::~Game() {
     // No realiza ninguna acciòn.
 }
