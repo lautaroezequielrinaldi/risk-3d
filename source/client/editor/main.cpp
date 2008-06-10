@@ -4,6 +4,7 @@
 #include<gtkmm/viewport.h>
 #include<gtkmm/adjustment.h>
 #include "continentpage.h"
+#include "countrypage.h"
 #include "mapdrawingareaframe.h"
 #include "editor.h"
 #include "../../common/smartpointer/referencecountptr.h"
@@ -35,6 +36,7 @@ int main(int argc, char** argv) {
     editor->getMapa()->agregarPais(japon);
 
     ContinentPage continentPage(editor);
+    CountryPage countryPage(editor);
     MapDrawingAreaFrame mapDrawingArea(editor);
     mapDrawingArea.loadImage("mapa.jpg");
     Gtk::Window window;
@@ -42,6 +44,7 @@ int main(int argc, char** argv) {
 
     box.add(mapDrawingArea);
     box.add(continentPage);
+    box.add(countryPage);
 
     window.add(box);
     window.show_all_children();
