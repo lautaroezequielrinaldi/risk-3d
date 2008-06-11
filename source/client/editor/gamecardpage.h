@@ -1,8 +1,9 @@
-#ifndef __CARDGAMEPAGE_H__
-#define __CARDGAMEPAGE_H__
+#ifndef __GAMECARDPAGE_H__
+#define __GAMECARDPAGE_H__
 
 #include<gtkmm/frame.h> // Para definicion de Gtk::Frame.
 
+#include "conquercontinentframe.h" // Para definicion de ConquerContinentFrame.
 #include "viewgamecardsframe.h" // Para definicion de ViewGameCardsFrame.
 #include "editor.h" // Para definicion de Editor.
 #include "../../common/smartpointer/referencecountptr.h" // Para defincion de
@@ -21,6 +22,11 @@ class GameCardPage: public Gtk::Frame {
 		 * Almacena el layout vertical del CardGamePage.
 		 */
 		Gtk::VBox verticalBox;
+		/**
+		 * Almacena el frame para agregar cartas de juego para conquistar
+		 * continentes.
+		 */
+		ConquerContinentFrame conquerContinentFrame;
 		/**
 		 * Almacena el frame para listar las cartas de juego.
 		 */
@@ -57,5 +63,5 @@ class GameCardPage: public Gtk::Frame {
 		virtual ~GameCardPage();
 };
 
-#endif /** __CARDGAMEPAGE_H__ */
+#endif /** __GAMECARDPAGE_H__ */
 
