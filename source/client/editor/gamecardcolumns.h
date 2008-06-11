@@ -26,11 +26,11 @@ class GameCardColumns: public Gtk::TreeModelColumnRecord {
         /**
          * Constructor de la clase GameCardColumns.
          */
-        CountryColumns();
+        GameCardColumns();
         /**
          * Destructor de la clase GameCardColumns.
          */
-        ~CountryColumns();
+        ~GameCardColumns();
 };
 
 #endif /** __GAMECARDCOLUMNS_H__ */
