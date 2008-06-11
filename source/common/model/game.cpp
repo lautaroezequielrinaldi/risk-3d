@@ -81,7 +81,7 @@ std::string Game::serialize() {
 void* Game::hydrate(std::string filename) {
     return NULL;
 }
-*/
+
 Game::~Game() {
     // No realiza ninguna acciòn.
 }
