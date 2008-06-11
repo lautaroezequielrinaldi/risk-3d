@@ -43,6 +43,7 @@
 
 #include "proxyplayer.h"
 #include "../common/net/sockets/socket.h"
+#include "statemachine.h"
 
 #include <iostream>
 #include <vector>
@@ -57,6 +58,8 @@ int main (int argc, char** argv) {
 	socket.close();
 	std::cerr<< "x4x";
 */
+
+	StateMachine statemachine;
 	std::vector<PlayerProxy *> players;
 	Socket socket(2000,4);
 	PlayerProxy * playerProxy;
