@@ -1,5 +1,5 @@
 #ifndef __GAME_H__
-#define __GANE_H__
+#define __GAME_H__
 
 #include "mapa.h" // Para definiciòn de Mapa.
 #include "player.h" // Para definiciòn de Player.

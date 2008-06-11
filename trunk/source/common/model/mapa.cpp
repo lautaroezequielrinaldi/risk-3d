@@ -1,8 +1,10 @@
 #include "mapa.h"
+#include "gamecard.h"
 
 Mapa::Mapa():
     paises(),
-    continentes() {
+    continentes(),
+    gameCards() {
     // No realiza ninguna acciòn.
 }
 
@@ -60,6 +62,14 @@ ReferenceCountPtr<Continente> Mapa::obtenerContinente(
     return NULL;
 }
 
+void Mapa::agregarGameCard(const ReferenceCountPtr<GameCard>& gameCard) {
+    this->gameCards.push_back(gameCard);
+}
+
+void Mapa::removerGameCard(const ReferenceCountPtr<GameCard>& gameCard) {
+    this->gameCards.remove(gameCard);
+}
+
 Mapa::IteradorPais Mapa::primerPais() {
     return this->paises.begin();
 }
@@ -74,6 +84,14 @@ Mapa::IteradorContinente Mapa::primerContinente() {
 
 Mapa::IteradorContinente Mapa::ultimoContinente() {
     return this->continentes.end();
+}
+
+Mapa::IteradorGameCard Mapa::primerGameCard() {
+    return this->gameCards.begin();
+}
+
+Mapa::IteradorGameCard Mapa::ultimoGameCard() {
+    return this->gameCards.end();
 }
 
 Mapa::~Mapa() {
