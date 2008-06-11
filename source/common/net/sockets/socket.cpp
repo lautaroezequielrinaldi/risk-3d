@@ -12,19 +12,117 @@
  */
 #include "socket.h"
 
-/**
+/*
  * Client socket
  *
  *
  */
-Socket::Socket(const std::string& destination, int port)
-    throw(SocketConnectionException) {
-    // Inicializa el socket.
+Socket::Socket(const std::string& destination, int port) throw(SocketConnectionException) {
     this->initialize();
-
-    // Conecta el socket.
     this->connect(destination, port);
 }
+
+void Socket::connect(const std::string& destination, int port) throw(SocketConnectionException) {
+	if (!this->is_valid() ) {
+		throw SocketConnectionException("connect sobre socket invalido\n");
+	}
+	// Defino entidad del host al cual se va a conectar el socket.
+	hostent* hostnameInformation;
+	// Defino la direcciòn TCP / IP del host al cual se va a conectar el
+	// socket.
+	in_addr* hostnameInetAddress;
+	// Defino la direcciòn TCP / IP del host al cual se va a conectar el
+	// socket como cadena de caracteres.
+	char* hostnameAddress;
+	// Defino la direccion TCP / IP destino a la cual se va a conectar el
+	// socket.
+	sockaddr_in address;
+	// Defino valor de retorno de la funcion connect.
+	int returnValue;
+
+	// Obtengo informaciòn del host al cual se va a conectar el socket.
+	hostnameInformation = gethostbyname(destination.c_str());
+
+	// Valido que puedo obtener informaciòn del hostname.
+	if (hostnameInformation == NULL) {
+		throw SocketConnectionException("no se pudo obtener hostname\n");
+	}
+
+	// Obtengo la direcciòn TCP / IP del host al cual se va a conectar el
+	// socket.
+	hostnameInetAddress = (in_addr*) hostnameInformation->h_addr;
+
+	// Obtengo la direcciòn TCP / IP del host al cual se va a conectar el
+	// socket como cadena de caracteres.
+	hostnameAddress = inet_ntoa(*hostnameInetAddress);
+
+	// Inicializo la direccion TCP / IP.
+	memset(&address, 0, sizeof(address));
+
+	// Establezco valores de direccion TCP / IP.
+	address.sin_family = AF_INET;
+	address.sin_port = htons(port);
+	inet_aton(hostnameAddress, &address.sin_addr);
+
+	// Conecto el socket a la direcciòn TCP / IP.
+	returnValue = ::connect(this->socketDescriptor, (sockaddr*) &address, sizeof(address));
+
+	// Valido que me pude conectar.
+	if (returnValue == -1) {
+		throw SocketConnectionException("no se pudo conectar\n");
+	}
+}
+
+
+/*
+ * Server socket
+ *
+ *
+ */
+Socket::Socket(int port, int client_wait) throw(SocketConnectionException){
+	struct sockaddr_in server_address;
+
+	this->initialize();
+
+	memset((char*)&server_address,0,sizeof(server_address));
+	server_address.sin_family= AF_INET;
+	server_address.sin_port=htons(port);
+	server_address.sin_addr.s_addr=INADDR_ANY;
+
+	if (bind(this->socketDescriptor,(struct sockaddr *) & server_address, (socklen_t)sizeof(struct sockaddr)) < 0) {
+		throw SocketConnectionException("error de bind");
+	}
+
+	listen(this->socketDescriptor,client_wait);
+}
+
+Socket::Socket(const int & socketDescriptor) throw(SocketConnectionException){
+	this->socketDescriptor=socketDescriptor;
+	
+}
+
+Socket * Socket::accept() throw(SocketConnectionException) {
+	if (!this->is_valid() ) {
+		throw SocketConnectionException("accept sobre socket invalido");
+	}
+
+	unsigned int newsockfd, client_len;
+	struct sockaddr_in client_address;
+	
+	client_len = (socklen_t)sizeof(client_address);
+	newsockfd = ::accept(this->socketDescriptor, (struct sockaddr*)&client_address,&client_len);
+	if (newsockfd <0) {
+		throw SocketConnectionException("error de accept");
+	}
+	return new Socket(newsockfd);
+}
+
+/*
+ * Comun
+ *
+ *
+ */
+
 
 
 void Socket::initialize() {
@@ -35,89 +133,6 @@ bool Socket::is_valid() {
     return (this->socketDescriptor != INVALID_SOCKET_DESCRIPTOR);
 }
 
-/**
- * Server socket
- *
- *
- */
-Socket::Socket(int port, int client_wait)
-     throw(SocketConnectionException){
-}
-
-Socket::Socket(const int & socketDescriptor)
-     throw(SocketConnectionException){
-     this->socketDescriptor=socketDescriptor;
-
-}
-
-Socket * Socket::accept()
-     throw(SocketConnectionException){
-     return 0;
-
-
-}
-
-void Socket::connect(const std::string& destination, int port)
-    throw(SocketConnectionException) {
-
-    if (this->is_valid() ) {
-        // Defino entidad del host al cual se va a conectar el socket.
-        hostent* hostnameInformation;
-        // Defino la direcciòn TCP / IP del host al cual se va a conectar el
-        // socket.
-        in_addr* hostnameInetAddress;
-        // Defino la direcciòn TCP / IP del host al cual se va a conectar el
-        // socket como cadena de caracteres.
-        char* hostnameAddress;
-        // Defino la direccion TCP / IP destino a la cual se va a conectar el
-        // socket.
-        sockaddr_in address;
-        // Defino valor de retorno de la funcion connect.
-        int returnValue;
-
-        // Obtengo informaciòn del host al cual se va a conectar el socket.
-        hostnameInformation = gethostbyname(destination.c_str());
-
-        // Valido que puedo obtener informaciòn del hostname.
-        if (hostnameInformation == NULL) {
-            throw SocketConnectionException("no se pudo obtener hostname\n");
-        }
-
-        // Obtengo la direcciòn TCP / IP del host al cual se va a conectar el
-        // socket.
-        hostnameInetAddress = (in_addr*) hostnameInformation->h_addr;
-
-        // Obtengo la direcciòn TCP / IP del host al cual se va a conectar el
-        // socket como cadena de caracteres.
-        hostnameAddress = inet_ntoa(*hostnameInetAddress);
-
-        // Inicializo la direccion TCP / IP.
-        memset(&address, 0, sizeof(address));
-
-        // Establezco valores de direccion TCP / IP.
-        address.sin_family = AF_INET;
-        address.sin_port = htons(port);
-        inet_aton(hostnameAddress, &address.sin_addr);
-
-        // Conecto el socket a la direcciòn TCP / IP.
-        returnValue = ::connect(this->socketDescriptor, (sockaddr*) &address,
-            sizeof(address));
-
-        // Valido que me pude conectar.
-        if (returnValue == -1) {
-            throw SocketConnectionException("no se pudo conectar\n");
-        }
-    } else {
-        throw SocketConnectionException("connect sobre socket invalido\n");
-    }
-}
-
-
-void Socket::listen(int port, int client_wait)
-     throw(SocketConnectionException){
-
-
-}
 
 
 int Socket::write(const char* data, int length)

@@ -2,7 +2,7 @@
 #define __PROXYPLAYER_H__
 #include "../common/thread/threaded.h"
 
-#include "socket.h"
+#include "../common/net/sockets/socket.h"
 /**
  *
  * @todo usar & en lugar de *

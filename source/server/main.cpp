@@ -42,7 +42,7 @@
 
 
 #include "proxyplayer.h"
-#include "../common/net/socket/socket.h"
+#include "../common/net/sockets/socket.h"
 
 #include <iostream>
 #include <vector>
@@ -59,20 +59,23 @@ int main (int argc, char** argv) {
 */
 	std::vector<PlayerProxy *> players;
 	Socket socket(2000,4);
-	
+	PlayerProxy * playerProxy;
 	// mientras 
 	// juego no iniciado
 	// juego no lleno 
 	// aceptar nuevos jugadores
 	for (int i=0; i<4; i++) {
-		PlayerProxy * playerProxy = new PlayerProxy(socket.accept());
-		//echoserver->start();
+		std::cerr << "Antes de new con i = " << i << "\n" << std::endl;
+		playerProxy = new PlayerProxy(socket.accept());
+		std::cerr << "Despues de new...\n" << std::endl;
+
+		playerProxy->start();
 		players.push_back(playerProxy);
 	}
 
-
+	playerProxy->join();
 	// bloquearse esperando a que el juego termine
-
+if (false) {
         std::vector<PlayerProxy *>::iterator players_iterator;
         players_iterator = players.begin();
         while( players_iterator != players.end() ) {
@@ -81,5 +84,8 @@ int main (int argc, char** argv) {
 		++players_iterator;
 		delete(playerProxy);
 	}
+}
+
+
 	return 0;
 }
