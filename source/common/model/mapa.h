@@ -9,6 +9,11 @@
 // ReferenceCountPtr.
 
 /**
+ * Forward declaration de la clase GameCard.
+ */
+class GameCard;
+
+/**
  * Clase cuyo propòsito es modelar al mapa de nuestro modelo.
  */
 class Mapa {
@@ -25,6 +30,11 @@ class Mapa {
          */
         typedef std::list< ReferenceCountPtr<Continente> >::iterator
             IteradorContinente;
+        /**
+         * Defino el tipo de dato IteradorGameCard de la clase Mapa.
+         */
+        typedef std::list< ReferenceCountPtr<GameCard> >::iterator
+            IteradorGameCard;
 
     /**
      * Atributos privados de la clase Mapa.
@@ -38,6 +48,10 @@ class Mapa {
          * Almacena la lista de continentes del Mapa.
          */
         std::list< ReferenceCountPtr<Continente> > continentes;
+        /**
+         * Almacena la lista de game cards del Mapa.
+         */
+        std::list< ReferenceCountPtr<GameCard> > gameCards;
 
     /**
      * Mètodos privados de la clase Mapa.
@@ -85,6 +99,14 @@ class Mapa {
          */
         ReferenceCountPtr<Continente> obtenerContinente(const std::string& nombre);
         /**
+         * Mètodo cuyo propòsito es agregar una carta de juego al Mapa.
+         */
+        void agregarGameCard(const ReferenceCountPtr<GameCard>& gameCard);
+        /**
+         * Mètodo cuyo proòsito es remover una carta de juego del Mapa.
+         */
+        void removerGameCard(const ReferenceCountPtr<GameCard>& gameCard);
+        /**
          * Mètodo cuyo propòsito es obtener un iterador apuntando al primer
          * paìs del Mapa.
          */
@@ -104,6 +126,16 @@ class Mapa {
          * continente del Mapa.
          */
         IteradorContinente ultimoContinente();
+        /**
+         * Mètodo cuyo propòsito es obtener un iterador apuntando al primer
+         * game card del Mapa.
+         */
+        IteradorGameCard primerGameCard();
+        /**
+         * Mètodo cuyo propòsito es obtener un iterador apuntando al ùltimo
+         * game card del Mapa.
+         */
+        IteradorGameCard ultimoGameCard();
         /**
          * Destructor de la clase Mapa.
          */
