@@ -152,11 +152,14 @@ void AddCountryRelationFrame::onAddRelationButtonClicked() {
             // Obtengo segundo pais.
             ReferenceCountPtr<Pais> secondCountry = map->obtenerPais(secondName);
 
-            // Relaciono ambos paises.        
-            firstCountry->agregarAdyacente(secondCountry);
-            secondCountry->agregarAdyacente(firstCountry);
-            // Notifica de los cambios al resto de la interfaz grafica
-            this->editor->notify();
+			// Si los paises son distintos.
+			if (firstCountry != secondCountry) {
+	            // Relaciono ambos paises.        
+		        firstCountry->agregarAdyacente(secondCountry);
+			    secondCountry->agregarAdyacente(firstCountry);
+				// Notifica de los cambios al resto de la interfaz grafica
+				this->editor->notify();
+			}
         }
     }
 }
