@@ -31,6 +31,14 @@ class AddCountryRelation: public Observer, public Gtk::Frame {
          */
         Glib::RefPtr<Gtk::ListStore> secondCountryTreeModel;
         /**
+         * Almacena el label para el primer pais.
+         */
+        Gtk::Label firstCountryLabel;
+        /**
+         * Almacena el label para el segundo pais.
+         */
+        Gtk::Label secondCountryLabel;
+        /**
          * Almacena el combo box para el primer pais.
          */
         Gtk::ComboBox firstCountryComboBox;

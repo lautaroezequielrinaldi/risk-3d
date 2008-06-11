@@ -82,7 +82,7 @@ void AddCountryToContinentFrame::initializeCountryTreeModel() {
 
 void AddCountryToContinentFrame::initializeContinentComboBox() {
     this->continentComboBox.set_model(this->continentTreeModel);
-    this->continentComboBox.pack_start(continentColumns.continentName);
+    this->continentComboBox.pack_start(this->continentColumns.continentName);
 }
 
 void AddCountryToContinentFrame::initializeCountryComboBox() {
