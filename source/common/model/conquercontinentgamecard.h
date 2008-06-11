@@ -43,7 +43,8 @@ class ConquerContinentGameCard: public GameCard {
         /**
          * Constructor de la clase ConquerContinentGameCard.
          */
-        ConquerContinentGameCard(const std::string& continentName);
+        ConquerContinentGameCard(const std::string& name,
+            const std::string& continentName);
         /**
          * Mètodo que valida la carta de juego.
          */
