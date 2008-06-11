@@ -1,13 +1,30 @@
-#ifndef __ADDCOUNTRYRELATION_H__
-#define __ADDCOUNTRYRELATION_H__
+#ifndef __ADDCOUNTRYRELATIONFRAME_H__
+#define __ADDCOUNTRYRELATIONFRAME_H__
+
+#include<gtkmm/frame.h> // Para definiciòn de Gtk::Frame.
+#include<gtkmm/box.h> // Para definiciòn de Gtk::VBox.
+#include<gtkmm/liststore.h> // Para definiciòn de Gtk::ListStore.
+#include<gtkmm/label.h> // Para definiciòn de Gtk::Label.
+#include<gtkmm/combobox.h> // Para definiciòn de Gtk::ComboBox.
+#include<gtkmm/button.h> // Para definiciòn de Gtk::Button.
+#include<glibmm/refptr.h> // Para definiciòn de Glib::RefPtr.
+
+#include "continentcolumns.h" // Para definiciòn de ContinentColumns.
+#include "countrycolumns.h" // Para definiciòn de CountryColumns.
+
+#include "observer.h" // Para definiciòn de Observer.
+#include "subject.h" // Para definiciòn de Subject.
+#include "editor.h" // Para definiciòn de Editor.
+#include "../../common/smartpointer/referencecountptr.h" // Para definiciòn de
+// ReferenceCountPtr.
 
 /**
  * Clase cuyo propòsito es mostrar un frame con controles para que el usuario
  * seleccione dos paises y agregue una relacion de adyacencia entre ambos.
  */
-class AddCountryRelation: public Observer, public Gtk::Frame {
+class AddCountryRelationFrame: public Observer, public Gtk::Frame {
     /**
-     * Atributos privados de la clase AddCountryRelation.
+     * Atributos privados de la clase AddCountryRelationFrame.
      */
     private:
         /**
@@ -52,17 +69,18 @@ class AddCountryRelation: public Observer, public Gtk::Frame {
         Gtk::Button addRelationButton;
 
     /**
-     * Mètodos privados de la clase AddCountryRelation.
+     * Mètodos privados de la clase AddCountryRelationFrame.
      */
     private:
         /**
-         * Constructor copia de la clase AddCountryRelation.
+         * Constructor copia de la clase AddCountryRelationFrame.
          */
-        AddCountryRelation(const AddCountryRelation& otherInstance);
+        AddCountryRelationFrame(const AddCountryRelationFrame& otherInstance);
         /**
-         * Operador de asignaciòn de la clase AddCountryRelation.
+         * Operador de asignaciòn de la clase AddCountryRelationFrame.
          */
-        AddCountryRelation& operator=(const AddCountryRelation& otherInstance);
+        AddCountryRelationFrame& operator=(
+            const AddCountryRelationFrame& otherInstance);
         /**
          * Inicializa el modelo de tree para el primer pais.
          */
@@ -79,15 +97,24 @@ class AddCountryRelation: public Observer, public Gtk::Frame {
          * Inicializa el combo box para el segundo pais.
          */
         void initializeSecondCountryComboBox();
+        /**
+         * Popula la lista de paises con datos del editor.
+         */
+        void populate();
+
+        /**
+         * Manejador de la señal signal_clicked del boton addRelationButton.
+         */
+        void onAddRelationButtonClicked();
 
     /**
-     * Mètodos pùblicos de la clase AddCountryRelation.
+     * Mètodos pùblicos de la clase AddCountryRelationFrame.
      */
     public:
         /**
-         * Constructor de la clase AddCountryRelation.
+         * Constructor de la clase AddCountryRelationFrame.
          */
-        AddCountryRelation(const ReferenceCountPtr<Editor>& editor) {
+        AddCountryRelationFrame(const ReferenceCountPtr<Editor>& editor);
         /**
          * Establece el editor usado para tomar los datos.
          */
@@ -101,10 +128,10 @@ class AddCountryRelation: public Observer, public Gtk::Frame {
          */
         void update(Subject* subject);
         /**
-         * Destructor virtual de la clase AddCountryRelation.
+         * Destructor virtual de la clase AddCountryRelationFrame.
          */
-        virtual ~AddCountryRelation();
+        virtual ~AddCountryRelationFrame();
 };
 
-#endif /** __ADDCOUNTRYRELATION_H__ */
+#endif /** __ADDCOUNTRYRELATIONFRAME_H__ */
 

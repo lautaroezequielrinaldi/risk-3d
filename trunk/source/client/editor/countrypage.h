@@ -5,6 +5,7 @@
 #include<gtkmm/box.h> // Para definiciòn de Gtk::VBox.
 
 #include "addcountrytocontinentframe.h" // Para definiciòn de AddCountryFrame.
+#include "addcountryrelationframe.h" // Para definiciòn de AddCountryRelation.
 #include "editor.h" // Para definiciòn de Editor.
 
 #include "../../common/smartpointer/referencecountptr.h" // Para definiciòn de
@@ -27,6 +28,10 @@ class CountryPage: public Gtk::Frame {
          * Almacena el frame para agregar paises continentes.
          */
         AddCountryToContinentFrame addCountryToContinentFrame;
+        /**
+         * Almacena el frame para agregar relaciones entre paises.
+         */
+        AddCountryRelationFrame addCountryRelationFrame;
 
     /**
      * Mètodos privados de la clase CountryPage.
