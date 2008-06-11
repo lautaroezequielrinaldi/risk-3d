@@ -2,42 +2,30 @@
 #define COMMAND_H_
 
 #include "../parser/serializable.h"
-#include "../model/mapa.h"
-#include "../model/player.h"
+#include "../model/gamemanager.h" // Para definiciòn de gameManager.
+#include "../smartpointer/referencecountptr.h" // Para definiciòn de ReferenceCountPtr
 
 /**
  * Clase abstracta cuyo proposito es brindar la interfaz de un comando serializable.
  */ 
 class Command : public Serializable
 {
-	
-	protected:
-		
-		/**
-		 * Referencia al jugador que posee el turno
-		 */
-		Player& jugador;
-		
-		/**
-		 * Referencia al mapa del juego
-		 */
-		Mapa &mapa;
-		
-
 		
 	public:
 		
 		/*
 		 * Constructor de la clase
 		 */
-		Command(Player& player, Mapa &map);
+		Command();
 		/*
 		 * Destructor de la clase
 		 */
 		virtual ~Command();
 		
-		/*Metodo cuyo proposito es validar la accion que realice el comando*/
-		virtual bool validate()=0;
+		/**
+		 * Metodo cuyo proposito es validar la accion que realice el comando
+		 */
+		virtual bool validate(ReferenceCountPtr<GameManager>& gameMAnager)=0;
 		
 };
 

@@ -75,6 +75,23 @@ class Game: public Serializable {
          * Obtiene la lista de jugadores del juego.
          */
         std::list< ReferenceCountPtr<Player> >& getPlayerList();
+        
+        /**
+         * Obtiene el jugador correspondinte al color especificado.
+         * Retorna el jugador correspondiente o NULL en caso de no encontrar jugador con el color especificado.
+         */
+        ReferenceCountPtr<Player> getPlayer(int color);
+        
+        /**
+		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.
+		 */
+        std::string serialize();
+
+		/**
+		 * Metodo cuyo proposito es hidratar  un objeto a partir del Xml especificado.
+		 */
+		void* hydrate(std::string filename);
+                
         /**
          * Destructor virtual de la clase Game.
          */

@@ -1,7 +1,7 @@
 #include <sstream>
 #include "move.h"
 
-Move::Move(std::vector<std::string> &parameterList, Mapa &mapa, Player& player): Command ( player, mapa )
+Move::Move(std::vector<std::string> &parameterList): Command ()
 {
 	this->paisOrigen = parameterList[0];
 	this->paisDestino = parameterList[1];
@@ -9,7 +9,7 @@ Move::Move(std::vector<std::string> &parameterList, Mapa &mapa, Player& player):
 	
 }
 
-Move::Move(Mapa &mapa, Player& player, std::string xml):Command ( player, mapa ){
+Move::Move(std::string xml):Command (){
 
 	// construye el objeto a partir del Xml recibido
 	hydrate(xml);
@@ -170,10 +170,12 @@ void* Move::hydrate(std::string xml){
 	
 }
 		
-bool Move::validate(){
+bool Move::validate(ReferenceCountPtr<GameManager>& gameMAnager){
 	
 	bool movimValido=false;
-	ReferenceCountPtr<Pais> paisO = this->mapa.obtenerPais(this->paisOrigen);
+	ReferenceCountPtr<Game> game = gameMAnager->getGame();
+	ReferenceCountPtr<Mapa> map = game->getMapa();
+	ReferenceCountPtr<Pais> paisO = map->obtenerPais(this->paisOrigen);
 	
 	/*si pais origen es adyacente al pais destino*/
 	if( paisO->esAdyacente(this->paisDestino)){
