@@ -2,6 +2,11 @@
 #define __VIEWGAMECARDSFRAME_H__
 
 #include<gtkmm/frame.h> // Para definicion de Gtk::Frame.
+#include<gtkmm/box.h> // Para definicion de Gtk::VBox.
+#include<gtkmm/liststore.h> // Para definicion de Gtk::ListStore.
+#include<gtkmm/treeview.h> // Para definicion de Gtk::TreeView.
+
+#include "gamecardcolumns.h" // Para definicion de GameCardColumns.
 
 #include "editor.h" // Para definicion de Editor.
 #include "observer.h" // Para definicion de Observer.
@@ -22,6 +27,23 @@ class ViewGameCardsFrame: public Observer, public Gtk::Frame {
 		 * Almacena el editor del cual tomar los cambios.
 		 */
 		ReferenceCountPtr<Editor> editor;
+		/**
+		 * Almacena el layout vertical del ViewGameCardsFrame.
+		 */
+		Gtk::VBox verticalBox;
+        /**
+		 * Almacena el registro de columnas usado para la lista de cartas de
+		 * juego.
+		 */
+        GameCardColumns gameCardColumns;
+        /**
+		 * Almacena el modelo de tree usado para la lista de cartas de juego.
+		 */
+        Glib::RefPtr<Gtk::ListStore> gameCardTreeModel;
+        /**
+		 * Almacena la vista de tree usado para la lista de cartas de juego.
+		 */
+        Gtk::TreeView gameCardTreeView;
 
 	/**
 	 * Metodos privados de la clase ViewGameCardsFrame.
@@ -35,6 +57,18 @@ class ViewGameCardsFrame: public Observer, public Gtk::Frame {
 		 * Operador de asignacion de la clase ViewGameCardsFrame.
 		 */
 		ViewGameCardsFrame& operator=(const ViewGameCardsFrame& otherInstance);
+		/**
+		 * Inicializa el modelo de tree de las cartas de juego.
+		 */
+		void initializeGameCardTreeModel();
+		/**
+		 * Inicializa el tree view de las cartas de juego.
+		 */
+		void initializeGameCardTreeView();
+		/**
+		 * Popula la lista de cartas de juego.
+		 */
+		void populate();
 
 	/**
 	 * Metodos publicos de la clase  ViewGameCardsFrame.
