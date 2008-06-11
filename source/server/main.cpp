@@ -66,7 +66,7 @@ int main (int argc, char** argv) {
 	// aceptar nuevos jugadores
 	for (int i=0; i<4; i++) {
 		std::cerr << "Antes de new con i = " << i << "\n" << std::endl;
-		playerProxy = new PlayerProxy(socket.accept());
+		playerProxy = new PlayerProxy(socket.accept(), players);
 		std::cerr << "Despues de new...\n" << std::endl;
 
 		playerProxy->start();
@@ -75,7 +75,7 @@ int main (int argc, char** argv) {
 
 	playerProxy->join();
 	// bloquearse esperando a que el juego termine
-if (false) {
+if (true) {
         std::vector<PlayerProxy *>::iterator players_iterator;
         players_iterator = players.begin();
         while( players_iterator != players.end() ) {

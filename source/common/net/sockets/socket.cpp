@@ -153,6 +153,12 @@ int Socket::write(const char* data, int length)
     throw SocketIOException("write sobre socket invalido\n");
 }
 
+int Socket::write(const std::string & data) throw(SocketIOException) {
+	return this->write(data.c_str(), data.size());
+}
+
+
+
 std::string Socket::full_read(int length)
 	throw(SocketIOException) {
 

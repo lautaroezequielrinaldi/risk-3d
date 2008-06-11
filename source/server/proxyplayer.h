@@ -3,6 +3,8 @@
 #include "../common/thread/threaded.h"
 
 #include "../common/net/sockets/socket.h"
+
+#include <vector>
 /**
  *
  * @todo usar & en lugar de *
@@ -12,13 +14,14 @@ class PlayerProxy:public Threaded {
 	Socket * socket;
 	// State & state;
 	// GameController & gamecontroller;
+	std::vector<PlayerProxy *> & players;
 
 	protected:
 	void * run();
 
 	public:
-	PlayerProxy(Socket * socket);
-
+	PlayerProxy(Socket * socket, std::vector<PlayerProxy *> & players);
+	void notify(const std::string & msg);
 	~PlayerProxy();
 
 };
