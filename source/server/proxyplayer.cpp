@@ -4,11 +4,11 @@
 #include <iostream>
 void * PlayerProxy::run() {
 	std::string msg("bienvenido\n");
+	std::vector<PlayerProxy *>::iterator players_iterator;
 	socket->write(msg);
 	while (true) {
 		msg=socket->full_read(5);
 		std::cerr << msg << std::endl;
-	        std::vector<PlayerProxy *>::iterator players_iterator;
 		players_iterator = players.begin();
 		while( players_iterator != players.end() ) {
 			PlayerProxy * playerProxy =  *players_iterator;
