@@ -12,6 +12,8 @@ ViewContinentCountriesFrame::ViewContinentCountriesFrame(
     countryTreeModel(),
     continentComboBox(),
     countryTreeView() {
+    // Establece el titulo del frame.
+    this->set_label("Listar paises por continente");
 
     // Se agrega como observer del editor.
     if (this->editor != NULL) {
@@ -28,10 +30,12 @@ ViewContinentCountriesFrame::ViewContinentCountriesFrame(
     this->initializeCountryTreeView();
 
     // Agrega el combobox de continentes al verical box.
-    this->verticalBox.add(this->continentComboBox);
+    this->verticalBox.pack_start(this->continentComboBox,
+        Gtk::PACK_SHRINK);
 
     // Agrega el tree view de paises al vertical box.
-    this->verticalBox.add(this->countryTreeView);
+    this->verticalBox.pack_start(this->countryTreeView,
+        Gtk::PACK_SHRINK);
 
     // Agrega el vertical box al frame.
     this->add(this->verticalBox);

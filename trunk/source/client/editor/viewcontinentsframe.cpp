@@ -7,6 +7,8 @@ ViewContinentsFrame::ViewContinentsFrame(
     continentColumns(),
     continentTreeModel(),
     continentTreeView() {
+    // Establece el titulo del frame.
+    this->set_label("Listar Continentes");
 
     // Se agrega como observer del editor.
     if (this->editor != NULL) {

@@ -14,6 +14,8 @@ AddContinentFrame::AddContinentFrame(
     continentBonusEntry(),
     addContinentButton(),
     resetContinentButton() {
+    // Establece el titulo del frame.
+    this->set_label("Agregar Continente");
 
     // Establece el texto del label para indicarle al usuario que ingrese
     // el nombre del continente.
@@ -40,30 +42,39 @@ AddContinentFrame::AddContinentFrame(
     this->resetContinentButton.set_label("Reset");
 
     // Agrego el label del nombre del continente.
-    this->continentNameBox.add(this->continentNameLabel);
+    this->continentNameBox.pack_start(this->continentNameLabel,
+        Gtk::PACK_SHRINK);
     // Agrego el entry para ingresar el nombre del continente a su box
     // horizontal.
-    this->continentNameBox.add(this->continentNameEntry);
+    this->continentNameBox.pack_start(this->continentNameEntry,
+        Gtk::PACK_SHRINK);
 
     // Agrego el label del bonus del continente.
-    this->continentBonusBox.add(this->continentBonusLabel);
+    this->continentBonusBox.pack_start(this->continentBonusLabel,
+        Gtk::PACK_SHRINK);
     // Agrego el entry para ingresar el bonus del continente en su box.
-    this->continentBonusBox.add(this->continentBonusEntry);
+    this->continentBonusBox.pack_start(this->continentBonusEntry,
+        Gtk::PACK_SHRINK);
 
     // Agrego el boton para agregar al continente a su box.
-    this->continentButtonBox.add(addContinentButton);
+    this->continentButtonBox.pack_start(addContinentButton,
+        Gtk::PACK_SHRINK);
 
     // Agrego el boton para resetear el continente a su box.
-    this->continentButtonBox.add(resetContinentButton);
+    this->continentButtonBox.pack_start(resetContinentButton,
+        Gtk::PACK_SHRINK);
 
     // Agrego el box para el nombre del continente al vertical box.
-    this->verticalBox.add(this->continentNameBox);
+    this->verticalBox.pack_start(this->continentNameBox,
+        Gtk::PACK_SHRINK);
 
     // Agrego el box para el bonus del continente al vertical box.
-    this->verticalBox.add(this->continentBonusBox);
+    this->verticalBox.pack_start(this->continentBonusBox,
+        Gtk::PACK_SHRINK);
 
     // Agrego el box para los botones de accion al vertical box.
-    this->verticalBox.add(this->continentButtonBox);
+    this->verticalBox.pack_start(this->continentButtonBox,
+        Gtk::PACK_SHRINK);
 
     // Agrego el vertical box al frame.
     this->add(this->verticalBox);
