@@ -176,11 +176,13 @@ void Socket::full_read(char* data, int length)
 	throw(SocketIOException) {
 
 	int read = 0;
+	int index = 0;
 	int toread = length;
 
 	while (toread) {
-		read = this->read(data + read,toread);
-		toread = length - read;
+		read   = this->read(data + index,toread);
+		toread -= read;
+		index  +=read;
 	}
 }
 
