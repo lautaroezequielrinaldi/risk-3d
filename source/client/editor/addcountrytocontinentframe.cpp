@@ -15,6 +15,8 @@ AddCountryToContinentFrame::AddCountryToContinentFrame(
     continentComboBox(),
     countryComboBox(),
     addButton() {
+    // Establece el titulo del frame.
+    this->set_label("Agregar pais a continente");
 
     // Se agrega como observer del editor.
     if (this->editor != NULL) {
@@ -40,19 +42,24 @@ AddCountryToContinentFrame::AddCountryToContinentFrame(
     this->addButton.set_label("Agregar Pais A Continente");
 
     // Agrega el label de la lista de continentes.
-    this->verticalBox.add(this->continentLabel);
+    this->verticalBox.pack_start(this->continentLabel,
+        Gtk::PACK_SHRINK);
 
     // Agrega el combobox de continentes al verical box.
-    this->verticalBox.add(this->continentComboBox);
+    this->verticalBox.pack_start(this->continentComboBox,
+        Gtk::PACK_SHRINK);
 
     // Agrega el label de la lista de paises.
-    this->verticalBox.add(this->countryLabel);
+    this->verticalBox.pack_start(this->countryLabel,
+        Gtk::PACK_SHRINK);
 
     // Agrega el combo box de paises al vertical box.
-    this->verticalBox.add(this->countryComboBox);
+    this->verticalBox.pack_start(this->countryComboBox,
+        Gtk::PACK_SHRINK);
 
     // Agrega el boton addButton al vertical box.
-    this->verticalBox.add(this->addButton);
+    this->verticalBox.pack_start(this->addButton,
+        Gtk::PACK_SHRINK);
 
     // Agrega el vertical box al frame.
     this->add(this->verticalBox);
