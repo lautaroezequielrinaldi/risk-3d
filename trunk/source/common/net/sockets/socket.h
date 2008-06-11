@@ -122,13 +122,6 @@ class Socket {
         void connect(const std::string& destination, int port)
             throw(SocketConnectionException);
 
-        /**
-         *
-         *
-         */
-        void listen(int port, int client_wait)
-           throw(SocketConnectionException);
-
    public:
         /**
          * Mètodo cuyo propòsito es escribir en el stream del socket una cadena
