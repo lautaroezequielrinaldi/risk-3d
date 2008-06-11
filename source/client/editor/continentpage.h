@@ -59,7 +59,7 @@ class ContinentPage: public Gtk::Frame {
         /**
          * Constructor de la clase ContinentPage.
          */
-        ContinentPage(const ReferenceCountPtr<Editor>& editor);
+        ContinentPage(const ReferenceCountPtr<Editor>& editor = NULL);
 
         /**
          * Establece el editor del cual tomara los datos a mostrar.
