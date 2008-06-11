@@ -45,7 +45,34 @@ void Game::setPlayerList(
 std::list< ReferenceCountPtr<Player> >& Game::getPlayerList() {
     return this->playerList;
 }
-/*
+
+ReferenceCountPtr<Player> Game::getPlayer(int color){
+
+	bool encontrado = false;
+	ReferenceCountPtr<Player> actualPlayer;
+	std::list<ReferenceCountPtr<Player> >::iterator it;
+
+	it =this->playerList.begin();
+	/*busco en la lista de jugadores, al actual, usando el color del jugador q tiene el turno*/
+	while ( it != this->playerList.end() && !encontrado) {
+	
+		actualPlayer = *it;
+		
+		/*comparo color del jugador especificado con color del jugador de la iteracion*/
+		if ( color == actualPlayer->getColor() )
+			encontrado=true;
+		else
+			++it;
+	}
+	
+	if( !encontrado )
+		actualPlayer = NULL;
+		
+	return actualPlayer;
+	
+	
+}
+
 std::string Game::serialize() {
     std::string resultado;
     return resultado;

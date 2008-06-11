@@ -1,7 +1,7 @@
 #include<sstream>
 #include "attack.h"
 
-Attack::Attack(std::vector<std::string> & parameterList, Mapa &mapa, Player& player):Command ( player, mapa )
+Attack::Attack(std::vector<std::string> & parameterList):Command ()
 {
 	/*construyo el objeto a partir de los parametros pasados en la lista*/
 	this->paisAtacante = parameterList[0];
@@ -9,7 +9,7 @@ Attack::Attack(std::vector<std::string> & parameterList, Mapa &mapa, Player& pla
 	this->cantidadEjercitos = atoi (parameterList[2].c_str() );
 }
 
-Attack::Attack(Mapa &mapa, Player& player, std::string xml):Command ( player, mapa ){
+Attack::Attack(std::string xml):Command (){
 
 	// construye el objeto a partir del Xml recibido
 	hydrate(xml);
@@ -169,10 +169,12 @@ void* Attack::hydrate(std::string xml){
 	
 }
 		
-bool Attack::validate(){
+bool Attack::validate(ReferenceCountPtr<GameManager>& gameMAnager){
 	
 	bool ataqueValido=false;
-	ReferenceCountPtr<Pais> paisAtaca = this->mapa.obtenerPais(this->paisAtacante);
+	ReferenceCountPtr<Game> game = gameMAnager->getGame();
+	ReferenceCountPtr<Mapa> map = game->getMapa();
+	ReferenceCountPtr<Pais> paisAtaca =	map->obtenerPais(this->paisAtacante);
 	
 	/*si pais atacante es adyacente al pais atacado*/
 	if( paisAtaca->esAdyacente(this->paisAtacado)){

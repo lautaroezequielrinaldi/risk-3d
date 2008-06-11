@@ -1,10 +1,11 @@
 #ifndef BATTLE_H_
 #define BATTLE_H_
 
-#include<vector>
+#include<list>
 #include "../commands/attack.h" 
 #include "../commands/defend.h"
 #include "battleResult.h"
+#include "dice.h"
 
 /**
  * Clase que representa a la batalla en el modelo del juego.
@@ -16,14 +17,25 @@ class Battle
 	 */
 	private:
 	
-		/*referencia al ataque realizado por el jugador*/
-		Attack& ataque;
+		/**
+		 * Almacena el ataque realizado por el jugador.
+		 */
+        ReferenceCountPtr<Attack> ataque;
 	
-		/*referencia a la defensa hecha por el jugador*/
-		Defend& defensa;
+		/**
+		 * Almacena la defensa hecha por el jugador
+		 */
+		 ReferenceCountPtr<Defend> defensa;
 		 
-		/*objeto que se encargara de almacenar el resultado de la batalla*/
-		BattleResult resultadoBatalla;
+		 /**
+		  * Almacena el dado con el que se definira el resultado de la batalla.
+		  */
+		 ReferenceCountPtr<Dice> dice;
+		 
+		/**
+		 * Almacena el resultado de la batalla.
+		 */
+		//ReferenceCountPtr<BattleResult> resultadoBatalla;
 		
 	/**
 	 * Metodos publicos de la clase
@@ -33,7 +45,7 @@ class Battle
 		/**
 		 * Constructor de la clase
 		 */
-		Battle(Attack& ataque,Defend& defensa);
+		Battle(ReferenceCountPtr<Attack>& ataque,ReferenceCountPtr<Defend>& defensa,ReferenceCountPtr<Dice>&  dice);
 		
 		/**
 		 * Destructor de la clase
@@ -52,17 +64,11 @@ class Battle
 	private:
 		
 		/**
-		 * Metodo cuyo proposito es simular la tirada de dados al azar.
-		 * Devuelve el numero de dado que se obtuvo.
-		 */
-		int rollDice();
-		
-		/**
 		 * Metodo cuyo proposito es comparar los dados del atacante con los del defensor para definir la batalla.
 		 * Recibe un vector con los dados del atacante y otro con los dados del defensor.
 		 * Devuelve un objeto Resultado en el cual esta seteado el resultado de la batalla.
 		 */
-		 BattleResult& compareDice(std::vector<int>attackerDice, std::vector<int> defenderDice);
+		BattleResult compareDice(std::list<int>attackerDice, std::list<int> defenderDice);
 		
 };
 

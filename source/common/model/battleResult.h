@@ -38,6 +38,11 @@ class BattleResult : public Serializable
 		/**
 		 * Constructor de la clase
 		 */
+		BattleResult(std::string attackerLand ,std::string defenderLand);
+
+		/**
+		 * Constructor de la clase
+		 */	
 		BattleResult();
 	
 		/**
@@ -48,12 +53,12 @@ class BattleResult : public Serializable
 		/**
 		 * Metodo cuyo proposito es obtener el nombre del atacante.
 		 */
-		std::string& getAttackerLand();
+		std::string getAttackerLand();
 		
 		/**
 		 * Metodo cuyo proposito es obtener el nombre del adefensor.
 		 */		
-		std::string& getDefenderLand();
+		std::string getDefenderLand();
 		
 		/**
 		 * Metodo cuyo proposito es obtener el resultado del atacante.
@@ -64,33 +69,23 @@ class BattleResult : public Serializable
 		 * Metodo cuyo proposito es obtener el resultado del defensor.
 		 */
 		int getDefenderResult();
-		
+				
 		/**
-		 * Metodo cuyo proposito es establecer el nombre del atacante
+		 * Metodo cuyo proposito es elminar un ejercito del pais atacante.
 		 */
-		void setAttackerLand(std::string& attackerLando);
-		
-		/**
-		 * Metodo cuyo proposito es establecer el nombre del defensor.
-		 */		
-		void setDefenderLand(std::string& defenderLand);
-		
-		/**
-		 * Metodo cuyo proposito es establecer el resultado del atacante en la batalla
-		 */
-		void setAttackerResult(int attackerResult);
+		void deletetAttackerArmy();
 
 		/**
-		 * Metodo cuyo proposito es establecer el resultado del defensor en la batalla
+		 * Metodo cuyo proposito es eliminar un ejercito del pais defensor.
 		 */		
-		void setDefenderResult(int defnderResult);
+		void deletetDefenderArmy();
 		
 		/**
 		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.
 		 */
 		std::string serialize();
 		/**
-		 * Metodo cuyo proposito es hidratar un archivo XML y construir un objeto a partir de el.
+		 * Metodo cuyo proposito es hidratar un objeto a partir de un archivo XML.
 		 */
 		void* hydrate(std::string fileName) ;
 };

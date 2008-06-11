@@ -2,14 +2,14 @@
 #include "defend.h"
 
 
-Defend::Defend(std::vector<std::string> &parameterList, Mapa &mapa, Player& player) : Command (player, mapa)
+Defend::Defend(std::vector<std::string> &parameterList) : Command ()
 {
 	this->paisDefensor = parameterList[0];
 	this->cantidadEjercitos = atoi ( parameterList[1].c_str() );
 	
 }
 
-Defend::Defend(Mapa &mapa, Player& player, std::string xml):Command ( player, mapa ){
+Defend::Defend(std::string xml):Command (){
 
 	// construye el objeto a partir del Xml recibido
 	hydrate(xml);
@@ -146,10 +146,12 @@ void* Defend::hydrate(std::string xml){
 	return NULL;
 }
 		
-bool Defend::validate(){
+bool Defend::validate(ReferenceCountPtr<GameManager>& gameMAnager){
 	
 	bool defensaValida = false;
-	ReferenceCountPtr<Pais> paisDefiende = this->mapa.obtenerPais(this->paisDefensor);
+	ReferenceCountPtr<Game> game = gameMAnager->getGame();
+	ReferenceCountPtr<Mapa> map = game->getMapa();
+	ReferenceCountPtr<Pais> paisDefiende = map->obtenerPais(this->paisDefensor);
 	
 	/*si pais atacante defiende con 2 o menos ejercitos Y defiende con menos ejercitos de los que tiene*/
 	if ( paisDefiende->getArmyCount() <= 2  && this->cantidadEjercitos < paisDefiende->getArmyCount() )

@@ -2,13 +2,13 @@
 #include "../model/armyBonusCalculator.h"
 #include "populate.h"
 
-Populate::Populate(std::vector<std::string> &parameterList, Mapa &mapa, Player& player) : Command (player,  mapa)
+Populate::Populate(std::vector<std::string> &parameterList) : Command ()
 {
 	this->paisDestino = parameterList[0];
 	this->cantidadEjercitos = atoi( parameterList[1].c_str() );
 }
 
-Populate::Populate(Mapa &mapa, Player& player, std::string xml):Command ( player, mapa ){
+Populate::Populate(std::string xml):Command (){
 
 	// construye el objeto a partir del Xml recibido
 	hydrate(xml);
@@ -143,13 +143,18 @@ void* Populate::hydrate(std::string xml){
 	return NULL;
 	
 }
+
+// dependiendo de quien lleve la cuenta	y quien valide esa cuenta, quizas esta validacion deba recibir
+// la cantidad de ejercitos ubicados hasta el momento.
+//si esa validacion se hace desde afuera, entonces esta solo valida que por cada poblada no se pase del maximo,
+//al margen de lo que ya uso de su bonus.	
+bool Populate::validate(ReferenceCountPtr<GameManager>& gameMAnager){
+	
 		
-bool Populate::validate(){
-	
 	/*creo un calculador de ejercitos extras correspondientes el jugador para verificar que no use mas de los debidos*/
-	ArmyBonusCalculator calculadorBonus(this->jugador, this->mapa);
+	ArmyBonusCalculator calculadorBonus;
 	
-	if (this->cantidadEjercitos <= calculadorBonus.getArmyBonus() )
+	if (this->cantidadEjercitos <= calculadorBonus.getArmyBonus(gameMAnager) )
 		return true;
 	else
 		return false;

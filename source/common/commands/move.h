@@ -18,13 +18,13 @@ class Move : public Command
 		/*
 		 * Constructor de la clase
 		 */
-		Move(std::vector<std::string> &parameterList, Mapa &mapa, Player& player);
+		Move(std::vector<std::string> &parameterList);
 		
 		/**
 		 * Constructor de la clase.
-		 * La misma se construye sin valores, estos podran ser seteados desde un XML al hidratar el objeto.
+		 * La misma se construye a partir del Xml especificado.
 		 */
-		Move(Mapa &mapa, Player& player, std::string xml);
+		Move(std::string xml);
 		
 		/*
 		 * Destructor de la clase
@@ -36,12 +36,12 @@ class Move : public Command
 		 */
 		std::string serialize();
 		/**
-		 * Metodo cuyo proposito es hidratar un archivo XML y construir un objeto a partir de el.
+		 * Metodo cuyo proposito es hidratar  un objeto a partir del Xml especificado.
 		 */
 		void* hydrate(std::string xml);
 		
 		/*Metodo cuyo proposito es validar la accion que realice el comando*/
-		bool validate();
+		bool validate(ReferenceCountPtr<GameManager>& gameMAnager);
 		
 };
 

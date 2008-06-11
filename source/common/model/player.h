@@ -15,14 +15,16 @@ class Player
 		
 		/**
 		 * Colores:
-		 * 1	rojo
-		 * 2	negro
-		 * 3	verde
-		 * 4	amarillo
-		 * 5	azul
+		 * 1	rojo  
+		 * 2	negro  
+		 * 3	verde  
+		 * 4	amarillo   
+		 * 5	azul   
 		 * 6	blanco
 		 */
 		int color;
+		
+		static int ultimoColorAsignado;
 		
 		/*paises conquistados*/
 		std::list <std::string> listaPaisesConquistados;
@@ -36,6 +38,12 @@ class Player
 		 * Constructor de la clase
 		 */
 		Player(int color);
+		
+		/**
+		 * Constructor de la clase. 
+		 * Asigna al jugador, un color que todavia no haya sido asignado.
+		 */
+		Player();
 		
 		/**
 		 * Destructor de la clase
@@ -52,6 +60,7 @@ class Player
 		  */
 		void setColor( int color);
 		
+					
 		/**
 		 * Metodo cuyo proposito es obtener la lista de nombres de los paises conquistados por un jugador
 		 */
@@ -102,7 +111,13 @@ class Player
 		  */
 		  bool continentOwner(std::string continentName );
 		  
-		  
+	private:
+	
+		  /**
+		   * Metodo cuyo proposito es obtener un nuevo color que represente al jugador, sin repetir uno ya utilizado.
+		   */	
+		  int getNewColor();
+	
 };
 
 #endif /*PLAYER_H_*/
