@@ -1,8 +1,8 @@
 #include "conquercontinentgamecard.h"
 
 ConquerContinentGameCard::ConquerContinentGameCard(
-    const std::string& continentName):
-    GameCard(),
+    const std::string& name, const std::string& continentName):
+    GameCard(name),
     continentName(continentName) {
     // No realiza ninguna acciòn.
 }
