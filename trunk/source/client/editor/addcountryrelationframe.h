@@ -114,7 +114,7 @@ class AddCountryRelationFrame: public Observer, public Gtk::Frame {
         /**
          * Constructor de la clase AddCountryRelationFrame.
          */
-        AddCountryRelationFrame(const ReferenceCountPtr<Editor>& editor);
+        AddCountryRelationFrame(const ReferenceCountPtr<Editor>& editor = NULL);
         /**
          * Establece el editor usado para tomar los datos.
          */

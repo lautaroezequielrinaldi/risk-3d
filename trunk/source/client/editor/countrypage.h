@@ -53,7 +53,7 @@ class CountryPage: public Gtk::Frame {
         /**
          * Constructor de la clase CountryPage.
          */
-        CountryPage(const ReferenceCountPtr<Editor>& editor);
+        CountryPage(const ReferenceCountPtr<Editor>& editor = NULL);
 
         /**
          * Establece el editor del cual tomara los datos a mostrar.
