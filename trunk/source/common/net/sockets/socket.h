@@ -132,6 +132,9 @@ class Socket {
         int write(const char* data, int length)
             throw(SocketIOException);
 
+	int write(const std::string & data)
+		throw(SocketIOException);
+
         /**
          * Mètodo cuyo propòsito es leer del stream del socket una cadena
          * de bytes contigua. Lanza excepciòn SocketIOExeption cuando no pudo
