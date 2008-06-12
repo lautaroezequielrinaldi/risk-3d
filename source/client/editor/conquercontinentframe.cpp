@@ -6,8 +6,7 @@ ConquerContinentFrame::ConquerContinentFrame(
 	GameCardFrame(editor),
 	continentLabel(),
 	continentTreeModel(),
-	continentComboBox(),
-	addGameCardButton() {
+	continentComboBox() {
 	// Establece el titulo del frame.
 	this->set_label("Carta para comquistar continente");
 	// Se agrega como observador del editor.
