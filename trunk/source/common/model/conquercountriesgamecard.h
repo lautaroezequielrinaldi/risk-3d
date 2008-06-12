@@ -1,0 +1,60 @@
+#ifndef __CONQUERCOUNTRIESGAMECARD_H__
+#define __CONQUERCOUNTRIESGAMECARD_H__
+
+#include<string> // Para definicion de std::string
+#include "gamecard.h" // Para definicion de GameCard.
+#include "player.h" // Para definiciòn de Countries.
+#include "game.h" // Para definiciòn de Game.
+#include "../smartpointer/referencecountptr.h" // Para definiciòn de 
+// ReferenceCountPtr.
+
+/**
+ * Clase cuyo propòsito es definir una carta de juego para eliminar a un
+ * jugador determinado.
+ */
+class ConquerCountriesGameCard: public GameCard {
+    /**
+     * Atributos privados de la clase ConquerCountriesGameCard.
+     */
+    private:
+        /**
+         * Almacena el numero de paises a conquistar.
+         */
+        int countryCount;
+
+    /**
+     * Mètodos privados de la clase ConquerCountriesGameCard.
+     */
+    private:
+        /**
+         * Constructor copia de la clase ConquerCountriesGameCard.
+         */
+        ConquerCountriesGameCard(const ConquerCountriesGameCard& otherInstance);
+        /**
+         * Operador de asignacion de la clase ConquerCountriesGameCard.
+         */
+        ConquerCountriesGameCard& operator=(
+            const ConquerCountriesGameCard& otherInstance);
+
+    /**
+     * Mètodos pùblicos de la clase ConquerCountriesGameCard.
+     */
+    public:
+        /**
+         * Constructor de la clase ConquerCountriesGameCard.
+         */
+        ConquerCountriesGameCard(const std::string& gameCardName,
+			int countryCount);
+        /**
+         * Mètodo que valida la carta de juego.
+         */
+        bool execute(const ReferenceCountPtr<Player>& player,
+            const ReferenceCountPtr<Game>& game);
+        /**
+         * Destructor virtual de la clase ConquerCountriesGameCard.
+         */
+        ~ConquerCountriesGameCard();
+};
+
+#endif /** __CONQUERCOUNTRIESGAMECARD_H__ */
+
