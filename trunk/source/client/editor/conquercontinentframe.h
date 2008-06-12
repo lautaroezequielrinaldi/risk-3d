@@ -89,10 +89,6 @@ class ConquerContinentFrame: public Observer, public GameCardFrame {
 		 */
 		void setEditor(const ReferenceCountPtr<Editor>& editor);
 		/**
-		 * Obtiene el editor del cual tomar los datos.
-		 */
-		ReferenceCountPtr<Editor>& getEditor();
-		/**
 		 * Se actualiza con los cambios del editor.
 		 */
 		void update(Subject* subject);

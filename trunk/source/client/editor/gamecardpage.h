@@ -5,6 +5,7 @@
 
 #include "conquercontinentframe.h" // Para definicion de ConquerContinentFrame.
 #include "conquerplayerframe.h" // Para defincion de ConquerPlayerFrame.
+#include "conquercountriesframe.h" // Para definicion de ConquerCuntriesFrame.
 #include "viewgamecardsframe.h" // Para definicion de ViewGameCardsFrame.
 #include "editor.h" // Para definicion de Editor.
 #include "../../common/smartpointer/referencecountptr.h" // Para defincion de
@@ -33,6 +34,11 @@ class GameCardPage: public Gtk::Frame {
 		 * jugadres.
 		 */
 		ConquerPlayerFrame conquerPlayerFrame;
+		/**
+		 * Almacena el frame para agregar cartas de juego para conquistar N
+		 * paises.
+		 */
+		ConquerCountriesFrame conquerCountriesFrame;	
 		/**
 		 * Almacena el frame para listar las cartas de juego.
 		 */

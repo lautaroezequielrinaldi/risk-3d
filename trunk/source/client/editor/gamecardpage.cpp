@@ -4,6 +4,7 @@ GameCardPage::GameCardPage(const ReferenceCountPtr<Editor>& editor):
 	Gtk::Frame(),
 	conquerContinentFrame(editor),
 	conquerPlayerFrame(editor),
+	conquerCountriesFrame(editor),
 	viewGameCardsFrame(editor) {
 
 	// Agrega el frame para agregar cartas de juego para conquistar
@@ -13,6 +14,10 @@ GameCardPage::GameCardPage(const ReferenceCountPtr<Editor>& editor):
 	// Agrego el frame para agregar cartas de juego para conquistar
 	// jugadores al vertical box.
 	this->verticalBox.pack_start(this->conquerPlayerFrame,
+		Gtk::PACK_SHRINK);
+	// Agrego el frame para agregar cartas de juego para conquistar N
+	// paises al verical box.
+	this->verticalBox.pack_start(this->conquerCountriesFrame,
 		Gtk::PACK_SHRINK);
 	// Agrega el frame para listar cartas de juego al vertical box.
 	this->verticalBox.pack_start(this->viewGameCardsFrame,
@@ -24,6 +29,8 @@ GameCardPage::GameCardPage(const ReferenceCountPtr<Editor>& editor):
 
 void GameCardPage::setEditor(const ReferenceCountPtr<Editor>& editor) {
 	this->conquerContinentFrame.setEditor(editor);
+	this->conquerPlayerFrame.setEditor(editor);
+	this->conquerCountriesFrame.setEditor(editor);
 	this->viewGameCardsFrame.setEditor(editor);
 }
 

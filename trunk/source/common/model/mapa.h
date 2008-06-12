@@ -106,6 +106,10 @@ class Mapa {
          * Mètodo cuyo proòsito es remover una carta de juego del Mapa.
          */
         void removerGameCard(const ReferenceCountPtr<GameCard>& gameCard);
+		/**
+		 * Obtiene la cantidad de paises en el mapa.
+		 */
+		int getCantidadPaises();
         /**
          * Mètodo cuyo propòsito es obtener un iterador apuntando al primer
          * paìs del Mapa.

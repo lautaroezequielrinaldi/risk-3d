@@ -110,10 +110,6 @@ void ConquerContinentFrame::setEditor(const ReferenceCountPtr<Editor>& editor) {
 	this->populate();
 }
 
-ReferenceCountPtr<Editor>& ConquerContinentFrame::getEditor() {
-	return GameCardFrame::getEditor();
-}
-
 void ConquerContinentFrame::update(Subject* subject) {
 	// Popula la lista de continentes.
 	this->populate();
