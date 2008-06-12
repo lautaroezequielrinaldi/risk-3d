@@ -55,5 +55,5 @@ class ConquerPlayerGameCard: public GameCard {
         ~ConquerPlayerGameCard();
 };
 
-#endif /** __CONQUERPLAYERCARDGAME_H__ */
+#endif /** __CONQUERPLAYERGAMECARD_H__ */
 
