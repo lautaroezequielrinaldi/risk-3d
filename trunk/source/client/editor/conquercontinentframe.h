@@ -1,14 +1,11 @@
 #ifndef __CONQUERCONTINENTFRAME_H__
 #define __CONQUERCONTINENTFRAME_H__
 
-#include<gtkmm/frame.h> // Para definicion de Gtk::Frame.
-#include<gtkmm/box.h> // Para definicion de Gtk::VBox.
 #include<gtkmm/label.h> // Para definicion de Gtk::Label.
-#include<gtkmm/entry.h> // Para definicion de Gtk::Entry.
 #include<gtkmm/liststore.h> // Para definicion de Gtk::ListStore.
 #include<gtkmm/combobox.h> // Para definicion de Gtk::ComboBox.
-#include<gtkmm/button.h> // Para defincion de Gtk::Button.
 
+#include "gamecardframe.h" // Para definicion de GameCardFrame.
 #include "observer.h" // Para definicion de Observer.
 #include "subject.h" // Para definicion de Subject.
 #include "continentcolumns.h" // Para definicion de ContinentColumns.
@@ -22,27 +19,11 @@
  * Clase que representa un frame para agregar cartas de juego
  * ConquerContinentGameCard al mapa.
  */
-class ConquerContinentFrame: public Observer, public Gtk::Frame {
+class ConquerContinentFrame: public Observer, public GameCardFrame {
 	/**
 	 * Atributos privados de la clase ConquerContinentFrame.
 	 */
 	private:
-		/**
-		 * El editor del cual tomar los datos a mostrar.
-		 */
-		ReferenceCountPtr<Editor> editor;
-		/**
-		 * El layout vertical del ConquerContinentFrame.
-		 */
-		Gtk::VBox verticalBox;
-		/**
-		 * Almacena el label para el ingreso de nombre de carta.
-		 */
-		Gtk::Label gameCardNameLabel;
-		/**
-		 * Almacena el entry para el ingreso de nombre de carta.
-		 */
-		Gtk::Entry gameCardNameEntry;
 		/**
 		 * Almacena el label para seleccionar continente.
 		 */
@@ -59,10 +40,6 @@ class ConquerContinentFrame: public Observer, public Gtk::Frame {
 		 * Almacena el combo box para la lista de continentes.
 		 */
 		Gtk::ComboBox continentComboBox;
-		/**
-		 * Almacena el boton para agregar la carta de juego.
-		 */
-		Gtk::Button addGameCardButton;
 
 	/**
 	 * Metodos privados de la clase ConquerContinentFrame.
@@ -89,10 +66,15 @@ class ConquerContinentFrame: public Observer, public Gtk::Frame {
 		 * Popula la lista de continentes.
 		 */
 		void populate();
+
+	/**
+	 * Metodos protegidos de la clase ConquerContinentFrame.
+	 */
+	protected:
 		/**
 		 * Manejador de la senial signal_clicked del boton addGameCardButton.
 		 */
-		void onAddGameCardButtonClicked();
+		virtual void onAddGameCardButtonClicked();
 
 	/**
 	 * Metodos publicos de la clase ConquerContinentFrame.
