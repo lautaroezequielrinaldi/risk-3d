@@ -93,9 +93,39 @@ void ConquerContinentFrame::populate() {
 }
 
 void ConquerContinentFrame::onAddGameCardButtonClicked() {
+    // Verifico que editor y map no sea NULL
+    if (editor != NULL && editor->getMapa() != NULL) {
+        // Obtengo el mapa
+        ReferenceCountPtr<Mapa> map = editor->getMapa();
 
+        // Obtengo elmemento activo de combo box de continentes.
+        Gtk::TreeModel::iterator activeContinent =
+            this->continentComboBox.get_active();
+        // Si hay elemento activo en el combobox.
+        if (activeContinent) {
+            // Obtengo la fila de continente que representa ese elemento.
+            Gtk::TreeModel::Row activeRow = *activeContinent;
+
+            // Obtengo nombre del continente seleccionado.
+            std::string continentName =
+                activeRow[continentColumns.continentName];
+            // Obtengo nombre de carta de juego.
+            std::string gameCardName = this->gameCardNameEntry.get_text();
+
+            // Verifico si escribio un nombre de carta de juego.
+            if (!gameCardName.empty()) {
+                // Creo carta de juego para conquistar continente.
+                ReferenceCountPtr<GameCard> gameCard =
+                    new ConquerContinentGameCard(gameCardName, continentName);
+                // Agrego carta de juego al editor.
+                map->agregarGameCard(gameCard);
+                // Notifico de cambios en el editor.
+                this->editor->notify();
+            }
+        }
+    }
 }
-
+                
 void ConquerContinentFrame::setEditor(const ReferenceCountPtr<Editor>& editor) {
 	this->editor = editor;
 

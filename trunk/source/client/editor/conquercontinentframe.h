@@ -13,6 +13,8 @@
 #include "subject.h" // Para definicion de Subject.
 #include "continentcolumns.h" // Para definicion de ContinentColumns.
 #include "editor.h" // Para definicion de Editor.
+#include "../../common/model/conquercontinentgamecard.h" // Para definicion de
+// ConquerContinentGameCard.
 #include "../../common/smartpointer/referencecountptr.h" // Para definicion de
 // ReferenceCountPtr.
 
