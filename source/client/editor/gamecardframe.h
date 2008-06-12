@@ -62,7 +62,7 @@ class GameCardFrame: public Gtk::Frame {
 		/**
 		 * Establece el editor de donde tomar los datos.
 		 */
-		void setEditor(const ReferenceCountPtr<Editor>& editor);
+		virtual void setEditor(const ReferenceCountPtr<Editor>& editor);
 		/**
 		 * Obtiene el editor de donde tomar los datos.
 		 */

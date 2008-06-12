@@ -70,6 +70,10 @@ void Mapa::removerGameCard(const ReferenceCountPtr<GameCard>& gameCard) {
     this->gameCards.remove(gameCard);
 }
 
+int Mapa::getCantidadPaises() {
+	return this->paises.size();
+}
+
 Mapa::IteradorPais Mapa::primerPais() {
     return this->paises.begin();
 }
