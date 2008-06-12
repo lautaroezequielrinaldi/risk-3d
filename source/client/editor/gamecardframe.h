@@ -1,4 +1,4 @@
-#ifndef __GAMECARDFARME_H__
+#ifndef __GAMECARDFRAME_H__
 #define __GAMECARDFRAME_H__
 
 #include<gtkmm/frame.h> // Para definicion de Gtk::Frame.
