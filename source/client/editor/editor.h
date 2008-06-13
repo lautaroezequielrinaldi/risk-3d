@@ -46,7 +46,7 @@ class Editor: public Subject {
         /**
          * Devuelve el mapa con el cual va a trabajar el editor.
          */
-        ReferenceCountPtr<Mapa> getMapa();
+        ReferenceCountPtr<Mapa>& getMapa();
         /**
          * Destructor virtual de la clase Editor.
          */

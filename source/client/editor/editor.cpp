@@ -10,7 +10,7 @@ void Editor::setMapa(const ReferenceCountPtr<Mapa>& mapa) {
     this->mapa = mapa;
 }
 
-ReferenceCountPtr<Mapa> Editor::getMapa() {
+ReferenceCountPtr<Mapa>& Editor::getMapa() {
     return this->mapa;
 }
 
