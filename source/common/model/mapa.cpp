@@ -1,6 +1,5 @@
 #include "mapa.h"
 #include "gamecard.h"
-
 Mapa::Mapa():
     paises(),
     continentes(),
@@ -71,7 +70,7 @@ void Mapa::removerGameCard(const ReferenceCountPtr<GameCard>& gameCard) {
 }
 
 int Mapa::getCantidadPaises() {
-	return this->paises.size();
+    return this->paises.size();
 }
 
 Mapa::IteradorPais Mapa::primerPais() {
