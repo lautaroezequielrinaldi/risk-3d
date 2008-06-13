@@ -1,5 +1,5 @@
 #include "conquercountriesframe.h"
-#include<iostream>
+
 ConquerCountriesFrame::ConquerCountriesFrame(
 	const ReferenceCountPtr<Editor>& editor):
 	Observer(),
@@ -10,7 +10,6 @@ ConquerCountriesFrame::ConquerCountriesFrame(
 	// Se agrega como observador del editor.
 	if (this->editor != NULL) {
 		this->editor->registerObserver(this);
-		std::cout << "Registro observador";
 	}
 
 	// Establece el texto del label de cantidad de paises.
@@ -23,15 +22,20 @@ ConquerCountriesFrame::ConquerCountriesFrame(
 	this->verticalBox.pack_start(this->countryCountSpinButton,
 		Gtk::PACK_SHRINK);
 
-	// Popula el rango del spin button.
-	this->populate();
+    // Popula el rango de cantidad de paises a elegir.
+    this->populate();
 }
 
 void ConquerCountriesFrame::populate() {
 	if (this->editor != NULL && this->editor->getMapa() != NULL) {
-		this->countryCountSpinButton.set_range(0.00,
+		// Establece el nuevo rango de cantidad de paises a elegir.
+        this->countryCountSpinButton.set_range(0.00,
 			this->editor->getMapa()->getCantidadPaises());
-		std::cout << this->editor->getMapa()->getCantidadPaises();
+         // Establece los digitos de precisiòn del entry para elegir cantidad
+         // de paises
+         this->countryCountSpinButton.set_digits(0);
+         // Establece el incremento del entry para elegir cantidad de paises.
+         this->countryCountSpinButton.set_increments(1.0, 1.0);
 	}
 }
 
@@ -71,7 +75,7 @@ void ConquerCountriesFrame::setEditor(const ReferenceCountPtr<Editor>& editor) {
 }
 
 void ConquerCountriesFrame::update(Subject* subject) {
-	// Popula el rango de cantidad de paises a elegir.
+    // Popula el rango de cantidad de paises a elegir.
 	this->populate();
 }
 
