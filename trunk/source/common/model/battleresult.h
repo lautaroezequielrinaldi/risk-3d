@@ -20,13 +20,13 @@ class BattleResult : public Serializable
 	 	/*nombre del pais defensor*/
 	 	std::string paisDefensor;
 	 	
-	 	/*cantidad de ejercitos del atacante, ganados o perdidos en la batalla.
-	 	 * Puede ser un numero positivo o negativo en caso que haya perdido ejercitos
+	 	/*cantidad de ejercitos perdidos del atacante en la batalla.
+	 	 * Puede ser un numero  negativo en caso que haya perdido ejercitos
 	 	 */
 	 	int resultadoAtacante;
 	
-		/*cantidad de ejercitos del defensor, ganados o perdidos en la batalla.
-	 	 * Puede ser un numero positivo o negativo en caso que haya perdido ejercitos
+		/*cantidad de ejercitos perdidos del defensor en la batalla.
+	 	 * Puede ser un numero negativo en caso que haya perdido ejercitos
 	 	 */
 	 	int resultadoDefensor;
 		
