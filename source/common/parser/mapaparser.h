@@ -2,6 +2,7 @@
 #define __MAPAPARSER_H__
 
 #include<string> // Para definiciòn de std::string.
+#include<sstream> // Para definicino de dtd::ostringstream.
 #include<map> // Para definiciòn de std::map
 #include<libxml/parser.h> // Para definiciòn de la libreria libxml parser.
 #include<libxml/tree.h> // Para definiciòn de la libreria libxml tree.
