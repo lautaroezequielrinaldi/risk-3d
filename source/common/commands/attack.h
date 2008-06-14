@@ -53,7 +53,7 @@ class Attack : public Command
 		/**
 		 * Metodo cuyo proposito es ejecutar la accion que realice el comando.
 		 */
-		void execute(ReferenceCountPtr<GameManager>& gameMAnager);
+		void executeexecute(ReferenceCountPtr<State>& state);
 		
 		
 		

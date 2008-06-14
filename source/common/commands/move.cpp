@@ -188,8 +188,9 @@ bool Move::validate(ReferenceCountPtr<GameManager>& gameMAnager){
 	
 }
 
-void  Move::execute(ReferenceCountPtr<GameManager>& gameMAnager){
+void  Move::execute(ReferenceCountPtr<State>& state){
 	
+	state->move(this);
 	
 }
 

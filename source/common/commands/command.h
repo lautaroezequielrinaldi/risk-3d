@@ -2,6 +2,7 @@
 #define COMMAND_H_
 
 #include "../parser/serializable.h"
+#include "../state/state.h"
 #include "../model/gamemanager.h" // Para definiciòn de gameManager.
 #include "../smartpointer/referencecountptr.h" // Para definiciòn de ReferenceCountPtr
 
@@ -30,7 +31,7 @@ class Command : public Serializable
 		/**
 		 * Metodo cuyo proposito es ejecutar la accion que realice el comando
 		 */
-		virtual void excute(ReferenceCountPtr<GameManager>& gameMAnager)=0;
+		virtual void execute(ReferenceCountPtr<State>& state)=0;
 		
 };
 

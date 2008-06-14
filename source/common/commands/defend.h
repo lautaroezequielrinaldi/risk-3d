@@ -47,7 +47,7 @@ class Defend : public Command
 		/**
 		 * Metodo cuyo proposito es ejecutar la accion que realice el comando.
 		 */
-		void execute(ReferenceCountPtr<GameManager>& gameMAnager);
+		void execute(ReferenceCountPtr<State>& state);
 		
 		std::string getDefenderdLand();
 		
