@@ -1,11 +1,12 @@
 #include "player.h"
 
+
 // definicion del atributo estatico para que el linker lo encuentre.
 int Player::ultimoColorAsignado = 0;
 
 Player::Player(int color)
 {
-	this->color = color;
+	this->color = color;	
 }
 
 Player::Player()

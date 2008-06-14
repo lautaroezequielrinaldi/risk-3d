@@ -11,11 +11,17 @@ class TurnManager
 	
 	private:
 	
-		/*
+		/**
 		 * Almacena el numero de color correspondiente al jugador que tiene el turno
 		 */
 		int jugadorActual;
 	
+		/**
+		 * Almacena la cantidad de ejercitos bonus que posee el jugador actual
+		 */
+		int cantEjercitosBonus;
+
+
 		/**
 		 * Almacena el orden en que se le asignara el turno a cada jugador.
 		 */
@@ -29,8 +35,7 @@ class TurnManager
 		TurnManager();
 		
 		/**
-		 * Metodo cuyo proposito es establecer, en forma aleatoria, el orden de los turnos.
-		 * Recibe el color que representa al jugador que comenzara la partida.
+		 * Metodo cuyo proposito es establecer color que representa al jugador que comenzara la partida.
 		 */
 		void setTurnOrder(int firstPlayerColor);
 		

@@ -13,6 +13,7 @@ class Player
 	
 	private:
 		
+
 		/**
 		 * Colores:
 		 * 1	rojo  

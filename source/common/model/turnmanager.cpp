@@ -4,7 +4,7 @@
 TurnManager::TurnManager()
 {
 	this->jugadorActual = -1;
-		
+	//this->cantEjercitosBonus 
 }
 
 TurnManager::~TurnManager()
