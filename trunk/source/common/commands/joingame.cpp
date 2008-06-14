@@ -36,7 +36,7 @@ bool JoinGame::validate(ReferenceCountPtr<GameManager>& gameMAnager){
 }
 
 void JoinGame::execute(ReferenceCountPtr<State>& state){
-    state->joinGame(this);
+    state->joinGame(*this);
 
     // pasar al state correspondiente
     // suscribir jugador
