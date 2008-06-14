@@ -2,9 +2,11 @@
 #define COMMAND_H_
 
 #include "../parser/serializable.h"
-#include "../state/state.h"
+//#include "../state/state.h"
 #include "../model/gamemanager.h" // Para definiciòn de gameManager.
 #include "../smartpointer/referencecountptr.h" // Para definiciòn de ReferenceCountPtr
+
+class State;
 
 /**
  * Clase abstracta cuyo proposito es brindar la interfaz de un comando serializable.
