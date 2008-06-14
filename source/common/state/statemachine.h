@@ -1,6 +1,8 @@
 #ifndef __STATEMACHINE_H__ 
 #define __STATEMACHINE_H__ 
 #include <map>
+
+#include "state.h"
 #include "../smartpointer/referencecountptr.h"
 
 
