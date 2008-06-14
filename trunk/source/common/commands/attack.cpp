@@ -186,7 +186,7 @@ bool Attack::validate(ReferenceCountPtr<GameManager>& gameMAnager){
 	return ataqueValido;
 }
 
-void Attack::excute(ReferenceCountPtr<GameManager>& gameMAnager){
+void Attack::execute(ReferenceCountPtr<GameManager>& gameMAnager){
 	
 	
 }
