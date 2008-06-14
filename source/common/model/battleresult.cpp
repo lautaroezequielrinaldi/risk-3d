@@ -1,4 +1,4 @@
-#include "battleResult.h"
+#include "battleresult.h"
 
 BattleResult::BattleResult(std::string attackerLand,std::string defenderLand):
 paisAtacante(attackerLand),

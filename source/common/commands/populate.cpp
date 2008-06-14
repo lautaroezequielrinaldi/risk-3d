@@ -1,5 +1,5 @@
 #include <sstream>
-#include "../model/armyBonusCalculator.h"
+#include "../model/armybonuscalculator.h"
 #include "populate.h"
 
 Populate::Populate(std::vector<std::string> &parameterList) : Command ()
@@ -160,4 +160,11 @@ bool Populate::validate(ReferenceCountPtr<GameManager>& gameMAnager){
 		return false;
 	
 }
+
+void Populate::excute(ReferenceCountPtr<GameManager>& gameMAnager){
+	
+	
+}
+
+
 

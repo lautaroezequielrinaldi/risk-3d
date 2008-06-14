@@ -1,4 +1,4 @@
-#include "FileDice.h"
+#include "filedice.h"
 
 FileDice::FileDice(): 
 Dice()

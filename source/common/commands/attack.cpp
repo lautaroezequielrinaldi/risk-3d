@@ -186,6 +186,11 @@ bool Attack::validate(ReferenceCountPtr<GameManager>& gameMAnager){
 	return ataqueValido;
 }
 
+void Attack::excute(ReferenceCountPtr<GameManager>& gameMAnager){
+	
+	
+}
+
 std::string Attack::getAttackerLand(){
 	return this->paisAtacante;
 }

@@ -27,6 +27,11 @@ class Command : public Serializable
 		 */
 		virtual bool validate(ReferenceCountPtr<GameManager>& gameMAnager)=0;
 		
+		/**
+		 * Metodo cuyo proposito es ejecutar la accion que realice el comando
+		 */
+		virtual void excute(ReferenceCountPtr<GameManager>& gameMAnager)=0;
+		
 };
 
 #endif /*COMMAND_H_*/

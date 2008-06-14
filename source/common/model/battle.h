@@ -4,7 +4,7 @@
 #include<list>
 #include "../commands/attack.h" 
 #include "../commands/defend.h"
-#include "battleResult.h"
+#include "battleresult.h"
 #include "dice.h"
 
 /**

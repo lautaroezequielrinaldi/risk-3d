@@ -188,3 +188,10 @@ bool Move::validate(ReferenceCountPtr<GameManager>& gameMAnager){
 	
 }
 
+void  Move::excute(ReferenceCountPtr<GameManager>& gameMAnager){
+	
+	
+}
+
+
+

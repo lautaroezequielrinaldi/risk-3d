@@ -160,6 +160,11 @@ bool Defend::validate(ReferenceCountPtr<GameManager>& gameMAnager){
 	return defensaValida;
 }
 
+void Defend::excute(ReferenceCountPtr<GameManager>& gameMAnager){
+	
+	
+}
+
 std::string Defend::getDefenderdLand(){
 	return this->paisDefensor;
 }
