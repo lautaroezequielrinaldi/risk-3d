@@ -48,7 +48,7 @@ class Move : public Command
 		/**
 		 * Metodo cuyo proposito es ejecutar la accion que realice el comando.
 		 */
-		void excute(ReferenceCountPtr<GameManager>& gameMAnager);
+		void execute(ReferenceCountPtr<GameManager>& gameMAnager);
 		
 };
 

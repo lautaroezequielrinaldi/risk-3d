@@ -161,7 +161,7 @@ bool Populate::validate(ReferenceCountPtr<GameManager>& gameMAnager){
 	
 }
 
-void Populate::excute(ReferenceCountPtr<GameManager>& gameMAnager){
+void Populate::execute(ReferenceCountPtr<GameManager>& gameMAnager){
 	
 	
 }
