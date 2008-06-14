@@ -1,6 +1,7 @@
 #ifndef __EDITOR_H__
 #define __EDITOR_H__
 
+#include<string> // Para definicion de std::string.
 #include "subject.h" // Para definiciòn de Subject.
 #include "../../common/model/mapa.h" // Para definiciòn de Mapa.
 #include "../../common/smartpointer/referencecountptr.h" // Para definiciòn de
@@ -18,6 +19,10 @@ class Editor: public Subject {
          * Almacena el mapa que va a usar el editor.
          */
         ReferenceCountPtr<Mapa> mapa;
+		/**
+		 * Almacena el nombre de la imagen del mapa.
+		 */
+		std::string imageFileName;
     /**
      * Mètodos privados de la clase Editor.
      */
@@ -38,7 +43,7 @@ class Editor: public Subject {
         /**
          * Constructor de la clase Editor.
          */
-        Editor();
+        Editor(const std::string& fileName);
         /**
          * Establece el mapa con el cual va a trabajar el editor.
          */
@@ -47,6 +52,14 @@ class Editor: public Subject {
          * Devuelve el mapa con el cual va a trabajar el editor.
          */
         ReferenceCountPtr<Mapa>& getMapa();
+		/**
+		 * Establece el nombre de la imagen del mapa.
+		 */
+		void setImageFileName(const std::string& imageFileName);
+		/**
+		 * Obtiene el nombre de la imagen del mapa.
+		 */
+		std::string& getImageFileName();
         /**
          * Destructor virtual de la clase Editor.
          */
