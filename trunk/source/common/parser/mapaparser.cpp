@@ -66,11 +66,19 @@ void MapaParser::persistirContinentes(xmlNodePtr& nodoMapa,
         ReferenceCountPtr<Continente> actual = *iterContinente;
         // Creo el nodo del continente a persistir.
         nodoContinente = xmlNewChild(nodoListaContinentes, NULL,
-            BAD_CAST "continente",
-          NULL);
+            BAD_CAST "continente", NULL);
         // Agrego el atributo nombre del continente a persistir.
         xmlNewProp(nodoContinente, BAD_CAST "nombre",
             BAD_CAST (const xmlChar*) actual->getNombre().c_str());
+
+		// Creo un stream de salida de string para convertir numero a string
+		std::ostringstream strBonus;
+		strBonus << actual->getArmyBonus();
+
+		// Agrego el atributo bonus del continente a persistir.
+		xmlNewProp(nodoContinente, BAD_CAST "bonus",
+			BAD_CAST (const xmlChar*) strBonus.str().c_str());
+			
         // Itero por cada pais.
         for (iterPais = actual->primerPais(); 
             iterPais != actual->ultimoPais(); ++iterPais) {
