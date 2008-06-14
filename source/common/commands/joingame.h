@@ -45,7 +45,7 @@ class JoinGame : public Command
 		/**
 		 * Metodo cuyo proposito es ejecutar la accion que realice el comando.
 		 */
-		void execute(ReferenceCountPtr<GameManager>& gameManager);
+		void execute(ReferenceCountPtr<State>& state);
 		
 		
 };

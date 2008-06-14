@@ -163,7 +163,7 @@ bool Populate::validate(ReferenceCountPtr<GameManager>& gameMAnager){
 
 void Populate::execute(ReferenceCountPtr<State>& state){
 	
-	state->populate(this);
+	state->populate(*this);
 	
 }
 

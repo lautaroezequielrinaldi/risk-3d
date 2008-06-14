@@ -188,7 +188,7 @@ bool Attack::validate(ReferenceCountPtr<GameManager>& gameMAnager){
 
 void Attack::execute(ReferenceCountPtr<State>& state){
 	
-	state->attack(this);
+	state->attack(*this);
 	
 }
 

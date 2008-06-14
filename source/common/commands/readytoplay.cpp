@@ -34,7 +34,7 @@ bool ReadyToPlay::validate(ReferenceCountPtr<GameManager>& gameMAnager){
 }
 
 void ReadyToPlay::execute(ReferenceCountPtr<State>& state){
-    state->readyToPlay(this);
+    state->readyToPlay(*this);
     // pasar al state correspondiente
     // cambiar a ready al player
     // si !todos ready
