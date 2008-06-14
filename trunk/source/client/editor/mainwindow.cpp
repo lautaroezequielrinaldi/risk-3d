@@ -64,7 +64,23 @@ void MainWindow::onNewMenuItemActivated() {
 }
 
 void MainWindow::onOpenMenuItemActivated() {
+    // Creo un nuevo cuadro de dialogo de seleccion de archivos.
+    Gtk::FileChooserDialog dialog("CARGAR MAPA", Gtk::FILE_CHOOSER_ACTION_OPEN);
+    dialog.set_transient_for(*this);
+    dialog.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
+    dialog.add_button("Select", Gtk::RESPONSE_OK);
 
+	// Ejecuto el dialogo.
+    int result = dialog.run();
+
+	//Handle the response:
+    switch(result) {
+		case(Gtk::RESPONSE_OK): {
+			std::string fileToLoad = dialog.get_filename();
+			MapaParser parser;
+			//this->setEditor(loadedEditor);
+		}
+	}
 }
 
 void MainWindow::onSaveMenuItemActivated() {
