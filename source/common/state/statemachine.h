@@ -11,7 +11,7 @@ class StateMachine {
 
     private:
     ReferenceCountPtr<State> state;
-    map<std::string,ReferenceCountPtr<State> > currentState;
+    std::map<std::string,ReferenceCountPtr<State> > currentState;
 
 };
 #endif /** __STATEMACHINE_H__ */

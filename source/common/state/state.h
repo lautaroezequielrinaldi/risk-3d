@@ -17,15 +17,15 @@ class State {
 
 
 
-     bool Attack(Attack * command);
-     bool Defend(Defend * command);
-     bool JoinGame(JoinGame * command);
-     //bool Kill(Kill * move);
-     bool Move(Move * command);
-     bool SelectMap(SelectMap * command);
-     //bool SetOwner(SetOwner * command);
-     bool Populate(Populate * command);
-     bool ReadyToPlay(ReadyToPlay * command);
+     bool attack(Attack * command);
+     bool defend(Defend * command);
+     bool joinGame(JoinGame * command);
+     //bool kill(Kill * move);
+     bool move(Move * command);
+     bool selectMap(SelectMap * command);
+     //bool setOwner(SetOwner * command);
+     bool populate(Populate * command);
+     bool readyToPlay(ReadyToPlay * command);
 
     
     
