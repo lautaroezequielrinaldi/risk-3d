@@ -4,11 +4,11 @@ Conquer::Conquer()
 {
 }
 
-void Conquer::validate(const ReferenceCountPtr<GameManager>& gameManager){
+bool Conquer::validate(const ReferenceCountPtr<GameManager>& gameManager){
 	return false;
 }
 
-void Conquer::execute(const ReferenceCountPtr<GameManager>& gameManager) {
+bool Conquer::execute(const ReferenceCountPtr<GameManager>& gameManager) {
 	return false;
 }
 
