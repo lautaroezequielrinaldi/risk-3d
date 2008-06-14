@@ -13,6 +13,7 @@
 #include "mapdrawingareaframe.h" // Para definicino de MapDrawingAreaFrame.
 #include "mainmenu.h" // Para definicion de MainMenu.
 #include "editor.h" // Para definicionde Editor.
+#include "../../common/parser/mapaparser.h" // Para definicion de MapaParseer.
 #include "../../common/smartpointer/referencecountptr.h" // Para definicino de
 // ReferenceCountPtr.
 

@@ -46,7 +46,7 @@ MainWindow::MainWindow():
 
 void MainWindow::onNewMenuItemActivated() {
 	// Creo un nuevo cuadro de dialogo de seleccion de archivos.
-	Gtk::FileChooserDialog dialog("ABRIR MAPA", Gtk::FILE_CHOOSER_ACTION_OPEN);
+	Gtk::FileChooserDialog dialog("ABRIR IMAGEN DE MAPA", Gtk::FILE_CHOOSER_ACTION_OPEN);
 	dialog.set_transient_for(*this);
 	dialog.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
 	dialog.add_button("Select", Gtk::RESPONSE_OK);
@@ -68,7 +68,25 @@ void MainWindow::onOpenMenuItemActivated() {
 }
 
 void MainWindow::onSaveMenuItemActivated() {
+	if (this->editor != NULL) {
+		// Creo un nuevo cuadro de dialogo de seleccion de archivos.
+		Gtk::FileChooserDialog dialog("GUARDAR MAPA", Gtk::FILE_CHOOSER_ACTION_SAVE);
+		dialog.set_transient_for(*this);
+		dialog.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
+		dialog.add_button("Select", Gtk::RESPONSE_OK);
 
+		// Ejecuto el dialogo.
+		int result = dialog.run();
+
+		//Handle the response:
+		switch(result) {
+			case(Gtk::RESPONSE_OK): {
+				std::string fileToSave  = dialog.get_filename();
+				MapaParser parser;
+				parser.saveMap(fileToSave, this->editor->getMapa());
+			}
+		}
+	}
 }
 
 void MainWindow::onQuitMenuItemActivated() {
