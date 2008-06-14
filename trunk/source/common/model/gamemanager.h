@@ -3,6 +3,7 @@
 
 #include "game.h"
 #include "turnmanager.h"
+#include "../state/statemachine.h"
 //#include "state.h"
 #include "../smartpointer/referencecountptr.h" // Para definiciòn de ReferenceCountPtr.
 
@@ -21,11 +22,10 @@ class GameManager
          */
         ReferenceCountPtr<TurnManager> turnManager;
 	
-		/**
-		 * Almacena es estado del juego
-		 */
-		 //Aca iria la referencia al estado
-	
+	/**
+	 * Almacena es estado del juego
+	 */
+	ReferenceCountPtr<StateMachine> stateMachine;
 	
 	public:
 	

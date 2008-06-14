@@ -1,5 +1,6 @@
 #include "joingame.h"
 
+
 JoinGame::JoinGame(std::vector<std::string> &parameterList) : Command ()
 {
 }
@@ -34,7 +35,10 @@ bool JoinGame::validate(ReferenceCountPtr<GameManager>& gameMAnager){
 	
 }
 
-void JoinGame::execute(ReferenceCountPtr<GameManager>& gameManager){
+void JoinGame::execute(ReferenceCountPtr<State>& state){
+    state->joinGame(this);
+
+    // pasar al state correspondiente
     // suscribir jugador
     // si es el primer jugador cambiar estado a "esperandoSeleccionMapa"
     //    enviar comando "offerMaps" a este jugador

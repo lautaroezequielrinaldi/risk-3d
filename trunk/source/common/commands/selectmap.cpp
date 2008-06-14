@@ -34,7 +34,9 @@ bool SelectMap::validate(ReferenceCountPtr<GameManager>& gameMAnager){
 	
 }
 
-void SelectMap::execute(ReferenceCountPtr<GameManager>& gameManager){
+void SelectMap::execute(ReferenceCountPtr<State>& state){
+    state->selectMap(this);
+    // pasar a la implementacion apropiada de state
     // seleccionar el mapa enviado
     // cambiar estado a "esperando listos"
     // notificar "aguardando jugadores"	
