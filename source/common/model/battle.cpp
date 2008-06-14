@@ -55,7 +55,13 @@ BattleResult Battle::start(){
 	
 	std::list<int> dadosAtacante;
 	std::list<int> dadosDefensor;
-	
+
+	// att que necesito para luego de ejecutar la batalla, se actualice el modelo con el resultado
+	ReferenceCountPtr<Game> game = gameMAnager->getGame();
+	ReferenceCountPtr<Mapa> map = game->getMapa();
+	ReferenceCountPtr<Pais> paisAtacante = map->obtenerPais( this->ataque->getAttackerLand );
+	ReferenceCountPtr<Pais> paisDefensor = map->obtenerPais( this->ataque->getAttackedLand );	
+
 	// tiro los dados para el atacante
 	for(int i=0;i<this->ataque->getArmyCount();i++)
 		dadosAtacante.push_back(this->dice->roll() );
@@ -67,6 +73,14 @@ BattleResult Battle::start(){
 	// compara dados de atacante y defensor y obtiene el resultado de la batalla
 	BattleResult resultadoBatalla = compareDice(dadosAtacante, dadosDefensor);	
 	
+	// actualizacion del modelo con respecto al resultado de la batalla
+
+	// elimina del pais atacante, los ejercitos perdidos en la batalla . si perdio 0 ejercitos no modifica nada.
+	paisAtacante->removeArmies(resultadoBatalla->getAttackerResult();
+
+	// elimina del pais defensor, los ejercitos perdidos en la batalla . si perdio 0 ejercitos no modifica nada.
+	paisDefensor->removeArmies(resultadoBatalla->getDefenderResult();
+
 	return resultadoBatalla;
 	
 

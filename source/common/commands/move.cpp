@@ -192,6 +192,20 @@ void  Move::execute(ReferenceCountPtr<State>& state){
 	
 	state->move(*this);
 	
+	/*
+	ReferenceCountPtr<Game> game = gameMAnager->getGame();
+	ReferenceCountPtr<Mapa> map = game->getMapa();
+	ReferenceCountPtr<Pais> paisO = map->obtenerPais(this->paisOrigen);
+	ReferenceCountPtr<Pais> paisD = map->obtenerPais(this->paisDestino);
+	
+	// elimina la cantidad de ejercitos que mueve del pais origen
+	paisO->removeArmies(this->cantidadEjercitos);
+	
+	// agrega la cantidad de ejercitos que se mueven, al pais destino
+	paisD->addArmies(this->cantidadEjercitos);
+
+	//notifica el cambio
+
 }
 
 
