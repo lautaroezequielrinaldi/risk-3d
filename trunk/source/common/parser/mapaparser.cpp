@@ -121,6 +121,8 @@ void MapaParser::cargarPaises(xmlNodePtr& mapNode,
     xmlXPathObjectPtr xpathObject;
     // Defino el set de nodos devueltos por la expresiòn XPath.
     xmlNodeSetPtr countryNodeSet;
+    // Defino el set de nodos devueltos por la expresion XPath.
+    xmlNodeSetPtr adjacentNodeSet;
 
     // Creo el contexto de XPath.
     xpathContext = xmlXPathNewContext(this->document);
@@ -157,6 +159,41 @@ void MapaParser::cargarPaises(xmlNodePtr& mapNode,
 
         // Agrego el pais al mapa.
         map->agregarPais(country);
+    }
+
+    // Creo iterador para recorrer paises del mapa.
+    Mapa::IteradorPais countryIter;
+    // Itero por los paises del mapa.
+    for (countryIter = map->primerPais(); countryIter != map->ultimoPais();
+        ++countryIter) {
+        // Obtengo pais actual.
+        ReferenceCountPtr<Pais> country = *countryIter;
+
+        // Creo expresion XPath
+        std::string expresion = "//mapa/lista-paises/pais[@nombre='"
+            + country->getNombre()
+            + "']/adyacente";
+
+        // Evaluo la expresiòn XPath.
+        xpathObject = xmlXPathEvalExpression(BAD_CAST expresion.c_str(), xpathContext);
+
+        // Obtengo  el set de nodos de adyacentes.
+        adjacentNodeSet = xpathObject->nodesetval;
+
+        // Itero por cada nodo de adyacentes.
+        for (int contador = 0; contador < adjacentNodeSet->nodeNr; ++contador) {
+            // Obtengo el nodo del adyacente actual.
+            xmlNodePtr adjacentNode = adjacentNodeSet->nodeTab[contador];
+
+            // Obtengo el nombre del adyacente actual.
+            std::string nombreAdyacente = (const char*) xmlNodeGetContent(adjacentNode);
+
+            // Obtengo el paise cargado.
+            ReferenceCountPtr<Pais> adyacente = this->paisesCargados[nombreAdyacente];
+
+            // Agrego el adyacente al pais.
+            country->agregarAdyacente(adyacente);
+        }
     }
 }
 
