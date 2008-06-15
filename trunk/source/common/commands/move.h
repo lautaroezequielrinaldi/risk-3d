@@ -50,6 +50,23 @@ class Move : public Command
 		 */
 		void execute(ReferenceCountPtr<State>& state);
 		
+		/**
+		 * Metodo cuyo proposito es obtener el nombre del pais destino al cual se mueven ejercitos.
+		 */
+		 std::string getCountryDestination();
+		 
+		/**
+		 * Metodo cuyo proposito es obtener el nombre del pais origen al cual se mueven ejercitos.
+		 */
+		std::string getCountryOrigin();
+
+		/**
+		 * Metodo cuyo proposito es obtener la cantidad de ejercitos a mover.
+		 */
+		int getArmyCount();
+
+
+		
 };
 
 #endif /*MOVE_H_*/

@@ -118,6 +118,12 @@ void TurnManager::deletePlayer(int color){
 	
 }
 
+int TurnManager::getDefenderPlayer(){
+	return this->jugadorDefensor;
+}
 
+void TurnManager::setDefenderPlayer(int color){
+	this->jugadorDefensor = color;
+}
 
 

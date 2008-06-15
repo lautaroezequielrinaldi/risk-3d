@@ -170,20 +170,29 @@ void* Move::hydrate(std::string xml){
 	
 }
 		
-bool Move::validate(ReferenceCountPtr<GameManager>& gameMAnager){
+bool Move::validate(ReferenceCountPtr<GameManager>& gameManager){
 	
 	bool movimValido=false;
-	ReferenceCountPtr<Game> game = gameMAnager->getGame();
+	ReferenceCountPtr<Game> game = gameManager->getGame();
 	ReferenceCountPtr<Mapa> map = game->getMapa();
 	ReferenceCountPtr<Pais> paisO = map->obtenerPais(this->paisOrigen);
 	
-	/*si pais origen es adyacente al pais destino*/
-	if( paisO->esAdyacente(this->paisDestino)){
-		/*si la cantidad de ejercitos a mover es menor a la cantidad de ejercitos que tiene el pais origen*/
-		if ( this->cantidadEjercitos < paisO->getArmyCount() )
-			movimValido = true;
-	}
+	ReferenceCountPtr<TurnManager> turnManager = gameManager->getTurnManager();
+	ReferenceCountPtr<Player> jugadorActual = game->getPlayer( turnManager->getCurrentPlayer());
 	
+	//si el pais origen es del jugador actual
+	if( jugadorActual->landOwner(this->paisOrigen) ){
+	//si el pais destino es del jugador actual
+		if( jugadorActual->landOwner(this->paisDestino) ){	
+			/*si pais origen es adyacente al pais destino*/
+			if( paisO->esAdyacente(this->paisDestino)){
+				/*si la cantidad de ejercitos a mover es menor a la cantidad de ejercitos que tiene el pais origen*/
+				if ( this->cantidadEjercitos < paisO->getArmyCount() )
+					movimValido = true;
+			}
+		}
+	}
+		
 	return movimValido;
 	
 }
@@ -192,21 +201,19 @@ void  Move::execute(ReferenceCountPtr<State>& state){
 	
 	state->move(*this);
 	
-	/*
-	ReferenceCountPtr<Game> game = gameMAnager->getGame();
-	ReferenceCountPtr<Mapa> map = game->getMapa();
-	ReferenceCountPtr<Pais> paisO = map->obtenerPais(this->paisOrigen);
-	ReferenceCountPtr<Pais> paisD = map->obtenerPais(this->paisDestino);
 	
-	// elimina la cantidad de ejercitos que mueve del pais origen
-	paisO->removeArmies(this->cantidadEjercitos);
-	
-	// agrega la cantidad de ejercitos que se mueven, al pais destino
-	paisD->addArmies(this->cantidadEjercitos);
+}
 
-	//notifica el cambio
-*/
+std::string  Move::getCountryDestination(){
+	return this->paisDestino;
+}		 
 
+std::string  Move::getCountryOrigin(){
+	return this->paisOrigen;
+}
+
+int  Move::getArmyCount(){
+	return this->cantidadEjercitos;
 }
 
 

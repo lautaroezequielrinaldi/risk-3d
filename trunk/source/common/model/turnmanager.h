@@ -15,6 +15,12 @@ class TurnManager
 		 * Almacena el numero de color correspondiente al jugador que tiene el turno
 		 */
 		int jugadorActual;
+		
+		/**
+		 * Almacena el numero de color correspondiente al jugador secundario que comparte el turno
+		 * con el jugador actual, al estar en estado de defensa.
+		 */
+		 int jugadorDefensor;
 	
 		/**
 		 * Almacena la cantidad de ejercitos bonus que posee el jugador actual
@@ -42,7 +48,7 @@ class TurnManager
 		/**
 		 * Metodo cuyo proposito es obtener el color de jugador que posee el turno.
 		 */
-		 int getCurrentPlayer();
+		int getCurrentPlayer();
 		
 		/**
 		 * Metodo cuyo proposito es cambiar el turno actual al proximo jugador, respetando el orden seteado.
@@ -60,6 +66,18 @@ class TurnManager
 		 */
 		 void deletePlayer(int color);
 		  
+		  
+		/**
+		 * Metodo cuyo proposito es obtener el jugador que comparte el turno con el jugador actual ,
+		 * jugador que se esta defendiendo.
+		 */
+		 int getDefenderPlayer();
+		 
+		/**
+		 * Metodo cuyo proposito es establecer que jugador compartira el turno con el jugador actual
+		 * para poder defenderse.
+		 */
+		 void setDefenderPlayer(int color);
 		
 		/**
 		 * Destructor de la clase
