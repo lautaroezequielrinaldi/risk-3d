@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include "command.h"
-//#include "../model/gamemanager.h"
+#include "../model/gamemanager.h"
 
 class Attack : public Command
 {
