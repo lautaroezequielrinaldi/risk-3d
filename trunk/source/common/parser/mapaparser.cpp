@@ -5,70 +5,87 @@ MapaParser::MapaParser():
     // No realiza ninguna acciòn.
 }
 
-void MapaParser::persistirPaises(xmlNodePtr& nodoMapa,
-    ReferenceCountPtr<Mapa>& mapa) {
+void MapaParser::persistirPaises(xmlNodePtr& mapNode,
+    ReferenceCountPtr<Mapa>& map) {
     // Define el nodo de lista de paises a persistir.
-    xmlNodePtr nodoListaPaises;
+    xmlNodePtr countryListNode;
     // Define el nodo del pais a persistir.
-    xmlNodePtr nodoPais;
+    xmlNodePtr countryNode;
     // Define el nodo del pais adyacente a persistir.
-    xmlNodePtr nodoAdyacente;
+    xmlNodePtr adjacentNode;
     // Defino el contador de pais.
-    Mapa::IteradorPais iterPais;
+    Mapa::IteradorPais countryIter;
     // Defino el contador de adyacente.
-    Pais::Iterador iterAdyacente;
+    Pais::Iterador adjacentIter;
 
     // Creo el nodo de lista de paises a persistir.
-    nodoListaPaises = xmlNewChild(nodoMapa, NULL, BAD_CAST "lista-paises",
+    countryListNode = xmlNewChild(mapNode, NULL, BAD_CAST "lista-paises",
         NULL);
     // Itero por cada pais.
-    for (iterPais = mapa->primerPais(); iterPais != mapa->ultimoPais();
-        ++iterPais) {
+    for (countryIter = map->primerPais(); countryIter != map->ultimoPais();
+        ++countryIter) {
         // Obtengo pais actual.
-        ReferenceCountPtr<Pais> actual = *iterPais;
+        ReferenceCountPtr<Pais> actual = *countryIter;
         // Creo el nodo del pais a persistir.
-        nodoPais = xmlNewChild(nodoListaPaises, NULL, BAD_CAST "pais", NULL);
+        countryNode = xmlNewChild(countryListNode, NULL, BAD_CAST "pais", NULL);
         // Agrego el atributo nombre del pais a persistir.
-        xmlNewProp(nodoPais, BAD_CAST "nombre",
+        xmlNewProp(countryNode, BAD_CAST "nombre",
             BAD_CAST (const xmlChar*) actual->getNombre().c_str());
+
+        // Creo un string stream para convertir numeros a string
+        std::ostringstream xPositionStr;
+        xPositionStr << actual->getPosition().getX();
+
+        // Creo un string stream para convertir numeros a string
+        std::ostringstream yPositionStr;
+        yPositionStr << actual->getPosition().getY();
+
+        // Agrego el atributo x del pais a persistir.
+        xmlNewProp(countryNode, BAD_CAST "x",
+            BAD_CAST (const xmlChar*) xPositionStr.str().c_str());
+
+        // Agrego el atributo y del pais a persistir.
+        xmlNewProp(countryNode, BAD_CAST "y",
+            BAD_CAST (const xmlChar*) yPositionStr.str().c_str());
+            
         // Itero por cada pais adyacente.
-        for (iterAdyacente = actual->primerAdyacente(); 
-            iterAdyacente != actual->ultimoAdyacente(); ++iterAdyacente) {
+        for (adjacentIter = actual->primerAdyacente(); 
+            adjacentIter != actual->ultimoAdyacente(); ++adjacentIter) {
             // Obtengo pais adyacente actual.
-            ReferenceCountPtr<Pais> adyacenteActual = *iterAdyacente;
+            ReferenceCountPtr<Pais> adyacenteActual = *adjacentIter;
             // Creo el nodo del pais adyacente a persistir.
-            nodoAdyacente = xmlNewChild(nodoPais, NULL, BAD_CAST "adyacente",
+            adjacentNode = xmlNewChild(countryNode, NULL, BAD_CAST "adyacente",
                 BAD_CAST (const xmlChar*) adyacenteActual->getNombre().c_str());
         }
     }
 }
 
-void MapaParser::persistirContinentes(xmlNodePtr& nodoMapa,
-    ReferenceCountPtr<Mapa>& mapa) {
+void MapaParser::persistirContinentes(xmlNodePtr& mapNode,
+    ReferenceCountPtr<Mapa>& map) {
     // Define el nodo de lista de continentes a persistir.
-    xmlNodePtr nodoListaContinentes;
+    xmlNodePtr continentListNode;
     // Define el nodo del continente a persistir.
-    xmlNodePtr nodoContinente;
+    xmlNodePtr continentNode;
     // Define el nodo del pais a persistir.
-    xmlNodePtr nodoPais;
+    xmlNodePtr countryNode;
     // Defino el contador de continente.
-    Mapa::IteradorContinente iterContinente;
+    Mapa::IteradorContinente continentIter;
     // Defino el contador de adyacente.
-    Pais::Iterador iterPais;
+    Pais::Iterador countryIter;
 
     // Creo en nodo de lista de continentes a persistir.
-    nodoListaContinentes = xmlNewChild(nodoMapa, NULL,
+    continentListNode = xmlNewChild(mapNode, NULL,
         BAD_CAST "lista-continentes", NULL);
     // Itero por cada continente.
-    for (iterContinente = mapa->primerContinente();
-        iterContinente != mapa->ultimoContinente(); ++iterContinente) {
+    for (continentIter = map->primerContinente();
+        continentIter != map->ultimoContinente(); ++continentIter) {
         // Obtengo continente actual.
-        ReferenceCountPtr<Continente> actual = *iterContinente;
+        ReferenceCountPtr<Continente> actual = *continentIter;
         // Creo el nodo del continente a persistir.
-        nodoContinente = xmlNewChild(nodoListaContinentes, NULL,
+        continentNode = xmlNewChild(continentListNode, NULL,
             BAD_CAST "continente", NULL);
         // Agrego el atributo nombre del continente a persistir.
-        xmlNewProp(nodoContinente, BAD_CAST "nombre",
+        xmlNewProp(continentNode, BAD_CAST "nombre",
             BAD_CAST (const xmlChar*) actual->getNombre().c_str());
 
 		// Creo un stream de salida de string para convertir numero a string
@@ -76,95 +93,101 @@ void MapaParser::persistirContinentes(xmlNodePtr& nodoMapa,
 		strBonus << actual->getArmyBonus();
 
 		// Agrego el atributo bonus del continente a persistir.
-		xmlNewProp(nodoContinente, BAD_CAST "bonus",
+		xmlNewProp(continentNode, BAD_CAST "bonus",
 			BAD_CAST (const xmlChar*) strBonus.str().c_str());
 			
         // Itero por cada pais.
-        for (iterPais = actual->primerPais(); 
-            iterPais != actual->ultimoPais(); ++iterPais) {
+        for (countryIter = actual->primerPais(); 
+            countryIter != actual->ultimoPais(); ++countryIter) {
             // Obtengo pais pais actual.
-            ReferenceCountPtr<Pais> paisActual = *iterPais;
+            ReferenceCountPtr<Pais> paisActual = *countryIter;
             // Creo el nodo del pais a persistir.
-            nodoPais = xmlNewChild(nodoContinente, NULL, BAD_CAST "pais",
+            countryNode = xmlNewChild(continentNode, NULL, BAD_CAST "pais",
                 BAD_CAST (const xmlChar*) paisActual->getNombre().c_str());
         }
     }
 }
 
-void MapaParser::persistirReglas(xmlNodePtr& nodoMapa,
-    ReferenceCountPtr<Mapa>& mapa) {
+void MapaParser::persistirReglas(xmlNodePtr& mapNode,
+    ReferenceCountPtr<Mapa>& map) {
 
 }
 
-void MapaParser::cargarPaises(xmlNodePtr& nodoMapa,
-    ReferenceCountPtr<Mapa>& mapa) {
+void MapaParser::cargarPaises(xmlNodePtr& mapNode,
+    ReferenceCountPtr<Mapa>& map) {
     // Defino un contexto de XPath.
-    xmlXPathContextPtr contextoXPath;
+    xmlXPathContextPtr xpathContext;
     // Defino un objeto de XPath.
-    xmlXPathObjectPtr objetoXPath;
+    xmlXPathObjectPtr xpathObject;
     // Defino el set de nodos devueltos por la expresiòn XPath.
-    xmlNodeSetPtr setNodoPais;
+    xmlNodeSetPtr countryNodeSet;
 
     // Creo el contexto de XPath.
-    contextoXPath = xmlXPathNewContext(this->document);
+    xpathContext = xmlXPathNewContext(this->document);
 
     // Evaluo la expresiòn XPath.
-    objetoXPath = xmlXPathEvalExpression(BAD_CAST "//mapa/lista-paises/pais",
-        contextoXPath);
+    xpathObject = xmlXPathEvalExpression(BAD_CAST "//mapa/lista-paises/pais",
+        xpathContext);
 
     // Obtengo el set de nodos de paises.
-    setNodoPais = objetoXPath->nodesetval;
+    countryNodeSet = xpathObject->nodesetval;
 
     // Itero por cada nodo de paises.
-    for ( int contador = 0; contador < setNodoPais->nodeNr; ++contador) {
+    for ( int contador = 0; contador < countryNodeSet->nodeNr; ++contador) {
         // Obtengo el nodo del pais actual.
-        xmlNodePtr nodoPais = setNodoPais->nodeTab[contador];
+        xmlNodePtr countryNode = countryNodeSet->nodeTab[contador];
 
         // Obtengo el nombre del pais actual.
-        std::string nombre = (const char*) xmlGetProp(nodoPais,
+        std::string nombre = (const char*) xmlGetProp(countryNode,
             BAD_CAST "nombre");
-
+        // Obtengo la posicion x del pais actual,
+        std::string xPositionStr = (const char*) xmlGetProp(countryNode,
+            BAD_CAST "x");
+        // Obtengo la posicion y del pais actual.
+        std::string yPositionStr = (const char*) xmlGetProp(countryNode,
+            BAD_CAST "y");
         // Creo posicion del pais
-        MapPosition position(0,0);
+        MapPosition position(atoi(xPositionStr.c_str()),
+            atoi(yPositionStr.c_str()));
         // Creo objeto pais.
-        ReferenceCountPtr<Pais> pais(new Pais(nombre, position));
+        ReferenceCountPtr<Pais> country(new Pais(nombre, position));
 
         // Agrego pais al mapa de paises cargados.
-        this->paisesCargados[nombre] = pais;
+        this->paisesCargados[nombre] = country;
 
         // Agrego el pais al mapa.
-        mapa->agregarPais(pais);
+        map->agregarPais(country);
     }
 }
 
-void MapaParser::cargarContinentes(xmlNodePtr& nodoMapa,
-    ReferenceCountPtr<Mapa>& mapa) {
+void MapaParser::cargarContinentes(xmlNodePtr& mapNode,
+    ReferenceCountPtr<Mapa>& map) {
 
 }
 
-void MapaParser::cargarReglas(xmlNodePtr& nodoMapa,
-    ReferenceCountPtr<Mapa>& mapa) {
+void MapaParser::cargarReglas(xmlNodePtr& mapNode,
+    ReferenceCountPtr<Mapa>& map) {
 
 }
 
 void MapaParser::saveMap(const std::string& fileName,
-    ReferenceCountPtr<Mapa>& mapa) {
+    ReferenceCountPtr<Mapa>& map) {
     // Define el nodo raiz del documento XML sobre el cual se va a trabajar.
-    xmlNodePtr nodoMapa;
+    xmlNodePtr mapNode;
 
     // Crea el documento XML sobre el cual se va a trabajar.
     this->document = xmlNewDoc(BAD_CAST "1.0");
     // Crea el nodo raiz del documento XML sobre el cual se va a trabajar.
-    nodoMapa = xmlNewNode(NULL, BAD_CAST "mapa");
+    mapNode = xmlNewNode(NULL, BAD_CAST "mapa");
     // Establece el nodo raìz del documento XML sobre el cual se va a trabajar.
-    xmlDocSetRootElement(this->document, nodoMapa);
+    xmlDocSetRootElement(this->document, mapNode);
 
     // Persiste los paises del mapa.
-    persistirPaises(nodoMapa, mapa);
-    // Persiste los continentes del mapa.
-    persistirContinentes(nodoMapa, mapa);
-    // Persiste las reglas del mapa.
-    persistirReglas(nodoMapa, mapa);
+    persistirPaises(mapNode, map);
+    // Persiste los continentes del map.
+    persistirContinentes(mapNode, map);
+    // Persiste las reglas del map.
+    persistirReglas(mapNode, map);
 
     // Escribe el documento XML a disco.
     xmlSaveFormatFileEnc(fileName.c_str(), this->document, "UTF-8", 1);
@@ -179,28 +202,28 @@ void MapaParser::saveMap(const std::string& fileName,
 ReferenceCountPtr<Mapa> MapaParser::loadMap(
     const std::string& fileName) {
     // Defino el mapa que voy a devolver.
-    ReferenceCountPtr<Mapa> mapa;
+    ReferenceCountPtr<Mapa> map;
     // Defino el elemento raiz del documento XML sobre el cual voy a trabajar.
-    xmlNodePtr nodoMapa;
+    xmlNodePtr mapNode;
 
     // Leo el documento XML de disco
     this->document = xmlReadFile(fileName.c_str(), NULL, 0);
 
     // Obtengo el elemento root del documento XML sobre el cual se va a
     // trabajar.
-    nodoMapa = xmlDocGetRootElement(this->document);
+    mapNode = xmlDocGetRootElement(this->document);
 
     // Vacio la lista de paises cargados.
     this->paisesCargados.clear();
 
     // Leo los paises del mapa.
-    cargarPaises(nodoMapa, mapa);
+    cargarPaises(mapNode, map);
 
     // Leo los contientes del mapa.
-    cargarContinentes(nodoMapa, mapa);
+    cargarContinentes(mapNode, map);
 
     // Leo las reglas del mapa.
-    cargarReglas(nodoMapa, mapa);
+    cargarReglas(mapNode, map);
 
     // Libera el documento XML sobre el cual se va a trabajar.
     xmlFreeDoc(this->document);
@@ -209,7 +232,7 @@ ReferenceCountPtr<Mapa> MapaParser::loadMap(
     xmlCleanupParser();
 
     // Devuelve el mapa cargado.
-    return mapa;
+    return map;
 }
 
 MapaParser::~MapaParser() {
