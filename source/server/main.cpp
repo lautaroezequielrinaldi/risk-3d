@@ -43,7 +43,7 @@
 
 #include "proxyplayer.h"
 #include "../common/net/sockets/socket.h"
-#include "statemachine.h"
+#include "../common/state/statemachine.h"
 
 #include <iostream>
 #include <vector>

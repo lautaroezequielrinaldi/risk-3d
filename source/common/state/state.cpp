@@ -14,3 +14,10 @@ State::State() {
 State::~State() {
     // No realiza ninguna acciòn,
 }
+
+std::string State::getName(){
+	return name;
+
+}
+
+
