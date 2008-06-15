@@ -6,6 +6,9 @@
 #include "../model/gamemanager.h" // Para definiciòn de gameManager.
 #include "../smartpointer/referencecountptr.h" // Para definiciòn de ReferenceCountPtr
 
+/**
+ * Forward declaration de la clase State.
+ */
 class State;
 
 /**
