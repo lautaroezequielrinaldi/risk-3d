@@ -205,8 +205,11 @@ void  Move::execute(ReferenceCountPtr<State>& state){
 	paisD->addArmies(this->cantidadEjercitos);
 
 	//notifica el cambio
+*/
 
 }
+
+
 
 
 

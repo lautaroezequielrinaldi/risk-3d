@@ -51,16 +51,16 @@ BattleResult Battle::compareDice(std::list<int>attackerDice, std::list<int> defe
 	return resultadoBatalla;
 }
 
-BattleResult Battle::start(){
+BattleResult Battle::start(ReferenceCountPtr<GameManager>& gameManager){
 	
 	std::list<int> dadosAtacante;
 	std::list<int> dadosDefensor;
 
 	// att que necesito para luego de ejecutar la batalla, se actualice el modelo con el resultado
-	ReferenceCountPtr<Game> game = gameMAnager->getGame();
+	ReferenceCountPtr<Game> game = gameManager->getGame();
 	ReferenceCountPtr<Mapa> map = game->getMapa();
-	ReferenceCountPtr<Pais> paisAtacante = map->obtenerPais( this->ataque->getAttackerLand );
-	ReferenceCountPtr<Pais> paisDefensor = map->obtenerPais( this->ataque->getAttackedLand );	
+	ReferenceCountPtr<Pais> paisAtacante = map->obtenerPais( this->ataque->getAttackerLand() );
+	ReferenceCountPtr<Pais> paisDefensor = map->obtenerPais( this->ataque->getAttackedLand() );	
 
 	// tiro los dados para el atacante
 	for(int i=0;i<this->ataque->getArmyCount();i++)
@@ -76,10 +76,10 @@ BattleResult Battle::start(){
 	// actualizacion del modelo con respecto al resultado de la batalla
 
 	// elimina del pais atacante, los ejercitos perdidos en la batalla . si perdio 0 ejercitos no modifica nada.
-	paisAtacante->removeArmies(resultadoBatalla->getAttackerResult();
+	paisAtacante->removeArmies(resultadoBatalla.getAttackerResult());
 
 	// elimina del pais defensor, los ejercitos perdidos en la batalla . si perdio 0 ejercitos no modifica nada.
-	paisDefensor->removeArmies(resultadoBatalla->getDefenderResult();
+	paisDefensor->removeArmies(resultadoBatalla.getDefenderResult());
 
 	return resultadoBatalla;
 	
