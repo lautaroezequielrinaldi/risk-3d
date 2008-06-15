@@ -40,7 +40,7 @@ class ReadyToPlay : public Command
 		/**
 		 * Metodo cuyo proposito es validar la accion que realice el comando.
 		 */
-		bool validate(ReferenceCountPtr<State>& state);
+		bool validate(ReferenceCountPtr<GameManager>& state);
 		
 		/**
 		 * Metodo cuyo proposito es ejecutar la accion que realice el comando.
