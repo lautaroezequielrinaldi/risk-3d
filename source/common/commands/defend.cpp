@@ -153,7 +153,7 @@ bool Defend::validate(ReferenceCountPtr<GameManager>& gameManager){
 	ReferenceCountPtr<Mapa> map = game->getMapa();
 	ReferenceCountPtr<Pais> paisDefiende = map->obtenerPais(this->paisDefensor);
 	
-	/*si pais atacante defiende con 2 o menos ejercitos Y defiende con menos ejercitos de los que tiene*/
+	/*si pais defensor defiende con 2 o menos ejercitos Y defiende con menos ejercitos de los que tiene*/
 	if ( paisDefiende->getArmyCount() <= 2  && this->cantidadEjercitos < paisDefiende->getArmyCount() )
 		defensaValida = true;
 	

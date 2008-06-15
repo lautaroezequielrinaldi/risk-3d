@@ -169,20 +169,27 @@ void* Attack::hydrate(std::string xml){
 	
 }
 		
-bool Attack::validate(ReferenceCountPtr<GameManager>& gameMAnager){
+bool Attack::validate(ReferenceCountPtr<GameManager>& gameManager){
 	
 	bool ataqueValido=false;
-	ReferenceCountPtr<Game> game = gameMAnager->getGame();
+	ReferenceCountPtr<Game> game = gameManager->getGame();
 	ReferenceCountPtr<Mapa> map = game->getMapa();
 	ReferenceCountPtr<Pais> paisAtaca =	map->obtenerPais(this->paisAtacante);
+	ReferenceCountPtr<TurnManager> turnManager = gameManager->getTurnManager();
+	ReferenceCountPtr<Player> jugadorActual = game->getPlayer( turnManager->getCurrentPlayer());
 	
-	/*si pais atacante es adyacente al pais atacado*/
-	if( paisAtaca->esAdyacente(this->paisAtacado)){
-		/*si pais atacante ataca con 3 o menos ejercitos Y ataca con menos ejercitos de los que tiene*/
-		if ( paisAtaca->getArmyCount() <= 3  && this->cantidadEjercitos < paisAtaca->getArmyCount() )
-			ataqueValido = true;
+	//si el pais atacante es del jugador actual
+	if( jugadorActual->landOwner(this->paisAtacante) ){
+	//si el pais defensor NO es del jugador actual
+		if( !jugadorActual->landOwner(this->paisAtacado) ){	
+			/*si pais atacante es adyacente al pais atacado*/
+			if( paisAtaca->esAdyacente(this->paisAtacado)){
+				/*si pais atacante ataca con 3 o menos ejercitos Y ataca con menos ejercitos de los que tiene*/
+				if ( paisAtaca->getArmyCount() <= 3  && this->cantidadEjercitos < paisAtaca->getArmyCount() )
+					ataqueValido = true;
+			}
+		}
 	}
-	
 	return ataqueValido;
 }
 

@@ -148,17 +148,24 @@ void* Populate::hydrate(std::string xml){
 // la cantidad de ejercitos ubicados hasta el momento.
 //si esa validacion se hace desde afuera, entonces esta solo valida que por cada poblada no se pase del maximo,
 //al margen de lo que ya uso de su bonus.	
-bool Populate::validate(ReferenceCountPtr<GameManager>& gameMAnager){
+bool Populate::validate(ReferenceCountPtr<GameManager>& gameManager){
 	
+	bool resul=false;
+	ReferenceCountPtr<Game> game = gameManager->getGame();
+	ReferenceCountPtr<TurnManager> turnManager = gameManager->getTurnManager();
+	ReferenceCountPtr<Player> jugadorActual = game->getPlayer( turnManager->getCurrentPlayer());
+	
+	//si el pais destino es del jugador actual
+	if( jugadorActual->landOwner(this->paisDestino) ){	
+		/*creo un calculador de ejercitos extras correspondientes el jugador para verificar que no use mas de los debidos*/
+		ArmyBonusCalculator calculadorBonus;
 		
-	/*creo un calculador de ejercitos extras correspondientes el jugador para verificar que no use mas de los debidos*/
-	ArmyBonusCalculator calculadorBonus;
+		if (this->cantidadEjercitos <= calculadorBonus.getArmyBonus(gameManager) )
+			resul= true;
+	}
 	
-	if (this->cantidadEjercitos <= calculadorBonus.getArmyBonus(gameMAnager) )
-		return true;
-	else
-		return false;
-	
+	return resul;
+		
 }
 
 void Populate::execute(ReferenceCountPtr<State>& state){

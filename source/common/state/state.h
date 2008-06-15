@@ -2,6 +2,7 @@
 #define __STATE_H__
 
 #include <string>
+#include "../smartpointer/referencecountptr.h"
 
 class Attack;
 class Defend;

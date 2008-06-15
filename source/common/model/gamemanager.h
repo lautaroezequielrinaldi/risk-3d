@@ -21,12 +21,12 @@ class GameManager
          * Almacena el manejador de turnos.
          */
         ReferenceCountPtr<TurnManager> turnManager;
-	
-	/**
-	 * Almacena es estado del juego
-	 */
-	ReferenceCountPtr<StateMachine> stateMachine;
-	
+		
+		/**
+		 * Almacena es estado del juego
+		 */
+		ReferenceCountPtr<StateMachine> stateMachine;
+		
 	public:
 	
 		/**
