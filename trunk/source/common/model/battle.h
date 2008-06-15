@@ -56,7 +56,7 @@ class Battle
 		 * Metodo cuyo proposito es iniciar la batalla entre atacante y defensor.
 		 * Devuelve el resultado de la batalla.
 		 */
-		BattleResult start(); 
+		BattleResult start(ReferenceCountPtr<GameManager>& gameMAnager); 
 		
 	/**
 	 * Metodos privados de la clase

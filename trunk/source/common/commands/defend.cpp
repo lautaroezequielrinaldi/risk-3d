@@ -146,10 +146,10 @@ void* Defend::hydrate(std::string xml){
 	return NULL;
 }
 		
-bool Defend::validate(ReferenceCountPtr<GameManager>& gameMAnager){
+bool Defend::validate(ReferenceCountPtr<GameManager>& gameManager){
 	
 	bool defensaValida = false;
-	ReferenceCountPtr<Game> game = gameMAnager->getGame();
+	ReferenceCountPtr<Game> game = gameManager->getGame();
 	ReferenceCountPtr<Mapa> map = game->getMapa();
 	ReferenceCountPtr<Pais> paisDefiende = map->obtenerPais(this->paisDefensor);
 	
