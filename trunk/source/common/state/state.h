@@ -14,19 +14,16 @@ class State {
 	State();
 	virtual ~State();
 
-
-
-
-     virtual bool attack(Attack & command);
-     virtual bool defend(Defend & command);
-     virtual bool joinGame(JoinGame & command);
+     virtual bool attack(Attack & command) = 0;
+     virtual bool defend(Defend & command) = 0;
+     virtual bool joinGame(JoinGame & command) = 0;
      //bool kill(Kill & move);
-     virtual bool move(Move & command);
-     virtual bool selectMap(SelectMap & command);
+     virtual bool move(Move & command) = 0;
+     virtual bool selectMap(SelectMap & command) = 0;
      //bool setOwner(SetOwner & command);
-     virtual bool populate(Populate & command);
-     virtual bool readyToPlay(ReadyToPlay & command);
-
+     virtual bool populate(Populate & command) = 0;
+     virtual bool readyToPlay(ReadyToPlay & command) = 0;
 };
+
 #endif /** __STATE_H__ */
 
