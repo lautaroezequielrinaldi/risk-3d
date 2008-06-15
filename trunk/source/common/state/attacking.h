@@ -13,7 +13,7 @@ class Attacking : public State
 		
 		~Attacking();
 		
-		bool attack(Attack & command);
+		//bool attack(Attack & command);
 };
 
 #endif /*ATTACKING_H_*/
