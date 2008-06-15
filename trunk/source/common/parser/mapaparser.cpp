@@ -189,10 +189,10 @@ void MapaParser::cargarPaises(xmlNodePtr& mapNode,
             std::string nombreAdyacente = (const char*) xmlNodeGetContent(adjacentNode);
 
             // Obtengo el paise cargado.
-            ReferenceCountPtr<Pais> adyacente = this->paisesCargados[nombreAdyacente];
+            ReferenceCountPtr<Pais> adjacent = this->paisesCargados[nombreAdyacente];
 
             // Agrego el adyacente al pais.
-            country->agregarAdyacente(adyacente);
+            country->agregarAdyacente(adjacent);
         }
     }
 }
@@ -205,6 +205,8 @@ void MapaParser::cargarContinentes(xmlNodePtr& mapNode,
     xmlXPathObjectPtr xpathObject;
     // Defino el set de nodos devueltos por la expresiòn XPath.
     xmlNodeSetPtr continentNodeSet;
+    // Defino el set de nodos devueltos por la expresion XPath.
+    xmlNodeSetPtr countryNodeSet;
 
     // Creo el contexto de XPath.
     xpathContext = xmlXPathNewContext(this->document);
@@ -233,7 +235,39 @@ void MapaParser::cargarContinentes(xmlNodePtr& mapNode,
         ReferenceCountPtr<Continente> continent(new Continente(nombre, armyBonus));
         // Agrego el continente al mapa.
         map->agregarContinente(continent);
-    } 
+    }
+
+     // Creo iterador para recorrer continentes del mapa.
+     Mapa::IteradorContinente continentIter;
+     // Itero por los continentes del mapa.
+     for (continentIter = map->primerContinente(); continentIter != map->ultimoContinente();
+        ++continentIter) {
+        // Obtengo continente actual.
+        ReferenceCountPtr<Continente> continent = *continentIter;
+
+        // Creo expresion XPath
+        std::string expresion = "//mapa/lista-continentes/continente[@nombre='"
+            + continent->getNombre()
+            + "']/pais";
+
+        // Evaluo la expresiòn XPath.
+        xpathObject = xmlXPathEvalExpression(BAD_CAST expresion.c_str(), xpathContext);
+
+        // Obtengo  el set de nodos de paises.
+        countryNodeSet = xpathObject->nodesetval;
+
+        // Itero por cada nodo de paises.
+        for (int contador = 0; contador < countryNodeSet->nodeNr; ++contador) {
+            // Obtengo el nodo del pais actual.
+            xmlNodePtr countryNode = countryNodeSet->nodeTab[contador];
+            // Obtengo el nombre del pais actual.
+            std::string nombrePais = (const char*) xmlNodeGetContent(countryNode);
+            // Obtengo el pais cargado.
+            ReferenceCountPtr<Pais> country = this->paisesCargados[nombrePais];
+            // Agrego el pais al continente.
+            continent->agregarPais(country);
+        }
+    }
 }
 
 void MapaParser::cargarReglas(xmlNodePtr& mapNode,
