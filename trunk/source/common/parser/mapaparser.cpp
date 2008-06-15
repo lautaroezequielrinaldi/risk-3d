@@ -162,7 +162,41 @@ void MapaParser::cargarPaises(xmlNodePtr& mapNode,
 
 void MapaParser::cargarContinentes(xmlNodePtr& mapNode,
     ReferenceCountPtr<Mapa>& map) {
+    // Defino un contexto de XPath.
+    xmlXPathContextPtr xpathContext;
+    // Defino un objeto de XPath.
+    xmlXPathObjectPtr xpathObject;
+    // Defino el set de nodos devueltos por la expresiòn XPath.
+    xmlNodeSetPtr continentNodeSet;
 
+    // Creo el contexto de XPath.
+    xpathContext = xmlXPathNewContext(this->document);
+
+    // Evaluo la expresiòn XPath.
+    xpathObject = xmlXPathEvalExpression(BAD_CAST "//mapa/lista-continentes/continente",
+        xpathContext);
+
+     // Obtengo el set de nodos de continentes.
+    continentNodeSet = xpathObject->nodesetval;
+
+    // Itero por cada nodo de paises.
+    for ( int contador = 0; contador < continentNodeSet->nodeNr; ++contador) {
+        // Obtengo el nodo del continente actual.
+        xmlNodePtr continentNode = continentNodeSet->nodeTab[contador];
+
+        // Obtengo el nombre del continente actual.
+        std::string nombre = (const char*) xmlGetProp(continentNode,
+            BAD_CAST "nombre");
+        // Obtengo el bonus del continente actual,
+        std::string armyBonusStr = (const char*) xmlGetProp(continentNode,
+            BAD_CAST "bonus");
+        // Obtengo el army bonus del continente actual como int.
+        int armyBonus = atoi(armyBonusStr.c_str());
+        // Creo objeto continente.
+        ReferenceCountPtr<Continente> continent(new Continente(nombre, armyBonus));
+        // Agrego el continente al mapa.
+        map->agregarContinente(continent);
+    } 
 }
 
 void MapaParser::cargarReglas(xmlNodePtr& mapNode,
@@ -202,7 +236,7 @@ void MapaParser::saveMap(const std::string& fileName,
 ReferenceCountPtr<Mapa> MapaParser::loadMap(
     const std::string& fileName) {
     // Defino el mapa que voy a devolver.
-    ReferenceCountPtr<Mapa> map;
+    ReferenceCountPtr<Mapa> map = new Mapa();
     // Defino el elemento raiz del documento XML sobre el cual voy a trabajar.
     xmlNodePtr mapNode;
 
