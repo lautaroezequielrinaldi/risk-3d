@@ -12,13 +12,13 @@ void MapaParser::persistirImagen(xmlNodePtr& mapNode,
 		std::ios_base::in | std::ios_base::binary);
 	std::vector<unsigned char> bytes;
 	char character;
-	while (!imageFile.read (&character, 1)) {
+	while (imageFile.read (&character, 1)) {
 		bytes.push_back(character);
 	}
 
 	std::string base64 = HexCoder::encode(bytes);
 	// Creo un nodo para la imagen encodeada.
-	xmlNodePtr imageNode = xmlNewChild(mapNode, NULL,
+	xmlNewChild(mapNode, NULL,
 		BAD_CAST (const xmlChar*) "imagen",
 		BAD_CAST (const xmlChar*) base64.c_str());
 }
