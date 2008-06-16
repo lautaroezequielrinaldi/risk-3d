@@ -15,6 +15,10 @@
 #include "../model/gamecard.h" // Para definiciòn de GameCard.
 #include "../model/conquercontinentgamecard.h" // Para definiciòn de
 //ConquerContinentGameCard.
+#include "../model/conquerplayergamecard.h" // Para definicion de
+//ConquerPlayerGameCard.
+#include "../model/conquercountriesgamecard.h" // Para definicion de
+//ConquerCountriesGameCard.
 #include "../smartpointer/referencecountptr.h" // Para definiciòn de
 // ReferenceCountPtr.
 

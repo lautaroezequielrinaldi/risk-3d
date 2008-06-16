@@ -1,7 +1,7 @@
 #include<gtkmm/main.h>
 #include "mainwindow.h" // Para definicion de MainWindow.
 #include<iostream>
-int main(int argc, char** argv) {
+/*int main(int argc, char** argv) {
     Gtk::Main main(argc, argv);
 
 	MainWindow mainWindow;
@@ -9,9 +9,9 @@ int main(int argc, char** argv) {
 	Gtk::Main::run(mainWindow);
 
     return 0;
-}
+}*/
 
-/*int main(int argc, char** argv) {
+int main(int argc, char** argv) {
     MapaParser parser;
 
     ReferenceCountPtr<Mapa> map = parser.loadMap("./mapa.xml");
@@ -62,5 +62,10 @@ int main(int argc, char** argv) {
             std::cout << std::endl;
         }
     }
+	Mapa::IteradorGameCard gameCardIter;
+	for (gameCardIter = map->primerGameCard(); gameCardIter != map->ultimoGameCard(); ++gameCardIter) {
+		ReferenceCountPtr<GameCard> gameCard = *gameCardIter;
+		std::cout << "Nombre: " << gameCard->getName() << std::endl;
+	}
     return 0;
-}*/
+}

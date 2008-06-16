@@ -300,7 +300,81 @@ void MapaParser::cargarContinentes(xmlNodePtr& mapNode,
 
 void MapaParser::cargarReglas(xmlNodePtr& mapNode,
     ReferenceCountPtr<Mapa>& map) {
+    // Defino un contexto de XPath.
+    xmlXPathContextPtr xpathContext;
+    // Defino un objeto de XPath.
+    xmlXPathObjectPtr xpathObject;
+    // Defino el set de nodos devueltos por la expresion XPath.
+    xmlNodeSetPtr gameCardNodeSet;
 
+    // Creo el contexto de XPath.
+    xpathContext = xmlXPathNewContext(this->document);
+
+	// Evaluo la expresiòn XPath.
+	xpathObject = xmlXPathEvalExpression(
+		BAD_CAST "//mapa/lista-cartas-de-juego/carta-de-juego[@tipo='CONQUERCONTINENTGAMECARD']",
+		xpathContext);
+	// Obtengo  el set de nodos de cartas de juego.
+	gameCardNodeSet = xpathObject->nodesetval;
+
+	// Itero por las reglas de conquistar continentes.
+	for (int contador = 0; contador < gameCardNodeSet->nodeNr; ++contador) {
+		// Obtengo el nodo de carta de juego actual.
+		xmlNodePtr gameCardNode = gameCardNodeSet->nodeTab[contador];
+		// Obtengo el nombre de la carta de juego.
+		std::string nombre = (const char*) xmlGetProp(gameCardNode, BAD_CAST (const xmlChar*) "nombre");
+		// Obtengo el nombre del continente.
+		std::string continente = (const char*) xmlGetProp(gameCardNode, BAD_CAST (const xmlChar*) "continente");
+		// Creo la carta de juego.
+		ReferenceCountPtr<GameCard> gameCard(new ConquerContinentGameCard(nombre, continente));
+		// Agrego la carta de juego al mapa.
+		map->agregarGameCard(gameCard);
+	}
+
+	// Evaluo la expresiòn XPath.
+	xpathObject = xmlXPathEvalExpression(
+		BAD_CAST "//mapa/lista-cartas-de-juego/carta-de-juego[@tipo='CONQUERPLAYERGAMECARD']",
+		xpathContext);
+    // Obtengo  el set de nodos de cartas de juego.
+    gameCardNodeSet = xpathObject->nodesetval;
+
+	// Itero por las cartas de juego.
+	for (int contador = 0; contador < gameCardNodeSet->nodeNr; ++contador) {
+		// Obtengo el nodo actual.
+		xmlNodePtr gameCardNode = gameCardNodeSet->nodeTab[contador];
+		// Obtengo nombre de carta de juego.
+		std::string nombre = (const char*) xmlGetProp(gameCardNode, BAD_CAST (const xmlChar*) "nombre");
+		// Obtengo jugador como string.
+		std::string jugadorStr = (const char*) xmlGetProp(gameCardNode, BAD_CAST (const xmlChar*) "jugador");
+		// Obtengo jugador.
+		int jugador = atoi(jugadorStr.c_str());
+		// Creo carta de juego.
+		ReferenceCountPtr<GameCard> gameCard(new ConquerPlayerGameCard(nombre, jugador));
+		// Agrego carta de juego al mapa.
+		map->agregarGameCard(gameCard);
+	}	
+
+    // Evaluo la expresiòn XPath.
+    xpathObject = xmlXPathEvalExpression(
+		BAD_CAST "//mapa/lista-cartas-de-juego/carta-de-juego[@tipo='CONQUERCOUNTRIESGAMECARD']",
+		xpathContext);
+    // Obtengo  el set de nodos de cartas de juego.
+    gameCardNodeSet = xpathObject->nodesetval;
+    // Itero por las cartas de juego.
+    for (int contador = 0; contador < gameCardNodeSet->nodeNr; ++contador) {
+		//Obtengo el nodo actual.
+        xmlNodePtr gameCardNode = gameCardNodeSet->nodeTab[contador];
+        // Obtengo nombre de carta de juego.
+        std::string nombre = (const char*) xmlGetProp(gameCardNode, BAD_CAST (const xmlChar*) "nombre");
+        // Obtengo cantidad de paises como string.
+        std::string cantidadStr = (const char*) xmlGetProp(gameCardNode, BAD_CAST (const xmlChar*) "cantidad");
+        // Obtengo paises.
+        int cantidad = atoi(cantidadStr.c_str());
+        // Creo carta de juego.
+        ReferenceCountPtr<GameCard> gameCard(new ConquerCountriesGameCard(nombre, cantidad));
+        // Agrego carta de juego al mapa.
+        map->agregarGameCard(gameCard);
+    }
 }
 
 void MapaParser::saveMap(const std::string& fileName,
@@ -315,7 +389,7 @@ void MapaParser::saveMap(const std::string& fileName,
     // Establece el nodo raìz del documento XML sobre el cual se va a trabajar.
     xmlDocSetRootElement(this->document, mapNode);
 
-    // Persiste los paises del mapa.
+    // Persiste los paises del mapa.a
     persistirPaises(mapNode, map);
     // Persiste los continentes del map.
     persistirContinentes(mapNode, map);
