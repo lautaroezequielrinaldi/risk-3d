@@ -34,7 +34,8 @@ class StateMachine {
 	private:
 		
 		std::map <std::string, ReferenceCountPtr<State> > states;
-		State * current_state;
+		ReferenceCountPtr<State> current_state;
+                std::string current_state_name;
 		
 	
 	
