@@ -11,7 +11,7 @@ StateMachine::StateMachine(){
         states.insert(std::make_pair("waitingPlayer",new WaitingPlayer()));
         states.insert(std::make_pair("waitingFirstPlayer",new WaitingFirstPlayer()));
         states.insert(std::make_pair("waitingMapSelection",new WaitingMapSelection()));
-
+        setNextState("waitingfirstplayer");
 
 
 
@@ -22,6 +22,8 @@ StateMachine::~StateMachine(){
 }
 
 void StateMachine::setNextState(const std::string & statename){
+       current_state = states[statename];
+       current_state_name = statename;
 
 }
 
