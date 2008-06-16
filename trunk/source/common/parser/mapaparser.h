@@ -4,11 +4,13 @@
 #include<string> // Para definiciòn de std::string.
 #include<sstream> // Para definicino de dtd::ostringstream.
 #include<map> // Para definiciòn de std::map
+#include<fstream> // Para definicion de std::ifstream.
 #include<libxml/parser.h> // Para definiciòn de la libreria libxml parser.
 #include<libxml/tree.h> // Para definiciòn de la libreria libxml tree.
 #include<libxml/xpath.h> // Para definiciòn de la libreria libxml xpath.
 #include<libxml/xpathInternals.h> // Para definiciòn de la libreria libxml
 // xpath internals.
+#include "hexcoder.h" // Para definicion de HexCoder.
 #include "../model/mapa.h" // Para definiciòn de Mapa.
 #include "../model/pais.h" // Para definiciòn de Pais.
 #include "../model/continente.h" // Para definiciòn de Continente.
@@ -52,6 +54,11 @@ class MapaParser {
          * Operador de asignaciòn de la clase MapaParser.
          */
         MapaParser& operator=(const MapaParser& otherInstance);
+		/**
+		 * Persiste la imagen del mapa.
+		 */
+		void persistirImagen(xmlNodePtr& nodoMapa,
+			const std::string& imageFileName);
         /**
          * Persiste los paises del mapa.
          */
@@ -96,7 +103,7 @@ class MapaParser {
          * XML en disco.
          */
         void saveMap(const std::string& fileName,
-            ReferenceCountPtr<Mapa>& mapa);
+			const std::string& imageFileName, ReferenceCountPtr<Mapa>& mapa);
         /**
          * Mètodo cuyo propòsito es cargar el mapa desde un archivo XML en
          * disco.
