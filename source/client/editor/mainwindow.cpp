@@ -99,7 +99,8 @@ void MainWindow::onSaveMenuItemActivated() {
 			case(Gtk::RESPONSE_OK): {
 				std::string fileToSave  = dialog.get_filename();
 				MapaParser parser;
-				parser.saveMap(fileToSave, this->editor->getMapa());
+				parser.saveMap(fileToSave, this->editor->getImageFileName(),
+					this->editor->getMapa());
 			}
 		}
 	}
