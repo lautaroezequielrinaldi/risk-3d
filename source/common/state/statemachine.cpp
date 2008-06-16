@@ -2,7 +2,9 @@
 // #include "todos los estados"
 
 StateMachine::StateMachine(){
-	// poblar states con pares nombre state
+	std::string key("attaking");
+
+	states.insert(std::make_pair(key,new Attacking(););
 }
 
 StateMachine::~StateMachine(){

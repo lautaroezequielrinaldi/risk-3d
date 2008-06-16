@@ -3,13 +3,6 @@
 
 #include "state.h"
 
-class Attack;
-class Defend;
-class JoinGame;
-class Move;
-class SelectMap;
-class Populate;
-class ReadyToPlay;
 
 class Defending : public State
 {
