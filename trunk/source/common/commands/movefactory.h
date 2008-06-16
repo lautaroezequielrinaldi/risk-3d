@@ -1,15 +1,15 @@
-#ifndef __ATTACKFACTORY__
-#define __ATTACKFACTORY__
+#ifndef __MOVEFACTORY__
+#define __MOVEFACTORY__
 
 #include "commandfactory.h"
-#include "attack.h"
+#include "move.h"
 
-class AttackFactory : public CommandFactory{
+class MoveFactory : public CommandFactory{
 	
 	
-		AttackFactory();
+		MoveFactory();
 
-		~AttackFactory();
+		~MoveFactory();
 	
 		/**
 		 * Metodo cuyo proposito es crear un comando a partir de una lista de parametros.
@@ -27,6 +27,5 @@ class AttackFactory : public CommandFactory{
 };
 
 
+#endif /* __MOVEFACTORY__*/
 
-
-#endif /* __ATTACKFACTORY__*/
