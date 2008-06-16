@@ -3,4 +3,28 @@
 #include "commandfactory.h"
 #include "defend.h"
 
+
+class DefendFactory : public CommandFactory{
+	
+	
+	
+	
+	
+	
+	
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #endif /* __DEFENDFACTORY__*/
