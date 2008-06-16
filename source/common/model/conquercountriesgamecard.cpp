@@ -23,7 +23,7 @@ std::map<std::string, std::string> ConquerCountriesGameCard::toString() {
 
     result["tipo"] = "CONQUERCOUNTRIESGAMECARD";
     result["nombre"] = getName();
-    result["cantidad-paises"] = countryCountStr.str();
+    result["cantidad"] = countryCountStr.str();
 
     return result;
 }
