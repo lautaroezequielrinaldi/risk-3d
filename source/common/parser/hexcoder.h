@@ -1,24 +1,20 @@
 #ifndef __HEXCODER__
 #define __HEXCODER__
 
-#include<string> // Para definicion de std::string.
+#include<string>
+#include<vector>
 
 /**
- * Clase para encodear y desencodear en base64
+ * Clae HexCoder que se encarga de encodear a base 64.
  */
 class HexCoder {
-	/**
-	 * Metodos publicos de la clase HexCoder.
-	 */
-	public:
-		/**
-		 * Encodea una cadena de bytes a base64 encoding.
-		 */
-		static std::string encode(unsigned char const* , unsigned int len);
-		/**
-		 * Desencodea una cadena de bytes de base64 encoding.
-		 */
-		static std::string decode(std::string const& s);
+  private:
+    static char encode(unsigned char unsignedCharacter);
+    static unsigned char decode(char character);
+    static bool isBase64(char character);
+  public:
+    static std::string encode(const std::vector<unsigned char> & source);
+    static std::vector<unsigned char> decode(const std::string & source);
 };
 
 #endif

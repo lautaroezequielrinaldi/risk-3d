@@ -12,6 +12,9 @@
 #include "../model/mapa.h" // Para definiciòn de Mapa.
 #include "../model/pais.h" // Para definiciòn de Pais.
 #include "../model/continente.h" // Para definiciòn de Continente.
+#include "../model/gamecard.h" // Para definiciòn de GameCard.
+#include "../model/conquercontinentgamecard.h" // Para definiciòn de
+//ConquerContinentGameCard.
 #include "../smartpointer/referencecountptr.h" // Para definiciòn de
 // ReferenceCountPtr.
 

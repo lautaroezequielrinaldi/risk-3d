@@ -110,7 +110,35 @@ void MapaParser::persistirContinentes(xmlNodePtr& mapNode,
 
 void MapaParser::persistirReglas(xmlNodePtr& mapNode,
     ReferenceCountPtr<Mapa>& map) {
+    // Define el nodo de lista de cartas de juego a persistir.
+    xmlNodePtr gameCardListNode;
+    // Define el nodo de la carta de juego a persistir.
+    xmlNodePtr gameCardNode;
+    // Defino el iterador de cartas de juego.
+    Mapa::IteradorGameCard gameCardIter;
 
+    // Creo el nodo de lista de cartas de juego a persistir.
+    gameCardListNode = xmlNewChild(mapNode, NULL,
+        BAD_CAST "lista-cartas-de-juego", NULL);
+    // Itero por cada carta de juego.
+    for (gameCardIter = map->primerGameCard(); gameCardIter != map->ultimoGameCard();
+        ++gameCardIter) {
+        // Obtengo la carta de juego actual.
+        ReferenceCountPtr<GameCard> gameCard = *gameCardIter;
+        // Crea el nodo para la carta de juego
+        gameCardNode = xmlNewChild(gameCardListNode, NULL, BAD_CAST "carta-de-juego",
+            NULL);
+        // Serializa la carta de juego
+        std::map<std::string, std::string> result  = gameCard->toString();
+        std::map<std::string, std::string>::iterator attributeIter;
+        for (attributeIter = result.begin(); attributeIter != result.end();
+            ++attributeIter) {
+            std::string key = attributeIter->first;
+            std::string value = attributeIter->second;
+            xmlNewProp(gameCardNode, BAD_CAST (const xmlChar*) key.c_str(),
+                BAD_CAST (const xmlChar*) value.c_str());
+        }
+    }
 }
 
 void MapaParser::cargarPaises(xmlNodePtr& mapNode,

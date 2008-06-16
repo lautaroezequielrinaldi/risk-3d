@@ -2,6 +2,7 @@
 #define __GAMECARD_H__
 
 #include<string> // Para definiciòn de std::string.
+#include<map> // Para definiciòn de std::list.
 #include "player.h" // Para definiciòn de Player.
 #include "game.h" // Para definiciòn de Game.
 #include "../smartpointer/referencecountptr.h" // Para definiciòn de
@@ -36,7 +37,10 @@ class GameCard {
          * Obtiene el nombre de la GameCard.
          */
         std::string getName();
-
+        /**
+         * Devuelve el objeto serializado como pares clave, valor.
+         */
+        virtual std::map<std::string, std::string> toString() = 0;
         /**
          * Valida la carta de juego para un jugador.
          */
