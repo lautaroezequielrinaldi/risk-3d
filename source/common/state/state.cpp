@@ -1,5 +1,15 @@
 #include "state.h"
 
+#include "../commands/attack.h"
+#include "../commands/defend.h"
+#include "../commands/joingame.h"
+#include "../commands/move.h"
+#include "../commands/selectmap.h"
+#include "../commands/populate.h"
+#include "../commands/readytoplay.h"
+#include "../commands/nomore.h"
+#include "../commands/surrender.h"
+#include "../commands/quit.h"
 
 State::State() {
     // No realiza ninguna acciòn.

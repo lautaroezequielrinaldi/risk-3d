@@ -1,14 +1,13 @@
 #ifndef GAMEMANAGER_H_
 #define GAMEMANAGER_H_
 
+
 #include "game.h"
 #include "turnmanager.h"
 #include "../state/statemachine.h"
-//#include "state.h"
+#include "../state/state.h"
 #include "../smartpointer/referencecountptr.h" // Para definiciòn de ReferenceCountPtr.
-
 class Attack;
-
 class GameManager
 {
 	

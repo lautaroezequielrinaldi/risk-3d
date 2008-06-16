@@ -4,16 +4,16 @@
 #include <string>
 #include "../smartpointer/referencecountptr.h"
 
-#include "../commands/attack.h"
-#include "../commands/defend.h"
-#include "../commands/joingame.h"
-#include "../commands/move.h"
-#include "../commands/selectmap.h"
-#include "../commands/populate.h"
-#include "../commands/readytoplay.h"
-#include "../commands/nomore.h"
-#include "../commands/surrender.h"
-#include "../commands/quit.h"
+class Attack;
+class Defend;
+class JoinGame;
+class Move;
+class SelectMap;
+class Populate;
+class ReadyToPlay;
+class NoMore;
+class Surrender;
+class Quit;
 
 class State {
 
@@ -38,7 +38,7 @@ class State {
 
 		
 		
-	    virtual bool attack(Attack & command)
+	    virtual bool attack(Attack & command);
 	    
 	    virtual bool defend(Defend & command);
 	    

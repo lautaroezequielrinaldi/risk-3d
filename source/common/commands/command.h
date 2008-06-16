@@ -3,13 +3,14 @@
 
 #include "../parser/serializable.h"
 //#include "../state/state.h"
-#include "../model/gamemanager.h" // Para definiciòn de gameManager.
+//#include "../model/gamemanager.h" // Para definiciòn de gameManager.
 #include "../smartpointer/referencecountptr.h" // Para definiciòn de ReferenceCountPtr
 
 /**
  * Forward declaration de la clase State.
  */
 class State;
+class GameManager;
 
 /**
  * Clase abstracta cuyo proposito es brindar la interfaz de un comando serializable.
