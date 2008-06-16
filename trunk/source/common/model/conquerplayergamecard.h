@@ -1,7 +1,9 @@
 #ifndef __CONQUERPLAYERGAMECARD_H__
 #define __CONQUERPLAYERGAMECARD_H__
 
-#include<string> // Para definicion de std::string
+#include<string> // Para definicion de std::string.
+#include<map> // Para definicion de std::map.
+#include<sstream> // Para definicion de std::ostringstream.
 #include "gamecard.h" // Para definicion de GameCard.
 #include "player.h" // Para definiciòn de Player.
 #include "game.h" // Para definiciòn de Game.
@@ -45,10 +47,18 @@ class ConquerPlayerGameCard: public GameCard {
          */
         ConquerPlayerGameCard(const std::string& gameCardName, int color);
         /**
+         * Metodo que devuelve el color del jugador.
+         */
+        int getColor();
+        /**
          * Mètodo que valida la carta de juego.
          */
         bool execute(const ReferenceCountPtr<Player>& player,
             const ReferenceCountPtr<Game>& game);
+        /**
+         * Se serializa a  un string.
+         */
+        std::map<std::string, std::string> toString();
         /**
          * Destructor virtual de la clase ConquerPlayerGameCard.
          */

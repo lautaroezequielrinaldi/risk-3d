@@ -7,9 +7,22 @@ ConquerContinentGameCard::ConquerContinentGameCard(
     // No realiza ninguna acciòn.
 }
 
+std::string ConquerContinentGameCard::getContinentName() {
+    return this->continentName;
+}
+
 bool ConquerContinentGameCard::execute(const ReferenceCountPtr<Player>& player,
     const ReferenceCountPtr<Game>& game) {
     return false;
+}
+
+std::map<std::string, std::string> ConquerContinentGameCard::toString() {
+    std::map<std::string, std::string> result;
+    result["tipo"] = "CONQUERCONTINENTGAMECARD";
+    result["nombre"] = getName();
+    result["continente"] = getContinentName();
+
+    return result;
 }
 
 ConquerContinentGameCard::~ConquerContinentGameCard() {

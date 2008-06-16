@@ -2,6 +2,7 @@
 #define __CONQUERCONTINENTGAMECARD_H__
 
 #include<string> // Para definiciòn de std::string.
+#include<map> // Para definicion de std::map.
 #include "player.h" // Para definiciòn de Player.
 #include "game.h" // Para definiciòn de Game.
 #include "gamecard.h" // Para definiciòn de GameCard.
@@ -41,6 +42,10 @@ class ConquerContinentGameCard: public GameCard {
      */
     public:
         /**
+         * Obtiene el nombre del continente.
+         */
+        std::string getContinentName();
+        /**
          * Constructor de la clase ConquerContinentGameCard.
          */
         ConquerContinentGameCard(const std::string& name,
@@ -50,6 +55,10 @@ class ConquerContinentGameCard: public GameCard {
          */
         bool execute(const ReferenceCountPtr<Player>& player,
             const ReferenceCountPtr<Game>& game);
+        /**
+         * Se serializa a string.
+         */
+        std::map<std::string, std::string> toString();
         /**
          * Destructor virtual de la clase ConquerContinentGameCard.
          */
