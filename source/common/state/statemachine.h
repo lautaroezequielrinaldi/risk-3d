@@ -12,8 +12,8 @@
 #include "occupying.h"
 #include "populating.h"
 #include "simplepopulating.h"
-//#include ".h"
-//#include ".h"
+#include "waitingfirstplayer.h"
+#include "waitingmapselection.h"
 
 /**
  *
