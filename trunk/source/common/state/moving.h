@@ -23,7 +23,7 @@ class Moving : public State
 		 * Metodo cuyo proposito es ejecutar la accion correspondiente al estado del juego y notificar 
 		 * los cambios en el mismo.
 		 */
-		bool move(Move & command);
+		virtual bool move(Move & command);
 
 	 
 };

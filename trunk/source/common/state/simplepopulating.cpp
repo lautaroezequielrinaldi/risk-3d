@@ -8,3 +8,9 @@ SimplePopulating::~SimplePopulating()
 {
 }
 
+
+bool SimplePopulating::populate(Populate & command){
+
+        return false;
+}
+

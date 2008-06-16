@@ -12,7 +12,7 @@ class Populating : public State
 		Populating();
 	
 		~Populating();
-		
+                virtual bool populate(Populate & command);		
 };
 
 #endif /*POPULATING_H_*/

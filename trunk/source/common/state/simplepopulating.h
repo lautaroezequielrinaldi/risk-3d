@@ -11,6 +11,7 @@ class SimplePopulating : public State
 		SimplePopulating();
 	
 		~SimplePopulating();
+                virtual bool populate(Populate & command);
 };
 
 #endif /*SIMPLEPOPULATING_H_*/

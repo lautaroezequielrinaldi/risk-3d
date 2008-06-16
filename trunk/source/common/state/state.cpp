@@ -25,43 +25,46 @@ std::string State::getName(){
 }
 
 
-bool attack(Attack & command){
+bool State::attack(Attack & command){
 	return false;
 }
 
-bool defend(Defend & comman){
+bool State::defend(Defend & command){
 	return false;
 }
 
-//virtual void occupy(Occupy & command);
+//virtual void State::occupy(Occupy & command);
 
-bool joinGame(JoinGame & command){
+bool State::joinGame(JoinGame & command){
 	return false;
 }
-//virtual bool kill(Kill & move);
-bool move(Move & command){
+//virtual bool State::kill(Kill & move);
+bool State::move(Move & command){
 	return false;
 }
-bool selectMap(SelectMap & command){
-
+bool State::selectMap(SelectMap & command){
+        return false;
 }
 
 //bool virtual setOwner(SetOwner & command);
-bool populate(Populate & command){
-
+bool State::populate(Populate & command){
+     return false;
 }
 
-bool readyToPlay(ReadyToPlay & command){
+bool State::readyToPlay(ReadyToPlay & command){
 	return false;
 }
 
-bool noMore(NoMore & command){
+bool State::noMore(NoMore & command){
 	return false;
 }
 
-bool surrender(Surrender & command){
+bool State::surrender(Surrender & command){
 	return false;
 }
 
+bool State::quit(Quit & command){
+        return false;
+}
 
 

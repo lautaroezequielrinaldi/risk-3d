@@ -13,26 +13,8 @@ class Defending : public State
 	
 		~Defending();
 		
-		bool defend(Defend & command);
+		virtual bool defend(Defend & command);
 		
-/*
-		State * getNext();
-		
-	    bool attack(Attack & command);
-	    
-	    
-	    
-	   	//void occupy(Occupy & command)
-	    
-	    bool joinGame(JoinGame & command);
-	    //bool kill(Kill & move);
-	    bool move(Move & command);
-	    bool selectMap(SelectMap & command);
-	    //bool setOwner(SetOwner & command);
-	    bool populate(Populate & command);
-	    bool readyToPlay(ReadyToPlay & command);
-		
-*/		
 };
 
 #endif /*DEFENDING_H_*/
