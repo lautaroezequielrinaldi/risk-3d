@@ -13,6 +13,8 @@ class WaitingPlayer : public State
 		~WaitingPlayer();
 		
 	                   virtual bool joinGame(JoinGame & command); 
+                 virtual bool readyToPlay(ReadyToPlay & command);
+
 };
 
 #endif /*WAITINGPLAYER_H_*/
