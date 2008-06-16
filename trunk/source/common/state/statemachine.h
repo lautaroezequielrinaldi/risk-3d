@@ -28,6 +28,7 @@ class StateMachine {
 		StateMachine();
 	
 		~StateMachine();
+                ReferenceCountPtr<state> getState(std::string);
 	
 		void setNextState(const std::string & statename);
 		
