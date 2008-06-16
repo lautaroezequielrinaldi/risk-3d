@@ -4,9 +4,11 @@
 // definicion del atributo estatico para que el linker lo encuentre.
 int Player::ultimoColorAsignado = 0;
 
-Player::Player(int color)
+Player::Player(int color, int armyCount)
 {
-	this->color = color;	
+	this->color = color;
+	this->ejercitosAUbicar = armyCount;
+		
 }
 
 Player::Player()
@@ -32,6 +34,14 @@ int Player::getColor(){
 
 void Player::setColor(int color){
 	this->color = color;
+}
+
+int Player::getArmyCount(){
+	return this->ejercitosAUbicar;
+}
+
+void Player::setArmyCount(int armyCount){
+	this->ejercitosAUbicar = armyCount;
 }
 
 std::list<std::string>& Player::getConqueredLandList(){

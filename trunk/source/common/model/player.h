@@ -13,7 +13,6 @@ class Player
 	
 	private:
 		
-
 		/**
 		 * Colores:
 		 * 1	rojo  
@@ -24,6 +23,8 @@ class Player
 		 * 6	blanco
 		 */
 		int color;
+
+		int ejercitosAUbicar;
 		
 		static int ultimoColorAsignado;
 		
@@ -38,7 +39,7 @@ class Player
 		/**
 		 * Constructor de la clase
 		 */
-		Player(int color);
+		Player(int color,int armyCount);
 		
 		/**
 		 * Constructor de la clase. 
@@ -61,6 +62,15 @@ class Player
 		  */
 		void setColor( int color);
 		
+		/**
+		 * Metodo cuyo proposito es obtener la cantidad de ejercitos que posee el jugador para ubicar
+		 */
+		int getArmyCount();
+		 
+		 /**
+		  * Metodo cuyo proposito es establecer la cantidad de ejercitos que podra ubicar el jugador.
+		  */
+		void setArmyCount(int armyCount);
 					
 		/**
 		 * Metodo cuyo proposito es obtener la lista de nombres de los paises conquistados por un jugador
