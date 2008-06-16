@@ -1,6 +1,5 @@
 #include "gamemanager.h"
 #include "../state/statemachine.h"
-#include "../command/attack.h"
 
 GameManager::GameManager(): game (), turnManager ()
 {

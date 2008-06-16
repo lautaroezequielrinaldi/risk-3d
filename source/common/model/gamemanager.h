@@ -73,5 +73,6 @@ class GameManager
 		 void setAttack( ReferenceCountPtr<Attack>& attack);
 		
 };
+#include "../commands/attack.h"
 
 #endif /*GAMEMANAGER_H_*/
