@@ -1,7 +1,7 @@
 #ifndef __COMMANDFACTORY__
 #define __COMMANDFACTORY__
 
-
+#include <vector>
 #include "command.h"
 
 class CommandFactory{

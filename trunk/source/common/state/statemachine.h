@@ -11,9 +11,9 @@
 #include "moving.h"
 #include "occupying.h"
 #include "populating.h"
-#include "simplepopulatng.h"
-#include ".h"
-#include ".h"
+#include "simplepopulating.h"
+//#include ".h"
+//#include ".h"
 
 /**
  *
