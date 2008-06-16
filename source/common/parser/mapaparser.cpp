@@ -5,6 +5,23 @@ MapaParser::MapaParser():
     // No realiza ninguna acciòn.
 }
 
+void MapaParser::persistirImagen(xmlNodePtr& mapNode,
+	const std::string& imageFileName) {
+	// Creo el archivo de imagen a leer.
+	std::ifstream imageFile(imageFileName.c_str(),
+		std::ios_base::in | std::ios_base::binary);
+	std::vector<char> bytes;
+	char character;
+	while (!imageFile.read (character, 1)) {
+		bytes.push_back(character);
+	}
+
+	std::string base64 = HexCoder::encode(bytes);
+	// Creo un nodo para la imagen encodeada.
+	xmlNodePtr = xnlNewChild(mapNode, BAD_CAST (const xmlChar*) "imagen",
+		BAD_CAST (const xmlChar*) base64.c_str());
+}
+
 void MapaParser::persistirPaises(xmlNodePtr& mapNode,
     ReferenceCountPtr<Mapa>& map) {
     // Define el nodo de lista de paises a persistir.
@@ -378,7 +395,7 @@ void MapaParser::cargarReglas(xmlNodePtr& mapNode,
 }
 
 void MapaParser::saveMap(const std::string& fileName,
-    ReferenceCountPtr<Mapa>& map) {
+	const std::string& imageFileName, ReferenceCountPtr<Mapa>& map) {
     // Define el nodo raiz del documento XML sobre el cual se va a trabajar.
     xmlNodePtr mapNode;
 
@@ -389,7 +406,9 @@ void MapaParser::saveMap(const std::string& fileName,
     // Establece el nodo raìz del documento XML sobre el cual se va a trabajar.
     xmlDocSetRootElement(this->document, mapNode);
 
-    // Persiste los paises del mapa.a
+	// Persiste la imagen del mapa.
+	persistirImagen(mapNode, imageFileName);
+    // Persiste los paises del mapa.
     persistirPaises(mapNode, map);
     // Persiste los continentes del map.
     persistirContinentes(mapNode, map);

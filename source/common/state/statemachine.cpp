@@ -4,7 +4,7 @@
 StateMachine::StateMachine(){
 	std::string key("attaking");
 
-	states.insert(std::make_pair(key,new Attacking(););
+	states.insert(std::make_pair(key,new Attacking()));
 }
 
 StateMachine::~StateMachine(){
