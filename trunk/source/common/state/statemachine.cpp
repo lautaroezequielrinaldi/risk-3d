@@ -2,9 +2,19 @@
 // #include "todos los estados"
 
 StateMachine::StateMachine(){
-	std::string key("attaking");
+	states.insert(std::make_pair("attacking",new Attacking()));
+        states.insert(std::make_pair("defending",new Defending()));
+        states.insert(std::make_pair("moving",new Moving()));
+        states.insert(std::make_pair("occupying",new Occupying()));
+        states.insert(std::make_pair("simplePopulating",new SimplePopulating()));
+        states.insert(std::make_pair("populating",new Populating()));
+        states.insert(std::make_pair("waitingPlayer",new WaitingPlayer()));
+        states.insert(std::make_pair("waitingFirstPlayer",new WaitingFirstPlayer()));
+        states.insert(std::make_pair("waitingMapSelection",new WaitingMapSelection()));
 
-	states.insert(std::make_pair(key,new Attacking()));
+
+
+
 }
 
 StateMachine::~StateMachine(){
@@ -15,10 +25,3 @@ void StateMachine::setNextState(const std::string & statename){
 
 }
 
-void StateMachine::setNextPlayer(const std::string &playername){
-
-}
-
-void StateMachine::setNextPlayer(const Player * player){
-
-}
