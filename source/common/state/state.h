@@ -31,14 +31,16 @@ class State {
 		 */
 		virtual ~State();
 
-
-		virtual State * getNext()=0;
 		std::string getName();
 
-
+		virtual State * getNext()=0;
+		
 	    virtual bool attack(Attack & command) = 0;
 	    
 	    virtual bool defend(Defend & command) = 0;
+	    
+	    //virtual void occupy(Occupy & command)= 0;
+	    
 	    virtual bool joinGame(JoinGame & command) = 0;
 	    //bool kill(Kill & move);
 	    virtual bool move(Move & command) = 0;

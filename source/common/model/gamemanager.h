@@ -7,6 +7,8 @@
 //#include "state.h"
 #include "../smartpointer/referencecountptr.h" // Para definiciòn de ReferenceCountPtr.
 
+class Attack;
+
 class GameManager
 {
 	
@@ -23,9 +25,15 @@ class GameManager
         ReferenceCountPtr<TurnManager> turnManager;
 		
 		/**
-		 * Almacena es estado del juego
+		 * Almacena el estado del juego
 		 */
 		ReferenceCountPtr<StateMachine> stateMachine;
+		
+		/**
+		 * Almacena un ataque.
+		 */
+		 ReferenceCountPtr<Attack> attack;
+		
 		
 	public:
 	
@@ -54,6 +62,16 @@ class GameManager
 		 * Metodo cuyo proposito es obtener el manejador de turnos del juego.
 		 */
 		 ReferenceCountPtr<TurnManager>& getTurnManager();
+		
+		/**
+		 * Metodo cuyo proposito es obtener el ataque almacenado.
+		 */
+		 ReferenceCountPtr<Attack>& getAttack();
+		 
+		 /**
+		  * Metodo cuyo proposito es establecer un ataque.
+		  */
+		 void setAttack( ReferenceCountPtr<Attack>& attack);
 		
 };
 

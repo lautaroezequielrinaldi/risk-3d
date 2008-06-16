@@ -26,3 +26,12 @@ ReferenceCountPtr<TurnManager>& GameManager::getTurnManager(){
 	return this->turnManager;
 }
 
+
+ReferenceCountPtr<Attack>& GameManager::getAttack(){
+	return this->attack;
+}
+		 
+void GameManager::setAttack( ReferenceCountPtr<Attack>& attack){
+	this->attack = attack;	
+}
+		 
