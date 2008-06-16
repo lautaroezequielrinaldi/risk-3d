@@ -7,6 +7,9 @@
 #include "../state/statemachine.h"
 #include "../state/state.h"
 #include "../smartpointer/referencecountptr.h" // Para definiciòn de ReferenceCountPtr.
+
+
+class ProxyPlayer;
 class Attack;
 class GameManager
 {
@@ -51,7 +54,13 @@ class GameManager
 		 * Destructor de la clase
 		 */
 		~GameManager();
-		
+
+		/**
+		 *
+		 *
+		*/
+		void add(ReferenceCountPtr<ProxyPlayer> proxyplayer);		
+
 		/**
 		 * Metodo cuyo proposito es obtener la partida que se esta jugando.
 		 */
@@ -73,6 +82,8 @@ class GameManager
 		 void setAttack( ReferenceCountPtr<Attack>& attack);
 		
 };
+
 #include "../commands/attack.h"
+#include "../../server/proxyplayer.h"
 
 #endif /*GAMEMANAGER_H_*/
