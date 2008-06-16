@@ -74,6 +74,10 @@ class MapaParser {
          */
         void persistirReglas(xmlNodePtr& nodoMapa,
             ReferenceCountPtr<Mapa>& mapa);
+		/**
+		 * Carga la imagen del mapa.
+		 */
+		void cargarImagen(xmlNodePtr& nodoMapa);
         /**
          * Carga los paises del mapa.
          */

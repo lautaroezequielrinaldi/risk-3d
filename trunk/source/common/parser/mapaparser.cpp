@@ -21,6 +21,7 @@ void MapaParser::persistirImagen(xmlNodePtr& mapNode,
 	xmlNewChild(mapNode, NULL,
 		BAD_CAST (const xmlChar*) "imagen",
 		BAD_CAST (const xmlChar*) base64.c_str());
+	imageFile.close();
 }
 
 void MapaParser::persistirPaises(xmlNodePtr& mapNode,
@@ -157,6 +158,36 @@ void MapaParser::persistirReglas(xmlNodePtr& mapNode,
                 BAD_CAST (const xmlChar*) value.c_str());
         }
     }
+}
+
+void MapaParser::cargarImagen(xmlNodePtr& mapNode) {
+    // Defino un contexto de XPath.
+	xmlXPathContextPtr xpathContext;
+    // Defino un objeto de XPath.
+    xmlXPathObjectPtr xpathObject;
+    // Defino el nodo de la imagen
+    xmlNodePtr imageNode;
+
+    // Creo el contexto de XPath.
+    xpathContext = xmlXPathNewContext(this->document);
+
+    // Evaluo la expresiòn XPath.
+    xpathObject = xmlXPathEvalExpression(BAD_CAST "//mapa/imagen",
+		xpathContext);
+    // Obtengo el nodo de la imagen.
+	imageNode = xpathObject->nodesetval->nodeTab[0];
+	// Obtengo el contenido del nodo.
+	std::string base64 = (const char*) xmlNodeGetContent(imageNode);
+
+    // Creo el archivo de imagen a leer.
+    std::ofstream imageFile("./image",
+		std::ios_base::out | std::ios_base::binary);	
+    std::vector<unsigned char> bytes = HexCoder::decode(base64);
+	for (unsigned int contador = 0; contador < bytes.size(); ++contador) {
+		imageFile.write((char*) &bytes[contador],1);
+	}
+	imageFile.flush();
+	imageFile.close();
 }
 
 void MapaParser::cargarPaises(xmlNodePtr& mapNode,
@@ -442,6 +473,9 @@ ReferenceCountPtr<Mapa> MapaParser::loadMap(
 
     // Vacio la lista de paises cargados.
     this->paisesCargados.clear();
+
+	// Leo la imagen del mapa.
+	cargarImagen(mapNode);
 
     // Leo los paises del mapa.
     cargarPaises(mapNode, map);
