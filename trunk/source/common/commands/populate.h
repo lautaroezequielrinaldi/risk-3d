@@ -41,9 +41,16 @@ class Populate : public Command
 		void* hydrate(std::string xml);
 		
 		/**
-		 * Metodo cuyo proposito es validar la accion que realice el comando.
+		 * Metodo cuyo proposito es validar la accion de poblar un territorio.
 		 */
 		bool validate(ReferenceCountPtr<GameManager>& gameMAnager);
+
+		/**
+		* NOTA: ESTE METODO ES SOLO POR EL MOMENTO. A REFACTORIZAR.	
+		*
+		 * Metodo cuyo proposito es validar la accion de ocupar un territorio vacio.
+		 */
+		bool validateOccupy(ReferenceCountPtr<GameManager>& gameManager);
 		
 		/**
 		 * Metodo cuyo proposito es ejecutar la accion que realice el comando.

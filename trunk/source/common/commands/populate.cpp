@@ -158,15 +158,35 @@ bool Populate::validate(ReferenceCountPtr<GameManager>& gameManager){
 	//si el pais destino es del jugador actual
 	if( jugadorActual->landOwner(this->paisDestino) ){	
 		/*creo un calculador de ejercitos extras correspondientes el jugador para verificar que no use mas de los debidos*/
-		ArmyBonusCalculator calculadorBonus;
+		//ArmyBonusCalculator calculadorBonus;
 		
-		if (this->cantidadEjercitos <= calculadorBonus.getArmyBonus(gameManager) )
+		//if (this->cantidadEjercitos <= calculadorBonus.getArmyBonus(gameManager) )
+		if (this->cantidadEjercitos <=  jugadorActual->getArmyCount() )
 			resul= true;
 	}
 	
 	return resul;
 		
 }
+
+bool Populate::validateOccupy(ReferenceCountPtr<GameManager>& gameManager){
+
+	bool res = false;
+
+	ReferenceCountPtr<Game> game = gameManager->getGame();
+	ReferenceCountPtr<Mapa> map = game->getMapa();
+	ReferenceCountPtr<Pais> paisD = map->obtenerPais(this->paisDestino);
+
+	// si pais destino esta vacio
+	if ( paisD->getArmyCount() == 0 ){
+		// si quiere ubicar solo 1 ejercito
+		if ( this->cantidadEjercitos == 1 )
+			res = true;
+	}    
+
+	return res;
+}
+
 
 void Populate::execute(ReferenceCountPtr<State>& state){
 	
