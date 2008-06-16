@@ -5,6 +5,7 @@
 #include <map>
 #include <string.h>
 #include "../model/player.h"
+#include "../smartpointer/referencecountptr.h"
 
 #include "attacking.h"
 #include "defending.h"
@@ -14,6 +15,7 @@
 #include "simplepopulating.h"
 #include "waitingfirstplayer.h"
 #include "waitingmapselection.h"
+#include "waitingplayer.h"
 
 /**
  *
@@ -29,20 +31,12 @@ class StateMachine {
 	
 		void setNextState(const std::string & statename);
 		
-		void setNextPlayer(const std::string &playername);
-		
-		void setNextPlayer(const Player * player);
-
 	private:
 		
-		std::map <std::string, State*> states;
+		std::map <std::string, ReferenceCountPtr<State> > states;
 		State * current_state;
-		Player * current_player;
-		Player * current_defender;
 		
 	
 	
-	//ReferenceCountPtr<State> state;
-    //std::map<std::string,ReferenceCountPtr<State> > currentState;
 };
 #endif /** __STATEMACHINE_H__ */
