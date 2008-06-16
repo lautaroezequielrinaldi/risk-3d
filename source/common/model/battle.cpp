@@ -62,6 +62,10 @@ BattleResult Battle::start(ReferenceCountPtr<GameManager>& gameManager){
 	ReferenceCountPtr<Pais> paisAtacante = map->obtenerPais( this->ataque->getAttackerLand() );
 	ReferenceCountPtr<Pais> paisDefensor = map->obtenerPais( this->ataque->getAttackedLand() );	
 
+	ReferenceCountPtr<Player> playerAtacante = game->getPlayer( gameManager->getTurnManager()->getCurrentPlayer() );
+	ReferenceCountPtr<Player> playerDefensor = game->getPlayer( gameManager->getTurnManager()->getDefenderPlayer() );
+
+
 	// tiro los dados para el atacante
 	for(int i=0;i<this->ataque->getArmyCount();i++)
 		dadosAtacante.push_back(this->dice->roll() );
@@ -79,8 +83,30 @@ BattleResult Battle::start(ReferenceCountPtr<GameManager>& gameManager){
 	paisAtacante->removeArmies(resultadoBatalla.getAttackerResult());
 
 	// elimina del pais defensor, los ejercitos perdidos en la batalla . si perdio 0 ejercitos no modifica nada.
-	paisDefensor->removeArmies(resultadoBatalla.getDefenderResult());
+	//paisDefensor->removeArmies(resultadoBatalla.getDefenderResult());
 
+
+	// verifico si hubo conquista
+
+	// si pais defensor tenia la misma cantidad de ejercitos que los que perdio en la batalla
+	if ( paisDefensor->getArmyCount() == abs(resultadoBatalla.getDefenderResult() ) ){
+		
+		// elimino al pais defensor de la lista de paises del player defensor
+		playerDefensor->removeConqueredLand(this->defensa->getDefenderdLand());
+		
+		// agrego pais conquistado a la lista de paises del jugador atacante
+		playerAtacante->addConqueredLand( this->ataque->getAttackerLand() );
+		
+		// elimino del paisAtacante los ejercitos que se mueven al pais conquistado.
+		// el movimiento no se hace explicitamente ya que quedan los ejercitos en el pais conquistado y 
+		// solo se agrega el pais conquistado a la lista de paises del atacante.
+		paisAtacante->removeArmies( abs(resultadoBatalla.getDefenderResult() ) );
+
+	}
+
+
+	
+	
 	return resultadoBatalla;
 	
 
