@@ -41,4 +41,8 @@ class Command : public Serializable
 		
 };
 
+#include "../state/state.h"
+#include "../model/gamemanager.h"
+
+
 #endif /*COMMAND_H_*/
