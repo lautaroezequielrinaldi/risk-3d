@@ -28,17 +28,12 @@ class StateMachine {
 		StateMachine();
 	
 		~StateMachine();
-                ReferenceCountPtr<state> getState(std::string);
+                ReferenceCountPtr<State> getState(std::string statename);
 	
-		void setNextState(const std::string & statename);
 		
 	private:
 		
 		std::map <std::string, ReferenceCountPtr<State> > states;
-		ReferenceCountPtr<State> current_state;
-                std::string current_state_name;
-		
-	
 	
 };
 #endif /** __STATEMACHINE_H__ */
