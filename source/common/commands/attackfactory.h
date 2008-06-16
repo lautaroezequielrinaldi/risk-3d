@@ -3,4 +3,17 @@
 #include "commandfactory.h"
 #include "attack.h"
 
+class AttackFactory : public CommandFactory{
+	
+	
+	
+	
+	
+	
+	
+};
+
+
+
+
 #endif /* __ATTACKFACTORY__*/
