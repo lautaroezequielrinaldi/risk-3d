@@ -78,7 +78,10 @@ void MainWindow::onOpenMenuItemActivated() {
 		case(Gtk::RESPONSE_OK): {
 			std::string fileToLoad = dialog.get_filename();
 			MapaParser parser;
-			//this->setEditor(loadedEditor);
+			ReferenceCountPtr<Mapa> map = parser.loadMap(fileToLoad);
+			ReferenceCountPtr<Editor> loadedEditor(new Editor("./image"));
+			loadedEditor->setMapa(map);
+			this->setEditor(loadedEditor);
 		}
 	}
 }
