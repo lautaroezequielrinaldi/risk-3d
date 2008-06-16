@@ -5,6 +5,16 @@
 #include <map>
 #include <string.h>
 #include "../model/player.h"
+
+#include "attacking.h"
+#include "defending.h"
+#include "moving.h"
+#include "occupying.h"
+#include "populating.h"
+#include "simplepopulatng.h"
+#include ".h"
+#include ".h"
+
 /**
  *
  * 
@@ -25,7 +35,7 @@ class StateMachine {
 
 	private:
 		
-		//std::map <std::string, State*> states;
+		std::map <std::string, State*> states;
 		State * current_state;
 		Player * current_player;
 		Player * current_defender;

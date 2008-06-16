@@ -4,13 +4,16 @@
 #include <string>
 #include "../smartpointer/referencecountptr.h"
 
-class Attack;
-class Defend;
-class JoinGame;
-class Move;
-class SelectMap;
-class Populate;
-class ReadyToPlay;
+#include "../commands/attack.h"
+#include "../commands/defend.h"
+#include "../commands/joingame.h"
+#include "../commands/move.h"
+#include "../commands/selectmap.h"
+#include "../commands/populate.h"
+#include "../commands/readytoplay.h"
+#include "../commands/nomore.h"
+#include "../commands/surrender.h"
+#include "../commands/quit.h"
 
 class State {
 
@@ -33,22 +36,27 @@ class State {
 
 		std::string getName();
 
-		virtual State * getNext()=0;
 		
-	    virtual bool attack(Attack & command) = 0;
+		
+	    virtual bool attack(Attack & command)
 	    
-	    virtual bool defend(Defend & command) = 0;
+	    virtual bool defend(Defend & command);
 	    
-	    //virtual void occupy(Occupy & command)= 0;
+	    //virtual void occupy(Occupy & command);
 	    
-	    virtual bool joinGame(JoinGame & command) = 0;
-	    //bool kill(Kill & move);
-	    virtual bool move(Move & command) = 0;
-	    virtual bool selectMap(SelectMap & command) = 0;
-	    //bool setOwner(SetOwner & command);
-	    virtual bool populate(Populate & command) = 0;
-	    virtual bool readyToPlay(ReadyToPlay & command) = 0;
+	    virtual bool joinGame(JoinGame & command);
+	    //virtual bool kill(Kill & move);
+	    virtual bool move(Move & command);
+	    virtual bool selectMap(SelectMap & command);
+	    //bool virtual setOwner(SetOwner & command);
+	    virtual bool populate(Populate & command) ;
+	    virtual bool readyToPlay(ReadyToPlay & command);
+            virtual bool noMore(NoMore & command);
+            virtual bool surrender(Surrender & command);
+     
+            virtual bool quit(Quit & command);
 };
+
 
 #endif /** __STATE_H__ */
 
