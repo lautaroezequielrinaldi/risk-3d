@@ -11,7 +11,6 @@ class GameManager;
 class PlayerProxy:public Threaded {
 	private:
 	Socket * socket;
-	// State & state;
 	ReferenceCountPtr<GameManager> gamemanager;
 	protected:
 	void * run();
