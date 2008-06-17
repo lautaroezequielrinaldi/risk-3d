@@ -1,9 +1,11 @@
-#ifndef __PROXYPLAYER_H__
-#define __PROXYPLAYER_H__
+#ifndef __PLAYERPROXY_H__
+#define __PLAYERPROXY_H__
 #include "../common/thread/threaded.h"
 #include "../common/smartpointer/referencecountptr.h"
 #include "../common/net/sockets/socket.h"
-class GameManager;
+class PlayerProxy;
+
+#include "../common/model/gamemanager.h"
 /**
  *
  * @todo usar & en lugar de *
@@ -22,6 +24,5 @@ class PlayerProxy:public Threaded {
 
 };
 
-#include "../common/model/gamemanager.h"
 
-#endif /** __PROXYPLAYER_H__ */
+#endif /** __PLAYERPROXY_H__ */

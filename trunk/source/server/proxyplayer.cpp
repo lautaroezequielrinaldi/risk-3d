@@ -1,13 +1,13 @@
 
-#include "proxyplayer.h"
+#include "playerproxy.h"
 
 #include <iostream>
 void * PlayerProxy::run() {
 	std::string msg("bienvenido\n");
-	std::vector<PlayerProxy *>::iterator players_iterator;
+//	std::vector<PlayerProxy *>::iterator players_iterator;
 	socket->write(msg);
 	//char * data = new(char[5]);
-	while (true) {
+/*	while (true) {
 		//socket->full_read(data,5);
 		
 		msg=socket->full_read(5);
@@ -19,7 +19,7 @@ void * PlayerProxy::run() {
 			playerProxy->notify(msg);
 		}
 
-		
+*/		
 
 	//   cuando llega el mensaje,
 	//   se obtiene un lock sobre el estado.

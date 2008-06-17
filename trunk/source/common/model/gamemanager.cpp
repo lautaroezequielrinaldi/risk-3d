@@ -34,5 +34,5 @@ void GameManager::setAttack( ReferenceCountPtr<Attack>& attack){
 	this->attack = attack;	
 }
 
-void GameManager::add(ReferenceCountPtr<ProxyPlayer> proxyplayer);
+void GameManager::add(ReferenceCountPtr<PlayerProxy> playerProxy);
 		 
