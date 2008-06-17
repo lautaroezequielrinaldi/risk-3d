@@ -28,6 +28,19 @@ std::map<std::string, std::string> ConquerCountriesGameCard::toString() {
     return result;
 }
 
+
+bool ConquerCountriesGameCard::execute(const ReferenceCountPtr<Player>& player, const ReferenceCountPtr<Game>& game){
+	
+	bool res=false;
+	
+	// si el jugador tiene la cantidad de paises necesarios para cumplir el objetivo
+	if (player->getConqueredLands() ==this->countryCount )
+		res=true;
+		
+	return res;
+}
+
+
 ConquerCountriesGameCard::~ConquerCountriesGameCard() {
     // No realiza ninguna acciòn.
 }

@@ -29,3 +29,15 @@ ConquerContinentGameCard::~ConquerContinentGameCard() {
     // No realiza ninguna acciòn.
 }
 
+bool ConquerContinentGameCard::execute(const ReferenceCountPtr<Player>& player, const ReferenceCountPtr<Game>& game){
+	
+	bool res=false;
+	
+	// si el jugador conquisto todo el continente
+	if ( player->continentOwner( this->continentName ) )
+		res=true;
+		
+	return res;
+	
+}
+
