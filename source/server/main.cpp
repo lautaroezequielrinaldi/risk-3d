@@ -9,7 +9,7 @@
 int main (int argc, char** argv) {
 	ReferenceCountPtr<GameManager> gamemanager= new GameManager();
 	Socket socket(2000,4);
-	ReferenceCountPtr<PlayerProxyr>  playerProxy;
+	ReferenceCountPtr<PlayerProxy>  playerProxy;
 	// mientras 
 	// juego no iniciado
 	// juego no lleno 

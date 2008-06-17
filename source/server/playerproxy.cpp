@@ -18,7 +18,7 @@ void * PlayerProxy::run() {
 			PlayerProxy * playerProxy =  *players_iterator;
 			playerProxy->notify(msg);
 		}
-
+	}
 */		
 
 	//   cuando llega el mensaje,
@@ -26,7 +26,7 @@ void * PlayerProxy::run() {
 	//   dependiendo del estado, al cual todos los jugadores acceden
 	//   se toma alguna accion, que puede involucrar escribir en todos los demas jugadores
 	//   devuelve el lock
-	}
+	
 	//delete[] data;
 	return 0;
 }
