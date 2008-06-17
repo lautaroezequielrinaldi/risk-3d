@@ -1,7 +1,7 @@
-#include "proxyplayer.h"
 #include "../common/net/sockets/socket.h"
 #include "../common/model/gamemanager.h"
 #include "../common/smartpointer/referencecountptr.h"
+#include "proxyplayer.h"
 
 #include <iostream>
 #include <vector>
@@ -22,19 +22,19 @@ int main (int argc, char** argv) {
 		proxyPlayer->start();
 		gamemanager->add(proxyPlayer);
 	}
-
-	proxyPlayer->join();
-	// bloquearse esperando a que el juego termine
-
 /*
-if (true) {
+	while (siga el juego) {
+		//
+
+	}
+*/
+/*
         std::vector<ReferenceCountPtr<PlayerProxy> >::iterator players_iterator;
         players_iterator = players.begin();
         while( players_iterator != players.end() ) {
 		playerProxy->join();
 		++players_iterator;
 	}
-}
 */
 
 	return 0;

@@ -1,16 +1,17 @@
-#ifndef GAMEMANAGER_H_
-#define GAMEMANAGER_H_
+#ifndef __GAMEMANAGER_H__
+#define __GAMEMANAGER_H__
 
 
 #include "game.h"
 #include "turnmanager.h"
 #include "../state/statemachine.h"
 #include "../state/state.h"
-#include "../smartpointer/referencecountptr.h" // Para definiciòn de ReferenceCountPtr.
-
+#include "../smartpointer/referencecountptr.h"
 
 class ProxyPlayer;
+
 class Attack;
+
 class GameManager
 {
 	
@@ -84,6 +85,6 @@ class GameManager
 };
 
 #include "../commands/attack.h"
-#include "../../server/proxyplayer.h"
+//#include "../../server/proxyplayer.h"
 
-#endif /*GAMEMANAGER_H_*/
+#endif /* __GAMEMANAGER_H__ */
