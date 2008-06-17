@@ -18,7 +18,7 @@ class PlayerProxy:public Threaded {
 	void * run();
 
 	public:
-	PlayerProxy(Socket * socket, ReferenceCountPtr<GameManager>);
+	PlayerProxy(Socket * socket, ReferenceCountPtr<GameManager>& gamemanager);
 	void notify(const std::string & msg);
 	~PlayerProxy();
 

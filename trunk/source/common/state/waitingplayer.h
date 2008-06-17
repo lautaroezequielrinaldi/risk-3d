@@ -8,12 +8,12 @@ class WaitingPlayer : public State
 
 	public:
 
-		WaitingPlayer();
-		
-		~WaitingPlayer();
-		
-	                   virtual bool joinGame(JoinGame & command); 
-                 virtual bool readyToPlay(ReadyToPlay & command);
+	WaitingPlayer();
+	
+	~WaitingPlayer();
+	
+	virtual bool joinGame(JoinGame & command); 
+	virtual bool readyToPlay(ReadyToPlay & command);
 
 };
 

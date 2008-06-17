@@ -8,11 +8,11 @@ class WaitingFirstPlayer : public State
 
 	public:
 
-		WaitingFirstPlayer();
+	WaitingFirstPlayer();
 		
-		~WaitingFirstPlayer();
+	~WaitingFirstPlayer();
 		
-	                   virtual bool joinGame(JoinGame & command); 
+	virtual bool joinGame(JoinGame & command); 
 };
 
 #endif /*WAITINGFIRSTPLAYER_H_*/

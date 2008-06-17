@@ -11,10 +11,12 @@ std::string ConquerContinentGameCard::getContinentName() {
     return this->continentName;
 }
 
+/* deshabilitado por Charli para compilar
 bool ConquerContinentGameCard::execute(const ReferenceCountPtr<Player>& player,
     const ReferenceCountPtr<Game>& game) {
     return false;
 }
+*/
 
 std::map<std::string, std::string> ConquerContinentGameCard::toString() {
     std::map<std::string, std::string> result;
@@ -34,9 +36,11 @@ bool ConquerContinentGameCard::execute(const ReferenceCountPtr<Player>& player, 
 	bool res=false;
 	
 	// si el jugador conquisto todo el continente
+/* deshabilitado por Charli para compilar
 	if ( player->continentOwner( this->continentName ) )
 		res=true;
 		
+*/
 	return res;
 	
 }
