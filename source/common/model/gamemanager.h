@@ -1,16 +1,16 @@
 #ifndef __GAMEMANAGER_H__
 #define __GAMEMANAGER_H__
 
+class GameManager;
 
 #include "game.h"
 #include "turnmanager.h"
 #include "../state/statemachine.h"
 #include "../state/state.h"
 #include "../smartpointer/referencecountptr.h"
+#include "../commands/attack.h"
+#include "../../server/playerproxy.h"
 
-class ProxyPlayer;
-
-class Attack;
 
 class GameManager
 {
@@ -60,7 +60,7 @@ class GameManager
 		 *
 		 *
 		*/
-		void add(ReferenceCountPtr<ProxyPlayer> proxyplayer);		
+		void add(ReferenceCountPtr<PlayerProxy> playerproxy);	
 
 		/**
 		 * Metodo cuyo proposito es obtener la partida que se esta jugando.
@@ -84,7 +84,5 @@ class GameManager
 		
 };
 
-#include "../commands/attack.h"
-//#include "../../server/proxyplayer.h"
 
 #endif /* __GAMEMANAGER_H__ */
