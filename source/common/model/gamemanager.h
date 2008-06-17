@@ -17,7 +17,7 @@ class GameManager
 	
 	private:
 	
-		/**
+	/**
          * Almacena el juego.
          */
         ReferenceCountPtr<Game> game;
@@ -27,15 +27,15 @@ class GameManager
          */
         ReferenceCountPtr<TurnManager> turnManager;
 		
-		/**
-		 * Almacena el estado del juego
-		 */
-		ReferenceCountPtr<StateMachine> stateMachine;
-		
-		/**
-		 * Almacena un ataque.
-		 */
-		 ReferenceCountPtr<Attack> attack;
+	/**
+	* Almacena el estado del juego
+	*/
+	ReferenceCountPtr<StateMachine> stateMachine;
+	
+	/**
+	* Almacena un ataque.
+	*/
+	ReferenceCountPtr<Attack> attack;
 		
 		
 	public:
@@ -60,7 +60,7 @@ class GameManager
 		 *
 		 *
 		*/
-		void add(ReferenceCountPtr<PlayerProxy> playerproxy);	
+		void add(ReferenceCountPtr<PlayerProxy> & playerproxy);	
 
 		/**
 		 * Metodo cuyo proposito es obtener la partida que se esta jugando.

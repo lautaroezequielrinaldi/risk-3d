@@ -34,7 +34,7 @@ void PlayerProxy::notify(const std::string & msg) {
 	socket->write(msg);
 }
 
-PlayerProxy::PlayerProxy(Socket * socket, ReferenceCountPtr< gamemanager>){
+PlayerProxy::PlayerProxy(Socket * socket, ReferenceCountPtr< GameManager> & gamemanager){
 	this->gamemanager= gamemanager;
 	this->socket = socket;
 }

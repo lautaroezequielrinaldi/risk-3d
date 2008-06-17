@@ -11,10 +11,12 @@ int ConquerCountriesGameCard::getCountryCount() {
     return this->countryCount;
 }
 
+/* deshabilitado por Charli para compilar
 bool ConquerCountriesGameCard::execute(const ReferenceCountPtr<Player>& player,
     const ReferenceCountPtr<Game>& game) {
     return false;
 }
+*/
 
 std::map<std::string, std::string> ConquerCountriesGameCard::toString() {
     std::map<std::string, std::string> result;
@@ -34,9 +36,11 @@ bool ConquerCountriesGameCard::execute(const ReferenceCountPtr<Player>& player, 
 	bool res=false;
 	
 	// si el jugador tiene la cantidad de paises necesarios para cumplir el objetivo
+
+/* deshabilitado por Charli para compilar
 	if (player->getConqueredLands() ==this->countryCount )
 		res=true;
-		
+*/		
 	return res;
 }
 
