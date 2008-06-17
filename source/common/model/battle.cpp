@@ -86,7 +86,7 @@ BattleResult Battle::start(ReferenceCountPtr<GameManager>& gameManager){
 	//paisDefensor->removeArmies(resultadoBatalla.getDefenderResult());
 
 
-	// verifico si hubo conquista
+	// verifico si hubo conquista de pais
 
 	// si pais defensor tenia la misma cantidad de ejercitos que los que perdio en la batalla
 	if ( paisDefensor->getArmyCount() == abs(resultadoBatalla.getDefenderResult() ) ){
@@ -104,6 +104,8 @@ BattleResult Battle::start(ReferenceCountPtr<GameManager>& gameManager){
 
 	}
 
+		
+	// verificar si hubo conquista de continente
 
 	
 	

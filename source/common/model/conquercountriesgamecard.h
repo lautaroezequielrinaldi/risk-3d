@@ -11,8 +11,8 @@
 // ReferenceCountPtr.
 
 /**
- * Clase cuyo propòsito es definir una carta de juego para eliminar a un
- * jugador determinado.
+ * Clase cuyo propòsito es definir una carta de juego para conquistar un numero de paises
+ * determinado.
  */
 class ConquerCountriesGameCard: public GameCard {
     /**
