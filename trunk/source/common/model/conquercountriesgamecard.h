@@ -54,8 +54,8 @@ class ConquerCountriesGameCard: public GameCard {
         /**
          * Mètodo que valida la carta de juego.
          */
-        bool execute(const ReferenceCountPtr<Player>& player,
-            const ReferenceCountPtr<Game>& game);
+        bool execute(ReferenceCountPtr<Player>& player,
+            ReferenceCountPtr<Game>& game);
         /**
          * Serializa la carta de juego.
          */
