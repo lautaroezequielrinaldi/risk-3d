@@ -11,8 +11,8 @@ int ConquerPlayerGameCard::getColor() {
     return this->color;
 }
 
-bool ConquerPlayerGameCard::execute(const ReferenceCountPtr<Player>& player,
-    const ReferenceCountPtr<Game>& game) {
+bool ConquerPlayerGameCard::execute(ReferenceCountPtr<Player>& player,
+    ReferenceCountPtr<Game>& game) {
     return false;
 }
 

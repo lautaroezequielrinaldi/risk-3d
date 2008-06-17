@@ -31,16 +31,14 @@ ConquerContinentGameCard::~ConquerContinentGameCard() {
     // No realiza ninguna acciòn.
 }
 
-bool ConquerContinentGameCard::execute(const ReferenceCountPtr<Player>& player, const ReferenceCountPtr<Game>& game){
+bool ConquerContinentGameCard::execute(ReferenceCountPtr<Player>& player, ReferenceCountPtr<Game>& game){
 	
 	bool res=false;
 	
 	// si el jugador conquisto todo el continente
-/* deshabilitado por Charli para compilar
 	if ( player->continentOwner( this->continentName ) )
 		res=true;
 		
-*/
 	return res;
 	
 }

@@ -44,8 +44,8 @@ class GameCard {
         /**
          * Valida la carta de juego para un jugador.
          */
-        virtual bool execute(const ReferenceCountPtr<Player>& player,
-            const ReferenceCountPtr<Game>& game) = 0;
+        virtual bool execute(ReferenceCountPtr<Player>& player,
+            ReferenceCountPtr<Game>& game) = 0;
         /**
          * Destructor virtual de la clase GameCard.
          */
