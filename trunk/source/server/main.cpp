@@ -10,32 +10,27 @@ int main (int argc, char** argv) {
 	ReferenceCountPtr<GameManager> gamemanager= new GameManager();
 	Socket socket(2000,4);
 	ReferenceCountPtr<PlayerProxy>  playerProxy;
-	// mientras 
-	// juego no iniciado
-	// juego no lleno 
-	// aceptar nuevos jugadores
-	for (int i=0; i<4; i++) {
-		std::cerr << "Antes de new con i = " << i << "\n" << std::endl;
+
+	while (! gamemanager->open() ) {
+		std::cerr << "Antes de new con i = \n" << std::endl;
 		playerProxy = new PlayerProxy(socket.accept(), gamemanager);
 		std::cerr << "Despues de new...\n" << std::endl;
 
 		playerProxy->start();
 		gamemanager->add(playerProxy);
 	}
-/*
-	while (siga el juego) {
+
+	while (gamemanager->playing()) {
 		//
 
 	}
-*/
-/*
-        std::vector<ReferenceCountPtr<PlayerProxy> >::iterator players_iterator;
-        players_iterator = players.begin();
-        while( players_iterator != players.end() ) {
+
+        std::vector<ReferenceCountPtr<PlayerProxy> >::iterator playersProxyIterator;
+/*        playersProxyIterator = gamemanager->players.begin();
+        while( playersProxyIterator != gamemanager->players.end() ) {
 		playerProxy->join();
-		++players_iterator;
+		++playersProxyIterator;
 	}
 */
-
 	return 0;
 }
