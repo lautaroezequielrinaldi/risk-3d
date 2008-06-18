@@ -102,6 +102,7 @@ void TurnManager::deletePlayer(int color){
 		changeTurn();
 		
 	it = this->orden.begin();
+	// busco al jugador que se desea eliminar para confirmar que exista en la lista de players activos.
 	while ( it != this->orden.end() && !encontrado) {
 		
 		colorActual = *it;
