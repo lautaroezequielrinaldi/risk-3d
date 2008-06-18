@@ -3,8 +3,7 @@
 
 #include<string> // Para definiciòn de std::string.
 #include<map> // Para definiciòn de std::list.
-#include "player.h" // Para definiciòn de Player.
-#include "game.h" // Para definiciòn de Game.
+#include "gamemanager.h" // Para definiciòn de GameManager.
 #include "../smartpointer/referencecountptr.h" // Para definiciòn de
 //ReferenceCountPtr.
 
@@ -44,8 +43,7 @@ class GameCard {
         /**
          * Valida la carta de juego para un jugador.
          */
-        virtual bool execute(ReferenceCountPtr<Player>& player,
-            ReferenceCountPtr<Game>& game) = 0;
+        virtual bool execute(ReferenceCountPtr<GameManager>& gameManager) = 0;
         /**
          * Destructor virtual de la clase GameCard.
          */

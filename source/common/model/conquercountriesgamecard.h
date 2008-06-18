@@ -54,8 +54,7 @@ class ConquerCountriesGameCard: public GameCard {
         /**
          * Mètodo que valida la carta de juego.
          */
-        bool execute(ReferenceCountPtr<Player>& player,
-            ReferenceCountPtr<Game>& game);
+        bool execute(ReferenceCountPtr<GameManager>& gameManager);
         /**
          * Serializa la carta de juego.
          */

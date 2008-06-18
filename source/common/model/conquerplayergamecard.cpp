@@ -11,11 +11,6 @@ int ConquerPlayerGameCard::getColor() {
     return this->color;
 }
 
-bool ConquerPlayerGameCard::execute(ReferenceCountPtr<Player>& player,
-    ReferenceCountPtr<Game>& game) {
-    return false;
-}
-
 std::map<std::string, std::string> ConquerPlayerGameCard::toString() {
     std::ostringstream playerStr;
     playerStr << getColor();
@@ -26,6 +21,21 @@ std::map<std::string, std::string> ConquerPlayerGameCard::toString() {
 
     return result;
 }
+
+bool ConquerPlayerGameCard::execute(ReferenceCountPtr<GameManager>& gameManager){
+	
+	bool res = false;
+	ReferenceCountPtr<TurnManager> turnManeger = gameManager->getTurnManager();
+	
+	// si el jugador que se debe eliminar, ya no esta activo en la lista de turnos del juego
+	if ( ! turnManeger->isPlayerActive( this->color ) )
+		// el objetivo se cumplio
+		res= true;
+	
+	return res;	
+
+}
+
 
 ConquerPlayerGameCard::~ConquerPlayerGameCard() {
     // No realiza ninguna acciòn.
