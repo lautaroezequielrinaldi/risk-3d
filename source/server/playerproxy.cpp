@@ -43,3 +43,7 @@ PlayerProxy::~PlayerProxy(){
 	delete(socket);
 }
 
+void PlayerProxy::setPlayer(ReferenceCountPtr<Player> & player){
+	this->player = player;
+}
+

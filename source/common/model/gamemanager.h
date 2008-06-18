@@ -62,6 +62,8 @@ class GameManager
 		*/
 		void add(ReferenceCountPtr<PlayerProxy> & playerproxy);	
 
+		void addFirst(ReferenceCountPtr<PlayerProxy> & playerproxy);	
+
 		/**
 		 * Metodo cuyo proposito es obtener la partida que se esta jugando.
 		 */

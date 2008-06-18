@@ -11,11 +11,14 @@ int main (int argc, char** argv) {
 	Socket socket(2000,4);
 	ReferenceCountPtr<PlayerProxy>  playerProxy;
 
-	while (! gamemanager->open() ) {
-		std::cerr << "Antes de new con i = \n" << std::endl;
-		playerProxy = new PlayerProxy(socket.accept(), gamemanager);
-		std::cerr << "Despues de new...\n" << std::endl;
+	// primer jugador
 
+	playerProxy = new PlayerProxy(socket.accept(), gamemanager);
+	gamemanager->addFirst(playerProxy);
+	playerProxy->start();
+
+	while (! gamemanager->open() ) {
+		playerProxy = new PlayerProxy(socket.accept(), gamemanager);
 		playerProxy->start();
 		gamemanager->add(playerProxy);
 	}
