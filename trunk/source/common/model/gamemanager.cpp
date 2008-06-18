@@ -38,6 +38,14 @@ void GameManager::add(ReferenceCountPtr<PlayerProxy> & playerProxy) {
 
 }
 
+
+void GameManager::addFirst(ReferenceCountPtr<PlayerProxy> & playerProxy) {
+
+	add(playerProxy);
+
+
+}
+
 bool GameManager::playing() {
 	return false;
 
