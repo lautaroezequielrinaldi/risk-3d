@@ -46,6 +46,19 @@ std::list< ReferenceCountPtr<Player> >& Game::getPlayerList() {
     return this->playerList;
 }
 
+
+ReferenceCountPtr<Player> Game::addPlayer() {
+	ReferenceCountPtr<Player> player = new Player(1,1);
+	// agregar player al contenedor
+	playerList.push_back(player);
+	return player;
+}
+
+
+/**
+ * @todo reimplementar utilizando un map <color, player>
+ *
+ */
 ReferenceCountPtr<Player> Game::getPlayer(int color){
 
 	bool encontrado = false;
