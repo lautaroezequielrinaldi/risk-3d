@@ -31,11 +31,7 @@ class Battle
 		  * Almacena el dado con el que se definira el resultado de la batalla.
 		  */
 		 ReferenceCountPtr<Dice> dice;
-		 
-		/**
-		 * Almacena el resultado de la batalla.
-		 */
-		//ReferenceCountPtr<BattleResult> resultadoBatalla;
+		
 		
 	/**
 	 * Metodos publicos de la clase

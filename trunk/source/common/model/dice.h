@@ -8,10 +8,6 @@
 
 class Dice
 {
-	
-	private:
-	
-		//int diceNumber;
 		
 	public:
 	
@@ -32,11 +28,6 @@ class Dice
 	 */
 	virtual int roll() =0 ;
 	
-	/**
-	 * Metodo cuyo proposito es obtener el valor del dado que se obtuvo al arrojarlo.
-	 * Si se pide el valor antes de hacer roll(), el metodo devuelve -1 representando un dado sin valor.
-	 */
-	 //int getDiceNumber();
 	
 };
 
