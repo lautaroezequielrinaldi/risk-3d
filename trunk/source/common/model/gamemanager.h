@@ -3,11 +3,13 @@
 
 class GameManager;
 
+#include "../smartpointer/referencecountptr.h"
+
 #include "game.h"
 #include "turnmanager.h"
+#include "player.h"
 #include "../state/statemachine.h"
 #include "../state/state.h"
-#include "../smartpointer/referencecountptr.h"
 #include "../commands/attack.h"
 #include "../../server/playerproxy.h"
 

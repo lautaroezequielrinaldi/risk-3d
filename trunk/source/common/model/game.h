@@ -75,6 +75,9 @@ class Game: public Serializable {
          * Obtiene la lista de jugadores del juego.
          */
         std::list< ReferenceCountPtr<Player> >& getPlayerList();
+
+        ReferenceCountPtr<Player> addPlayer();
+
         
         /**
          * Obtiene el jugador correspondinte al color especificado.
