@@ -126,4 +126,26 @@ void TurnManager::setDefenderPlayer(int color){
 	this->jugadorDefensor = color;
 }
 
+bool TurnManager::isPlayerActive(int color){
+	
+	int colorActual= -1;
+	std::vector<int>::iterator it;
+	
+	it = this->orden.begin();
+	//busco el jugador indicado en vector orden 
+	while ( it != this->orden.end()) {
+		
+		colorActual = *it;
+		// si se encontro el color buscado
+		if ( colorActual == color )
+			return true;
+	
+	}
+	
+	return false;	
+	
+}
+
+
+
 

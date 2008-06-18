@@ -31,12 +31,16 @@ ConquerContinentGameCard::~ConquerContinentGameCard() {
     // No realiza ninguna acciòn.
 }
 
-bool ConquerContinentGameCard::execute(ReferenceCountPtr<Player>& player, ReferenceCountPtr<Game>& game){
+bool ConquerContinentGameCard::execute(ReferenceCountPtr<GameManager>& gameManager){
 	
 	bool res=false;
+	ReferenceCountPtr<TurnManager> turnManeger = gameManager->getTurnManager();
+	ReferenceCountPtr<Player> currentPlayer = gameManager->getGame()->getPlayer(turnManeger->getCurrentPlayer() );
+	
+	
 	
 	// si el jugador conquisto todo el continente
-	if ( player->continentOwner( this->continentName ) )
+	if ( currentPlayer->continentOwner( this->continentName ) )
 		res=true;
 		
 	return res;

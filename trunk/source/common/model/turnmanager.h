@@ -68,6 +68,11 @@ class TurnManager
 		  
 		  
 		/**
+		 * Metodo cuyo proposito es verificar si existe un jugador en la lista de turnos.
+		 */
+		 bool isPlayerActive(int color);
+		  
+		/**
 		 * Metodo cuyo proposito es obtener el jugador que comparte el turno con el jugador actual ,
 		 * jugador que se esta defendiendo.
 		 */

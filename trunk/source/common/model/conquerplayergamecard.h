@@ -5,8 +5,6 @@
 #include<map> // Para definicion de std::map.
 #include<sstream> // Para definicion de std::ostringstream.
 #include "gamecard.h" // Para definicion de GameCard.
-#include "player.h" // Para definiciòn de Player.
-#include "game.h" // Para definiciòn de Game.
 #include "../smartpointer/referencecountptr.h" // Para definiciòn de 
 // ReferenceCountPtr.
 
@@ -53,8 +51,7 @@ class ConquerPlayerGameCard: public GameCard {
         /**
          * Mètodo que valida la carta de juego.
          */
-        bool execute(ReferenceCountPtr<Player>& player,
-            ReferenceCountPtr<Game>& game);
+        bool execute(ReferenceCountPtr<GameManager>& gameManager);
         /**
          * Se serializa a  un string.
          */
