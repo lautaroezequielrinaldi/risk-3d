@@ -80,8 +80,14 @@ class GameManager
 		 /**
 		  * Metodo cuyo proposito es establecer un ataque.
 		  */
-		 void setAttack( ReferenceCountPtr<Attack>& attack);
+		void setAttack( ReferenceCountPtr<Attack>& attack);
 		
+		bool playing();
+
+		bool open();
+
+
+		std::list< ReferenceCountPtr<Player> >& getPlayerList();
 };
 
 

@@ -37,4 +37,18 @@ void GameManager::setAttack( ReferenceCountPtr<Attack>& attack){
 void GameManager::add(ReferenceCountPtr<PlayerProxy> & playerProxy) {
 
 }
-		 
+
+bool GameManager::playing() {
+	return false;
+
+}
+
+bool GameManager::open() {
+	return false;
+
+}
+
+std::list< ReferenceCountPtr<Player> >& GameManager::getPlayerList(){
+	return game->getPlayerList();
+
+}
