@@ -9,7 +9,7 @@ class Occupying : public State
 	
 		Occupying();
 	
-		~Occupying();
+		virtual ~Occupying();
 	virtual bool populate(Populate & command);		
 };
 

@@ -34,7 +34,7 @@ class Attack : public Command
 		 * Destructor de la clase
 		 */
 		 
-		~Attack();
+		virtual ~Attack();
 		
 		/**
 		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.

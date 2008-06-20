@@ -26,7 +26,7 @@ class SelectMap : public Command
 		/*
 		 * Destructor de la clase
 		 */		
-		~SelectMap();
+		virtual ~SelectMap();
 		
 		/**
 		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.

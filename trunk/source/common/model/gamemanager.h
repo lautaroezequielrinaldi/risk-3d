@@ -40,6 +40,10 @@ class GameManager
 	ReferenceCountPtr<Attack> attack;
 		
 		
+	bool open;
+
+	bool playing;
+
 	public:
 	
 		/**
@@ -64,8 +68,6 @@ class GameManager
 		*/
 		void add(ReferenceCountPtr<PlayerProxy> & playerproxy);	
 
-		void addFirst(ReferenceCountPtr<PlayerProxy> & playerproxy);	
-
 		/**
 		 * Metodo cuyo proposito es obtener la partida que se esta jugando.
 		 */
@@ -86,9 +88,9 @@ class GameManager
 		  */
 		void setAttack( ReferenceCountPtr<Attack>& attack);
 		
-		bool playing();
+		bool isPlaying();
 
-		bool open();
+		bool isOpen();
 
 
 		std::list< ReferenceCountPtr<Player> >& getPlayerList();

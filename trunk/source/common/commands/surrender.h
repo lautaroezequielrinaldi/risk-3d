@@ -2,7 +2,10 @@
 #define __SURRENDER__
 #include "command.h"
 class Surrender:public Command{
-
+	public:
+	Surrender();
+	
+	virtual ~Surrender();
 
 
 };

@@ -11,19 +11,14 @@ int main (int argc, char** argv) {
 	Socket socket(2000,4);
 	ReferenceCountPtr<PlayerProxy>  playerProxy;
 
-	// primer jugador
-
-	playerProxy = new PlayerProxy(socket.accept(), gamemanager);
-	gamemanager->addFirst(playerProxy);
-	playerProxy->start();
-
-	while (! gamemanager->open() ) {
+	while (! gamemanager->isOpen() ) {
 		playerProxy = new PlayerProxy(socket.accept(), gamemanager);
-		playerProxy->start();
 		gamemanager->add(playerProxy);
+		playerProxy->start();
+
 	}
 
-	while (gamemanager->playing()) {
+	while (gamemanager->isPlaying()) {
 		//
 
 	}

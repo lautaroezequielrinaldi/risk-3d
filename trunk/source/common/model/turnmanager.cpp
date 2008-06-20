@@ -3,7 +3,8 @@
 
 TurnManager::TurnManager()
 {
-	this->jugadorActual = -1;
+	this->jugadorActual = 0;
+	this->jugadorDefensor = 0;
 	//this->cantEjercitosBonus 
 }
 
@@ -53,6 +54,11 @@ int TurnManager::getCurrentPlayer(){
 void TurnManager::changeTurn(){
 	this->jugadorActual = getNextPlayerTurn();
 }
+
+void TurnManager::changeTurn(int color){
+	this->jugadorActual = color;
+}
+
 
 int TurnManager::getNextPlayerTurn(){
 	

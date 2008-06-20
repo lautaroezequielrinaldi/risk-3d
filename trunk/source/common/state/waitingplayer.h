@@ -10,7 +10,7 @@ class WaitingPlayer : public State
 
 	WaitingPlayer();
 	
-	~WaitingPlayer();
+	virtual ~WaitingPlayer();
 	
 	virtual bool joinGame(JoinGame & command); 
 	virtual bool readyToPlay(ReadyToPlay & command);

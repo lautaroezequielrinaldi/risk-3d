@@ -28,7 +28,7 @@ class Defend : public Command
 		/*
 		 * Destructor de la clase
 		 */
-		~Defend();
+		virtual ~Defend();
 
 		/**
 		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.

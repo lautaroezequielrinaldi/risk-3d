@@ -47,3 +47,8 @@ void PlayerProxy::setPlayer(ReferenceCountPtr<Player> & player){
 	this->player = player;
 }
 
+ReferenceCountPtr<Player> & PlayerProxy::getPlayer(){
+	return player;
+
+}
+

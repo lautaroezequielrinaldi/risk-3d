@@ -17,7 +17,7 @@ class Moving : public State
 		/**
 		 * Destructor de la clase
 		 */	
-		~Moving();
+		virtual ~Moving();
 		
 		/**
 		 * Metodo cuyo proposito es ejecutar la accion correspondiente al estado del juego y notificar 

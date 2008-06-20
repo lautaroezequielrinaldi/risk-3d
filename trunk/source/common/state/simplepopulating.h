@@ -10,7 +10,7 @@ class SimplePopulating : public State
 	
 		SimplePopulating();
 	
-		~SimplePopulating();
+		virtual ~SimplePopulating();
                 virtual bool populate(Populate & command);
 };
 

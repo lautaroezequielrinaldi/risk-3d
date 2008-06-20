@@ -11,7 +11,7 @@ class Defending : public State
 	
 		Defending();
 	
-		~Defending();
+		virtual ~Defending();
 		
 		virtual bool defend(Defend & command);
 		

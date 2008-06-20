@@ -26,7 +26,7 @@ class JoinGame : public Command
 		/*
 		 * Destructor de la clase
 		 */		
-		~JoinGame();
+		virtual ~JoinGame();
 		
 		/**
 		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.
