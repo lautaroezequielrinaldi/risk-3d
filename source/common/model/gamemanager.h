@@ -9,7 +9,6 @@ class GameManager;
 #include "turnmanager.h"
 #include "player.h"
 #include "../state/statemachine.h"
-#include "../state/state.h"
 #include "../commands/attack.h"
 #include "../../server/playerproxy.h"
 

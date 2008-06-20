@@ -1,7 +1,7 @@
 #include "statemachine.h"
 // #include "todos los estados"
 
-StateMachine::StateMachine(){
+StateMachine::StateMachine(GameManager & gameManager){
 	states.insert(std::make_pair("attacking",new Attacking()));
         states.insert(std::make_pair("defending",new Defending()));
         states.insert(std::make_pair("moving",new Moving()));
@@ -23,4 +23,8 @@ StateMachine::~StateMachine(){
 ReferenceCountPtr<State> StateMachine::getState(std::string statename) {
 	return states[statename];
 
+}
+
+void StateMachine::setState(std::string statename){
+	currentState= getState(statename);
 }

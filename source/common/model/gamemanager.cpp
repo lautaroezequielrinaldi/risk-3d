@@ -1,5 +1,4 @@
 #include "gamemanager.h"
-#include "../state/statemachine.h"
 
 GameManager::GameManager(): game (), turnManager ()
 {
@@ -8,7 +7,9 @@ GameManager::GameManager(): game (), turnManager ()
 GameManager::GameManager( ReferenceCountPtr<Game> & game, ReferenceCountPtr<TurnManager> & turnManager):
 game (game),
 turnManager (turnManager){
-	//stateMachine->setState("waitingFirstPlayer");
+	stateMachine = new StateMachine(*this);
+	stateMachine->setState("waitingFirstPlayer");
+
 	open = true;
 	playing = false;
 }
