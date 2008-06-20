@@ -1,6 +1,8 @@
 #ifndef __STATEMACHINE_H__
 #define __STATEMACHINE_H__
 
+class GameManager;
+
 #include "state.h"
 #include <map>
 #include <string.h>
@@ -25,15 +27,17 @@ class StateMachine {
 	
 	public:
 		
-		StateMachine();
+		StateMachine(GameManager& gameManager);
 	
 		~StateMachine();
                 ReferenceCountPtr<State> getState(std::string statename);
+		void setState(std::string statename);
 	
 		
 	private:
 		
 		std::map <std::string, ReferenceCountPtr<State> > states;
+		ReferenceCountPtr<State> currentState;
 	
 };
 #endif /** __STATEMACHINE_H__ */
