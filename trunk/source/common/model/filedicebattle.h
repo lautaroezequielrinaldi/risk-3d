@@ -17,16 +17,30 @@ class FileDiceBattle : public Dice
 
 	private:
 	
+		/**
+		 * Objeto que manejara el archivo de entrada que contendra los valores de los dados del atacante y defensor.
+		 */
 		std::ifstream file;
 		
+		/**
+		 * Almacena los valores de los dados del atacante que se leeran del archivo de entrada.
+		 */
 		std::vector<int> dadosAtacante;
-		
+		/**
+		 * Almacena los valores de los dados del defensor que se leeran del archivo de entrada.
+		 */		
 		std::vector<int> dadosDefensor;
-		
+		/**
+		 * Almacena la posicion del vector dadosAtacante, que se debera devolver al lanzar el dado con roll().
+		 */
 		unsigned int posicionADevolverAt;
-		
+		/**
+		 * Almacena la posicion del vector dadosDefensor, que se debera devolver al lanzar el dado con roll().
+		 */		
 		unsigned int posADevolverDef;
-		
+		/**
+		 * Bandera que indica si la lanzada de dados esta devolviendo dados del atacante.
+		 */
 		bool atacante;
 
 	public:

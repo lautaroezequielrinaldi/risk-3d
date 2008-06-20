@@ -19,9 +19,8 @@ Dice()
 
 FileDiceBattle::~FileDiceBattle()
 {
-	//cierro archivo
-	if (this->file.is_open() )
-		this->file.close();
+	// si el archivo esta abierto, lo cierro- verificacion automatica.
+	this->file.close();
 }
 
 int FileDiceBattle::roll(){
