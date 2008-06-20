@@ -2,6 +2,7 @@
 #define FILEDICEPLAYERTURN_H_
 
 #include "dice.h"
+#include <fstream>
 
 /**
  * Clase cuyo proposito es representar a un dado del juego que tomara 1 solo valor desde un archivo de texto.
@@ -10,12 +11,20 @@
 
 class fileDicePlayerTurn : public Dice
 {
+	
+	private:
+	
+		/**
+		 * Objeto que manejara el archivo de entrada que contendra el valor del dado.
+		 */
+		std::ifstream file;
+	
 	public:
 
 		/**
 	 	 * Constructor de la clase.
 	 	 */	
-		fileDicePlayerTurn();
+		fileDicePlayerTurn(std::string fileName);
 		
 		/**
 	 	 * Destructor de la clase.
@@ -25,7 +34,7 @@ class fileDicePlayerTurn : public Dice
 		/**
 		 * Metodo cuyo proposito es simular la tirada de dados.
 		 * Devuelve un numero de dado que se obtiene de un archivo.
-		 * La devolucion respeta el orden de aparicion de los valores en el archivo.
+		 * Solo podra invocarse una vez por instancia.
 		 */
 		int roll();
 		
