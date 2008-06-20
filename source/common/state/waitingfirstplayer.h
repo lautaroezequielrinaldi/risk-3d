@@ -10,7 +10,7 @@ class WaitingFirstPlayer : public State
 
 	WaitingFirstPlayer();
 		
-	~WaitingFirstPlayer();
+	virtual ~WaitingFirstPlayer();
 		
 	virtual bool joinGame(JoinGame & command); 
 };

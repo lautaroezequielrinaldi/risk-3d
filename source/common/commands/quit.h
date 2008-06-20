@@ -2,7 +2,9 @@
 #define __QUIT_H__
 #include "command.h"
 class Quit: public Command {
-
+	public:
+	Quit();
+	virtual ~Quit();
 
 
 };

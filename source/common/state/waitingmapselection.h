@@ -10,7 +10,7 @@ class WaitingMapSelection : public State
 
 	WaitingMapSelection();
 		
-	~WaitingMapSelection();
+	virtual ~WaitingMapSelection();
 		
 	virtual bool selectMap(SelectMap & command); 
 	virtual bool joinGame(JoinGame & command);

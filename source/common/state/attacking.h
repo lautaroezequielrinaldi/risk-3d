@@ -10,7 +10,7 @@ class Attacking : public State
 
 		Attacking();
 		
-		~Attacking();
+		virtual ~Attacking();
 
 		 virtual bool attack(Attack & command);
 		

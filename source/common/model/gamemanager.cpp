@@ -7,9 +7,10 @@ GameManager::GameManager(): game (), turnManager ()
 
 GameManager::GameManager( ReferenceCountPtr<Game> & game, ReferenceCountPtr<TurnManager> & turnManager):
 game (game),
-turnManager (turnManager)
-{
-	// no realiza ninguna accion
+turnManager (turnManager){
+	//stateMachine->setState("waitingFirstPlayer");
+	open = true;
+	playing = false;
 }
 
 GameManager::~GameManager()
@@ -35,28 +36,25 @@ void GameManager::setAttack( ReferenceCountPtr<Attack>& attack){
 }
 
 void GameManager::add(ReferenceCountPtr<PlayerProxy> & playerProxy) {
-	//ReferenceCountPtr<Player> p = game->addPlayer();
-	//playerProxy->setPlayer(p);
+	/* codigo comentado para que compile EDITOR_TARGET, no falla en SERVER_TARGET
 	playerProxy->setPlayer(game->addPlayer());
 
 
-}
-
-
-void GameManager::addFirst(ReferenceCountPtr<PlayerProxy> & playerProxy) {
-
-	add(playerProxy);
+	*/
+	// incrementar jugadores
+	// si alcanzado max, open -> false;
 
 
 }
 
-bool GameManager::playing() {
-	return false;
+
+bool GameManager::isPlaying() {
+	return playing;
 
 }
 
-bool GameManager::open() {
-	return false;
+bool GameManager::isOpen() {
+	return open;
 
 }
 

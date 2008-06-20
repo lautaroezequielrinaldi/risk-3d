@@ -54,6 +54,9 @@ class TurnManager
 		 * Metodo cuyo proposito es cambiar el turno actual al proximo jugador, respetando el orden seteado.
 		 */
 		void changeTurn();
+
+
+		void changeTurn(int color);
 		
 		/**
 		 * Metodo cuyo proposito es agregar un color que represente a un jugador al manejador de turnos.

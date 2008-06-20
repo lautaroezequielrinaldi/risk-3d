@@ -26,7 +26,7 @@ class ReadyToPlay : public Command
 		/*
 		 * Destructor de la clase
 		 */		
-		~ReadyToPlay();
+		virtual ~ReadyToPlay();
 		
 		/**
 		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.

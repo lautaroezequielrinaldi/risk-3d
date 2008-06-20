@@ -3,8 +3,9 @@
 #include "command.h"
 
 class NoMore: public Command {
-
-
+	public:
+	NoMore();
+	virtual ~NoMore();
 
 };
 
