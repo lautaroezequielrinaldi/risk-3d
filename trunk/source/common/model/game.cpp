@@ -47,7 +47,7 @@ std::list< ReferenceCountPtr<Player> >& Game::getPlayerList() {
 }
 
 
-ReferenceCountPtr<Player> Game::addPlayer() {
+ReferenceCountPtr<Player>& Game::addPlayer() {
 	ReferenceCountPtr<Player> player = new Player(1,1);
 	// agregar player al contenedor
 	playerList.push_back(player);
