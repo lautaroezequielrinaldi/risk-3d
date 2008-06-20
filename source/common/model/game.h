@@ -76,7 +76,11 @@ class Game: public Serializable {
          */
         std::list< ReferenceCountPtr<Player> >& getPlayerList();
 
-        ReferenceCountPtr<Player> addPlayer();
+	/**
+	 * Para solicitarle al Game que cree un nuevo jugador y lo devuelva
+	 *
+	 */
+        ReferenceCountPtr<Player>& addPlayer();
 
         
         /**
