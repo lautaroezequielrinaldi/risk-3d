@@ -7,7 +7,7 @@ class Occupying : public State
 {
 	public:
 	
-		Occupying(ReferenceCountPtr<GameManager>&gameManager);
+		Occupying(ReferenceCountPtr<GameManager>&gameManager, std::string name);
 	
 		virtual ~Occupying();
 	virtual bool populate(Populate & command);		

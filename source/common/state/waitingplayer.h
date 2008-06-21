@@ -8,7 +8,7 @@ class WaitingPlayer : public State
 
 	public:
 
-	WaitingPlayer(ReferenceCountPtr<GameManager>&gameManager);
+	WaitingPlayer(ReferenceCountPtr<GameManager>&gameManager, std::string name);
 	
 	virtual ~WaitingPlayer();
 	

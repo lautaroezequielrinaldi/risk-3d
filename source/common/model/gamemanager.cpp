@@ -1,4 +1,5 @@
 #include "gamemanager.h"
+#include <iostream>
 
 GameManager::GameManager(): game (), turnManager ()
 {
@@ -68,6 +69,7 @@ std::list< ReferenceCountPtr<Player> >& GameManager::getPlayerList(){
 void GameManager::execute(std::string commandName, std::string commandXml){
 	// obtener lock
 	ReferenceCountPtr<State> currentState = stateMachine->getCurrentState();
+	std::cerr << "Estado actual: " << currentState->getName() << std::endl;
 	/*
 	codigo dummy
 	*/

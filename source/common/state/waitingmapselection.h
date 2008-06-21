@@ -8,7 +8,7 @@ class WaitingMapSelection : public State
 
 	public:
 
-	WaitingMapSelection(ReferenceCountPtr<GameManager>&gameManager);
+	WaitingMapSelection(ReferenceCountPtr<GameManager>&gameManager, std::string name);
 		
 	virtual ~WaitingMapSelection();
 		

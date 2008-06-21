@@ -208,7 +208,7 @@ std::string Attack::getAttackedLand(){
 }
 
 int Attack::getArmyCount(){
-	return this->cantidadEjercitos;	
+	return this->cantidadEjercitos;
 }
 
 

@@ -36,11 +36,11 @@ class StateMachine {
 		 * Destructor de la clase
 		 */
 		~StateMachine();
-    	
-    	/**
-    	 * Metodo cuyo proposito es obtener un estado a partir de su nombre.
-    	 */
-        ReferenceCountPtr<State> getState(std::string statename);
+
+		/**
+		* Metodo cuyo proposito es obtener un estado a partir de su nombre.
+		*/
+		ReferenceCountPtr<State> getState(std::string statename);
 		
 		/**
 		 * Metodo cuyo proposito es obtener el estado actual del juego.

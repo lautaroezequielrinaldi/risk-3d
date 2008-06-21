@@ -16,7 +16,7 @@
     // No realiza ninguna acciòn.
 }
 */
-State::State(ReferenceCountPtr<GameManager>&gameManager):gameManager(gameManager){
+State::State(ReferenceCountPtr<GameManager>&gameManager, std::string name):gameManager(gameManager),name(name){
 
 }
 
