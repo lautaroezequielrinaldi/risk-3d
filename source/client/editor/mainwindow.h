@@ -7,6 +7,7 @@
 #include<gtkmm/box.h> // Para definicion de Gtk::HBox y Gtk::VBox.
 #include<gtkmm/filechooserdialog.h> // Para definicion de
 // Gtk::FileChooserDialog.
+#include<gtkmm/messagedialog.h> // Para definicion de Gtk::MessageDialog.
 #include<gtkmm/filefilter.h> // Para definicion de Gtk::FileFilter.
 #include<gtkmm/stock.h> // Para definicion de Gtk::Stock.
 #include "continentpage.h" // Para definicion de ContinentPage.
@@ -16,6 +17,7 @@
 #include "mainmenu.h" // Para definicion de MainMenu.
 #include "editor.h" // Para definicionde Editor.
 #include "../../common/parser/mapaparser.h" // Para definicion de MapaParseer.
+#include "../../common/parser/parserexception.h" // Para definicion de ParserException.
 #include "../../common/smartpointer/referencecountptr.h" // Para definicino de
 // ReferenceCountPtr.
 
