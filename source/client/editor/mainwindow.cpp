@@ -45,11 +45,17 @@ MainWindow::MainWindow():
 }
 
 void MainWindow::onNewMenuItemActivated() {
+    // Creo un nuevo FileFilter para filtrar por imagenes.
+    Gtk::FileFilter imageFileFilter;
+    imageFileFilter.set_name("Todas las imagenes");
+    imageFileFilter.add_mime_type("image/*");
+
 	// Creo un nuevo cuadro de dialogo de seleccion de archivos.
 	Gtk::FileChooserDialog dialog("ABRIR IMAGEN DE MAPA", Gtk::FILE_CHOOSER_ACTION_OPEN);
 	dialog.set_transient_for(*this);
 	dialog.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
-	dialog.add_button("Select", Gtk::RESPONSE_OK);
+	dialog.add_button(Gtk::Stock::OK, Gtk::RESPONSE_OK);
+    dialog.add_filter(imageFileFilter);
 
 	// Ejecuto el dialogo.
 	int result = dialog.run();
@@ -64,12 +70,17 @@ void MainWindow::onNewMenuItemActivated() {
 }
 
 void MainWindow::onOpenMenuItemActivated() {
+    // Creo un nuevo FileFilter para filtrar archivos por extension xml.
+    Gtk::FileFilter xmlFileFilter;
+    xmlFileFilter.set_name("Todos los archivos xml");
+    xmlFileFilter.add_pattern("*.xml");
+
     // Creo un nuevo cuadro de dialogo de seleccion de archivos.
     Gtk::FileChooserDialog dialog("CARGAR MAPA", Gtk::FILE_CHOOSER_ACTION_OPEN);
     dialog.set_transient_for(*this);
     dialog.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
-    dialog.add_button("Select", Gtk::RESPONSE_OK);
-
+    dialog.add_button(Gtk::Stock::OK, Gtk::RESPONSE_OK);
+    dialog.add_filter(xmlFileFilter);
 	// Ejecuto el dialogo.
     int result = dialog.run();
 
@@ -88,12 +99,16 @@ void MainWindow::onOpenMenuItemActivated() {
 
 void MainWindow::onSaveMenuItemActivated() {
 	if (this->editor != NULL) {
+        // Creo un FileFilter para los archivos xml.
+        Gtk::FileFilter xmlFileFilter;
+        xmlFileFilter.set_name("Todos los archivos xml");
+        xmlFileFilter.add_pattern("*.xml");
 		// Creo un nuevo cuadro de dialogo de seleccion de archivos.
 		Gtk::FileChooserDialog dialog("GUARDAR MAPA", Gtk::FILE_CHOOSER_ACTION_SAVE);
 		dialog.set_transient_for(*this);
 		dialog.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
-		dialog.add_button("Select", Gtk::RESPONSE_OK);
-
+		dialog.add_button(Gtk::Stock::OK, Gtk::RESPONSE_OK);
+        dialog.add_filter(xmlFileFilter);
 		// Ejecuto el dialogo.
 		int result = dialog.run();
 

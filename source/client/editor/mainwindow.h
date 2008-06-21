@@ -5,7 +5,9 @@
 #include<gtkmm/window.h> // Para definicion de Gtk::Window.
 #include<gtkmm/notebook.h> // Para definicion de Gtk:Notebook.
 #include<gtkmm/box.h> // Para definicion de Gtk::HBox y Gtk::VBox.
-#include<gtkmm/filechooserdialog.h> // Para definicion de Gtk::FileChooserDialog.
+#include<gtkmm/filechooserdialog.h> // Para definicion de
+// Gtk::FileChooserDialog.
+#include<gtkmm/filefilter.h> // Para definicion de Gtk::FileFilter.
 #include<gtkmm/stock.h> // Para definicion de Gtk::Stock.
 #include "continentpage.h" // Para definicion de ContinentPage.
 #include "countrypage.h" // Para definicion de CountryPage.
