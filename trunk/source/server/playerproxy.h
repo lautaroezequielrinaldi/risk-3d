@@ -14,13 +14,13 @@ class PlayerProxy;
 class PlayerProxy:public Threaded {
 	private:
 	Socket * socket;
-	ReferenceCountPtr<GameManager> gamemanager;
+	ReferenceCountPtr<GameManager> gameManager;
 	ReferenceCountPtr<Player> player;
 	protected:
 	void * run();
 
 	public:
-	PlayerProxy(Socket * socket, ReferenceCountPtr<GameManager>& gamemanager);
+	PlayerProxy(Socket * socket, ReferenceCountPtr<GameManager>& gameManager);
 	void setPlayer(ReferenceCountPtr<Player> & player);
 	ReferenceCountPtr<Player> & getPlayer();
 	void notify(const std::string & msg);

@@ -4,22 +4,30 @@
 #include <iostream>
 void * PlayerProxy::run() {
 	std::string msg("bienvenido\n");
-//	std::vector<PlayerProxy *>::iterator players_iterator;
+
 	socket->write(msg);
-	//char * data = new(char[5]);
-/*	while (true) {
-		//socket->full_read(data,5);
-		
-		msg=socket->full_read(5);
+
+	while (true) {
+
+		// deshardcodear este 30
+		msg=socket->full_read(30);
 		std::cerr << msg << std::endl;
-		for (players_iterator =players.begin();
+		unsigned int msgLen = 0; //leer cuanto mide el resto del mensaje
+		std::string commandName = "JoinGame"; //leer que comando es
+		std::string commandXml = "<name>Mauro</name>";//socket->full_read(msgLen);
+		gameManager->execute(commandName, commandXml);
+		// crear el commmand
+		// command->execute()
+
+/*		for (players_iterator =players.begin();
 				players_iterator != players.end();
 				++players_iterator) {
 			PlayerProxy * playerProxy =  *players_iterator;
 			playerProxy->notify(msg);
 		}
+*/
 	}
-*/		
+		
 
 	//   cuando llega el mensaje,
 	//   se obtiene un lock sobre el estado.
@@ -34,8 +42,8 @@ void PlayerProxy::notify(const std::string & msg) {
 	socket->write(msg);
 }
 
-PlayerProxy::PlayerProxy(Socket * socket, ReferenceCountPtr< GameManager> & gamemanager){
-	this->gamemanager= gamemanager;
+PlayerProxy::PlayerProxy(Socket * socket, ReferenceCountPtr< GameManager> & gameManager){
+	this->gameManager= gameManager;
 	this->socket = socket;
 }
 
