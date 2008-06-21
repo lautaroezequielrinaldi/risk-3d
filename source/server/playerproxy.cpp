@@ -15,10 +15,9 @@ void * PlayerProxy::run() {
 		unsigned int msgLen = 0; //leer cuanto mide el resto del mensaje
 		std::string commandName = "JoinGame"; //leer que comando es
 		std::string commandXml = "<name>Mauro</name>";//socket->full_read(msgLen);
-		/* desactivado por charli por error compilacion
+		
 		gameManager->execute(commandName, commandXml);
 
-		*/
 		// crear el commmand
 		// command->execute()
 

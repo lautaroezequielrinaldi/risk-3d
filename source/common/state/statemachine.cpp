@@ -20,6 +20,11 @@ StateMachine::~StateMachine(){
 
 }
 
+ReferenceCountPtr<State> StateMachine::getCurrentState() {
+	return currentState;
+
+}
+
 ReferenceCountPtr<State> StateMachine::getState(std::string statename) {
 	return states[statename];
 
