@@ -1,0 +1,21 @@
+Manual del Proyecto
+
+1. Integrantes (*)
+	Analía Hojman (86368)
+	Pablo Martín Viva (83020)
+	Carlos Federico Pantelides (74901)
+2. Enunciado
+	(Cortar y pegar)
+3. División de tareas (*)
+4. Evolución del proyecto
+	Cronograma propuesto y cronograma real
+5. Inconvenientes encontrados (*)
+	Problemas principales encontrados
+6. Análisis de puntos pendientes
+	Cosas que faltan o deberían mejorar, cómo y por qué
+7. Herramientas (*)
+	Herramientas auxiliares que utilizaron para hacer el proyecto, como editor de interfaz gráfica, herramienta para generar documentación, herramientas para debug, etc
+	Control de versiones: svn en code.google.com
+8. Conclusiones
+
+
