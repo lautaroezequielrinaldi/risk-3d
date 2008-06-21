@@ -1,6 +1,6 @@
 #include "moving.h"
 
-Moving::Moving()
+Moving::Moving(ReferenceCountPtr<GameManager>&gameManager):State(gameManager)
 {
 }
 

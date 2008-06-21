@@ -1,6 +1,6 @@
 #include "simplepopulating.h"
 
-SimplePopulating::SimplePopulating()
+SimplePopulating::SimplePopulating(ReferenceCountPtr<GameManager>&gameManager):State(gameManager)
 {
 }
 

@@ -9,7 +9,7 @@ class Defending : public State
 
 	public:
 	
-		Defending();
+		Defending(ReferenceCountPtr<GameManager>&gameManager);
 	
 		virtual ~Defending();
 		

@@ -27,7 +27,7 @@ class StateMachine {
 	
 	public:
 		
-		StateMachine(GameManager& gameManager);
+		StateMachine(ReferenceCountPtr<GameManager>& gameManager);
 	
 		~StateMachine();
                 ReferenceCountPtr<State> getState(std::string statename);
