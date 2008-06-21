@@ -39,14 +39,13 @@ void GameManager::setAttack( ReferenceCountPtr<Attack>& attack){
 }
 
 void GameManager::add(ReferenceCountPtr<PlayerProxy> & playerProxy) {
-	/* codigo comentado para que compile EDITOR_TARGET, no falla en SERVER_TARGET
+	/* codigo comentado para que compile EDITOR_TARGET, no falla en SERVER_TARGET*/
 	playerProxy->setPlayer(game->addPlayer());
 
 
-	*/
+	
 	// incrementar jugadores
 	// si alcanzado max, open -> false;
-
 
 }
 
@@ -63,5 +62,14 @@ bool GameManager::isOpen() {
 
 std::list< ReferenceCountPtr<Player> >& GameManager::getPlayerList(){
 	return game->getPlayerList();
+
+}
+
+void GameManager::execute(std::string commandName, std::string commandXml){
+	// obtener CommandFactory a partir de commmandName
+	// construir comando a partir de commandXml
+	
+
+	//stateMachine->
 
 }
