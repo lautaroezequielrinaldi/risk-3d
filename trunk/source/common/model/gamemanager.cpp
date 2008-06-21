@@ -66,11 +66,16 @@ std::list< ReferenceCountPtr<Player> >& GameManager::getPlayerList(){
 }
 
 void GameManager::execute(std::string commandName, std::string commandXml){
+	// obtener lock
 	ReferenceCountPtr<State> currentState = stateMachine->getCurrentState();
+	/*
+	codigo dummy
+	*/
+	ReferenceCountPtr<Command> command = new Attack("slkdlsdf");
 	// obtener CommandFactory a partir de commmandName
 	// construir comando a partir de commandXml
 	
-
-	//stateMachine->getCurrentState
+	command->execute(currentState);
+	
 
 }
