@@ -66,10 +66,11 @@ std::list< ReferenceCountPtr<Player> >& GameManager::getPlayerList(){
 }
 
 void GameManager::execute(std::string commandName, std::string commandXml){
+	ReferenceCountPtr<State> currentState = stateMachine->getCurrentState();
 	// obtener CommandFactory a partir de commmandName
 	// construir comando a partir de commandXml
 	
 
-	//stateMachine->
+	//stateMachine->getCurrentState
 
 }
