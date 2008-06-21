@@ -15,6 +15,9 @@ int main (int argc, char** argv) {
 	ReferenceCountPtr<TurnManager> turnmanager= new TurnManager();
 
 	ReferenceCountPtr<GameManager> gamemanager= new GameManager(game,turnmanager);
+
+	gamemanager->prepare(gamemanager);
+
 	Socket socket(2000,4);
 	ReferenceCountPtr<PlayerProxy>  playerProxy;
 

@@ -61,6 +61,8 @@ class GameManager
 		 */
 		~GameManager();
 
+
+		void prepare(ReferenceCountPtr<GameManager>& gameManager);
 		/**
 		 *
 		 *
