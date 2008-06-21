@@ -3,12 +3,16 @@
 
 #include "state.h"
 
+class JoinGame;
+class SelectMap;
+class ReadyToPlay;
+
 class WaitingMapSelection : public State
 {
 
 	public:
 
-	WaitingMapSelection();
+	WaitingMapSelection(ReferenceCountPtr<GameManager> & gameManager);
 		
 	virtual ~WaitingMapSelection();
 		

@@ -1,6 +1,7 @@
 #include "attacking.h"
+#include "../commands/attack.h"
 
-Attacking::Attacking()
+Attacking::Attacking(ReferenceCountPtr<GameManager> & gameManager)
 {
 }
 

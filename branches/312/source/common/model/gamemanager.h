@@ -4,7 +4,6 @@
 class GameManager;
 
 #include "../smartpointer/referencecountptr.h"
-
 #include "game.h"
 #include "turnmanager.h"
 #include "player.h"

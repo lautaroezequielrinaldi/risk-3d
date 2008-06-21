@@ -2,15 +2,16 @@
 // #include "todos los estados"
 
 StateMachine::StateMachine(GameManager & gameManager){
-	states.insert(std::make_pair("attacking",new Attacking()));
-        states.insert(std::make_pair("defending",new Defending()));
-        states.insert(std::make_pair("moving",new Moving()));
-        states.insert(std::make_pair("occupying",new Occupying()));
-        states.insert(std::make_pair("simplePopulating",new SimplePopulating()));
-        states.insert(std::make_pair("populating",new Populating()));
-        states.insert(std::make_pair("waitingPlayer",new WaitingPlayer()));
-        states.insert(std::make_pair("waitingFirstPlayer",new WaitingFirstPlayer()));
-        states.insert(std::make_pair("waitingMapSelection",new WaitingMapSelection()));
+/* comentado por charli para compilar 313*/
+	states.insert(std::make_pair("attacking",new Attacking(gameManager)));
+        states.insert(std::make_pair("defending",new Defending(gameManager)));
+        states.insert(std::make_pair("moving",new Moving(gameManager)));
+        states.insert(std::make_pair("occupying",new Occupying(gameManager)));
+        states.insert(std::make_pair("simplePopulating",new SimplePopulating(gameManager)));
+        states.insert(std::make_pair("populating",new Populating(gameManager)));
+        states.insert(std::make_pair("waitingPlayer",new WaitingPlayer(gameManager)));
+        states.insert(std::make_pair("waitingFirstPlayer",new WaitingFirstPlayer(gameManager)));
+        states.insert(std::make_pair("waitingMapSelection",new WaitingMapSelection(gameManager)));
 
 
 

@@ -3,7 +3,9 @@
 
 #include <string>
 #include "../smartpointer/referencecountptr.h"
-class State;
+
+#include "../model/gamemanager.h"
+
 /*
 #include "../commands/attack.h"
 #include "../commands/defend.h"
@@ -28,20 +30,23 @@ class NoMore;
 class Surrender;
 class Quit;
 
+
 class State {
 
 	private:
 	
 		std::string name;
-
-
+/* comentado por charli para compilar 313
+		ReferenceCountPtr<GameManager> gameManager;
+*/
 	public:
 		
 		/**
 		 * Constructor de la clase
 		 */
-		State();
+		State(ReferenceCountPtr<GameManager>& gameManager);
 		
+
 		/**
 		 * Destructor de la clase
 		 */
@@ -69,6 +74,7 @@ class State {
      
             virtual bool quit(Quit & command);
 };
+
 
 
 #endif /** __STATE_H__ */

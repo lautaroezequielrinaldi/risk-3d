@@ -1,6 +1,6 @@
 #include "moving.h"
-
-Moving::Moving()
+#include "../commands/move.h"
+Moving::Moving(ReferenceCountPtr<GameManager> & gameManager)
 {
 }
 
@@ -24,6 +24,7 @@ bool Moving::move(Move & command){
 
 	//notifica el cambio
 */
+	return false;
 }
 
 

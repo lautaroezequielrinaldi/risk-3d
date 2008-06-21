@@ -2,13 +2,15 @@
 #define WAITINGPLAYER_H_
 
 #include "state.h"
+class JoinGame;
+class ReadyToPlay;
 
 class WaitingPlayer : public State
 {
 
 	public:
 
-	WaitingPlayer();
+	WaitingPlayer(ReferenceCountPtr<GameManager> & gameManager);
 	
 	virtual ~WaitingPlayer();
 	
