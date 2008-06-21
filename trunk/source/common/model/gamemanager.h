@@ -10,7 +10,7 @@ class GameManager;
 #include "player.h"
 #include "../state/statemachine.h"
 #include "../commands/attack.h"
-#include "../../server/playerproxy.h"
+#include "../playerproxy.h"
 
 
 class GameManager {

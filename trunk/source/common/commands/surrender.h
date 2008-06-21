@@ -6,7 +6,7 @@ class Surrender:public Command{
 	Surrender();
 	
 	virtual ~Surrender();
-
+	virtual void execute(ReferenceCountPtr<State>& state);
 
 };
 

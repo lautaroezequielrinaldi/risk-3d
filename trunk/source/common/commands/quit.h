@@ -5,7 +5,7 @@ class Quit: public Command {
 	public:
 	Quit();
 	virtual ~Quit();
-
+	virtual void execute(ReferenceCountPtr<State>& state);
 
 };
 

@@ -74,7 +74,9 @@ void GameManager::execute(std::string commandName, std::string commandXml){
 	ReferenceCountPtr<Command> command = new Attack("slkdlsdf");
 	// obtener CommandFactory a partir de commmandName
 	// construir comando a partir de commandXml
-	
+
+	// aca le estamos pidiendo al command que llame al metodo correspondiente
+	// a si mismo del estado actual.
 	command->execute(currentState);
 	
 
