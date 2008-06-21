@@ -3,7 +3,7 @@
 #include "../common/model/game.h"
 #include "../common/model/turnmanager.h"
 #include "../common/smartpointer/referencecountptr.h"
-#include "playerproxy.h"
+#include "../common/playerproxy.h"
 
 #include <iostream>
 //#include <vector>
