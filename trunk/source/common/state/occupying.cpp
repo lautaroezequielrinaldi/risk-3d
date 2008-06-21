@@ -1,6 +1,6 @@
 #include "occupying.h"
 
-Occupying::Occupying()
+Occupying::Occupying(ReferenceCountPtr<GameManager>&gameManager):State(gameManager)
 {
 }
 

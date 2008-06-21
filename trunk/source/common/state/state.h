@@ -17,6 +17,8 @@ class State;
 #include "../commands/quit.h"
 */
 
+class GameManager;
+
 class Attack;
 class Defend;
 class JoinGame;
@@ -33,14 +35,16 @@ class State {
 	private:
 	
 		std::string name;
-
+		ReferenceCountPtr<GameManager>&gameManager;
 
 	public:
 		
 		/**
 		 * Constructor de la clase
 		 */
-		State();
+		/*State();*/
+
+		State(ReferenceCountPtr<GameManager>&gameManager);
 		
 		/**
 		 * Destructor de la clase

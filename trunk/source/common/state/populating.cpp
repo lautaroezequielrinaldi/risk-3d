@@ -1,6 +1,6 @@
 #include "populating.h"
 
-Populating::Populating()
+Populating::Populating(ReferenceCountPtr<GameManager>&gameManager):State(gameManager)
 {
 }
 

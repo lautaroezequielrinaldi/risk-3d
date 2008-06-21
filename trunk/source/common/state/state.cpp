@@ -10,9 +10,14 @@
 #include "../commands/nomore.h"
 #include "../commands/surrender.h"
 #include "../commands/quit.h"
+#include "../model/gamemanager.h"
 
-State::State() {
+/*State::State() {
     // No realiza ninguna acciòn.
+}
+*/
+State::State(ReferenceCountPtr<GameManager>&gameManager):gameManager(gameManager){
+
 }
 
 State::~State() {

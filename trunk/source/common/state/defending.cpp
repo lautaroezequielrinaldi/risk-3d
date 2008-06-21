@@ -1,6 +1,6 @@
 #include "defending.h"
 
-Defending::Defending()
+Defending::Defending(ReferenceCountPtr<GameManager>&gameManager):State(gameManager)
 {
 }
 

@@ -1,6 +1,6 @@
 #include "waitingplayer.h"
 
-WaitingPlayer::WaitingPlayer()
+WaitingPlayer::WaitingPlayer(ReferenceCountPtr<GameManager>&gameManager):State(gameManager)
 {
 }
 

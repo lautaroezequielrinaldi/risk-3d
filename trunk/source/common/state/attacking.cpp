@@ -1,6 +1,6 @@
 #include "attacking.h"
 
-Attacking::Attacking()
+Attacking::Attacking(ReferenceCountPtr<GameManager>&gameManager):State(gameManager)
 {
 }
 
