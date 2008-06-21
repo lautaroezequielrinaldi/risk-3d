@@ -13,8 +13,7 @@ class GameManager;
 #include "../../server/playerproxy.h"
 
 
-class GameManager
-{
+class GameManager {
 	
 	private:
 	
@@ -93,6 +92,7 @@ class GameManager
 
 		bool isOpen();
 
+		void execute(std::string commandName, std::string commandXml);
 
 		std::list< ReferenceCountPtr<Player> >& getPlayerList();
 };
