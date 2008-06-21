@@ -11,20 +11,34 @@
 int main (int argc, char** argv) {
 	// usamos este constructor pues aun no conocemos ni los jugadores ni el mapa
 	ReferenceCountPtr<Game>        game       = new Game();
+	std::cerr<< "Game created" << std::endl;
 
 	ReferenceCountPtr<TurnManager> turnmanager= new TurnManager();
+	std::cerr<< "TurnManager created" << std::endl;
 
 	ReferenceCountPtr<GameManager> gamemanager= new GameManager(game,turnmanager);
+	std::cerr<< "GameManager created" << std::endl;
 
 	gamemanager->prepare(gamemanager);
+	std::cerr<< "GameManager prepared" << std::endl;
 
+	// deshardcodear 2000
 	Socket socket(2000,4);
-	ReferenceCountPtr<PlayerProxy>  playerProxy;
+	std::cerr<< "Socket created" << std::endl;
 
-	while (! gamemanager->isOpen() ) {
+	ReferenceCountPtr<PlayerProxy>  playerProxy;
+	std::cerr<< "PlayerProxy created" << std::endl;
+
+	while (gamemanager->isOpen() ) {
+		std::cerr<< "Accepting connection" << std::endl;
 		playerProxy = new PlayerProxy(socket.accept(), gamemanager);
+		std::cerr<< "Connection accepted" << std::endl;
+
 		gamemanager->add(playerProxy);
+		std::cerr<< "PlayerProxy added" << std::endl;
+
 		playerProxy->start();
+		std::cerr<< "PlayerProxy started" << std::endl;
 	}
 
 	while (gamemanager->isPlaying()) {
