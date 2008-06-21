@@ -35,6 +35,7 @@ class State {
 	private:
 	
 		std::string name;
+		
 		ReferenceCountPtr<GameManager>&gameManager;
 
 	public:

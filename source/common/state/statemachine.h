@@ -27,17 +27,37 @@ class StateMachine {
 	
 	public:
 		
+		/**
+		 * Constructor de la clase
+		 */
 		StateMachine(ReferenceCountPtr<GameManager>& gameManager);
-	
+		
+		/**
+		 * Destructor de la clase
+		 */
 		~StateMachine();
-                ReferenceCountPtr<State> getState(std::string statename);
-                ReferenceCountPtr<State> getCurrentState();
+    	
+    	/**
+    	 * Metodo cuyo proposito es obtener un estado a partir de su nombre.
+    	 */
+        ReferenceCountPtr<State> getState(std::string statename);
+		
+		/**
+		 * Metodo cuyo proposito es obtener el estado actual del juego.
+		 */ 
+		ReferenceCountPtr<State> getCurrentState();
+		
+		/**
+		 * Metodo cuyo proposito es establecer el estado actual del juego.
+		 */
 		void setState(std::string statename);
 	
 		
 	private:
 		
+		
 		std::map <std::string, ReferenceCountPtr<State> > states;
+		
 		ReferenceCountPtr<State> currentState;
 	
 };
