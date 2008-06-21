@@ -93,10 +93,8 @@ class GameManager {
 		bool isOpen();
 
 
-
 		void execute(std::string commandName, std::string commandXml);
 
-		
 		
 		
 		/**
