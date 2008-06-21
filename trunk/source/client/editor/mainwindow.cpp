@@ -88,11 +88,21 @@ void MainWindow::onOpenMenuItemActivated() {
     switch(result) {
 		case(Gtk::RESPONSE_OK): {
 			std::string fileToLoad = dialog.get_filename();
-			MapaParser parser;
-			ReferenceCountPtr<Mapa> map = parser.loadMap(fileToLoad);
-			ReferenceCountPtr<Editor> loadedEditor(new Editor("./image"));
-			loadedEditor->setMapa(map);
-			this->setEditor(loadedEditor);
+
+			try {
+                // Carga el mapa.
+                MapaParser parser;
+	    		ReferenceCountPtr<Mapa> map = parser.loadMap(fileToLoad);
+		    	ReferenceCountPtr<Editor> loadedEditor(new Editor("./image"));
+			    loadedEditor->setMapa(map);
+    			this->setEditor(loadedEditor);
+
+            } catch (ParserException& exception) {
+                // Muestra dialogo de error.
+                Gtk::MessageDialog errorDialog("ERROR");
+                errorDialog.set_message(exception.what());
+                errorDialog.run();
+            }
 		}
 	}
 }

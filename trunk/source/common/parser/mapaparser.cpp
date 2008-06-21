@@ -160,7 +160,7 @@ void MapaParser::persistirReglas(xmlNodePtr& mapNode,
     }
 }
 
-void MapaParser::cargarImagen(xmlNodePtr& mapNode) {
+void MapaParser::cargarImagen(xmlNodePtr& mapNode) throw(ParserException) {
     // Defino un contexto de XPath.
 	xmlXPathContextPtr xpathContext;
     // Defino un objeto de XPath.
@@ -174,6 +174,17 @@ void MapaParser::cargarImagen(xmlNodePtr& mapNode) {
     // Evaluo la expresiòn XPath.
     xpathObject = xmlXPathEvalExpression(BAD_CAST "//mapa/imagen",
 		xpathContext);
+    if (xpathObject == NULL) {
+        xmlXPathFreeContext(xpathContext);
+        throw ParserException("Error al leer la imagen del mapa");
+    }
+    
+    if (xpathObject->nodesetval->nodeNr == 0) {
+        xmlXPathFreeContext(xpathContext);
+        xmlXPathFreeObject(xpathObject);
+        throw ParserException("Error al leer la imagen del mapa");
+    }
+
     // Obtengo el nodo de la imagen.
 	imageNode = xpathObject->nodesetval->nodeTab[0];
 	// Obtengo el contenido del nodo.
@@ -188,14 +199,19 @@ void MapaParser::cargarImagen(xmlNodePtr& mapNode) {
 	}
 	imageFile.flush();
 	imageFile.close();
+
+    xmlXPathFreeContext(xpathContext);
+    xmlXPathFreeObject(xpathObject);
 }
 
 void MapaParser::cargarPaises(xmlNodePtr& mapNode,
-    ReferenceCountPtr<Mapa>& map) {
+    ReferenceCountPtr<Mapa>& map) throw(ParserException) {
     // Defino un contexto de XPath.
     xmlXPathContextPtr xpathContext;
     // Defino un objeto de XPath.
     xmlXPathObjectPtr xpathObject;
+    // Defino un objeto de XPath.
+    xmlXPathObjectPtr xpathObjectInner;
     // Defino el set de nodos devueltos por la expresiòn XPath.
     xmlNodeSetPtr countryNodeSet;
     // Defino el set de nodos devueltos por la expresion XPath.
@@ -208,70 +224,88 @@ void MapaParser::cargarPaises(xmlNodePtr& mapNode,
     xpathObject = xmlXPathEvalExpression(BAD_CAST "//mapa/lista-paises/pais",
         xpathContext);
 
+    if (xpathObject == NULL) {
+        xmlXPathFreeContext(xpathContext);
+        throw ParserException("Error al leer los paises del mapa");
+    }
+
     // Obtengo el set de nodos de paises.
     countryNodeSet = xpathObject->nodesetval;
 
-    // Itero por cada nodo de paises.
-    for ( int contador = 0; contador < countryNodeSet->nodeNr; ++contador) {
-        // Obtengo el nodo del pais actual.
-        xmlNodePtr countryNode = countryNodeSet->nodeTab[contador];
+    if (countryNodeSet != NULL) {
+        // Itero por cada nodo de paises.
+        for ( int contador = 0; contador < countryNodeSet->nodeNr; ++contador) {
+            // Obtengo el nodo del pais actual.
+            xmlNodePtr countryNode = countryNodeSet->nodeTab[contador];
 
-        // Obtengo el nombre del pais actual.
-        std::string nombre = (const char*) xmlGetProp(countryNode,
-            BAD_CAST "nombre");
-        // Obtengo la posicion x del pais actual,
-        std::string xPositionStr = (const char*) xmlGetProp(countryNode,
-            BAD_CAST "x");
-        // Obtengo la posicion y del pais actual.
-        std::string yPositionStr = (const char*) xmlGetProp(countryNode,
-            BAD_CAST "y");
-        // Creo posicion del pais
-        MapPosition position(atoi(xPositionStr.c_str()),
-            atoi(yPositionStr.c_str()));
-        // Creo objeto pais.
-        ReferenceCountPtr<Pais> country(new Pais(nombre, position));
+            // Obtengo el nombre del pais actual.
+            std::string nombre = (const char*) xmlGetProp(countryNode,
+                BAD_CAST "nombre");
+            // Obtengo la posicion x del pais actual,
+            std::string xPositionStr = (const char*) xmlGetProp(countryNode,
+                BAD_CAST "x");
+            // Obtengo la posicion y del pais actual.
+            std::string yPositionStr = (const char*) xmlGetProp(countryNode,
+                BAD_CAST "y");
+            // Creo posicion del pais
+            MapPosition position(atoi(xPositionStr.c_str()),
+                atoi(yPositionStr.c_str()));
+            // Creo objeto pais.
+            ReferenceCountPtr<Pais> country(new Pais(nombre, position));
 
-        // Agrego pais al mapa de paises cargados.
-        this->paisesCargados[nombre] = country;
+            // Agrego pais al mapa de paises cargados.
+            this->paisesCargados[nombre] = country;
 
-        // Agrego el pais al mapa.
-        map->agregarPais(country);
-    }
+            // Agrego el pais al mapa.
+            map->agregarPais(country);
+        }
 
-    // Creo iterador para recorrer paises del mapa.
-    Mapa::IteradorPais countryIter;
-    // Itero por los paises del mapa.
-    for (countryIter = map->primerPais(); countryIter != map->ultimoPais();
-        ++countryIter) {
-        // Obtengo pais actual.
-        ReferenceCountPtr<Pais> country = *countryIter;
+        // Creo iterador para recorrer paises del mapa.
+        Mapa::IteradorPais countryIter;
+        // Itero por los paises del mapa.
+        for (countryIter = map->primerPais(); countryIter != map->ultimoPais();
+            ++countryIter) {
+            // Obtengo pais actual.
+            ReferenceCountPtr<Pais> country = *countryIter;
 
-        // Creo expresion XPath
-        std::string expresion = "//mapa/lista-paises/pais[@nombre='"
-            + country->getNombre()
-            + "']/adyacente";
+            // Creo expresion XPath
+            std::string expresion = "//mapa/lista-paises/pais[@nombre='"
+                + country->getNombre()
+                + "']/adyacente";
 
-        // Evaluo la expresiòn XPath.
-        xpathObject = xmlXPathEvalExpression(BAD_CAST expresion.c_str(), xpathContext);
+            // Evaluo la expresiòn XPath.
+            xpathObjectInner = xmlXPathEvalExpression(BAD_CAST expresion.c_str(), xpathContext);
 
-        // Obtengo  el set de nodos de adyacentes.
-        adjacentNodeSet = xpathObject->nodesetval;
+            if (xpathObjectInner == NULL) {
+                xmlXPathFreeContext(xpathContext);
+                xmlXPathFreeObject(xpathObject);
+                throw ParserException("Error al leer los paises del mapa");
+            }
 
-        // Itero por cada nodo de adyacentes.
-        for (int contador = 0; contador < adjacentNodeSet->nodeNr; ++contador) {
-            // Obtengo el nodo del adyacente actual.
-            xmlNodePtr adjacentNode = adjacentNodeSet->nodeTab[contador];
+            // Obtengo  el set de nodos de adyacentes.
+            adjacentNodeSet = xpathObjectInner->nodesetval;
 
-            // Obtengo el nombre del adyacente actual.
-            std::string nombreAdyacente = (const char*) xmlNodeGetContent(adjacentNode);
+            if (adjacentNodeSet != NULL) {
+                // Itero por cada nodo de adyacentes.
+                for (int contador = 0; contador < adjacentNodeSet->nodeNr; ++contador) {
+                    // Obtengo el nodo del adyacente actual.
+                    xmlNodePtr adjacentNode = adjacentNodeSet->nodeTab[contador];
 
-            // Obtengo el paise cargado.
-            ReferenceCountPtr<Pais> adjacent = this->paisesCargados[nombreAdyacente];
+                    // Obtengo el nombre del adyacente actual.
+                    std::string nombreAdyacente = (const char*) xmlNodeGetContent(adjacentNode);
 
-            // Agrego el adyacente al pais.
-            country->agregarAdyacente(adjacent);
+                    // Obtengo el paise cargado.
+                    ReferenceCountPtr<Pais> adjacent = this->paisesCargados[nombreAdyacente];
+
+                    // Agrego el adyacente al pais.
+                    country->agregarAdyacente(adjacent);
+                }
+            }
+            xmlXPathFreeObject(xpathObjectInner);
         }
     }
+    xmlXPathFreeContext(xpathContext);
+    xmlXPathFreeObject(xpathObject);
 }
 
 void MapaParser::cargarContinentes(xmlNodePtr& mapNode,
@@ -280,6 +314,8 @@ void MapaParser::cargarContinentes(xmlNodePtr& mapNode,
     xmlXPathContextPtr xpathContext;
     // Defino un objeto de XPath.
     xmlXPathObjectPtr xpathObject;
+    // Defino un objeto de XPath.
+    xmlXPathObjectPtr xpathObjectInner;
     // Defino el set de nodos devueltos por la expresiòn XPath.
     xmlNodeSetPtr continentNodeSet;
     // Defino el set de nodos devueltos por la expresion XPath.
@@ -292,59 +328,78 @@ void MapaParser::cargarContinentes(xmlNodePtr& mapNode,
     xpathObject = xmlXPathEvalExpression(BAD_CAST "//mapa/lista-continentes/continente",
         xpathContext);
 
+    if (xpathObject == NULL) {
+        xmlXPathFreeContext(xpathContext);
+        throw ParserException("Error al leer los continentes del mapa");
+    }
+
      // Obtengo el set de nodos de continentes.
     continentNodeSet = xpathObject->nodesetval;
 
-    // Itero por cada nodo de paises.
-    for ( int contador = 0; contador < continentNodeSet->nodeNr; ++contador) {
-        // Obtengo el nodo del continente actual.
-        xmlNodePtr continentNode = continentNodeSet->nodeTab[contador];
-
-        // Obtengo el nombre del continente actual.
-        std::string nombre = (const char*) xmlGetProp(continentNode,
-            BAD_CAST "nombre");
-        // Obtengo el bonus del continente actual,
-        std::string armyBonusStr = (const char*) xmlGetProp(continentNode,
-            BAD_CAST "bonus");
-        // Obtengo el army bonus del continente actual como int.
-        int armyBonus = atoi(armyBonusStr.c_str());
-        // Creo objeto continente.
-        ReferenceCountPtr<Continente> continent(new Continente(nombre, armyBonus));
-        // Agrego el continente al mapa.
-        map->agregarContinente(continent);
-    }
-
-     // Creo iterador para recorrer continentes del mapa.
-     Mapa::IteradorContinente continentIter;
-     // Itero por los continentes del mapa.
-     for (continentIter = map->primerContinente(); continentIter != map->ultimoContinente();
-        ++continentIter) {
-        // Obtengo continente actual.
-        ReferenceCountPtr<Continente> continent = *continentIter;
-
-        // Creo expresion XPath
-        std::string expresion = "//mapa/lista-continentes/continente[@nombre='"
-            + continent->getNombre()
-            + "']/pais";
-
-        // Evaluo la expresiòn XPath.
-        xpathObject = xmlXPathEvalExpression(BAD_CAST expresion.c_str(), xpathContext);
-
-        // Obtengo  el set de nodos de paises.
-        countryNodeSet = xpathObject->nodesetval;
-
+    if(continentNodeSet != NULL) {
         // Itero por cada nodo de paises.
-        for (int contador = 0; contador < countryNodeSet->nodeNr; ++contador) {
-            // Obtengo el nodo del pais actual.
-            xmlNodePtr countryNode = countryNodeSet->nodeTab[contador];
-            // Obtengo el nombre del pais actual.
-            std::string nombrePais = (const char*) xmlNodeGetContent(countryNode);
-            // Obtengo el pais cargado.
-            ReferenceCountPtr<Pais> country = this->paisesCargados[nombrePais];
-            // Agrego el pais al continente.
-            continent->agregarPais(country);
+        for ( int contador = 0; contador < continentNodeSet->nodeNr; ++contador) {
+            // Obtengo el nodo del continente actual.
+            xmlNodePtr continentNode = continentNodeSet->nodeTab[contador];
+
+            // Obtengo el nombre del continente actual.
+            std::string nombre = (const char*) xmlGetProp(continentNode,
+                BAD_CAST "nombre");
+            // Obtengo el bonus del continente actual,
+            std::string armyBonusStr = (const char*) xmlGetProp(continentNode,
+                BAD_CAST "bonus");
+            // Obtengo el army bonus del continente actual como int.
+            int armyBonus = atoi(armyBonusStr.c_str());
+            // Creo objeto continente.
+            ReferenceCountPtr<Continente> continent(new Continente(nombre, armyBonus));
+            // Agrego el continente al mapa.
+            map->agregarContinente(continent);
+        }
+
+         // Creo iterador para recorrer continentes del mapa.
+         Mapa::IteradorContinente continentIter;
+         // Itero por los continentes del mapa.
+         for (continentIter = map->primerContinente(); continentIter != map->ultimoContinente();
+            ++continentIter) {
+            // Obtengo continente actual.
+            ReferenceCountPtr<Continente> continent = *continentIter;
+
+            // Creo expresion XPath
+            std::string expresion = "//mapa/lista-continentes/continente[@nombre='"
+                + continent->getNombre()
+                + "']/pais";
+
+            // Evaluo la expresiòn XPath.
+            xpathObjectInner = xmlXPathEvalExpression(BAD_CAST expresion.c_str(), xpathContext);
+
+            if (xpathObjectInner == NULL) {
+                xmlXPathFreeContext(xpathContext);
+                xmlXPathFreeObject(xpathObject);
+                throw ParserException("Error al leer los continentes del mapa");
+            }
+
+            // Obtengo  el set de nodos de paises.
+            countryNodeSet = xpathObjectInner->nodesetval;
+
+            if(countryNodeSet != NULL) {
+                // Itero por cada nodo de paises.
+                for (int contador = 0; contador < countryNodeSet->nodeNr; ++contador) {
+                    // Obtengo el nodo del pais actual.
+                    xmlNodePtr countryNode = countryNodeSet->nodeTab[contador];
+                    // Obtengo el nombre del pais actual.
+                    std::string nombrePais = (const char*) xmlNodeGetContent(countryNode);
+                    // Obtengo el pais cargado.
+                    ReferenceCountPtr<Pais> country = this->paisesCargados[nombrePais];
+                    // Agrego el pais al continente.
+                    continent->agregarPais(country);
+                }
+            }
+            xmlXPathFreeObject(xpathObjectInner);
         }
     }
+
+    xmlXPathFreeContext(xpathContext);
+    xmlXPathFreeObject(xpathObject);
 }
 
 void MapaParser::cargarReglas(xmlNodePtr& mapNode,
@@ -363,71 +418,101 @@ void MapaParser::cargarReglas(xmlNodePtr& mapNode,
 	xpathObject = xmlXPathEvalExpression(
 		BAD_CAST "//mapa/lista-cartas-de-juego/carta-de-juego[@tipo='CONQUERCONTINENTGAMECARD']",
 		xpathContext);
+
+    if (xpathObject == NULL) {
+        xmlXPathFreeContext(xpathContext);
+        throw ParserException("Error al leer las reglas del mapa");
+    }
+
 	// Obtengo  el set de nodos de cartas de juego.
 	gameCardNodeSet = xpathObject->nodesetval;
 
-	// Itero por las reglas de conquistar continentes.
-	for (int contador = 0; contador < gameCardNodeSet->nodeNr; ++contador) {
-		// Obtengo el nodo de carta de juego actual.
-		xmlNodePtr gameCardNode = gameCardNodeSet->nodeTab[contador];
-		// Obtengo el nombre de la carta de juego.
-		std::string nombre = (const char*) xmlGetProp(gameCardNode, BAD_CAST (const xmlChar*) "nombre");
-		// Obtengo el nombre del continente.
-		std::string continente = (const char*) xmlGetProp(gameCardNode, BAD_CAST (const xmlChar*) "continente");
-		// Creo la carta de juego.
-		ReferenceCountPtr<GameCard> gameCard(new ConquerContinentGameCard(nombre, continente));
-		// Agrego la carta de juego al mapa.
-		map->agregarGameCard(gameCard);
-	}
+    if (gameCardNodeSet != NULL) {
+    	// Itero por las reglas de conquistar continentes.
+	    for (int contador = 0; contador < gameCardNodeSet->nodeNr; ++contador) {
+		    // Obtengo el nodo de carta de juego actual.
+    		xmlNodePtr gameCardNode = gameCardNodeSet->nodeTab[contador];
+	    	// Obtengo el nombre de la carta de juego.
+		    std::string nombre = (const char*) xmlGetProp(gameCardNode, BAD_CAST (const xmlChar*) "nombre");
+    		// Obtengo el nombre del continente.
+	    	std::string continente = (const char*) xmlGetProp(gameCardNode, BAD_CAST (const xmlChar*) "continente");
+		    // Creo la carta de juego.
+    		ReferenceCountPtr<GameCard> gameCard(new ConquerContinentGameCard(nombre, continente));
+	    	// Agrego la carta de juego al mapa.
+		    map->agregarGameCard(gameCard);
+    	}
+    }
+    xmlXPathFreeObject(xpathObject);
 
 	// Evaluo la expresiòn XPath.
 	xpathObject = xmlXPathEvalExpression(
 		BAD_CAST "//mapa/lista-cartas-de-juego/carta-de-juego[@tipo='CONQUERPLAYERGAMECARD']",
 		xpathContext);
+
+    if (xpathObject == NULL) {
+        xmlXPathFreeContext(xpathContext);
+        throw ParserException("Error al leer las reglas del mapa");
+    }
+
     // Obtengo  el set de nodos de cartas de juego.
     gameCardNodeSet = xpathObject->nodesetval;
 
-	// Itero por las cartas de juego.
-	for (int contador = 0; contador < gameCardNodeSet->nodeNr; ++contador) {
-		// Obtengo el nodo actual.
-		xmlNodePtr gameCardNode = gameCardNodeSet->nodeTab[contador];
-		// Obtengo nombre de carta de juego.
-		std::string nombre = (const char*) xmlGetProp(gameCardNode, BAD_CAST (const xmlChar*) "nombre");
-		// Obtengo jugador como string.
-		std::string jugadorStr = (const char*) xmlGetProp(gameCardNode, BAD_CAST (const xmlChar*) "jugador");
-		// Obtengo jugador.
-		int jugador = atoi(jugadorStr.c_str());
-		// Creo carta de juego.
-		ReferenceCountPtr<GameCard> gameCard(new ConquerPlayerGameCard(nombre, jugador));
-		// Agrego carta de juego al mapa.
-		map->agregarGameCard(gameCard);
-	}	
+    if (gameCardNodeSet != NULL) {
+    	// Itero por las cartas de juego.
+	    for (int contador = 0; contador < gameCardNodeSet->nodeNr; ++contador) {
+		    // Obtengo el nodo actual.
+    		xmlNodePtr gameCardNode = gameCardNodeSet->nodeTab[contador];
+	    	// Obtengo nombre de carta de juego.
+		    std::string nombre = (const char*) xmlGetProp(gameCardNode, BAD_CAST (const xmlChar*) "nombre");
+    		// Obtengo jugador como string.
+	    	std::string jugadorStr = (const char*) xmlGetProp(gameCardNode, BAD_CAST (const xmlChar*) "jugador");
+		    // Obtengo jugador.
+    		int jugador = atoi(jugadorStr.c_str());
+	    	// Creo carta de juego.
+		    ReferenceCountPtr<GameCard> gameCard(new ConquerPlayerGameCard(nombre, jugador));
+    		// Agrego carta de juego al mapa.
+	    	map->agregarGameCard(gameCard);
+    	}	
+    }
+    xmlXPathFreeObject(xpathObject);
 
     // Evaluo la expresiòn XPath.
     xpathObject = xmlXPathEvalExpression(
 		BAD_CAST "//mapa/lista-cartas-de-juego/carta-de-juego[@tipo='CONQUERCOUNTRIESGAMECARD']",
 		xpathContext);
+
+    if (xpathObject == NULL) {
+        xmlXPathFreeContext(xpathContext);
+        throw ParserException("Error al leer las reglas del mapa");
+    }
+
     // Obtengo  el set de nodos de cartas de juego.
     gameCardNodeSet = xpathObject->nodesetval;
-    // Itero por las cartas de juego.
-    for (int contador = 0; contador < gameCardNodeSet->nodeNr; ++contador) {
-		//Obtengo el nodo actual.
-        xmlNodePtr gameCardNode = gameCardNodeSet->nodeTab[contador];
-        // Obtengo nombre de carta de juego.
-        std::string nombre = (const char*) xmlGetProp(gameCardNode, BAD_CAST (const xmlChar*) "nombre");
-        // Obtengo cantidad de paises como string.
-        std::string cantidadStr = (const char*) xmlGetProp(gameCardNode, BAD_CAST (const xmlChar*) "cantidad");
-        // Obtengo paises.
-        int cantidad = atoi(cantidadStr.c_str());
-        // Creo carta de juego.
-        ReferenceCountPtr<GameCard> gameCard(new ConquerCountriesGameCard(nombre, cantidad));
-        // Agrego carta de juego al mapa.
-        map->agregarGameCard(gameCard);
+
+    if (gameCardNodeSet != NULL) {
+        // Itero por las cartas de juego.
+        for (int contador = 0; contador < gameCardNodeSet->nodeNr; ++contador) {
+		    //Obtengo el nodo actual.
+            xmlNodePtr gameCardNode = gameCardNodeSet->nodeTab[contador];
+            // Obtengo nombre de carta de juego.
+            std::string nombre = (const char*) xmlGetProp(gameCardNode, BAD_CAST (const xmlChar*) "nombre");
+            // Obtengo cantidad de paises como string.
+            std::string cantidadStr = (const char*) xmlGetProp(gameCardNode, BAD_CAST (const xmlChar*) "cantidad");
+            // Obtengo paises.
+            int cantidad = atoi(cantidadStr.c_str());
+            // Creo carta de juego.
+            ReferenceCountPtr<GameCard> gameCard(new ConquerCountriesGameCard(nombre, cantidad));
+            // Agrego carta de juego al mapa.
+            map->agregarGameCard(gameCard);
+        }
     }
+    xmlXPathFreeContext(xpathContext);
+    xmlXPathFreeObject(xpathObject);
 }
 
 void MapaParser::saveMap(const std::string& fileName,
-	const std::string& imageFileName, ReferenceCountPtr<Mapa>& map) {
+	const std::string& imageFileName, ReferenceCountPtr<Mapa>& map) 
+    throw(ParserException) {
     // Define el nodo raiz del documento XML sobre el cual se va a trabajar.
     xmlNodePtr mapNode;
 
@@ -458,7 +543,7 @@ void MapaParser::saveMap(const std::string& fileName,
 }
 
 ReferenceCountPtr<Mapa> MapaParser::loadMap(
-    const std::string& fileName) {
+    const std::string& fileName) throw(ParserException) {
     // Defino el mapa que voy a devolver.
     ReferenceCountPtr<Mapa> map = new Mapa();
     // Defino el elemento raiz del documento XML sobre el cual voy a trabajar.
@@ -466,32 +551,52 @@ ReferenceCountPtr<Mapa> MapaParser::loadMap(
 
     // Leo el documento XML de disco
     this->document = xmlReadFile(fileName.c_str(), NULL, 0);
-
+    // Si no se pudo leer el documento lanzo excepcion
+    if (this->document == NULL) {
+        throw ParserException("Error al cargar el mapa");
+    }
     // Obtengo el elemento root del documento XML sobre el cual se va a
     // trabajar.
     mapNode = xmlDocGetRootElement(this->document);
 
-    // Vacio la lista de paises cargados.
-    this->paisesCargados.clear();
+    // Si no hay elemento raiz lanzo excepcion.
+    if (mapNode == NULL) {
+        // Libero el documento xml.
+        xmlFreeDoc(this->document);
+        // Limpio los recursod el parser.
+        xmlCleanupParser();
+        throw ParserException("Error al cargar el mapa");
+    }
 
-	// Leo la imagen del mapa.
-	cargarImagen(mapNode);
+    try {
+        // Vacio la lista de paises cargados.
+        this->paisesCargados.clear();
 
-    // Leo los paises del mapa.
-    cargarPaises(mapNode, map);
+    	// Leo la imagen del mapa.
+	    cargarImagen(mapNode);
 
-    // Leo los contientes del mapa.
-    cargarContinentes(mapNode, map);
+        // Leo los paises del mapa.
+        cargarPaises(mapNode, map);
 
-    // Leo las reglas del mapa.
-    cargarReglas(mapNode, map);
+        // Leo los contientes del mapa.
+        cargarContinentes(mapNode, map);
 
-    // Libera el documento XML sobre el cual se va a trabajar.
-    xmlFreeDoc(this->document);
+        // Leo las reglas del mapa.
+        cargarReglas(mapNode, map);
 
-    // Libera las variables globales que el parser XML haya inicializado.
-    xmlCleanupParser();
+        // Libera el documento XML sobre el cual se va a trabajar.
+        xmlFreeDoc(this->document);
 
+        // Libera las variables globales que el parser XML haya inicializado.
+        xmlCleanupParser();
+    } catch(ParserException& exception) {
+        // Libera documento raiz
+        xmlFreeDoc(this->document);
+        // Libera recursos del parser.
+        xmlCleanupParser();
+        // Vuelve a lanzar la excepcion.
+        throw exception;
+    }
     // Devuelve el mapa cargado.
     return map;
 }
