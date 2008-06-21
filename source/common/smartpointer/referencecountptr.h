@@ -82,6 +82,8 @@ class ReferenceCountPtr {
          */
         ReferenceCountPtr( T* pointer );
 
+        template<class Y> ReferenceCountPtr( Y* pointer );
+
         /**
          * Constructor de la clase ReferenceCountPtr.
          * Construye una nueva instancia de la clase ReferenceCountPtr a partir
@@ -89,11 +91,14 @@ class ReferenceCountPtr {
          */
         ReferenceCountPtr( const ReferenceCountPtr<T>& otherInstance );
 
+        template<class Y> ReferenceCountPtr(const ReferenceCountPtr<Y>& otherInstance);
         /**
          * Operador de asignaciòn de la clase ReferenceCountPtr.
          * Asigna el puntero existente a la clase ReferenceCountPtr.
          */
         ReferenceCountPtr& operator=( T* pointer );
+
+        template<class Y> ReferenceCountPtr& operator=( Y* pointer );
 
         /**
          * Operador de asignaciòn de la clase ReferenceCountPtr.
@@ -101,6 +106,8 @@ class ReferenceCountPtr {
          * ReferenceCountPtr.
          */
         ReferenceCountPtr& operator=( const ReferenceCountPtr<T>& otherInstance );
+
+        template<class Y> ReferenceCountPtr& operator=( const ReferenceCountPtr<Y>& otherInstance);
 
         /**
          * Operador de indirecciòn de la clase ReferenceCountPtr.
@@ -167,12 +174,30 @@ ReferenceCountPtr<T>::ReferenceCountPtr( T* pointer ):
 }
 
 template<class T>
+template<class Y> ReferenceCountPtr<T>::ReferenceCountPtr( Y* pointer):
+        referenceCount( NULL ),
+        pointer( NULL ) {
+    // Liga el puntero recibido como argumento.
+    this->attach ( pointer );
+}
+
+template<class T>
 ReferenceCountPtr<T>::ReferenceCountPtr( 
         const ReferenceCountPtr<T>& otherInstance ):
     referenceCount( NULL ),
     pointer( NULL ) {
     // Liga el objeto de tipo ReferenceCountPtr como argumento.
     this->attach( otherInstance );
+}
+
+template<class T>
+template<class Y>
+ReferenceCountPtr<T>::ReferenceCountPtr(
+        const ReferenceCountPtr<Y>& otherInstance):
+    referenceCount(NULL),
+    pointer( NULL ) {
+    // Liga el objeto de tipo ReferenceCountPtr< como argumento.
+    this->attach (otherInstance);
 }
 
 template<class T>
@@ -227,8 +252,23 @@ ReferenceCountPtr<T>& ReferenceCountPtr<T>::operator=( T* pointer ) {
 }
 
 template<class T>
+template<class Y>
+ReferenceCountPtr<T>& ReferenceCountPtr<T>::operator=( Y* pointer ) {
+    this->assign( pointer );
+    return ( *this );
+}
+
+template<class T>
 ReferenceCountPtr<T>& ReferenceCountPtr<T>::operator=( 
         const ReferenceCountPtr<T>& otherInstance ) {
+    this->assign( otherInstance );
+    return ( *this );
+}
+
+template<class T>
+template<class Y>
+ReferenceCountPtr<T>& ReferenceCountPtr<T>::operator=(
+        const ReferenceCountPtr<Y>& otherInstance ) {
     this->assign( otherInstance );
     return ( *this );
 }
