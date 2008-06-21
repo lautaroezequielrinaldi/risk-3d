@@ -17,7 +17,7 @@ class GameManager {
 	
 	private:
 	
-	/**
+		/**
          * Almacena el juego.
          */
         ReferenceCountPtr<Game> game;
@@ -27,16 +27,16 @@ class GameManager {
          */
         ReferenceCountPtr<TurnManager> turnManager;
 		
-	/**
-	* Almacena el estado del juego
-	*/
-	ReferenceCountPtr<StateMachine> stateMachine;
-	
-	/**
-	* Almacena un ataque.
-	*/
-	ReferenceCountPtr<Attack> attack;
-		
+		/**
+		* Almacena el estado del juego
+		*/
+		ReferenceCountPtr<StateMachine> stateMachine;
+				
+		/**
+		* Almacena un ataque.
+		*/
+		ReferenceCountPtr<Attack> attack;
+			
 		
 	bool open;
 
@@ -92,9 +92,19 @@ class GameManager {
 
 		bool isOpen();
 
+
+
 		void execute(std::string commandName, std::string commandXml);
 
+		
+		
+		
+		/**
+		 * Metodo cuyo proposito es obtener la lista de jugadores.
+		 */
 		std::list< ReferenceCountPtr<Player> >& getPlayerList();
+		
+		
 };
 
 
