@@ -1,6 +1,8 @@
 #include "waitingplayer.h"
+#include "../commands/joingame.h"
+#include "../commands/readytoplay.h"
 
-WaitingPlayer::WaitingPlayer()
+WaitingPlayer::WaitingPlayer(ReferenceCountPtr<GameManager> & gameManager)
 {
 }
 

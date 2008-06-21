@@ -7,7 +7,8 @@ GameManager::GameManager(): game (), turnManager ()
 GameManager::GameManager( ReferenceCountPtr<Game> & game, ReferenceCountPtr<TurnManager> & turnManager):
 game (game),
 turnManager (turnManager){
-	stateMachine = new StateMachine(*this);
+	ReferenceCountPtr<GameManager> & gameManager = this;
+	stateMachine = new StateMachine(gameManager);
 	stateMachine->setState("waitingFirstPlayer");
 
 	open = true;

@@ -2,14 +2,14 @@
 #define DEFENDING_H_
 
 #include "state.h"
-
+class Defend;
 
 class Defending : public State
 {
 
 	public:
 	
-		Defending();
+		Defending(ReferenceCountPtr<GameManager> & gameManager);
 	
 		virtual ~Defending();
 		

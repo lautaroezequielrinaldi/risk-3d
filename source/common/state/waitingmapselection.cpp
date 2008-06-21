@@ -1,6 +1,9 @@
 #include "waitingmapselection.h"
+#include "../commands/joingame.h"
+#include "../commands/selectmap.h"
+#include "../commands/readytoplay.h"
 
-WaitingMapSelection::WaitingMapSelection()
+WaitingMapSelection::WaitingMapSelection(ReferenceCountPtr<GameManager> & gameManager)
 {
 }
 

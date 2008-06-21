@@ -11,9 +11,15 @@
 #include "../commands/surrender.h"
 #include "../commands/quit.h"
 
-State::State() {
+
+State::State(ReferenceCountPtr<GameManager>& gameManager):gameManager(gameManager) {
     // No realiza ninguna acciòn.
 }
+
+State::State(GameManager & gameManager):gameManager(gameManager) {
+    // No realiza ninguna acciòn.
+}
+
 
 State::~State() {
     // No realiza ninguna acciòn,

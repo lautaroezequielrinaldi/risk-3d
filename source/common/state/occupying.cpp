@@ -1,6 +1,6 @@
 #include "occupying.h"
-
-Occupying::Occupying()
+#include "../commands/populate.h"
+Occupying::Occupying(ReferenceCountPtr<GameManager> & gameManager)
 {
 }
 

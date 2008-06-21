@@ -1,5 +1,6 @@
 #include<sstream>
 #include "attack.h"
+#include "../state/state.h"
 
 Attack::Attack(std::vector<std::string> & parameterList):Command ()
 {

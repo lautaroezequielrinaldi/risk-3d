@@ -3,12 +3,14 @@
 
 #include "state.h"
 
+class JoinGame;
+
 class WaitingFirstPlayer : public State
 {
 
 	public:
 
-	WaitingFirstPlayer();
+	WaitingFirstPlayer(ReferenceCountPtr<GameManager> & gameManager);
 		
 	virtual ~WaitingFirstPlayer();
 		
