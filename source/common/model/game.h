@@ -80,7 +80,7 @@ class Game: public Serializable {
 	 * Para solicitarle al Game que cree un nuevo jugador y lo devuelva
 	 *
 	 */
-        ReferenceCountPtr<Player> addPlayer();
+        ReferenceCountPtr<Player> & addPlayer();
 
         
         /**
