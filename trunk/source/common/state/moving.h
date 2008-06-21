@@ -12,7 +12,7 @@ class Moving : public State
 		/**
 		 * Constructor de la clase
 		 */
-		Moving(ReferenceCountPtr<GameManager>&gameManager);
+		Moving(ReferenceCountPtr<GameManager>&gameManager, std::string name);
 		
 		/**
 		 * Destructor de la clase

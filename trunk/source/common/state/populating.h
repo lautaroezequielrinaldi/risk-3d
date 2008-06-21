@@ -9,7 +9,7 @@ class Populating : public State
 {
 	public:
 	
-		Populating(ReferenceCountPtr<GameManager>&gameManager);
+		Populating(ReferenceCountPtr<GameManager>&gameManager, std::string name);
 	
 		virtual ~Populating();
                 virtual bool populate(Populate & command);		

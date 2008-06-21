@@ -8,7 +8,7 @@ class Attacking : public State
 
 	public:
 
-		Attacking(ReferenceCountPtr<GameManager>&gameManager);
+		Attacking(ReferenceCountPtr<GameManager>&gameManager, std::string name);
 		
 		virtual ~Attacking();
 

@@ -39,40 +39,40 @@ class State {
 		ReferenceCountPtr<GameManager>&gameManager;
 
 	public:
-		
+
 		/**
 		 * Constructor de la clase
 		 */
-		/*State();*/
 
-		State(ReferenceCountPtr<GameManager>&gameManager);
+		State(ReferenceCountPtr<GameManager>&gameManager, std::string name);
 		
 		/**
 		 * Destructor de la clase
 		 */
 		virtual ~State();
 
+		/**
+		 * @return nombre del estado
+		 *
+		 */
 		std::string getName();
 
 		
 		
-	    virtual bool attack(Attack & command);
-	    
-	    virtual bool defend(Defend & command);
-	    
-	    //virtual void occupy(Occupy & command);
-	    
-	    virtual bool joinGame(JoinGame & command);
-	    //virtual bool kill(Kill & move);
-	    virtual bool move(Move & command);
-	    virtual bool selectMap(SelectMap & command);
-	    //bool virtual setOwner(SetOwner & command);
-	    virtual bool populate(Populate & command) ;
-	    virtual bool readyToPlay(ReadyToPlay & command);
-            virtual bool noMore(NoMore & command);
-            virtual bool surrender(Surrender & command);
-     
-            virtual bool quit(Quit & command);
+		virtual bool attack(Attack & command);
+		virtual bool defend(Defend & command);
+		virtual bool joinGame(JoinGame & command);
+		virtual bool move(Move & command);
+		virtual bool selectMap(SelectMap & command);
+		virtual bool populate(Populate & command) ;
+		virtual bool readyToPlay(ReadyToPlay & command);
+		virtual bool noMore(NoMore & command);
+		virtual bool surrender(Surrender & command);
+		virtual bool quit(Quit & command);
+
+		//bool virtual setOwner(SetOwner & command);
+		//virtual void occupy(Occupy & command);
+		//virtual bool kill(Kill & move);
 };
 
 

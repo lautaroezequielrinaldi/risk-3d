@@ -8,7 +8,7 @@ class SimplePopulating : public State
 	
 	public:
 	
-		SimplePopulating(ReferenceCountPtr<GameManager>&gameManager);
+		SimplePopulating(ReferenceCountPtr<GameManager>&gameManager, std::string name);
 	
 		virtual ~SimplePopulating();
                 virtual bool populate(Populate & command);

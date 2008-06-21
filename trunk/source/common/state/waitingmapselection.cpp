@@ -1,6 +1,6 @@
 #include "waitingmapselection.h"
 
-WaitingMapSelection::WaitingMapSelection(ReferenceCountPtr<GameManager>&gameManager):State(gameManager)
+WaitingMapSelection::WaitingMapSelection(ReferenceCountPtr<GameManager>&gameManager, std::string name):State(gameManager,name)
 {
 }
 
