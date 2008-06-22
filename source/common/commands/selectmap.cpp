@@ -9,6 +9,9 @@ SelectMap::SelectMap(std::string xml):Command (){
 	// construye el objeto a partir del Xml recibido
 	hydrate(xml);
 }
+SelectMap::SelectMap() {
+
+}
 
 SelectMap::~SelectMap()
 {
@@ -28,7 +31,7 @@ void* SelectMap::hydrate(std::string xml){
     return 0;	
 }
 
-bool SelectMap::validate(ReferenceCountPtr<GameManager>& gameMAnager){
+bool SelectMap::validate(ReferenceCountPtr<GameManager>& gameManager){
     // evaluar que el mapa exista	
 		return false;
 	

@@ -26,6 +26,7 @@ class Move : public Command
 		 */
 		Move(std::string xml);
 		
+		Move();
 		/*
 		 * Destructor de la clase
 		 */		
@@ -43,7 +44,7 @@ class Move : public Command
 		/** 
 		 * Metodo cuyo proposito es validar la accion que realice el comando.
 		 */
-		bool validate(ReferenceCountPtr<GameManager>& gameMAnager);
+		bool validate(ReferenceCountPtr<GameManager>& gameManager);
 		
 		/**
 		 * Metodo cuyo proposito es ejecutar la accion que realice el comando.

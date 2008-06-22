@@ -15,6 +15,10 @@ Attack::Attack(std::string xml):Command (){
 	hydrate(xml);
 }
 
+Attack::Attack(){
+
+}
+
 Attack::~Attack()
 {
 	//no realiza ninguna accion

@@ -8,6 +8,18 @@ NoMore::~NoMore(){
 
 }
 
+std::string NoMore::serialize(){
+
+	return "unimplemented";
+}
+bool NoMore::validate(ReferenceCountPtr<GameManager>& gameManager){
+	return false;
+}
+void* NoMore::hydrate(std::string xml){
+
+	return NULL;
+}
+
 
 void NoMore::execute(ReferenceCountPtr<State>& state){
 	

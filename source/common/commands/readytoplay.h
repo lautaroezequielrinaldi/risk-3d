@@ -23,6 +23,8 @@ class ReadyToPlay : public Command
 		 */
 		ReadyToPlay(std::string xml);
 		
+
+		ReadyToPlay();
 		/*
 		 * Destructor de la clase
 		 */		
