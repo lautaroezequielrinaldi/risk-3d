@@ -23,6 +23,7 @@ class JoinGame : public Command
 		 */
 		JoinGame(std::string xml);
 		
+		JoinGame();
 		/*
 		 * Destructor de la clase
 		 */		

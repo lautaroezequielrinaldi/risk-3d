@@ -11,6 +11,10 @@ JoinGame::JoinGame(std::string xml):Command (){
 	hydrate(xml);
 }
 
+JoinGame::JoinGame(){
+
+}
+
 JoinGame::~JoinGame()
 {
 }
@@ -29,7 +33,7 @@ void* JoinGame::hydrate(std::string xml){
     return 0;	
 }
 
-bool JoinGame::validate(ReferenceCountPtr<GameManager>& gameMAnager){
+bool JoinGame::validate(ReferenceCountPtr<GameManager>& gameManager){
     // evaluar si hay lugar	
 		return false;
 	

@@ -13,6 +13,9 @@ Populate::Populate(std::string xml):Command (){
 	// construye el objeto a partir del Xml recibido
 	hydrate(xml);
 }
+Populate::Populate(){
+
+}
 
 Populate::~Populate()
 {

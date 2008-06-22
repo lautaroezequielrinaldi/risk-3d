@@ -24,6 +24,8 @@ class Defend : public Command
 		 * La misma se construye a partir del Xml especificado.
 		 */
 		Defend(std::string xml);
+
+		Defend();
 		
 		/*
 		 * Destructor de la clase
@@ -42,7 +44,7 @@ class Defend : public Command
 		/**
 		 * Metodo cuyo proposito es validar la accion que realice el comando.
 		 */
-		bool validate(ReferenceCountPtr<GameManager>& gameMAnager);
+		bool validate(ReferenceCountPtr<GameManager>& gameManager);
 		
 		/**
 		 * Metodo cuyo proposito es ejecutar la accion que realice el comando.
