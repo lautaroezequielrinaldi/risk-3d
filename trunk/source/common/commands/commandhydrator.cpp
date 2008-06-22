@@ -19,12 +19,10 @@ CommandHydrator::~CommandHydrator(){
 }
 
 /**
- * @todo Pablo o Analia:
- * que no sea local
- * que sea copia
+ * Es
  */
-ReferenceCountPtr<Command> & CommandHydrator::getCommand(std::string name, std::string xml){
-	ReferenceCountPtr<Command> command = commands[name]; // aca quiero una copia
+ReferenceCountPtr<Command>  CommandHydrator::getCommand(std::string name, std::string xml){
+	ReferenceCountPtr<Command> command = commands[name];
 	command->hydrate(xml);
 	return command;
 }
