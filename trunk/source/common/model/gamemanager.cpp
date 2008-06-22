@@ -1,5 +1,6 @@
 #include "gamemanager.h"
 #include <iostream>
+#include "../commands/commandhydrator.h"
 
 GameManager::GameManager(): game (), turnManager ()
 {
@@ -8,6 +9,7 @@ GameManager::GameManager(): game (), turnManager ()
 GameManager::GameManager( ReferenceCountPtr<Game> & game, ReferenceCountPtr<TurnManager> & turnManager):
 game (game),
 turnManager (turnManager){
+	commandHydrator = new CommandHydrator();
 	open = true;
 	playing = false;
 	attack = NULL;
@@ -71,13 +73,8 @@ void GameManager::execute(std::string commandName, std::string commandXml){
 	// obtener lock
 	ReferenceCountPtr<State> currentState = stateMachine->getCurrentState();
 	std::cerr << "Estado actual: " << currentState->getName() << std::endl;
-	/*
-	codigo dummy
-	*/
 	
-	ReferenceCountPtr<Command> command = new Attack(commandXml);
-	// obtener CommandFactory a partir de commmandName
-	// construir comando a partir de commandXml
+	ReferenceCountPtr<Command> command = commandHydrator->getCommand(commandName,commandXml);
 
 	// aca le estamos pidiendo al command que llame al metodo correspondiente
 	// a si mismo del estado actual.

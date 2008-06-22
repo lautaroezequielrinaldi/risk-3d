@@ -2,7 +2,7 @@
 #define __GAMEMANAGER_H__
 
 class GameManager;
-
+class CommandHydrator;
 #include "../smartpointer/referencecountptr.h"
 
 #include "game.h"
@@ -10,6 +10,7 @@ class GameManager;
 #include "player.h"
 #include "../state/statemachine.h"
 #include "../commands/attack.h"
+
 #include "../playerproxy.h"
 
 
@@ -17,7 +18,9 @@ class GameManager {
 	
 	private:
 	
-		/**
+	ReferenceCountPtr<CommandHydrator> commandHydrator;
+
+	/**
          * Almacena el juego.
          */
         ReferenceCountPtr<Game> game;
