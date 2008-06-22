@@ -39,6 +39,26 @@ class Command : public Serializable
 		 */
 		virtual void execute(ReferenceCountPtr<State>& state)=0;
 		
+		/**
+		 * Este metodo debe evaluar el destino del mensaje segun jugador
+		 */
+		bool isForMe(int me);
+
+		/**
+		 * Este metodo debe evaluar el origen del mensaje segun jugador
+		 */
+		bool isFromMe(int me);
+
+		void setMainMsg(std::string msg);
+
+		void setSecMsg(std::string msg);
+
+		std::string getMainMsg();
+
+		std::string getSecMsg();
+	private:
+		std::string mainMsg;
+		std::string secMsg;
 };
 
 #include "../state/state.h"
