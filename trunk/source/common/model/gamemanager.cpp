@@ -10,6 +10,7 @@ game (game),
 turnManager (turnManager){
 	open = true;
 	playing = false;
+	attack = NULL;
 }
 
 void GameManager::prepare(ReferenceCountPtr<GameManager>& gameManager) {
@@ -31,12 +32,12 @@ ReferenceCountPtr<TurnManager>& GameManager::getTurnManager(){
 }
 
 
-ReferenceCountPtr<Attack>& GameManager::getAttack(){
-	return this->attack;
+Attack& GameManager::getAttack(){
+	return *attack;
 }
 		 
-void GameManager::setAttack( ReferenceCountPtr<Attack>& attack){
-	this->attack = attack;	
+void GameManager::setAttack(Attack& attack){
+	this->attack = &attack;	
 }
 
 void GameManager::add(ReferenceCountPtr<PlayerProxy> & playerProxy) {
@@ -84,3 +85,17 @@ void GameManager::execute(std::string commandName, std::string commandXml){
 	
 
 }
+
+ReferenceCountPtr<State> GameManager::getCurrentState(){
+	
+	return this->stateMachine->getCurrentState();	
+}
+		 
+
+void GameManager::setCurrentState( std::string stateName  ){
+	
+	this->stateMachine->setState(stateName);	
+} 
+
+
+

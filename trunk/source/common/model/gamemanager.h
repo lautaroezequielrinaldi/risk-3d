@@ -34,8 +34,11 @@ class GameManager {
 				
 		/**
 		* Almacena un ataque.
+		* Inicialmente apunta a null, luego se le seteara el ataque.
+		* No puede ser un ReferenceCountPtr ya que quien lo setea , lo hace con un *attack.
+		* No puede ser una referencia al ataque ya que el ataque no existe al crearse el gameManager. 
 		*/
-		ReferenceCountPtr<Attack> attack;
+		Attack *attack;
 			
 		
 	bool open;
@@ -81,12 +84,12 @@ class GameManager {
 		/**
 		 * Metodo cuyo proposito es obtener el ataque almacenado.
 		 */
-		 ReferenceCountPtr<Attack>& getAttack();
+		 Attack& getAttack();
 		 
-		 /**
-		  * Metodo cuyo proposito es establecer un ataque.
-		  */
-		void setAttack( ReferenceCountPtr<Attack>& attack);
+		/**
+		 * Metodo cuyo proposito es establecer un ataque.
+		 */
+		void setAttack(Attack & attack);
 		
 		bool isPlaying();
 
@@ -95,12 +98,20 @@ class GameManager {
 
 		void execute(std::string commandName, std::string commandXml);
 
-		
-		
 		/**
 		 * Metodo cuyo proposito es obtener la lista de jugadores.
 		 */
 		std::list< ReferenceCountPtr<Player> >& getPlayerList();
+		
+		/**
+		 * Metodo cuyo proposito es obtener el estado actual del juego.
+		 */
+		ReferenceCountPtr<State> getCurrentState();
+		 
+		/**
+		 * Metodo cuyo proposito es establecer el estado actual del juego.
+		 */
+		void setCurrentState( std::string stateName  );  
 		
 		
 };
