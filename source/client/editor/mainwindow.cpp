@@ -99,8 +99,9 @@ void MainWindow::onOpenMenuItemActivated() {
 
             } catch (ParserException& exception) {
                 // Muestra dialogo de error.
-                Gtk::MessageDialog errorDialog("ERROR");
-                errorDialog.set_message(exception.what());
+                Gtk::MessageDialog errorDialog(*this, exception.what(), false,
+					Gtk::MESSAGE_ERROR);
+				errorDialog.set_title("Error");
                 errorDialog.run();
             }
 		}

@@ -73,6 +73,18 @@ class ImageDrawingArea: public Gtk::DrawingArea {
          * en el mismo.
          */
         bool loadImage(const std::string& imageFileName);
+		/**
+		 * Obtiene el ancho de la imagen.
+		 */
+		int getWidth();
+		/**
+		 * Obtiene el alto de la imagen.
+		 */
+		int getHeight(); 
+		/**
+		 * Obtiene si la imagen ha sido cargada.
+		 */
+		bool isImageLoaded();
         /**
          * Destructor virtual de la clase ImageDrawingArea.
          */
