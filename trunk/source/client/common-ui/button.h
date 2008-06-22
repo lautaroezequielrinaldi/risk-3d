@@ -2,7 +2,7 @@
 #define __BUTTON_H__
 
 #include<SDL/SDL.h>
-#include<SDL/SDL_image.h>
+//#include<SDL/SDL_image.h> comentado por charli para compilar
 #include "uicontext.h"
 #include "uihandler.h"
 #include "uimouseinformation.h"
