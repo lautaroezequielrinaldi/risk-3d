@@ -11,10 +11,7 @@ Defending::~Defending()
 
 bool Defending::defend(Defend & command){
 	
-	bool accionValida=false;
-
-	//se le pide al comando que se valide
-	accionValida = command.validate(this->gameManager);
+	bool accionValida = command.validate(this->gameManager);
 	
 	//si es valido
 	if (accionValida){
@@ -26,9 +23,11 @@ bool Defending::defend(Defend & command){
 		//cambio a proximo estado : mover
 		this->gameManager->setCurrentState("moving");
 		
-		//notifico resultado batalla
+		//notifico resultado batalla!!!!!!
 
 	}
+	else
+		//notificar error
 	
 	return accionValida;	
 }

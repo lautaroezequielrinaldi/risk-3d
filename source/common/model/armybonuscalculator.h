@@ -41,7 +41,7 @@ class ArmyBonusCalculator
 		 * Metodo cuyo proposito es obtener la cantidad de ejercitos bonus que se deben entregar al jugador que posee el turno.
 		 * El bonus se basa en la cantidad de paises conquistados por el jugador y en la cantidad de continentes completos que posee.
 		 */
-		int getArmyBonus(ReferenceCountPtr<GameManager>& gameMAnager);
+		int getArmyBonus(ReferenceCountPtr<GameManager>& gameManager);
 		
 		
 };

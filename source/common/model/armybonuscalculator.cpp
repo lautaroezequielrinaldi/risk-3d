@@ -1,7 +1,4 @@
 #include "armybonuscalculator.h"
-
-
-
 using namespace std;
 
 ArmyBonusCalculator::ArmyBonusCalculator()
