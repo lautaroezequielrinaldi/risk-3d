@@ -1,31 +1,36 @@
 #include "game.h"
 
-Game::Game():
+Game::Game(Dice& dice):
     Serializable(),
     mapa(),
-    playerList() {
+    playerList(),
+    dado(dice) {
     // No realiza ninguna acciòn.
 }
 
-Game::Game(const ReferenceCountPtr<Mapa>& mapa):
+Game::Game(const ReferenceCountPtr<Mapa>& mapa,Dice& dice):
     Serializable(),
     mapa(mapa),
-    playerList() {
+    playerList(),
+     dado(dice) {
     // No realiza ninguna acciòn.
 }
 
-Game::Game(const std::list< ReferenceCountPtr<Player> >& playerList):
+Game::Game(const std::list< ReferenceCountPtr<Player> >& playerList,Dice& dice):
     Serializable(),
     mapa(),
-    playerList(playerList) {
+    playerList(playerList),
+     dado(dice) {
     // No realiza ninguna acciòn.
 }
 
 Game::Game(const ReferenceCountPtr<Mapa>& mapa,
-    const std::list< ReferenceCountPtr<Player> >& playerList):
+    const std::list< ReferenceCountPtr<Player> >& playerList,
+    Dice& dice):
     Serializable(),
     mapa(mapa),
-    playerList(playerList) {
+    playerList(playerList),
+    dado (dice) {
     // No realiza ninguna acciòn.
 }
 
@@ -88,6 +93,19 @@ ReferenceCountPtr<Player> Game::getPlayer(int color){
 	
 	
 }
+
+         
+Dice& Game::getDice(){
+	
+	return this->dado;	
+}
+      	
+
+void Game::setDice( Dice& dice ){
+
+	this->dado = dice;	
+}
+
 
 std::string Game::serialize() {
     std::string resultado;

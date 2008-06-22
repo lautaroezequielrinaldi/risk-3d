@@ -1,6 +1,7 @@
 #include "../common/net/sockets/socket.h"
 #include "../common/model/gamemanager.h"
 #include "../common/model/game.h"
+#include "../common/model/randomdice.h"
 #include "../common/model/turnmanager.h"
 #include "../common/smartpointer/referencecountptr.h"
 #include "../common/playerproxy.h"
@@ -10,7 +11,13 @@
 
 int main (int argc, char** argv) {
 	// usamos este constructor pues aun no conocemos ni los jugadores ni el mapa
-	ReferenceCountPtr<Game>        game       = new Game();
+	
+	/** NOTA POR ANI: 
+				SE DEBERA USAR UN NUEVO CONSTRUCTOR CON EL DADO Q SE USARA EN EL JUEGO, YA QUE EL MISMO
+				ES UNA REFERENCIA EN GAME Y DEBE INICIALIZARSE AL CREAR EL MISMO.
+	 */
+	Dice *dado = new RandomDice();
+	ReferenceCountPtr<Game>        game       = new Game(*dado);
 	std::cerr<< "Game created" << std::endl;
 
 	ReferenceCountPtr<TurnManager> turnmanager= new TurnManager();

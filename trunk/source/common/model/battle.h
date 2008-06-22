@@ -20,17 +20,17 @@ class Battle
 		/**
 		 * Almacena el ataque realizado por el jugador.
 		 */
-        ReferenceCountPtr<Attack> ataque;
+        Attack& ataque;
 	
 		/**
 		 * Almacena la defensa hecha por el jugador
 		 */
-		 ReferenceCountPtr<Defend> defensa;
+		Defend& defensa;
 		 
 		 /**
 		  * Almacena el dado con el que se definira el resultado de la batalla.
 		  */
-		 ReferenceCountPtr<Dice> dice;
+		Dice& dice;
 		
 		
 	/**
@@ -41,8 +41,8 @@ class Battle
 		/**
 		 * Constructor de la clase
 		 */
-		Battle(ReferenceCountPtr<Attack>& ataque,ReferenceCountPtr<Defend>& defensa,ReferenceCountPtr<Dice>&  dice);
-		
+		//Battle(ReferenceCountPtr<Attack>& ataque,ReferenceCountPtr<Defend>& defensa,ReferenceCountPtr<Dice>&  dice);
+		Battle(Attack& ataque,Defend& defensa,Dice& dice);
 		/**
 		 * Destructor de la clase
 		 */
