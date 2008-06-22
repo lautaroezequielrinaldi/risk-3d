@@ -39,9 +39,15 @@ Attack& GameManager::getAttack(){
 }
 		 
 void GameManager::setAttack(Attack& attack){
-	this->attack = &attack;	
+	this->attack = &attack;
 }
 
+
+/**
+ * @todo evaluar impacto contra reutilizacion en cliente
+ *
+ *
+ */
 void GameManager::add(ReferenceCountPtr<PlayerProxy> & playerProxy) {
 	/* codigo comentado para que compile EDITOR_TARGET, no falla en SERVER_TARGET*/
 	playerProxy->setPlayer(game->addPlayer());
