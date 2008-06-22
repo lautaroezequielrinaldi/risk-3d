@@ -1,6 +1,7 @@
 #include "state.h"
 
 #include "../commands/attack.h"
+#include "../commands/chat.h"
 #include "../commands/defend.h"
 #include "../commands/joingame.h"
 #include "../commands/move.h"
@@ -94,6 +95,10 @@ bool State::surrender(Surrender & command){
 bool State::quit(Quit & command){
 	// debe aplicar surrender y ademas cortar la conexión
         return true;
+}
+
+bool State::chat(Chat & command) {
+	return false;
 }
 
 

@@ -20,6 +20,7 @@ class State;
 class GameManager;
 
 class Attack;
+class Chat;
 class Defend;
 class JoinGame;
 class Move;
@@ -71,7 +72,7 @@ class State {
 		virtual bool noMore(NoMore & command);
 		virtual bool surrender(Surrender & command);
 		virtual bool quit(Quit & command);
-
+		virtual bool chat(Chat & command);
 		//bool virtual setOwner(SetOwner & command);
 		//virtual void occupy(Occupy & command);
 		//virtual bool kill(Kill & move);
