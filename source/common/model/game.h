@@ -3,6 +3,7 @@
 
 #include "mapa.h" // Para definiciòn de Mapa.
 #include "player.h" // Para definiciòn de Player.
+#include "dice.h" // PAra def de Dado
 #include "../smartpointer/referencecountptr.h" // Para definiciòn de
 // ReferenceCountPtr.
 #include "../parser/serializable.h" // Para definiciòn de Serializable.
@@ -23,6 +24,10 @@ class Game: public Serializable {
          * Almacena la lista de jugadores del juego.
          */
         std::list< ReferenceCountPtr<Player> > playerList;
+        /**
+         * Almacena el dado con el que se jugara.
+         */
+        Dice& dado;
 
     /**
      * Mètodos privados de la clase Game.
@@ -44,20 +49,21 @@ class Game: public Serializable {
         /**
          * Constructor de la clase Game.
          */
-        Game();
+        Game(Dice& dice);
         /**
          * Constructor de la clase Game.
          */
         Game(const ReferenceCountPtr<Mapa>& mapa,
-            const std::list< ReferenceCountPtr<Player> >& playerList);
+            const std::list< ReferenceCountPtr<Player> >& playerList,
+            Dice& dice);
         /**
          * Constructor de la clase Game.
          */
-        Game(const std::list< ReferenceCountPtr<Player> >& playerList);
+        Game(const std::list< ReferenceCountPtr<Player> >& playerList, Dice& dice);
         /**
          * Constructor de la clase Game.
          */
-        Game(const ReferenceCountPtr<Mapa>& mapa);
+        Game(const ReferenceCountPtr<Mapa>& mapa, Dice& dice);
         /**
          * Establece el mapa asociado al juego.
          */
@@ -88,6 +94,17 @@ class Game: public Serializable {
          * Retorna el jugador correspondiente o NULL en caso de no encontrar jugador con el color especificado.
          */
         ReferenceCountPtr<Player> getPlayer(int color);
+        
+        /**
+         * Metodo cuyo proposito es obtener el dado que se utilizara para jugar.
+         */
+      	Dice& getDice();
+      	
+      	/**
+      	 * Metodo cuyo proposito es establecer el dado que utilizara el juego.
+      	 */
+      	void setDice( Dice & dice );
+        
         
         /**
 		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.

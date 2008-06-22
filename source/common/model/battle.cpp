@@ -4,7 +4,7 @@
 #include<list>
 
 
-Battle::Battle(ReferenceCountPtr<Attack>& ataque,ReferenceCountPtr<Defend>& defensa,ReferenceCountPtr<Dice>& dice):
+Battle::Battle(Attack& ataque,Defend& defensa,Dice& dice):
 ataque (ataque),
 defensa(defensa),
 dice (dice)
@@ -19,7 +19,7 @@ Battle::~Battle()
 BattleResult Battle::compareDice(std::list<int>attackerDice, std::list<int> defenderDice){
 	
 	//creo instancia de BattleResult para almacenar el resultado de la batalla.
-	BattleResult resultadoBatalla(this->ataque->getAttackerLand(),this->defensa->getDefenderdLand() );
+	BattleResult resultadoBatalla(this->ataque.getAttackerLand(),this->defensa.getDefenderdLand() );
 	
 	// iteradores para recorrer lista de valores de dados
 	std::list<int>::iterator itDef;
@@ -59,20 +59,20 @@ BattleResult Battle::start(ReferenceCountPtr<GameManager>& gameManager){
 	// att que necesito para luego de ejecutar la batalla, se actualice el modelo con el resultado
 	ReferenceCountPtr<Game> game = gameManager->getGame();
 	ReferenceCountPtr<Mapa> map = game->getMapa();
-	ReferenceCountPtr<Pais> paisAtacante = map->obtenerPais( this->ataque->getAttackerLand() );
-	ReferenceCountPtr<Pais> paisDefensor = map->obtenerPais( this->ataque->getAttackedLand() );	
+	ReferenceCountPtr<Pais> paisAtacante = map->obtenerPais( this->ataque.getAttackerLand() );
+	ReferenceCountPtr<Pais> paisDefensor = map->obtenerPais( this->ataque.getAttackedLand() );	
 
 	ReferenceCountPtr<Player> playerAtacante = game->getPlayer( gameManager->getTurnManager()->getCurrentPlayer() );
 	ReferenceCountPtr<Player> playerDefensor = game->getPlayer( gameManager->getTurnManager()->getDefenderPlayer() );
 
 
 	// tiro los dados para el atacante
-	for(int i=0;i<this->ataque->getArmyCount();i++)
-		dadosAtacante.push_back(this->dice->roll() );
+	for(int i=0;i<this->ataque.getArmyCount();i++)
+		dadosAtacante.push_back(this->dice.roll() );
 	
 	// tiro los dados para defensor
-	for(int j=0;j<this->defensa->getArmyCount();j++)
-		dadosDefensor.push_back(this->dice->roll() );
+	for(int j=0;j<this->defensa.getArmyCount();j++)
+		dadosDefensor.push_back(this->dice.roll() );
 		
 	// compara dados de atacante y defensor y obtiene el resultado de la batalla
 	BattleResult resultadoBatalla = compareDice(dadosAtacante, dadosDefensor);	
@@ -92,10 +92,10 @@ BattleResult Battle::start(ReferenceCountPtr<GameManager>& gameManager){
 	if ( paisDefensor->getArmyCount() == abs(resultadoBatalla.getDefenderResult() ) ){
 		
 		// elimino al pais defensor de la lista de paises del player defensor
-		playerDefensor->removeConqueredLand(this->defensa->getDefenderdLand());
+		playerDefensor->removeConqueredLand(this->defensa.getDefenderdLand());
 		
 		// agrego pais conquistado a la lista de paises del jugador atacante
-		playerAtacante->addConqueredLand( this->ataque->getAttackerLand() );
+		playerAtacante->addConqueredLand( this->ataque.getAttackerLand() );
 		
 		// elimino del paisAtacante los ejercitos que se mueven al pais conquistado.
 		// el movimiento no se hace explicitamente ya que quedan los ejercitos en el pais conquistado y 
