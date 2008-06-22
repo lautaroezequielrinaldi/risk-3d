@@ -6,6 +6,15 @@ Command::Command():Serializable()
 Command::~Command()
 {
 }
+
+bool Command::isValid() {
+	return valid;
+}
+void Command::setValid(bool valid){
+	this->valid = valid;
+}
+
+
 bool Command::isForMe(int me){
 	return false;
 }
