@@ -83,6 +83,24 @@ bool ImageDrawingArea::loadImage(const std::string& imageFileName) {
     }
 }
 
+int ImageDrawingArea::getWidth() {
+	if (imageLoaded) {
+		return this->image->get_width();
+	}
+	return 0;
+}
+
+int ImageDrawingArea::getHeight() {
+	if (imageLoaded) {
+		return this->image->get_height();
+	}
+	return 0;
+}
+
+bool ImageDrawingArea::isImageLoaded() {
+	return this->imageLoaded;
+}
+
 ImageDrawingArea::~ImageDrawingArea() {
     // No realiza ninguna acciòn.
 }
