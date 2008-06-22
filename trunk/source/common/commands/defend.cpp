@@ -14,6 +14,9 @@ Defend::Defend(std::string xml):Command (){
 	// construye el objeto a partir del Xml recibido
 	hydrate(xml);
 }
+Defend::Defend(){
+
+}
 
 Defend::~Defend()
 {

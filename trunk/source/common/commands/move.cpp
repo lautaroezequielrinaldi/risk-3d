@@ -15,6 +15,10 @@ Move::Move(std::string xml):Command (){
 	hydrate(xml);
 }
 
+Move::Move(){
+
+}
+
 Move::~Move()
 {
 }

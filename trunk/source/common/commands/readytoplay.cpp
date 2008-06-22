@@ -9,6 +9,9 @@ ReadyToPlay::ReadyToPlay(std::string xml):Command (){
 	// construye el objeto a partir del Xml recibido
 	hydrate(xml);
 }
+ReadyToPlay::ReadyToPlay(){
+
+}
 
 ReadyToPlay::~ReadyToPlay()
 {
@@ -28,7 +31,7 @@ void* ReadyToPlay::hydrate(std::string xml){
     return 0;	
 }
 
-bool ReadyToPlay::validate(ReferenceCountPtr<GameManager>& gameMAnager){
+bool ReadyToPlay::validate(ReferenceCountPtr<GameManager>& gameManager){
     return false;
 	
 }

@@ -30,6 +30,8 @@ class Attack : public Command
 		 */
 		Attack( std::string xml);
 		
+
+		Attack();
 		/*
 		 * Destructor de la clase
 		 */
@@ -48,7 +50,7 @@ class Attack : public Command
 		/**
 		 * Metodo cuyo proposito es validar la accion que realice el comando.
 		 */
-		bool validate(ReferenceCountPtr<GameManager>& gameMAnager);
+		bool validate(ReferenceCountPtr<GameManager>& gameManager);
 		
 		/**
 		 * Metodo cuyo proposito es ejecutar la accion que realice el comando.
