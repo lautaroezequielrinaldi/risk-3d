@@ -13,11 +13,7 @@ Attacking::~Attacking()
 
 bool Attacking::attack(Attack & command){
 			
-	bool accionValida=false;
-
-	
-	//se le pide al comando que se valide
-	accionValida = command.validate(this->gameManager);
+	bool accionValida = command.validate(this->gameManager);
 	
 	//si es valido
 	if (accionValida){
@@ -29,6 +25,8 @@ bool Attacking::attack(Attack & command){
 		
 		//notificar del ataque!!!
 	}
+	else
+		//notificar error
 	
 	return accionValida;	
 }

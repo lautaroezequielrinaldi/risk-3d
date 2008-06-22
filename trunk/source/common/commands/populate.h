@@ -59,7 +59,15 @@ class Populate : public Command
 		 */
 		void execute(ReferenceCountPtr<State>& state);
 		
-		
+		/**
+		 * Metodo cuyo proposito es obtener el nombre del pais destino que se poblara.
+		 */
+		 std::string getCountryDestination();
+		 
+		 /**
+		  * Metodo cuyo proposito es obtener la cantidad de ejercitos a ubicar.
+		  */
+		  int getArmyCount();
 };
 
 #endif /*POPULATE_H_*/
