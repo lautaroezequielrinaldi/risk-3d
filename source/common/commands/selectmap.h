@@ -22,6 +22,8 @@ class SelectMap : public Command
 		 * La misma se construye a partir del Xml especificado.
 		 */
 		SelectMap(std::string xml);
+
+		SelectMap();
 		
 		/*
 		 * Destructor de la clase

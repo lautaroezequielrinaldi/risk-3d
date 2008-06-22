@@ -26,6 +26,8 @@ class Populate : public Command
 		 */
 		Populate(std::string xml);
 		
+		Populate();
+
 		/*
 		 * Destructor de la clase
 		 */		
