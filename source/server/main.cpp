@@ -10,13 +10,10 @@
 //#include <vector>
 
 int main (int argc, char** argv) {
-	// usamos este constructor pues aun no conocemos ni los jugadores ni el mapa
 	
-	/** NOTA POR ANI: 
-				SE DEBERA USAR UN NUEVO CONSTRUCTOR CON EL DADO Q SE USARA EN EL JUEGO, YA QUE EL MISMO
-				ES UNA REFERENCIA EN GAME Y DEBE INICIALIZARSE AL CREAR EL MISMO.
-	 */
 	Dice *dado = new RandomDice();
+	std::cerr<< "Dice created" << std::endl;
+
 	ReferenceCountPtr<Game>        game       = new Game(*dado);
 	std::cerr<< "Game created" << std::endl;
 
@@ -61,5 +58,6 @@ int main (int argc, char** argv) {
 		++playersProxyIterator;
 	}
 */
+	delete(dado);
 	return 0;
 }
