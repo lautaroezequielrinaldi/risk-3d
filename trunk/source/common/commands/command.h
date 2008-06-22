@@ -56,9 +56,14 @@ class Command : public Serializable
 		std::string getMainMsg();
 
 		std::string getSecMsg();
+
+		bool isValid();
+
+		void setValid(bool valid);
 	private:
 		std::string mainMsg;
 		std::string secMsg;
+		bool valid;
 };
 
 #include "../state/state.h"
