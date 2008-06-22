@@ -18,15 +18,13 @@ bool Defending::defend(Defend & command){
 	
 	//si es valido
 	if (accionValida){
-		//creo e inicio batalla
+		//creo batalla
 		Battle batalla(this->gameManager->getAttack(),command, this->gameManager->getGame()->getDice());
-		
+		// inicio batalla. el modelo se actualiza automaticamente.
 		BattleResult resultadoBatalla = batalla.start(this->gameManager);
-		
+				
 		//cambio a proximo estado : mover
 		this->gameManager->setCurrentState("moving");
-		
-		//actualizo modelo
 		
 		//notifico resultado batalla
 
