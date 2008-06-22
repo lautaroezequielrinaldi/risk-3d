@@ -83,7 +83,7 @@ BattleResult Battle::start(ReferenceCountPtr<GameManager>& gameManager){
 	paisAtacante->removeArmies(resultadoBatalla.getAttackerResult());
 
 	// elimina del pais defensor, los ejercitos perdidos en la batalla . si perdio 0 ejercitos no modifica nada.
-	//paisDefensor->removeArmies(resultadoBatalla.getDefenderResult());
+	paisDefensor->removeArmies(resultadoBatalla.getDefenderResult());
 
 
 	// verifico si hubo conquista de pais
