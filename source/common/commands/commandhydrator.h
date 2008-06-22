@@ -23,7 +23,7 @@ class CommandHydrator {
 	public:
 		CommandHydrator();
 		virtual ~CommandHydrator();
-		ReferenceCountPtr<Command> & getCommand(std::string name, std::string xml);
+		ReferenceCountPtr<Command> getCommand(std::string name, std::string xml);
 	private:
 		std::map <std::string, ReferenceCountPtr<Command> > commands;
 
