@@ -73,6 +73,31 @@ int Mapa::getCantidadPaises() {
     return this->paises.size();
 }
 
+bool Mapa::areUninhabitedCountries(){
+	
+	std::list<ReferenceCountPtr<Pais> >::iterator it;
+	it= this->paises.begin();
+	
+	while( it != this->paises.end() ){
+	
+		//obtengo pais actual de la lista de paises
+		ReferenceCountPtr<Pais> paisActual = *it;	
+		
+		// si el pais no tiene ejercitos 
+		if( paisActual->getArmyCount() == 0 )
+			//hay paises sin habitar
+			return true;
+		else
+			++it;
+	
+	}
+	
+	// todos los paises estan habitados.
+	return false;
+		
+
+}
+
 Mapa::IteradorPais Mapa::primerPais() {
     return this->paises.begin();
 }

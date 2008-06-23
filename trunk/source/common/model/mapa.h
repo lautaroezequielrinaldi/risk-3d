@@ -110,6 +110,12 @@ class Mapa {
 		 * Obtiene la cantidad de paises en el mapa.
 		 */
 		int getCantidadPaises();
+        
+        /**
+         * Metodo cuyo proposito es verificar si hay paises deshabitados.
+         */
+        bool areUninhabitedCountries();
+        
         /**
          * Mètodo cuyo propòsito es obtener un iterador apuntando al primer
          * paìs del Mapa.

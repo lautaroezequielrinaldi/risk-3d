@@ -17,17 +17,16 @@ class TurnManager
 		int jugadorActual;
 		
 		/**
+		 * Almacena color del ultimo jugador de la ronda.
+		 */
+		 int ultimoJugador;
+		
+		/**
 		 * Almacena el numero de color correspondiente al jugador secundario que comparte el turno
 		 * con el jugador actual, al estar en estado de defensa.
 		 */
 		 int jugadorDefensor;
 	
-		/**
-		 * Almacena la cantidad de ejercitos bonus que posee el jugador actual
-		 */
-		int cantEjercitosBonus;
-
-
 		/**
 		 * Almacena el orden en que se le asignara el turno a cada jugador.
 		 */
@@ -74,6 +73,12 @@ class TurnManager
 		 * Metodo cuyo proposito es verificar si existe un jugador en la lista de turnos.
 		 */
 		 bool isPlayerActive(int color);
+		  
+		 /**
+		  * Metodo cuyo proposito es obtener id del ultimo jugador de la ronda .
+		  */
+		  int getLastPlayer();
+		  
 		  
 		/**
 		 * Metodo cuyo proposito es obtener el jugador que comparte el turno con el jugador actual ,
