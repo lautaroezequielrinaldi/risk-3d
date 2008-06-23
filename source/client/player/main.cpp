@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
 	socket->write(msg);
 	std::cerr << msg << std::endl;
 
-	ServerProxy
+	//ServerProxy
 
 
 }
