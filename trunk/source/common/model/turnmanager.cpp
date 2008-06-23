@@ -15,11 +15,28 @@ TurnManager::~TurnManager()
 
 void TurnManager::setTurnOrder(int firstPlayerColor){
 	
+	bool encontrado=false;
+	int i=0;
+	
 	//seteo el jugador actual con el color del jugador que jugara 1ero.
 	this->jugadorActual = firstPlayerColor;
 	
-	//seteo id de quien jugara ultimo
-	//if (this
+	//busco pos en vector del firstPlayerColor	
+	while ( i< this->orden.size() && !encontrado) {
+	
+		if (this->orden.at(i) == firstPlayerColor )
+			encontrado=true;
+		else
+			i++;
+	}
+	
+	// si el primer jugador esta en la pos 0 del vec
+	if ( i== 0)
+		// el ultimo esta en la ultima pos del vector
+		this->ultimoJugador = this->orden.back();
+	else
+		//el ultimo esta en una pos atras del 1ero
+		this->ultimoJugador = this->orden.at(i - 1);
 
 }
 

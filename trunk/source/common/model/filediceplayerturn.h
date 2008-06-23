@@ -9,7 +9,7 @@
  * Se utilizara para obtener el numero de jugador que comenzara la ronda.
  */
 
-class fileDicePlayerTurn : public Dice
+class FileDicePlayerTurn : public Dice
 {
 	
 	private:
@@ -24,12 +24,12 @@ class fileDicePlayerTurn : public Dice
 		/**
 	 	 * Constructor de la clase.
 	 	 */	
-		fileDicePlayerTurn(std::string fileName);
+		FileDicePlayerTurn(std::string fileName);
 		
 		/**
 	 	 * Destructor de la clase.
 	 	 */
-		~fileDicePlayerTurn();
+		~FileDicePlayerTurn();
 
 		/**
 		 * Metodo cuyo proposito es simular la tirada de dados.

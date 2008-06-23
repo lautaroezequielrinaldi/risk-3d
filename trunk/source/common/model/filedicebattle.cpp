@@ -3,11 +3,11 @@
 #include <stdlib.h>
 
 
-FileDiceBattle::FileDiceBattle(std::string fileName): 
-Dice()
+FileDiceBattle::FileDiceBattle(std::string fileName): Dice()
 {
+	std::string pathName = "/home/analia/Escritorio/risk3d/source/common/model/"+fileName;
 	//abro archivo del cual se levantaran los valores que toma el dado
-	this->file.open(fileName.c_str());
+	this->file.open(pathName.c_str());
 	this->posicionADevolverAt =0;
 	this->posADevolverDef =0;
 	this->atacante = true;	
