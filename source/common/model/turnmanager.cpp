@@ -5,6 +5,7 @@ TurnManager::TurnManager()
 {
 	this->jugadorActual = 0;
 	this->jugadorDefensor = 0;
+	this->ultimoJugador=0;
 	//this->cantEjercitosBonus 
 }
 
@@ -16,35 +17,10 @@ void TurnManager::setTurnOrder(int firstPlayerColor){
 	
 	//seteo el jugador actual con el color del jugador que jugara 1ero.
 	this->jugadorActual = firstPlayerColor;
-	/*
-	std::vector<int> vecAuxColores;
-	bool seguir = true;
-	int posRand;
 	
-	
-		
-	// inicializo vecAuxColores con los numeros que representan a cada color de un jugador.
-	for(int i=0;i<playerCount;i++)
-		vecAuxColores[i] = i+1;
-	
-	for(int j=0;j<playerCount;j++){
-		
-		do{
-			// pido un entero aleatorio, entre 1 y playerCount
-			posRand = random();
-			posRand = ( posRand % playerCount ) +1;
-			
-			// si no se asigno la poscion obtenida con random
-			if ( this->orden.at(j) == -1 ){
-				seguir = false;
-				//asigno al vector que contiene el orden de los turnos, un color de jugador
-				this->orden[posRand] = vecAuxColores[j];
-			}
-			
-		}while(seguir);
-		
-	}
-		*/
+	//seteo id de quien jugara ultimo
+	//if (this
+
 }
 
 int TurnManager::getCurrentPlayer(){
@@ -72,9 +48,9 @@ int TurnManager::getNextPlayerTurn(){
 			
 			encontro= true;
 			
-			// si es el ultimo jugador de la ronda
+			// si es el ultimo jugador del vec
 			if ( i+1 == this->orden.size() )
-				//asigno a nextPlayer el primer jugador
+				//asigno a nextPlayer el primer jugador del vec
 				nextPlayer = this->orden.at(0);
 			else
 				//asigno a nextPlayer el siguiente a i.
@@ -125,6 +101,10 @@ void TurnManager::deletePlayer(int color){
 	
 }
 
+int TurnManager::getLastPlayer(){
+	return this->ultimoJugador;	
+}
+
 int TurnManager::getDefenderPlayer(){
 	return this->jugadorDefensor;
 }
@@ -152,7 +132,5 @@ bool TurnManager::isPlayerActive(int color){
 	return false;	
 	
 }
-
-
 
 
