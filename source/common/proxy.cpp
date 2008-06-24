@@ -17,3 +17,6 @@ Proxy::~Proxy(){
 	delete(socket);
 }
 
+
+
+
