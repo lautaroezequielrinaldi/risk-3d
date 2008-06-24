@@ -18,6 +18,8 @@
  */
 template<class T>
 class ReferenceCountPtr {
+	// Defino a la clase Friend
+	template<class Y> friend class ReferenceCountPtr;
     /**
      * Atributos privados de la clase ReferenceCountPtr.
      */
@@ -40,12 +42,13 @@ class ReferenceCountPtr {
          * Liga el puntero recibido como pàrametro.
          */
         void attach( T* pointer );
+		template<class Y> void attach( Y* pointer );
 
         /**
          * Liga el objeto de tipo ReferenceCountPtr recibido como pàrametro.
          */
         void attach( const ReferenceCountPtr<T>& otherInstance );
-
+		template<class Y> void attach( const ReferenceCountPtr<Y>& otherInstance);
         /**
          * Desliga el puntero encapsulado.
          */
@@ -57,13 +60,15 @@ class ReferenceCountPtr {
          * recibido como paràmetro.
          */
         void assign( T* pointer );
+		template<class Y> void assign( Y* pointer );
 
-        /**
+		/**
          * Asigna el objeto de tipo ReferenceCountPtr recibido como paràmetro.
          * Basicamente desliga el puntero encapsulado y luego liga el objeto
          * de tipo ReferenceCountPtr recibido como paràmetro.
          */
         void assign( const ReferenceCountPtr<T>& otherInstance );
+		template<class Y> void assign( const ReferenceCountPtr<Y>& otherInstance );
 
     /**
      * Mètodos pùblicos de la clase ReferenceCountPtr.
@@ -81,23 +86,20 @@ class ReferenceCountPtr {
          * de un puntero existente.
          */
         ReferenceCountPtr( T* pointer );
-
         template<class Y> ReferenceCountPtr( Y* pointer );
 
         /**
          * Constructor de la clase ReferenceCountPtr.
-         * Construye una nueva instancia de la clase ReferenceCountPtr a partir
-         * de un objeto de tipo ReferenceCountPtr.
+         * Construye una nueva instancia de la clase ReferenceCountPtr a
+         * partir de un objeto de tipo ReferenceCountPtr.
          */
         ReferenceCountPtr( const ReferenceCountPtr<T>& otherInstance );
-
         template<class Y> ReferenceCountPtr(const ReferenceCountPtr<Y>& otherInstance);
         /**
          * Operador de asignaciòn de la clase ReferenceCountPtr.
          * Asigna el puntero existente a la clase ReferenceCountPtr.
          */
         ReferenceCountPtr& operator=( T* pointer );
-
         template<class Y> ReferenceCountPtr& operator=( Y* pointer );
 
         /**
@@ -106,7 +108,6 @@ class ReferenceCountPtr {
          * ReferenceCountPtr.
          */
         ReferenceCountPtr& operator=( const ReferenceCountPtr<T>& otherInstance );
-
         template<class Y> ReferenceCountPtr& operator=( const ReferenceCountPtr<Y>& otherInstance);
 
         /**
@@ -131,25 +132,29 @@ class ReferenceCountPtr {
          * Operador de comparaciòn de la clase ReferenceCounPtr.
          * Compara el smart pointer contra un puntero regular de C / C++
          */
-        bool operator == ( const T* pointer );
+        bool operator==( T* pointer );
+		template<class Y> bool operator==( Y* pointer );
 
-        /**
+		/**
          * Operador de comparaciòn de la clase ReferenceCountPtr.
          * Compara el smart pointer contra otro smart pointer.
          */
         bool operator==( const ReferenceCountPtr<T>& otherInstance);
+		template<class Y> bool operator==( const ReferenceCountPtr<Y>& otherInstance);
 
         /**
          * Operador de comparaciòn de la clase ReferenceCountPtr.
          * Compara el smart pointer contra un puntero recular de C / C++
          */
-        bool operator!=( const T* pointer);
+        bool operator!=( T* pointer );
+		template<class Y> bool operator!=( Y* pointer );
 
         /**
          * Operador de comparaciòn de la clase ReferenceCountPtr.
          * Compara el smart pointer contra otro smart pointer.
          */
         bool operator!=( const ReferenceCountPtr<T>& otherInstance);
+		template<class Y> bool operator!=( const ReferenceCountPtr<Y>& otherInstance);
 
         /**
          * Destructor virtual de la clase ReferenceCountPtr.
@@ -212,12 +217,34 @@ void ReferenceCountPtr<T>::attach( T* pointer ) {
 }
 
 template<class T>
+template<class Y>
+void ReferenceCountPtr<T>::attach( Y* pointer) {
+	if ( pointer != NULL ) {
+		this->referenceCount = new ReferenceCount();
+		this->referenceCount->increment();
+	} else {
+		this->referenceCount = NULL;
+	}
+	this->pointer = (T*) pointer;
+}
+
+template<class T>
 void ReferenceCountPtr<T>::attach( const ReferenceCountPtr<T>& otherInstance ) {
     this->referenceCount = otherInstance.referenceCount;
     this->pointer = otherInstance.pointer;
     if ( this->referenceCount != NULL ) {
         this->referenceCount->increment();
     }
+}
+
+template<class T>
+template<class Y>
+void ReferenceCountPtr<T>::attach( const ReferenceCountPtr<Y>& otherInstance) {
+	this->referenceCount = otherInstance.referenceCount;
+	this->pointer = (T*) otherInstance.pointer;
+	if ( this->referenceCount != NULL) {
+		this->referenceCount->increment();
+	}
 }
 
 template<class T>
@@ -240,7 +267,21 @@ void ReferenceCountPtr<T>::assign( T* pointer ) {
 }
 
 template<class T>
+template<class Y>
+void ReferenceCountPtr<T>::assign( Y* pointer ) {
+    this->detach();
+    this->attach( pointer );
+}
+
+template<class T>
 void ReferenceCountPtr<T>::assign( const ReferenceCountPtr<T>& otherInstance ) {
+    this->detach();
+    this->attach( otherInstance );
+}
+
+template<class T>
+template<class Y>
+void ReferenceCountPtr<T>::assign( const ReferenceCountPtr<Y>& otherInstance ) {
     this->detach();
     this->attach( otherInstance );
 }
@@ -289,8 +330,14 @@ bool ReferenceCountPtr<T>::isNull() {
 }
 
 template<class T>
-bool ReferenceCountPtr<T>::operator==( const T* pointer ) {
+bool ReferenceCountPtr<T>::operator==( T* pointer ) {
     return this->pointer == pointer;
+}
+
+template<class T>
+template<class Y>
+bool ReferenceCountPtr<T>::operator==( Y* pointer ) {
+    return this->pointer == (T*) pointer;
 }
 
 template<class T>
@@ -300,14 +347,34 @@ bool ReferenceCountPtr<T>::operator==(
 }
 
 template<class T>
-bool ReferenceCountPtr<T>::operator!=( const T* pointer )  {
+template<class Y>
+bool ReferenceCountPtr<T>::operator==(
+    const ReferenceCountPtr<Y>& otherInstance) {
+    return this->pointer == (T*) otherInstance.pointer;
+}
+
+template<class T>
+bool ReferenceCountPtr<T>::operator!=( T* pointer )  {
     return this->pointer != pointer;
+}
+
+template<class T>
+template<class Y>
+bool ReferenceCountPtr<T>::operator!=( Y* pointer )  {
+    return this->pointer != (T*) pointer;
 }
 
 template<class T>
 bool ReferenceCountPtr<T>::operator!=(
     const ReferenceCountPtr<T>& otherInstance) {
     return this->pointer != otherInstance.pointer;
+}
+
+template<class T>
+template<class Y>
+bool ReferenceCountPtr<T>::operator!=(
+    const ReferenceCountPtr<Y>& otherInstance) {
+    return this->pointer != (T*) otherInstance.pointer;
 }
 
 template<class T>
