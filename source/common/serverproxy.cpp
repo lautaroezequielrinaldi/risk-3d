@@ -1,5 +1,6 @@
 
 #include "serverproxy.h"
+#include "../common/model/gamemanager.h"
 #include<sstream>
 #include <iostream>
 void * ServerProxy::run() {
@@ -13,12 +14,12 @@ void * ServerProxy::run() {
 	while (true) {
 		std::cerr << "ServerProxy leyendo encabezado " << std::endl;
 		// deshardcodear este 32
-		msg << socket.full_read(32);
+		msg << socket->full_read(32);
 		msg >> msgLen;
 		msg >> commandName;
 
 		std::cerr << "longitud " << msgLen << " nombre " << commandName << std::endl;
-		commandXml = socket.full_read(msgLen);
+		commandXml = socket->full_read(msgLen);
 		
 		std::cerr << "serializacion " << commandXml << std::endl;
 		gameManager->execute(commandName, commandXml);
@@ -27,15 +28,12 @@ void * ServerProxy::run() {
 	return 0;
 }
 
-void ServerProxy::notify(const std::string & msg) {
-	socket.write(msg);
-}
 
-ServerProxy::ServerProxy(Socket & socket,  ReferenceCountPtr< GameManager> & gameManager):socket(socket){
-	this->gameManager= gameManager;
+ServerProxy::ServerProxy(Socket * socket,  ReferenceCountPtr< GameManager> & gameManager):Proxy(socket,gameManager){
+	
 }
 
 ServerProxy::~ServerProxy(){
-	//delete(socket);
+
 }
 

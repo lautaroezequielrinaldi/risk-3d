@@ -1,20 +1,15 @@
 #ifndef __PLAYERPROXY_H__
 #define __PLAYERPROXY_H__
-#include "../common/thread/threaded.h"
-#include "../common/smartpointer/referencecountptr.h"
-#include "../common/net/sockets/socket.h"
-class PlayerProxy;
+#include "proxy.h"
 
-#include "../common/model/gamemanager.h"
-#include "../common/model/player.h"
+class Player;
+
 /**
  *
- * @todo usar & en lugar de *
+ * 
  */
-class PlayerProxy:public Threaded {
-	private:
-	Socket * socket;
-	ReferenceCountPtr<GameManager> gameManager;
+class PlayerProxy:public Proxy {
+	protected:
 	ReferenceCountPtr<Player> player;
 	protected:
 	void * run();
@@ -23,7 +18,6 @@ class PlayerProxy:public Threaded {
 	PlayerProxy(Socket * socket, ReferenceCountPtr<GameManager>& gameManager);
 	void setPlayer(ReferenceCountPtr<Player> & player);
 	ReferenceCountPtr<Player> & getPlayer();
-	void notify(const std::string & msg);
 	virtual ~PlayerProxy();
 
 };
