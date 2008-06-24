@@ -4,6 +4,11 @@
 #include "../model/player.h"
 #include <list>
 
+
+#include<iostream>
+
+using namespace std;
+
 Occupying::Occupying(ReferenceCountPtr<GameManager>&gameManager, std::string name):State(gameManager,name)
 {
 }
@@ -24,46 +29,50 @@ bool Occupying::populate(Populate & command){
 		//obtengo pais a poblar
 		ReferenceCountPtr<Pais> paisD = map->obtenerPais(command.getCountryDestination());	
 		
+		cout<<"Estado: OCUPANDO"<<endl;
+		cout<<"pais destino: "<<paisD->getNombre()<<endl;
+		cout<<"ejercitos antes de ocupar: "<<paisD->getArmyCount();
+		
 		//agrego al pais destino la cantidad de ejercitos solicitados
 		paisD->addArmies(command.getArmyCount() );
+		
+		cout<<"ejercitos despues de ocupar: "<<paisD->getArmyCount()<<endl;
 		
 		//obtengo jugador actual 
 		ReferenceCountPtr<Player> playerActual = game->getPlayer( this->gameManager->getTurnManager()->getCurrentPlayer() );
 		
 		//agrego a la lista de paises del jugador, el pais ocupado.
 		playerActual->addConqueredLand(command.getCountryDestination());
-
-		//si quien esta jugando es el ultimo de la ronda
-		if ( this->gameManager->getTurnManager()->getLastPlayer() == this->gameManager->getTurnManager()->getCurrentPlayer() ){
-			
-			//obtengo lista de jugadores
-			std::list< ReferenceCountPtr<Player> > listaJug = game->getPlayerList();
-			std::list<ReferenceCountPtr<Player> >::iterator it;	
-			
-			//disminuyo 1 ejercito a todos los jugadores de la cant de ejercitos a ubicar.
-			for (it = listaJug.begin(); it != listaJug.end() ; ++it ){
-				
-				ReferenceCountPtr<Player> playerActual = *it;
-				//seteo al jugador, un ejercito menos a ubicar.
-				playerActual->setArmyCount( playerActual->getArmyCount() - 1 );	
-
-			}
-			
-			// si ya se habitaron todos los paises del mapa
-			if ( !map->areUninhabitedCountries() )
-				// cambio alproximo estado: simplePopulating
-				this->gameManager->setCurrentState("simplePopulating");
-		}
 		
-		//cambio de turno
-		this->gameManager->getTurnManager()->changeTurn();
+		//disminuyo en 1 la cant de ejercitos a ubicar
+		playerActual->setArmyCount( playerActual->getArmyCount() - 1 );
+		
+		cout<<"Cantidad de paises conquistados por el jugador "<<playerActual->getColor()<<" :"<<playerActual->getConqueredLands();
+	
+		// si ya se habitaron todos los paises del mapa
+		if ( !map->areUninhabitedCountries() ){
+			
+			// cambio alproximo estado: simplePopulating
+			this->gameManager->setCurrentState("simplePopulating");
+			
+			//cambio de turno al 1er jugador
+			this->gameManager->getTurnManager()->changeTurn( this->gameManager->getTurnManager()->getFirstPlayer() );
+			
+			cout<<"HORA DE POBLAR INICIAL"<<endl;	
+		}
+		else
+			//cambio de turno 
+			this->gameManager->getTurnManager()->changeTurn();
 
 
-		//notificacion		
+		//notificacion
+		cout<<"Le toca jugar al jugador: "<<gameManager->getTurnManager()->getCurrentPlayer()<<endl;	
+		
 		
 	}
 	else
 		//notificacion de error
+		cout<<"Ocupamiento invalido"<<endl;
 		
 		
 	return accionValida;        

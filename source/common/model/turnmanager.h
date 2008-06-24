@@ -17,6 +17,11 @@ class TurnManager
 		int jugadorActual;
 		
 		/**
+		 * Almacena color del primer jugador
+		 */
+		 int primerJugador;
+		
+		/**
 		 * Almacena color del ultimo jugador de la ronda.
 		 */
 		 int ultimoJugador;
@@ -74,6 +79,11 @@ class TurnManager
 		 */
 		 bool isPlayerActive(int color);
 		  
+		 /**
+		  * Metodo cuyo proposito es obtener el id del primer jugador de la ronda.
+		  */
+		  int getFirstPlayer(); 
+		 
 		 /**
 		  * Metodo cuyo proposito es obtener id del ultimo jugador de la ronda .
 		  */

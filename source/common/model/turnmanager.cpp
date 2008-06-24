@@ -21,6 +21,8 @@ void TurnManager::setTurnOrder(int firstPlayerColor){
 	//seteo el jugador actual con el color del jugador que jugara 1ero.
 	this->jugadorActual = firstPlayerColor;
 	
+	this->primerJugador = firstPlayerColor;
+	
 	//busco pos en vector del firstPlayerColor	
 	while ( i< this->orden.size() && !encontrado) {
 	
@@ -116,6 +118,10 @@ void TurnManager::deletePlayer(int color){
 	
 	}	
 	
+}
+
+int TurnManager::getFirstPlayer(){
+	return this->primerJugador;	
 }
 
 int TurnManager::getLastPlayer(){

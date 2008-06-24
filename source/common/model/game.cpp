@@ -106,6 +106,23 @@ void Game::setDice( Dice& dice ){
 	this->dado = dice;	
 }
 
+int Game::getCountryOwner(std::string countryName){
+	
+	std::list< ReferenceCountPtr<Player> >::iterator it;
+	it = this->playerList.begin();
+	
+	while( it != this->playerList.end()){
+		
+		ReferenceCountPtr<Player> playerAct = *it;
+		//si el jugador actual es el dueño del pais consultado
+		if ( playerAct->landOwner(countryName) )
+			return playerAct->getColor();
+	}
+	//en caso de que ningun jugador sea el dueño, devuelve cero.
+	return 0;
+	
+}
+
 
 std::string Game::serialize() {
     std::string resultado;

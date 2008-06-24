@@ -4,6 +4,10 @@
 #include "../model/armybonuscalculator.h"
 #include "../model/player.h"
 
+#include<iostream>
+
+using namespace std;
+
 Moving::Moving(ReferenceCountPtr<GameManager>&gameManager, std::string name):State(gameManager,name)
 {
 }
@@ -18,6 +22,8 @@ bool Moving::move(Move & command){
 	
 	if( accionValida ){
 
+		cout<<"Estado: MOVIENDO"<<endl;
+		
 		//actualiza modelo:
 		ReferenceCountPtr<Game> game = gameManager->getGame();
 		ReferenceCountPtr<Mapa> map = game->getMapa();
@@ -29,6 +35,10 @@ bool Moving::move(Move & command){
 		
 		// agrega la cantidad de ejercitos que se mueven, al pais destino
 		paisD->addArmies(command.getArmyCount());
+	
+		cout<<"pais origen: "<<paisO->getNombre()<<endl;
+		cout<<"ejercitos a mover: "<<command.getArmyCount()<<endl;
+		cout<<"pais destino: "<<paisD->getNombre()<<endl;
 	
 		//cambio de turno
 		this->gameManager->getTurnManager()->changeTurn();
@@ -44,7 +54,9 @@ bool Moving::move(Move & command){
 		
 		//cambio a proximo estado
 		this->gameManager->setCurrentState("populating");
-	
+		
+		cout<<"HORA DE POBLAR"<<endl;	
+		cout<<"Juega el jugador: "<< playerActual->getColor()<<" con bonus: "<<playerActual->getArmyCount()<<endl;
 	
 		//notifica el cambio
 	}
