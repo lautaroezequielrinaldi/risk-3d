@@ -102,15 +102,15 @@ void deleteQuadric() {
 }
 
 void drawSphere() {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//    glMatrixMode(GL_MODELVIEW);
-//   glLoadIdentity();
-    glTranslatef(0.0, 0.0, -10.0);
-//    glScalef(scaleFactor, scaleFactor, scaleFactor);
-    glBegin(GL_QUADS);
-        gluSphere(sphere, radius, 20, 20);
-    glEnd();
-    SDL_GL_SwapBuffers();
+	SDL_Rect rectangle;
+	rectangle.x = 5;
+	rectangle.y = 5;
+	rectangle.w = 100;
+	rectangle.h	 = 100;
+	SDL_Delay(10);
+	SDL_FillRect(screen, &rectangle, 0xee);
+	SDL_Flip(screen);
+	SDL_GL_SwapBuffers();
 }
 
 void main_loop() {
@@ -132,17 +132,17 @@ int main( int argc, char** argv ) {
 
     initOpenGL(1024, 768);
 
-    screen = SDL_SetVideoMode(  1024, 768, 32, SDL_OPENGL | SDL_RESIZABLE |
-        SDL_HWSURFACE );
+    screen = SDL_SetVideoMode(  1024, 768, 32, SDL_OPENGL | SDL_OPENGLBLIT | SDL_RESIZABLE |
+        SDL_HWSURFACE | SDL_DOUBLEBUF);
     if (  screen == NULL  ) {
         std::cout << "Error al crear ventana: " << SDL_GetError() << std::endl;
     }
 
     SDL_WM_SetCaption(  "Hola Mundo!!!", "Hola Mundo!!!"  );
 
-    initQuadric();
+    //initQuadric();
     main_loop();
-    deleteQuadric();
+    //deleteQuadric();
     return 0;
 }
 
