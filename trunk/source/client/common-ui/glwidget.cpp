@@ -1,13 +1,16 @@
 #include "glwidget.h"
 
 GLWidget::GLWidget(const int& x, const int& y, const int& width,
-	const int& height, const bool& visible, const bool& enabled):
+	const int& height, const bool& visible, const bool& enabled,
+	const bool& hoover):
 	bounds(x, y, width, height),
 	shadowColor(1.0f, 0.0f, 0.0f),
 	backgroundColor(0.5f, 0.5f, 0.5f),
 	foregroundColor(1.0f, 1.0f, 1.0f),
+	hooverColor(1.0f, 1.0f, 1.0f),
 	visible(visible),
-	enabled(enabled) {
+	enabled(enabled),
+	hoover(hoover) {
 	// No realiza ninguna accion.
 }
 
@@ -43,6 +46,14 @@ void GLWidget::setForegroundColor(const Color& color) {
     this->foregroundColor = color;
 }
 
+Color GLWidget::getHooverColor() {
+    return this->hooverColor;
+}
+
+void GLWidget::setHooverColor(const Color& color) {
+    this->hooverColor = color;
+}
+
 bool GLWidget::getVisible() {
 	return this->visible;
 }
@@ -57,6 +68,14 @@ bool GLWidget::getEnabled() {
 
 void GLWidget::setEnabled(const bool& enabled) {
 	this->enabled = enabled;
+}
+
+bool GLWidget::getHoover() {
+    return this->hoover;
+}
+
+void GLWidget::setHoover(const bool& hoover) {
+    this->hoover = hoover;
 }
 
 void GLWidget::preDrawWidget() {

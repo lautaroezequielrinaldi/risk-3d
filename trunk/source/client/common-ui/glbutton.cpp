@@ -1,16 +1,22 @@
 #include "glbutton.h"
 #include <iostream>
 GLButton::GLButton(const int& x, const int& y, const int& width,
-	const int& height, const bool& visible, const bool& enabled):
-	GLWidget(x, y, width, height, visible, enabled) {
+	const int& height, const bool& visible, const bool& enabled,
+	const bool& hoover):
+	GLWidget(x, y, width, height, visible, enabled, hoover) {
 	// No realiza ninguna accion.
 }
 
 void GLButton::drawWidget() {
 	this->drawQuadrangle(GL_QUADS, bounds.getX() - 10, bounds.getWidth() - 10,
         bounds.getY() - 10, bounds.getHeight() - 10, shadowColor);
-	this->drawQuadrangle(GL_QUADS, bounds.getX(), bounds.getWidth(),
-		bounds.getY(), bounds.getHeight(), backgroundColor);
+	if (this->hoover) {
+		this->drawQuadrangle(GL_QUADS, bounds.getX(), bounds.getWidth(),
+			bounds.getY(), bounds.getHeight(), hooverColor);
+	} else {
+        this->drawQuadrangle(GL_QUADS, bounds.getX(), bounds.getWidth(),
+            bounds.getY(), bounds.getHeight(), backgroundColor);
+	}
     this->drawQuadrangle(GL_LINE_LOOP, bounds.getX() - 1 ,
 		bounds.getWidth() + 1, bounds.getY() - 1, bounds.getHeight() + 1,
 		foregroundColor);
@@ -25,7 +31,11 @@ void GLButton::processMouseButton(const SDL_MouseButtonEvent& event) {
 }
 
 void GLButton::processMouseMotion(const SDL_MouseMotionEvent& event) {
-
+	if (this->contains(event.x, event.y)) {
+		this->hoover = true;
+	} else {
+		this->hoover = false;
+	}
 }
 
 void GLButton::processKeyboard(const SDL_KeyboardEvent& event) {

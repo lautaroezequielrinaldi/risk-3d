@@ -24,7 +24,7 @@ class GLButton: public GLWidget {
          */
         GLButton(const int& x = 0, const int& y = 0, const int& width = 0,
             const int& height = 0, const bool& visible = true,
-            const bool& enabled = true);
+            const bool& enabled = true, const bool& hoover = false);
         /**
          * Procesa un evento de boton de mouse en caso de que sea para el.
          */
