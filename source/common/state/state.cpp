@@ -11,6 +11,14 @@
 #include "../commands/nomore.h"
 #include "../commands/surrender.h"
 #include "../commands/quit.h"
+#include "../commands/win.h"
+#include "../commands/lose.h"
+#include "../commands/youare.h"
+#include "../commands/map.h"
+#include "../commands/turntoattack.h"
+#include "../commands/turntomove.h"
+#include "../commands/turntoocuppy.h"
+
 #include "../model/gamemanager.h"
 
 /*State::State() {
@@ -104,6 +112,30 @@ bool State::quit(Quit & command){
 }
 
 bool State::chat(Chat & command) {
+	return false;
+}
+
+bool State::lose(Lose & command) {
+	return false;
+}
+
+bool State::map(Map & command) {
+	return false;
+}
+
+bool State::turnToAttack(TurnToAttack & command) {
+	return false;
+}
+
+bool State::turnToMove(TurnToMove & command) {
+	return false;
+}
+
+bool State::turnToOcuppy(TurnToOcuppy & command) {
+	return false;
+}
+
+bool State::win(Win & command) {
 	return false;
 }
 

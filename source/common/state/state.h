@@ -31,6 +31,12 @@ class NoMore;
 class Surrender;
 class Quit;
 class YouAre;
+class Map;
+class Lose;
+class Win;
+class TurnToAttack;
+class TurnToMove;
+class TurnToOcuppy;
 
 class State {
 
@@ -77,12 +83,12 @@ class State {
 		virtual bool youAre(YouAre & command);
 
 		// virtual bool battleResult(BattleResult & command);
-		// virtual bool lose(Lose & command);
-		// virtual bool map(Map & command);
-		// virtual bool turnToAttack(TurnToAttack & command);
-		// virtual bool turnToMove(TurnToMove & command);
-		// virtual bool turnToOcuppy(TurnToOcuppy & command);
-		// virtual bool win(Win & command);
+		virtual bool lose(Lose & command);
+		virtual bool map(Map & command);
+		virtual bool turnToAttack(TurnToAttack & command);
+		virtual bool turnToMove(TurnToMove & command);
+		virtual bool turnToOcuppy(TurnToOcuppy & command);
+		virtual bool win(Win & command);
 		// virtual bool setOwner(SetOwner & command);
 		// virtual bool kill(Kill & command);
 

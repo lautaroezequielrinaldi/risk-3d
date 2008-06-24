@@ -1,12 +1,12 @@
-#ifndef __WIN_H__
-#define __WIN_H__
+#ifndef __TURNTOMOVE_H__
+#define __TURNTOMOVE_H__
 
 #include <string>
 #include <vector>
 #include "command.h"
 #include "../model/gamemanager.h"
 
-class Win : public Command
+class TurnToMove : public Command
 {
 	
 	
@@ -17,21 +17,21 @@ class Win : public Command
 		 * la idea es que reciba una lista de parametros y con ellos arme el ataque que se validara, en ppio
 		 * sera una lista de strings y en el caso de necesitar convertir un elemento a int usare atoi.
 		 */
-		Win(std::vector<std::string> &parameterList);
+		TurnToMove(std::vector<std::string> &parameterList);
 		
 		/**
 		 * Constructor de la clase.
 		 * La misma se construye a partir del Xml especificado.
 		 */
-		Win( std::string xml);
+		TurnToMove( std::string xml);
 		
 
-		Win();
+		TurnToMove();
 		/*
 		 * Destructor de la clase
 		 */
 		 
-		virtual ~Win();
+		virtual ~TurnToMove();
 		
 		/**
 		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.
@@ -57,4 +57,4 @@ class Win : public Command
 		
 };
 
-#endif /*__WIN_H__*/
+#endif /*__TURNTOMOVE_H__*/
