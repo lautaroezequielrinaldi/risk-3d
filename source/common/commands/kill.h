@@ -1,6 +1,12 @@
 #ifndef __KILL_H__
 #define __KILL_H__
 
+/**
+ * server => client
+ *
+ * Comando del servidor que elimina ejercitos en el pais señalado
+ */
+
 #include <string>
 #include <vector>
 #include "command.h"

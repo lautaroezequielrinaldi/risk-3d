@@ -1,6 +1,13 @@
 #ifndef __SETOWNER_H__
 #define __SETOWNER_H__
 
+/**
+ * server => client
+ *
+ * Comando utilizado al comienzo del juego, tras una batalla o ante un abandono para setear la 
+ * pertenencia de un pais
+ */
+
 #include <string>
 #include <vector>
 #include "command.h"

@@ -1,6 +1,12 @@
 #ifndef __WIN_H__
 #define __WIN_H__
 
+/**
+ * server => client
+ * 
+ * Mensaje que se envia a todos los clientes informando quien gano
+ */
+
 #include <string>
 #include <vector>
 #include "command.h"

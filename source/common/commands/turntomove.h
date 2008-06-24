@@ -1,6 +1,12 @@
 #ifndef __TURNTOMOVE_H__
 #define __TURNTOMOVE_H__
 
+/**
+ * server => client
+ *
+ * Indicacion del servidor de pasaje a estado Moving
+ */
+
 #include <string>
 #include <vector>
 #include "command.h"

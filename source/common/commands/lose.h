@@ -1,6 +1,13 @@
 #ifndef __LOSE_H__
 #define __LOSE_H__
 
+
+/**
+ * server => client
+ * 
+ * Mensaje que se envia a todos los clientes informando quien perdio
+ */
+
 #include <string>
 #include <vector>
 #include "command.h"

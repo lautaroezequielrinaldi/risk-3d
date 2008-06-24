@@ -1,6 +1,13 @@
 #ifndef DEFEND_H_
 #define DEFEND_H_
 
+/**
+ * client => server
+ *
+ * Comando creado por el cliente, se envia al servidor para su validacion y utilizacion en Battle,
+ * este luego hace los Kill, SetOwner y Move correspondientes
+ */
+
 #include <vector>
 #include "command.h"
 

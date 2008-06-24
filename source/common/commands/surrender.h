@@ -1,5 +1,12 @@
 #ifndef __SURRENDER__
 #define __SURRENDER__
+
+/**
+ * client => server => client
+ *
+ * Comando para indicar el deseo de abandonar el juego pero permanecer mirando.
+ */
+
 #include "command.h"
 class Surrender:public Command{
 	public:

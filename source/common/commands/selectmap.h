@@ -1,6 +1,10 @@
 #ifndef SELECTMAP_H_
 #define SELECTMAP_H_
 
+/**
+ * client => server
+ */
+
 #include "command.h"
 
 class SelectMap : public Command

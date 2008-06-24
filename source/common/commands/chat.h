@@ -1,5 +1,10 @@
 #ifndef __CHAT_H__
 #define __CHAT_H__
+
+/**
+ * client => server => client
+ */
+
 #include "command.h"
 class Chat: public Command {
 	public:

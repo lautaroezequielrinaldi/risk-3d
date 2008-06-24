@@ -1,5 +1,12 @@
 #ifndef __QUIT_H__
 #define __QUIT_H__
+
+/**
+ * client => server => client
+ *
+ * Comando para indicar el deseo de abandonar el juego y la conexion.
+ */
+
 #include "command.h"
 class Quit: public Command {
 	public:
