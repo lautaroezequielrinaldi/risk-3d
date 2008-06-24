@@ -1,27 +1,19 @@
 #ifndef __SERVERPROXY_H__
 #define __SERVERPROXY_H__
-#include "../common/thread/threaded.h"
-#include "../common/smartpointer/referencecountptr.h"
-#include "../common/net/sockets/socket.h"
-class ServerProxy;
 
-#include "../common/model/gamemanager.h"
+#include "proxy.h"
+
 /**
  *
- * @todo usar & en lugar de *
+ * 
  */
-class ServerProxy:public Threaded {
-	private:
-	Socket & socket;
-	ReferenceCountPtr<GameManager> gameManager;
+class ServerProxy:public Proxy {
 
 	protected:
 	void * run();
 
 	public:
-	ServerProxy(Socket & socket, ReferenceCountPtr<GameManager>& gameManager);
-
-	void notify(const std::string & msg);
+	ServerProxy(Socket * socket, ReferenceCountPtr<GameManager>& gameManager);
 	virtual ~ServerProxy();
 
 };

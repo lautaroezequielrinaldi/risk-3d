@@ -1,5 +1,7 @@
 
 #include "playerproxy.h"
+#include "../common/model/player.h"
+#include "../common/model/gamemanager.h"
 #include<sstream>
 #include <iostream>
 void * PlayerProxy::run() {
@@ -28,17 +30,12 @@ void * PlayerProxy::run() {
 	return 0;
 }
 
-void PlayerProxy::notify(const std::string & msg) {
-	socket->write(msg);
-}
+PlayerProxy::PlayerProxy(Socket * socket, ReferenceCountPtr< GameManager> & gameManager):Proxy(socket,gameManager){
 
-PlayerProxy::PlayerProxy(Socket * socket, ReferenceCountPtr< GameManager> & gameManager){
-	this->gameManager= gameManager;
-	this->socket = socket;
 }
 
 PlayerProxy::~PlayerProxy(){
-	delete(socket);
+
 }
 
 void PlayerProxy::setPlayer(ReferenceCountPtr<Player> & player){
