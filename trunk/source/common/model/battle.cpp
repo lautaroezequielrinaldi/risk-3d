@@ -1,3 +1,8 @@
+/**
+ *
+ * Esta clase deberia crear y enviar los comandos Kill, SetOwner y Move apropiados
+ *
+ */
 
 #include "battle.h"
 #include<stdlib.h>

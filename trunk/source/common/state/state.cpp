@@ -18,6 +18,9 @@
 #include "../commands/turntoattack.h"
 #include "../commands/turntomove.h"
 #include "../commands/turntoocuppy.h"
+#include "../commands/setowner.h"
+#include "../commands/kill.h"
+
 
 #include "../model/gamemanager.h"
 
@@ -139,4 +142,11 @@ bool State::win(Win & command) {
 	return false;
 }
 
+bool State::setOwner(SetOwner & command){
+	return false;
+}
+
+bool State::kill(Kill & command){
+	return false;
+}
 
