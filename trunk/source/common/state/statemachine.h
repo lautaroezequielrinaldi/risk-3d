@@ -18,7 +18,7 @@ class GameManager;
 #include "waitingfirstplayer.h"
 #include "waitingmapselection.h"
 #include "waitingplayer.h"
-
+#include "waiting.h"
 /**
  *
  * 
