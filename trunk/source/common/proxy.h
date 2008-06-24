@@ -16,7 +16,7 @@ class Proxy:public Threaded {
 	Socket * socket;
 	ReferenceCountPtr<GameManager> gameManager;
 	protected:
-	void * run();
+	virtual void * run()=0;
 
 	public:
 	Proxy(Socket * socket,  ReferenceCountPtr< GameManager> & gameManager);

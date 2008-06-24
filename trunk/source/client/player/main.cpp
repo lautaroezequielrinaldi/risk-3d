@@ -12,7 +12,9 @@
 
 #include <SDL.h>
 #include "../common-ui/glbutton.h"
+
 int main(int argc, char** argv) {
+
 	// Aca iria el codigo del cliente
 	/*
 	modo 2d
