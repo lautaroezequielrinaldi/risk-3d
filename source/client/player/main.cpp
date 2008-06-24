@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
 	ReferenceCountPtr<GameManager> gamemanager= new GameManager(game,turnmanager);
 	std::cerr<< "GameManager created" << std::endl;
 
-	Socket socket("localhost", 2000);
+	Socket * socket = new Socket("localhost", 2000);
 
 	ReferenceCountPtr<ServerProxy> serverProxy= new ServerProxy(socket, gamemanager);
 	std::cerr<< "ServerProxy created" << std::endl;
