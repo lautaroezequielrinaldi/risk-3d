@@ -70,7 +70,7 @@ CXXSTD = c++98
 ifdef sdl
 CFLAGS += $(shell pkg-config --cflags sdl)
 LDFLAGS += $(shell pkg-config --libs sdl)
-LDFLAGS += -lGL -lGLU -lag_core -lag_gui -lag_rg -lag_vg -lag_dev -lag_map -lag_net -lag_sc -lSDL_ttf
+LDFLAGS += -lGL -lGLU -lSDL_ttf
 endif
 
 # Agrego flags y libs de GTK+ de ser necesario.
