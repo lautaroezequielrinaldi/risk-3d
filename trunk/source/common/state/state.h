@@ -75,9 +75,18 @@ class State {
 		virtual bool quit(Quit & command);
 		virtual bool chat(Chat & command);
 		virtual bool youAre(YouAre & command);
-		//bool virtual setOwner(SetOwner & command);
-		//virtual void occupy(Occupy & command);
-		//virtual bool kill(Kill & move);
+
+		// virtual bool battleResult(BattleResult & command);
+		// virtual bool lose(Lose & command);
+		// virtual bool map(Map & command);
+		// virtual bool turnToAttack(TurnToAttack & command);
+		// virtual bool turnToMove(TurnToMove & command);
+		// virtual bool turnToOcuppy(TurnToOcuppy & command);
+		// virtual bool win(Win & command);
+		// virtual bool setOwner(SetOwner & command);
+		// virtual bool kill(Kill & command);
+
+
 };
 
 
