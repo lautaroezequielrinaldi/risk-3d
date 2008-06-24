@@ -105,6 +105,11 @@ class Game: public Serializable {
       	 */
       	void setDice( Dice & dice );
         
+        /**
+         * Metodo cuyo proposito es devolver el id del jugador dueño del pais countryName.
+         * Si el pais no tiene dueño, devuelve cero.
+         */
+        int getCountryOwner(std::string countryName);
         
         /**
 		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.

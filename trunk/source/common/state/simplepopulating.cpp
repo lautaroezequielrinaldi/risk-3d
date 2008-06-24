@@ -5,6 +5,11 @@
 #include "../model/armybonuscalculator.h"
 #include <list>
 
+
+#include<iostream>
+
+using namespace std;
+
 SimplePopulating::SimplePopulating(ReferenceCountPtr<GameManager>&gameManager, std::string name):State(gameManager,name)
 {
 }
@@ -16,15 +21,23 @@ SimplePopulating::~SimplePopulating()
 
 bool SimplePopulating::populate(Populate & command){
 
+	bool accionValida =  command.validate(this->gameManager);
 	
 	//si la accion es valida
-	if ( command.validate(this->gameManager) ){
+	if ( accionValida){
+		
+		cout<<"Estado: simple populating"<<endl;
+		cout<<"Jugador: "<<gameManager->getTurnManager()->getCurrentPlayer()<<endl;
 		
 		//actualiza modelo:
 		ReferenceCountPtr<Game> game = gameManager->getGame();
 		ReferenceCountPtr<Mapa> map = game->getMapa();
 		//obtengo pais a poblar
 		ReferenceCountPtr<Pais> paisD = map->obtenerPais(command.getCountryDestination());	
+		
+		cout<<"pais destino: "<<paisD->getNombre()<<endl;
+		cout<<"ejercitos antes de poblar: "<<paisD->getArmyCount();
+		cout<<"Cantidad de ejercitos a ubicar: "<<command.getArmyCount() <<endl;
 		
 		//agrego al pais destino la cantidad de ejercitos solicitados
 		paisD->addArmies(command.getArmyCount() );
@@ -38,7 +51,11 @@ bool SimplePopulating::populate(Populate & command){
 		//seteo al jugador actual la cant de ejercitos que le quedan por ubicar
 		playerActual->setArmyCount( ejercitosRestantes );
 		
-						
+		cout<<"ejercitos despues de poblar: "<<paisD->getArmyCount();
+		cout<<"Al jugador "<<playerActual->getColor()<<" le quedan: "<<playerActual->getArmyCount()<<" ejerctos para ubicar"<<endl;
+		
+	
+	
 		//obtengo lista de jugadores
 		std::list< ReferenceCountPtr<Player> > listaJug = game->getPlayerList();
 		std::list<ReferenceCountPtr<Player> >::iterator it;	
@@ -57,7 +74,8 @@ bool SimplePopulating::populate(Populate & command){
 		// sino hay mas ejercitos en ningun jugador para ubicar
 		if ( noMasEjercitos ){
 				
-					
+			cout<<"ningun jugador tiene mas ejercitos por ubicar en la etapa inicial"<<endl;
+						
 			//cambio de turno
 			this->gameManager->getTurnManager()->changeTurn();
 				
@@ -72,12 +90,18 @@ bool SimplePopulating::populate(Populate & command){
 				
 			//cambio a proximo estado
 			this->gameManager->setCurrentState("populating");
-
+		
+			cout<<"Turno de poblar juego para el jugador: "<<playerActual->getColor()<<endl;
+			cout<<"El bonus de ejercitos es: "<<playerActual->getArmyCount()<<endl;
 		}
-		
-	}	
-		//notificacion
-		
-		return true;
+		//si todavia quedan jugadores con ejercitos a ubucar
+		else
+			//cambio de turno
+			this->gameManager->getTurnManager()->changeTurn();
+	
+
+	}
+	
+	return accionValida;
 }
 

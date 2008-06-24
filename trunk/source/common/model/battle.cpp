@@ -3,6 +3,10 @@
 #include<stdlib.h>
 #include<list>
 
+#include<iostream>
+
+using namespace std;
+
 
 Battle::Battle(Attack& ataque,Defend& defensa,Dice& dice):
 ataque (ataque),
@@ -91,6 +95,8 @@ BattleResult Battle::start(ReferenceCountPtr<GameManager>& gameManager){
 	// si pais defensor tenia la misma cantidad de ejercitos que los que perdio en la batalla
 	if ( paisDefensor->getArmyCount() == abs(resultadoBatalla.getDefenderResult() ) ){
 		
+		cout<<"PAIS CONQUISTADO!!!! BRAVO"<<endl;
+		
 		// elimino al pais defensor de la lista de paises del player defensor
 		playerDefensor->removeConqueredLand(this->defensa.getDefenderdLand());
 		
@@ -107,7 +113,7 @@ BattleResult Battle::start(ReferenceCountPtr<GameManager>& gameManager){
 		
 	// verificar si hubo conquista de continente
 
-	
+		
 	
 	return resultadoBatalla;
 	
