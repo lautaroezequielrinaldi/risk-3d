@@ -11,7 +11,7 @@ StateMachine::StateMachine(ReferenceCountPtr<GameManager> & gameManager){
         states.insert(std::make_pair("waitingPlayer",new WaitingPlayer(gameManager,"waitingPlayer")));
         states.insert(std::make_pair("waitingFirstPlayer",new WaitingFirstPlayer(gameManager,"waitingFirstPlayer")));
         states.insert(std::make_pair("waitingMapSelection",new WaitingMapSelection(gameManager,"waitingMapSelection")));
-
+	states.insert(std::make_pair("waiting",new Waiting(gameManager,"waiting")));
 
 
 }
