@@ -92,6 +92,12 @@ bool State::surrender(Surrender & command){
 	return true;
 }
 
+bool State::youAre(YouAre & command){
+	// 
+        return true;
+}
+
+
 bool State::quit(Quit & command){
 	// debe aplicar surrender y ademas cortar la conexión
         return true;

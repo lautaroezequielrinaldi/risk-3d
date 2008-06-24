@@ -30,6 +30,7 @@ class ReadyToPlay;
 class NoMore;
 class Surrender;
 class Quit;
+class YouAre;
 
 class State {
 
@@ -73,6 +74,7 @@ class State {
 		virtual bool surrender(Surrender & command);
 		virtual bool quit(Quit & command);
 		virtual bool chat(Chat & command);
+		virtual bool youAre(YouAre & command);
 		//bool virtual setOwner(SetOwner & command);
 		//virtual void occupy(Occupy & command);
 		//virtual bool kill(Kill & move);

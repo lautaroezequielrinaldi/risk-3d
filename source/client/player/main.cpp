@@ -1,5 +1,11 @@
-#include "../../common/net/sockets/socket.h"
 #include "../../common/commands/joingame.h"
+
+#include "../../common/model/randomdice.h"
+#include "../../common/model/gamemanager.h"
+#include "../../common/model/game.h"
+#include "../../common/model/turnmanager.h"
+#include "../../common/serverproxy.h"
+
 #include <iostream>
 
 #include<sstream>
@@ -22,8 +28,26 @@ int main(int argc, char** argv) {
 	area de chat
 	
 	*/
-/*
-	Socket * socket = new Socket("localhost", 2000);
+
+	Dice *dado = new RandomDice();
+	std::cerr<< "Dice created" << std::endl;
+
+	ReferenceCountPtr<Game>        game       = new Game(*dado);
+	std::cerr<< "Game created" << std::endl;
+
+	ReferenceCountPtr<TurnManager> turnmanager= new TurnManager();
+	std::cerr<< "TurnManager created" << std::endl;
+
+	ReferenceCountPtr<GameManager> gamemanager= new GameManager(game,turnmanager);
+	std::cerr<< "GameManager created" << std::endl;
+
+	Socket socket("localhost", 2000);
+
+	ReferenceCountPtr<ServerProxy> serverProxy= new ServerProxy(socket, gamemanager);
+	std::cerr<< "ServerProxy created" << std::endl;
+
+	 gamemanager->add(serverProxy);
+
 
 	JoinGame * joinGame = new JoinGame();
 	std::string cmd = joinGame->serialize();
@@ -44,10 +68,16 @@ int main(int argc, char** argv) {
 	msg.append("\r\n");
 	msg.append(cmd);
 
-	socket->write(msg);
+	std::cerr << "Escribiendo..." << std::endl;
+	serverProxy->notify(msg);
+	std::cerr << "Escrito..." << std::endl;
+
 	std::cerr << msg << std::endl;
 
-	//ServerProxyi*/
+	serverProxy->start();
+	//ServerProxy
+
+if (false) {
 	SDL_Surface* screen;
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
 		return 0;
@@ -72,4 +102,5 @@ int main(int argc, char** argv) {
 		}
 	}
 	SDL_FreeSurface(screen);
+}
 }

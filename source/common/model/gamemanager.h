@@ -12,7 +12,7 @@ class CommandHydrator;
 #include "../commands/attack.h"
 
 #include "../playerproxy.h"
-
+#include "../serverproxy.h"
 
 class GameManager {
 	
@@ -44,6 +44,8 @@ class GameManager {
 		Attack *attack;
 			
 		
+	ReferenceCountPtr<ServerProxy> serverProxy;
+
 	bool open;
 
 	bool playing;
@@ -74,6 +76,8 @@ class GameManager {
 		*/
 		void add(ReferenceCountPtr<PlayerProxy> & playerproxy);	
 
+		void add(ReferenceCountPtr<ServerProxy> & serverproxy);	
+
 		/**
 		 * Metodo cuyo proposito es obtener la partida que se esta jugando.
 		 */
@@ -98,6 +102,7 @@ class GameManager {
 
 		bool isOpen();
 
+		void notify(std::string msg);
 
 		void execute(std::string commandName, std::string commandXml);
 
