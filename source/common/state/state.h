@@ -37,6 +37,8 @@ class Win;
 class TurnToAttack;
 class TurnToMove;
 class TurnToOcuppy;
+class SetOwner;
+class Kill;
 
 class State {
 
@@ -89,8 +91,8 @@ class State {
 		virtual bool turnToMove(TurnToMove & command);
 		virtual bool turnToOcuppy(TurnToOcuppy & command);
 		virtual bool win(Win & command);
-		// virtual bool setOwner(SetOwner & command);
-		// virtual bool kill(Kill & command);
+		virtual bool setOwner(SetOwner & command);
+		virtual bool kill(Kill & command);
 
 
 };
