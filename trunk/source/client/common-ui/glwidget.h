@@ -1,9 +1,10 @@
 #ifndef __GLWIDGET_H__
 #define __GLWIDGET_H__
 
-#include <SDL.h> // Para definicion de SDL.
-#include <list> // Para definicion de std:list.
-#include "mousebuttonlistener.h" // Para definicion de MouseButtonListener.
+#include<GL/gl.h> // Para funciones de OpenGL
+#include<GL/glu.h>// Para funciones de OpenGLU
+#include<SDL/SDL.h> // Para funciones de SDL
+#include "rectangle.h" // Para definicion de Rectangle
 
 /**
  * Clase abstracta base para todos los widgets GL SDL del cliente 3D.
@@ -12,62 +13,48 @@ class GLWidget {
 	/**
 	 * Atributos privados de la clase GLWidget.
 	 */
-	private:
+	protected:
 		/**
- 		 * Almacena la lista de listeners para eventos de Mouse Button SDL.
- 		 */
-		std::list<MouseButtonListener*> mouseButtonListenerList;
-		/**
-		 * Almacena la posicion X inicial del widget.
+		 * Almacena el rectangulo en pantalla que representa el widget.
 		 */
-		int x;
+		Rectangle bounds;
 		/**
-		 * Almacena la posicion Y inicial del widget.
-		 */
-		int y;
-		/**
-		 * Almacena el ancho del widget.
-		 */
-		int width;
-		/**
-		 * Almacena el alto del widget.
-		 */
-		int height;
-		/**
-		 * Almacena si el widget es visible.
+		 * Almacena el estado visible del widget.
 		 */
 		bool visible;
 		/**
-		 * Almacena si el widget esta habilitado.
+		 * Almacena el estado habilitado del widget.
 		 */
 		bool enabled;
-
 	/**
-	 * Metodos privados de la clase GLWidget.
-	 */
-	private:
-		/**
-		 * Constructor copia de la clase GLWidget.
-		 */
-		GLWidget(const GLWidget& otherInstance);
-		/**
-		 * Operador de asignacion de la clase GLWidget.
-		 */
-		GLWidget& operator=(const GLWidget& otherInstance);
-		/**
-		 * Dispara una notificacion de eventos Mouse Button SDL.
-		 */
-		void fireMouseButtonNotification(const SDL_MouseButtonEvent& event);
-
-	/**
-	 * Metodos protegidos de la clase GLWidget.
+	 * Metodos protegidos de la clse GLWidget.
 	 */
 	protected:
 		/**
-		 * Verifica si una posicion X,Y en pantalla pertenece dentro del widget.
+		 * Se invoca antes de dibujar el componente.
 		 */
-		virtual bool containsPoint(const int& x, const int& y);
-
+		virtual void preDrawWidget();
+		/**
+		 * Se invoca al dibujar el componente.
+		 */
+		virtual void drawWidget() = 0;
+		/**
+		 * Se invoca despues de dibujar el componente.
+		 */
+		virtual void postDrawWidget();
+		/**
+		 * Vuelve idle al componente.
+		 */
+		virtual void becomeIdle();
+		/**
+		 * Dibuja un quadrangle.
+		 */
+		void drawQuadrangle(int polygonType, int left, int right, int bottom,
+			int top);
+		/**
+		 * Verifica si un punto determinado forma parte del widget.
+		 */
+		bool contains(const int& x, const int& y);
 	/**
 	 * Metodos publicos de la clase GLWidget.
 	 */
@@ -75,75 +62,34 @@ class GLWidget {
 		/**
 		 * Constructor de la clase GLWidget.
 		 */
-		GLWidget(const int& x, const int& y, const int& width,
-			const int& height, const bool& visible = true,
+		GLWidget(const int& x = 0, const int& y = 0, const int& width = 0,
+			const int& height = 0, const bool& visible = true,
 			const bool& enabled = true);
 		/**
-		 * Establece la posicion X del widget.
+		 * Obtiene los limites del componente.
 		 */
-		void setX(const int& x);
+		Rectangle getBounds();
 		/**
-		 * Obtiene la posicion X del widget.
+		 * Establece los limites del componente.
 		 */
-		int getX() const ;
+		void setBounds(const Rectangle& rectangle);
 		/**
-		 * Establece la posicion Y del widget.
+		 * Dibuja el componente.
 		 */
-		void setY(const int& y);
+		void draw();
 		/**
-		 * Obtiene la posicion Y del widget.
+		 * Procesa un evento de boton de mouse en caso de que sea para el.
 		 */
-		int getY() const;
+		virtual void processMouseButton(const SDL_MouseButtonEvent& event) = 0;
 		/**
-		 * Establece el ancho del widget.
+		 * Procesa un evento de movimiento de mouse en caso de que sea para el.
 		 */
-		void setWidth(const int& width);
+		virtual void  processMouseMotion(
+			const SDL_MouseMotionEvent& event) = 0;
 		/**
-		 * Obtiene el ancho del widget.
+		 * Procesa un evento de teclado en caso de que sea para el.
 		 */
-		int getWidth() const;
-		/**
-		 * Establece el alto del widget.
-		 */
-		void setHeight(const int& height);
-		/**
-		 * Obtiene el alto del widget.
-		 */
-		int getHeight() const;
-		/**
-		 * Establece el estado visible del widget.
-		 */
-		void setVisible(const bool& visible);
-		/**
-		 * Obtiene el estado visible del widget.
-		 */
-		bool getVisible() const;
-		/**
-		 * Establece el estado habilitado del widget.
-		 */
-		void setEnabled(const bool& enabled);
-		/**
-		 * Obtiene el estado habilitado del widget.
-		 */
-		bool getEnabled() const;
-		/**
-		 * Registra un listener de evento Mouse Button SDL.
-		 */
-		void registerMouseButtonListener(MouseButtonListener* listener);
-		/**
-		 * Des Registra un listener de evento Mouse Button SDL.
-		 */
-		void unregisterMouseButtonListener(
-			MouseButtonListener* listener);
-		/**
-		 * Dibuja el widget en pantalla.
-		 */
-		virtual void draw() = 0;
-		/**
-		 * Procesa un evento de Mouse Button SDL y notifica a los listeners de
-		 * dicho widget si se ha hecho click.
-		 */
-		virtual void processMouseButtonEvent(const SDL_MouseButtonEvent& event);
+		virtual void processKeyboard(const SDL_KeyboardEvent& event) = 0;
 		/**
 		 * Destructor virtual de la clase GLWidget.
 		 */
