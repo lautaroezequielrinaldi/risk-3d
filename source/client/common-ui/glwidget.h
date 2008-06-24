@@ -31,6 +31,10 @@ class GLWidget {
 		 */
 		Color foregroundColor;
 		/**
+		 * Almacena el color de hoover del widget.
+		 */
+		Color hooverColor;
+		/**
 		 * Almacena el estado visible del widget.
 		 */
 		bool visible;
@@ -38,6 +42,11 @@ class GLWidget {
 		 * Almacena el estado habilitado del widget.
 		 */
 		bool enabled;
+		/**
+		 * Almacena el estado hoover del widget.
+		 */
+		bool hoover;
+
 	/**
 	 * Metodos protegidos de la clse GLWidget.
 	 */
@@ -76,7 +85,7 @@ class GLWidget {
 		 */
 		GLWidget(const int& x = 0, const int& y = 0, const int& width = 0,
 			const int& height = 0, const bool& visible = true,
-			const bool& enabled = true);
+			const bool& enabled = true, const bool& hoover = false);
 		/**
 		 * Obtiene los limites del componente.
 		 */
@@ -109,6 +118,14 @@ class GLWidget {
 		 * Establece el color de fondo del componente.
 		 */
         void setForegroundColor(const Color& foregroundColor);
+        /**
+		 * Obtiene el color de hoover del componente.
+		 */
+        Color getHooverColor();
+        /**
+		 * Establece el color de hoover del componente.
+		 */
+        void setHooverColor(const Color& hooverColor);
 		/**
 		 * Obtiene el estado visible del componente.
 		 */
@@ -125,6 +142,14 @@ class GLWidget {
 		 * Establece el estado habilitado del componente.
 		 */
 		void setEnabled(const bool& enabled);
+        /**
+		 * Obtiene el estado hoover del componente.
+		 */
+        bool getHoover();
+        /**
+		 * Establece el estado hoover del componente.
+		 */
+        void setHoover(const bool& hoover);
 		/**
 		 * Dibuja el componente.
 		 */
