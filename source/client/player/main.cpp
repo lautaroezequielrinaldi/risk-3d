@@ -3,6 +3,9 @@
 #include <iostream>
 
 #include<sstream>
+
+#include <SDL.h>
+#include "../common-ui/glbutton.h"
 int main(int argc, char** argv) {
 	// Aca iria el codigo del cliente
 	/*
@@ -19,7 +22,7 @@ int main(int argc, char** argv) {
 	area de chat
 	
 	*/
-
+/*
 	Socket * socket = new Socket("localhost", 2000);
 
 	JoinGame * joinGame = new JoinGame();
@@ -44,7 +47,29 @@ int main(int argc, char** argv) {
 	socket->write(msg);
 	std::cerr << msg << std::endl;
 
-	//ServerProxy
+	//ServerProxyi*/
+	SDL_Surface* screen;
+	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+		return 0;
+	}
+	screen = SDL_SetVideoMode(1024, 768, 32, SDL_OPENGL);
+	GLButton button(10,10,110,110);
 
-
+	SDL_Event event;
+	bool running = true;
+	while(running) {
+		if (SDL_PollEvent(&event)) {
+			switch (event.type) {
+				case SDL_QUIT:
+					running = false;
+				case SDL_MOUSEBUTTONDOWN:
+					button.processMouseButton(event.button);
+				case SDL_MOUSEBUTTONUP:
+					button.processMouseButton(event.button);
+			}
+			button.draw();
+			SDL_GL_SwapBuffers();
+		}
+	}
+	SDL_FreeSurface(screen);
 }

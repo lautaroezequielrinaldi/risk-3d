@@ -5,7 +5,7 @@
 #include<GL/glu.h>// Para funciones de OpenGLU
 #include<SDL/SDL.h> // Para funciones de SDL
 #include "rectangle.h" // Para definicion de Rectangle
-
+#include "color.h" // Para definicion de Color
 /**
  * Clase abstracta base para todos los widgets GL SDL del cliente 3D.
  */
@@ -18,6 +18,18 @@ class GLWidget {
 		 * Almacena el rectangulo en pantalla que representa el widget.
 		 */
 		Rectangle bounds;
+		/**
+		 * Almacena el color de sombra del widget.
+		 */
+		Color shadowColor;
+		/**
+		 * Almacena el color de fondo del widget.
+		 */
+		Color backgroundColor;
+		/**
+		 * Almacena el color de frente del widget.
+		 */
+		Color foregroundColor;
 		/**
 		 * Almacena el estado visible del widget.
 		 */
@@ -49,8 +61,8 @@ class GLWidget {
 		/**
 		 * Dibuja un quadrangle.
 		 */
-		void drawQuadrangle(int polygonType, int left, int right, int bottom,
-			int top);
+		void drawQuadrangle(GLenum polygonType, GLint left, GLint right,
+			GLint bottom, GLint top, Color color);
 		/**
 		 * Verifica si un punto determinado forma parte del widget.
 		 */
@@ -73,6 +85,46 @@ class GLWidget {
 		 * Establece los limites del componente.
 		 */
 		void setBounds(const Rectangle& rectangle);
+		/**
+		 * Obtiene el color de sombra del componente.
+		 */
+		Color getShadowColor();
+		/**
+		 * Establece el color de sombra del componente.
+		 */
+		void setShadowColor(const Color& shadowColor);
+        /**
+         * Obtiene el color de fondo del componente.
+         */
+        Color getBackgroundColor();
+        /**
+		 * Establece el color de fondo del componente.
+		 */
+        void setBackgroundColor(const Color& backgroundColor);
+        /**
+		 * Obtiene el color de frente del componente.
+		 */
+        Color getForegroundColor();
+        /**
+		 * Establece el color de fondo del componente.
+		 */
+        void setForegroundColor(const Color& foregroundColor);
+		/**
+		 * Obtiene el estado visible del componente.
+		 */
+		bool getVisible();
+		/**
+		 * Establece el estado visible del componente.
+		 */
+		void setVisible(const bool& visible);
+		/**
+		 * Obtiene el estado habilitado del componente.
+		 */
+		bool getEnabled();
+		/**
+		 * Establece el estado habilitado del componente.
+		 */
+		void setEnabled(const bool& enabled);
 		/**
 		 * Dibuja el componente.
 		 */
