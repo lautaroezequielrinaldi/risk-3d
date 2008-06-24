@@ -1,6 +1,14 @@
 #ifndef MOVE_H_
 #define MOVE_H_
 
+/**
+ * client => server => client
+ * server => client
+ *
+ * Comando que indica el movimiento de ejercitos entre paises.
+ * Puede ser generado tanto por un cliente como por el servidor tras una batalla.
+ */
+
 #include <vector>
 #include "command.h"
 

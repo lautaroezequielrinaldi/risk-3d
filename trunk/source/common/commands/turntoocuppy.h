@@ -1,6 +1,13 @@
 #ifndef __TURNTOOCUPPY_H__
 #define __TURNTOOCUPPY_H__
 
+/**
+ * server => client
+ *
+ * Indicacion del servidor de pasaje a estado Ocuppying
+ * hay que ver que pasa con Populating...
+ */
+
 #include <string>
 #include <vector>
 #include "command.h"

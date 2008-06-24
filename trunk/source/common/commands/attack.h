@@ -1,6 +1,13 @@
 #ifndef ATTACK_H_
 #define ATTACK_H_
 
+/**
+ * client => server => client
+ *
+ * Comando creado en el cliente, se valida en el servidor y se reenvia a todos
+ * El atacado pregunta isForMe para pasar al estado Defending
+ */
+
 #include <string>
 #include <vector>
 #include "command.h"

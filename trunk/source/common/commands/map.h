@@ -1,6 +1,14 @@
 #ifndef __MAP_H__
 #define __MAP_H__
 
+/**
+ * server => client
+ * 
+ * Comando que se envia una unica vez con toda la informacion del juego
+ * Hay que cambiar el nombre a Game algo
+ */
+
+
 #include <string>
 #include <vector>
 #include "command.h"

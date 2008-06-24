@@ -1,6 +1,12 @@
 #ifndef JOINGAME_H_
 #define JOINGAME_H_
 
+/**
+ * client => server
+ *
+ * Comando para unirse al juego
+ */
+
 #include "command.h"
 
 class JoinGame : public Command

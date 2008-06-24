@@ -2,6 +2,12 @@
 #define __NOMORE_H__
 #include "command.h"
 
+/**
+ * client => server => client
+ *
+ * Comando utilizado para señalar el fin de Attacking o Moving
+ */
+
 class NoMore: public Command {
 	public:
 		NoMore();

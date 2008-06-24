@@ -1,6 +1,13 @@
 #ifndef __YOUARE_H__
 #define __YOUARE_H__
 
+/**
+ * server => client
+ * 
+ * mensaje que se envia tras un JoinGame informando al cliente cual es su numero
+ */
+
+
 #include <string>
 #include <vector>
 #include "command.h"

@@ -1,6 +1,12 @@
 #ifndef __TURNTOATTACK_H__
 #define __TURNTOATTACK_H__
 
+/**
+ * server => client
+ *
+ * Indicacion del servidor de pasaje a estado Attacking
+ */
+
 #include <string>
 #include <vector>
 #include "command.h"

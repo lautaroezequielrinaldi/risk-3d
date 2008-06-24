@@ -1,6 +1,12 @@
 #ifndef POPULATE_H_
 #define POPULATE_H_
 
+/**
+ * client => server => client
+ *
+ * Comando para ubicar ejercitos al comienzo del turno
+ */
+
 #include <vector>
 #include "command.h"
 #include "../model/gamemanager.h"
