@@ -12,8 +12,6 @@
 #include "surrender.h"
 #include "quit.h"
 
-#include "../../common/smartpointer/referencecountptr.h"
-
 
 #include <map>
 #include <string>
@@ -23,9 +21,9 @@ class CommandHydrator {
 	public:
 		CommandHydrator();
 		virtual ~CommandHydrator();
-		ReferenceCountPtr<Command> getCommand(std::string name, std::string xml);
+		Command * getCommand(std::string name, std::string xml);
 	private:
-		std::map <std::string, ReferenceCountPtr<Command> > commands;
+		std::map <std::string, Command * > commands;
 
 };
 #endif /*__COMMANDHYDRATOR_H__*/

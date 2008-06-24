@@ -21,8 +21,8 @@ CommandHydrator::~CommandHydrator(){
 /**
  * Es
  */
-ReferenceCountPtr<Command>  CommandHydrator::getCommand(std::string name, std::string xml){
-	ReferenceCountPtr<Command> command = commands[name];
+Command * CommandHydrator::getCommand(std::string name, std::string xml){
+	Command * command = commands[name];
 	command->hydrate(xml);
 	return command;
 }

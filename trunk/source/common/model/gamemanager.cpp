@@ -51,14 +51,16 @@ void GameManager::setAttack(Attack& attack){
 void GameManager::add(ReferenceCountPtr<PlayerProxy> & playerProxy) {
 	/* codigo comentado para que compile EDITOR_TARGET, no falla en SERVER_TARGET*/
 	playerProxy->setPlayer(game->addPlayer());
-
-
 	
+	// incorporar a contenedor
 	// incrementar jugadores
 	// si alcanzado max, open -> false;
 
 }
 
+void GameManager::add(ReferenceCountPtr<ServerProxy> & serverproxy) {
+	this->serverProxy = serverproxy;
+}
 
 bool GameManager::isPlaying() {
 	return playing;
@@ -68,6 +70,10 @@ bool GameManager::isPlaying() {
 bool GameManager::isOpen() {
 	return open;
 
+}
+
+void notify(std::string msg){
+	// para cada xProxy, pedir notify(msg);
 }
 
 std::list< ReferenceCountPtr<Player> >& GameManager::getPlayerList(){
@@ -88,6 +94,13 @@ void GameManager::execute(std::string commandName, std::string commandXml){
 	
 
 }
+
+void GameManager::notify(std::string msg) {
+	// pedirle a cada elemento del contenedor full_write(msg)
+
+
+}
+
 
 ReferenceCountPtr<State> GameManager::getCurrentState(){
 	
