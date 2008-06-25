@@ -38,3 +38,7 @@ std::string Command::getMainMsg(){
 std::string Command::getSecMsg(){
 	return secMsg;
 }
+
+std::string Command::getName(){
+	return name;
+}

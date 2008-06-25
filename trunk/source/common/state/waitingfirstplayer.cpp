@@ -22,7 +22,7 @@ bool WaitingFirstPlayer::joinGame(JoinGame & command){
 
 	YouAre * youare = new YouAre();
 	
-	this->gameManager->notify(youare->serialize());
+	this->gameManager->notify(youare);
 
 	this->gameManager->getTurnManager()->changeTurn(1);
 	// marcar jugador como actual

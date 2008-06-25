@@ -5,7 +5,7 @@
 #include "../common/net/sockets/socket.h"
 
 class GameManager;
-
+class Command;
 
 /**
  *
@@ -20,7 +20,7 @@ class Proxy:public Threaded {
 
 	public:
 	Proxy(Socket * socket,  ReferenceCountPtr< GameManager> & gameManager);
-	void notify(const std::string & msg);
+	void notify(Command * command);
 	virtual ~Proxy();
 
 };

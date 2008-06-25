@@ -60,7 +60,10 @@ class Command : public Serializable
 		bool isValid();
 
 		void setValid(bool valid);
+
+		std::string getName();
 	private:
+		std::string name;
 		std::string mainMsg;
 		std::string secMsg;
 		bool valid;
