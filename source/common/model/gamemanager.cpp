@@ -95,7 +95,7 @@ void GameManager::execute(std::string commandName, std::string commandXml){
 
 }
 
-void GameManager::notify(std::string msg) {
+void GameManager::notify(Command * command) {
 	// pedirle a cada elemento del contenedor full_write(msg)
 
 

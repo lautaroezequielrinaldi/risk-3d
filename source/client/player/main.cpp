@@ -32,11 +32,15 @@ int main(int argc, char** argv) {
 	
 	*/
 
+	// aca no deberiamos necesitar el Dice, corregir
+
 	Dice *dado = new RandomDice();
 	std::cerr<< "Dice created" << std::endl;
 
 	ReferenceCountPtr<Game>        game       = new Game(*dado);
 	std::cerr<< "Game created" << std::endl;
+
+	// aca no deberiamos necesitar el TurnManager, corregir
 
 	ReferenceCountPtr<TurnManager> turnmanager= new TurnManager();
 	std::cerr<< "TurnManager created" << std::endl;
@@ -53,42 +57,21 @@ int main(int argc, char** argv) {
 	gamemanager->setStateMachine(stateMachine);
 	std::cerr<< "StateMachine asigned" << std::endl;
 
-
 	Socket * socket = new Socket("localhost", 2000);
+	std::cerr<< "Socket created" << std::endl;
 
 	ReferenceCountPtr<ServerProxy> serverProxy= new ServerProxy(socket, gamemanager);
 	std::cerr<< "ServerProxy created" << std::endl;
 
-	 gamemanager->add(serverProxy);
-
+	gamemanager->add(serverProxy);
 
 	JoinGame * joinGame = new JoinGame();
-	std::string cmd = joinGame->serialize();
-	std::cerr << cmd << std::endl;
-	std::cerr << cmd.size() << std::endl;
 
-	std::stringstream header;
-	header << cmd.size();
-	header << " joingame ";
-
-	std::string msg = header.str();
-	
-
-	while (msg.size() < 30) {
-		msg.append(".");
-	}
-
-	msg.append("\r\n");
-	msg.append(cmd);
-
-	std::cerr << "Escribiendo..." << std::endl;
-	serverProxy->notify(msg);
+	serverProxy->notify(joinGame);
 	std::cerr << "Escrito..." << std::endl;
 
-	std::cerr << msg << std::endl;
-
 	serverProxy->start();
-	//ServerProxy
+
 
 if (false) {
 	SDL_Surface* screen;

@@ -30,7 +30,7 @@ bool WaitingMapSelection::selectMap(SelectMap & command){
 	// si ahora no hay lugar o todos estan ready to play
 	//    Map
 	//     pasar a simplePopulating
-	//     seleccionar primer jugador y TurnToOcuppy	
+	//     seleccionar primer jugador y TurnToOccupy	
 	return false;
 }
 
