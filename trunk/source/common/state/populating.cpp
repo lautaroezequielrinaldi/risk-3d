@@ -15,7 +15,7 @@ Populating::~Populating()
 {
 }
 bool Populating::populate(Populate & command){
-
+	std::cerr << "Evento Populating::populate" << std::endl;
 	bool accoinValida =false;
 	
 	//si la accion es valida

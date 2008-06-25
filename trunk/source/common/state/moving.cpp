@@ -17,7 +17,7 @@ Moving::~Moving()
 }
 
 bool Moving::move(Move & command){
-
+	std::cerr << "Evento Moving::move" << std::endl;
 	bool accionValida= command.validate ( this->gameManager);
 	
 	if( accionValida ){

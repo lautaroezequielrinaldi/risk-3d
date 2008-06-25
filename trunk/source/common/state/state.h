@@ -3,6 +3,8 @@
 
 #include <string>
 #include "../smartpointer/referencecountptr.h"
+#include <iostream>
+
 class State;
 /*
 #include "../commands/attack.h"

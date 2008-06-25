@@ -20,7 +20,7 @@ SimplePopulating::~SimplePopulating()
 
 
 bool SimplePopulating::populate(Populate & command){
-
+	std::cerr << "Evento SimplePopulating::populate" << std::endl;
 	bool accionValida =  command.validate(this->gameManager);
 	
 	//si la accion es valida

@@ -14,7 +14,7 @@ Defending::~Defending()
 }
 
 bool Defending::defend(Defend & command){
-	
+	std::cerr << "Evento Defending::defend" << std::endl;
 	bool accionValida = command.validate(this->gameManager);
 	
 	//si es valido

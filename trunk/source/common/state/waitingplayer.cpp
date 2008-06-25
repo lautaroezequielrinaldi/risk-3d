@@ -9,6 +9,7 @@ WaitingPlayer::~WaitingPlayer()
 }
 
 bool WaitingPlayer::readyToPlay(ReadyToPlay & command){
+	std::cerr << "Evento WaitingPlayer::readyToPlay" << std::endl;
 	// marcar como ready to play
 	// si todos listos, 
 	//     Map 
@@ -18,6 +19,7 @@ bool WaitingPlayer::readyToPlay(ReadyToPlay & command){
 }
 
 bool WaitingPlayer::joinGame(JoinGame & command){
+	std::cerr << "Evento WaitingPlayer::joinGame" << std::endl;
 	// si hay lugar, 
 	//	aceptarlo
 	//      YouAre(n)

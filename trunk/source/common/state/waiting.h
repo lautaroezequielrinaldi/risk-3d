@@ -15,8 +15,7 @@ class Waiting : public State
 	bool attack(Attack & command);
 	bool defend(Defend & command);
 	bool youAre(YouAre & command);
-//	bool turnToAttack(turnToAttack & command);
-//	bool battleResult(BattleResult & command);
+	bool turnToAttack(TurnToAttack & command);
 
 };
 
