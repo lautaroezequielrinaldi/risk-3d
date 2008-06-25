@@ -6,6 +6,7 @@
 #include<GL/glu.h>// Para funciones de OpenGLU
 #include<GL/glut.h> // Para funciones de FreeGlut.
 #include "color.h" // Para definicion de Color.
+#include "dimension.h" // Para definicion de Dimension.
 
 class GLDrawHelper {
 	/**
@@ -22,6 +23,10 @@ class GLDrawHelper {
 		 */
 		static void drawFillRectangle(const GLint& left, const GLint& right, const GLint& top, const GLint& bottom,
 			Color& color);
+		/**
+		 * Dibuja un texto centrado a partir de una dimension.
+		 */
+		static void drawCenteredText(const std::string& text, Dimension& dimension, Color& color);
 		/**
 		 * Dibuja un texto a partir de la posicion x, y.
 		 */

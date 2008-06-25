@@ -82,11 +82,11 @@ if (false) {
 	}
 	SDL_Surface* screen = SDL_SetVideoMode(1024, 768, 32, SDL_OPENGL);
 	
-	ReferenceCountPtr<GLButton> button( new GLButton("Primer Boton!!!"));
+	ReferenceCountPtr<GLButton> button( new GLButton("Boton!!!"));
 	button->setX(10);
 	button->setY(10);
-	button->setWidth(300);
-	button->setWidth(70);
+	button->setWidth(150);
+	button->setHeight(70);
 
 	GLWidgetManager::registerWidget(button);
 	GLMainLoop::run();
