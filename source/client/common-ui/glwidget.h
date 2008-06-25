@@ -148,10 +148,6 @@ class GLWidget {
 		 */
         GLWidget();
 		/**
-		 * Constructor de la clase GLWidget.
-		 */
-		GLWidget(const Dimension& dimension, const bool& visible = true, const bool& enabled = true);
-		/**
 		 * Obtiene la dimension del widget.
 		 */
 		Dimension& getDimension();

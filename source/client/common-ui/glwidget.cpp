@@ -73,27 +73,6 @@ GLWidget::GLWidget() {
 	this->foregroundColorMap[GLWIDGET_FOCUS] = Color::BLACK;
 }
 
-GLWidget::GLWidget(const Dimension& dimension, const bool& visible, const bool& enabled) {
-    // Incrementa el contador de widget.
-    GLWidget::incrementIdCounter();
-    // Establece el id de widget.
-    this->setId(GLWidget::getIdCounter());
-    // Establece el estado visible del widget.
-    this->setVisible(visible);
-    // Establece el estado habilitado del widget.
-    this->setEnabled(enabled);
-    // Establece el estado del widget como inactivo.
-    this->setState(GLWIDGET_INACTIVE);
-    // Llena el mapa de color background del widget.
-    this->backgroundColorMap[GLWIDGET_ACTIVE] = Color::RED;
-    this->backgroundColorMap[GLWIDGET_INACTIVE] = Color::GRAY;
-    this->backgroundColorMap[GLWIDGET_FOCUS] = Color::GRAY;
-    // Llena el mapa de color foreground del widget.
-    this->foregroundColorMap[GLWIDGET_ACTIVE] = Color::BLACK;
-    this->foregroundColorMap[GLWIDGET_INACTIVE] = Color::WHITE;
-    this->foregroundColorMap[GLWIDGET_FOCUS] = Color::BLACK;
-}
-
 Dimension& GLWidget::getDimension() {
 	return this->dimension;
 }

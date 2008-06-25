@@ -25,10 +25,6 @@ class GL2DWidget: public GLWidget {
 		 * Constructor de la clase GL2DWidget.
 		 */
         GL2DWidget();
-        /**
-		 * Constructor de la clase GLWidget.
-		 */
-        GL2DWidget(const Dimension& dimension, const bool& visible = true, const bool& enabled = true);
 		/**
 		 * Destructor virtual de la clase GL2DWidget.
 		 */
