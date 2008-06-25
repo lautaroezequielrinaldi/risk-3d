@@ -37,7 +37,7 @@ int main(int argc, char** argv) {
 	// aca no deberiamos necesitar el Dice, corregir
 
 	Dice *dado = new RandomDice();
-	std::cerr<< "Dice created" << std::endl;
+	std::cerr<< "unnecessary Dice created" << std::endl;
 
 	ReferenceCountPtr<Game>        game       = new Game(*dado);
 	std::cerr<< "Game created" << std::endl;
@@ -45,7 +45,7 @@ int main(int argc, char** argv) {
 	// aca no deberiamos necesitar el TurnManager, corregir
 
 	ReferenceCountPtr<TurnManager> turnmanager= new TurnManager();
-	std::cerr<< "TurnManager created" << std::endl;
+	std::cerr<< "unnecessary TurnManager created" << std::endl;
 
 	ReferenceCountPtr<GameManager> gamemanager= new GameManager(game,turnmanager);
 	std::cerr<< "GameManager created" << std::endl;
@@ -75,7 +75,7 @@ int main(int argc, char** argv) {
 	serverProxy->start();
 
 
-if (false) {
+if (true) {
 	glutInit(&argc, argv);
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
 		return 0;
