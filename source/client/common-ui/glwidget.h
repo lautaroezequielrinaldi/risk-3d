@@ -9,6 +9,11 @@
 #include "color.h" // Para definicion de Color.
 
 /**
+ * Forward declaration de la clase GLMainLoop.
+ */
+class GLMainLoop;
+
+/**
  * Constante que define el tipo de estado del widget.
  */
 typedef enum GLWidgetStateType {
@@ -18,6 +23,9 @@ typedef enum GLWidgetStateType {
 } GLWidgetStateType;
 
 class GLWidget {
+	// Defino la clase GLMainLoop como friend.
+	friend class GLMainLoop;
+
 	/**
 	 * Atributos privados de la clase GLWidget.
 	 */
@@ -108,6 +116,28 @@ class GLWidget {
 		 * Postdibuja el widget en el viewport.
 		 */
 		virtual void postDrawWidget() = 0;
+		/**
+		 * Manejador del evento mouse presionado.
+		 */
+		virtual void handleMouseButtonDownEvent(
+			const SDL_MouseButtonEvent& event);
+		/**
+		 *  Manejador del evento mouse liberado.
+		 */
+		virtual void handleMouseButtonUpEvent(
+			const SDL_MouseButtonEvent& event);
+		/**
+		 * Manejador del evento movimiento de mouse.
+		 */
+		virtual void handleMouseMotionEvent(const SDL_MouseMotionEvent& event);
+		/**
+		 * Manejador del evento tecla presionada.
+		 */
+		virtual void handleKeyDownEvent(const SDL_KeyboardEvent& event);
+		/**
+		 * Manejador del evento tecla liberada.
+		 */
+		virtual void handleKeyUpEvent(const SDL_KeyboardEvent& event);
 
 	/**
 	 * Metodos publicos de la clase GLWidget.

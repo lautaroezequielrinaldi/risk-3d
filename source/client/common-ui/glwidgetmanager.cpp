@@ -1,12 +1,20 @@
 #include "glwidgetmanager.h"
 
-GLWidgetManager GLWidgetManager::singleton;
+std::list< ReferenceCountPtr<GL2DWidget> > GLWidgetManager::widgetList2D;
 
-GLWidgetManager::GLWidgetManager() {
-	// No realiza ninguna accion.
+void GLWidgetManager::registerWidget(const ReferenceCountPtr<GL2DWidget>& widget) {
+	GLWidgetManager::widgetList2D.push_back(widget);
 }
 
-GLWidgetManager& GLWidgetManager::getInstance() {
-	return GLWidgetManager::singleton;
+void GLWidgetManager::unregisterWidget(const ReferenceCountPtr<GL2DWidget>& widget) {
+	GLWidgetManager::widgetList2D.remove(widget);
+}
+
+GLWidgetManager::WidgetIterator2D GLWidgetManager::first2DWidget() {
+	return GLWidgetManager::widgetList2D.begin();
+}
+
+GLWidgetManager::WidgetIterator2D GLWidgetManager::last2DWidget() {
+	return GLWidgetManager::widgetList2D.end();
 }
 

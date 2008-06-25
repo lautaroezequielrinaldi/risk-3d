@@ -1,41 +1,54 @@
 #ifndef __GLWIDGETMANAGER_H__
 #define __GLWIDGETMANAGER_H__
 
+#include<list> // Para definicion de std::list.
+#include "gl2dwidget.h"
+#include "../../common/smartpointer/referencecountptr.h"
+
 class GLWidgetManager {
+	/**
+	 * Atributos publicos de la clase GLWidgetManager.
+	 */
+	public:
+		/**
+		 * Define el tipo de iterador para widgets 2D.
+		 */
+		typedef std::list< ReferenceCountPtr<GL2DWidget> >::iterator WidgetIterator2D;
+
 	/**
 	 * Atributos privados de la clase GLWidgetManager.
 	 */
 	private:
 		/**
-		 * Almacena la instancia singleton de GLWidgetManager.
+		 * Almacena la lista de widgets 3d reigstrados.
+		 * static std::list< ReferenceCountPtr<GL3DWidget> > 3dwidgetList;
 		 */
-		static GLWidgetManager singleton;
-
-	/**
-	 * Metodos privados de la clase GLWidgetManager.
-	 */
-	private:
 		/**
-		 * Constructor de la clase GLWidgetManager.
+		 * Almacena la lista de widgets 2d registrados.
 		 */
-		GLWidgetManager();
-		/**
-		 * Constructor copia de la clase GLWidgetManager.
-		 */
-		GLWidgetManager(const GLWidgetManager& otherInstance);
-		/**
-		 * Operador de asignacion de la clase GLWidgetManager.
-		 */
-		GLWidgetManager& operator=(const GLWidgetManager& otherInstance);
-
+		static std::list< ReferenceCountPtr<GL2DWidget> > widgetList2D;
+	
 	/**
 	 * Metodos publicos de la clase GLWidgetManager.
 	 */
 	public:
 		/**
-		 * Obtiene la instancia singleton de GLWidgetManager.
+		 * Registro un widget 2D.
 		 */
-		static GLWidgetManager& getInstance();
+		static void registerWidget(const ReferenceCountPtr<GL2DWidget>& widget);
+		/**
+		 * Desregistro un widget 2D.
+		 */
+		static void unregisterWidget(const ReferenceCountPtr<GL2DWidget>& widget);
+		/**
+		 * Obtiene un iterador al primer widget 2D.
+		 */
+		static WidgetIterator2D first2DWidget();
+		/**
+		 * Obtiene un iterador al ultimo widget 2D.
+		 */
+		static WidgetIterator2D last2DWidget();
+
 };
 
 #endif /** __GLWIDGETMANAGER_H__ */

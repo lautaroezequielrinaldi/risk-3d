@@ -63,6 +63,10 @@ class Dimension {
 		 * Establece el alto.
 		 */
 		void setHeight(const int& height);
+		/**
+		 * Verifica si contiene un punto x,y.
+		 */
+		bool contains(const int& x, const int& y); 
 };
 
 #endif /** __DIMENSION_H__ */

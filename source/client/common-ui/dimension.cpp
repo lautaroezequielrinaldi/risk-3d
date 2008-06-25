@@ -40,3 +40,12 @@ void Dimension::setHeight(const int& height) {
 	this->height = height;
 }
 
+bool Dimension::contains(const int& posx, const int& posy) {
+	if ( (posx >= this->x) && ( posx <= this->x + this->width)
+		&& (posy >= this->y) && (posy <= this->y + this->height)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
