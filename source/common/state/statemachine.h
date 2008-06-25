@@ -9,16 +9,6 @@ class GameManager;
 #include "../model/player.h"
 #include "../smartpointer/referencecountptr.h"
 
-#include "attacking.h"
-#include "defending.h"
-#include "moving.h"
-#include "occupying.h"
-#include "populating.h"
-#include "simplepopulating.h"
-#include "waitingfirstplayer.h"
-#include "waitingmapselection.h"
-#include "waitingplayer.h"
-#include "waiting.h"
 /**
  *
  * 
@@ -35,7 +25,7 @@ class StateMachine {
 		/**
 		 * Destructor de la clase
 		 */
-		~StateMachine();
+		virtual ~StateMachine();
 
 		/**
 		* Metodo cuyo proposito es obtener un estado a partir de su nombre.
@@ -53,11 +43,11 @@ class StateMachine {
 		void setState(std::string statename);
 	
 		
-	private:
-		
+	
+	protected:	
 		
 		std::map <std::string, ReferenceCountPtr<State> > states;
-		
+	private:
 		ReferenceCountPtr<State> currentState;
 	
 };

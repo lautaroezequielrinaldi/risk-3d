@@ -5,6 +5,7 @@
 #include "../../common/model/game.h"
 #include "../../common/model/turnmanager.h"
 #include "../../common/serverproxy.h"
+#include "../../common/state/clientstatemachine.h"
 
 #include <iostream>
 
@@ -43,7 +44,7 @@ int main(int argc, char** argv) {
 	ReferenceCountPtr<GameManager> gamemanager= new GameManager(game,turnmanager);
 	std::cerr<< "GameManager created" << std::endl;
 
-	ReferenceCountPtr<StateMachine> stateMachine = new StateMachine(gamemanager);
+	ReferenceCountPtr<StateMachine> stateMachine = new ClientStateMachine(gamemanager);
 	std::cerr<< "StateMachine created" << std::endl;
 
 	stateMachine->setState("waiting");
