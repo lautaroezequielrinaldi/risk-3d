@@ -207,6 +207,9 @@ void  Move::execute(ReferenceCountPtr<State>& state){
 	
 	
 }
+std::string Move::getName() {
+	return "move";
+}
 
 std::string  Move::getCountryDestination(){
 	return this->paisDestino;

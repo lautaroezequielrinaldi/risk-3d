@@ -59,8 +59,8 @@ class Map : public Command
 		 * Metodo cuyo proposito es ejecutar la accion que realice el comando.
 		 */
 		virtual void execute(ReferenceCountPtr<State>& state);
-		
 
+		virtual std::string getName();
 		
 		
 };

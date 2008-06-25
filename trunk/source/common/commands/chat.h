@@ -24,7 +24,7 @@ class Chat: public Command {
 		 */
 		bool validate(ReferenceCountPtr<GameManager>& gameManager);
 	virtual void execute(ReferenceCountPtr<State>& state);
-
+		std::string getName() = 0;
 };
 
 #endif /* __CHAT_H__*/

@@ -74,6 +74,7 @@ class Move : public Command
 		 */
 		int getArmyCount();
 
+		virtual std::string getName();
 
 		
 };

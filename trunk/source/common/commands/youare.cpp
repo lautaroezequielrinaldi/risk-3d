@@ -14,7 +14,7 @@ YouAre::YouAre(std::string xml):Command (){
 }
 
 YouAre::YouAre(){
-
+	
 }
 
 YouAre::~YouAre()
@@ -42,6 +42,9 @@ void YouAre::execute(ReferenceCountPtr<State>& state){
 	
 	state->youAre(*this);
 	
+}
+std::string YouAre::getName() {
+	return "youAre";
 }
 
 

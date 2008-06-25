@@ -55,7 +55,7 @@ class ReadyToPlay : public Command
 		 */
 		void execute(ReferenceCountPtr<State>& state);
 		
-		
+		virtual std::string getName();
 };
 
 #endif /*READYTOPLAY_H_*/

@@ -43,6 +43,9 @@ void TurnToOccupy::execute(ReferenceCountPtr<State>& state){
 	state->turnToOccupy(*this);
 	
 }
+std::string TurnToOccupy::getName() {
+	return "turnToOccupy";
+}
 
 
 

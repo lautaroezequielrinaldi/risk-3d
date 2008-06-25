@@ -26,3 +26,6 @@ void NoMore::execute(ReferenceCountPtr<State>& state){
 	state->noMore(*this);
 	
 }
+std::string NoMore::getName() {
+	return "noMore";
+}

@@ -58,7 +58,7 @@ class Win : public Command
 		 */
 		virtual void execute(ReferenceCountPtr<State>& state);
 		
-
+		virtual std::string getName();
 		
 		
 };

@@ -44,5 +44,8 @@ void Kill::execute(ReferenceCountPtr<State>& state){
 	
 }
 
+std::string Kill::getName() {
+	return "kill";
+}
 
 

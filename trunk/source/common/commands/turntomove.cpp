@@ -43,6 +43,9 @@ void TurnToMove::execute(ReferenceCountPtr<State>& state){
 	state->turnToMove(*this);
 	
 }
+std::string TurnToMove::getName() {
+	return "turnToMove";
+}
 
 
 

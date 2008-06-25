@@ -53,7 +53,7 @@ class SelectMap : public Command
 		 */
 		void execute(ReferenceCountPtr<State>& state);
 		
-		
+		virtual std::string getName();
 };
 
 #endif /*SELECTMAP_H_*/

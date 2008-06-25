@@ -44,5 +44,8 @@ void Lose::execute(ReferenceCountPtr<State>& state){
 	
 }
 
+std::string Lose::getName() {
+	return "lose";
+}
 
 

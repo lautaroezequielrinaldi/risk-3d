@@ -59,7 +59,7 @@ class Lose : public Command
 		 */
 		virtual void execute(ReferenceCountPtr<State>& state);
 		
-
+		virtual std::string getName();
 		
 		
 };

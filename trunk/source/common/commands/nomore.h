@@ -27,6 +27,9 @@ class NoMore: public Command {
 		 */
 		bool validate(ReferenceCountPtr<GameManager>& gameManager);
 		virtual void execute(ReferenceCountPtr<State>& state);
+
+		virtual std::string getName();
+
 };
 
 #endif /* __NOMORE_H__*/

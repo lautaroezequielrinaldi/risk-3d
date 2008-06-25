@@ -64,7 +64,7 @@ class Attack : public Command
 		 */
 		virtual void execute(ReferenceCountPtr<State>& state);
 		
-		
+		virtual std::string getName();
 		
 		std::string getAttackerLand();
 		

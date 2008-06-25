@@ -59,7 +59,7 @@ class TurnToOccupy : public Command
 		 */
 		virtual void execute(ReferenceCountPtr<State>& state);
 		
-
+		virtual std::string getName();
 		
 		
 };

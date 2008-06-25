@@ -44,5 +44,8 @@ void Win::execute(ReferenceCountPtr<State>& state){
 	
 }
 
+std::string Win::getName() {
+	return "win";
+}
 
 

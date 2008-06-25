@@ -2,6 +2,7 @@
 #include <iostream>
 #include "../model/gamemanager.h"
 #include "../commands/youare.h"
+#include "../commands/selectmap.h"
 
 WaitingFirstPlayer::WaitingFirstPlayer(ReferenceCountPtr<GameManager>&gameManager, std::string name):State(gameManager,name)
 {
@@ -25,9 +26,11 @@ bool WaitingFirstPlayer::joinGame(JoinGame & command){
 	this->gameManager->notify(youare);
 
 	this->gameManager->getTurnManager()->changeTurn(1);
-	// marcar jugador como actual
-	// enviar un comando SelectMap con los mapas hallados en la carpeta apropiada
-	// stateMachine->setState("waitingMapSelection");
+	
+	SelectMap * selectMap = new SelectMap();
+	this->gameManager->notify(selectMap);
+
+	gameManager->getStateMachine()->setState("waitingMapSelection");
 	return false;
 }
 

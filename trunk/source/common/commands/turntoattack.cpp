@@ -43,6 +43,9 @@ void TurnToAttack::execute(ReferenceCountPtr<State>& state){
 	state->turnToAttack(*this);
 	
 }
+std::string TurnToAttack::getName() {
+	return "turnToAttack";
+}
 
 
 

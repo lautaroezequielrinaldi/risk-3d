@@ -75,5 +75,8 @@ void JoinGame::execute(ReferenceCountPtr<State>& state){
 	
 }
 
+std::string JoinGame::getName() {
+	return "joinGame";
+}
 
 

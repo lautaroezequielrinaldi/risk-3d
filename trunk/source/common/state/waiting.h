@@ -13,7 +13,6 @@ class Waiting : public State
 	virtual ~Waiting();
 	
 	bool attack(Attack & command);
-	bool defend(Defend & command);
 	bool youAre(YouAre & command);
 	bool turnToAttack(TurnToAttack & command);
 

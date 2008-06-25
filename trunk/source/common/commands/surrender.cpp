@@ -25,3 +25,6 @@ void Surrender::execute(ReferenceCountPtr<State>& state){
 	state->surrender(*this);
 	
 }
+std::string Surrender::getName() {
+	return "surrender";
+}
