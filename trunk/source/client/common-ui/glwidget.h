@@ -1,39 +1,39 @@
 #ifndef __GLWIDGET_H__
-#define __GLWIDGET_H__
+#define __GLWDIGET_H__
 
+#include<map> // Para definicion de std::map
 #include<GL/gl.h> // Para funciones de OpenGL
 #include<GL/glu.h>// Para funciones de OpenGLU
 #include<SDL/SDL.h> // Para funciones de SDL
-#include "rectangle.h" // Para definicion de Rectangle
-#include "color.h" // Para definicion de Color
+#include "dimension.h" // Para definicion de Dimension.
+#include "color.h" // Para definicion de Color.
+
 /**
- * Clase abstracta base para todos los widgets GL SDL del cliente 3D.
+ * Constante que define el tipo de estado del widget.
  */
+typedef enum GLWidgetStateType {
+	GLWIDGET_ACTIVE,
+	GLWIDGET_INACTIVE,
+	GLWIDGET_FOCUS
+} GLWidgetStateType;
+
 class GLWidget {
 	/**
 	 * Atributos privados de la clase GLWidget.
 	 */
-	protected:
+	private:
 		/**
-		 * Almacena el rectangulo en pantalla que representa el widget.
+		 * Almacena el contador de IDs de widget.
 		 */
-		Rectangle bounds;
+		static long idCounter;
 		/**
-		 * Almacena el color de sombra del widget.
+		 * Almacena el ID del widget.
 		 */
-		Color shadowColor;
+		long id;
 		/**
-		 * Almacena el color de fondo del widget.
+		 * Almacena la dimension del widget.
 		 */
-		Color backgroundColor;
-		/**
-		 * Almacena el color de frente del widget.
-		 */
-		Color foregroundColor;
-		/**
-		 * Almacena el color de hoover del widget.
-		 */
-		Color hooverColor;
+		Dimension dimension;
 		/**
 		 * Almacena el estado visible del widget.
 		 */
@@ -43,39 +43,72 @@ class GLWidget {
 		 */
 		bool enabled;
 		/**
-		 * Almacena el estado hoover del widget.
+		 * Almacena el tipo de estado del widget.
 		 */
-		bool hoover;
+		GLWidgetStateType state;
+		/**
+		 * Almacena el mapa de colores background para el widget.
+		 */
+		std::map<GLWidgetStateType, Color> backgroundColorMap;
+		/**
+		 * Almacena el mapa de colores foreground para el widget.
+		 */
+		std::map<GLWidgetStateType, Color> foregroundColorMap;
 
 	/**
-	 * Metodos protegidos de la clse GLWidget.
+	 * Metodos privados de la clase GLWidget.
+	 */
+	private:
+		/**
+		 * Incrementa el contador de IDs de widget.
+		 */
+		static void incrementIdCounter();
+		/**
+		 * Obtiene el contador de IDs de widget.
+		 */
+		static long getIdCounter();
+		/**
+		 * Constructor copia de la clase GLWidget.
+		 */
+		GLWidget(const GLWidget& otherInstance);
+		/**
+		 * Operador de asignacion de la clase GLWidget.
+		 */
+		GLWidget& operator=(const GLWidget& otherInstance);
+
+	/**
+	 * Metodos protegidos de la clase GLWidget.
 	 */
 	protected:
 		/**
-		 * Se invoca antes de dibujar el componente.
+		 * Obtiene el id del widget.
 		 */
-		virtual void preDrawWidget();
+		long getId();
 		/**
-		 * Se invoca al dibujar el componente.
+		 * Establece el id del widget.
+		 */
+		void setId(const long& id);
+		/**
+		 * Obtiene el estado del widget.
+		 */
+		GLWidgetStateType getState();
+		/**
+		 * Establece el estado del widget.
+		 */
+		void setState(const GLWidgetStateType& type);
+		/**
+		 * Predibuja el widget en el viewport.
+		 */
+		virtual void preDrawWidget() = 0;
+		/**
+		 * Dibuja el widget en el viewport.
 		 */
 		virtual void drawWidget() = 0;
 		/**
-		 * Se invoca despues de dibujar el componente.
+		 * Postdibuja el widget en el viewport.
 		 */
-		virtual void postDrawWidget();
-		/**
-		 * Vuelve idle al componente.
-		 */
-		virtual void becomeIdle();
-		/**
-		 * Dibuja un quadrangle.
-		 */
-		void drawQuadrangle(GLenum polygonType, GLint left, GLint right,
-			GLint bottom, GLint top, Color color);
-		/**
-		 * Verifica si un punto determinado forma parte del widget.
-		 */
-		bool contains(const int& x, const int& y);
+		virtual void postDrawWidget() = 0;
+
 	/**
 	 * Metodos publicos de la clase GLWidget.
 	 */
@@ -83,94 +116,75 @@ class GLWidget {
 		/**
 		 * Constructor de la clase GLWidget.
 		 */
-		GLWidget(const int& x = 0, const int& y = 0, const int& width = 0,
-			const int& height = 0, const bool& visible = true,
-			const bool& enabled = true, const bool& hoover = false);
+        GLWidget();
 		/**
-		 * Obtiene los limites del componente.
+		 * Constructor de la clase GLWidget.
 		 */
-		Rectangle getBounds();
+		GLWidget(const Dimension& dimension, const bool& visible = true, const bool& enabled = true);
 		/**
-		 * Establece los limites del componente.
+		 * Obtiene la dimension del widget.
 		 */
-		void setBounds(const Rectangle& rectangle);
+		Dimension& getDimension();
 		/**
-		 * Obtiene el color de sombra del componente.
+		 * Establece la dimension del widget.
 		 */
-		Color getShadowColor();
+		void setDimension(const Dimension& dimension);
 		/**
-		 * Establece el color de sombra del componente.
+		 * Establece la coordenada x del widget.
 		 */
-		void setShadowColor(const Color& shadowColor);
-        /**
-         * Obtiene el color de fondo del componente.
-         */
-        Color getBackgroundColor();
-        /**
-		 * Establece el color de fondo del componente.
-		 */
-        void setBackgroundColor(const Color& backgroundColor);
-        /**
-		 * Obtiene el color de frente del componente.
-		 */
-        Color getForegroundColor();
-        /**
-		 * Establece el color de fondo del componente.
-		 */
-        void setForegroundColor(const Color& foregroundColor);
-        /**
-		 * Obtiene el color de hoover del componente.
-		 */
-        Color getHooverColor();
-        /**
-		 * Establece el color de hoover del componente.
-		 */
-        void setHooverColor(const Color& hooverColor);
+		void setX(const int& x);
 		/**
-		 * Obtiene el estado visible del componente.
+		 * Establece la coordenada Y del widget.
+		 */
+		void setY(const int& y);
+		/**
+		 * Establece el ancho del widget.
+		 */
+		void setWidth(const int& width);
+		/**
+		 * Establece el alto del widget.
+		 */
+		void setHeight(const int& height);
+		/**
+		 * Obtiene en valor visible del widget.
 		 */
 		bool getVisible();
 		/**
-		 * Establece el estado visible del componente.
+		 * Establece el valor visible del widget.
 		 */
 		void setVisible(const bool& visible);
 		/**
-		 * Obtiene el estado habilitado del componente.
+		 * Obtiene el valor habilitado del widget.
 		 */
 		bool getEnabled();
 		/**
-		 * Establece el estado habilitado del componente.
+		 * Establece el valor habilitado del widget.
 		 */
 		void setEnabled(const bool& enabled);
-        /**
-		 * Obtiene el estado hoover del componente.
-		 */
-        bool getHoover();
-        /**
-		 * Establece el estado hoover del componente.
-		 */
-        void setHoover(const bool& hoover);
 		/**
-		 * Dibuja el componente.
+		 * Obtiene el color de background para un estado determinado.
+		 */
+		Color getBackgroundColor(const GLWidgetStateType& type);
+		/**
+		 * Establece el color de background para un estado determinado.
+		 */
+		void setBackgroundColor(const GLWidgetStateType& type, const Color& color);
+        /**
+		 * Obtiene el color de foreground para un estado determinado.
+		 */
+        Color getForegroundColor(const GLWidgetStateType& type);
+        /**
+		 * Establece el color de foreground para un estado determinado.
+		 */
+        void setForegroundColor(const GLWidgetStateType& type, const Color& color);
+		/**
+		 * Dibuja el widget.
 		 */
 		void draw();
 		/**
-		 * Procesa un evento de boton de mouse en caso de que sea para el.
-		 */
-		virtual void processMouseButton(const SDL_MouseButtonEvent& event) = 0;
-		/**
-		 * Procesa un evento de movimiento de mouse en caso de que sea para el.
-		 */
-		virtual void  processMouseMotion(
-			const SDL_MouseMotionEvent& event) = 0;
-		/**
-		 * Procesa un evento de teclado en caso de que sea para el.
-		 */
-		virtual void processKeyboard(const SDL_KeyboardEvent& event) = 0;
-		/**
 		 * Destructor virtual de la clase GLWidget.
 		 */
-		virtual ~GLWidget();
+		virtual ~GLWidget(); 
 };
 
 #endif /** __GLWIDGET_H__ */

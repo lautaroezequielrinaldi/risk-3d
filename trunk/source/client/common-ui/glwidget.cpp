@@ -1,57 +1,95 @@
 #include "glwidget.h"
 
-GLWidget::GLWidget(const int& x, const int& y, const int& width,
-	const int& height, const bool& visible, const bool& enabled,
-	const bool& hoover):
-	bounds(x, y, width, height),
-	shadowColor(1.0f, 0.0f, 0.0f),
-	backgroundColor(0.5f, 0.5f, 0.5f),
-	foregroundColor(1.0f, 1.0f, 1.0f),
-	hooverColor(1.0f, 1.0f, 1.0f),
-	visible(visible),
-	enabled(enabled),
-	hoover(hoover) {
-	// No realiza ninguna accion.
+long GLWidget::idCounter = 0;
+
+void GLWidget::incrementIdCounter() {
+	++GLWidget::idCounter;
 }
 
-Rectangle GLWidget::getBounds() {
-	return this->bounds;
+long GLWidget::getIdCounter() {
+	return GLWidget::idCounter;
 }
 
-void GLWidget::setBounds(const Rectangle& bounds) {
-	this->bounds = bounds;
+long GLWidget::getId() {
+	return this->id;
 }
 
-Color GLWidget::getShadowColor() {
-	return this->shadowColor;
+void GLWidget::setId(const long& id) {
+	this->id = id;
 }
 
-void GLWidget::setShadowColor(const Color& color) {
-	this->shadowColor = color;
+GLWidgetStateType GLWidget::getState() {
+	return this->state;
 }
 
-Color GLWidget::getBackgroundColor() {
-    return this->backgroundColor;
+void GLWidget::setState(const GLWidgetStateType& type) {
+	this->state = type;
 }
 
-void GLWidget::setBackgroundColor(const Color& color) {
-    this->backgroundColor = color;
+GLWidget::GLWidget() {
+	// Incrementa el contador de widget.
+	GLWidget::incrementIdCounter();
+	// Establece el id de widget.
+	this->setId(GLWidget::getIdCounter());
+	// Establece el estado visible del widget.
+	this->setVisible(true);
+	// Establece el estado habilitado del widget.
+	this->setEnabled(true);
+	// Establece el estado del widget como inactivo.
+	this->setState(GLWIDGET_INACTIVE);
+	// Llena el mapa de color background del widget.
+	this->backgroundColorMap[GLWIDGET_ACTIVE] = Color::GRAY;
+	this->backgroundColorMap[GLWIDGET_INACTIVE] = Color::GRAY;
+	this->backgroundColorMap[GLWIDGET_FOCUS] = Color::GRAY;
+	// Llena el mapa de color foreground del widget.
+	this->foregroundColorMap[GLWIDGET_ACTIVE] = Color::BLACK;
+	this->foregroundColorMap[GLWIDGET_INACTIVE] = Color::WHITE;
+	this->foregroundColorMap[GLWIDGET_FOCUS] = Color::BLACK;
 }
 
-Color GLWidget::getForegroundColor() {
-    return this->foregroundColor;
+GLWidget::GLWidget(const Dimension& dimension, const bool& visible, const bool& enabled) {
+    // Incrementa el contador de widget.
+    GLWidget::incrementIdCounter();
+    // Establece el id de widget.
+    this->setId(GLWidget::getIdCounter());
+    // Establece el estado visible del widget.
+    this->setVisible(visible);
+    // Establece el estado habilitado del widget.
+    this->setEnabled(enabled);
+    // Establece el estado del widget como inactivo.
+    this->setState(GLWIDGET_INACTIVE);
+    // Llena el mapa de color background del widget.
+    this->backgroundColorMap[GLWIDGET_ACTIVE] = Color::GRAY;
+    this->backgroundColorMap[GLWIDGET_INACTIVE] = Color::GRAY;
+    this->backgroundColorMap[GLWIDGET_FOCUS] = Color::GRAY;
+    // Llena el mapa de color foreground del widget.
+    this->foregroundColorMap[GLWIDGET_ACTIVE] = Color::BLACK;
+    this->foregroundColorMap[GLWIDGET_INACTIVE] = Color::WHITE;
+    this->foregroundColorMap[GLWIDGET_FOCUS] = Color::BLACK;
 }
 
-void GLWidget::setForegroundColor(const Color& color) {
-    this->foregroundColor = color;
+Dimension& GLWidget::getDimension() {
+	return this->dimension;
 }
 
-Color GLWidget::getHooverColor() {
-    return this->hooverColor;
+void GLWidget::setDimension(const Dimension& dimension) {
+	this->dimension = dimension;
 }
 
-void GLWidget::setHooverColor(const Color& color) {
-    this->hooverColor = color;
+void GLWidget::setX(const int& x) {
+	this->dimension.setX(x);
+}
+
+void GLWidget::setY(const int& y) {
+    this->dimension.setY(y);
+}
+
+void GLWidget::setWidth(const int& width) {
+    this->dimension.setWidth(width);
+}
+
+void GLWidget::setHeight(const int& height) {
+    this->dimension.setHeight(height);
 }
 
 bool GLWidget::getVisible() {
@@ -70,66 +108,26 @@ void GLWidget::setEnabled(const bool& enabled) {
 	this->enabled = enabled;
 }
 
-bool GLWidget::getHoover() {
-    return this->hoover;
+Color GLWidget::getBackgroundColor(const GLWidgetStateType& type) {
+	return backgroundColorMap[type];
 }
 
-void GLWidget::setHoover(const bool& hoover) {
-    this->hoover = hoover;
+void GLWidget::setBackgroundColor(const GLWidgetStateType& type, const Color& color) {
+	this->backgroundColorMap[type] = color;
 }
 
-void GLWidget::preDrawWidget() {
-	// Guarda en el stack la matriz actual.
-	glPushMatrix();
-	// Guarda en el stack los atributos actuales.
-	glPushAttrib(GL_ALL_ATTRIB_BITS);
-	// Deshabilita DEPTH.
-	glDisable(GL_DEPTH_TEST);
-	// Carga la matriz de proyeccion.
-	glMatrixMode(GL_PROJECTION);
-	// Carga la identidad.
-	glLoadIdentity();
-	// Establece coordenadas 2D.
-	glOrtho(0, 1024, 768, 0, 0, 1);
-	// Carga la matriz model view.
-	glMatrixMode(GL_MODELVIEW);
+Color GLWidget::getForegroundColor(const GLWidgetStateType& type) {
+    return foregroundColorMap[type];
 }
 
-void GLWidget::postDrawWidget() {
-	// Carga del stack los atributos.
-	glPopAttrib();
-	// Carga del sack la matriz actual.
-	glPopMatrix();
-}
-
-void GLWidget::becomeIdle() {
-	SDL_Delay(100);
-}
-
-void GLWidget::drawQuadrangle(GLenum polygonType, GLint left, GLint right,
-	GLint bottom, GLint top, Color color) {
-	glBegin(polygonType);
-        glColor3f(color.red, color.green, color.blue);
-		glVertex2i(left, bottom);
-		glColor3f(color.red, color.green, color.blue);	
-		glVertex2i(left, top);
-        glColor3f(color.red, color.green, color.blue);
-		glVertex2i(right, top);
-        glColor3f(color.red, color.green, color.blue);
-		glVertex2i(right, bottom);
-	glEnd();
-}
-
-bool GLWidget::contains(const int& x, const int& y) {
-	return this->bounds.contains(x, y);
+void GLWidget::setForegroundColor(const GLWidgetStateType& type, const Color& color) {
+    this->foregroundColorMap[type] = color;
 }
 
 void GLWidget::draw() {
-	if (this->visible) {
-		this->preDrawWidget();
-		this->drawWidget();
-		this->postDrawWidget();
-	}
+	this->preDrawWidget();
+	this->drawWidget();
+	this->postDrawWidget();
 }
 
 GLWidget::~GLWidget() {
