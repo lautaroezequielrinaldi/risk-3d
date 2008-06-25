@@ -30,18 +30,18 @@ class GameManager {
          */
         ReferenceCountPtr<TurnManager> turnManager;
 		
-		/**
-		* Almacena el estado del juego
-		*/
-		ReferenceCountPtr<StateMachine> stateMachine;
-				
-		/**
-		* Almacena un ataque.
-		* Inicialmente apunta a null, luego se le seteara el ataque.
-		* No puede ser un ReferenceCountPtr ya que quien lo setea , lo hace con un *attack.
-		* No puede ser una referencia al ataque ya que el ataque no existe al crearse el gameManager. 
-		*/
-		Attack *attack;
+	/**
+	* Almacena el estado del juego
+	*/
+	ReferenceCountPtr<StateMachine> stateMachine;
+			
+	/**
+	* Almacena un ataque.
+	* Inicialmente apunta a null, luego se le seteara el ataque.
+	* No puede ser un ReferenceCountPtr ya que quien lo setea , lo hace con un *attack.
+	* No puede ser una referencia al ataque ya que el ataque no existe al crearse el gameManager. 
+	*/
+	Attack *attack;
 			
 		
 	ReferenceCountPtr<ServerProxy> serverProxy;
@@ -69,7 +69,7 @@ class GameManager {
 		~GameManager();
 
 
-		void prepare(ReferenceCountPtr<GameManager>& gameManager);
+		void setStateMachine(ReferenceCountPtr<StateMachine>& stateMachine);
 		/**
 		 *
 		 *

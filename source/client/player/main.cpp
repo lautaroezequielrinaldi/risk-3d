@@ -43,6 +43,16 @@ int main(int argc, char** argv) {
 	ReferenceCountPtr<GameManager> gamemanager= new GameManager(game,turnmanager);
 	std::cerr<< "GameManager created" << std::endl;
 
+	ReferenceCountPtr<StateMachine> stateMachine = new StateMachine(gamemanager);
+	std::cerr<< "StateMachine created" << std::endl;
+
+	stateMachine->setState("waiting");
+	std::cerr<< "StateMachine initialized" << std::endl;
+
+	gamemanager->setStateMachine(stateMachine);
+	std::cerr<< "StateMachine asigned" << std::endl;
+
+
 	Socket * socket = new Socket("localhost", 2000);
 
 	ReferenceCountPtr<ServerProxy> serverProxy= new ServerProxy(socket, gamemanager);
