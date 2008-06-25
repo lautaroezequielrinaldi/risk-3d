@@ -17,7 +17,7 @@ Attacking::~Attacking()
 
 
 bool Attacking::attack(Attack & command){
-			
+	std::cerr << "Evento Attacking::attack" << std::endl;			
 	bool accionValida = command.validate(this->gameManager);
 	
 	//si es valido

@@ -14,7 +14,7 @@ WaitingFirstPlayer::~WaitingFirstPlayer()
 
 
 bool WaitingFirstPlayer::joinGame(JoinGame & command){
-	std::cerr << "WaitingFirstPlayer::joinGame" << std::endl;
+	std::cerr << "Evento WaitingFirstPlayer::joinGame" << std::endl;
 
 	// aceptarlo
 

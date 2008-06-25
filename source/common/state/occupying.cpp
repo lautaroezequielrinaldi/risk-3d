@@ -18,7 +18,7 @@ Occupying::~Occupying()
 }
 
 bool Occupying::populate(Populate & command){
-
+	std::cerr << "Evento Occupying::populate" << std::endl;
 	bool accionValida = command.validateOccupy(this->gameManager);
 	
 	if ( accionValida ){
