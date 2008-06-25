@@ -15,9 +15,9 @@ turnManager (turnManager){
 	attack = NULL;
 }
 
-void GameManager::prepare(ReferenceCountPtr<GameManager>& gameManager) {
-	stateMachine = new StateMachine(gameManager);
-	stateMachine->setState("waitingFirstPlayer");
+void GameManager::setStateMachine(ReferenceCountPtr<StateMachine>& stateMachine) {
+	this->stateMachine = stateMachine;
+	
 }
 
 GameManager::~GameManager()

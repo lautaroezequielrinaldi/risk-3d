@@ -5,6 +5,7 @@
 #include "../common/model/turnmanager.h"
 #include "../common/smartpointer/referencecountptr.h"
 #include "../common/playerproxy.h"
+#include "../common/state/statemachine.h"
 
 #include <iostream>
 //#include <vector>
@@ -23,8 +24,14 @@ int main (int argc, char** argv) {
 	ReferenceCountPtr<GameManager> gamemanager= new GameManager(game,turnmanager);
 	std::cerr<< "GameManager created" << std::endl;
 
-	gamemanager->prepare(gamemanager);
-	std::cerr<< "GameManager prepared" << std::endl;
+	ReferenceCountPtr<StateMachine> stateMachine = new StateMachine(gamemanager);
+	std::cerr<< "StateMachine created" << std::endl;
+
+	stateMachine->setState("waitingFirstPlayer");
+	std::cerr<< "StateMachine initialized" << std::endl;
+
+	gamemanager->setStateMachine(stateMachine);
+	std::cerr<< "StateMachine asigned" << std::endl;
 
 	// deshardcodear 2000
 	Socket socket(2000,4);
