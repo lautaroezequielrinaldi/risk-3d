@@ -16,7 +16,7 @@ void GLButton::drawWidget() {
 			GLDrawHelper::drawFillRectangle(dimension.getX(), dimension.getWidth(), dimension.getY(),
 				dimension.getHeight(), background);
 			// Dibuja el texto del boton.
-			GLDrawHelper::drawText(this->getText(), dimension.getX() + 10, dimension.getY() + 10, foreground);
+			GLDrawHelper::drawCenteredText(this->getText(), dimension, foreground);
 			// Corta la secuencia.
 			break;
 		}
@@ -30,7 +30,7 @@ void GLButton::drawWidget() {
             GLDrawHelper::drawFillRectangle(dimension.getX(), dimension.getWidth(), dimension.getY(),
                 dimension.getHeight(), background);
 			// Dibuja el texto del boton.
-            GLDrawHelper::drawText(this->getText(), dimension.getX() + 10, dimension.getY() + 10, foreground);
+            GLDrawHelper::drawCenteredText(this->getText(), dimension, foreground);
 			// Corta la secuencia.
 			break;
 		}
@@ -44,7 +44,7 @@ void GLButton::drawWidget() {
             GLDrawHelper::drawFillRectangle(dimension.getX(), dimension.getWidth(), dimension.getY(),
                 dimension.getHeight(), background);
 			// Dibuja el texto del boton.
-            GLDrawHelper::drawText(this->getText(), dimension.getX() + 10, dimension.getY() + 10, foreground);
+            GLDrawHelper::drawCenteredText(this->getText(), dimension, foreground);
 			// Corta la secuencia.
 			break;
 		}
