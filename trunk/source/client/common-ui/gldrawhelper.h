@@ -9,7 +9,7 @@
 #include "dimension.h" // Para definicion de Dimension.
 
 class GLDrawHelper {
-	/**
+	/**o
 	 * Metodos publicos de la clase GLDrawHelper.
 	 */
 	public:
@@ -21,8 +21,16 @@ class GLDrawHelper {
 		/**
 		 * Dibuja un rectangulo lleno con un color determinado.
 		 */
-		static void drawFillRectangle(const GLint& left, const GLint& right, const GLint& top, const GLint& bottom,
+		static void drawFilledRectangle(const GLint& left, const GLint& right, const GLint& top, const GLint& bottom,
 			Color& color);
+		/**
+		 * Calcula el ancho de un texto determinado.
+		 */
+		static int calculateTextWidth(const std::string& text, const int& padding = 0);
+		/**
+		 * Calcula el alto de un texto determinado.
+		 */
+		static int calculateTextHeight(const std::string& text, const int& padding = 0);
 		/**
 		 * Dibuja un texto centrado a partir de una dimension.
 		 */

@@ -33,11 +33,6 @@ GL2DWidget::GL2DWidget(): GLWidget() {
 	// No realiza ninguna accion.
 }
 
-GL2DWidget::GL2DWidget(const Dimension& dimension, const bool& visible, const bool& enabled):
-	GLWidget(dimension, visible, enabled) {
-	// No realiza ninguna accion.
-}
-
 GL2DWidget::~GL2DWidget() {
 	// No realiza ninguna accion.
 }

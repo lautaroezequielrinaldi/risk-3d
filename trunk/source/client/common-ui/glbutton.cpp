@@ -13,7 +13,7 @@ void GLButton::drawWidget() {
 			// Obtengo el color foreground para widget activo.
 			Color foreground = this->getForegroundColor(GLWIDGET_ACTIVE);
 			// Dibuja el fondo del boton.
-			GLDrawHelper::drawFillRectangle(dimension.getX(), dimension.getWidth(), dimension.getY(),
+			GLDrawHelper::drawFilledRectangle(dimension.getX(), dimension.getWidth(), dimension.getY(),
 				dimension.getHeight(), background);
 			// Dibuja el texto del boton.
 			GLDrawHelper::drawCenteredText(this->getText(), dimension, foreground);
@@ -27,7 +27,7 @@ void GLButton::drawWidget() {
             // Obtengo el color foreground para widget inactivo.
             Color foreground = this->getForegroundColor(GLWIDGET_INACTIVE);
 			// Dibuja el fondo del boton.
-            GLDrawHelper::drawFillRectangle(dimension.getX(), dimension.getWidth(), dimension.getY(),
+            GLDrawHelper::drawFilledRectangle(dimension.getX(), dimension.getWidth(), dimension.getY(),
                 dimension.getHeight(), background);
 			// Dibuja el texto del boton.
             GLDrawHelper::drawCenteredText(this->getText(), dimension, foreground);
@@ -41,7 +41,7 @@ void GLButton::drawWidget() {
             // Obtengo color foreground para widget focus.
             Color foreground = this->getForegroundColor(GLWIDGET_FOCUS);
 			// Dibuja el fondo del boton.
-            GLDrawHelper::drawFillRectangle(dimension.getX(), dimension.getWidth(), dimension.getY(),
+            GLDrawHelper::drawFilledRectangle(dimension.getX(), dimension.getWidth(), dimension.getY(),
                 dimension.getHeight(), background);
 			// Dibuja el texto del boton.
             GLDrawHelper::drawCenteredText(this->getText(), dimension, foreground);
@@ -53,15 +53,18 @@ void GLButton::drawWidget() {
 
 GLButton::GLButton(const std::string& text): GL2DWidget(), text(text) {
 	// No realiza ninguna accion.
-}
-
-GLButton::GLButton(const Dimension& dimension, const bool& visible, const bool& enabled, const std::string& text):
-	GL2DWidget(dimension, visible, enabled), text(text) {
-	// No realiza ninguna accion.
+	int widgetWidth = GLDrawHelper::calculateTextWidth(text, 5);
+	int widgetHeight = GLDrawHelper::calculateTextHeight(text, 5);
+	this->setWidth(widgetWidth);
+	this->setHeight(widgetHeight);
 }
 
 std::string GLButton::getText() {
 	return this->text;
+    int widgetWidth = GLDrawHelper::calculateTextWidth(text, 5);
+    int widgetHeight = GLDrawHelper::calculateTextHeight(text, 5);
+    this->setWidth(widgetWidth);
+    this->setHeight(widgetHeight);
 }
 
 void GLButton::setText(const std::string& text) {

@@ -32,11 +32,6 @@ class GLButton: public GL2DWidget {
 		 */
 		GLButton(const std::string& text);
 		/**
-		 * Constructor de la clase GLButton.
-		 */
-		GLButton(const Dimension& dimension, const bool& visble = true, const bool& enabled = true,
-				const std::string& text = "");
-		/**
 		 * Obtiene el texto del boton.
 		 */
 		std::string getText();
