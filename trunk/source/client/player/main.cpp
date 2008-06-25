@@ -10,9 +10,11 @@
 #include <iostream>
 
 #include<sstream>
-
-#include <SDL.h>
+#include <GL/glut.h>
+#include "../common-ui/glwidgetmanager.h"
+#include "../common-ui/glmainloop.h"
 #include "../common-ui/glbutton.h"
+#include "../../common/smartpointer/referencecountptr.h"
 
 int main(int argc, char** argv) {
 
@@ -74,32 +76,20 @@ int main(int argc, char** argv) {
 
 
 if (false) {
-	SDL_Surface* screen;
+	glutInit(&argc, argv);
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
 		return 0;
 	}
-	screen = SDL_SetVideoMode(1024, 768, 32, SDL_OPENGL);
-	GLButton button("Primer Boton!!!");
+	SDL_Surface* screen = SDL_SetVideoMode(1024, 768, 32, SDL_OPENGL);
+	
+	ReferenceCountPtr<GLButton> button( new GLButton("Primer Boton!!!"));
+	button->setX(10);
+	button->setY(10);
+	button->setWidth(300);
+	button->setWidth(70);
 
-	SDL_Event event;
-	bool running = true;
-	while(running) {
-		if (SDL_PollEvent(&event)) {
-			switch (event.type) {
-				case SDL_QUIT:
-					running = false;
-					break;
-				case SDL_MOUSEBUTTONDOWN:
-					break;
-					//button.processMouseButton(event.button);
-				case SDL_MOUSEBUTTONUP:
-					break;
-					//button.processMouseButton(event.button);
-			}
-			button.draw();
-			SDL_GL_SwapBuffers();
-		}
-	}
+	GLWidgetManager::registerWidget(button);
+	GLMainLoop::run();
 	SDL_FreeSurface(screen);
 }
 }
