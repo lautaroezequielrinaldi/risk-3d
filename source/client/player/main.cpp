@@ -85,7 +85,7 @@ if (false) {
 		return 0;
 	}
 	screen = SDL_SetVideoMode(1024, 768, 32, SDL_OPENGL);
-	GLButton button(10,10,110,110);
+	GLButton button("Primer Boton!!!");
 
 	SDL_Event event;
 	bool running = true;
@@ -94,10 +94,13 @@ if (false) {
 			switch (event.type) {
 				case SDL_QUIT:
 					running = false;
+					break;
 				case SDL_MOUSEBUTTONDOWN:
-					button.processMouseButton(event.button);
+					break;
+					//button.processMouseButton(event.button);
 				case SDL_MOUSEBUTTONUP:
-					button.processMouseButton(event.button);
+					break;
+					//button.processMouseButton(event.button);
 			}
 			button.draw();
 			SDL_GL_SwapBuffers();

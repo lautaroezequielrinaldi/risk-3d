@@ -1,32 +1,88 @@
 #ifndef __COLOR_H__
 #define __COLOR_H__
 
-/**
- * Defino la estructura color.
- */
-struct Color {
+class Color {
 	/**
-	 * Almacena el color rojo.
+	 * Atributos publicos de la clase Color.
 	 */
-	float red;
+	public:
+		/**
+		 * Constante que representa el color blanco.
+		 */
+		static const Color WHITE;
+		/**
+		 * Constante que representa el color negro.
+		 */
+		static const Color BLACK;
+		/**
+		 * Constante que representa el color gris.
+		 */
+		static const Color GRAY;
+		/**
+ 		 * Constante que representa el color rojo.
+ 		 */
+		static const Color RED;
+		/**
+ 		 * Constante que representa el color verde.
+ 		 */
+		static const Color GREEN;
+		/**
+		 * Constante que representa el color azul.
+		 */
+		static const Color BLUE;
+
 	/**
-	 * Almacena el color verde.
+	 * Atributos privados de la clase Color.
 	 */
-	float green;
+	private:
+		/**
+		 * Almacena el valor de rojo.
+		 */
+		float red;
+		/**
+		 * Almacena el valor de verde.
+		 */
+		float green;
+		/**
+		 * Almacena el valor de azul.
+		 */
+		float blue;
+
 	/**
-	 * Almacena el color azul.
+	 * Metodos publicos de la clase Color.
 	 */
-	float blue;
-	/**
-	 * Constructor de la clase Color.
-	 */
-	Color(const float& red = 0, const float& green = 0, const float& blue = 0):
-		red(red),
-		green(green),
-		blue(blue) {
-		// No realiza ninguna accion.
-	}
+	public:
+		/**
+		 * Constructor de la clase Color.
+		 */
+		Color(const float& red = 0.0f, const float& green = 0.0f, const float& blue = 0.0f);
+		/**
+		 *  Obtiene el valor de rojo.
+		 */
+		float getRed();
+		/**
+		 * Establece el valor de rojo.
+		 */
+		void setRed(const float& red);
+        /**
+		 *  Obtiene el valor de verde.
+		 */
+        float getGreen();
+        /**
+		 * Establece el valor de verde.
+		 */
+        void setGreen(const float& green);
+        /**
+		 * Obtiene el valor de azul.
+		 */
+        float getBlue();
+        /**
+		 * Establece el valor de azul.
+		 */
+        void setBlue(const float& blue);
+
 };
 
 #endif /** __COLOR_H__ */
+
 
