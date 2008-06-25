@@ -1,5 +1,5 @@
-#ifndef __TURNTOOCUPPY_H__
-#define __TURNTOOCUPPY_H__
+#ifndef __TURNTOOCCUPPY_H__
+#define __TURNTOOCCUPPY_H__
 
 /**
  * server => client
@@ -13,7 +13,7 @@
 #include "command.h"
 #include "../model/gamemanager.h"
 
-class TurnToOcuppy : public Command
+class TurnToOccuppy : public Command
 {
 	
 	
@@ -24,21 +24,21 @@ class TurnToOcuppy : public Command
 		 * la idea es que reciba una lista de parametros y con ellos arme el ataque que se validara, en ppio
 		 * sera una lista de strings y en el caso de necesitar convertir un elemento a int usare atoi.
 		 */
-		TurnToOcuppy(std::vector<std::string> &parameterList);
+		TurnToOccuppy(std::vector<std::string> &parameterList);
 		
 		/**
 		 * Constructor de la clase.
 		 * La misma se construye a partir del Xml especificado.
 		 */
-		TurnToOcuppy( std::string xml);
+		TurnToOccuppy( std::string xml);
 		
 
-		TurnToOcuppy();
+		TurnToOccuppy();
 		/*
 		 * Destructor de la clase
 		 */
 		 
-		virtual ~TurnToOcuppy();
+		virtual ~TurnToOccuppy();
 		
 		/**
 		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.
@@ -64,4 +64,4 @@ class TurnToOcuppy : public Command
 		
 };
 
-#endif /*__TURNTOOCUPPY_H__*/
+#endif /*__TURNTOOCCUPPY_H__*/
