@@ -45,6 +45,9 @@ void SelectMap::execute(ReferenceCountPtr<State>& state){
     // notificar "aguardando jugadores"	
 	
 }
+std::string SelectMap::getName() {
+	return "selectMap";
+}
 
 
 

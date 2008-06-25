@@ -203,6 +203,10 @@ void Attack::execute(ReferenceCountPtr<State>& state){
 	
 }
 
+std::string Attack::getName() {
+	return "attack";
+}
+
 std::string Attack::getAttackerLand(){
 	return this->paisAtacante;
 }

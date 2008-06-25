@@ -44,5 +44,8 @@ void Map::execute(ReferenceCountPtr<State>& state){
 	
 }
 
+std::string Map::getName() {
+	return "map";
+}
 
 

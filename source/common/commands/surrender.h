@@ -28,7 +28,7 @@ class Surrender:public Command{
 		 */
 		bool validate(ReferenceCountPtr<GameManager>& gameManager);
 	virtual void execute(ReferenceCountPtr<State>& state);
-
+		virtual std::string getName();
 };
 
 #endif /* __SURRENDER__*/

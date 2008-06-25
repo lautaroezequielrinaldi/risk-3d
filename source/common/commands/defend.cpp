@@ -168,6 +168,10 @@ void Defend::execute(ReferenceCountPtr<State>& state){
 	state->defend(*this);
 }
 
+std::string Defend::getName() {
+	return "defend";
+}
+
 std::string Defend::getDefenderdLand(){
 	return this->paisDefensor;
 }

@@ -46,5 +46,8 @@ void ReadyToPlay::execute(ReferenceCountPtr<State>& state){
     // cambiar estado a populating 	
 }
 
+std::string ReadyToPlay::getName() {
+	return "readyToPlay";
+}
 
 

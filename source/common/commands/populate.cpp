@@ -198,6 +198,9 @@ int Populate::getArmyCount(){
 	return this->cantidadEjercitos;
 }
 
+std::string Populate::getName() {
+	return "populate";
+}
 
 
 

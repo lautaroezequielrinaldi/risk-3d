@@ -70,6 +70,9 @@ class GameManager {
 
 
 		void setStateMachine(ReferenceCountPtr<StateMachine>& stateMachine);
+
+		ReferenceCountPtr<StateMachine>& getStateMachine();
+
 		/**
 		 *
 		 *

@@ -44,5 +44,8 @@ void SetOwner::execute(ReferenceCountPtr<State>& state){
 	
 }
 
+std::string SetOwner::getName() {
+	return "setOwner";
+}
 
 

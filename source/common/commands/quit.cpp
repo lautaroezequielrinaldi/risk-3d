@@ -24,3 +24,6 @@ void Quit::execute(ReferenceCountPtr<State>& state){
 	state->quit(*this);
 	
 }
+std::string Quit::getName() {
+	return "quit";
+}

@@ -34,6 +34,10 @@ ReferenceCountPtr<TurnManager>& GameManager::getTurnManager(){
 }
 
 
+ReferenceCountPtr<StateMachine>& GameManager::getStateMachine(){
+	return this->stateMachine;
+}
+
 Attack& GameManager::getAttack(){
 	return *attack;
 }

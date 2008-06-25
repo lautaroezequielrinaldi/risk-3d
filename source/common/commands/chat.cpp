@@ -24,3 +24,7 @@ void Chat::execute(ReferenceCountPtr<State>& state){
 	state->chat(*this);
 	
 }
+
+std::string Chat::getName() {
+	return "chat";
+}

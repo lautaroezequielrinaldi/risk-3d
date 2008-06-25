@@ -22,11 +22,6 @@ bool Waiting::attack(Attack & command){
 	return false;
 }
 
-bool Waiting::defend(Defend & command){
-	std::cerr << "Evento Waiting::defend" << std::endl;
-	return false;
-}
-
 
 bool Waiting::youAre(YouAre & command){
 	std::cerr << "Evento Waiting::youAre" << std::endl;
@@ -50,51 +45,31 @@ bool Waiting::turnToAttack(TurnToAttack & command){
 bool Waiting::kill(Kill & command){
 	std::cerr << "Evento Waiting::kill" << std::endl;
 
-	/*
-	if (isForMe()) {
-		pasar a modo Attacking
-	}
-	*/
 	return false;
 }
 bool Waiting::move(Move & command){
 	std::cerr << "Evento Waiting::move" << std::endl;
 
-	/*
-	if (isForMe()) {
-		pasar a modo Attacking
-	}
-	*/
 	return false;
 }
 bool Waiting::setOwner(SetOwner & command){
 	std::cerr << "Evento Waiting::setOwner" << std::endl;
 
-	/*
-	if (isForMe()) {
-		pasar a modo Attacking
-	}
-	*/
 	return false;
 }
 bool Waiting::lose(Lose & command){
 	std::cerr << "Evento Waiting::lose" << std::endl;
 
-	/*
-	if (isForMe()) {
-		pasar a modo Attacking
-	}
-	*/
+	
+	//if (isForMe()) {
+		//pasar a modo Observing, no implementado aun
+	//}
+	
 	return false;
 }
 bool Waiting::map(Map & command){
 	std::cerr << "Evento Waiting::map" << std::endl;
 
-	/*
-	if (isForMe()) {
-		pasar a modo Attacking
-	}
-	*/
 	return false;
 }
 bool Waiting::turnToMove(TurnToMove & command){
@@ -102,7 +77,7 @@ bool Waiting::turnToMove(TurnToMove & command){
 
 	/*
 	if (isForMe()) {
-		pasar a modo Attacking
+		pasar a modo Moving
 	}
 	*/
 	return false;
@@ -112,7 +87,7 @@ bool Waiting::turnToOccupy(TurnToOccupy & command){
 
 	/*
 	if (isForMe()) {
-		pasar a modo Attacking
+		pasar a modo Occupying
 	}
 	*/
 	return false;

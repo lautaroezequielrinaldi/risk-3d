@@ -61,7 +61,7 @@ class Command : public Serializable
 
 		void setValid(bool valid);
 
-		std::string getName();
+		virtual std::string getName() = 0;
 	private:
 		std::string name;
 		std::string mainMsg;

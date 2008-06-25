@@ -58,6 +58,8 @@ class Defend : public Command
 		 */
 		void execute(ReferenceCountPtr<State>& state);
 		
+		virtual std::string getName();
+
 		std::string getDefenderdLand();
 		
 		int getArmyCount();

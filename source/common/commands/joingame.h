@@ -54,7 +54,7 @@ class JoinGame : public Command
 		 */
 		void execute(ReferenceCountPtr<State>& state);
 		
-		
+		virtual std::string getName();
 };
 
 #endif /*JOINGAME_H_*/
