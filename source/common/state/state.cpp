@@ -17,7 +17,7 @@
 #include "../commands/map.h"
 #include "../commands/turntoattack.h"
 #include "../commands/turntomove.h"
-#include "../commands/turntoocuppy.h"
+#include "../commands/turntooccupy.h"
 #include "../commands/setowner.h"
 #include "../commands/kill.h"
 
@@ -134,7 +134,7 @@ bool State::turnToMove(TurnToMove & command) {
 	return false;
 }
 
-bool State::turnToOcuppy(TurnToOcuppy & command) {
+bool State::turnToOccupy(TurnToOccupy & command) {
 	return false;
 }
 

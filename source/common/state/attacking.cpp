@@ -3,6 +3,7 @@
 #include "../model/gamemanager.h"
 
 
+
 #include<iostream>
 
 using namespace std;
@@ -16,9 +17,17 @@ Attacking::~Attacking()
 }
 
 
+/*
+ * Este modo solo recibe attack en el servidor
+ *
+ */ 
+
 bool Attacking::attack(Attack & command){
 	std::cerr << "Evento Attacking::attack" << std::endl;			
+
+	// 
 	bool accionValida = command.validate(this->gameManager);
+
 	
 	//si es valido
 	if (accionValida){

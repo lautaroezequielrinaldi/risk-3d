@@ -17,6 +17,14 @@ class Waiting : public State
 	bool youAre(YouAre & command);
 	bool turnToAttack(TurnToAttack & command);
 
+	bool kill(Kill & command);
+	bool move(Move & command);
+	bool setOwner(SetOwner & command);
+	bool lose(Lose & command);
+	bool map(Map & command);
+	bool turnToMove(TurnToMove & command);
+	bool turnToOccupy(TurnToOccupy & command);
+
 };
 
 #endif /*__WAITING_H__*/

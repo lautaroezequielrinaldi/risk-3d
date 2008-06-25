@@ -14,7 +14,7 @@ bool WaitingPlayer::readyToPlay(ReadyToPlay & command){
 	// si todos listos, 
 	//     Map 
 	//     pasar a simplePopulating
-	//     seleccionar primer jugador y TurnToOcuppy
+	//     seleccionar primer jugador y TurnToOccupy
 	return false;
 }
 
@@ -26,7 +26,7 @@ bool WaitingPlayer::joinGame(JoinGame & command){
 	// si ahora no hay lugar
 	//     Map 
 	//     pasar a simplePopulating
-	//     seleccionar primer jugador y TurnToOcuppy
+	//     seleccionar primer jugador y TurnToOccupy
 	return false;
 }
 
