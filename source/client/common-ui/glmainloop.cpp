@@ -3,11 +3,25 @@
 bool GLMainLoop::running = true;
 
 void GLMainLoop::dispatchMouseButtonDownEvent(const SDL_MouseButtonEvent& event) {
+    // Obtengo iterador para los widgets 2d registrados
+    GLWidgetManager::WidgetIterator2D iterator2D;
 
+	for (iterator2D = GLWidgetManager::first2DWidget(); iterator2D != GLWidgetManager::last2DWidget();
+		++iterator2D) {
+		ReferenceCountPtr<GL2DWidget> widget = *iterator2D;
+		widget->handleMouseButtonDownEvent(event);
+    }
 }
 
 void GLMainLoop::dispatchMouseButtonUpEvent(const SDL_MouseButtonEvent& event) {
+    // Obtengo iterador para los widgets 2d registrados
+    GLWidgetManager::WidgetIterator2D iterator2D;
 
+	for (iterator2D = GLWidgetManager::first2DWidget(); iterator2D != GLWidgetManager::last2DWidget();
+		++iterator2D) {
+		ReferenceCountPtr<GL2DWidget> widget = *iterator2D;
+		widget->handleMouseButtonUpEvent(event);
+	}
 }
 
 void GLMainLoop::dispatchMouseMotionEvent(const SDL_MouseMotionEvent& event) {
