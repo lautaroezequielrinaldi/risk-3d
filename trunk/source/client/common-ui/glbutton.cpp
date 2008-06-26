@@ -1,5 +1,6 @@
 #include "glbutton.h"
 #include<iostream>
+
 void GLButton::drawWidget() {
 	// Obtengo la dimension del widget.
     Dimension dimension = this->getDimension();
@@ -51,7 +52,34 @@ void GLButton::drawWidget() {
 	}
 }
 
-GLButton::GLButton(const std::string& text): GL2DWidget(), text(text) {
+void GLButton::handleMouseButtonDownEvent(const SDL_MouseButtonEvent& event) {
+	// Invoca al metodo padre
+	GLWidget::handleMouseButtonDownEvent(event);
+	// Si se presiono notifica del evento.
+	if ( getDimension().contains(event.x, event.y) ) {
+		notifyMouseButtonDownEvent(event);
+	}
+}
+
+void GLButton::handleMouseButtonUpEvent(const SDL_MouseButtonEvent& event) {
+	// Invoca al metodo padre
+	GLWidget::handleMouseButtonUpEvent(event);
+	// Si se solto notifica del evento.
+	if ( getDimension().contains(event.x, event.y) ) {
+		notifyMouseButtonUpEvent(event);
+	}
+}
+
+void GLButton::handleMouseMotionEvent(const SDL_MouseMotionEvent& event) {
+	// Invoca al metodo padre
+	GLWidget::handleMouseMotionEvent(event);
+	// Si se movio notifica del evento
+	if ( getDimension().contains(event.x, event.y) ) {
+		notifyMouseMotionEvent(event);
+	}
+}
+
+GLButton::GLButton(const std::string& text): GL2DWidget(), MouseObservable(), text(text) {
 	// No realiza ninguna accion.
 	int widgetWidth = GLDrawHelper::calculateTextWidth(text, 5);
 	int widgetHeight = GLDrawHelper::calculateTextHeight(text, 5);

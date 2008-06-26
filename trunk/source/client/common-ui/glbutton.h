@@ -4,8 +4,9 @@
 #include<string> // Para definicion de std::string.
 #include "gl2dwidget.h"
 #include "gldrawhelper.h"
+#include "mouseobservable.h"
 
-class GLButton: public GL2DWidget {
+class GLButton: public GL2DWidget, public MouseObservable {
 	/**
 	 * Atributos privados de la clase GLButton.
 	 */
@@ -22,6 +23,20 @@ class GLButton: public GL2DWidget {
 		 * Dibuja el widget.
 		 */
 		virtual void drawWidget();
+        /**
+		 * Manejador del evento mouse presionado.
+		 */
+        virtual void handleMouseButtonDownEvent(
+            const SDL_MouseButtonEvent& event);
+        /**
+		 *  Manejador del evento mouse liberado.
+		 */
+        virtual void handleMouseButtonUpEvent(
+            const SDL_MouseButtonEvent& event);
+        /**
+		 * Manejador del evento movimiento de mouse.
+		 */
+		virtual void handleMouseMotionEvent(const SDL_MouseMotionEvent& event);
 
 	/**
 	 * Metodos publicos de la clase GLButton.

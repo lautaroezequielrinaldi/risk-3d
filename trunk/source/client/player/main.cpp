@@ -14,7 +14,21 @@
 #include "../common-ui/glwidgetmanager.h"
 #include "../common-ui/glmainloop.h"
 #include "../common-ui/glbutton.h"
+#include "../common-ui/mouseobserver.h"
 #include "../../common/smartpointer/referencecountptr.h"
+
+class SimpleMouseObserver: public MouseObserver {
+	/**
+	 * Metodos publicos:
+	 */
+	public:
+		/**
+		 * Mouse Pressed.
+		 */
+		void mousePressed(const SDL_MouseButtonEvent& event) {
+			std::cout << "Se presiono el mouse en X: " << event.x << " y en Y: " << event.y << std::endl;
+		}
+};
 
 int main(int argc, char** argv) {
 
@@ -81,12 +95,13 @@ if (true) {
 		return 0;
 	}
 	SDL_Surface* screen = SDL_SetVideoMode(1024, 768, 32, SDL_OPENGL);
-	
+	SimpleMouseObserver observer;
 	ReferenceCountPtr<GLButton> button( new GLButton("Boton!!!"));
 	button->setX(10);
 	button->setY(10);
 	button->setWidth(150);
 	button->setHeight(70);
+	button->addMouseObserver(&observer);
 
 	GLWidgetManager::registerWidget(button);
 	GLMainLoop::run();
