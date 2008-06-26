@@ -41,10 +41,9 @@ bool Defending::defend(Defend & command){
 		this->gameManager->setCurrentState("moving");
 	
 
-	}
-	else
+	} else {
 		//notificar error
-	
+	}
 	return accionValida;	
 }
 

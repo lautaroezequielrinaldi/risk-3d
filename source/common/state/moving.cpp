@@ -59,10 +59,9 @@ bool Moving::move(Move & command){
 		cout<<"Juega el jugador: "<< playerActual->getColor()<<" con bonus: "<<playerActual->getArmyCount()<<endl;
 	
 		//notifica el cambio
-	}
-	else
+	} else {
 		//notificar error
-	
+	}
 	//a sacar
 	return accionValida;
 }
