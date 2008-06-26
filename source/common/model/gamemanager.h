@@ -44,11 +44,15 @@ class GameManager {
 	Attack *attack;
 			
 		
-	ReferenceCountPtr<ServerProxy> serverProxy;
-
 	bool open;
 
 	bool playing;
+
+	/**
+	 * considerar utilizar un map para poder acceder individualmente
+	 *
+	 */
+	std::list< ReferenceCountPtr<Proxy> > proxyList;
 
 	public:
 	
@@ -77,6 +81,7 @@ class GameManager {
 		 *
 		 *
 		*/
+
 		void add(ReferenceCountPtr<PlayerProxy> & playerproxy);	
 
 		void add(ReferenceCountPtr<ServerProxy> & serverproxy);	
