@@ -88,10 +88,10 @@ std::list< ReferenceCountPtr<Player> >& GameManager::getPlayerList(){
 void GameManager::execute(std::string commandName, std::string commandXml){
 	// obtener lock
 	ReferenceCountPtr<State> currentState = stateMachine->getCurrentState();
-	std::cerr << "Estado actual: " << currentState->getName() << std::endl;
-	std::cout << "a punto de hidratar comando" << std::endl;	
+	std::cerr << "GameManager::execute( " << commandName << ")"<< std::endl;
+	std::cout << commandName << " -> execute("<< currentState->getName()<<")" <<std::endl << std::endl;
 	Command* command = commandHydrator->getCommand(commandName,commandXml);
-	std::cout << "Hidrato comando" << std::endl;
+	
 	// aca le estamos pidiendo al command que llame al metodo correspondiente
 	// a si mismo del estado actual.
 	command->execute(currentState);
@@ -104,8 +104,7 @@ void GameManager::execute(std::string commandName, std::string commandXml){
  * ojo, esto solo anda en el cliente, en el server hay que hacer el iterador....
  */
 void GameManager::notify(Command * command) {
-	std::cerr << "Se ha pedido notificacion de " << command->getName() << std::endl;
-	// pedirle a cada elemento del contenedor full_write(msg)
+	std::cerr << "GameManager::notify(" << command->getName() << ")" << std::endl << std::endl;
 
 	ReferenceCountPtr<Proxy> actualProxy;
 	std::list<ReferenceCountPtr<Proxy> >::iterator it;

@@ -14,7 +14,8 @@ void Proxy::notify(Command * command) {
 	header << cmd.size() << " " << command->getName() << " ";
 
 	std::string msg = header.str();
-
+	
+	// deshardcodear este 30
 	while (msg.size() < 30) {
 		msg.append(".");
 	}
@@ -22,7 +23,7 @@ void Proxy::notify(Command * command) {
 	msg.append("\r\n");
 	msg.append(cmd);
 
-	std::cerr << "Escribiendo..." << std::endl;
+	std::cerr << "Proxy::notify("<< msg << ")" << std::endl << std::endl;
 
 	socket->write(msg);
 }
