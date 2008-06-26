@@ -34,11 +34,11 @@ void GLLabel::drawWidget() {
             break;
 		}
         // Widget focus, dibujo widget focus.
-        case GLWIDGET_FOCUS: {
+        case GLWIDGET_DISABLED: {
 			// Obtengo color background para widget focus.
-            Color background = this->getBackgroundColor(GLWIDGET_FOCUS);
+            Color background = this->getBackgroundColor(GLWIDGET_DISABLED);
             // Obtengo color foreground para widget focus.
-            Color foreground = this->getForegroundColor(GLWIDGET_FOCUS);
+            Color foreground = this->getForegroundColor(GLWIDGET_DISABLED);
             // Dibuja el fondo del boton.
             GLDrawHelper::drawFilledRectangle(dimension.getX(), dimension.getX() + dimension.getWidth(),
                 dimension.getY(), dimension.getY() + dimension.getHeight(), background);
@@ -56,6 +56,9 @@ GLLabel::GLLabel(const std::string& text): GL2DWidget(), text(text) {
     int widgetHeight = GLDrawHelper::calculateTextHeight(text, 10);
     this->setWidth(widgetWidth);
     this->setHeight(widgetHeight);
+
+	// Establece el color de foreground para activo e inactivo igual.
+	this->setForegroundColor(GLWIDGET_ACTIVE, this->getForegroundColor(GLWIDGET_INACTIVE));
 }
 
 std::string GLLabel::getText() {

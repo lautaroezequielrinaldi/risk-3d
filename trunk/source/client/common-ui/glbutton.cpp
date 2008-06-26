@@ -34,11 +34,11 @@ void GLButton::drawWidget() {
 			break;
 		}
 		// Widget focus, dibujo widget focus.
-		case GLWIDGET_FOCUS: {
+		case GLWIDGET_DISABLED: {
             // Obtengo color background para widget focus.
-            Color background = this->getBackgroundColor(GLWIDGET_FOCUS);
+            Color background = this->getBackgroundColor(GLWIDGET_DISABLED);
             // Obtengo color foreground para widget focus.
-            Color foreground = this->getForegroundColor(GLWIDGET_FOCUS);
+            Color foreground = this->getForegroundColor(GLWIDGET_DISABLED);
 			// Dibuja el fondo del boton.
             GLDrawHelper::drawFilledRectangle(dimension.getX(), dimension.getX() +  dimension.getWidth(),
                 dimension.getY(), dimension.getY() + dimension.getHeight(), background);
@@ -53,18 +53,22 @@ void GLButton::drawWidget() {
 void GLButton::handleMouseButtonDownEvent(const SDL_MouseButtonEvent& event) {
 	// Invoca al metodo padre
 	GLWidget::handleMouseButtonDownEvent(event);
-	// Si se presiono notifica del evento.
-	if ( getDimension().contains(event.x, event.y) ) {
-		notifyMouseButtonDownEvent(event);
+	if (this->getEnabled()) {
+		// Si se presiono notifica del evento.
+		if ( getDimension().contains(event.x, event.y) ) {
+			notifyMouseButtonDownEvent(event);
+		}
 	}
 }
 
 void GLButton::handleMouseButtonUpEvent(const SDL_MouseButtonEvent& event) {
 	// Invoca al metodo padre
 	GLWidget::handleMouseButtonUpEvent(event);
-	// Si se solto notifica del evento.
-	if ( getDimension().contains(event.x, event.y) ) {
-		notifyMouseButtonUpEvent(event);
+	if (this->getEnabled()) {
+		// Si se solto notifica del evento.
+		if ( getDimension().contains(event.x, event.y) ) {
+			notifyMouseButtonUpEvent(event);
+		}
 	}
 }
 
