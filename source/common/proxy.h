@@ -1,6 +1,7 @@
 #ifndef __PROXY_H__
 #define __PROXY_H__
 #include "../common/thread/threaded.h"
+#include "../common/thread/cancelable.h"
 #include "../common/smartpointer/referencecountptr.h"
 #include "../common/net/sockets/socket.h"
 
@@ -11,7 +12,7 @@ class Command;
  *
  *
  */
-class Proxy:public Threaded {
+class Proxy:public Threaded, public Cancelable {
 	protected:
 	Socket * socket;
 	ReferenceCountPtr<GameManager> gameManager;
