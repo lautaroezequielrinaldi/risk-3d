@@ -9,8 +9,8 @@ Surrender::~Surrender(){
 }
 
 std::string Surrender::serialize(){
-
-	return "unimplemented";
+	return "<?xml version=\"1.0\"?>";
+	
 }
 bool Surrender::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return false;

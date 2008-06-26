@@ -8,8 +8,7 @@ Chat::~Chat(){
 }
 
 std::string Chat::serialize(){
-
-	return "unimplemented";
+	return "<?xml version=\"1.0\"?>";
 }
 bool Chat::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return false;
