@@ -26,7 +26,10 @@ void GL2DWidget::postDrawWidget() {
     // Carga del stack los atributos.
     glPopAttrib();
     // Carga del sack la matriz actual.
+	glMatrixMode(GL_PROJECTION);
     glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	glPopMatrix();
 }
 
 GL2DWidget::GL2DWidget(): GLWidget() {

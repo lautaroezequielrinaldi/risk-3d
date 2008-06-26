@@ -1,10 +1,8 @@
 #include "glbutton.h"
-#include<iostream>
 
 void GLButton::drawWidget() {
 	// Obtengo la dimension del widget.
     Dimension dimension = this->getDimension();
-
 	// Verifica el tipo de estado.
 	switch ( this->getState() ) {
 		// Widget activo, dibujo widget activo.
@@ -14,8 +12,8 @@ void GLButton::drawWidget() {
 			// Obtengo el color foreground para widget activo.
 			Color foreground = this->getForegroundColor(GLWIDGET_ACTIVE);
 			// Dibuja el fondo del boton.
-			GLDrawHelper::drawFilledRectangle(dimension.getX(), dimension.getWidth(), dimension.getY(),
-				dimension.getHeight(), background);
+			GLDrawHelper::drawFilledRectangle(dimension.getX(), dimension.getX() +  dimension.getWidth(),
+				dimension.getY(), dimension.getY() + dimension.getHeight(), background);
 			// Dibuja el texto del boton.
 			GLDrawHelper::drawCenteredText(this->getText(), dimension, foreground);
 			// Corta la secuencia.
@@ -28,8 +26,8 @@ void GLButton::drawWidget() {
             // Obtengo el color foreground para widget inactivo.
             Color foreground = this->getForegroundColor(GLWIDGET_INACTIVE);
 			// Dibuja el fondo del boton.
-            GLDrawHelper::drawFilledRectangle(dimension.getX(), dimension.getWidth(), dimension.getY(),
-                dimension.getHeight(), background);
+            GLDrawHelper::drawFilledRectangle(dimension.getX(), dimension.getX() +  dimension.getWidth(),
+                dimension.getY(), dimension.getY() + dimension.getHeight(), background);
 			// Dibuja el texto del boton.
             GLDrawHelper::drawCenteredText(this->getText(), dimension, foreground);
 			// Corta la secuencia.
@@ -42,8 +40,8 @@ void GLButton::drawWidget() {
             // Obtengo color foreground para widget focus.
             Color foreground = this->getForegroundColor(GLWIDGET_FOCUS);
 			// Dibuja el fondo del boton.
-            GLDrawHelper::drawFilledRectangle(dimension.getX(), dimension.getWidth(), dimension.getY(),
-                dimension.getHeight(), background);
+            GLDrawHelper::drawFilledRectangle(dimension.getX(), dimension.getX() +  dimension.getWidth(),
+                dimension.getY(), dimension.getY() + dimension.getHeight(), background);
 			// Dibuja el texto del boton.
             GLDrawHelper::drawCenteredText(this->getText(), dimension, foreground);
 			// Corta la secuencia.
@@ -81,16 +79,16 @@ void GLButton::handleMouseMotionEvent(const SDL_MouseMotionEvent& event) {
 
 GLButton::GLButton(const std::string& text): GL2DWidget(), MouseObservable(), text(text) {
 	// No realiza ninguna accion.
-	int widgetWidth = GLDrawHelper::calculateTextWidth(text, 5);
-	int widgetHeight = GLDrawHelper::calculateTextHeight(text, 5);
+	int widgetWidth = GLDrawHelper::calculateTextWidth(text, 10);
+	int widgetHeight = GLDrawHelper::calculateTextHeight(text, 10);
 	this->setWidth(widgetWidth);
 	this->setHeight(widgetHeight);
 }
 
 std::string GLButton::getText() {
 	return this->text;
-    int widgetWidth = GLDrawHelper::calculateTextWidth(text, 5);
-    int widgetHeight = GLDrawHelper::calculateTextHeight(text, 5);
+    int widgetWidth = GLDrawHelper::calculateTextWidth(text, 10);
+    int widgetHeight = GLDrawHelper::calculateTextHeight(text, 10);
     this->setWidth(widgetWidth);
     this->setHeight(widgetHeight);
 }

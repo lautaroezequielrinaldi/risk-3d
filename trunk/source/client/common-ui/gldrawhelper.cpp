@@ -48,7 +48,7 @@ void GLDrawHelper::drawCenteredText(const std::string& text, Dimension& dimensio
 	// Calculo posicion centrada del texto en x.
 	int centeredX = dimension.getX() + ((dimension.getWidth() - textWidth) / 2);
 	// Calculo posicion centrada de texto en y.
-	int centeredY = dimension.getY() + (textHeight / 2) + ((dimension.getHeight() - textHeight) / 2);
+	int centeredY = dimension.getY() + (textHeight) + ((dimension.getHeight() - textHeight) / 2);
 	// Dibujo el texto centrado.
 	GLDrawHelper::drawText(text, centeredX, centeredY, color);
 }

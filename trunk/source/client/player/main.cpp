@@ -14,6 +14,7 @@
 #include "../common-ui/glwidgetmanager.h"
 #include "../common-ui/glmainloop.h"
 #include "../common-ui/glbutton.h"
+#include "../common-ui/gllabel.h"
 #include "../common-ui/mouseobserver.h"
 #include "../../common/smartpointer/referencecountptr.h"
 
@@ -97,13 +98,22 @@ if (true) {
 	SDL_Surface* screen = SDL_SetVideoMode(1024, 768, 32, SDL_OPENGL);
 	SimpleMouseObserver observer;
 	ReferenceCountPtr<GLButton> button( new GLButton("Boton!!!"));
-	button->setX(10);
-	button->setY(10);
-	button->setWidth(150);
-	button->setHeight(70);
+	button->setX(20);
+	button->setY(20);
 	button->addMouseObserver(&observer);
 
+	ReferenceCountPtr<GLButton> button2( new GLButton("Boton2!!!"));
+	button2->setX(50);
+	button2->setY(50);
+	button2->addMouseObserver(&observer);
+
+	ReferenceCountPtr<GLLabel> label( new GLLabel("Label!!!"));
+	label->setX(100);
+	label->setY(100);
+
 	GLWidgetManager::registerWidget(button);
+	GLWidgetManager::registerWidget(button2);
+	GLWidgetManager::registerWidget(label);
 	GLMainLoop::run();
 	SDL_FreeSurface(screen);
 }
