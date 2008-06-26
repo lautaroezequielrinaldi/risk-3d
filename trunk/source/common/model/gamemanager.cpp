@@ -55,15 +55,15 @@ void GameManager::setAttack(Attack& attack){
 void GameManager::add(ReferenceCountPtr<PlayerProxy> & playerProxy) {
 	/* codigo comentado para que compile EDITOR_TARGET, no falla en SERVER_TARGET*/
 	playerProxy->setPlayer(game->addPlayer());
-	
+	proxyList.push_back(playerProxy);
 	// incorporar a contenedor
 	// incrementar jugadores
 	// si alcanzado max, open -> false;
 
 }
 
-void GameManager::add(ReferenceCountPtr<ServerProxy> & serverproxy) {
-	this->serverProxy = serverproxy;
+void GameManager::add(ReferenceCountPtr<ServerProxy> & serverProxy) {
+	proxyList.push_back(serverProxy);
 }
 
 bool GameManager::isPlaying() {
@@ -99,8 +99,23 @@ void GameManager::execute(std::string commandName, std::string commandXml){
 
 }
 
+/**
+ *
+ * ojo, esto solo anda en el cliente, en el server hay que hacer el iterador....
+ */
 void GameManager::notify(Command * command) {
+	std::cerr << "Se ha pedido notificacion de " << command->getName() << std::endl;
 	// pedirle a cada elemento del contenedor full_write(msg)
+
+	ReferenceCountPtr<Proxy> actualProxy;
+	std::list<ReferenceCountPtr<Proxy> >::iterator it;
+	it =this->proxyList.begin();
+
+	while ( it != this->proxyList.end()) {
+		actualProxy = *it;
+		actualProxy->notify(command);
+		++it;
+	}
 
 
 }

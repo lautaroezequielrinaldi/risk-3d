@@ -18,11 +18,8 @@ ReadyToPlay::~ReadyToPlay()
 }
 
 std::string ReadyToPlay::serialize(){
-	std::string result("");	
-    
-    
-    return result;
-  
+
+    	return "<?xml version=\"1.0\"?><readyToPlay>1</readyToPlay>";
 }
 
 void* ReadyToPlay::hydrate(std::string xml){

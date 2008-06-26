@@ -1,4 +1,5 @@
 #include "../../common/commands/joingame.h"
+#include "../../common/commands/readytoplay.h"
 
 #include "../../common/model/randomdice.h"
 #include "../../common/model/gamemanager.h"
@@ -28,7 +29,20 @@ class SimpleMouseObserver: public MouseObserver {
 		 */
 		void mousePressed(const SDL_MouseButtonEvent& event) {
 			std::cout << "Se presiono el mouse en X: " << event.x << " y en Y: " << event.y << std::endl;
+			
+			ReadyToPlay * readyToPlay = new ReadyToPlay();
+
+			gamemanager->notify(readyToPlay);
+			delete(readyToPlay);
+
 		}
+
+		void setGameManager(ReferenceCountPtr<GameManager> gamemanager) {
+			this->gamemanager = gamemanager;
+		}
+
+	private:
+		ReferenceCountPtr<GameManager> gamemanager;
 };
 
 int main(int argc, char** argv) {
@@ -96,20 +110,23 @@ int main(int argc, char** argv) {
 	}
 	SDL_Surface* screen = SDL_SetVideoMode(1024, 768, 32, SDL_OPENGL);
 	SimpleMouseObserver observer;
-	ReferenceCountPtr<GLButton> button( new GLButton("Boton!!!"));
+
+	observer.setGameManager(gamemanager);
+
+	ReferenceCountPtr<GLButton> button( new GLButton("ReadyToPlay"));
 	button->setX(20);
 	button->setY(20);
 	button->addMouseObserver(&observer);
 
 	ReferenceCountPtr<GLButton> button2( new GLButton("Boton2!!!"));
-	button2->setX(50);
-	button2->setY(50);
+	button2->setX(70);
+	button2->setY(70);
 	button2->setEnabled(false);
 	button2->addMouseObserver(&observer);
 
 	ReferenceCountPtr<GLLabel> label( new GLLabel("Esto es un label muy largo largo largo Label!!!"));
-	label->setX(100);
-	label->setY(100);
+	label->setX(120);
+	label->setY(120);
 
 	GLWidgetManager::registerWidget(button);
 	GLWidgetManager::registerWidget(button2);
