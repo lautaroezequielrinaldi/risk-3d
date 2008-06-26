@@ -22,12 +22,14 @@ bool WaitingFirstPlayer::joinGame(JoinGame & command){
 	gameManager->getTurnManager()->getCurrentPlayer();
 
 	YouAre * youare = new YouAre();
-	
+	std::cerr << "A punto de notificar youare" << std::endl;	
 	this->gameManager->notify(youare);
+	std::cerr << " Se envio youare" << std::endl;
 
 	this->gameManager->getTurnManager()->changeTurn(1);
 	
 	SelectMap * selectMap = new SelectMap();
+	std::cerr << "A punto de enviar select map" << std::endl;
 	this->gameManager->notify(selectMap);
 
 	gameManager->getStateMachine()->setState("waitingMapSelection");
