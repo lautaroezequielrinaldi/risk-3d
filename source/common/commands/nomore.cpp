@@ -9,8 +9,7 @@ NoMore::~NoMore(){
 }
 
 std::string NoMore::serialize(){
-
-	return "unimplemented";
+	return "<?xml version=\"1.0\"?>";
 }
 bool NoMore::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return false;

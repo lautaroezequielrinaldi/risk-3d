@@ -8,8 +8,7 @@ Quit::~Quit(){
 }
 
 std::string Quit::serialize(){
-
-	return "unimplemented";
+	return "<?xml version=\"1.0\"?>";
 }
 bool Quit::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return false;
