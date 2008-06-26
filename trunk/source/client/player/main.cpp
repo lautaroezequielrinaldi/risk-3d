@@ -90,7 +90,6 @@ int main(int argc, char** argv) {
 	serverProxy->start();
 
 
-if (true) {
 	glutInit(&argc, argv);
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
 		return 0;
@@ -117,5 +116,12 @@ if (true) {
 	GLWidgetManager::registerWidget(label);
 	GLMainLoop::run();
 	SDL_FreeSurface(screen);
-}
+	
+	serverProxy->cancel();
+	std::cerr << "Canceled" << std::endl;
+
+	// va a quedar bloqueado aca hasta que reciba un mensaje via socket
+	// para desbloquearse del read()
+	serverProxy->join();
+	std::cerr << "Joined" << std::endl;
 }
