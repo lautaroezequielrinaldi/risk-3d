@@ -19,7 +19,7 @@ class GLMainLoop;
 typedef enum GLWidgetStateType {
 	GLWIDGET_ACTIVE,
 	GLWIDGET_INACTIVE,
-	GLWIDGET_FOCUS
+	GLWIDGET_DISABLED
 } GLWidgetStateType;
 
 class GLWidget {

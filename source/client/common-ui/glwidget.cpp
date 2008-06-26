@@ -37,10 +37,12 @@ void GLWidget::handleMouseButtonUpEvent(const SDL_MouseButtonEvent& event) {
 void GLWidget::handleMouseMotionEvent(const SDL_MouseMotionEvent& event) {
 	// Si la posicion del mouse es sobre el control, lo marcamos como activo.
 	// Caso contrario lo marcamos como inactivo.
-	if ( dimension.contains(event.x, event.y) ) {
-		this->setState(GLWIDGET_ACTIVE);
-	} else {
-		this->setState(GLWIDGET_INACTIVE);
+	if (this->getEnabled()) {
+		if ( dimension.contains(event.x, event.y) ) {
+			this->setState(GLWIDGET_ACTIVE);
+		} else {
+			this->setState(GLWIDGET_INACTIVE);
+		}
 	}
 }
 
@@ -64,13 +66,13 @@ GLWidget::GLWidget() {
 	// Establece el estado del widget como inactivo.
 	this->setState(GLWIDGET_INACTIVE);
 	// Llena el mapa de color background del widget.
-	this->backgroundColorMap[GLWIDGET_ACTIVE] = Color::RED;
+	this->backgroundColorMap[GLWIDGET_ACTIVE] = Color::GRAY;
 	this->backgroundColorMap[GLWIDGET_INACTIVE] = Color::GRAY;
-	this->backgroundColorMap[GLWIDGET_FOCUS] = Color::GRAY;
+	this->backgroundColorMap[GLWIDGET_DISABLED] = Color::GRAY;
 	// Llena el mapa de color foreground del widget.
 	this->foregroundColorMap[GLWIDGET_ACTIVE] = Color::BLACK;
 	this->foregroundColorMap[GLWIDGET_INACTIVE] = Color::WHITE;
-	this->foregroundColorMap[GLWIDGET_FOCUS] = Color::BLACK;
+	this->foregroundColorMap[GLWIDGET_DISABLED] = Color::BLACK;
 }
 
 Dimension& GLWidget::getDimension() {
@@ -111,6 +113,9 @@ bool GLWidget::getEnabled() {
 
 void GLWidget::setEnabled(const bool& enabled) {
 	this->enabled = enabled;
+	if (enabled == false) {
+		this->setState(GLWIDGET_DISABLED);
+	}
 }
 
 Color GLWidget::getBackgroundColor(const GLWidgetStateType& type) {
