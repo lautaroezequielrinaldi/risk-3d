@@ -17,22 +17,19 @@ WaitingFirstPlayer::~WaitingFirstPlayer()
 bool WaitingFirstPlayer::joinGame(JoinGame & command){
 	std::cerr << "Evento WaitingFirstPlayer::joinGame" << std::endl;
 
-	// aceptarlo
-
 	gameManager->getTurnManager()->getCurrentPlayer();
 
 	YouAre * youare = new YouAre();
-	std::cerr << "A punto de notificar youare" << std::endl;	
 	this->gameManager->notify(youare);
-	std::cerr << " Se envio youare" << std::endl;
+	delete(youare);
 
 	this->gameManager->getTurnManager()->changeTurn(1);
 	
 	SelectMap * selectMap = new SelectMap();
-	std::cerr << "A punto de enviar select map" << std::endl;
 	this->gameManager->notify(selectMap);
+	delete(selectMap);
 
-	gameManager->getStateMachine()->setState("waitingMapSelection");
+	this->gameManager->getStateMachine()->setState("waitingMapSelection");
 	return false;
 }
 

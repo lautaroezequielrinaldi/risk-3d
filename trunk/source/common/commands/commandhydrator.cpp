@@ -19,11 +19,11 @@ CommandHydrator::~CommandHydrator(){
 }
 
 /**
- * Es
+ *
  */
 Command * CommandHydrator::getCommand(std::string name, std::string xml){
 	Command * command = commands[name];
-	std::cout << "El nombre del comando es: " << name << std::endl;
+	std::cout << "El nombre del comando es: " << name << "." << std::endl;
 	command->hydrate(xml);
 	return command;
 }
