@@ -1,9 +1,9 @@
 #include "commandhydrator.h"
-
+#include<iostream>
 CommandHydrator::CommandHydrator(){
 	commands.insert(std::make_pair("attack",new Attack()));
 	commands.insert(std::make_pair("defend",new Defend()));
-	commands.insert(std::make_pair("joingame",new JoinGame()));
+	commands.insert(std::make_pair("joinGame",new JoinGame()));
 	commands.insert(std::make_pair("move",new Move()));
 	commands.insert(std::make_pair("selectmap",new SelectMap()));
 	commands.insert(std::make_pair("populate",new Populate()));
@@ -23,6 +23,7 @@ CommandHydrator::~CommandHydrator(){
  */
 Command * CommandHydrator::getCommand(std::string name, std::string xml){
 	Command * command = commands[name];
+	std::cout << "El nombre del comando es: " << name << std::endl;
 	command->hydrate(xml);
 	return command;
 }

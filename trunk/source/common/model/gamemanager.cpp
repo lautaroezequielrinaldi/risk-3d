@@ -89,9 +89,9 @@ void GameManager::execute(std::string commandName, std::string commandXml){
 	// obtener lock
 	ReferenceCountPtr<State> currentState = stateMachine->getCurrentState();
 	std::cerr << "Estado actual: " << currentState->getName() << std::endl;
-	
-	ReferenceCountPtr<Command> command = commandHydrator->getCommand(commandName,commandXml);
-
+	std::cout << "a punto de hidratar comando" << std::endl;	
+	Command* command = commandHydrator->getCommand(commandName,commandXml);
+	std::cout << "Hidrato comando" << std::endl;
 	// aca le estamos pidiendo al command que llame al metodo correspondiente
 	// a si mismo del estado actual.
 	command->execute(currentState);
