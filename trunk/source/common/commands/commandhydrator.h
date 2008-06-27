@@ -28,11 +28,28 @@
 
 
 class CommandHydrator {
+	
 	public:
+		
+		/**
+		 * Constructor de la clase
+		 */
 		CommandHydrator();
+		
+		/**
+		 * Destructor de la clase
+		 */
 		virtual ~CommandHydrator();
+		
+		/**
+		 * Metodo cuyo proposito es obtener un comando a partir del nombre proporcionado,
+		 * hidratado a partir del xml proporcionado.
+		 */
 		Command * getCommand(std::string name, std::string xml);
+	
+	
 	private:
+	
 		std::map <std::string, Command * > commands;
 
 };

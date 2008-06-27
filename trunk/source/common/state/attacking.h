@@ -12,7 +12,9 @@ class Attacking : public State
 		
 		virtual ~Attacking();
 
-		 virtual bool attack(Attack & command);
+		virtual bool attack(Attack & command);
+		
+		virtual bool noMore(NoMore & command);
 		
 	    
 };

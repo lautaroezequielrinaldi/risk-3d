@@ -59,4 +59,10 @@ bool Attacking::attack(Attack & command){
 }
 
 
-
+bool Attacking::noMore(NoMore & command){
+	
+	//cambio a proximo estado : mover
+	this->gameManager->setCurrentState("moving");
+	cout<<"HORA DE MOVER EJERCITOS"<<endl;
+		
+}
