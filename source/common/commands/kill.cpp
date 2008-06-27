@@ -23,7 +23,7 @@ Kill::~Kill()
 }
 
 std::string Kill::serialize(){
-	 return "<?xml version=\"1.0\"?>";
+	 return "<?xml version=\"1.0\"?><kill><from>0</from><to>$player</to><country>$country</country><army>$armies</army></kill>";
 }
 
 void* Kill::hydrate(std::string xml){

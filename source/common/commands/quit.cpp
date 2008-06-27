@@ -8,7 +8,7 @@ Quit::~Quit(){
 }
 
 std::string Quit::serialize(){
-	return "<?xml version=\"1.0\"?>";
+	return "<?xml version=\"1.0\"?><quit><from>$player></from><to>0</to></quit>";
 }
 bool Quit::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return false;

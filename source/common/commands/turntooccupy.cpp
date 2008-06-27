@@ -23,7 +23,7 @@ TurnToOccupy::~TurnToOccupy()
 }
 
 std::string TurnToOccupy::serialize(){
-	 return "<?xml version=\"1.0\"?>";
+	 return "<?xml version=\"1.0\"?><turntooccupy><from>0</from><to>$player</to></turntooccupy>";
 }
 
 void* TurnToOccupy::hydrate(std::string xml){

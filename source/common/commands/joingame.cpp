@@ -20,6 +20,8 @@ JoinGame::~JoinGame()
 }
 
 std::string JoinGame::serialize(){
+	return "<?xml version=\"1.0\"?><joingame><from>0</from><to>0</to><name>$name</name></joingame>";
+
 	std::string joinGameSerializado;
 	
 	xmlDocPtr docJoinGame;

@@ -23,7 +23,7 @@ Lose::~Lose()
 }
 
 std::string Lose::serialize(){
-	 return "<?xml version=\"1.0\"?>";
+	 return "<?xml version=\"1.0\"?><lose><from>0</from><to>$player</to></lose>";
 }
 
 void* Lose::hydrate(std::string xml){

@@ -23,7 +23,7 @@ Map::~Map()
 }
 
 std::string Map::serialize(){
-	 return "<?xml version=\"1.0\"?>";
+	 return "<?xml version=\"1.0\"?>mapa....";
 }
 
 void* Map::hydrate(std::string xml){

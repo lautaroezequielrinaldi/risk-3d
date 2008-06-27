@@ -25,7 +25,8 @@ Populate::~Populate()
 }
 
 std::string Populate::serialize(){
-	
+	return "<?xml version=\"1.0\"?><populate><from>$player></from><to>0</to><country>$country</country><army>$armies</army></populate>";
+
 	std::string poblarSeralizado;
 	
 	// creo documento
