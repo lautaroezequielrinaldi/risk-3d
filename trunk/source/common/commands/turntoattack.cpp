@@ -23,7 +23,7 @@ TurnToAttack::~TurnToAttack()
 }
 
 std::string TurnToAttack::serialize(){
-	 return "<?xml version=\"1.0\"?>";
+	 return "<?xml version=\"1.0\"?><turntoattack><from>0</from><to>$player</to></turntoattack>";
 }
 
 void* TurnToAttack::hydrate(std::string xml){

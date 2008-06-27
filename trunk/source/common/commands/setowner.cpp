@@ -23,7 +23,7 @@ SetOwner::~SetOwner()
 }
 
 std::string SetOwner::serialize(){
-	 return "<?xml version=\"1.0\"?>";
+	 return "<?xml version=\"1.0\"?><setowner><from>0</from><to>$player</to><country>$country</country></setowner>";
 }
 
 void* SetOwner::hydrate(std::string xml){

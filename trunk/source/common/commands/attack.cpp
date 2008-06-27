@@ -29,7 +29,7 @@ Attack::~Attack()
 }
 
 std::string Attack::serialize(){
-	
+	return "<?xml version=\"1.0\"?><attack><from>$player</from><to>$player</to><source>$country</source><target>$country</target><army>$armies</army></attack>";
 	std::string ataqueSeralizado;
 	
 	// creo documento

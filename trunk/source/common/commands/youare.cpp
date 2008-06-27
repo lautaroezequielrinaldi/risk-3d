@@ -23,7 +23,7 @@ YouAre::~YouAre()
 }
 
 std::string YouAre::serialize(){
-	 return "<?xml version=\"1.0\"?><jugador>1</jugador>";
+	 return "<?xml version=\"1.0\"?><youare><from>0</from><to>$player</to></youare>";
 }
 
 void* YouAre::hydrate(std::string xml){

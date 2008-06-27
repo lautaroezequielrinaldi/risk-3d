@@ -23,7 +23,7 @@ Win::~Win()
 }
 
 std::string Win::serialize(){
-	 return "<?xml version=\"1.0\"?>";
+	 return "<?xml version=\"1.0\"?><win><from>0</from><to>$player</to></win>";
 }
 
 void* Win::hydrate(std::string xml){

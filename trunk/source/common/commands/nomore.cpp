@@ -9,7 +9,7 @@ NoMore::~NoMore(){
 }
 
 std::string NoMore::serialize(){
-	return "<?xml version=\"1.0\"?>";
+	return "<?xml version=\"1.0\"?><nomore><from>$player</from><to>0</to></nomore>";
 }
 bool NoMore::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return false;

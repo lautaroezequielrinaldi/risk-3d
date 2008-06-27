@@ -8,7 +8,7 @@ Chat::~Chat(){
 }
 
 std::string Chat::serialize(){
-	return "<?xml version=\"1.0\"?>";
+	return "<?xml version=\"1.0\"?><chat><from>$player</player><to>0</to><msg>$message></msg></chat>";
 }
 bool Chat::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return false;

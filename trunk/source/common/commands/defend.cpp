@@ -26,7 +26,7 @@ Defend::~Defend()
 }
 
 std::string Defend::serialize(){
-	
+	return "<?xml version=\"1.0\"?><defend><from>$player</from><to>$player</to><army>$armies</army></defend>";
 	std::string defensaSeralizado;
 	
 	// creo documento

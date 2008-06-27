@@ -24,6 +24,7 @@ Move::~Move()
 }
 
 std::string Move::serialize(){
+	return "<?xml version=\"1.0\"?><move><from>$player></from><to>0</to><source>$country</source><target>country</target><army>$armies</army></move>";
 
 	std::string movimientoSeralizado;
 	

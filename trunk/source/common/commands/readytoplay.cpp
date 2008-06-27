@@ -19,7 +19,7 @@ ReadyToPlay::~ReadyToPlay()
 
 std::string ReadyToPlay::serialize(){
 
-    	return "<?xml version=\"1.0\"?><readyToPlay>1</readyToPlay>";
+    	return "<?xml version=\"1.0\"?><readytoplay><from>$player</from><to>0</to></readytoplay>";
 }
 
 void* ReadyToPlay::hydrate(std::string xml){

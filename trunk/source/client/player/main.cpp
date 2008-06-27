@@ -134,7 +134,7 @@ if (true) {
     ReferenceCountPtr<GLButton> button2( new GLButton("Boton2!!!"));
     button2->setX(70);
     button2->setY(70);
-    button2->setEnabled(false);
+    //button2->setEnabled(false);
     button2->addMouseObserver(&observer);
 
     ReferenceCountPtr<GLLabel> label( new GLLabel("Esto es un label muy largo largo largo Label!!!"));

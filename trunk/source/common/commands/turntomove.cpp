@@ -23,7 +23,7 @@ TurnToMove::~TurnToMove()
 }
 
 std::string TurnToMove::serialize(){
-	 return "<?xml version=\"1.0\"?>";
+	 return "<?xml version=\"1.0\"?><turntomove><from>0</from><to>$player</to></turntomove>";
 }
 
 void* TurnToMove::hydrate(std::string xml){
