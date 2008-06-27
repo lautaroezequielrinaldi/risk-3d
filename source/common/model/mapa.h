@@ -117,6 +117,11 @@ class Mapa {
         bool areUninhabitedCountries();
         
         /**
+         * Metodo cuyo proposito es obtener la lista de paises del mapa.
+         */
+         std::list<ReferenceCountPtr<Pais> >& getCountryList();
+        
+        /**
          * Mètodo cuyo propòsito es obtener un iterador apuntando al primer
          * paìs del Mapa.
          */

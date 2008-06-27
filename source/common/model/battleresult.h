@@ -73,12 +73,12 @@ class BattleResult : public Serializable
 		/**
 		 * Metodo cuyo proposito es elminar un ejercito del pais atacante.
 		 */
-		void deletetAttackerArmy();
+		void incrementAttackerLostArmy();
 
 		/**
 		 * Metodo cuyo proposito es eliminar un ejercito del pais defensor.
 		 */		
-		void deletetDefenderArmy();
+		void incrementDefenderLostArmy();
 		
 		/**
 		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.

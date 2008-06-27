@@ -1,5 +1,4 @@
 #include "state.h"
-
 #include "../commands/attack.h"
 #include "../commands/chat.h"
 #include "../commands/defend.h"
@@ -23,6 +22,12 @@
 
 
 #include "../model/gamemanager.h"
+
+
+
+#include<iostream>
+
+using namespace std;
 
 /*State::State() {
     // No realiza ninguna acciòn.
@@ -80,7 +85,7 @@ bool State::selectMap(SelectMap & command){
 bool State::populate(Populate & command){
 	command.setMainMsg("Intento de poblar en momento inoportuno");
 	command.setSecMsg("El jugador ... intentó poblar cuando no le tocaba");
-
+	cout<<"	no es momento de atacar"<<endl;
      return false;
 }
 

@@ -1,6 +1,10 @@
 #include<sstream>
 #include "attack.h"
 
+#include<iostream>
+
+using namespace std;
+
 Attack::Attack(std::vector<std::string> & parameterList):Command ()
 {
 	/*construyo el objeto a partir de los parametros pasados en la lista*/
@@ -189,11 +193,22 @@ bool Attack::validate(ReferenceCountPtr<GameManager>& gameManager){
 			/*si pais atacante es adyacente al pais atacado*/
 			if( paisAtaca->esAdyacente(this->paisAtacado)){
 				/*si pais atacante ataca con 3 o menos ejercitos Y ataca con menos ejercitos de los que tiene*/
-				if ( paisAtaca->getArmyCount() <= 3  && this->cantidadEjercitos < paisAtaca->getArmyCount() )
+				if ( this->cantidadEjercitos <= 3  && this->cantidadEjercitos < paisAtaca->getArmyCount() )
 					ataqueValido = true;
+				else
+					cout<<"CANTIDAD DE EJERCITOS ATACANTES ( "<<this->cantidadEjercitos<<" ) INVALIDA -"<<paisAtaca->getArmyCount()<<endl;
 			}
+			else
+				cout<<"EL PAIS QUE ATACA NO ES ADYACENTE AL ATACADO"<<endl;
 		}
+		else
+			cout<<"ESTA INTENTANDO ATACAR UN PAIS SUYO"<<endl;
 	}
+	else
+		cout<<"EL PAIS CON EL QUE INTENTA ATACAR NO ES DEL JUGADOR ACTUAL"<<endl;
+	
+	
+	
 	return ataqueValido;
 }
 

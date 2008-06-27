@@ -20,14 +20,22 @@ bool Defending::defend(Defend & command){
 	//si es valido
 	if (accionValida){
 		
+		ReferenceCountPtr<Pais> paisA = gameManager->getGame()->getMapa()->obtenerPais(command.getDefenderdLand() );
+		ReferenceCountPtr<Pais> paisD =  gameManager->getGame()->getMapa()->obtenerPais( gameManager->getAttack().getAttackerLand() );
+		
+		
 		cout<<"Ejercitos defensores: "<<command.getArmyCount()<<endl;		
 		
+		cout<<"ANTES DE LA BATALLA:"<<endl;
+		cout<<"Pais atacado tiene: "<< paisA->getArmyCount() <<" ejercitos"<<endl;
+		cout<<"Pais atacante tiene: "<<paisD->getArmyCount() <<" ejercitos"<<endl;		
+				
 		//creo batalla
 		Battle batalla(this->gameManager->getAttack(),command, this->gameManager->getGame()->getDice());
 		
 		// inicio batalla. el modelo se actualiza automaticamente.
 		BattleResult resultadoBatalla = batalla.start(this->gameManager);
-	
+		
 		//notifico resultado batalla
 		cout<<"RESULTADO DE LA BATALLA:"<<endl;
 		
@@ -36,10 +44,17 @@ bool Defending::defend(Defend & command){
 		
 		if ( resultadoBatalla.getDefenderResult() < 0 )
 			cout<<"Defensor perdio: "<< abs( resultadoBatalla.getDefenderResult() )<<" ejercitos"<<endl;	
+		
+		
+		cout<<"DESPUES DE LA BATALLA:"<<endl;
+ 		cout<<"Pais atacado tiene: "<< paisA->getArmyCount() <<" ejercitos"<<endl;
+		cout<<"Pais atacante tiene: "<<paisD->getArmyCount() <<" ejercitos"<<endl;				
+		
+		
 				
 		//cambio a proximo estado : mover
 		this->gameManager->setCurrentState("moving");
-	
+		cout<<"HORA DE MOVER EJERCITOS"<<endl;
 
 	} else {
 		//notificar error

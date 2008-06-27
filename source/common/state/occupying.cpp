@@ -6,7 +6,6 @@
 
 
 #include<iostream>
-
 using namespace std;
 
 Occupying::Occupying(ReferenceCountPtr<GameManager>&gameManager, std::string name):State(gameManager,name)
@@ -18,8 +17,10 @@ Occupying::~Occupying()
 }
 
 bool Occupying::populate(Populate & command){
-	std::cerr << "Evento Occupying::populate" << std::endl;
+	
+
 	bool accionValida = command.validateOccupy(this->gameManager);
+	
 	
 	if ( accionValida ){
 
@@ -31,7 +32,7 @@ bool Occupying::populate(Populate & command){
 		
 		cout<<"Estado: OCUPANDO"<<endl;
 		cout<<"pais destino: "<<paisD->getNombre()<<endl;
-		cout<<"ejercitos antes de ocupar: "<<paisD->getArmyCount();
+		cout<<"ejercitos antes de ocupar: "<<paisD->getArmyCount()<<endl;
 		
 		//agrego al pais destino la cantidad de ejercitos solicitados
 		paisD->addArmies(command.getArmyCount() );
@@ -47,7 +48,7 @@ bool Occupying::populate(Populate & command){
 		//disminuyo en 1 la cant de ejercitos a ubicar
 		playerActual->setArmyCount( playerActual->getArmyCount() - 1 );
 		
-		cout<<"Cantidad de paises conquistados por el jugador "<<playerActual->getColor()<<" :"<<playerActual->getConqueredLands();
+		cout<<"Cantidad de paises conquistados por el jugador "<<playerActual->getColor()<<" :"<<playerActual->getConqueredLands()<<endl;;
 	
 		// si ya se habitaron todos los paises del mapa
 		if ( !map->areUninhabitedCountries() ){
@@ -66,7 +67,7 @@ bool Occupying::populate(Populate & command){
 
 
 		//notificacion
-		cout<<"Le toca jugar al jugador: "<<gameManager->getTurnManager()->getCurrentPlayer()<<endl;	
+		cout<<"---->  Le toca jugar al jugador: "<<gameManager->getTurnManager()->getCurrentPlayer()<<endl;	
 		
 		
 	}

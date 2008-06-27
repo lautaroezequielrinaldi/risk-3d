@@ -36,7 +36,7 @@ bool SimplePopulating::populate(Populate & command){
 		ReferenceCountPtr<Pais> paisD = map->obtenerPais(command.getCountryDestination());	
 		
 		cout<<"pais destino: "<<paisD->getNombre()<<endl;
-		cout<<"ejercitos antes de poblar: "<<paisD->getArmyCount();
+		cout<<"ejercitos antes de poblar: "<<paisD->getArmyCount()<<endl;
 		cout<<"Cantidad de ejercitos a ubicar: "<<command.getArmyCount() <<endl;
 		
 		//agrego al pais destino la cantidad de ejercitos solicitados
@@ -51,7 +51,7 @@ bool SimplePopulating::populate(Populate & command){
 		//seteo al jugador actual la cant de ejercitos que le quedan por ubicar
 		playerActual->setArmyCount( ejercitosRestantes );
 		
-		cout<<"ejercitos despues de poblar: "<<paisD->getArmyCount();
+		cout<<"ejercitos despues de poblar: "<<paisD->getArmyCount()<<endl;
 		cout<<"Al jugador "<<playerActual->getColor()<<" le quedan: "<<playerActual->getArmyCount()<<" ejerctos para ubicar"<<endl;
 		
 	
@@ -61,14 +61,19 @@ bool SimplePopulating::populate(Populate & command){
 		std::list<ReferenceCountPtr<Player> >::iterator it;	
 		bool noMasEjercitos= true;
 		it = listaJug.begin();
-			
+		
+					
 		//verifico si todos los jugadores estan con cero ejercitos para ubicar
 		while ( it != listaJug.end() && noMasEjercitos ){
 				
 			ReferenceCountPtr<Player> playerActual = *it;
-				//si al jugador actual de la lista le quedan ejercitos por ubicar
-				if ( playerActual->getArmyCount() != 0 )
-					noMasEjercitos = false;
+			
+			//si al jugador actual de la lista le quedan ejercitos por ubicar
+			if ( playerActual->getArmyCount() != 0 )
+				noMasEjercitos = false;
+			
+			++it;
+			
 		}
 			
 		// sino hay mas ejercitos en ningun jugador para ubicar
@@ -95,12 +100,20 @@ bool SimplePopulating::populate(Populate & command){
 			cout<<"El bonus de ejercitos es: "<<playerActual->getArmyCount()<<endl;
 		}
 		//si todavia quedan jugadores con ejercitos a ubucar
-		else
-			//cambio de turno
-			this->gameManager->getTurnManager()->changeTurn();
-	
+		else{
+			
+			// si luego de actualizar cant de ejercitos restantes del jugadorq  poblo, se quedo en cero.
+			if ( playerActual->getArmyCount() == 0 ){
 
+				//cambio de turno
+				this->gameManager->getTurnManager()->changeTurn();	
+			
+				cout<<"Turno de poblar inicial para el jugador: "<<this->gameManager->getTurnManager()->getCurrentPlayer() <<endl;
+			}
+		}
 	}
+	else
+		cout<<"accion invalida"<<endl;
 	
 	return accionValida;
 }

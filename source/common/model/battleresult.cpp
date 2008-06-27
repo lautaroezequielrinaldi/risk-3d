@@ -35,12 +35,12 @@ int BattleResult::getDefenderResult(){
 	return this->resultadoDefensor;
 }
 				
-void BattleResult::deletetAttackerArmy(){
-	this->resultadoAtacante--;	
+void BattleResult::incrementAttackerLostArmy(){
+	this->resultadoAtacante++;	
 }
 			
-void BattleResult::deletetDefenderArmy(){
-	this->resultadoDefensor--;	
+void BattleResult::incrementDefenderLostArmy(){
+	this->resultadoDefensor++;	
 }
 
 std::string BattleResult::serialize(){
