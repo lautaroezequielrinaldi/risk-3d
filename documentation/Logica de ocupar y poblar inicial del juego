@@ -1,0 +1,11 @@
+La logica de ocupamiento de tierras se realiza haciendo que cada jugador, por turno, ubique solo 1 ejercito en un pais libre para apropiarse de el.
+Esto se repite hasta que se ocupan todos los paises del mapa, momento en el cual el turno pasa al primer jugador aunque no respete como venia la ronda.
+
+La logica del poblar inicial se realiza haciendo que cada jugador en su turno vaya poblando sus tierras con los ejercitos
+que quedaron sin ubicar en el ocupamiento.
+Cuando un jugador termnina de ubicar los ejercitos que tenia, se pasa el turno para que haga lo mismo el proximo.
+Se puede ubicar la cantidad de ejercitos que el jugador quiera ( mientras los tenga)en sus diferentes tierras ocupadas .
+Esto se repite hasta que todos los jugadores se queden con 0 ejercitos para ubicar, momento en el cual el estado
+del juego pasa a "populating" y se le asigna el bonus correspondiente al jugador que empezara a poblar. ( sera el 1ero
+la 1er vez ).
+
