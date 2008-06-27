@@ -11,6 +11,15 @@ void GLMainLoop::dispatchMouseButtonDownEvent(const SDL_MouseButtonEvent& event)
 		ReferenceCountPtr<GL2DWidget> widget = *iterator2D;
 		widget->handleMouseButtonDownEvent(event);
     }
+
+   // Obtengo iterador para los widgets 3d registrados
+   GLWidgetManager::WidgetIterator3D iterator3D;
+
+	for (iterator3D = GLWidgetManager::first3DWidget(); iterator3D != GLWidgetManager::last3DWidget();
+		++iterator3D) {
+		ReferenceCountPtr<GL3DWidget> widget = *iterator3D;
+        widget->handleMouseButtonDownEvent(event);
+	}
 }
 
 void GLMainLoop::dispatchMouseButtonUpEvent(const SDL_MouseButtonEvent& event) {
@@ -21,6 +30,15 @@ void GLMainLoop::dispatchMouseButtonUpEvent(const SDL_MouseButtonEvent& event) {
 		++iterator2D) {
 		ReferenceCountPtr<GL2DWidget> widget = *iterator2D;
 		widget->handleMouseButtonUpEvent(event);
+	}
+
+   // Obtengo iterador para los widgets 3d registrados
+   GLWidgetManager::WidgetIterator3D iterator3D;
+
+   for (iterator3D = GLWidgetManager::first3DWidget(); iterator3D != GLWidgetManager::last3DWidget();
+		++iterator3D) {
+        ReferenceCountPtr<GL3DWidget> widget = *iterator3D;
+        widget->handleMouseButtonUpEvent(event);
 	}
 }
 
@@ -33,6 +51,15 @@ void GLMainLoop::dispatchMouseMotionEvent(const SDL_MouseMotionEvent& event) {
 		ReferenceCountPtr<GL2DWidget> widget = *iterator2D;
 		widget->handleMouseMotionEvent(event);
     }
+
+   // Obtengo iterador para los widgets 3d registrados
+   GLWidgetManager::WidgetIterator3D iterator3D;
+
+   for (iterator3D = GLWidgetManager::first3DWidget(); iterator3D != GLWidgetManager::last3DWidget();
+		++iterator3D) {
+        ReferenceCountPtr<GL3DWidget> widget = *iterator3D;
+		widget->handleMouseMotionEvent(event);
+	}
 }
 
 void GLMainLoop::dispatchKeyDownEvent(const SDL_KeyboardEvent& event) {
@@ -44,6 +71,15 @@ void GLMainLoop::dispatchKeyUpEvent(const SDL_KeyboardEvent& event) {
 }
 
 void GLMainLoop::renderScene() {
+	// Obtengo iterador para los widgets 3d registrados
+	GLWidgetManager::WidgetIterator3D iterator3D;
+
+	for (iterator3D = GLWidgetManager::first3DWidget(); iterator3D != GLWidgetManager::last3DWidget();
+		++iterator3D) {
+        ReferenceCountPtr<GL3DWidget> widget = *iterator3D;
+        widget->draw();
+	}
+   
 	// Obtengo iterador para los widgets 2d registrados
 	GLWidgetManager::WidgetIterator2D iterator2D;
 

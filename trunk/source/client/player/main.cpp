@@ -16,6 +16,7 @@
 #include "../common-ui/glmainloop.h"
 #include "../common-ui/glbutton.h"
 #include "../common-ui/gllabel.h"
+#include "../common-ui/glspherewidget.h"
 #include "../common-ui/mouseobserver.h"
 #include "../../common/smartpointer/referencecountptr.h"
 
@@ -99,46 +100,54 @@ int main(int argc, char** argv) {
 	JoinGame * joinGame = new JoinGame();
 
 	serverProxy->notify(joinGame);
+	delete joinGame;
 	std::cerr << "Escrito..." << std::endl;
 
 	serverProxy->start();
 
 
-	glutInit(&argc, argv);
-	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-		return 0;
-	}
-	SDL_Surface* screen = SDL_SetVideoMode(1024, 768, 32, SDL_OPENGL);
-	SimpleMouseObserver observer;
-
-	observer.setGameManager(gamemanager);
-
-	ReferenceCountPtr<GLButton> button( new GLButton("ReadyToPlay"));
-	button->setX(20);
-	button->setY(20);
-	button->addMouseObserver(&observer);
-
-	ReferenceCountPtr<GLButton> button2( new GLButton("Boton2!!!"));
-	button2->setX(70);
-	button2->setY(70);
-	button2->setEnabled(false);
-	button2->addMouseObserver(&observer);
-
-	ReferenceCountPtr<GLLabel> label( new GLLabel("Esto es un label muy largo largo largo Label!!!"));
-	label->setX(120);
-	label->setY(120);
-
-	GLWidgetManager::registerWidget(button);
-	GLWidgetManager::registerWidget(button2);
-	GLWidgetManager::registerWidget(label);
-	GLMainLoop::run();
-	SDL_FreeSurface(screen);
 	
-	serverProxy->cancel();
-	std::cerr << "Canceled" << std::endl;
+//	serverProxy->cancel();
+//	std::cerr << "Canceled" << std::endl;
 
 	// va a quedar bloqueado aca hasta que reciba un mensaje via socket
 	// para desbloquearse del read()
-	serverProxy->join();
-	std::cerr << "Joined" << std::endl;
+	//serverProxy->join();
+	//std::cerr << "Joined" << std::endl;
+
+
+if (true) {
+    glutInit(&argc, argv);
+    if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+        return 0;
+    }
+    SDL_Surface* screen = SDL_SetVideoMode(1024, 768, 32, SDL_OPENGL);
+    SimpleMouseObserver observer;
+
+    observer.setGameManager(gamemanager);
+
+    ReferenceCountPtr<GLButton> button( new GLButton("ReadyToPlay"));
+    button->setX(20);
+    button->setY(20);
+    button->addMouseObserver(&observer);
+
+    ReferenceCountPtr<GLButton> button2( new GLButton("Boton2!!!"));
+    button2->setX(70);
+    button2->setY(70);
+    button2->setEnabled(false);
+    button2->addMouseObserver(&observer);
+
+    ReferenceCountPtr<GLLabel> label( new GLLabel("Esto es un label muy largo largo largo Label!!!"));
+    label->setX(120);
+    label->setY(120);
+    ReferenceCountPtr<GLSphereWidget> sphere(new GLSphereWidget(0.3));
+
+    GLWidgetManager::register2DWidget(button);
+    GLWidgetManager::register2DWidget(button2);
+    GLWidgetManager::register2DWidget(label);
+    GLWidgetManager::register3DWidget(sphere);
+    GLMainLoop::run();
+
+    SDL_FreeSurface(screen);
+}
 }
