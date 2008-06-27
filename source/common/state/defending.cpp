@@ -37,6 +37,7 @@ bool Defending::defend(Defend & command){
 		BattleResult resultadoBatalla = batalla.start(this->gameManager);
 		
 		//notifico resultado batalla
+	
 		cout<<"RESULTADO DE LA BATALLA:"<<endl;
 		
 		if ( resultadoBatalla.getAttackerResult() < 0 )
@@ -50,15 +51,15 @@ bool Defending::defend(Defend & command){
  		cout<<"Pais atacado tiene: "<< paisA->getArmyCount() <<" ejercitos"<<endl;
 		cout<<"Pais atacante tiene: "<<paisD->getArmyCount() <<" ejercitos"<<endl;				
 		
-		
-				
-		//cambio a proximo estado : mover
-		this->gameManager->setCurrentState("moving");
-		cout<<"HORA DE MOVER EJERCITOS"<<endl;
+		//cambio a estado atacar nuevamente para que el jugador inicie nuevo ataque si asi lo desea.
+		this->gameManager->setCurrentState("attacking");
+		cout<<"PUEDE ATACAR NUEVAMENTE O TERMINAR AHORA."<<endl;
+	
 
 	} else {
 		//notificar error
 	}
+	
 	return accionValida;	
 }
 
