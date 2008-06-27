@@ -98,6 +98,11 @@ bool Mapa::areUninhabitedCountries(){
 
 }
 
+std::list<ReferenceCountPtr<Pais> >& Mapa::getCountryList(){
+	return this->paises;
+}
+
+
 Mapa::IteradorPais Mapa::primerPais() {
     return this->paises.begin();
 }

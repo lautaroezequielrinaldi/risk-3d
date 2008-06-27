@@ -2,6 +2,9 @@
 #include "../model/armybonuscalculator.h"
 #include "populate.h"
 
+#include<iostream>
+using namespace std;
+
 Populate::Populate(std::vector<std::string> &parameterList) : Command ()
 {
 	this->paisDestino = parameterList[0];
@@ -159,10 +162,14 @@ bool Populate::validate(ReferenceCountPtr<GameManager>& gameManager){
 		//si la cant de ejercitos a usar es menor o igual que la cantidad disponible del jugador
 		if (this->cantidadEjercitos <=  jugadorActual->getArmyCount() )
 			resul= true;
+		else
+			cout<<"no tenes esa cantidad de ejercitos disponibles!!!!!!!!!!!!!!!!!!!!!!"<<endl;
 	}
+	else
+		cout<<"no es tu pais!!!!!!!!!!!!!!!!!"<<endl;
 	
 	return resul;
-		
+	
 }
 
 bool Populate::validateOccupy(ReferenceCountPtr<GameManager>& gameManager){
@@ -170,15 +177,22 @@ bool Populate::validateOccupy(ReferenceCountPtr<GameManager>& gameManager){
 	bool res = false;
 
 	ReferenceCountPtr<Game> game = gameManager->getGame();
+
 	ReferenceCountPtr<Mapa> map = game->getMapa();
 	ReferenceCountPtr<Pais> paisD = map->obtenerPais(this->paisDestino);
+
 
 	// si pais destino esta vacio
 	if ( paisD->getArmyCount() == 0 ){
 		// si quiere ubicar solo 1 ejercito
 		if ( this->cantidadEjercitos == 1 )
 			res = true;
+		else
+			cout<<"NO PUEDE UBICAR MAS DE UN EJERCITO"<<endl;
 	}    
+	else
+		cout<<"PAIS YA OCUPADO"<<endl;
+
 
 	return res;
 }

@@ -64,12 +64,24 @@ class Attack : public Command
 		 */
 		virtual void execute(ReferenceCountPtr<State>& state);
 		
+		/**
+		 * Metodo cuyo proposito es obtener el nombre del comando.
+		 */
 		virtual std::string getName();
 		
+		/**
+		 * Metodo cuyo proposito es obtener el nombre del pais atacante.
+		 */
 		std::string getAttackerLand();
 		
+		/**
+		 * Metodo cuyo proposito es obtener el nombre del pais atacado.
+		 */
 		std::string getAttackedLand();
 		
+		/**
+		 * Metodo cuyo proposito es obtener la cantidad de ejercitos con los que se esta atacando.
+		 */
 		int getArmyCount();
 		
 		

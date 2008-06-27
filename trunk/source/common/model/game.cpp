@@ -117,6 +117,8 @@ int Game::getCountryOwner(std::string countryName){
 		//si el jugador actual es el dueño del pais consultado
 		if ( playerAct->landOwner(countryName) )
 			return playerAct->getColor();
+			
+		++it;
 	}
 	//en caso de que ningun jugador sea el dueño, devuelve cero.
 	return 0;

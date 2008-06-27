@@ -1,6 +1,9 @@
 #include<sstream>
 #include "defend.h"
 
+#include<iostream>
+
+using namespace std;
 
 Defend::Defend(std::vector<std::string> &parameterList) : Command ()
 {
@@ -156,9 +159,25 @@ bool Defend::validate(ReferenceCountPtr<GameManager>& gameManager){
 	ReferenceCountPtr<Mapa> map = game->getMapa();
 	ReferenceCountPtr<Pais> paisDefiende = map->obtenerPais(this->paisDefensor);
 	
-	/*si pais defensor defiende con 2 o menos ejercitos Y defiende con menos ejercitos de los que tiene*/
-	if ( paisDefiende->getArmyCount() <= 2  && this->cantidadEjercitos < paisDefiende->getArmyCount() )
-		defensaValida = true;
+	//obtengo jugador defensor ( al que atacaron en el ataque )
+	ReferenceCountPtr<Player> playerDef = game->getPlayer( gameManager->getTurnManager()->getDefenderPlayer() );
+	
+	// si el jugador seteado como defensor, es el dueño del pais con el que se mando la defensa
+	if( playerDef->landOwner( this->paisDefensor ) ){
+		//si el pais que fue atacado es igual al pais con el que se esta defendiendo el defensor
+		if( gameManager->getAttack().getAttackedLand() == this->getDefenderdLand()){
+			//si pais defensor defiende con 2 o menos ejercitos Y defiende con menos ejercitos de los que tiene
+			if ( this->cantidadEjercitos <= 2  && this->cantidadEjercitos < paisDefiende->getArmyCount() )
+				defensaValida = true;
+			else
+				cout<<"CANTIDAD DE EJERCITOS DEFENSORES INVALIDA"<<endl;
+		}
+		else
+			cout<<"DEFENSOR: TE ESTAS DEFENDIENDO CON UN PAIS TUYO QUE NO ES EL ATACADO"<<endl;
+	}
+	else
+		cout<<"DEFENSOR: POR QUE INTENTAS DEFENDERTE CON UN PAIS QUE NO ES TUYO? ES INVALIDO."<<endl;
+	
 	
 	return defensaValida;
 }
