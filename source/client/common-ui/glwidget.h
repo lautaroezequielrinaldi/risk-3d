@@ -1,4 +1,4 @@
-#ifndef __GLWIDGET_H__
+#ifndef __GLWDIGET_H__ 
 #define __GLWDIGET_H__
 
 #include<map> // Para definicion de std::map

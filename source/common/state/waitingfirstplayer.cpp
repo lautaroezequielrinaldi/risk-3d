@@ -15,7 +15,7 @@ WaitingFirstPlayer::~WaitingFirstPlayer()
 
 
 bool WaitingFirstPlayer::joinGame(JoinGame & command){
-	std::cerr << "Evento WaitingFirstPlayer::joinGame" << std::endl;
+	std::cout << "Evento WaitingFirstPlayer::joinGame" << std::endl;
 
 	gameManager->getTurnManager()->getCurrentPlayer();
 
