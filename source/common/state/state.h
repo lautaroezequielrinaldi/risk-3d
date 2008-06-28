@@ -6,30 +6,22 @@
 #include <iostream>
 
 class State;
-/*
-#include "../commands/attack.h"
-#include "../commands/defend.h"
-#include "../commands/joingame.h"
-#include "../commands/move.h"
-#include "../commands/selectmap.h"
-#include "../commands/populate.h"
-#include "../commands/readytoplay.h"
-#include "../commands/nomore.h"
-#include "../commands/surrender.h"
-#include "../commands/quit.h"
-*/
+
 
 class GameManager;
 
 class Attack;
 class Chat;
 class Defend;
+class DidIWin;
 class JoinGame;
 class Move;
+class MapList;
 class SelectMap;
 class Populate;
 class ReadyToPlay;
 class NoMore;
+class NoRoom;
 class Surrender;
 class Quit;
 class YouAre;
@@ -39,8 +31,7 @@ class Win;
 class TurnToAttack;
 class TurnToMove;
 class TurnToOccupy;
-class SetOwner;
-class Kill;
+
 
 class State {
 
@@ -89,12 +80,13 @@ class State {
 		// virtual bool battleResult(BattleResult & command);
 		virtual bool lose(Lose & command);
 		virtual bool map(Map & command);
+		virtual bool mapList(MapList & command);
 		virtual bool turnToAttack(TurnToAttack & command);
 		virtual bool turnToMove(TurnToMove & command);
 		virtual bool turnToOccupy(TurnToOccupy & command);
 		virtual bool win(Win & command);
-		virtual bool setOwner(SetOwner & command);
-		virtual bool kill(Kill & command);
+		virtual bool didIWin(DidIWin & command);
+		virtual bool noRoom(NoRoom & command);
 
 
 };

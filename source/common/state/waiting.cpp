@@ -42,21 +42,13 @@ bool Waiting::turnToAttack(TurnToAttack & command){
 	return false;
 }
 
-bool Waiting::kill(Kill & command){
-	std::cerr << "Evento Waiting::kill" << std::endl;
 
-	return false;
-}
 bool Waiting::move(Move & command){
 	std::cerr << "Evento Waiting::move" << std::endl;
 
 	return false;
 }
-bool Waiting::setOwner(SetOwner & command){
-	std::cerr << "Evento Waiting::setOwner" << std::endl;
 
-	return false;
-}
 bool Waiting::lose(Lose & command){
 	std::cerr << "Evento Waiting::lose" << std::endl;
 

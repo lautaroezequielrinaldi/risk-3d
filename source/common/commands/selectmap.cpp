@@ -18,7 +18,7 @@ SelectMap::~SelectMap()
 }
 
 std::string SelectMap::serialize(){
-	return "<?xml version=\"1.0\"?><selectmap><map>mapa 1</map><map>mapa 2</map></selectmap>";
+	return "<?xml version=\"1.0\"?><selectmap><from>$player</from><to>0</to><map>$map</map></selectmap>";
   
 }
 
