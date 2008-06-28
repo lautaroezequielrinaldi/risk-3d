@@ -11,6 +11,8 @@ Attack::Attack(std::vector<std::string> & parameterList):Command ()
 	this->paisAtacante = parameterList[0];
 	this->paisAtacado = parameterList[1];
 	this->cantidadEjercitos = atoi (parameterList[2].c_str() );
+	this->jugadorAtacante = atoi (parameterList[3].c_str() );
+	this->jugadorDefensor = atoi (parameterList[4].c_str() );
 }
 
 Attack::Attack(std::string xml):Command (){
@@ -29,9 +31,27 @@ Attack::~Attack()
 }
 
 std::string Attack::serialize(){
-	return "<?xml version=\"1.0\"?><attack><from>$player</from><to>$player</to><source>$country</source><target>$country</target><army>$armies</army></attack>";
+
+	//return //"<attack><from>$player</from><to>$player</to><source>$country</source><target>$country</target><army>$armies</army></attack>";
+
 	std::string ataqueSeralizado;
+
+
+	//conversion de entero a string para la cantidad de ejercitos
+  	std::ostringstream strCantEjercitos;
+   	strCantEjercitos << this->cantidadEjercitos;
+
+	ataqueSeralizado = "<?xml version=\"1.0\"?><attack>";
 	
+	std::string xmlComando = Command::serialize(this->jugadorAtacante, this->jugadorDefensor);
+
+	std::string xmlAttack = "<pais-atacante>"+this->paisAtacante+"</pais-atacante><pais-atacado>"+this->paisAtacado
+				+"</pais-atacado><cantidad-ejercitos>"+strCantEjercitos.str()+"</cantidad-ejercitos></attack>";
+
+	ataqueSeralizado += xmlComando + xmlAttack;
+
+	
+/*
 	// creo documento
 	xmlDocPtr docAtaque;
 	// defino nodo raiz
@@ -69,14 +89,14 @@ std::string Attack::serialize(){
     // dejo el document en un buffer
     xmlDocDumpFormatMemory(docAtaque, &xmlbuff, &buffersize, 1);
    
-   /*seteo el string que se devolvera almacenando al XML*/
+   //seteo el string que se devolvera almacenando al XML
     ataqueSeralizado.assign((char*)xmlbuff);
 	
 	//libero memoria utilizada
     xmlFree(xmlbuff);
     xmlFreeDoc(docAtaque);
     xmlCleanupParser();
-    
+    */
     return ataqueSeralizado;
   
 }
@@ -232,6 +252,14 @@ std::string Attack::getAttackedLand(){
 
 int Attack::getArmyCount(){
 	return this->cantidadEjercitos;
+}
+
+int Attack::getAttackerId(){
+	return this->jugadorAtacante;
+}
+
+int Attack::getAttackedId(){
+	return this->jugadorDefensor;
 }
 
 

@@ -21,6 +21,9 @@ class Attack : public Command
 		std::string paisAtacante;
 		std::string paisAtacado;
 		int cantidadEjercitos;
+
+		int jugadorAtacante;
+		int jugadorDefensor;
 	
 	public:
 		
@@ -84,6 +87,16 @@ class Attack : public Command
 		 */
 		int getArmyCount();
 		
+		/**
+		 * Metodo cuyo proposito es obtener el codigo del jugador atacante
+		 */
+		int getAttackerId();
+
+		/**
+		 * Metodo cuyo proposito es obtener el codigo del jugador atacado.
+		 */
+		int getAttackedId();
+
 		
 };
 
