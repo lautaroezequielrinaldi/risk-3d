@@ -88,8 +88,7 @@ int main(int argc, char** argv) {
 
 	gamemanager->setStateMachine(stateMachine);
 	std::cerr<< "StateMachine asigned" << std::endl;
-
-/*	Socket * socket = new Socket("localhost", 2000);
+	Socket * socket = new Socket("localhost", 2000);
 	std::cerr<< "Socket created" << std::endl;
 
 	ReferenceCountPtr<ServerProxy> serverProxy= new ServerProxy(socket, gamemanager);
@@ -114,9 +113,11 @@ int main(int argc, char** argv) {
 	// para desbloquearse del read()
 	//serverProxy->join();
 	//std::cerr << "Joined" << std::endl;
+	while (true) {
 
-*/
-if (true) {
+	}
+
+if (false) {
     glutInit(&argc, argv);
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
         return 0;

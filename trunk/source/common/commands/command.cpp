@@ -2,7 +2,7 @@
 #include <sstream>
 
 Command::Command():Serializable() {
-	
+	valid = false;
 }
 
 Command::~Command()
