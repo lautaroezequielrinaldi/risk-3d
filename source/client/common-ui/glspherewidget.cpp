@@ -1,5 +1,7 @@
 #include "glspherewidget.h"
-#include<iostream>
+// Almacena el valor de la constante PI
+const double PI = 3.1415926535897932384626433832795;
+
 void GLSphereWidget::loadTexture(const std::string& imageFileName) {
     glEnable(GL_TEXTURE_2D);
     SDL_Surface * mapaSurface = IMG_Load(imageFileName.c_str());
@@ -18,6 +20,13 @@ void GLSphereWidget::loadTexture(const std::string& imageFileName) {
         glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_NEAREST);
         glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR_MIPMAP_LINEAR);
     }
+}
+
+void GLSphereWidget::update() {
+	lastTime = SDL_GetTicks();
+    int newTime = SDL_GetTicks();
+    double deltaTime = (newTime - lastTime) / 1000.0;
+    lastTime = newTime;
 }
 
 void GLSphereWidget::drawWidget() {
@@ -57,6 +66,32 @@ void GLSphereWidget::drawWidget() {
 	glPopMatrix();
 }
 
+void GLSphereWidget::handleKeyDownEvent(const SDL_KeyboardEvent& event) {
+    double distancePrime = 0.0, alphaPrime = 0.0, betaPrime = 0.0;
+
+    if (event.keysym.sym == SDLK_LEFT)
+        alphaPrime -= 0.5;
+    if (event.keysym.sym == SDLK_RIGHT)
+        alphaPrime += 0.5;
+    if (event.keysym.sym == SDLK_DOWN)
+        betaPrime -= 0.5;
+    if (event.keysym.sym == SDLK_UP)
+        betaPrime += 0.5;
+    if (event.keysym.sym == SDLK_PAGEDOWN)
+        distancePrime += 5.0;
+    if (event.keysym.sym == SDLK_PAGEUP)
+        distancePrime -= 5.0;
+
+    alpha += deltaTime * alphaPrime;
+    beta += deltaTime * betaPrime;
+    distance += deltaTime * distancePrime;
+
+    alpha = (alpha > 2 * PI) ? alpha - 2 * PI : alpha;
+    alpha = (alpha < -2 * PI) ? alpha +  2 * PI : alpha;
+    beta = (beta > 1.0) ? 1.0 : beta;
+    beta = (beta < -1.0) ? -1.0 : beta;
+}
+
 GLSphereWidget::GLSphereWidget(const std::string& imageFileName, const float& radius): GL3DWidget(), texture(0), sphere(NULL), radius(radius) {
     sphere = gluNewQuadric();
     gluQuadricDrawStyle (sphere, GLU_FILL);
@@ -65,6 +100,11 @@ GLSphereWidget::GLSphereWidget(const std::string& imageFileName, const float& ra
 	this->setTexture(imageFileName);
 	this->setBackgroundColor(GLWIDGET_ACTIVE, Color::RED);
 	this->setBackgroundColor(GLWIDGET_INACTIVE, Color::BLUE);
+	this->lastTime = 0.0;
+	this->deltaTime = 0.0;
+	this->alpha = 0.0;
+	this->beta = 0.0;
+	this->distance = 2.0;
 }
 
 void GLSphereWidget::setTexture(const std::string& imageFileName) {

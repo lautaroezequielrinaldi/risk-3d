@@ -21,7 +21,26 @@ class GLSphereWidget: public GL3DWidget {
 		 * Almacena el radio de la esfera.
 		 */
 		float radius;
-
+		/**
+		 * Almacena el ultimo tiempo de tick SDL.
+		 */
+		double lastTime;
+		/**
+		 * Almacena el delta de tiempo de tick SDL.
+		 */
+		double deltaTime;
+		/**
+		 * Almacena el angulo alfa de la esfera.
+		 */
+		float alpha;
+		/**
+		 * Almacena el angulo beta de la esfera.
+		 */
+		float beta;
+		/**
+		 * Almacena la distancia de la esfera.
+		 */
+		float distance;
 	/**
 	 * Metodos protegidos de la clase GLSphereWidget.
 	 */
@@ -31,10 +50,17 @@ class GLSphereWidget: public GL3DWidget {
 		 */
 		void loadTexture(const std::string& imageFileName);
 		/**
+		 * Hace update del widget.
+		 */
+		virtual void update();
+		/**
 		 * Dibuja el widget.
 		 */
 		virtual void drawWidget();
-
+		/**
+		 * Maneja el evento key down.
+		 */
+		virtual void handleKeyDownEvent(const SDL_KeyboardEvent& event);
 	/**
 	 * Metodos publicos de la clase GLSphereWidget.
 	 */
