@@ -7,7 +7,11 @@
 
 #include "command.h"
 class MapList: public Command {
+
+	private:
+		int numeroJugador;
 	public:
+	MapList(std::vector<std::string> &parameterList);
 	MapList();
 	virtual ~MapList();
 		/**

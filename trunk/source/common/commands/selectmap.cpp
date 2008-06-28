@@ -2,8 +2,8 @@
 
 SelectMap::SelectMap(std::vector<std::string> &parameterList) : Command ()
 {
-
 	this->numeroJugador = atoi (parameterList[0].c_str() );
+	this->nombreMapa = parameterList[1];
 }
 
 SelectMap::SelectMap(std::string xml):Command (){
@@ -20,7 +20,7 @@ SelectMap::~SelectMap()
 }
 
 std::string SelectMap::serialize(){
-	return "<?xml version=\"1.0\"?><selectmap>"+Command::serialize(0,numeroJugador)+"<map>$map</map></selectmap>";
+	return "<?xml version=\"1.0\"?><selectmap>"+Command::serialize(numeroJugador,0)+"<map>"+nombreMapa+"</map></selectmap>";
   
 }
 

@@ -3,7 +3,9 @@
 
 Lose::Lose(std::vector<std::string> & parameterList):Command ()
 {
-	/*construyo el objeto a partir de los parametros pasados en la lista*/
+
+
+	this->numeroJugador = atoi (parameterList[0].c_str() );
 	
 }
 
@@ -23,7 +25,7 @@ Lose::~Lose()
 }
 
 std::string Lose::serialize(){
-	 return "<?xml version=\"1.0\"?><lose><from>0</from><to>$player</to></lose>";
+	 return "<?xml version=\"1.0\"?><lose>"+Command::serialize(0,numeroJugador)+"</lose>";
 }
 
 void* Lose::hydrate(std::string xml){

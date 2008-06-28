@@ -8,7 +8,7 @@ NoRoom::~NoRoom(){
 }
 
 std::string NoRoom::serialize(){
-	return "<?xml version=\"1.0\"?><NoRoom><from>0</player><to>0</to><msg>$message></msg></NoRoom>";
+	return "<?xml version=\"1.0\"?><NoRoom>"+Command::serialize(0,0)+"</NoRoom>";
 }
 bool NoRoom::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return false;

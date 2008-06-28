@@ -16,7 +16,7 @@ NoMore::~NoMore(){
 }
 
 std::string NoMore::serialize(){
-	return "<?xml version=\"1.0\"?><nomore>"+Command::serialize(0,numeroJugador)+"</nomore>";
+	return "<?xml version=\"1.0\"?><nomore>"+Command::serialize(numeroJugador,0)+"</nomore>";
 }
 bool NoMore::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return false;

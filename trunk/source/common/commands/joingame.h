@@ -13,8 +13,7 @@ class JoinGame : public Command
 {
 	
 	private:
-	
-		std::string name;
+		int numeroJugador;
 	
 	public:
 	
