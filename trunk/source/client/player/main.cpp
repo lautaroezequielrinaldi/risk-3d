@@ -46,7 +46,7 @@ class SimpleMouseObserver: public MouseObserver {
 		ReferenceCountPtr<GameManager> gamemanager;
 };
 
-int main(int argc, char** argv) {
+int main1(int argc, char** argv) {
 
 	// Aca iria el codigo del cliente
 	/*

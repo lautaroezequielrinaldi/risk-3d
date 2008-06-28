@@ -31,19 +31,21 @@ BattleResult Battle::compareDice(std::list<int>attackerDice, std::list<int> defe
 	BattleResult resultadoBatalla(this->ataque.getAttackerLand(),this->defensa.getDefenderdLand() );
 	
 	// iteradores para recorrer lista de valores de dados
-	std::list<int>::iterator itDef;
-	std::list<int>::iterator itAt;
+	std::list<int>::reverse_iterator itDef;
+	std::list<int>::reverse_iterator itAt;
 	
-	//ordeno los vectores de valores de dados de menor a mayor
+	//ordeno los vectores de valores de dados de  *_ menor a mayor _*
 	attackerDice.sort();
 	defenderDice.sort();
-	
+			
 	// comparo los valores de los dados del atacante con los del defensor.
 	//se compara hasta que terminan los del defensor ya que es quien tiene la posibilidad de elegir menos dados.
-	itDef =defenderDice.end() ;
-	itAt = attackerDice.end() ;
-	
-	while ( itDef != defenderDice.begin() ){
+	// rbegin deja apuntando el iterador en el ultimo elem de la lista 
+	itDef =defenderDice.rbegin() ;
+	itAt = attackerDice.rbegin() ;
+
+	while ( itDef != defenderDice.rend() ){
+
 		//gano el atacante
 		if ( *itAt > *itDef )
 			//incremento la cant de ejercitos perdidos por el defensor
@@ -53,8 +55,8 @@ BattleResult Battle::compareDice(std::list<int>attackerDice, std::list<int> defe
 			//incremento la cant de ejercitos perdidos por el atacante
 			resultadoBatalla.incrementAttackerLostArmy();
 		
-		--itDef;
-		--itAt;
+		++itDef;
+		++itAt;
 		
 	}
 	

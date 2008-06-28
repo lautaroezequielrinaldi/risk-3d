@@ -164,10 +164,16 @@ bool Defend::validate(ReferenceCountPtr<GameManager>& gameManager){
 	
 	// si el jugador seteado como defensor, es el dueño del pais con el que se mando la defensa
 	if( playerDef->landOwner( this->paisDefensor ) ){
+		
 		//si el pais que fue atacado es igual al pais con el que se esta defendiendo el defensor
 		if( gameManager->getAttack().getAttackedLand() == this->getDefenderdLand()){
-			//si pais defensor defiende con 2 o menos ejercitos Y defiende con menos ejercitos de los que tiene
-			if ( this->cantidadEjercitos <= 2  && this->cantidadEjercitos < paisDefiende->getArmyCount() )
+			
+			// si pais defensor defiende con 2 o menos ejercitos Y 
+			// defiende con menos ejercitos de los que tiene y
+			// defiende con una cantidad de ejercitos <= que la cant de ejercitos con los que se ataco			
+			if ( this->cantidadEjercitos <= 2  && this->cantidadEjercitos < paisDefiende->getArmyCount()
+			     && this->cantidadEjercitos <= gameManager->getAttack().getArmyCount() )
+				
 				defensaValida = true;
 			else
 				cout<<"CANTIDAD DE EJERCITOS DEFENSORES INVALIDA"<<endl;
