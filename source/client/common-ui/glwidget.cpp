@@ -1,5 +1,4 @@
 #include "glwidget.h"
-
 long GLWidget::idCounter = 0;
 
 void GLWidget::incrementIdCounter() {
@@ -24,6 +23,10 @@ GLWidgetStateType GLWidget::getState() {
 
 void GLWidget::setState(const GLWidgetStateType& type) {
 	this->state = type;
+}
+
+void GLWidget::update() {
+
 }
 
 void GLWidget::handleMouseButtonDownEvent(const SDL_MouseButtonEvent& event) {

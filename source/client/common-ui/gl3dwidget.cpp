@@ -1,5 +1,4 @@
 #include "gl3dwidget.h"
-
 void GL3DWidget::preDrawWidget() {
     // Obtengo la dimension del viewport.
 	GLfloat viewportDimension[4];

@@ -1,5 +1,5 @@
 #include "glspherewidget.h"
-
+#include<iostream>
 void GLSphereWidget::loadTexture(const std::string& imageFileName) {
     glEnable(GL_TEXTURE_2D);
     SDL_Surface * mapaSurface = IMG_Load(imageFileName.c_str());
@@ -20,7 +20,7 @@ void GLSphereWidget::loadTexture(const std::string& imageFileName) {
     }
 }
 
-void GLSphereWidget::drawWidget(){
+void GLSphereWidget::drawWidget() {
     // Cargo la matriz de proyeccion.
 	glMatrixMode(GL_PROJECTION);
 	// Cargo la identidad
@@ -44,10 +44,8 @@ void GLSphereWidget::drawWidget(){
     glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
     glEnable(GL_TEXTURE_GEN_S);
     glEnable(GL_TEXTURE_GEN_T);
-
 	// Dibujo esfera
     gluSphere(sphere, radius, 20, 20);
-
 	// Deshabilito la textura
     glDisable(GL_TEXTURE_GEN_S);
     glDisable(GL_TEXTURE_GEN_T);
