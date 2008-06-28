@@ -60,6 +60,7 @@ class Command : public Serializable
 		std::string getMainMsg();
 
 		std::string getSecMsg();
+		virtual std::string serialize() = 0;
 		std::string serialize(int from, int to);
 
 		virtual std::string getName() = 0;
