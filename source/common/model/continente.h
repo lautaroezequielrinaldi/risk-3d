@@ -92,6 +92,7 @@ class Continente {
          * NULL si el pais no se encuentra.
          */
         ReferenceCountPtr<Pais> obtenerPais(const std::string& nombre);
+               
         /**
          * Mètodo cuyo propòsito es obtener un iterador apuntando
          * al primer pais del continente.

@@ -98,7 +98,7 @@ BattleResult Battle::start(ReferenceCountPtr<GameManager>& gameManager){
 	paisDefensor->removeArmies(resultadoBatalla.getDefenderResult());
 
 
-	// verifico si hubo conquista de pais
+	// verifico si hubo conquista de pais defensor
 
 	// si pais defensor se quedo con cero ejercitos
 	if ( paisDefensor->getArmyCount() == 0  ){
@@ -120,7 +120,6 @@ BattleResult Battle::start(ReferenceCountPtr<GameManager>& gameManager){
 		cout<<"el pais "<<this->ataque.getAttackerLand()<<"que ataco, se quedo con ejercitos: "<<paisAtacante->getArmyCount()<<endl;
 	}
 
-		
 	// verificar si hubo conquista de continente
 
 		
