@@ -4,17 +4,20 @@ CommandHydrator::CommandHydrator(){
 	commands.insert(std::make_pair("attack",new Attack()));
 	//commands.insert(std::make_pair("chat",new Chat()));
 	commands.insert(std::make_pair("defend",new Defend()));
+	commands.insert(std::make_pair("didIWin",new DidIWin()));
 	commands.insert(std::make_pair("joinGame",new JoinGame()));
-	commands.insert(std::make_pair("kill",new Kill()));
+	
 	commands.insert(std::make_pair("lose",new Lose()));
 	commands.insert(std::make_pair("map",new Map()));
+	commands.insert(std::make_pair("mapList",new MapList()));
 	commands.insert(std::make_pair("move",new Move()));
 	commands.insert(std::make_pair("noMore",new NoMore()));
+	commands.insert(std::make_pair("noRoom",new NoRoom()));
 	commands.insert(std::make_pair("populate",new Populate()));
 	commands.insert(std::make_pair("quit",new Quit()));
 	commands.insert(std::make_pair("readytoplay",new ReadyToPlay()));
 	commands.insert(std::make_pair("selectMap",new SelectMap()));
-	commands.insert(std::make_pair("setOwner",new SetOwner()));
+	
 	commands.insert(std::make_pair("surrender",new Surrender()));
 	commands.insert(std::make_pair("turnToAttack",new TurnToAttack()));
 	commands.insert(std::make_pair("turnTomMve",new TurnToMove()));

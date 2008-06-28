@@ -1,15 +1,15 @@
-#ifndef __CHAT_H__
-#define __CHAT_H__
+#ifndef __NOROOM_H__
+#define __NOROOM_H__
 
 /**
- * client => server => client
+ * server => client
  */
 
 #include "command.h"
-class Chat: public Command {
+class NoRoom: public Command {
 	public:
-	Chat();
-	virtual ~Chat();
+	NoRoom();
+	virtual ~NoRoom();
 		/**
 		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.
 		 */
@@ -25,8 +25,7 @@ class Chat: public Command {
 		bool validate(ReferenceCountPtr<GameManager>& gameManager);
 	virtual void execute(ReferenceCountPtr<State>& state);
 		
-
 		virtual std::string getName();
 };
 
-#endif /* __CHAT_H__*/
+#endif /* __NOROOM_H__*/

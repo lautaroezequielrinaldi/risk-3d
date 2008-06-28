@@ -8,6 +8,7 @@
 #include "../commands/populate.h"
 #include "../commands/readytoplay.h"
 #include "../commands/nomore.h"
+#include "../commands/noroom.h"
 #include "../commands/surrender.h"
 #include "../commands/quit.h"
 #include "../commands/win.h"
@@ -17,8 +18,8 @@
 #include "../commands/turntoattack.h"
 #include "../commands/turntomove.h"
 #include "../commands/turntooccupy.h"
-#include "../commands/setowner.h"
-#include "../commands/kill.h"
+#include "../commands/didiwin.h"
+#include "../commands/maplist.h"
 
 
 #include "../model/gamemanager.h"
@@ -67,7 +68,7 @@ bool State::joinGame(JoinGame & command){
 	command.setSecMsg("Un jugador intentó conectarse con el partido iniciado");
 	return false;
 }
-//virtual bool State::kill(Kill & move);
+
 bool State::move(Move & command){
 	command.setMainMsg("Intento de movimiento en momento inoportuno");
 	command.setSecMsg("El jugador ... intentó moverse cuando no le tocaba");
@@ -81,7 +82,7 @@ bool State::selectMap(SelectMap & command){
         return false;
 }
 
-//bool virtual setOwner(SetOwner & command);
+
 bool State::populate(Populate & command){
 	command.setMainMsg("Intento de poblar en momento inoportuno");
 	command.setSecMsg("El jugador ... intentó poblar cuando no le tocaba");
@@ -92,6 +93,13 @@ bool State::populate(Populate & command){
 bool State::readyToPlay(ReadyToPlay & command){
 	command.setMainMsg("Intento de aceptar el juego en momento inoportuno");
 	command.setSecMsg("El jugador ... intentó aceptar el juego cuando no le tocaba");
+
+	return false;
+}
+
+bool State::didIWin(DidIWin & command){
+	command.setMainMsg("Intento de terminar etapa en momento inoportuno");
+	command.setSecMsg("El jugador ... intentó terminar etapa cuando no le tocaba");
 
 	return false;
 }
@@ -147,11 +155,12 @@ bool State::win(Win & command) {
 	return false;
 }
 
-bool State::setOwner(SetOwner & command){
+bool State::noRoom(NoRoom & command){
 	return false;
 }
 
-bool State::kill(Kill & command){
+bool State::mapList(MapList & command){
 	return false;
 }
+
 
