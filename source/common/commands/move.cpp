@@ -1,6 +1,9 @@
 #include <sstream>
 #include "move.h"
 
+#include<iostream>
+using namespace std;
+
 Move::Move(std::vector<std::string> &parameterList): Command ()
 {
 	this->paisOrigen = parameterList[0];
@@ -189,14 +192,22 @@ bool Move::validate(ReferenceCountPtr<GameManager>& gameManager){
 	if( jugadorActual->landOwner(this->paisOrigen) ){
 	//si el pais destino es del jugador actual
 		if( jugadorActual->landOwner(this->paisDestino) ){	
-			/*si pais origen es adyacente al pais destino*/
+			//si pais origen es adyacente al pais destino
 			if( paisO->esAdyacente(this->paisDestino)){
-				/*si la cantidad de ejercitos a mover es menor a la cantidad de ejercitos que tiene el pais origen*/
+				//si la cantidad de ejercitos a mover es menor a la cantidad de ejercitos que tiene el pais origen
 				if ( this->cantidadEjercitos < paisO->getArmyCount() )
 					movimValido = true;
+				else
+					cout<<"error, solo se puede mover una cantidad de ejercitos MENOR al total que posee el pais"<<endl;
 			}
+			else
+				cout<<"solo se permiten movimientos entre paises adyacentes, error."<<endl;
 		}
+		else
+			cout<<"el pais destino al cual queres mover ejercitos......no es tuyo!!!"<<endl;
 	}
+	else
+		cout<<"el pais origen desde el cual queres mover ejercitos......no es tuyo!!!"<<endl;
 		
 	return movimValido;
 	

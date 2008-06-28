@@ -169,9 +169,9 @@ bool Defend::validate(ReferenceCountPtr<GameManager>& gameManager){
 		if( gameManager->getAttack().getAttackedLand() == this->getDefenderdLand()){
 			
 			// si pais defensor defiende con 2 o menos ejercitos Y 
-			// defiende con menos ejercitos de los que tiene y
+			// defiende con menos o igual ejercitos de los que tiene y
 			// defiende con una cantidad de ejercitos <= que la cant de ejercitos con los que se ataco			
-			if ( this->cantidadEjercitos <= 2  && this->cantidadEjercitos < paisDefiende->getArmyCount()
+			if ( this->cantidadEjercitos <= 2  && this->cantidadEjercitos <= paisDefiende->getArmyCount()
 			     && this->cantidadEjercitos <= gameManager->getAttack().getArmyCount() )
 				
 				defensaValida = true;
