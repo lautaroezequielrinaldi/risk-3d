@@ -46,7 +46,7 @@ class SimpleMouseObserver: public MouseObserver {
 		ReferenceCountPtr<GameManager> gamemanager;
 };
 
-int main1(int argc, char** argv) {
+int main(int argc, char** argv) {
 
 	// Aca iria el codigo del cliente
 	/*
@@ -89,7 +89,7 @@ int main1(int argc, char** argv) {
 	gamemanager->setStateMachine(stateMachine);
 	std::cerr<< "StateMachine asigned" << std::endl;
 
-	Socket * socket = new Socket("localhost", 2000);
+/*	Socket * socket = new Socket("localhost", 2000);
 	std::cerr<< "Socket created" << std::endl;
 
 	ReferenceCountPtr<ServerProxy> serverProxy= new ServerProxy(socket, gamemanager);
@@ -115,10 +115,10 @@ int main1(int argc, char** argv) {
 	//serverProxy->join();
 	//std::cerr << "Joined" << std::endl;
 
-
+*/
 if (true) {
     glutInit(&argc, argv);
-    if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
         return 0;
     }
     SDL_Surface* screen = SDL_SetVideoMode(1024, 768, 32, SDL_OPENGL);
@@ -140,7 +140,7 @@ if (true) {
     ReferenceCountPtr<GLLabel> label( new GLLabel("Esto es un label muy largo largo largo Label!!!"));
     label->setX(120);
     label->setY(120);
-    ReferenceCountPtr<GLSphereWidget> sphere(new GLSphereWidget(0.3));
+    ReferenceCountPtr<GLSphereWidget> sphere(new GLSphereWidget("mapa.jpg", 0.3));
 
     GLWidgetManager::register2DWidget(button);
     GLWidgetManager::register2DWidget(button2);

@@ -98,6 +98,7 @@ CLIENTLIB += $(shell  pkg-config --libs sdl)
 CLIENTLIB += -lGL
 CLIENTLIB += -lGLU
 CLIENTLIB += -lglut
+CLIENTLIB += -lSDL_image
 # Librerìas usadas por el editor
 EDITORLIB = $(COMMONLIB)
 EDITORLIB += $(shell  pkg-config --libs gtkmm-2.4)

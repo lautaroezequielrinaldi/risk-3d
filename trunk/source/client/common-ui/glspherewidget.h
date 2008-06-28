@@ -1,6 +1,7 @@
 #ifndef __GLSPHEREWIDGET_H__
 #define __GLSPHEREWIDGET_H__
 
+#include<string>
 #include "gl3dwidget.h"
 
 class GLSphereWidget: public GL3DWidget {
@@ -8,6 +9,10 @@ class GLSphereWidget: public GL3DWidget {
 	 * Atributos privados de la clase GLSphereWidget.
 	 */
 	private:
+		/**
+		 * Almacena la textura OpenGL a usar con la esfera.
+		 */
+		GLuint texture;
 		/**
 		 * Almacena el objeto quadrico para representar la esfera.
 		 */
@@ -22,6 +27,10 @@ class GLSphereWidget: public GL3DWidget {
 	 */
 	protected:
 		/**
+		 * Load texture.
+		 */
+		void loadTexture(const std::string& imageFileName);
+		/**
 		 * Dibuja el widget.
 		 */
 		virtual void drawWidget();
@@ -33,7 +42,11 @@ class GLSphereWidget: public GL3DWidget {
 		/**
 		 * Constructor de la clase GLSphereWidget.
 		 */
-		GLSphereWidget(const float& radius = 1.0f);
+		GLSphereWidget(const std::string& imageFileName, const float& radius = 1.0f);
+		/**
+		 * Carga la textura a la esfera.
+		 */
+		void setTexture(const std::string& imageFileName);
 		/**
 		 * Destructor virtual de la clase GLSphereWidget.
 		 */
