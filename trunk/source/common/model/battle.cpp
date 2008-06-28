@@ -120,8 +120,8 @@ BattleResult Battle::start(ReferenceCountPtr<GameManager>& gameManager){
 		cout<<"el pais "<<this->ataque.getAttackerLand()<<"que ataco, se quedo con ejercitos: "<<paisAtacante->getArmyCount()<<endl;
 	}
 
-	// verificar si hubo conquista de continente
-
+	// verificar si hubo conquista de continente por parte del atacante
+	//if ( game->conformContinent(playerAtacante->getConqueredLandList() ) )
 		
 	
 	return resultadoBatalla;

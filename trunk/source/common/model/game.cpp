@@ -125,17 +125,17 @@ int Game::getCountryOwner(std::string countryName){
 	
 }
 
-bool Game::conformContinent(std::list<ReferenceCountPtr<Pais> > countryList){
+bool Game::conformContinent(std::list<std::string> countryList){
 
 	bool termino = false;
 	bool contienePaises=true;
 	ReferenceCountPtr<Mapa> map = this->getMapa();
-	ReferenceCountPtr<Pais> paisActual=NULL;
+	std::string paisActual;
 
 	//std::list<Continente>::iterator itContinente;
 	Mapa::IteradorContinente itContinente;
 	itContinente = map->primerContinente();
-	std::list<ReferenceCountPtr<Pais> >::iterator itPais;
+	std::list<std::string>::iterator itPais;
 
 	//recorro lista de continentes
 	while ( itContinente != map->ultimoContinente() && !termino){
@@ -154,7 +154,7 @@ bool Game::conformContinent(std::list<ReferenceCountPtr<Pais> > countryList){
 				paisActual = *itPais;				
 
 				// si el continente no encuentra el pais pedido
-				if ( continente->obtenerPais(paisActual->getNombre() ) == NULL )
+				if ( continente->obtenerPais(paisActual) == NULL )
 					contienePaises=false;
 				else
 					++itPais;
