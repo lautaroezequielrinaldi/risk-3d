@@ -18,6 +18,9 @@ class Defend : public Command
 	
 		std::string paisDefensor;
 		int cantidadEjercitos;
+
+		int jugadorAtacante;
+		int jugadorDefensor;
 	
 	public:
 		
@@ -63,8 +66,19 @@ class Defend : public Command
 		std::string getDefenderdLand();
 		
 		int getArmyCount();
+
+		/**
+		 * Metodo cuyo proposito es obtener el codigo del jugador atacante
+		 */
+		int getAttackerId();
+
+		/**
+		 * Metodo cuyo proposito es obtener el codigo del jugador atacado.
+		 */
+		int getAttackedId();
+
 		
-};
+};	
 
 #endif /*DEFEND_H_*/
 

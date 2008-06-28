@@ -9,6 +9,8 @@ Defend::Defend(std::vector<std::string> &parameterList) : Command ()
 {
 	this->paisDefensor = parameterList[0];
 	this->cantidadEjercitos = atoi ( parameterList[1].c_str() );
+	this->jugadorAtacante = atoi (parameterList[2].c_str() );
+	this->jugadorDefensor = atoi (parameterList[3].c_str() );
 	
 }
 
@@ -26,9 +28,25 @@ Defend::~Defend()
 }
 
 std::string Defend::serialize(){
-	return "<?xml version=\"1.0\"?><defend><from>$player</from><to>$player</to><army>$armies</army></defend>";
+	//return "<?xml version=\"1.0\"?><defend><from>$player</from><to>$player</to><army>$armies</army></defend>";
 	std::string defensaSeralizado;
+
+	//conversion de entero a string para la cantidad de ejercitos
+  	std::ostringstream strCantEjercitos;
+   	strCantEjercitos << this->cantidadEjercitos;
+
+	defensaSeralizado = "<?xml version=\"1.0\"?><defend>";
 	
+	std::string xmlComando = Command::serialize(this->jugadorAtacante, this->jugadorDefensor);
+
+	std::string xmlDefend = "<pais-defensor>"+this->paisDefensor
+				+"</pais-defensor><cantidad-ejercitos>"+strCantEjercitos.str()+"</cantidad-ejercitos></defend>";
+
+	defensaSeralizado += xmlComando + xmlDefend;
+
+
+
+/*
 	// creo documento
 	xmlDocPtr docDefensa;
 	// defino nodo raiz
@@ -64,7 +82,7 @@ std::string Defend::serialize(){
     // dejo el document en un buffer
     xmlDocDumpFormatMemory(docDefensa, &xmlbuff, &buffersize, 1);
    
-   /*seteo el string que se devolvera almacenando al XML*/
+   //seteo el string que se devolvera almacenando al XML
     defensaSeralizado.assign((char*)xmlbuff);
 	
 	//libero memoria utilizada
@@ -72,6 +90,7 @@ std::string Defend::serialize(){
     xmlFreeDoc(docDefensa);
     xmlCleanupParser();
     
+*/
     return defensaSeralizado;
   
 	
@@ -205,4 +224,13 @@ int Defend::getArmyCount(){
 	return this->cantidadEjercitos;
 }
 		
+int Defend::getAttackerId(){
+	return this->jugadorAtacante;
+}
+
+int Defend::getAttackedId(){
+	return this->jugadorDefensor;
+}
+
+
 
