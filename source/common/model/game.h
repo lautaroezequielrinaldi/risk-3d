@@ -75,8 +75,7 @@ class Game: public Serializable {
         /**
          * Establece la lista de jugadores del juego.
          */
-        void setPlayerList(
-            const std::list< ReferenceCountPtr<Player> >& playerList);
+        void setPlayerList(const std::list< ReferenceCountPtr<Player> >& playerList);
         /**
          * Obtiene la lista de jugadores del juego.
          */
@@ -111,6 +110,13 @@ class Game: public Serializable {
          */
         int getCountryOwner(std::string countryName);
         
+       /**
+	* Metodo cuyo proposito es verificar si un conjunto de paises forman un continente del mapa del juego.
+	*/
+	bool conformContinent(std::list<ReferenceCountPtr<Pais> > countryList);
+
+
+
         /**
 		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.
 		 */

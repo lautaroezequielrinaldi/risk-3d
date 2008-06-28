@@ -121,6 +121,9 @@ class Player
 		  * Metodo cuyo proposito es verificar si un determinado continente esta conquistado por el jugador
 		  */
 		  bool continentOwner(std::string continentName );
+
+
+	
 		  
 	private:
 	

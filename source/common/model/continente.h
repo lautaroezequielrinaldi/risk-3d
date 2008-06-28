@@ -92,6 +92,11 @@ class Continente {
          * NULL si el pais no se encuentra.
          */
         ReferenceCountPtr<Pais> obtenerPais(const std::string& nombre);
+
+	/**
+	 * Metodo cuyo proposito es obtener la cantidad de paises de un continente.
+    	 */
+	int getCountryCount();
                
         /**
          * Mètodo cuyo propòsito es obtener un iterador apuntando

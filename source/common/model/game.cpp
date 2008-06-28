@@ -125,6 +125,58 @@ int Game::getCountryOwner(std::string countryName){
 	
 }
 
+bool Game::conformContinent(std::list<ReferenceCountPtr<Pais> > countryList){
+
+	bool termino = false;
+	bool contienePaises=true;
+	ReferenceCountPtr<Mapa> map = this->getMapa();
+	ReferenceCountPtr<Pais> paisActual=NULL;
+
+	//std::list<Continente>::iterator itContinente;
+	Mapa::IteradorContinente itContinente;
+	itContinente = map->primerContinente();
+	std::list<ReferenceCountPtr<Pais> >::iterator itPais;
+
+	//recorro lista de continentes
+	while ( itContinente != map->ultimoContinente() && !termino){
+		//obtengo continente actual
+		ReferenceCountPtr<Continente> continente = *itContinente;
+		
+		//si la lista de paises pasada tiene la misma cantidad de paises que el continente actual
+		if ( countryList.size() == continente->getCountryCount() ){
+
+			//me posiciono en 1er pais del continente
+			itPais = countryList.begin();
+			
+			while ( itPais != countryList.end() &&  contienePaises ){
+				
+				//ontengo pais actual de la lista de paises pasada
+				paisActual = *itPais;				
+
+				// si el continente no encuentra el pais pedido
+				if ( continente->obtenerPais(paisActual->getNombre() ) == NULL )
+					contienePaises=false;
+				else
+					++itPais;
+			}
+		
+			// si recorrio la lista de paises pasada y todos pertenecian al continente ( y las cant de paises fueron iguales
+			// ---> la lista de paises pasada conforma el continente
+			if ( contienePaises )
+				termino=true;
+		}
+		++itContinente;
+		
+	}
+	
+	//salio del while de continente porque encontro q la lista de paises pasada conforman un continente
+	if ( termino )
+		return true;
+	else
+		return false;
+
+}
+
 
 std::string Game::serialize() {
     std::string resultado;
