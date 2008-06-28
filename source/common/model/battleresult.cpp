@@ -36,11 +36,11 @@ int BattleResult::getDefenderResult(){
 }
 				
 void BattleResult::incrementAttackerLostArmy(){
-	this->resultadoAtacante++;	
+	this->resultadoAtacante += 1;	
 }
 			
 void BattleResult::incrementDefenderLostArmy(){
-	this->resultadoDefensor++;	
+	this->resultadoDefensor += 1;	
 }
 
 std::string BattleResult::serialize(){

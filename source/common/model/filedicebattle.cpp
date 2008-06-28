@@ -28,7 +28,7 @@ int FileDiceBattle::roll(){
 	int valor=0;
 	
 	// si la ultima pos devuelta es diferente de la ultima pos. del vector del atacante
-	if ( this->posicionADevolverAt != this->dadosAtacante.size() && this->atacante){
+	if ( this->posicionADevolverAt < this->dadosAtacante.size() && this->atacante){
 		// devuelvo el valor correspondente a la pos que le toca
 		valor = this->dadosAtacante[this->posicionADevolverAt];
 		this->posicionADevolverAt++;
@@ -43,7 +43,7 @@ int FileDiceBattle::roll(){
 			this->posADevolverDef++;
 		}
 	}
-	
+
 	return valor;
 }
 
@@ -62,7 +62,6 @@ void FileDiceBattle::loadDiceValue(){
 		//leo linea j del archivo
 		getline(this->file, linea);
 		
-		
 		// cargo vec correspondiente con datos de linea leida
 		for(unsigned int i=0; i < linea.length();i++){
 			// si lo que leo del string no es una coma
@@ -70,10 +69,11 @@ void FileDiceBattle::loadDiceValue(){
 				valor = new char ( linea[i] );
 				if( j==0 )
 					//lo almaceno en el vector del atacante
-					this->dadosAtacante.push_back( atoi (valor ) );
+					this->dadosAtacante.push_back( atoi (valor ) );				
 				else
 					this->dadosDefensor.push_back( atoi (valor) );
-			
+				
+				valor=NULL;
 				delete valor;
 			}
 		}
