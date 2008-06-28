@@ -5,8 +5,9 @@
 #include<GL/gl.h> // Para funciones de OpenGL
 #include<GL/glu.h>// Para funciones de OpenGLU
 #include<SDL/SDL.h> // Para funciones de SDL
-#include "dimension.h" // Para definicion de Dimension.
-#include "color.h" // Para definicion de Color.
+#include<SDL/SDL_image.h> // Para funciones SDL Image
+#include "dimension.h" // Para definicion de Dimension
+#include "color.h" // Para definicion de Color
 
 /**
  * Forward declaration de la clase GLMainLoop.
