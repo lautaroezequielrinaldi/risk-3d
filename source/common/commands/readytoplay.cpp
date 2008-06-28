@@ -2,6 +2,8 @@
 
 ReadyToPlay::ReadyToPlay(std::vector<std::string> &parameterList) : Command ()
 {
+
+	this->numeroJugador = atoi (parameterList[0].c_str() );
 }
 
 ReadyToPlay::ReadyToPlay(std::string xml):Command (){
@@ -19,7 +21,7 @@ ReadyToPlay::~ReadyToPlay()
 
 std::string ReadyToPlay::serialize(){
 
-    	return "<?xml version=\"1.0\"?><readytoplay><from>$player</from><to>0</to></readytoplay>";
+    	return "<?xml version=\"1.0\"?><readytoplay>"+Command::serialize(0,numeroJugador)+"</readytoplay>";
 }
 
 void* ReadyToPlay::hydrate(std::string xml){

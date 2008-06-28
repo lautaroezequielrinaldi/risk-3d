@@ -14,7 +14,7 @@ class ReadyToPlay : public Command
 	
 	private:
 	
-		std::string name;
+		int numeroJugador;
 	
 	public:
 	

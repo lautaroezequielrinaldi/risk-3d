@@ -16,7 +16,9 @@
 class Lose : public Command
 {
 	
-	
+	private:
+		int numeroJugador;
+
 	public:
 		
 		/*

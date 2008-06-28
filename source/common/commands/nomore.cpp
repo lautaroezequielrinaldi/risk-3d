@@ -1,5 +1,12 @@
 #include "nomore.h"
 
+NoMore::NoMore(std::vector<std::string> &parameterList) : Command ()
+{
+
+	this->numeroJugador = atoi (parameterList[0].c_str() );
+}
+
+
 NoMore::NoMore(){
 
 }
@@ -9,7 +16,7 @@ NoMore::~NoMore(){
 }
 
 std::string NoMore::serialize(){
-	return "<?xml version=\"1.0\"?><nomore><from>$player</from><to>0</to></nomore>";
+	return "<?xml version=\"1.0\"?><nomore>"+Command::serialize(0,numeroJugador)+"</nomore>";
 }
 bool NoMore::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return false;

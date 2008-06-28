@@ -1,5 +1,14 @@
 #include "surrender.h"
 
+Surrender::Surrender(std::vector<std::string> & parameterList):Command ()
+{
+	/*construyo el objeto a partir de los parametros pasados en la lista*/
+
+
+
+	this->numeroJugador = atoi (parameterList[0].c_str() );
+}
+
 Surrender::Surrender(){
 
 }
@@ -9,7 +18,7 @@ Surrender::~Surrender(){
 }
 
 std::string Surrender::serialize(){
-	return "<?xml version=\"1.0\"?><surrender><from>$player</from><to>0</to></surrender>";
+	return "<?xml version=\"1.0\"?><surrender>"+Command::serialize(0,numeroJugador)+"</surrender>";
 	
 }
 bool Surrender::validate(ReferenceCountPtr<GameManager>& gameManager){

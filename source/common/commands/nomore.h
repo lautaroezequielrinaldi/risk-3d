@@ -9,7 +9,11 @@
  */
 
 class NoMore: public Command {
+	private:
+		int numeroJugador;
 	public:
+
+		NoMore(std::vector<std::string> &parameterList);
 		NoMore();
 		virtual ~NoMore();
 
