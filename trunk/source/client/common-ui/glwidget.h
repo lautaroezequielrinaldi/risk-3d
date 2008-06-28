@@ -106,6 +106,10 @@ class GLWidget {
 		 */
 		void setState(const GLWidgetStateType& type);
 		/**
+		 * Se hace update del widget.
+		 */
+		virtual void update();
+		/**
 		 * Predibuja el widget en el viewport.
 		 */
 		virtual void preDrawWidget() = 0;

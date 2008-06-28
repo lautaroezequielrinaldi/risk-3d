@@ -1,5 +1,5 @@
 #include "glmainloop.h"
-
+#include<iostream>
 bool GLMainLoop::running = true;
 
 void GLMainLoop::dispatchMouseButtonDownEvent(const SDL_MouseButtonEvent& event) {
@@ -63,11 +63,47 @@ void GLMainLoop::dispatchMouseMotionEvent(const SDL_MouseMotionEvent& event) {
 }
 
 void GLMainLoop::dispatchKeyDownEvent(const SDL_KeyboardEvent& event) {
+	// Obtengo iterador para los widgets 2d registrados
+    GLWidgetManager::WidgetIterator2D iterator2D;
 
+    for (iterator2D = GLWidgetManager::first2DWidget(); iterator2D != GLWidgetManager::last2DWidget();
+        ++iterator2D) {
+        ReferenceCountPtr<GL2DWidget> widget = *iterator2D;
+		std::cout << "Enviando key down a widget 2d" << std::endl;
+        widget->handleKeyDownEvent(event);
+    }
+
+	// Obtengo iterador para los widgets 3d registgrados.
+	GLWidgetManager::WidgetIterator3D iterator3D;
+
+	for (iterator3D = GLWidgetManager::first3DWidget(); iterator3D != GLWidgetManager::last3DWidget();
+        ++iterator3D) {
+        ReferenceCountPtr<GL3DWidget> widget = *iterator3D;
+        std::cout << "Enviando key down a widget 3d" << std::endl;
+        widget->handleKeyDownEvent(event);
+    }
 }
 
 void GLMainLoop::dispatchKeyUpEvent(const SDL_KeyboardEvent& event) {
+	// Obtengo iterador para los widgets 2d registrados
+    GLWidgetManager::WidgetIterator2D iterator2D;
 
+    for (iterator2D = GLWidgetManager::first2DWidget(); iterator2D != GLWidgetManager::last2DWidget();
+        ++iterator2D) {
+        ReferenceCountPtr<GL2DWidget> widget = *iterator2D;
+        std::cout << "Enviando key up a widget 2d" << std::endl;
+        widget->handleKeyUpEvent(event);
+    }
+
+    // Obtengo iterador para los widgets 3d registgrados.
+    GLWidgetManager::WidgetIterator3D iterator3D;
+
+	for (iterator3D = GLWidgetManager::first3DWidget(); iterator3D != GLWidgetManager::last3DWidget();
+		++iterator3D) {
+		ReferenceCountPtr<GL3DWidget> widget = *iterator3D;
+        std::cout << "Enviando key up a widget 3d" << std::endl;
+		widget->handleKeyUpEvent(event);
+	}
 }
 
 void GLMainLoop::renderScene() {
