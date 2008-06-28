@@ -100,7 +100,7 @@ bool Player::continentOwner(std::string continentName ){
 	std::list< std::string>::iterator it;
 
     /* Itero por cada continente */
-    /*
+    
     for (it = this->listaContinentesConquistados.begin(); it != this->listaContinentesConquistados.end();++it) {
         //obtengo continente actual
         std::string continenteActual = *it;
@@ -108,13 +108,10 @@ bool Player::continentOwner(std::string continentName ){
 		//si el continente buscado esta en la lista de continentes conquistados
 		if ( continenteActual == continentName )
 			return true;
-	}*/
-	
-	
-	
-	
-	
+ 	}	
 	
 	return false;
 }
+
+
 

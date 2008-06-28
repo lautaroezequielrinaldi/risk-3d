@@ -51,6 +51,11 @@ ReferenceCountPtr<Pais> Continente::obtenerPais(const std::string& nombre) {
     return NULL;
 }
 
+int Continente::getCountryCount(){
+
+	return this->paises.size();
+}
+
 Continente::Iterador Continente::primerPais() {
     return this->paises.begin();
 }
