@@ -9,7 +9,14 @@
 
 #include "command.h"
 class Surrender:public Command{
+
+	
+	private:
+		int numeroJugador;
 	public:
+
+		Surrender(std::vector<std::string> &parameterList);
+
 	Surrender();
 	
 	virtual ~Surrender();

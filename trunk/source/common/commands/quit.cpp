@@ -1,5 +1,12 @@
 #include "quit.h"
 
+
+Quit::Quit(std::vector<std::string> &parameterList) : Command ()
+{
+
+	this->numeroJugador = atoi (parameterList[0].c_str() );
+}
+
 Quit::Quit(){
 
 }
@@ -8,7 +15,7 @@ Quit::~Quit(){
 }
 
 std::string Quit::serialize(){
-	return "<?xml version=\"1.0\"?><quit><from>$player></from><to>0</to></quit>";
+	return "<?xml version=\"1.0\"?><quit>"+Command::serialize(0,numeroJugador)+"</quit>";
 }
 bool Quit::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return false;

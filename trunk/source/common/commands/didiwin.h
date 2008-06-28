@@ -7,8 +7,14 @@
 
 #include "command.h"
 class DidIWin: public Command {
+
+
+	private:
+		int numeroJugador;
 	public:
-	DidIWin();
+
+		DidIWin(std::vector<std::string> &parameterList);
+		DidIWin();
 	virtual ~DidIWin();
 		/**
 		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.
