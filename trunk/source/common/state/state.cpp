@@ -71,7 +71,7 @@ bool State::joinGame(JoinGame & command){
 bool State::move(Move & command){
 	command.setMainMsg("Intento de movimiento en momento inoportuno");
 	command.setSecMsg("El jugador ... intentó moverse cuando no le tocaba");
-
+	cout<<"	no es momento de mover"<<endl;
 	return false;
 }
 bool State::selectMap(SelectMap & command){

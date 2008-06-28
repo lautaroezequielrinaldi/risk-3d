@@ -100,8 +100,8 @@ BattleResult Battle::start(ReferenceCountPtr<GameManager>& gameManager){
 
 	// verifico si hubo conquista de pais
 
-	// si pais defensor tenia la misma cantidad de ejercitos que los que perdio en la batalla
-	if ( paisDefensor->getArmyCount() == abs(resultadoBatalla.getDefenderResult() ) ){
+	// si pais defensor se quedo con cero ejercitos
+	if ( paisDefensor->getArmyCount() == 0  ){
 		
 		cout<<"PAIS CONQUISTADO!!!! BRAVO"<<endl;
 		
@@ -114,8 +114,10 @@ BattleResult Battle::start(ReferenceCountPtr<GameManager>& gameManager){
 		// elimino del paisAtacante los ejercitos que se mueven al pais conquistado.
 		// el movimiento no se hace explicitamente ya que quedan los ejercitos en el pais conquistado y 
 		// solo se agrega el pais conquistado a la lista de paises del atacante.
-		paisAtacante->removeArmies( abs(resultadoBatalla.getDefenderResult() ) );
+		paisAtacante->removeArmies( resultadoBatalla.getDefenderResult() );
 
+		cout<<"EL ATACANTE MOVIO "<<resultadoBatalla.getDefenderResult()<<" ejercitos para conquistar."<<endl;
+		cout<<"el pais "<<this->ataque.getAttackerLand()<<"que ataco, se quedo con ejercitos: "<<paisAtacante->getArmyCount()<<endl;
 	}
 
 		

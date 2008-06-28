@@ -27,8 +27,8 @@ bool Moving::move(Move & command){
 		//actualiza modelo:
 		ReferenceCountPtr<Game> game = gameManager->getGame();
 		ReferenceCountPtr<Mapa> map = game->getMapa();
-		ReferenceCountPtr<Pais> paisO = map->obtenerPais(command.getCountryDestination());
-		ReferenceCountPtr<Pais> paisD = map->obtenerPais(command.getCountryOrigin());
+		ReferenceCountPtr<Pais> paisD = map->obtenerPais(command.getCountryDestination());
+		ReferenceCountPtr<Pais> paisO = map->obtenerPais(command.getCountryOrigin());
 		
 		// elimina la cantidad de ejercitos que mueve del pais origen
 		paisO->removeArmies(command.getArmyCount());
@@ -59,8 +59,10 @@ bool Moving::move(Move & command){
 		cout<<"Juega el jugador: "<< playerActual->getColor()<<" con bonus: "<<playerActual->getArmyCount()<<endl;
 	
 		//notifica el cambio
-	} else {
+	} 
+	else {
 		//notificar error
+		cout<<"movimiento invalido"<<endl;
 	}
 	//a sacar
 	return accionValida;

@@ -2,6 +2,10 @@
 #include <iostream>
 using namespace std;
 
+#include<iostream>
+
+using namespace std;
+
 FileDicePlayerTurn::FileDicePlayerTurn(std::string fileName):Dice()
 {
 			
@@ -22,16 +26,19 @@ int FileDicePlayerTurn::roll(){
 	
 	std::string linea;
 	int valor;
-	char * strValor=NULL;
+	const char *strValor= NULL;
 
 	
 	// obtengo valor del archivo
 	getline(this->file, linea);
 
-	strValor = new char (linea[0]);
+	strValor = new char ( linea[0] ); 
 	valor = atoi (strValor);
 	
+	cout<<"EMPIEZA JUGADOR: "<<valor<<endl;
+	
 	//libero memoria
+	strValor=NULL;
 	delete strValor;
 
 	return valor;
