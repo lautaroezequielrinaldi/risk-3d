@@ -4,7 +4,10 @@
 TurnToAttack::TurnToAttack(std::vector<std::string> & parameterList):Command ()
 {
 	/*construyo el objeto a partir de los parametros pasados en la lista*/
-	
+
+
+
+	this->numeroJugador = atoi (parameterList[0].c_str() );
 }
 
 TurnToAttack::TurnToAttack(std::string xml):Command (){
@@ -23,7 +26,7 @@ TurnToAttack::~TurnToAttack()
 }
 
 std::string TurnToAttack::serialize(){
-	 return "<?xml version=\"1.0\"?><turntoattack><from>0</from><to>$player</to></turntoattack>";
+	 return "<?xml version=\"1.0\"?><turntoattack>"+Command::serialize(0,numeroJugador)+"</turntoattack>";
 }
 
 void* TurnToAttack::hydrate(std::string xml){

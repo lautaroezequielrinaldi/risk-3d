@@ -4,7 +4,7 @@
 TurnToOccupy::TurnToOccupy(std::vector<std::string> & parameterList):Command ()
 {
 	/*construyo el objeto a partir de los parametros pasados en la lista*/
-	
+	this->numeroJugador = atoi (parameterList[0].c_str() );
 }
 
 TurnToOccupy::TurnToOccupy(std::string xml):Command (){
@@ -23,7 +23,7 @@ TurnToOccupy::~TurnToOccupy()
 }
 
 std::string TurnToOccupy::serialize(){
-	 return "<?xml version=\"1.0\"?><turntooccupy><from>0</from><to>$player</to></turntooccupy>";
+	 return "<?xml version=\"1.0\"?>"+Command::serialize(0,numeroJugador)+" </turntooccupy>";
 }
 
 void* TurnToOccupy::hydrate(std::string xml){

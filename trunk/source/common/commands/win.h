@@ -16,6 +16,8 @@ class Win : public Command
 {
 	
 	
+	private:
+		int numeroJugador;
 	public:
 		
 		/*

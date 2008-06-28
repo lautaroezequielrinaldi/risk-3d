@@ -16,6 +16,8 @@ class TurnToMove : public Command
 {
 	
 	
+	private:
+		int numeroJugador;
 	public:
 		
 		/*
