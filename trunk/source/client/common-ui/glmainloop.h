@@ -48,6 +48,10 @@ class GLMainLoop {
 		static void dispatchKeyUpEvent(
 			const SDL_KeyboardEvent& event);
 		/**
+		 * Hace un update de la escena.
+		 */
+		static void updateScene();
+		/**
 		 * Hace un render de la escena.
 		 */
 		static void renderScene();
