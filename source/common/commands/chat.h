@@ -7,7 +7,12 @@
 
 #include "command.h"
 class Chat: public Command {
+
+	private:
+		int numeroJugador;
 	public:
+
+	Chat(std::vector<std::string> &parameterList);
 	Chat();
 	virtual ~Chat();
 		/**

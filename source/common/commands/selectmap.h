@@ -13,7 +13,7 @@ class SelectMap : public Command
 	
 	private:
 	
-
+		std::string nombreMapa;
 		int numeroJugador;
 
 	

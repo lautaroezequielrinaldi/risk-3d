@@ -3,6 +3,8 @@
 
 JoinGame::JoinGame(std::vector<std::string> &parameterList) : Command ()
 {
+
+	this->numeroJugador = atoi (parameterList[0].c_str() );
 }
 
 JoinGame::JoinGame(std::string xml):Command (){
@@ -20,7 +22,7 @@ JoinGame::~JoinGame()
 }
 
 std::string JoinGame::serialize(){
-	return "<?xml version=\"1.0\"?><joingame><from>0</from><to>0</to><name>$name</name></joingame>";
+	return "<?xml version=\"1.0\"?><joingame>"+Command::serialize(0,0)+"</joingame>";
 
 	std::string joinGameSerializado;
 	
