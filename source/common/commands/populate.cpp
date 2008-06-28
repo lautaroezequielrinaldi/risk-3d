@@ -9,6 +9,7 @@ Populate::Populate(std::vector<std::string> &parameterList) : Command ()
 {
 	this->paisDestino = parameterList[0];
 	this->cantidadEjercitos = atoi( parameterList[1].c_str() );
+	this->jugadorFrom = atoi( parameterList[2].c_str() );
 }
 
 Populate::Populate(std::string xml):Command (){
@@ -25,10 +26,29 @@ Populate::~Populate()
 }
 
 std::string Populate::serialize(){
-	return "<?xml version=\"1.0\"?><populate><from>$player></from><to>0</to><country>$country</country><army>$armies</army></populate>";
+	
 
 	std::string poblarSeralizado;
 	
+
+	//conversion de entero a string para la cantidad de ejercitos
+  	std::ostringstream strCantEjercitos;
+   	strCantEjercitos << this->cantidadEjercitos;
+
+	poblarSeralizado = "<?xml version=\"1.0\"?><poblar>";
+	
+	std::string xmlComando = Command::serialize(this->jugadorFrom, this->jugadorFrom);
+
+	std::string xmlPoblar = "<pais-destino>"+this->paisDestino
+				+"</pais-destino><cantidad-ejercitos>"+strCantEjercitos.str()+"</cantidad-ejercitos></poblar>";
+
+	poblarSeralizado += xmlComando + xmlPoblar;
+
+
+
+
+/*
+
 	// creo documento
 	xmlDocPtr docPoblar;
 	// defino nodo raiz
@@ -64,14 +84,14 @@ std::string Populate::serialize(){
     // dejo el document en un buffer
     xmlDocDumpFormatMemory(docPoblar, &xmlbuff, &buffersize, 1);
    
-   /*seteo el string que se devolvera almacenando al XML*/
+   //seteo el string que se devolvera almacenando al XML
     poblarSeralizado.assign((char*)xmlbuff);
 	
 	//libero memoria utilizada
     xmlFree(xmlbuff);
     xmlFreeDoc(docPoblar);
     xmlCleanupParser();
-    
+    */
     return poblarSeralizado;
   
 }
@@ -217,6 +237,7 @@ std::string Populate::getName() {
 	return "populate";
 }
 
-
-
+int Populate::getMoverId(){
+	return this->jugadorFrom;
+}
 

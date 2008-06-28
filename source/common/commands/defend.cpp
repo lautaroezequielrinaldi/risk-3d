@@ -28,19 +28,20 @@ Defend::~Defend()
 }
 
 std::string Defend::serialize(){
-	//return "<?xml version=\"1.0\"?><defend><from>$player</from><to>$player</to><army>$armies</army></defend>";
+	
+
 	std::string defensaSeralizado;
 
 	//conversion de entero a string para la cantidad de ejercitos
   	std::ostringstream strCantEjercitos;
    	strCantEjercitos << this->cantidadEjercitos;
 
-	defensaSeralizado = "<?xml version=\"1.0\"?><defend>";
+	defensaSeralizado = "<?xml version=\"1.0\"?><defender>";
 	
 	std::string xmlComando = Command::serialize(this->jugadorAtacante, this->jugadorDefensor);
 
 	std::string xmlDefend = "<pais-defensor>"+this->paisDefensor
-				+"</pais-defensor><cantidad-ejercitos>"+strCantEjercitos.str()+"</cantidad-ejercitos></defend>";
+				+"</pais-defensor><cantidad-ejercitos>"+strCantEjercitos.str()+"</cantidad-ejercitos></defender>";
 
 	defensaSeralizado += xmlComando + xmlDefend;
 

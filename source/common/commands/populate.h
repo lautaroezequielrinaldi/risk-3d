@@ -18,6 +18,8 @@ class Populate : public Command
 	
 		std::string paisDestino;
 		int cantidadEjercitos;
+
+		int jugadorFrom;
 	
 	public:
 	
@@ -77,6 +79,14 @@ class Populate : public Command
 		  * Metodo cuyo proposito es obtener la cantidad de ejercitos a ubicar.
 		  */
 		  int getArmyCount();
+
+		/**
+		 * Metodo cuyo proposito es obtener el codigo del jugador que realizo el movimiento.
+		 */
+		int getMoverId();
+
 };
+
+	
 
 #endif /*POPULATE_H_*/
