@@ -4,7 +4,7 @@
 YouAre::YouAre(std::vector<std::string> & parameterList):Command ()
 {
 	/*construyo el objeto a partir de los parametros pasados en la lista*/
-	this->numeroJugador = 1; //parameterList[0];
+	this->numeroJugador = atoi (parameterList[0].c_str() );
 }
 
 YouAre::YouAre(std::string xml):Command (){
@@ -23,7 +23,7 @@ YouAre::~YouAre()
 }
 
 std::string YouAre::serialize(){
-	 return "<?xml version=\"1.0\"?><youare><from>0</from><to>$player</to></youare>";
+	 return "<?xml version=\"1.0\"?><youare>"+Command::serialize(0,numeroJugador)+"</youare>";
 }
 
 void* YouAre::hydrate(std::string xml){

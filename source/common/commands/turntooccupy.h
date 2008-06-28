@@ -16,6 +16,8 @@
 class TurnToOccupy : public Command
 {
 	
+	private:
+		int numeroJugador;
 	
 	public:
 		

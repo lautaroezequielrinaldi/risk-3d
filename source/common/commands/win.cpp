@@ -4,7 +4,7 @@
 Win::Win(std::vector<std::string> & parameterList):Command ()
 {
 	/*construyo el objeto a partir de los parametros pasados en la lista*/
-	
+	this->numeroJugador = atoi (parameterList[0].c_str() );
 }
 
 Win::Win(std::string xml):Command (){
@@ -23,7 +23,7 @@ Win::~Win()
 }
 
 std::string Win::serialize(){
-	 return "<?xml version=\"1.0\"?><win><from>0</from><to>$player</to></win>";
+	 return "<?xml version=\"1.0\"?><win>"+Command::serialize(0,numeroJugador)+"</win>";
 }
 
 void* Win::hydrate(std::string xml){

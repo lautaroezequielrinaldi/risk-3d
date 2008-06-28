@@ -4,7 +4,7 @@
 TurnToMove::TurnToMove(std::vector<std::string> & parameterList):Command ()
 {
 	/*construyo el objeto a partir de los parametros pasados en la lista*/
-	
+	this->numeroJugador = atoi (parameterList[0].c_str() );
 }
 
 TurnToMove::TurnToMove(std::string xml):Command (){
@@ -23,7 +23,7 @@ TurnToMove::~TurnToMove()
 }
 
 std::string TurnToMove::serialize(){
-	 return "<?xml version=\"1.0\"?><turntomove><from>0</from><to>$player</to></turntomove>";
+	 return "<?xml version=\"1.0\"?><turntomove>"+Command::serialize(0,numeroJugador)+"</turntomove>";
 }
 
 void* TurnToMove::hydrate(std::string xml){
