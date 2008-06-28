@@ -41,12 +41,12 @@ std::string Attack::serialize(){
   	std::ostringstream strCantEjercitos;
    	strCantEjercitos << this->cantidadEjercitos;
 
-	ataqueSeralizado = "<?xml version=\"1.0\"?><attack>";
+	ataqueSeralizado = "<?xml version=\"1.0\"?><atacar>";
 	
 	std::string xmlComando = Command::serialize(this->jugadorAtacante, this->jugadorDefensor);
 
 	std::string xmlAttack = "<pais-atacante>"+this->paisAtacante+"</pais-atacante><pais-atacado>"+this->paisAtacado
-				+"</pais-atacado><cantidad-ejercitos>"+strCantEjercitos.str()+"</cantidad-ejercitos></attack>";
+				+"</pais-atacado><cantidad-ejercitos>"+strCantEjercitos.str()+"</cantidad-ejercitos></atacar>";
 
 	ataqueSeralizado += xmlComando + xmlAttack;
 

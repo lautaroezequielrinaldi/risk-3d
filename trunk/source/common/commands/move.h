@@ -20,6 +20,9 @@ class Move : public Command
 		std::string paisOrigen;
 		std::string paisDestino;
 		int cantidadEjercitos;
+
+		int jugadorFrom;
+		
 	
 	public:
 
@@ -75,6 +78,11 @@ class Move : public Command
 		int getArmyCount();
 
 		virtual std::string getName();
+
+		/**
+		 * Metodo cuyo proposito es obtener el codigo del jugador que realizo el movimiento.
+		 */
+		int getMoverId();
 
 		
 };

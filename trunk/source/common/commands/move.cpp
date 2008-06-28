@@ -9,7 +9,7 @@ Move::Move(std::vector<std::string> &parameterList): Command ()
 	this->paisOrigen = parameterList[0];
 	this->paisDestino = parameterList[1];
 	this->cantidadEjercitos = atoi( parameterList[2].c_str() );
-	
+	this->jugadorFrom = atoi ( parameterList[3].c_str() );
 }
 
 Move::Move(std::string xml):Command (){
@@ -27,10 +27,27 @@ Move::~Move()
 }
 
 std::string Move::serialize(){
-	return "<?xml version=\"1.0\"?><move><from>$player></from><to>0</to><source>$country</source><target>country</target><army>$armies</army></move>";
+	
+
+//return "<?xml //version=\"1.0\"?><move><from>$player></from><to>0</to><source>$country</source><target>country</target><army>$armies</army></move>";
 
 	std::string movimientoSeralizado;
+
+	//conversion de entero a string para la cantidad de ejercitos
+  	std::ostringstream strCantEjercitos;
+   	strCantEjercitos << this->cantidadEjercitos;
+
+	movimientoSeralizado = "<?xml version=\"1.0\"?><mover>";
 	
+	std::string xmlComando = Command::serialize(this->jugadorFrom, this->jugadorFrom);
+
+	std::string xmlMove = "<pais-origen>"+this->paisOrigen+"</pais-origen><pais-destino>"+
+			      this->paisDestino+"</pais-destino><cantidad-ejercitos>"+strCantEjercitos.str()
+			      +"</cantidad-ejercitos></mover>";
+
+	movimientoSeralizado += xmlComando + xmlMove;
+
+/*	
 	// creo documento
 	xmlDocPtr docMovimiento;
 	// defino nodo raiz
@@ -68,14 +85,14 @@ std::string Move::serialize(){
     // dejo el document en un buffer
     xmlDocDumpFormatMemory(docMovimiento, &xmlbuff, &buffersize, 1);
    
-   /*seteo el string que se devolvera almacenando al XML*/
+   //seteo el string que se devolvera almacenando al XML
     movimientoSeralizado.assign((char*)xmlbuff);
 	
 	//libero memoria utilizada
     xmlFree(xmlbuff);
     xmlFreeDoc(docMovimiento);
     xmlCleanupParser();
-    
+    */
     return movimientoSeralizado;
 	
 }
@@ -234,6 +251,11 @@ std::string  Move::getCountryOrigin(){
 int  Move::getArmyCount(){
 	return this->cantidadEjercitos;
 }
+
+int Move::getMoverId(){
+	return this->jugadorFrom;
+}
+
 
 
 
