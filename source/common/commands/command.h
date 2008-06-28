@@ -42,30 +42,31 @@ class Command : public Serializable
 		/**
 		 * Este metodo debe evaluar el destino del mensaje segun jugador
 		 */
-		bool isForMe(int me);
+		int to();
 
 		/**
 		 * Este metodo debe evaluar el origen del mensaje segun jugador
 		 */
-		bool isFromMe(int me);
+		int from();
 
-		void setMainMsg(std::string msg);
+		bool isValid();
+
+		void setValid(bool valid);
+
+		void setMainMsg(std::string msg) ;
 
 		void setSecMsg(std::string msg);
 
 		std::string getMainMsg();
 
 		std::string getSecMsg();
-
-		bool isValid();
-
-		void setValid(bool valid);
+		std::string serialize(int from, int to);
 
 		virtual std::string getName() = 0;
 	private:
 		std::string name;
-		std::string mainMsg;
-		std::string secMsg;
+		std::string mainmsg;
+		std::string secmsg;
 		bool valid;
 };
 

@@ -1,4 +1,6 @@
 #include "command.h"
+#include <sstream>
+
 Command::Command():Serializable() {
 	
 }
@@ -15,30 +17,46 @@ void Command::setValid(bool valid){
 }
 
 
-bool Command::isForMe(int me){
+int Command::from(){
 	return false;
 }
 
-bool Command::isFromMe(int me){
+int Command::to(){
 	return false;
 }
 
-void Command::setMainMsg(std::string msg){
-	mainMsg = msg;
-}
-
-void Command::setSecMsg(std::string msg){
-	secMsg = msg;
-}
-
-std::string Command::getMainMsg(){
-	return mainMsg;
-}
-
-std::string Command::getSecMsg(){
-	return secMsg;
-}
 
 std::string Command::getName(){
 	return name;
+}
+
+void Command::setMainMsg(std::string msg) {
+	mainmsg=msg;
+}
+
+void Command::setSecMsg(std::string msg) {
+	secmsg=msg;
+}
+
+std::string Command::getMainMsg() {
+	return mainmsg;
+}
+
+std::string Command::getSecMsg() {
+	return secmsg;
+}
+
+
+std::string Command::serialize(int from, int to){
+	std::ostringstream strFrom;
+	std::ostringstream strTo;
+	std::ostringstream strValid;
+
+   	strFrom << from;
+	strTo << to;
+	strValid << isValid();
+   	return "<from>"+strFrom.str()+"</from><to>"+strTo.str()+"</to><valid>"+ strValid.str()+"</valid><mainmsg>"+mainmsg+"</mainmsg><secmsg>"+secmsg+"</secmsg>";
+
+
+	
 }
