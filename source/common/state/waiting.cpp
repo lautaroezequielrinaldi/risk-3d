@@ -22,6 +22,14 @@ bool Waiting::attack(Attack & command){
 	return false;
 }
 
+bool Waiting::mapList(MapList & command){
+
+	std::cerr << "Evento Waiting::attack" << std::endl;
+	return false;
+}
+
+
+
 
 bool Waiting::youAre(YouAre & command){
 	std::cerr << "Evento Waiting::youAre" << std::endl;
