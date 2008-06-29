@@ -1,4 +1,7 @@
 #include "waitingplayer.h"
+#include "../commands/youare.h"
+#include "../model/gamemanager.h"
+#include <vector>
 
 WaitingPlayer::WaitingPlayer(ReferenceCountPtr<GameManager>&gameManager, std::string name):State(gameManager,name)
 {
@@ -10,6 +13,16 @@ WaitingPlayer::~WaitingPlayer()
 
 bool WaitingPlayer::readyToPlay(ReadyToPlay & command){
 	std::cerr << "Evento WaitingPlayer::readyToPlay" << std::endl;
+
+
+	std::vector<std::string> v;
+	v.push_back("3");
+
+
+	YouAre * youare = new YouAre(v);
+	this->gameManager->notify(youare);
+	delete(youare);
+	return false;
 	// marcar como ready to play
 	// si todos listos, 
 	//     Map 
