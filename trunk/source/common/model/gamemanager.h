@@ -18,6 +18,8 @@ class GameManager {
 	
 	private:
 	
+	static const unsigned int CAPACIDAD_MAXIMA=6;
+
 	ReferenceCountPtr<CommandHydrator> commandHydrator;
 
 	/**

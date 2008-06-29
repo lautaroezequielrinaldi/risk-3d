@@ -101,7 +101,8 @@ class TurnManager
 		 * para poder defenderse.
 		 */
 		 void setDefenderPlayer(int color);
-		
+	
+
 		/**
 		 * Destructor de la clase
 		 */

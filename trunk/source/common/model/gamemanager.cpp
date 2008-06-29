@@ -56,9 +56,12 @@ void GameManager::add(ReferenceCountPtr<PlayerProxy> & playerProxy) {
 	/* codigo comentado para que compile EDITOR_TARGET, no falla en SERVER_TARGET*/
 	playerProxy->setPlayer(game->addPlayer());
 	proxyList.push_back(playerProxy);
-	// incorporar a contenedor
+	//agrega el player a la lista del turnmanager
+	this->turnManager->addPlayer(playerProxy->getPlayer()->getColor());
 	// incrementar jugadores
 	// si alcanzado max, open -> false;
+	if ( proxyList.size() == CAPACIDAD_MAXIMA )
+		this->open = false;
 
 }
 
