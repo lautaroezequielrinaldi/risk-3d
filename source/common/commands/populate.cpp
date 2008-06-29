@@ -99,7 +99,7 @@ std::string Populate::serialize(){
 void* Populate::hydrate(std::string xml){
 	
 
-	xmlDocPtr document;
+	xmlDocPtr document= hydrateCommon(xml);
 	xmlNodePtr nodoRaiz;
     
     xmlChar* paisDes;
@@ -114,7 +114,7 @@ void* Populate::hydrate(std::string xml){
     xmlNodeSetPtr setNodoPopulate;
 
 	//parseo el xml en memoria y se construye el arbol
-	document = xmlParseMemory(xml.c_str(), xml.size());
+	//document = xmlParseMemory(xml.c_str(), xml.size());
 	
 	// Obtengo el elemento root del documento XML sobre el cual se va a trabajar.
     nodoRaiz = xmlDocGetRootElement(document);

@@ -100,7 +100,7 @@ std::string Move::serialize(){
 void* Move::hydrate(std::string xml){
 	
 	
-	xmlDocPtr document;
+	xmlDocPtr document = hydrateCommon(xml);
 	xmlNodePtr nodoRaiz;
     
     xmlChar* paisOri;
@@ -116,7 +116,7 @@ void* Move::hydrate(std::string xml){
     xmlNodeSetPtr setNodoMove;
 
 	//parseo el xml en memoria y se construye el arbol
-	document = xmlParseMemory(xml.c_str(), xml.size());
+	//document = xmlParseMemory(xml.c_str(), xml.size());
 	
 	// Obtengo el elemento root del documento XML sobre el cual se va a trabajar.
     nodoRaiz = xmlDocGetRootElement(document);

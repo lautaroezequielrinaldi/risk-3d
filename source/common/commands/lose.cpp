@@ -28,13 +28,6 @@ std::string Lose::serialize(){
 	 return "<?xml version=\"1.0\"?><lose>"+Command::serialize(0,numeroJugador)+"</lose>";
 }
 
-void* Lose::hydrate(std::string xml){
-	
-	
-	return NULL;
-;
-	
-}
 		
 bool Lose::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return true;

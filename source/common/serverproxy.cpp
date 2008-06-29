@@ -6,13 +6,15 @@
 void * ServerProxy::run() {
 	
 
-	std::stringstream msg;
-	unsigned int msgLen;
-	std::string commandName;
-	std::string commandXml;
+
 
 	while (! isCanceled()) {
-		std::cerr << "ServerProxy leyendo encabezado " << std::endl;
+		std::stringstream msg;
+		unsigned int msgLen;
+		std::string commandName;
+		std::string commandXml;
+
+		std::cerr<< std::endl << "################################"<< std::endl<<"ServerProxy leyendo encabezado " << std::endl;
 		// deshardcodear este 32
 		msg << socket->full_read(32);
 		msg >> msgLen;

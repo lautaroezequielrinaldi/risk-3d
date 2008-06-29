@@ -42,16 +42,16 @@ class Command : public Serializable
 		/**
 		 * Este metodo debe evaluar el destino del mensaje segun jugador
 		 */
-		int to();
+		int getTo();
 
 		/**
 		 * Este metodo debe evaluar el origen del mensaje segun jugador
 		 */
-		int from();
+		int getFrom();
 
-		bool isValid();
+		int isValid();
 
-		void setValid(bool valid);
+		void setValid(int valid);
 
 		void setMainMsg(std::string msg) ;
 
@@ -67,11 +67,19 @@ class Command : public Serializable
 
 		virtual std::string getName() = 0;
 
+		void* hydrate(std::string xml);
+
+	protected:
+		xmlDocPtr hydrateCommon(std::string xml);
+
 	private:
+		int to;
+		int from;
+		int valid;
 		std::string name;
 		std::string mainmsg;
 		std::string secmsg;
-		bool valid;
+
 };
 
 #include "../state/state.h"

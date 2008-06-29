@@ -29,13 +29,7 @@ std::string TurnToAttack::serialize(){
 	 return "<?xml version=\"1.0\"?><turntoattack>"+Command::serialize(0,numeroJugador)+"</turntoattack>";
 }
 
-void* TurnToAttack::hydrate(std::string xml){
-	
-	
-	return NULL;
-;
-	
-}
+
 		
 bool TurnToAttack::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return true;

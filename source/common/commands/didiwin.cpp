@@ -20,10 +20,6 @@ std::string DidIWin::serialize(){
 bool DidIWin::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return false;
 }
-void* DidIWin::hydrate(std::string xml){
-
-	return NULL;
-}
 
 void DidIWin::execute(ReferenceCountPtr<State>& state){
 	

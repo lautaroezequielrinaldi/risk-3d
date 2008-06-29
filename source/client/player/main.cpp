@@ -91,7 +91,7 @@ int main(int argc, char** argv) {
 	Socket * socket = new Socket("localhost", 2000);
 	std::cerr<< "Socket created" << std::endl;
 
-if (false) {
+if (true) {
 	ReferenceCountPtr<ServerProxy> serverProxy= new ServerProxy(socket, gamemanager);
 	std::cerr<< "ServerProxy created" << std::endl;
 
@@ -114,8 +114,9 @@ if (false) {
 	// para desbloquearse del read()
 	//serverProxy->join();
 	//std::cerr << "Joined" << std::endl;
-	while (true) {
-
+	while (!serverProxy->isCanceled()) {
+		sleep(1);
+		std::cerr << "looping" << std::endl;
 	}
 }
 

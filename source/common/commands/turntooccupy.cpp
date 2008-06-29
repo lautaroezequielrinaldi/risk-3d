@@ -26,13 +26,7 @@ std::string TurnToOccupy::serialize(){
 	 return "<?xml version=\"1.0\"?>"+Command::serialize(0,numeroJugador)+" </turntooccupy>";
 }
 
-void* TurnToOccupy::hydrate(std::string xml){
-	
-	
-	return NULL;
-;
-	
-}
+
 		
 bool TurnToOccupy::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return true;

@@ -2,27 +2,27 @@
 #include <sstream>
 
 Command::Command():Serializable() {
-	valid = false;
+	valid = 0;
 }
 
 Command::~Command()
 {
 }
 
-bool Command::isValid() {
+int Command::isValid() {
 	return valid;
 }
-void Command::setValid(bool valid){
+void Command::setValid(int valid){
 	this->valid = valid;
 }
 
 
-int Command::from(){
-	return false;
+int Command::getFrom(){
+	return from;
 }
 
-int Command::to(){
-	return false;
+int Command::getTo(){
+	return to;
 }
 
 
@@ -59,4 +59,59 @@ std::string Command::serialize(int from, int to){
 
 
 	
+}
+
+void* Command::hydrate(std::string xml){
+	xmlDocPtr document =hydrateCommon(xml);
+	xmlFreeDoc(document);
+	xmlCleanupParser();
+	return NULL;
+}
+
+xmlDocPtr Command::hydrateCommon(std::string xml){
+	xmlChar* field;
+	xmlXPathObjectPtr objetoXPath;
+	xmlNodeSetPtr setNodo;
+	xmlNodePtr nodo;
+
+	xmlDocPtr document = xmlParseMemory(xml.c_str(), xml.size());
+
+	xmlXPathContextPtr contextoXPath = xmlXPathNewContext(document);
+
+	objetoXPath = xmlXPathEvalExpression(BAD_CAST "//*/from", contextoXPath);
+	setNodo = objetoXPath->nodesetval;
+	nodo = setNodo->nodeTab[0];
+	field = xmlNodeGetContent(nodo);
+	this->from = atoi((char*)field);
+	
+	objetoXPath = xmlXPathEvalExpression(BAD_CAST "//*/to", contextoXPath);
+	setNodo = objetoXPath->nodesetval;
+	nodo = setNodo->nodeTab[0];
+	field = xmlNodeGetContent(nodo);
+	this->to = atoi((char*)field);
+	
+	objetoXPath = xmlXPathEvalExpression(BAD_CAST "//*/valid", contextoXPath);
+	setNodo = objetoXPath->nodesetval;
+	nodo = setNodo->nodeTab[0];
+	field = xmlNodeGetContent(nodo);
+	this->valid = atoi((char*)field);
+	
+	objetoXPath = xmlXPathEvalExpression(BAD_CAST "//*/mainmsg", contextoXPath);
+	setNodo = objetoXPath->nodesetval;
+	nodo = setNodo->nodeTab[0];
+	field = xmlNodeGetContent(nodo);
+	this->mainmsg.assign( (char*) field );
+	
+	objetoXPath = xmlXPathEvalExpression(BAD_CAST "//*/secmsg", contextoXPath);
+	setNodo = objetoXPath->nodesetval;
+	nodo = setNodo->nodeTab[0];
+	field = xmlNodeGetContent(nodo);
+	this->mainmsg.assign( (char*) field );
+
+	
+
+	xmlFree(field);
+	xmlXPathFreeObject(objetoXPath);
+	xmlXPathFreeContext(contextoXPath);
+	return document;
 }

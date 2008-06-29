@@ -7,8 +7,7 @@
 
 void Proxy::notify(Command * command) {
 	std::string cmd = command->serialize();
-	std::cerr << cmd << std::endl;
-	std::cerr << cmd.size() << std::endl;
+	std::cerr << "Proxy::notify(" << command->getName() << ") "<<cmd.size() <<" serializado: " << cmd << std::endl;
 
 	std::stringstream header;
 	header << cmd.size() << " " << command->getName() << " ";
@@ -23,7 +22,7 @@ void Proxy::notify(Command * command) {
 	msg.append("\r\n");
 	msg.append(cmd);
 
-	std::cerr << "Proxy::notify("<< msg << ")" << std::endl << std::endl;
+	std::cerr << "Proxy::notify socket->write("<< std::endl << msg << std::endl << ")" << std::endl << std::endl;
 
 	socket->write(msg);
 }

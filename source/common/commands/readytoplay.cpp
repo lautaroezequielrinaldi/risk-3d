@@ -24,11 +24,6 @@ std::string ReadyToPlay::serialize(){
     	return "<?xml version=\"1.0\"?><readytoplay>"+Command::serialize(numeroJugador,0)+"</readytoplay>";
 }
 
-void* ReadyToPlay::hydrate(std::string xml){
-	
-
-    return 0;	
-}
 
 bool ReadyToPlay::validate(ReferenceCountPtr<GameManager>& gameManager){
     return false;

@@ -26,13 +26,7 @@ std::string TurnToMove::serialize(){
 	 return "<?xml version=\"1.0\"?><turntomove>"+Command::serialize(0,numeroJugador)+"</turntomove>";
 }
 
-void* TurnToMove::hydrate(std::string xml){
-	
-	
-	return NULL;
-;
-	
-}
+
 		
 bool TurnToMove::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return true;

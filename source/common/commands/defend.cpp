@@ -99,7 +99,7 @@ std::string Defend::serialize(){
 
 void* Defend::hydrate(std::string xml){
 		
-	xmlDocPtr document;
+	xmlDocPtr document= hydrateCommon(xml);
 	xmlNodePtr nodoRaiz;
     
     xmlChar* paisDef;
@@ -114,7 +114,7 @@ void* Defend::hydrate(std::string xml){
     xmlNodeSetPtr setNodoDefensa;
 
 	//parseo el xml en memoria y se construye el arbol
-	document = xmlParseMemory(xml.c_str(), xml.size());
+	//document = xmlParseMemory(xml.c_str(), xml.size());
 	
 	// Obtengo el elemento root del documento XML sobre el cual se va a trabajar.
     nodoRaiz = xmlDocGetRootElement(document);

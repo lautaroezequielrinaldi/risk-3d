@@ -146,6 +146,11 @@ int Socket::write(const char* data, int length)
         returnValue = send(this->socketDescriptor, data, length, 0);
 
         // Verifico que se pudo enviar mensaje.
+	if (length != returnValue) {
+		throw SocketIOException("Socket::write incomplete write\n");
+	}
+
+
         if (returnValue != -1) {
             return returnValue;
         }

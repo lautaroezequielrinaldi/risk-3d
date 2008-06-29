@@ -13,10 +13,7 @@ std::string NoRoom::serialize(){
 bool NoRoom::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return false;
 }
-void* NoRoom::hydrate(std::string xml){
 
-	return NULL;
-}
 
 void NoRoom::execute(ReferenceCountPtr<State>& state){
 	
