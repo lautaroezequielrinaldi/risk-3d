@@ -7,6 +7,7 @@
 #include "../smartpointer/referencecountptr.h" // Para definiciòn de
 // ReferenceCountPtr.
 #include "../parser/serializable.h" // Para definiciòn de Serializable.
+#include<vector>
 
 /**
  * Clase cuyo propòsito es encapsular al juego.
@@ -111,9 +112,10 @@ class Game: public Serializable {
         int getCountryOwner(std::string countryName);
         
        /**
-	* Metodo cuyo proposito es verificar si un conjunto de paises forman un continente del mapa del juego.
+	* Metodo cuyo proposito es verificar si un conjunto de paises forman uno o mas continentes del mapa del juego.
+	* Retorna un vector con los nombres de los continentes formados por los paises de countryList.
 	*/
-	std::string conformContinent(std::list<std::string> countryList);
+	std::vector<std::string> conformContinent(const std::list<std::string>& countryList);
 
 
 

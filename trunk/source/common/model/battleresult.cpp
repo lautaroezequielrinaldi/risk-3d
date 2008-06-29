@@ -6,6 +6,7 @@ paisDefensor(defenderLand)
 {
 	this->resultadoAtacante=0;
 	this->resultadoDefensor=0;
+	this->conquista=0;
 }
 
 BattleResult::BattleResult()
@@ -42,6 +43,12 @@ void BattleResult::incrementAttackerLostArmy(){
 void BattleResult::incrementDefenderLostArmy(){
 	this->resultadoDefensor += 1;	
 }
+
+void BattleResult::setConquest ( int armyCount ){
+	this->conquista = armyCount;
+}
+
+
 
 std::string BattleResult::serialize(){
 	

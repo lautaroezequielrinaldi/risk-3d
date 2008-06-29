@@ -125,80 +125,59 @@ int Game::getCountryOwner(std::string countryName){
 	
 }
 
-std::string Game::conformContinent(std::list<std::string> countryList){
+std::vector<std::string> Game::conformContinent(const std::list<std::string>& countryList){
 
-	bool termino = false;
-	bool contienePaises=true;
+
 	ReferenceCountPtr<Mapa> map = this->getMapa();
 	std::string paisActual;
 
+	std::vector<std::string> vecContinentesConquist;
 	int cantPaisesPertenecientes=0;
 
 	//std::list<Continente>::iterator itContinente;
 	Mapa::IteradorContinente itContinente;
 	itContinente = map->primerContinente();
-	std::list<std::string>::iterator itPais;
+	std::list<std::string>::const_iterator itPais;
 
 	std::string nomContinente="";
 
 	//recorro lista de continentes
-	while ( itContinente != map->ultimoContinente() && !termino){
+	while ( itContinente != map->ultimoContinente() ){
 		//obtengo continente actual
 		ReferenceCountPtr<Continente> continente = *itContinente;
 		
 		//me posiciono en 1er pais de los pasados
-		itPais = countryList.begin();		
-		
+		itPais = countryList.begin();
+			
+		cantPaisesPertenecientes = 0;
+
 		//mientras la cant de paises de la lista pasada,pertenecientes al continente actual sea != de la cant de paises del continente
-		// yno haya terminado la lista de paises consultados
-		//while ( cantPaisesPertenecientes != continente->getCountryCount() && itPais != countryList.end() ){
+		// y no haya terminado la lista de paises consultados
+		while ( cantPaisesPertenecientes != continente->getCountryCount() && itPais != countryList.end() ){
 			
-			
-	
-	
-	
-	
-	
-	//	}
-	
-	
-	
-	
-	
-	
-	
-	
-		//si la lista de paises pasada tiene la misma cantidad de paises que el continente actual
-		if ( countryList.size() == continente->getCountryCount() ){
+			//ontengo pais actual de la lista de paises pasada
+			paisActual = *itPais;
 
-			
-			
-			while ( itPais != countryList.end() &&  contienePaises ){
-				
-				//ontengo pais actual de la lista de paises pasada
-				paisActual = *itPais;				
-
-				// si el continente no encuentra el pais pedido
-				if ( continente->obtenerPais(paisActual) == NULL )
-					contienePaises=false;
-				else
-					++itPais;
-			}
-		
-			// si recorrio la lista de paises pasada y todos pertenecian al continente ( y las cant de paises fueron iguales
-			// ---> la lista de paises pasada conforma el continente
-			if ( contienePaises ){
-				termino=true;
-				//seteo nombre del continente que contiene todos los paises consultados
-				nomContinente=continente->getNombre();
-			}
+			// si el continente  encuentra el pais pedido
+			if ( continente->obtenerPais(paisActual) != NULL )
+				cantPaisesPertenecientes++;
+	
+			//avanzo en lista de paises
+			++itPais;
+	
+	
 		}
-		++itContinente;
 		
+		//si la cantidad de paises pasados que pertenecen al continente actual es igual a la cant total de paises q tiene el conti
+		if ( cantPaisesPertenecientes == continente->getCountryCount() )
+			//agrego el continente actual a la lista de continentes conquistados.
+			vecContinentesConquist.push_back( continente->getNombre() );
+
+		++itContinente;
 	}
 	
-	//salio del while de continente porque encontro q la lista de paises pasada conforman un continente
-	return nomContinente;
+	
+	return vecContinentesConquist;
 	
 
 }
