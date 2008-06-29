@@ -91,6 +91,7 @@ int main(int argc, char** argv) {
 	Socket * socket = new Socket("localhost", 2000);
 	std::cerr<< "Socket created" << std::endl;
 
+if (false) {
 	ReferenceCountPtr<ServerProxy> serverProxy= new ServerProxy(socket, gamemanager);
 	std::cerr<< "ServerProxy created" << std::endl;
 
@@ -116,8 +117,9 @@ int main(int argc, char** argv) {
 	while (true) {
 
 	}
+}
 
-if (false) {
+if (true) {
     glutInit(&argc, argv);
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
         return 0;
@@ -143,9 +145,9 @@ if (false) {
     label->setY(120);
     ReferenceCountPtr<GLSphereWidget> sphere(new GLSphereWidget("mapa.jpg", 0.3));
 
-    GLWidgetManager::register2DWidget(button);
-    GLWidgetManager::register2DWidget(button2);
-    GLWidgetManager::register2DWidget(label);
+   // GLWidgetManager::register2DWidget(button);
+   // GLWidgetManager::register2DWidget(button2);
+   // GLWidgetManager::register2DWidget(label);
     GLWidgetManager::register3DWidget(sphere);
     GLMainLoop::run();
 
