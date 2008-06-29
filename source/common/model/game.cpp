@@ -132,6 +132,8 @@ std::string Game::conformContinent(std::list<std::string> countryList){
 	ReferenceCountPtr<Mapa> map = this->getMapa();
 	std::string paisActual;
 
+	int cantPaisesPertenecientes=0;
+
 	//std::list<Continente>::iterator itContinente;
 	Mapa::IteradorContinente itContinente;
 	itContinente = map->primerContinente();
@@ -144,11 +146,32 @@ std::string Game::conformContinent(std::list<std::string> countryList){
 		//obtengo continente actual
 		ReferenceCountPtr<Continente> continente = *itContinente;
 		
+		//me posiciono en 1er pais de los pasados
+		itPais = countryList.begin();		
+		
+		//mientras la cant de paises de la lista pasada,pertenecientes al continente actual sea != de la cant de paises del continente
+		// yno haya terminado la lista de paises consultados
+		//while ( cantPaisesPertenecientes != continente->getCountryCount() && itPais != countryList.end() ){
+			
+			
+	
+	
+	
+	
+	
+	//	}
+	
+	
+	
+	
+	
+	
+	
+	
 		//si la lista de paises pasada tiene la misma cantidad de paises que el continente actual
 		if ( countryList.size() == continente->getCountryCount() ){
 
-			//me posiciono en 1er pais del continente
-			itPais = countryList.begin();
+			
 			
 			while ( itPais != countryList.end() &&  contienePaises ){
 				
