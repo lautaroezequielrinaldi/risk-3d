@@ -29,6 +29,14 @@ class BattleResult : public Serializable
 	 	 * Puede ser un numero negativo en caso que haya perdido ejercitos
 	 	 */
 	 	int resultadoDefensor;
+
+		/**
+		 * Almacena:
+		 *           0 sino hubo conquista.
+		 * 	     1 si hubo conquista y hay que mover 1 ejercito al pais conquistado.
+		 * 	     2 si hubo conquista y hay que mover 2 ejercitos al pais conquistado.
+		 */
+		int conquista;
 		
 	/**
 	 * Metodos publicos de la clase
@@ -80,6 +88,12 @@ class BattleResult : public Serializable
 		 */		
 		void incrementDefenderLostArmy();
 		
+		/**
+		 * Metodo cuyo proposito es establecer si hubo o no conquista luego de una batalla, y la cantidad de ejercitos
+		 * que se debera mover al pais conquistado.
+		 */
+		void setConquest ( int armyCount );
+
 		/**
 		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.
 		 */

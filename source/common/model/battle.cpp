@@ -104,26 +104,43 @@ BattleResult Battle::start(ReferenceCountPtr<GameManager>& gameManager){
 	if ( paisDefensor->getArmyCount() == 0  ){
 		
 		cout<<"PAIS CONQUISTADO!!!! BRAVO"<<endl;
+			
+		//seteo al resultado de la batalla la cant de ejercitos a mover al pais conquistado.
+		resultadoBatalla.setConquest( this->defensa.getArmyCount() );
 		
 		// elimino al pais defensor de la lista de paises del player defensor
 		playerDefensor->removeConqueredLand(this->defensa.getDefenderdLand());
 		
 		// agrego pais conquistado a la lista de paises del jugador atacante
 		playerAtacante->addConqueredLand( this->ataque.getAttackerLand() );
-		
-		// elimino del paisAtacante los ejercitos que se mueven al pais conquistado.
-		// el movimiento no se hace explicitamente ya que quedan los ejercitos en el pais conquistado y 
-		// solo se agrega el pais conquistado a la lista de paises del atacante.
-		paisAtacante->removeArmies( resultadoBatalla.getDefenderResult() );
+				
+		// remuevo del pais atacante tantos ejercitos como dados usados en la batalla ( = dant ejercitos defensores )
+		// para "moverlos" al pais conquistado.
+		paisAtacante->removeArmies( this->defensa.getArmyCount());
+		// agrego al pais defensor que fue conquistado por el atacante los ejercitos "movidos"
+		paisDefensor->addArmies( this->defensa.getArmyCount() );
 
 		cout<<"EL ATACANTE MOVIO "<<resultadoBatalla.getDefenderResult()<<" ejercitos para conquistar."<<endl;
 		cout<<"el pais "<<this->ataque.getAttackerLand()<<"que ataco, se quedo con ejercitos: "<<paisAtacante->getArmyCount()<<endl;
+	
+
+		//verifico si hubo conquista de continente a partir de la conquista de un nuevo pais
+	
+		//  obtengo lista de continentes conquistados, si los hay, a partir de los paises conquistados.
+		std::vector<std::string> vecContinentes = game->conformContinent(playerAtacante->getConqueredLandList() );
+			
+		//veo si la lista de continentes conquistados tiene alguno que no este seteado en los continentes del jugador ( nuevo continente //conquistado.
+		for ( unsigned int i=0; i<vecContinentes.size();i++){
+			//si playerAtacante no es dueño todavia de uno de los continentes conquistados segun vecContinentes
+			if ( !playerAtacante->continentOwner( vecContinentes[i] ) )
+				//seteo al continente actual como conquistado por el player atacante
+				playerAtacante->addConqueredContinent(vecContinentes[i] );
+		}
+	
 	}
 
-	// si la verificacion de la lista de 
-	//if ( game->conformContinent(playerAtacante->getConqueredLandList() ) != "")
-		
 
+	
 
 	// setearle al battle result 0 1 2 3 para saber si hubo conquista:
 /*
