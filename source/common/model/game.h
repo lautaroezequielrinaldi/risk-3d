@@ -113,7 +113,7 @@ class Game: public Serializable {
        /**
 	* Metodo cuyo proposito es verificar si un conjunto de paises forman un continente del mapa del juego.
 	*/
-	bool conformContinent(std::list<std::string> countryList);
+	std::string conformContinent(std::list<std::string> countryList);
 
 
 
