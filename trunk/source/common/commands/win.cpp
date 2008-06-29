@@ -26,13 +26,6 @@ std::string Win::serialize(){
 	 return "<?xml version=\"1.0\"?><win>"+Command::serialize(0,numeroJugador)+"</win>";
 }
 
-void* Win::hydrate(std::string xml){
-	
-	
-	return NULL;
-;
-	
-}
 		
 bool Win::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return true;

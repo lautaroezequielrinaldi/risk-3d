@@ -19,10 +19,6 @@ std::string Chat::serialize(){
 bool Chat::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return false;
 }
-void* Chat::hydrate(std::string xml){
-
-	return NULL;
-}
 
 void Chat::execute(ReferenceCountPtr<State>& state){
 	

@@ -25,9 +25,27 @@ std::string SelectMap::serialize(){
 }
 
 void* SelectMap::hydrate(std::string xml){
+	xmlChar* field;
+	xmlXPathObjectPtr objetoXPath;
+	xmlNodeSetPtr setNodo;
+	xmlNodePtr nodo;
+	xmlDocPtr document = hydrateCommon(xml);
 	
 
-    return 0;	
+	xmlXPathContextPtr contextoXPath = xmlXPathNewContext(document);
+
+	objetoXPath = xmlXPathEvalExpression(BAD_CAST "//*/mapa", contextoXPath);
+	setNodo = objetoXPath->nodesetval;
+	nodo = setNodo->nodeTab[0];
+	field = xmlNodeGetContent(nodo);
+	this->nombreMapa.assign( (char*) field );
+
+	xmlFree(field);
+	xmlXPathFreeObject(objetoXPath);
+	xmlXPathFreeContext(contextoXPath);
+	xmlFreeDoc(document);
+	xmlCleanupParser();
+	return NULL;
 }
 
 bool SelectMap::validate(ReferenceCountPtr<GameManager>& gameManager){
@@ -38,10 +56,7 @@ bool SelectMap::validate(ReferenceCountPtr<GameManager>& gameManager){
 
 void SelectMap::execute(ReferenceCountPtr<State>& state){
     state->selectMap(*this);
-    // pasar a la implementacion apropiada de state
-    // seleccionar el mapa enviado
-    // cambiar estado a "esperando listos"
-    // notificar "aguardando jugadores"	
+
 	
 }
 std::string SelectMap::getName() {

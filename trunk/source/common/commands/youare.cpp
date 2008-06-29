@@ -26,13 +26,6 @@ std::string YouAre::serialize(){
 	 return "<?xml version=\"1.0\"?><youare>"+Command::serialize(0,numeroJugador)+"</youare>";
 }
 
-void* YouAre::hydrate(std::string xml){
-	
-	
-	return NULL;
-;
-	
-}
 		
 bool YouAre::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return true;
