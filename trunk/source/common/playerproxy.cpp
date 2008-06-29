@@ -5,8 +5,6 @@
 #include<sstream>
 #include <iostream>
 void * PlayerProxy::run() {
-	std::string msg1("bienvenido\n");
-	socket->write(msg1);
 
 	std::stringstream msg;
 	unsigned int msgLen;
@@ -24,6 +22,7 @@ void * PlayerProxy::run() {
 		commandXml = socket->full_read(msgLen);
 		
 		std::cerr << "serializacion " << commandXml << std::endl;
+		// pasar *this para que los waiting·::joingame sepan
 		gameManager->execute(commandName, commandXml);
 
 	}

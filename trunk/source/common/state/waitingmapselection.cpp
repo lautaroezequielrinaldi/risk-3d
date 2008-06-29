@@ -1,4 +1,7 @@
 #include "waitingmapselection.h"
+#include "../commands/youare.h"
+#include "../model/gamemanager.h"
+#include <vector>
 
 WaitingMapSelection::WaitingMapSelection(ReferenceCountPtr<GameManager>&gameManager, std::string name):State(gameManager,name)
 {
@@ -10,9 +13,14 @@ WaitingMapSelection::~WaitingMapSelection()
 
 bool WaitingMapSelection::joinGame(JoinGame & command) {
 	std::cerr << "Evento WaitingMapSelection::joinGame" << std::endl;
-	// si hay lugar
-	//    aceptarlo
-	//    YouAre(n) 
+
+	std::vector<std::string> v;
+	v.push_back("2");
+
+
+	YouAre * youare = new YouAre(v);
+	this->gameManager->notify(youare);
+	delete(youare);
 	return false;
 }
 
