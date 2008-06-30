@@ -1,5 +1,6 @@
 #include "gamemanager.h"
 #include <iostream>
+#include <sstream>
 #include "../commands/commandhydrator.h"
 
 GameManager::GameManager(): game (), turnManager ()
@@ -58,7 +59,18 @@ void GameManager::add(ReferenceCountPtr<PlayerProxy> & playerProxy) {
 	proxyList.push_back(playerProxy);
 	//agrega el player a la lista del turnmanager
 	this->turnManager->addPlayer(playerProxy->getPlayer()->getColor());
-	// incrementar jugadores
+	
+	std::vector<std::string> v;
+
+	std::ostringstream numeroJugador;
+	numeroJugador << playerProxy->getPlayer()->getColor();
+
+	v.push_back(numeroJugador.str());
+
+	YouAre * youare = new YouAre(v);
+	playerProxy->notify(youare);
+	delete(youare);
+
 	// si alcanzado max, open -> false;
 	if ( proxyList.size() == CAPACIDAD_MAXIMA )
 		this->open = false;

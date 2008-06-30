@@ -14,7 +14,7 @@ WaitingPlayer::~WaitingPlayer()
 bool WaitingPlayer::readyToPlay(ReadyToPlay & command){
 	std::cerr << "Evento WaitingPlayer::readyToPlay" << std::endl;
 
-
+/*
 	std::vector<std::string> v;
 	v.push_back("3");
 
@@ -22,7 +22,7 @@ bool WaitingPlayer::readyToPlay(ReadyToPlay & command){
 	YouAre * youare = new YouAre(v);
 	this->gameManager->notify(youare);
 	delete(youare);
-	return false;
+	return false;*/
 	// marcar como ready to play
 	// si todos listos, 
 	//     Map 

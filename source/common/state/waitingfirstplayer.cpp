@@ -19,18 +19,19 @@ WaitingFirstPlayer::~WaitingFirstPlayer()
 bool WaitingFirstPlayer::joinGame(JoinGame & command){
 	std::cout << "Evento WaitingFirstPlayer::joinGame" << std::endl;
 
-
+/*
 	std::vector<std::string> v;
 	v.push_back("1");
 
-
 	YouAre * youare = new YouAre(v);
-	this->gameManager->notify(youare);
+	this->gameManager->notify(youare,1);
 	delete(youare);
+*/
 
 	this->gameManager->getTurnManager()->changeTurn(1);
-	
-	v.clear();
+
+	std::vector<std::string> v;
+
 	v.push_back("mapa1");
 	v.push_back("mapa2");
 	v.push_back("mapa3");
