@@ -110,6 +110,7 @@ std::list< ReferenceCountPtr<Player> >& GameManager::getPlayerList(){
 }
 
 void GameManager::execute(Command * cmd){
+	std::cerr << "GameManager::execute("<< cmd->getName()<< ")"<< cmd->serialize() << std::endl;
 	ReferenceCountPtr<State> currentState = stateMachine->getCurrentState();
 	cmd->execute(currentState);
 }
