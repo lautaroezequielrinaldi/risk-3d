@@ -82,32 +82,37 @@ xmlDocPtr Command::hydrateCommon(std::string xml){
 	setNodo = objetoXPath->nodesetval;
 	nodo = setNodo->nodeTab[0];
 	field = xmlNodeGetContent(nodo);
-	this->from = atoi((char*)field);
+	this->from = atoi((char*)field);	
+	xmlXPathFreeObject(objetoXPath);
 	
 	objetoXPath = xmlXPathEvalExpression(BAD_CAST "//*/to", contextoXPath);
 	setNodo = objetoXPath->nodesetval;
 	nodo = setNodo->nodeTab[0];
 	field = xmlNodeGetContent(nodo);
 	this->to = atoi((char*)field);
-	
+	xmlXPathFreeObject(objetoXPath);
+
 	objetoXPath = xmlXPathEvalExpression(BAD_CAST "//*/valid", contextoXPath);
 	setNodo = objetoXPath->nodesetval;
 	nodo = setNodo->nodeTab[0];
 	field = xmlNodeGetContent(nodo);
 	this->valid = atoi((char*)field);
+	xmlXPathFreeObject(objetoXPath);
 	
 	objetoXPath = xmlXPathEvalExpression(BAD_CAST "//*/mainmsg", contextoXPath);
 	setNodo = objetoXPath->nodesetval;
 	nodo = setNodo->nodeTab[0];
 	field = xmlNodeGetContent(nodo);
 	this->mainmsg.assign( (char*) field );
-	
+	xmlXPathFreeObject(objetoXPath);	
+
+
 	objetoXPath = xmlXPathEvalExpression(BAD_CAST "//*/secmsg", contextoXPath);
 	setNodo = objetoXPath->nodesetval;
 	nodo = setNodo->nodeTab[0];
 	field = xmlNodeGetContent(nodo);
 	this->mainmsg.assign( (char*) field );
-
+	xmlXPathFreeObject(objetoXPath);
 	
 
 	xmlFree(field);

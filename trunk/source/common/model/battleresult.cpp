@@ -82,7 +82,9 @@ std::string BattleResult::serialize(){
 
 void* BattleResult::hydrate(std::string xml){
 	
-	xmlDocPtr document;
+
+	xmlDocPtr document= hydrateCommon(xml);
+
 	xmlNodePtr nodoRaiz;
 	xmlChar* paisDef;
 	xmlChar* paisAt;
