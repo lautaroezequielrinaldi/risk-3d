@@ -26,7 +26,15 @@ CommandHydrator::CommandHydrator(){
 	commands.insert(std::make_pair("win",new Win()));
 	commands.insert(std::make_pair("youAre",new YouAre()));
 
-
+	commands.insert(std::make_pair("uiReadyToPlay",new UIReadyToPlay()));
+/*
+	commands.insert(std::make_pair("uICountrySelect",new UICountrySelect()));
+	commands.insert(std::make_pair("uIQuantitySelect",new UIQuantitySelect()));
+	commands.insert(std::make_pair("uIQuit",new UIQuit()));
+	commands.insert(std::make_pair("uISurrender",new UISurrender()));
+	commands.insert(std::make_pair("uINoMore",new UINoMore()));
+	commands.insert(std::make_pair("",new ()));
+*/
 }
 
 CommandHydrator::~CommandHydrator(){

@@ -60,7 +60,7 @@ class YouAre : public Command
 		
 		virtual std::string getName();
 		
-		
+		int getJugador();
 };
 
 #endif /*__YOUARE_H__*/

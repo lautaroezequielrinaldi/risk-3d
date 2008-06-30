@@ -30,6 +30,7 @@ class GameManager: public StateObservable  {
         
         /**
          * Almacena el manejador de turnos.
+	 * (valido en el contexto del server)
          */
         ReferenceCountPtr<TurnManager> turnManager;
 		
@@ -43,14 +44,28 @@ class GameManager: public StateObservable  {
 	* Inicialmente apunta a null, luego se le seteara el ataque.
 	* No puede ser un ReferenceCountPtr ya que quien lo setea , lo hace con un *attack.
 	* No puede ser una referencia al ataque ya que el ataque no existe al crearse el gameManager. 
+	 * (valido en el contexto del server)
 	*/
 	Attack *attack;
 			
-		
+	/**
+	 * Hay lugar aun para conectarse?
+	 * (valido en el contexto del server)
+	 */
 	bool open;
 
+	/**
+	 * Ya comenzo el juego?
+	 * (valido en el contexto del server)
+	 */
 	bool playing;
 
+	/**
+	 * Quien soy
+	 * (valido en el contexto del player)
+	 */
+	int me;
+	
 	/**
 	 * considerar utilizar un map para poder acceder individualmente
 	 *
@@ -112,6 +127,10 @@ class GameManager: public StateObservable  {
 		bool isPlaying();
 
 		bool isOpen();
+
+		void setMe(int me);
+
+		int getMe();
 
 		void notify(Command * command);
 
