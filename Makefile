@@ -72,7 +72,7 @@ COMMONCFLAGS = $(shell xml2-config --cflags)
 # Flags de compilacìn usadas por el cliente
 CLIENTCFLAGS = $(COMMONCFLAGS)
 CLIENTCFLAGS += $(shell sdl-config --cflags)
-CLIENTFLAGS +=  $(shell pkg-config --cflags gtkmm-2.4)
+CLIENTCFLAGS +=  $(shell pkg-config --cflags gtkmm-2.4)
 
 # Flags de compilaciòn usadas por el editor
 EDITORCFLAGS = $(COMMONCFLAGS)
