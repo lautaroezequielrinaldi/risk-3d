@@ -160,10 +160,11 @@ int main(int argc, char** argv) {
 	std::cerr<< "StateMachine asigned" << std::endl;
 	Gtk::Main main(argc, argv);
 
+if (false) {
 	PreGameWindow preGameWindow(gamemanager);
 	Gtk::Main::run(preGameWindow);
 
-if (false) {
+} else {
 	Socket * socket = new Socket("localhost", 2000);
 	std::cerr<< "Socket created" << std::endl;
 
