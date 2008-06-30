@@ -54,28 +54,36 @@ class ReadyToPlayOnClickObserver: public UIObserver {
 class QuitOnClickObserver: public UIObserver {
 	public:
 		void mousePressed(const SDL_MouseButtonEvent& event) {
-			gamemanager->execute(new UIQuit());
+			UIQuit* cmd = new UIQuit();
+			gamemanager->execute(cmd);
+			delete cmd;
 		}
 };
 
 class SurrenderOnClickObserver: public UIObserver {
 	public:
 		void mousePressed(const SDL_MouseButtonEvent& event) {
-			gamemanager->execute(new UISurrender());
+			UISurrender* cmd = new UISurrender();
+			gamemanager->execute(cmd);
+			delete cmd;
 		}
 };
 
 class NoMoreOnClickObserver: public UIObserver {
 	public:
 		void mousePressed(const SDL_MouseButtonEvent& event) {
-			gamemanager->execute(new UINoMore());
+			UINoMore* cmd = new UINoMore();
+			gamemanager->execute(cmd);
+			delete cmd;
 		}
 };
 
 class DidIWinOnClickObserver: public UIObserver {
 	public:
 		void mousePressed(const SDL_MouseButtonEvent& event) {
-			gamemanager->execute(new UIDidIWin());
+			UIDidIWin* cmd = new UIDidIWin();
+			gamemanager->execute(cmd);
+			delete cmd;
 		}
 };
 
@@ -88,8 +96,10 @@ class SelectMapOnClickObserver: public UIObserver {
 		parameters.push_back("0");
 		parameters.push_back("mapa 1"); // seleccion hardcodeada de mapa
 		std::cerr << "SelectMapOnClickObserver::mousePressed" << std::endl;
-		gamemanager->execute(new UISelectMap(parameters));
-        }
+		UISelectMap* cmd = new UISelectMap(parameters);
+		gamemanager->execute(cmd);
+		delete cmd;
+    }
 };
 
 
@@ -252,3 +262,4 @@ if (true) {
 	SDL_FreeSurface(screen);
 
 }
+

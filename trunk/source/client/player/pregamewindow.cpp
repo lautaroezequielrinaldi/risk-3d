@@ -1,4 +1,7 @@
 #include "pregamewindow.h"
+#include<iostream>
+#include<iostream>
+#include<iostream>
 
 PreGameWindow::PreGameWindow(ReferenceCountPtr<GameManager>& gameManager):
 	StateObserver(),
@@ -19,8 +22,10 @@ PreGameWindow::PreGameWindow(ReferenceCountPtr<GameManager>& gameManager):
 	this->set_title("Pre sala de juego Risk3d");
 	// Establece el label del boton send message.
 	sendMessageButton.set_label("Send Message");
+	sendMessageButton.set_sensitive(false);
 	// Establece el label del boton ready to play.
 	readyToPlayButton.set_label("Ready To Play");
+	readyToPlayButton.set_sensitive(false);
 	// Establece el label del boton de dialogo de conexion.
 	connectionDialogButton.set_label("Connect to server...");
 
@@ -41,6 +46,12 @@ PreGameWindow::PreGameWindow(ReferenceCountPtr<GameManager>& gameManager):
 	// Conecta el signal_clicked del boton connnectionDialogButton con su manejador.
 	connectionDialogButton.signal_clicked().connect(sigc::mem_fun(*this,
 		&PreGameWindow::onConnectionDialogButtonClicked));
+    // Conecta el signal_clicked del boton readyToPlayButton con su manejador.
+    sendMessageButton.signal_clicked().connect(sigc::mem_fun(*this,
+		&PreGameWindow::onSendMessageButtonClicked));
+	// Conecta el signal_clicked del boton readyToPlayButton con su manejador.
+	readyToPlayButton.signal_clicked().connect(sigc::mem_fun(*this,
+		&PreGameWindow::onReadyToPlayButtonClicked));
 	// Muestro todos los widgets.
 	show_all();
 }
@@ -69,8 +80,12 @@ void PreGameWindow::showConnectionDialog() {
 
 			ReferenceCountPtr<ServerProxy> serverProxy = new ServerProxy(socket, gameManager);
 			gameManager->add(serverProxy);
-			gameManager->execute(new UIJoinGame());
-	        	connectionDialogButton.set_sensitive(false);
+			UIJoinGame* cmd = new UIJoinGame();
+			gameManager->execute(cmd);
+			delete cmd;
+			sendMessageButton.set_sensitive(true);
+			readyToPlayButton.set_sensitive(true);
+        	connectionDialogButton.set_sensitive(false);
 			serverProxy->start();
 		} catch (SocketConnectionException& exception) {
 			Gtk::MessageDialog errorDialog(*this, "No se pudo conectar al servidor!!!", false,
@@ -83,6 +98,16 @@ void PreGameWindow::showConnectionDialog() {
 
 void PreGameWindow::onConnectionDialogButtonClicked() {
 	this->showConnectionDialog();
+}
+
+void PreGameWindow::onSendMessageButtonClicked() {
+	std::cout << "TODO: Deberia mandar mensajes pero no esta implementado... Fuck!!!" << std::endl;
+}
+
+void PreGameWindow::onReadyToPlayButtonClicked() {
+	UIReadyToPlay* cmd = new UIReadyToPlay();
+	gameManager->notify(cmd);
+	delete cmd;
 }
 
 PreGameWindow::~PreGameWindow() {

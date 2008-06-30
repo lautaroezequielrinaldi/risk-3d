@@ -11,6 +11,7 @@
 #include<gtkmm/messagedialog.h>
 #include<gtkmm/dialog.h>
 #include "../../common/commands/uijoingame.h"
+#include "../..//common/commands/uireadytoplay.h"
 #include "../../common/model/gamemanager.h"
 #include "../../common/state/stateobserver.h"
 #include "../../common/smartpointer/referencecountptr.h"
@@ -79,6 +80,14 @@ class PreGameWindow: public StateObserver, public Gtk::Window {
 		 * Manejador de la senial signal_clicked del boton connection dialog button.
 		 */
 		void onConnectionDialogButtonClicked();
+		/**
+		 * Manejador de la senial signal_clicked del boton send messsage button.
+		 */
+		void onSendMessageButtonClicked();
+		/**
+		 * Manejador de la senial signal_clicked del boton ready to play button.
+		 */
+		void onReadyToPlayButtonClicked();
 	/**
 	 * Metodos publicos de la clase PreGameWindow.
 	 */
