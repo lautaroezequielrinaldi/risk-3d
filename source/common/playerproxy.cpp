@@ -6,12 +6,13 @@
 #include <iostream>
 void * PlayerProxy::run() {
 
-	std::stringstream msg;
-	unsigned int msgLen;
-	std::string commandName;
-	std::string commandXml;
+
 
 	while (! isCanceled()) {
+		std::stringstream msg;
+		unsigned int msgLen;
+		std::string commandName;
+		std::string commandXml;
 		std::cerr << std::endl << "################################"<< std::endl<< "PlayerProxy leyendo encabezado " << std::endl;
 		// deshardcodear este 32
 		msg << socket->full_read(32);
