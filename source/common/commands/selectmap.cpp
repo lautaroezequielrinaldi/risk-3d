@@ -34,7 +34,7 @@ void* SelectMap::hydrate(std::string xml){
 
 	xmlXPathContextPtr contextoXPath = xmlXPathNewContext(document);
 
-	objetoXPath = xmlXPathEvalExpression(BAD_CAST "//*/mapa", contextoXPath);
+	objetoXPath = xmlXPathEvalExpression(BAD_CAST "//*/map", contextoXPath);
 	setNodo = objetoXPath->nodesetval;
 	nodo = setNodo->nodeTab[0];
 	field = xmlNodeGetContent(nodo);
