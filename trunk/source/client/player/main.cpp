@@ -119,8 +119,8 @@ int main(int argc, char** argv) {
 	gamemanager->setStateMachine(stateMachine);
 	std::cerr<< "StateMachine asigned" << std::endl;
 
-if (false) {
-	Socket * socket = new Socket("pepote", 2000);
+if (true) {
+	Socket * socket = new Socket("localhost", 2000);
 	std::cerr<< "Socket created" << std::endl;
 
 	ReferenceCountPtr<ServerProxy> serverProxy= new ServerProxy(socket, gamemanager);
