@@ -69,6 +69,7 @@ bool Occupying::populate(Populate & command){
 		//notificacion
 		cout<<"---->  Le toca jugar al jugador: "<<gameManager->getTurnManager()->getCurrentPlayer()<<endl;	
 		
+		//////turnToPopulate
 		
 	}
 	else
