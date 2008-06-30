@@ -16,7 +16,7 @@ class Waiting : public State
 	bool youAre(YouAre & command);
 	bool turnToAttack(TurnToAttack & command);
 	bool mapList(MapList & command);
-	
+	bool quit(Quit & command);
 	bool move(Move & command);
 	
 	bool lose(Lose & command);
