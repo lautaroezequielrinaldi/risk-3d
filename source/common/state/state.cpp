@@ -20,6 +20,17 @@
 #include "../commands/turntooccupy.h"
 #include "../commands/didiwin.h"
 #include "../commands/maplist.h"
+
+#include "../commands/uireadytoplay.h"
+/*
+#include "../commands/ui.h"
+#include "../commands/ui.h"
+#include "../commands/ui.h"
+#include "../commands/ui.h"
+#include "../commands/ui.h"
+#include "../commands/ui.h"
+*/
+
 #include "stateobserver.h"
 
 #include "../model/gamemanager.h"
@@ -163,3 +174,6 @@ bool State::mapList(MapList & command){
 	return false;
 }
 
+bool State::uiReadyToPlay(UIReadyToPlay & command){
+	return false;
+}

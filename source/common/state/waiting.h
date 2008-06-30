@@ -23,6 +23,8 @@ class Waiting : public State
 	bool map(Map & command);
 	bool turnToMove(TurnToMove & command);
 	bool turnToOccupy(TurnToOccupy & command);
+	bool uiReadyToPlay(UIReadyToPlay & command);
+
 	virtual void accept(StateObserver* observer);
 };
 

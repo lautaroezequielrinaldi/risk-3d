@@ -91,6 +91,15 @@ bool GameManager::isOpen() {
 
 }
 
+
+void GameManager::setMe(int me) {
+	this->me = me;
+}
+
+int GameManager::getMe() {
+	return me;
+}
+
 void notify(std::string msg){
 	// para cada xProxy, pedir notify(msg);
 }

@@ -1,5 +1,7 @@
 #include "../../common/commands/joingame.h"
-#include "../../common/commands/readytoplay.h"
+
+#include "../../common/commands/uireadytoplay.h"
+
 #include "../../common/commands/selectmap.h"
 #include "../../common/model/randomdice.h"
 #include "../../common/model/gamemanager.h"
@@ -10,7 +12,7 @@
 
 #include <iostream>
 
-#include<sstream>
+#include <sstream>
 #include <GL/glut.h>
 #include "../common-ui/glwidgetmanager.h"
 #include "../common-ui/glmainloop.h"
@@ -31,10 +33,10 @@ class SimpleMouseObserver: public MouseObserver {
 		void mousePressed(const SDL_MouseButtonEvent& event) {
 			std::cout << "Se presiono el mouse en X: " << event.x << " y en Y: " << event.y << std::endl;
 			
-			ReadyToPlay * readyToPlay = new ReadyToPlay();
+			UIReadyToPlay * uiReadyToPlay = new UIReadyToPlay();
 
-			gamemanager->notify(readyToPlay);
-			delete(readyToPlay);
+			gamemanager->execute("uiReadyToPlay", uiReadyToPlay->serialize());
+			delete(uiReadyToPlay);
 
 		}
 
@@ -58,7 +60,12 @@ class MapMouseObserver: public MouseObserver {
         void mousePressed(const SDL_MouseButtonEvent& event) {
             std::cout << "Se presiono el mouse en X: " << event.x << " y en Y: " << event.y << std::endl;
 			std::vector<std::string> parameters;
-			parameters.push_back("1");
+
+			std::ostringstream strMe;
+		
+			strMe << gamemanager->getMe();
+
+			parameters.push_back(strMe.str());
 			parameters.push_back("mapa 1");
 
             SelectMap* selectMap = new SelectMap(parameters);

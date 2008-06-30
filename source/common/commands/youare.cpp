@@ -40,5 +40,7 @@ std::string YouAre::getName() {
 	return "youAre";
 }
 
-
+int YouAre::getJugador() {
+	return numeroJugador;
+}
 

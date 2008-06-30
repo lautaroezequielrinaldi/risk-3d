@@ -29,6 +29,16 @@ class TurnToAttack;
 class TurnToMove;
 class TurnToOccupy;
 
+class UIReadyToPlay;
+
+/*
+class UICountrySelect;
+class UIQuantitySelect;
+class UIQuit;
+class UISurrender;
+class UINoMore;
+*/
+
 class StateObserver;
 
 class State {
@@ -85,7 +95,20 @@ class State {
 		virtual bool win(Win & command);
 		virtual bool didIWin(DidIWin & command);
 		virtual bool noRoom(NoRoom & command);
+		virtual bool uiReadyToPlay(UIReadyToPlay & command);
+/*
+		virtual bool ( & command);
+		virtual bool ( & command);
+		virtual bool ( & command);
+		virtual bool ( & command);
+		virtual bool ( & command);
+		virtual bool ( & command);
+*/
+
 		virtual void accept(StateObserver* observer) = 0;
+
+
+
 };
 
 

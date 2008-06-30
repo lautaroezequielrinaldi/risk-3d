@@ -23,6 +23,15 @@
 #include "win.h"
 #include "youare.h"
 
+#include "uireadytoplay.h"
+/*
+#include "uicountryselect.h"
+#include "uiquantityselect.h"
+#include "uiquit.h"
+#include "uisurrender.h"
+#include "uinomore.h"
+*/
+
 
 #include <map>
 #include <string>
