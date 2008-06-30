@@ -15,12 +15,12 @@ CommandHydrator::CommandHydrator(){
 	commands.insert(std::make_pair("noRoom",new NoRoom()));
 	commands.insert(std::make_pair("populate",new Populate()));
 	commands.insert(std::make_pair("quit",new Quit()));
-	commands.insert(std::make_pair("readytoplay",new ReadyToPlay()));
+	commands.insert(std::make_pair("readyToPlay",new ReadyToPlay()));
 	commands.insert(std::make_pair("selectMap",new SelectMap()));
 	
 	commands.insert(std::make_pair("surrender",new Surrender()));
 	commands.insert(std::make_pair("turnToAttack",new TurnToAttack()));
-	commands.insert(std::make_pair("turnTomMve",new TurnToMove()));
+	commands.insert(std::make_pair("turnToMove",new TurnToMove()));
 	commands.insert(std::make_pair("turnToOccupy",new TurnToOccupy()));
 	commands.insert(std::make_pair("win",new Win()));
 	commands.insert(std::make_pair("youAre",new YouAre()));
