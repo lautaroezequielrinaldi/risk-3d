@@ -1,8 +1,21 @@
 #include "waiting.h"
 #include "stateobserver.h"
+
+
 #include "../commands/uireadytoplay.h"
 #include "../commands/readytoplay.h"
+#include "../commands/uiquit.h"
+#include "../commands/quit.h"
+#include "../commands/uinomore.h"
+#include "../commands/nomore.h"
+#include "../commands/uisurrender.h"
+#include "../commands/surrender.h"
+#include "../commands/uididiwin.h"
+#include "../commands/didiwin.h"
+
 #include "../commands/youare.h"
+
+#include <sstream>
 
 Waiting::Waiting(ReferenceCountPtr<GameManager>&gameManager, std::string name):State(gameManager,name)
 {
@@ -100,14 +113,46 @@ bool Waiting::turnToOccupy(TurnToOccupy & command){
 
 bool Waiting::uiReadyToPlay(UIReadyToPlay & command){
 	std::vector<std::string> parameters;
-	parameters.push_back("1");
-	//parameters.push_back(gameManager->whoAmI());
+	std::ostringstream strMe;
+	strMe << gameManager->getMe();
+	parameters.push_back(strMe.str());
+	this->gameManager->notify(new ReadyToPlay(parameters));
+	return false;
+}
 
-	ReadyToPlay * readyToPlay = new ReadyToPlay(parameters);
-	this->gameManager->notify(readyToPlay);
-	delete(readyToPlay);
+bool Waiting::uiQuit(UIQuit & command){
+	std::vector<std::string> parameters;
+	std::ostringstream strMe;
+	strMe << gameManager->getMe();
+	parameters.push_back(strMe.str());
+	this->gameManager->notify(new Quit(parameters));
+	return false;
+}
 
+bool Waiting::uiNoMore(UINoMore & command){
+	std::vector<std::string> parameters;
+	std::ostringstream strMe;
+	strMe << gameManager->getMe();
+	parameters.push_back(strMe.str());
+	this->gameManager->notify(new NoMore(parameters));
+	return false;
+}
 
+bool Waiting::uiSurrender(UISurrender & command){
+	std::vector<std::string> parameters;
+	std::ostringstream strMe;
+	strMe << gameManager->getMe();
+	parameters.push_back(strMe.str());
+	this->gameManager->notify(new Surrender(parameters));
+	return false;
+}
+
+bool Waiting::uiDidIWin(UIDidIWin & command){
+	std::vector<std::string> parameters;
+	std::ostringstream strMe;
+	strMe << gameManager->getMe();
+	parameters.push_back(strMe.str());
+	this->gameManager->notify(new DidIWin(parameters));
 	return false;
 }
 

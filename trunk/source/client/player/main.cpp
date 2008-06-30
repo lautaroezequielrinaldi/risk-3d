@@ -1,6 +1,12 @@
 #include "../../common/commands/joingame.h"
 
 #include "../../common/commands/uireadytoplay.h"
+#include "../../common/commands/uiquit.h"
+#include "../../common/commands/uisurrender.h"
+#include "../../common/commands/uinomore.h"
+#include "../../common/commands/uididiwin.h"
+
+
 
 #include "../../common/commands/selectmap.h"
 #include "../../common/model/randomdice.h"
@@ -22,41 +28,79 @@
 #include "../common-ui/mouseobserver.h"
 #include "../../common/smartpointer/referencecountptr.h"
 
-class SimpleMouseObserver: public MouseObserver {
-	/**
-	 * Metodos publicos:
-	 */
+class ReadyToPlayOnClickObserver: public MouseObserver {
 	public:
-		/**
-		 * Mouse Pressed.
-		 */
 		void mousePressed(const SDL_MouseButtonEvent& event) {
-			std::cout << "Se presiono el mouse en X: " << event.x << " y en Y: " << event.y << std::endl;
-			
-			UIReadyToPlay * uiReadyToPlay = new UIReadyToPlay();
-
-			gamemanager->execute("uiReadyToPlay", uiReadyToPlay->serialize());
-			delete(uiReadyToPlay);
-
+			UIReadyToPlay * cmd = new UIReadyToPlay();
+			gamemanager->execute("uiReadyToPlay", cmd->serialize());
+			delete(cmd);
 		}
-
 		void setGameManager(ReferenceCountPtr<GameManager> gamemanager) {
 			this->gamemanager = gamemanager;
 		}
+	private:
+		ReferenceCountPtr<GameManager> gamemanager;
+};
 
+class QuitOnClickObserver: public MouseObserver {
+	public:
+		void mousePressed(const SDL_MouseButtonEvent& event) {
+			UIQuit * cmd = new UIQuit();
+			gamemanager->execute("uiQuit", cmd->serialize());
+			delete(cmd);
+		}
+		void setGameManager(ReferenceCountPtr<GameManager> gamemanager) {
+			this->gamemanager = gamemanager;
+		}
+	private:
+		ReferenceCountPtr<GameManager> gamemanager;
+};
+
+class SurrenderOnClickObserver: public MouseObserver {
+	public:
+		void mousePressed(const SDL_MouseButtonEvent& event) {
+			UISurrender * cmd = new UISurrender();
+			gamemanager->execute("uiSurrender", cmd->serialize());
+			delete(cmd);
+		}
+		void setGameManager(ReferenceCountPtr<GameManager> gamemanager) {
+			this->gamemanager = gamemanager;
+		}
+	private:
+		ReferenceCountPtr<GameManager> gamemanager;
+};
+
+class NoMoreOnClickObserver: public MouseObserver {
+	public:
+		void mousePressed(const SDL_MouseButtonEvent& event) {
+			UINoMore * cmd = new UINoMore();
+			gamemanager->execute("uiNoMore", cmd->serialize());
+			delete(cmd);
+		}
+		void setGameManager(ReferenceCountPtr<GameManager> gamemanager) {
+			this->gamemanager = gamemanager;
+		}
+	private:
+		ReferenceCountPtr<GameManager> gamemanager;
+};
+
+class DidIWinOnClickObserver: public MouseObserver {
+	public:
+		void mousePressed(const SDL_MouseButtonEvent& event) {
+			UIDidIWin * cmd = new UIDidIWin();
+			gamemanager->execute("uiDidIWin", cmd->serialize());
+			delete(cmd);
+		}
+		void setGameManager(ReferenceCountPtr<GameManager> gamemanager) {
+			this->gamemanager = gamemanager;
+		}
 	private:
 		ReferenceCountPtr<GameManager> gamemanager;
 };
 
 
-class MapMouseObserver: public MouseObserver {
-    /**
- *      * Metodos publicos:
- *           */
+class SelectMapOnClickObserver: public MouseObserver {
     public:
-        /**
- *          * Mouse Pressed.
- *                   */
         void mousePressed(const SDL_MouseButtonEvent& event) {
             std::cout << "Se presiono el mouse en X: " << event.x << " y en Y: " << event.y << std::endl;
 			std::vector<std::string> parameters;
@@ -82,6 +126,11 @@ class MapMouseObserver: public MouseObserver {
     private:
         ReferenceCountPtr<GameManager> gamemanager;
 };
+
+
+
+
+
 
 int main(int argc, char** argv) {
 
@@ -158,39 +207,73 @@ if (true) {
 	}
 }
 
-if (true) {
-    glutInit(&argc, argv);
-	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-        return 0;
-    }
-    SDL_Surface* screen = SDL_SetVideoMode(1024, 768, 32, SDL_OPENGL);
-    SimpleMouseObserver observer;
-	MapMouseObserver mapObserver;
-    observer.setGameManager(gamemanager);
-	mapObserver.setGameManager(gamemanager);
+	glutInit(&argc, argv);
+		if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+		return 0;
+	}
+	SDL_Surface* screen = SDL_SetVideoMode(1024, 768, 32, SDL_OPENGL);
 
-    ReferenceCountPtr<GLButton> button( new GLButton("ReadyToPlay"));
-    button->setX(20);
-    button->setY(20);
-    button->addMouseObserver(&observer);
+	
+	ReadyToPlayOnClickObserver readyToPlayOnClickObserver; 
+	readyToPlayOnClickObserver.setGameManager(gamemanager);
 
-    ReferenceCountPtr<GLButton> button2( new GLButton("Boton2!!!"));
-    button2->setX(70);
-    button2->setY(70);
-    //button2->setEnabled(false);
-    button2->addMouseObserver(&mapObserver);
+	QuitOnClickObserver quitOnClickObserver;
+	quitOnClickObserver.setGameManager(gamemanager);
 
-    ReferenceCountPtr<GLLabel> label( new GLLabel("Esto es un label muy largo largo largo Label!!!"));
-    label->setX(120);
-    label->setY(120);
-    ReferenceCountPtr<GLSphereWidget> sphere(new GLSphereWidget("mapa.jpg", 0.3));
+	NoMoreOnClickObserver noMoreOnClickObserver;
+	noMoreOnClickObserver.setGameManager(gamemanager);
 
-    GLWidgetManager::register2DWidget(button);
-    GLWidgetManager::register2DWidget(button2);
-    GLWidgetManager::register2DWidget(label);
-    GLWidgetManager::register3DWidget(sphere);
-    GLMainLoop::run();
+	SurrenderOnClickObserver surrenderOnClickObserver;
+	surrenderOnClickObserver.setGameManager(gamemanager);
 
-    SDL_FreeSurface(screen);
-}
+	DidIWinOnClickObserver didIWinOnClickObserver;
+	didIWinOnClickObserver.setGameManager(gamemanager);
+
+	
+	ReferenceCountPtr<GLButton> readyToPlayButton( new GLButton("ReadyToPlay"));
+	readyToPlayButton->setX(100);
+	readyToPlayButton->setY(20);
+	readyToPlayButton->addMouseObserver(&readyToPlayOnClickObserver);
+
+
+	ReferenceCountPtr<GLButton> quitButton( new GLButton("Quit"));
+	quitButton->setX(600);
+	quitButton->setY(40);
+	quitButton->addMouseObserver(&quitOnClickObserver);
+
+	ReferenceCountPtr<GLButton> surrenderButton( new GLButton("Surrender"));
+	surrenderButton->setX(600);
+	surrenderButton->setY(80);
+	surrenderButton->addMouseObserver(&surrenderOnClickObserver);
+
+	ReferenceCountPtr<GLButton> noMoreButton( new GLButton("NoMore"));
+	noMoreButton->setX(600);
+	noMoreButton->setY(120);
+	noMoreButton->addMouseObserver(&noMoreOnClickObserver);
+
+	ReferenceCountPtr<GLButton> didIWinButton( new GLButton("DidIWin"));
+	didIWinButton->setX(600);
+	didIWinButton->setY(160);
+	didIWinButton->addMouseObserver(&didIWinOnClickObserver);
+	
+	
+	ReferenceCountPtr<GLLabel> label( new GLLabel("Esto es un label muy largo largo largo Label!!!"));
+	label->setX(10);
+	label->setY(280);
+	ReferenceCountPtr<GLSphereWidget> sphere(new GLSphereWidget("mapa.jpg", 0.3));
+	
+	GLWidgetManager::register2DWidget(readyToPlayButton);
+
+
+	GLWidgetManager::register2DWidget(quitButton);
+	GLWidgetManager::register2DWidget(surrenderButton);
+	GLWidgetManager::register2DWidget(noMoreButton);
+	GLWidgetManager::register2DWidget(didIWinButton);
+
+	GLWidgetManager::register2DWidget(label);
+	GLWidgetManager::register3DWidget(sphere);
+	GLMainLoop::run();
+	
+	SDL_FreeSurface(screen);
+
 }

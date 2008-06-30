@@ -24,6 +24,10 @@ class Waiting : public State
 	bool turnToMove(TurnToMove & command);
 	bool turnToOccupy(TurnToOccupy & command);
 	bool uiReadyToPlay(UIReadyToPlay & command);
+	bool uiNoMore(UINoMore & command);
+	bool uiSurrender(UISurrender & command);
+	bool uiQuit(UIQuit & command);
+	bool uiDidIWin(UIDidIWin & command);
 
 	virtual void accept(StateObserver* observer);
 };
