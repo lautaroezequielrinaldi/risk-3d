@@ -95,21 +95,12 @@ class DidIWinOnClickObserver: public MouseObserver {
 class SelectMapOnClickObserver: public MouseObserver {
     public:
         void mousePressed(const SDL_MouseButtonEvent& event) {
-            std::cout << "Se presiono el mouse en X: " << event.x << " y en Y: " << event.y << std::endl;
-			std::vector<std::string> parameters;
-
-			std::ostringstream strMe;
-		
-			strMe << gamemanager->getMe();
-
-			parameters.push_back(strMe.str());
-			parameters.push_back("mapa 1");
-
-            SelectMap* selectMap = new SelectMap(parameters);
-
-            gamemanager->notify(selectMap);
-            delete(selectMap);
-
+		std::vector<std::string> parameters;
+	
+		parameters.push_back("0");
+		parameters.push_back("mapa 1"); // seleccion hardcodeada de mapa
+	
+		gamemanager->notify(new SelectMap(parameters));
         }
 
         void setGameManager(ReferenceCountPtr<GameManager> gamemanager) {
@@ -211,6 +202,10 @@ if (false) {
 	SDL_Surface* screen = SDL_SetVideoMode(1024, 768, 32, SDL_OPENGL);
 
 	
+	SelectMapOnClickObserver selectMapOnClickObserver; 
+	selectMapOnClickObserver.setGameManager(gamemanager);
+
+	
 	ReadyToPlayOnClickObserver readyToPlayOnClickObserver; 
 	readyToPlayOnClickObserver.setGameManager(gamemanager);
 
@@ -228,8 +223,8 @@ if (false) {
 
 	
 	ReferenceCountPtr<GLButton> readyToPlayButton( new GLButton("ReadyToPlay"));
-	readyToPlayButton->setX(100);
-	readyToPlayButton->setY(20);
+	readyToPlayButton->setX(600);
+	readyToPlayButton->setY(0);
 	readyToPlayButton->addMouseObserver(&readyToPlayOnClickObserver);
 
 
@@ -252,6 +247,11 @@ if (false) {
 	didIWinButton->setX(600);
 	didIWinButton->setY(160);
 	didIWinButton->addMouseObserver(&didIWinOnClickObserver);
+
+	ReferenceCountPtr<GLButton> selectMapButton( new GLButton("Seleccionar mapa 1"));
+	selectMapButton->setX(600);
+	selectMapButton->setY(190);
+	selectMapButton->addMouseObserver(&selectMapOnClickObserver);
 	
 	
 	ReferenceCountPtr<GLLabel> label( new GLLabel("Esto es un label muy largo largo largo Label!!!"));
@@ -266,6 +266,7 @@ if (false) {
 	GLWidgetManager::register2DWidget(surrenderButton);
 	GLWidgetManager::register2DWidget(noMoreButton);
 	GLWidgetManager::register2DWidget(didIWinButton);
+	GLWidgetManager::register2DWidget(selectMapButton);
 
 	GLWidgetManager::register2DWidget(label);
 	GLWidgetManager::register3DWidget(sphere);
