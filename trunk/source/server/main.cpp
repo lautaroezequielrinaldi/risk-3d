@@ -11,7 +11,8 @@
 //#include <vector>
 
 int main (int argc, char** argv) {
-	
+
+try {	
 	RandomDice dado;
 	std::cerr<< "Dice created" << std::endl;
 
@@ -52,10 +53,19 @@ int main (int argc, char** argv) {
 		std::cerr<< "PlayerProxy started" << std::endl;
 	}
 
+
 	while (gamemanager->isPlaying()) {
 		// preguntarle a cada jugador si aun esta conectado, 
 		// hacer join en los que no
 	}
+
+} catch (SocketConnectionException& exception) {
+	std::cerr << exception.what() << std::endl;
+} catch (...) {
+	std::cerr << "default exception"<< std::endl;
+}
+
+
 
 	// Hay que obtener la lista de jugadores para 
         //std::vector<ReferenceCountPtr<PlayerProxy> >::iterator playersProxyIterator;

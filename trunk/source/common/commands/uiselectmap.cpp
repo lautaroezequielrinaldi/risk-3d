@@ -1,7 +1,7 @@
 #include "uiselectmap.h"
 
 UISelectMap::UISelectMap(std::vector<std::string> &parameterList) : Command (){
-	this->numeroJugador = atoi (parameterList[0].c_str() );
+	//this->numeroJugador = atoi (parameterList[0].c_str() );
 	this->nombreMapa = parameterList[1];
 }
 
@@ -59,6 +59,10 @@ void UISelectMap::execute(ReferenceCountPtr<State>& state){
 }
 std::string UISelectMap::getName() {
 	return "uiSelectMap";
+}
+
+std::string UISelectMap::getMapName(){
+	return nombreMapa;
 }
 
 

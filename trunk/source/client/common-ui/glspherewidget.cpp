@@ -58,7 +58,7 @@ void GLSphereWidget::update() {
     this->alpha = (this->alpha < -2 * PI) ? this->alpha +  2 * PI : this->alpha;
     this->beta = (this->beta > 1.0) ? 1.0 : this->beta;
     this->beta = (this->beta < -1.0) ? -1.0 : this->beta;
-	std::cout << this->alpha << "--" << this->beta << "--" << this->distance << "--" << deltaTime << std::endl;
+	//std::cerr << this->alpha << "--" << this->beta << "--" << this->distance << "--" << deltaTime << std::endl;
 
 }
 
@@ -79,7 +79,7 @@ void GLSphereWidget::drawWidget() {
 	// Cargo la identidad
 	glLoadIdentity();
 
-	std::cout << (this->distance * cos(this->alpha) * cos(this->beta)) << " " << (this->distance * sin(this->alpha) * cos(this->beta)) << " " << (this->distance * sin(this->beta)) << std::endl;
+//	std::cerr << (this->distance * cos(this->alpha) * cos(this->beta)) << " " << (this->distance * sin(this->alpha) * cos(this->beta)) << " " << (this->distance * sin(this->beta)) << std::endl;
     gluLookAt(
 		this->distance * cos(this->alpha) * cos(this->beta),
         this->distance * sin(this->alpha) * cos(this->beta),

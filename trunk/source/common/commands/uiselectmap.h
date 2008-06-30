@@ -14,7 +14,7 @@ class UISelectMap : public Command
 	private:
 	
 		std::string nombreMapa;
-		int numeroJugador;
+		//int numeroJugador;
 
 	
 	public:
@@ -57,6 +57,8 @@ class UISelectMap : public Command
 		void execute(ReferenceCountPtr<State>& state);
 		
 		virtual std::string getName();
+
+		std::string getMapName();
 };
 
 #endif /*UISELECTMAP_H_*/

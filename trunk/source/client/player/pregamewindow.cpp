@@ -29,6 +29,7 @@ PreGameWindow::PreGameWindow(ReferenceCountPtr<GameManager>& gameManager):
 void PreGameWindow::showConnectionDialog() {
 	Gtk::Label serverUrlLabel("Url del servidor:");
 	Gtk::Entry serverUrlEntry;
+	serverUrlEntry.set_text("localhost");
 	Gtk::Dialog connectionDialog("Conectar al servidor");
 	connectionDialog.get_vbox()->add(serverUrlLabel);
 	connectionDialog.get_vbox()->add(serverUrlEntry);
@@ -45,10 +46,8 @@ void PreGameWindow::showConnectionDialog() {
 			std::cout << "Se va a crear socket" << std::endl;
 			ReferenceCountPtr<ServerProxy> serverProxy = new ServerProxy(socket, gameManager);
 			gameManager->add(serverProxy);
-            UIJoinGame * cmd = new UIJoinGame();
-            gameManager->execute("uiJoinGame", cmd->serialize());
-            delete(cmd);
-	        connectionDialogButton.set_sensitive(false);
+			gameManager->execute(new UIJoinGame());
+	        	connectionDialogButton.set_sensitive(false);
 		} catch (SocketConnectionException& exception) {
 			Gtk::MessageDialog errorDialog(*this, "No se pudo conectar al servidor!!!", false,
 				Gtk::MESSAGE_ERROR);
