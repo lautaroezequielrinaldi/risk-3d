@@ -94,9 +94,6 @@ class SelectMapOnClickObserver: public UIObserver {
 
 
 
-
-
-
 int main(int argc, char** argv) {
 
 	// Aca iria el codigo del cliente
@@ -202,40 +199,41 @@ if (false) {
 
 	
 	ReferenceCountPtr<GLButton> readyToPlayButton( new GLButton("ReadyToPlay"));
-	readyToPlayButton->setX(600);
-	readyToPlayButton->setY(0);
+	readyToPlayButton->setX(700);
+	readyToPlayButton->setY(20);
 	readyToPlayButton->addMouseObserver(&readyToPlayOnClickObserver);
 
 
 	ReferenceCountPtr<GLButton> quitButton( new GLButton("Quit"));
-	quitButton->setX(600);
-	quitButton->setY(40);
+	quitButton->setX(700);
+	quitButton->setY(70);
 	quitButton->addMouseObserver(&quitOnClickObserver);
 
 	ReferenceCountPtr<GLButton> surrenderButton( new GLButton("Surrender"));
-	surrenderButton->setX(600);
-	surrenderButton->setY(80);
+	surrenderButton->setX(700);
+	surrenderButton->setY(130);
 	surrenderButton->addMouseObserver(&surrenderOnClickObserver);
 
 	ReferenceCountPtr<GLButton> noMoreButton( new GLButton("NoMore"));
-	noMoreButton->setX(600);
-	noMoreButton->setY(120);
+	noMoreButton->setX(700);
+	noMoreButton->setY(180);
 	noMoreButton->addMouseObserver(&noMoreOnClickObserver);
 
 	ReferenceCountPtr<GLButton> didIWinButton( new GLButton("DidIWin"));
-	didIWinButton->setX(600);
-	didIWinButton->setY(160);
+	didIWinButton->setX(700);
+	didIWinButton->setY(230);
 	didIWinButton->addMouseObserver(&didIWinOnClickObserver);
 
-	ReferenceCountPtr<GLButton> selectMapButton( new GLButton("Seleccionar mapa 1"));
-	selectMapButton->setX(600);
-	selectMapButton->setY(190);
+	ReferenceCountPtr<GLButton> selectMapButton( new GLButton("Falso Seleccionar mapa 1"));
+	selectMapButton->setX(700);
+	selectMapButton->setY(280);
 	selectMapButton->addMouseObserver(&selectMapOnClickObserver);
 	
 	
 	ReferenceCountPtr<GLLabel> label( new GLLabel("Esto es un label muy largo largo largo Label!!!"));
 	label->setX(10);
-	label->setY(280);
+	label->setY(480);
+
 	ReferenceCountPtr<GLSphereWidget> sphere(new GLSphereWidget("mapa.jpg", 0.3));
 	
 	GLWidgetManager::register2DWidget(readyToPlayButton);

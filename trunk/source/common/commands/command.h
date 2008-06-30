@@ -57,6 +57,10 @@ class Command : public Serializable
 		 */
 		int getFrom();
 
+		void setTo(int to);
+
+		void setFrom(int from);
+
 		int isValid();
 
 		void setValid(int valid);

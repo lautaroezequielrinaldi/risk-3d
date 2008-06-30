@@ -16,6 +16,13 @@ void Command::setValid(int valid){
 	this->valid = valid;
 }
 
+void Command::setTo(int to){
+	this->to = to;
+}
+
+void Command::setFrom(int from){
+	this->from=from;
+}
 
 int Command::getFrom(){
 	return from;

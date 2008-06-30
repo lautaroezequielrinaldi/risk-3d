@@ -48,7 +48,10 @@ bool Waiting::mapList(MapList & command){
 }
 
 
-
+bool Waiting::quit(Quit & command) {
+	std::cerr << "Evento Waiting::Quit" << std::endl;
+	return false;
+}
 
 bool Waiting::youAre(YouAre & command){
 	std::cerr << "Evento Waiting::youAre : " << command.getTo() << std::endl;
@@ -123,6 +126,7 @@ bool Waiting::uiReadyToPlay(UIReadyToPlay & command){
 }
 
 bool Waiting::uiQuit(UIQuit & command){
+	std::cerr << "Evento Waiting::uiQuit" << std::endl;
 	std::vector<std::string> parameters;
 	std::ostringstream strMe;
 	strMe << gameManager->getMe();

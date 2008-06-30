@@ -90,7 +90,7 @@ Socket::Socket(int port, int client_wait) throw(SocketConnectionException){
 	server_address.sin_addr.s_addr=INADDR_ANY;
 
 	if (bind(this->socketDescriptor,(struct sockaddr *) & server_address, (socklen_t)sizeof(struct sockaddr)) < 0) {
-		throw SocketConnectionException("error de bind");
+		throw SocketConnectionException("error de bind, verifique que el puerto este libre o intente mas tarde");
 	}
 
 	listen(this->socketDescriptor,client_wait);
