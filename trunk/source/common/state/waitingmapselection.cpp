@@ -14,13 +14,14 @@ WaitingMapSelection::~WaitingMapSelection()
 bool WaitingMapSelection::joinGame(JoinGame & command) {
 	std::cerr << "Evento WaitingMapSelection::joinGame" << std::endl;
 
-	std::vector<std::string> v;
+/*	std::vector<std::string> v;
 	v.push_back("2");
 
 
 	YouAre * youare = new YouAre(v);
-	this->gameManager->notify(youare);
+	this->gameManager->notify(youare,2);
 	delete(youare);
+*/
 	return false;
 }
 
