@@ -19,6 +19,9 @@
 #include <iostream>
 
 #include <sstream>
+#include<gtkmm/main.h>
+#include "pregamewindow.h"
+
 #include <GL/glut.h>
 #include "../common-ui/glwidgetmanager.h"
 #include "../common-ui/glmainloop.h"
@@ -174,8 +177,12 @@ int main(int argc, char** argv) {
 
 	gamemanager->setStateMachine(stateMachine);
 	std::cerr<< "StateMachine asigned" << std::endl;
+	Gtk::Main main(argc, argv);
 
-if (true) {
+	PreGameWindow preGameWindow(gamemanager);
+	Gtk::Main::run(preGameWindow);
+
+if (false) {
 	Socket * socket = new Socket("localhost", 2000);
 	std::cerr<< "Socket created" << std::endl;
 

@@ -12,10 +12,10 @@
 
 int main (int argc, char** argv) {
 	
-	Dice *dado = new RandomDice();
+	RandomDice dado;
 	std::cerr<< "Dice created" << std::endl;
 
-	ReferenceCountPtr<Game>        game       = new Game(*dado);
+	ReferenceCountPtr<Game>        game       = new Game(dado);
 	std::cerr<< "Game created" << std::endl;
 
 	ReferenceCountPtr<TurnManager> turnmanager= new TurnManager();
@@ -65,6 +65,6 @@ int main (int argc, char** argv) {
 		++playersProxyIterator;
 	}
 */
-	delete(dado);
 	return 0;
 }
+

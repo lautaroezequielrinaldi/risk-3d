@@ -31,18 +31,24 @@ void GLSphereWidget::update() {
 
     double distancePrime = 0.0, alphaPrime = 0.0, betaPrime = 0.0;
 
-    if (GLKeyManager::isKeyPressed(SDLK_LEFT))
+    if (GLKeyManager::isKeyPressed(SDLK_LEFT)) {
         alphaPrime -= 0.5;
-    if (GLKeyManager::isKeyPressed(SDLK_RIGHT))
+	}
+    if (GLKeyManager::isKeyPressed(SDLK_RIGHT)) {
         alphaPrime += 0.5;
-    if (GLKeyManager::isKeyPressed(SDLK_DOWN))
+	}
+    if (GLKeyManager::isKeyPressed(SDLK_DOWN)) {
         betaPrime -= 0.5;
-    if (GLKeyManager::isKeyPressed(SDLK_UP))
+	}
+    if (GLKeyManager::isKeyPressed(SDLK_UP)) {
         betaPrime += 0.5;
-    if (GLKeyManager::isKeyPressed(SDLK_PAGEDOWN))
+	}
+    if (GLKeyManager::isKeyPressed(SDLK_PAGEDOWN)) {
         distancePrime += 2.5;
-    if (GLKeyManager::isKeyPressed(SDLK_PAGEUP))
+	}
+    if (GLKeyManager::isKeyPressed(SDLK_PAGEUP)) {
         distancePrime -= 2.5;
+	}
 
     this->alpha += deltaTime * alphaPrime;
     this->beta += deltaTime * betaPrime;
@@ -52,26 +58,28 @@ void GLSphereWidget::update() {
     this->alpha = (this->alpha < -2 * PI) ? this->alpha +  2 * PI : this->alpha;
     this->beta = (this->beta > 1.0) ? 1.0 : this->beta;
     this->beta = (this->beta < -1.0) ? -1.0 : this->beta;
-	std::cout << this->alpha << " " << this->beta << " " << this->distance << std::endl;
+	std::cout << this->alpha << "--" << this->beta << "--" << this->distance << "--" << deltaTime << std::endl;
+
 }
 
 void GLSphereWidget::drawWidget() {
 	glMatrixMode(GL_PROJECTION);
-	// Cargo la identidad.
-	glLoadIdentity();
 	// Guardo en el stack la matriz.
 	glPushMatrix();
+    // Cargo la identidad.
+    glLoadIdentity();
 	// Translado coordenadas del origen
 	glTranslatef(0.0f, 0.0f, 0.0f);
 	// Defino campo de vision.
 	gluPerspective(60.0, 1.33, 0.1, 100.0);
 	// Cargo la matriz de proyeccion.
     glMatrixMode(GL_MODELVIEW);
-// Cargo la identidad
-    glLoadIdentity();
     // Guardo la matriz en el stack.
     glPushMatrix();
-//	std::cout << this->alpha << " " << this->beta << " " << this->distance << std::endl;
+	// Cargo la identidad
+	glLoadIdentity();
+
+	std::cout << (this->distance * cos(this->alpha) * cos(this->beta)) << " " << (this->distance * sin(this->alpha) * cos(this->beta)) << " " << (this->distance * sin(this->beta)) << std::endl;
     gluLookAt(
 		this->distance * cos(this->alpha) * cos(this->beta),
         this->distance * sin(this->alpha) * cos(this->beta),
@@ -96,10 +104,48 @@ void GLSphereWidget::drawWidget() {
 	// Cargo matriz.
 	glPopMatrix();
 	// Cargo matriz.
-	//glPopMatrix();
+	glPopMatrix();
 }
 
 void GLSphereWidget::handleKeyDownEvent(const SDL_KeyboardEvent& event) {
+/*	std::cout << "Entrando el handleKeyDownEvent de la esfera PUTA" << std::endl;
+    int newTime = SDL_GetTicks();
+    double deltaTime = (newTime - lastTime) / 1000.0;
+    lastTime = newTime;
+
+    double distancePrime = 0.0, alphaPrime = 0.0, betaPrime = 0.0;
+
+	if (event.keysym.sym == SDLK_LEFT) {
+        alphaPrime -= 0.5;
+        distancePrime += 2.5;
+    }
+    if (event.keysym.sym == SDLK_RIGHT) {
+        alphaPrime += 0.5;
+        distancePrime += 2.5;
+    }
+    if (event.keysym.sym == SDLK_DOWN) {
+        betaPrime -= 0.5;
+        distancePrime += 2.5;
+    }
+    if (event.keysym.sym == SDLK_UP) {
+        betaPrime += 0.5;
+        distancePrime += 2.5;
+    }
+    if (event.keysym.sym == SDLK_PAGEDOWN)
+        distancePrime += 2.5;
+    if (event.keysym.sym == SDLK_PAGEUP)
+        distancePrime -= 2.5;
+
+    this->alpha += deltaTime * alphaPrime;
+    this->beta += deltaTime * betaPrime;
+    this->distance += deltaTime * distancePrime;
+
+    this->alpha = (this->alpha > 2 * PI) ? this->alpha - 2 * PI : this->alpha;
+    this->alpha = (this->alpha < -2 * PI) ? this->alpha +  2 * PI : this->alpha;
+    this->beta = (this->beta > 1.0) ? 1.0 : this->beta;
+    this->beta = (this->beta < -1.0) ? -1.0 : this->beta;
+    std::cout << this->alpha << "--" << this->beta << "-- " << distancePrime << "--" << deltaTime << std::endl;
+	std::cout << "Saliendo del maldito handle key down event de la esfera PUTA" << std::endl;*/
 }
 
 GLSphereWidget::GLSphereWidget(const std::string& imageFileName, const float& radius): GL3DWidget(), texture(0), sphere(NULL), radius(radius) {
