@@ -99,7 +99,6 @@ bool Defending::defend(Defend & command){
 		//------- fin actualizacion modelo para cliente ------------------------
 				
 	
-
 	}
 	//defensa invalida
 	else {
