@@ -27,6 +27,7 @@
 #include "../commands/uiquit.h"
 #include "../commands/uisurrender.h"
 #include "../commands/uinomore.h"
+#include "../commands/uijoingame.h"
 
 /*
 #include "../commands/ui.h"
@@ -200,4 +201,7 @@ bool State::uiNoMore(UINoMore & command){
 	return false;
 }
 
+bool State::uiJoinGame(UIJoinGame & command) {
+	return false;
+}
 

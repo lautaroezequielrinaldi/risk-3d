@@ -31,6 +31,7 @@ CommandHydrator::CommandHydrator(){
 	commands.insert(std::make_pair("uiSurrender",new UISurrender()));
 	commands.insert(std::make_pair("uiNoMore",new UINoMore()));
 	commands.insert(std::make_pair("uiDidIWin",new UIDidIWin()));
+	commands.insert(std::make_pair("uiJoinGame",new UIJoinGame()));
 
 
 /*
