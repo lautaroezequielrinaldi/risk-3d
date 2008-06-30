@@ -35,6 +35,7 @@ class UIQuit;
 class UISurrender;
 class UINoMore;
 class UIDidIWin;
+class UIJoinGame;
 
 /*
 class UICountrySelect;
@@ -104,6 +105,7 @@ class State {
 		virtual bool uiQuit(UIQuit & command);
 		virtual bool uiSurrender(UISurrender & command);
 		virtual bool uiNoMore(UINoMore & command);
+		virtual bool uiJoinGame(UIJoinGame & command);
 
 
 /*

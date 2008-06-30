@@ -28,6 +28,7 @@
 #include "uisurrender.h"
 #include "uinomore.h"
 #include "uididiwin.h"
+#include "uijoingame.h"
 
 /*
 #include "uicountryselect.h"
