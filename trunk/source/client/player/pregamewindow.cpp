@@ -33,10 +33,15 @@ void PreGameWindow::showConnectionDialog() {
 	int result = connectionDialog.run();
 	if (result == Gtk::RESPONSE_OK) {
 		try {
-			Socket* socket = new Socket(serverUrlEntry.get_text(), 2000);
+			std::cout << "Se va a transformar en string" << std::endl;
+			std::string url = serverUrlEntry.get_text();
+			std::cout << "Se llego a tranformar en string" << std::endl;
+			Socket* socket = new Socket(url, 2000);
+			std::cout << "Se va a crear socket" << std::endl;
 			ReferenceCountPtr<ServerProxy> serverProxy = new ServerProxy(socket, gameManager);
+			gameManager->add(serverProxy);
 	        connectionDialogButton.set_sensitive(false);
-		} catch (SocketIOException& exception) {
+		} catch (SocketConnectionException& exception) {
 			Gtk::MessageDialog errorDialog(*this, "No se pudo conectar al servidor!!!", false,
 				Gtk::MESSAGE_ERROR);
             errorDialog.set_title("Error");
