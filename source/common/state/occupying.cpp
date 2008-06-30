@@ -1,10 +1,11 @@
 #include "occupying.h"
 #include "stateobserver.h"
 #include "../commands/populate.h"
+#include "../commands/turntooccupy.h"
 #include "../model/gamemanager.h"
 #include "../model/player.h"
 #include <list>
-
+#include <sstream>
 
 #include<iostream>
 using namespace std;
@@ -19,9 +20,10 @@ Occupying::~Occupying()
 
 bool Occupying::populate(Populate & command){
 	
+	std::ostringstream strFrom;
 
 	bool accionValida = command.validateOccupy(this->gameManager);
-	
+		
 	
 	if ( accionValida ){
 
@@ -51,6 +53,25 @@ bool Occupying::populate(Populate & command){
 		
 		cout<<"Cantidad de paises conquistados por el jugador "<<playerActual->getColor()<<" :"<<playerActual->getConqueredLands()<<endl;;
 	
+		// -------- Para actualizar y mensajear al cliente--------------
+		
+		//seteo al commando como valido
+		command.setValid(1);
+		
+		//seteo mje principal
+		std::string mainMsg = "Pais Ocupado: "+command.getCountryDestination();
+		command.setMainMsg(mainMsg);
+		
+		//seteo mje secundario
+   		strFrom << playerActual->getColor();
+		std::string secMsg = "El jugador * " +strFrom.str() +" * ocupo el pais: "+command.getCountryDestination();
+		command.setSecMsg(secMsg);	
+		
+		//notifico cambios y mensajes
+		gameManager->notify(&command);
+		
+		//------- fin actualizacion para cliente ------------------------
+		
 		// si ya se habitaron todos los paises del mapa
 		if ( !map->areUninhabitedCountries() ){
 			
@@ -59,23 +80,80 @@ bool Occupying::populate(Populate & command){
 			
 			//cambio de turno al 1er jugador
 			this->gameManager->getTurnManager()->changeTurn( this->gameManager->getTurnManager()->getFirstPlayer() );
+					
+			//preparo parametros para turnToOccupy que jugara de turnToSimplePopulate
+			std::vector<string> vecParam;
+			
+			//conversion de entero a string
+			strFrom << gameManager->getTurnManager()->getCurrentPlayer();
+			
+			//seteo jugador al que le toca jugar.
+			vecParam.push_back(strFrom.str());
+			
+			//creo comando para notificar
+			TurnToOccupy turnToOc(vecParam);
+			
+			//seteo los mensajes
+			turnToOc.setValid(1);
+			turnToOc.setMainMsg("Tenes el turno para poblar");
+   			
+			std::string secMsg = "El jugador * " + strFrom.str() + " * esta poblando";
+			turnToOc.setSecMsg(secMsg);
+			
+			//notifico 
+			gameManager->notify(&turnToOc);	
 			
 			cout<<"HORA DE POBLAR INICIAL"<<endl;	
 		}
-		else
+		else{
 			//cambio de turno 
 			this->gameManager->getTurnManager()->changeTurn();
 
+			//preparo parametros para turnToOccupy
+			std::vector<string> vecParam;
+		
+			//conversion de entero a string
+			strFrom << gameManager->getTurnManager()->getCurrentPlayer();
+			
+			//seteo jugador al que le toca jugar.
+			vecParam.push_back(strFrom.str());
+
+			//creo comando para notificar
+			TurnToOccupy turnToOc(vecParam);
+			
+			//seteo los mensajes
+			turnToOc.setValid(1);
+			turnToOc.setMainMsg("Tenes el turno para ocupar un territorio");
+			strFrom << gameManager->getTurnManager()->getCurrentPlayer();
+			std::string secMsg = "El jugador * "+ strFrom.str() +" * esta ocupando un territorio";
+			turnToOc.setSecMsg(secMsg);
+			
+			//notifico 
+			gameManager->notify(&turnToOc);	
+
+		}
 
 		//notificacion
 		cout<<"---->  Le toca jugar al jugador: "<<gameManager->getTurnManager()->getCurrentPlayer()<<endl;	
-		
-		//////turnToPopulate
-		
+				
 	}
-	else
-		//notificacion de error
-		cout<<"Ocupamiento invalido"<<endl;
+	//comando invalido
+	else{
+		command.setValid(0);
+		
+		//seteo mje principal
+		std::string mainMsg = "Error! Ocupamiento invalido ";
+		command.setMainMsg(mainMsg);
+		
+		//seteo mje secundario
+		strFrom << gameManager->getTurnManager()->getCurrentPlayer();
+		std::string secMsg = "El jugador * "+ strFrom.str() +" realizo un ocupamiento invalido";
+		command.setSecMsg(secMsg);	
+		
+		//notifico cambios y mensajes
+		gameManager->notify(&command);	
+	}
+		
 		
 		
 	return accionValida;        
