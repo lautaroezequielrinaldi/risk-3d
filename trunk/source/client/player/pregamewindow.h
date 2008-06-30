@@ -9,6 +9,7 @@
 #include<gtkmm/stock.h>
 #include<gtkmm/messagedialog.h>
 #include<gtkmm/dialog.h>
+#include "../../common/commands/uijoingame.h"
 #include "../../common/model/gamemanager.h"
 #include "../../common/smartpointer/referencecountptr.h"
 
