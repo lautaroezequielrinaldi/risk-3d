@@ -20,7 +20,7 @@
 #include "../commands/turntooccupy.h"
 #include "../commands/didiwin.h"
 #include "../commands/maplist.h"
-
+#include "stateobserver.h"
 
 #include "../model/gamemanager.h"
 
@@ -162,5 +162,4 @@ bool State::noRoom(NoRoom & command){
 bool State::mapList(MapList & command){
 	return false;
 }
-
 

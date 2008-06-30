@@ -25,7 +25,7 @@ class Moving : public State
 		 */
 		virtual bool move(Move & command);
 
-	 
+		virtual void accept(StateObserver* observer);	 
 };
 
 #endif /*MOVING_H_*/

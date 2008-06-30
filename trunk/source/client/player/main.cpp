@@ -1,6 +1,6 @@
 #include "../../common/commands/joingame.h"
 #include "../../common/commands/readytoplay.h"
-
+#include "../../common/commands/selectmap.h"
 #include "../../common/model/randomdice.h"
 #include "../../common/model/gamemanager.h"
 #include "../../common/model/game.h"
@@ -46,6 +46,36 @@ class SimpleMouseObserver: public MouseObserver {
 		ReferenceCountPtr<GameManager> gamemanager;
 };
 
+
+class MapMouseObserver: public MouseObserver {
+    /**
+ *      * Metodos publicos:
+ *           */
+    public:
+        /**
+ *          * Mouse Pressed.
+ *                   */
+        void mousePressed(const SDL_MouseButtonEvent& event) {
+            std::cout << "Se presiono el mouse en X: " << event.x << " y en Y: " << event.y << std::endl;
+			std::vector<std::string> parameters;
+			parameters.push_back("1");
+			parameters.push_back("mapa 1");
+
+            SelectMap* selectMap = new SelectMap(parameters);
+
+            gamemanager->notify(selectMap);
+            delete(selectMap);
+
+        }
+
+        void setGameManager(ReferenceCountPtr<GameManager> gamemanager) {
+            this->gamemanager = gamemanager;
+        }
+
+    private:
+        ReferenceCountPtr<GameManager> gamemanager;
+};
+
 int main(int argc, char** argv) {
 
 	// Aca iria el codigo del cliente
@@ -88,10 +118,11 @@ int main(int argc, char** argv) {
 
 	gamemanager->setStateMachine(stateMachine);
 	std::cerr<< "StateMachine asigned" << std::endl;
-	Socket * socket = new Socket("localhost", 2000);
+
+if (false) {
+	Socket * socket = new Socket("pepote", 2000);
 	std::cerr<< "Socket created" << std::endl;
 
-if (true) {
 	ReferenceCountPtr<ServerProxy> serverProxy= new ServerProxy(socket, gamemanager);
 	std::cerr<< "ServerProxy created" << std::endl;
 
@@ -114,8 +145,8 @@ if (true) {
 	// para desbloquearse del read()
 	//serverProxy->join();
 	//std::cerr << "Joined" << std::endl;
-	while (!serverProxy->isCanceled()) {
-		sleep(1);
+	while (false && !serverProxy->isCanceled()) {
+		sleep(10);
 		std::cerr << "looping" << std::endl;
 	}
 }
@@ -127,8 +158,9 @@ if (true) {
     }
     SDL_Surface* screen = SDL_SetVideoMode(1024, 768, 32, SDL_OPENGL);
     SimpleMouseObserver observer;
-
+	MapMouseObserver mapObserver;
     observer.setGameManager(gamemanager);
+	mapObserver.setGameManager(gamemanager);
 
     ReferenceCountPtr<GLButton> button( new GLButton("ReadyToPlay"));
     button->setX(20);
@@ -139,16 +171,16 @@ if (true) {
     button2->setX(70);
     button2->setY(70);
     //button2->setEnabled(false);
-    button2->addMouseObserver(&observer);
+    button2->addMouseObserver(&mapObserver);
 
     ReferenceCountPtr<GLLabel> label( new GLLabel("Esto es un label muy largo largo largo Label!!!"));
     label->setX(120);
     label->setY(120);
     ReferenceCountPtr<GLSphereWidget> sphere(new GLSphereWidget("mapa.jpg", 0.3));
 
-   // GLWidgetManager::register2DWidget(button);
-   // GLWidgetManager::register2DWidget(button2);
-   // GLWidgetManager::register2DWidget(label);
+    GLWidgetManager::register2DWidget(button);
+    GLWidgetManager::register2DWidget(button2);
+    GLWidgetManager::register2DWidget(label);
     GLWidgetManager::register3DWidget(sphere);
     GLMainLoop::run();
 

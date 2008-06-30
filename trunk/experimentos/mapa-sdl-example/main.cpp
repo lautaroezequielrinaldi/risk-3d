@@ -185,11 +185,12 @@ void updateModel() {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glTranslatef(-0.5f, .5f, 0.0f);
-    gluLookAt(
+    std::cout << alpha << " " << beta << " " << distance << std::endl;
+	gluLookAt(
         distance * cos(alpha) * cos(beta) + 0.5,
         distance * sin(alpha) * cos(beta) + 0.5,
         distance * sin(beta) + 0.5,
-        0.5, 0.5, 0.5,
+        0.5, 0.5, 0.0,
         0.0, 0.0, 1.0);
     //glScalef(1.0f, 1.0f, 1.0f);
 }

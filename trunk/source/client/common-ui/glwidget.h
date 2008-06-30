@@ -8,6 +8,7 @@
 #include<SDL/SDL_image.h> // Para funciones SDL Image
 #include "dimension.h" // Para definicion de Dimension
 #include "color.h" // Para definicion de Color
+#include "glkeymanager.h" // Para definicion de GLKeyManager.
 
 /**
  * Forward declaration de la clase GLMainLoop.

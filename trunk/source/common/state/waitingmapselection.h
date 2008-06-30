@@ -15,6 +15,7 @@ class WaitingMapSelection : public State
 	virtual bool selectMap(SelectMap & command); 
 	virtual bool joinGame(JoinGame & command);
 	virtual bool readyToPlay(ReadyToPlay & command);
+	virtual void accept(StateObserver* observer);
 };
 
 #endif /*__WAITINGMAPSELECTION_H__*/

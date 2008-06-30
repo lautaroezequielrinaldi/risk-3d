@@ -12,7 +12,8 @@ class Populating : public State
 		Populating(ReferenceCountPtr<GameManager>&gameManager, std::string name);
 	
 		virtual ~Populating();
-                virtual bool populate(Populate & command);		
+                virtual bool populate(Populate & command);
+		virtual void accept(StateObserver* observer);
 };
 
 #endif /*POPULATING_H_*/

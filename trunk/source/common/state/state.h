@@ -5,9 +5,6 @@
 #include "../smartpointer/referencecountptr.h"
 #include <iostream>
 
-class State;
-
-
 class GameManager;
 
 class Attack;
@@ -32,6 +29,7 @@ class TurnToAttack;
 class TurnToMove;
 class TurnToOccupy;
 
+class StateObserver;
 
 class State {
 
@@ -87,8 +85,7 @@ class State {
 		virtual bool win(Win & command);
 		virtual bool didIWin(DidIWin & command);
 		virtual bool noRoom(NoRoom & command);
-
-
+		virtual void accept(StateObserver* observer) = 0;
 };
 
 

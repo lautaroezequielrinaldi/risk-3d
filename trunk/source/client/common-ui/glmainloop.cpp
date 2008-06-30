@@ -113,7 +113,7 @@ void GLMainLoop::updateScene() {
 	for (iterator3D = GLWidgetManager::first3DWidget(); iterator3D != GLWidgetManager::last3DWidget();
 		++iterator3D) {
 		ReferenceCountPtr<GL3DWidget> widget = *iterator3D;
-		widget->draw();
+		widget->update();
     }
 
 	// Obtengo iterador para los widgets 2d registrados
@@ -122,7 +122,7 @@ void GLMainLoop::updateScene() {
 	for (iterator2D = GLWidgetManager::first2DWidget(); iterator2D != GLWidgetManager::last2DWidget();
 		++iterator2D) {
 		ReferenceCountPtr<GL2DWidget> widget = *iterator2D;
-		widget->draw();
+		widget->update();
 	}                                                                             
 }
 
@@ -133,8 +133,9 @@ void GLMainLoop::renderScene() {
 	for (iterator3D = GLWidgetManager::first3DWidget(); iterator3D != GLWidgetManager::last3DWidget();
 		++iterator3D) {
         ReferenceCountPtr<GL3DWidget> widget = *iterator3D;
+		widget->update();
         widget->draw();
-	}
+	}	
    
 	// Obtengo iterador para los widgets 2d registrados
 	GLWidgetManager::WidgetIterator2D iterator2D;
@@ -142,6 +143,7 @@ void GLMainLoop::renderScene() {
 	for (iterator2D = GLWidgetManager::first2DWidget(); iterator2D != GLWidgetManager::last2DWidget();
 		++iterator2D) {
 		ReferenceCountPtr<GL2DWidget> widget = *iterator2D;
+		widget->update();
 		widget->draw();
 	}
 	SDL_GL_SwapBuffers();
@@ -153,7 +155,7 @@ void GLMainLoop::run() {
 		// Define el evento a escuchar
 		SDL_Event event;
 		// Procesa todos los eventos pendientes.
-		while( SDL_PollEvent(&event) ) {
+		if( SDL_PollEvent(&event) ) {
 			// Verifica el tipo de evento.
 			switch( event.type ) {
 				// En caso de boton de mouse presionado
@@ -173,11 +175,15 @@ void GLMainLoop::run() {
 					break;
 				// En caso de tecla presionada
 				case SDL_KEYDOWN:
+					// Establezco la tecla como presionada.
+					GLKeyManager::pressKey(event.key.keysym.sym);
 					// Despacha el evento.
 					GLMainLoop::dispatchKeyDownEvent(event.key);
 					break;
 				// En caso de tecla liberada
 				case SDL_KEYUP:
+					// Establezco la tecla como liberada.
+					GLKeyManager::releaseKey(event.key.keysym.sym);
 					// Despacha el evento.
 					GLMainLoop::dispatchKeyUpEvent(event.key);
 					break;
@@ -187,7 +193,6 @@ void GLMainLoop::run() {
 					break;
 			}
 		}
-		GLMainLoop::updateScene();
 		GLMainLoop::renderScene();
 	}
 }

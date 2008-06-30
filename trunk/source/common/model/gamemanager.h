@@ -8,13 +8,14 @@ class CommandHydrator;
 #include "game.h"
 #include "turnmanager.h"
 #include "player.h"
+#include "../state/stateobservable.h"
 #include "../state/statemachine.h"
 #include "../commands/attack.h"
 
 #include "../playerproxy.h"
 #include "../serverproxy.h"
 
-class GameManager {
+class GameManager: public StateObservable  {
 	
 	private:
 	

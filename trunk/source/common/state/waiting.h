@@ -23,7 +23,7 @@ class Waiting : public State
 	bool map(Map & command);
 	bool turnToMove(TurnToMove & command);
 	bool turnToOccupy(TurnToOccupy & command);
-
+	virtual void accept(StateObserver* observer);
 };
 
 #endif /*__WAITING_H__*/

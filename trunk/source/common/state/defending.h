@@ -14,7 +14,8 @@ class Defending : public State
 		virtual ~Defending();
 		
 		virtual bool defend(Defend & command);
-		
+
+		virtual void accept(StateObserver* observer);		
 };
 
 #endif /*DEFENDING_H_*/

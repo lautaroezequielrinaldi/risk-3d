@@ -1,4 +1,5 @@
 #include "waitingmapselection.h"
+#include "stateobserver.h"
 #include "../commands/youare.h"
 #include "../model/gamemanager.h"
 #include <vector>
@@ -43,5 +44,7 @@ bool WaitingMapSelection::selectMap(SelectMap & command){
 	return false;
 }
 
-
+void WaitingMapSelection::accept(StateObserver* observer) {
+	observer->stateChanged(*this);
+}
 

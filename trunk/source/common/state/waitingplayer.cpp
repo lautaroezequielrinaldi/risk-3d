@@ -1,4 +1,5 @@
 #include "waitingplayer.h"
+#include "stateobserver.h"
 #include "../commands/youare.h"
 #include "../model/gamemanager.h"
 #include <vector>
@@ -43,5 +44,7 @@ bool WaitingPlayer::joinGame(JoinGame & command){
 	return false;
 }
 
-
+void WaitingPlayer::accept(StateObserver* observer) {
+	observer->stateChanged(*this);
+}
 

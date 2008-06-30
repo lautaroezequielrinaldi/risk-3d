@@ -2,6 +2,7 @@
 #define __GLMAINLOOP_H__
 
 #include<SDL.h> // Para definicion de las funciones de SDL.
+#include "glkeymanager.h" // Para definicion de GLKeyManager.
 #include "glwidgetmanager.h" // Para definicion de GLWidgetManager.
 #include "../../common/smartpointer/referencecountptr.h"
 

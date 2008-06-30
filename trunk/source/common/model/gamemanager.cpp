@@ -3,7 +3,7 @@
 #include <sstream>
 #include "../commands/commandhydrator.h"
 
-GameManager::GameManager(): game (), turnManager ()
+GameManager::GameManager(): StateObservable(), game (), turnManager ()
 {
 }
 
@@ -143,7 +143,8 @@ ReferenceCountPtr<State> GameManager::getCurrentState(){
 
 void GameManager::setCurrentState( std::string stateName  ){
 	
-	this->stateMachine->setState(stateName);	
+	this->stateMachine->setState(stateName);
+	this->notifyStateChanged(*(this->stateMachine->getCurrentState()));
 } 
 
 

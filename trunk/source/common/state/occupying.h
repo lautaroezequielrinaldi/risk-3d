@@ -10,7 +10,8 @@ class Occupying : public State
 		Occupying(ReferenceCountPtr<GameManager>&gameManager, std::string name);
 	
 		virtual ~Occupying();
-	virtual bool populate(Populate & command);		
+	virtual bool populate(Populate & command);
+	virtual void accept(StateObserver* observer);
 };
 
 #endif /*OCCUPYING_H_*/
