@@ -12,6 +12,8 @@
 #include "../commands/surrender.h"
 #include "../commands/uididiwin.h"
 #include "../commands/didiwin.h"
+#include "../commands/selectmap.h"
+#include "../commands/uiselectmap.h"
 
 #include "../commands/youare.h"
 
@@ -156,6 +158,16 @@ bool Waiting::uiDidIWin(UIDidIWin & command){
 	return false;
 }
 
+bool Waiting::uiSelectMap(UISelectMap & command){
+	std::vector<std::string> parameters;
+	std::ostringstream strMe;
+	strMe << gameManager->getMe();
+	parameters.push_back(strMe.str());
+	std::cerr << "Waiting::uiSelectMap me: " << gameManager->getMe() << std::endl;
+	parameters.push_back(command.getMapName());
+	this->gameManager->notify(new SelectMap(parameters));
+	return false;
+}
 void Waiting::accept(StateObserver* observer) {
 	observer->stateChanged(*this);
 }
