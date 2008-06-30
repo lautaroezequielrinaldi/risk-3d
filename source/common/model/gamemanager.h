@@ -134,6 +134,8 @@ class GameManager: public StateObservable  {
 
 		void notify(Command * command);
 
+		void execute(Command * cmd);
+
 		void execute(std::string commandName, std::string commandXml);
 
 		/**

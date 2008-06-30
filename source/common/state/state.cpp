@@ -28,6 +28,7 @@
 #include "../commands/uisurrender.h"
 #include "../commands/uinomore.h"
 #include "../commands/uijoingame.h"
+#include "../commands/uiselectmap.h"
 
 /*
 #include "../commands/ui.h"
@@ -202,6 +203,10 @@ bool State::uiNoMore(UINoMore & command){
 }
 
 bool State::uiJoinGame(UIJoinGame & command) {
+	return false;
+}
+
+bool State::uiSelectMap(UISelectMap & command) {
 	return false;
 }
 
