@@ -28,5 +28,5 @@ void DidIWin::execute(ReferenceCountPtr<State>& state){
 }
 
 std::string DidIWin::getName() {
-	return "DidIWin";
+	return "didIWin";
 }

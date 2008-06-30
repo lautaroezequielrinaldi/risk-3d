@@ -3,7 +3,7 @@
 UIReadyToPlay::UIReadyToPlay(std::vector<std::string> &parameterList) : Command ()
 {
 
-	this->numeroJugador = atoi (parameterList[0].c_str() );
+	//this->numeroJugador = atoi (parameterList[0].c_str() );
 }
 
 UIReadyToPlay::UIReadyToPlay(std::string xml):Command (){
@@ -20,7 +20,7 @@ UIReadyToPlay::~UIReadyToPlay()
 }
 
 std::string UIReadyToPlay::serialize(){
-	return "<?xml version=\"1.0\"?><uireadytoplay>"+Command::serialize(numeroJugador,0)+"</uireadytoplay>";
+	return "<?xml version=\"1.0\"?><uireadytoplay>"+Command::serialize(0,0)+"</uireadytoplay>";
 }
 
 

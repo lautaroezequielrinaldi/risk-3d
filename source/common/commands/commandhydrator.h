@@ -24,12 +24,14 @@
 #include "youare.h"
 
 #include "uireadytoplay.h"
-/*
-#include "uicountryselect.h"
-#include "uiquantityselect.h"
 #include "uiquit.h"
 #include "uisurrender.h"
 #include "uinomore.h"
+#include "uididiwin.h"
+
+/*
+#include "uicountryselect.h"
+#include "uiquantityselect.h"
 */
 
 

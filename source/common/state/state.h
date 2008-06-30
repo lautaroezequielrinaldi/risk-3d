@@ -30,13 +30,14 @@ class TurnToMove;
 class TurnToOccupy;
 
 class UIReadyToPlay;
+class UIQuit;
+class UISurrender;
+class UINoMore;
+class UIDidIWin;
 
 /*
 class UICountrySelect;
 class UIQuantitySelect;
-class UIQuit;
-class UISurrender;
-class UINoMore;
 */
 
 class StateObserver;
@@ -95,12 +96,15 @@ class State {
 		virtual bool win(Win & command);
 		virtual bool didIWin(DidIWin & command);
 		virtual bool noRoom(NoRoom & command);
+
 		virtual bool uiReadyToPlay(UIReadyToPlay & command);
+		virtual bool uiDidIWin(UIDidIWin & command);
+		virtual bool uiQuit(UIQuit & command);
+		virtual bool uiSurrender(UISurrender & command);
+		virtual bool uiNoMore(UINoMore & command);
+
+
 /*
-		virtual bool ( & command);
-		virtual bool ( & command);
-		virtual bool ( & command);
-		virtual bool ( & command);
 		virtual bool ( & command);
 		virtual bool ( & command);
 */

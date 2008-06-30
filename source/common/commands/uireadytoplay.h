@@ -12,9 +12,9 @@
 class UIReadyToPlay : public Command
 {
 	
-	private:
+	//private:
 	
-		int numeroJugador;
+		//int numeroJugador;
 	
 	public:
 	

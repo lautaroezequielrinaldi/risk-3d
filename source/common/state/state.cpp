@@ -22,11 +22,12 @@
 #include "../commands/maplist.h"
 
 #include "../commands/uireadytoplay.h"
+#include "../commands/uididiwin.h"
+#include "../commands/uiquit.h"
+#include "../commands/uisurrender.h"
+#include "../commands/uinomore.h"
+
 /*
-#include "../commands/ui.h"
-#include "../commands/ui.h"
-#include "../commands/ui.h"
-#include "../commands/ui.h"
 #include "../commands/ui.h"
 #include "../commands/ui.h"
 */
@@ -177,3 +178,21 @@ bool State::mapList(MapList & command){
 bool State::uiReadyToPlay(UIReadyToPlay & command){
 	return false;
 }
+
+bool State::uiSurrender(UISurrender & command){
+	return false;
+}
+
+bool State::uiQuit(UIQuit & command){
+	return false;
+}
+
+bool State::uiDidIWin(UIDidIWin & command){
+	return false;
+}
+
+bool State::uiNoMore(UINoMore & command){
+	return false;
+}
+
+
