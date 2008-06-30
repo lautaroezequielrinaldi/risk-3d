@@ -12,17 +12,6 @@ Command::~Command()
 int Command::isValid() {
 	return valid;
 }
-void Command::setValid(int valid){
-	this->valid = valid;
-}
-
-void Command::setTo(int to){
-	this->to = to;
-}
-
-void Command::setFrom(int from){
-	this->from=from;
-}
 
 int Command::getFrom(){
 	return from;
@@ -32,17 +21,8 @@ int Command::getTo(){
 	return to;
 }
 
-
 std::string Command::getName(){
 	return name;
-}
-
-void Command::setMainMsg(std::string msg) {
-	mainmsg=msg;
-}
-
-void Command::setSecMsg(std::string msg) {
-	secmsg=msg;
 }
 
 std::string Command::getMainMsg() {
@@ -51,6 +31,26 @@ std::string Command::getMainMsg() {
 
 std::string Command::getSecMsg() {
 	return secmsg;
+}
+
+void Command::setValid(int valid){
+	this->valid = valid;
+}
+
+void Command::setFrom(int from){
+	this->from = from;
+}
+		
+void Command::setTo(int to){
+	this->to = to;	
+}
+
+void Command::setMainMsg(std::string msg) {
+	mainmsg=msg;
+}
+
+void Command::setSecMsg(std::string msg) {
+	secmsg=msg;
 }
 
 

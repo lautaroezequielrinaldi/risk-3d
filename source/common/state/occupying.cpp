@@ -73,6 +73,7 @@ bool Occupying::populate(Populate & command){
 		
 		//------- fin actualizacion para cliente ------------------------
 		
+		
 		// si ya se habitaron todos los paises del mapa
 		if ( !map->areUninhabitedCountries() ){
 			
@@ -96,6 +97,9 @@ bool Occupying::populate(Populate & command){
 			
 			//seteo los mensajes
 			turnToFirstPopu.setValid(1);
+			turnToFirstPopu.setTo(gameManager->getTurnManager()->getCurrentPlayer());
+			turnToFirstPopu.setFrom(0);
+			
 			turnToFirstPopu.setMainMsg("Tenes el turno para poblar");
    			
 			std::string secMsg = "Todos los Paises fueron ocupados. El jugador * " + strComodin.str() + " * esta poblando";
@@ -124,6 +128,9 @@ bool Occupying::populate(Populate & command){
 			
 			//seteo los mensajes
 			turnToOc.setValid(1);
+			turnToOc.setTo(gameManager->getTurnManager()->getCurrentPlayer());
+			turnToOc.setFrom(0);
+			
 			turnToOc.setMainMsg("Tenes el turno para ocupar un territorio");
 			strComodin << gameManager->getTurnManager()->getCurrentPlayer();
 			std::string secMsg = "El jugador * "+ strComodin.str() +" * esta ocupando un territorio";

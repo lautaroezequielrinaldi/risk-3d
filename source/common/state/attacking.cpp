@@ -2,6 +2,7 @@
 #include "stateobserver.h"
 #include "../commands/attack.h"
 #include "../model/gamemanager.h"
+#include "../commands/turntomove.h"
 #include<sstream>
 
 
@@ -107,8 +108,41 @@ bool Attacking::attack(Attack & command){
 
 bool Attacking::noMore(NoMore & command){
 	
+	std::ostringstream strComodin;
+	
 	//cambio a proximo estado : mover
 	this->gameManager->setCurrentState("moving");
+	
+	//preparo parametros para turnToPopulate
+	std::vector<string> vecParam;
+			
+	//conversion de entero a string
+	strComodin << gameManager->getTurnManager()->getCurrentPlayer();
+			
+	//seteo jugador al que le toca jugar.
+	vecParam.push_back(strComodin.str());
+			
+	//creo comando para notificar
+	TurnToMove turnToMove(vecParam);
+			
+	//seteo los mensajes
+	turnToMove.setValid(1);
+	turnToMove.setTo(gameManager->getTurnManager()->getCurrentPlayer());
+	turnToMove.setFrom(0);
+			
+	//convierto el bonus en un string.
+	std::string mainMsg = "Hora de Fortificar unidades, podes mover ejercitos de un solo pais hacia otro";
+	turnToMove.setMainMsg(mainMsg);
+   			
+   	//conversion de entero a string para el numero de jugador
+	strComodin << gameManager->getTurnManager()->getCurrentPlayer();
+	std::string secMsg = "El jugador * " + strComodin.str() + " * esta fortificando unidades";
+	turnToMove.setSecMsg(secMsg);
+			
+	//notifico 
+	gameManager->notify(&turnToMove);
+	
+	
 	cerr<<"HORA DE MOVER EJERCITOS"<<endl;
 		
 }

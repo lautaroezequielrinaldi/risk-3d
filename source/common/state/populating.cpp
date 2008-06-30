@@ -99,6 +99,8 @@ bool Populating::populate(Populate & command){
 				
 			//seteo los mensajes
 			turnToAttack.setValid(1);
+			turnToAttack.setTo(gameManager->getTurnManager()->getCurrentPlayer());
+			turnToAttack.setFrom(0);
 			turnToAttack.setMainMsg("Hora de atacar");
 	   			
 			std::string secMsg = "El jugador * " + strComodin.str() + " * esta etacando";

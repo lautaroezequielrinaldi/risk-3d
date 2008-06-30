@@ -136,6 +136,8 @@ bool SimplePopulating::populate(Populate & command){
 			
 			//seteo los mensajes
 			turnToPopulate.setValid(1);
+			turnToPopulate.setTo(gameManager->getTurnManager()->getCurrentPlayer());
+			turnToPopulate.setFrom(0);
 			
 			//convierto el bonus en un string.
 			strComodin << playerActual->getArmyCount();
@@ -178,6 +180,9 @@ bool SimplePopulating::populate(Populate & command){
 				
 				//seteo los mensajes
 				turnToFirstPopu.setValid(1);
+				turnToFirstPopu.setTo( gameManager->getTurnManager()->getCurrentPlayer() );
+				turnToFirstPopu.setFrom(0);				
+				
 				turnToFirstPopu.setMainMsg("Tenes el turno para poblar tus territorios");
 	   			
 				std::string secMsg = "El jugador * " + strComodin.str() + " * esta poblando";
