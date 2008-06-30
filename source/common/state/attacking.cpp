@@ -1,4 +1,5 @@
 #include "attacking.h"
+#include "stateobserver.h"
 #include "../commands/attack.h"
 #include "../model/gamemanager.h"
 
@@ -66,3 +67,8 @@ bool Attacking::noMore(NoMore & command){
 	cout<<"HORA DE MOVER EJERCITOS"<<endl;
 		
 }
+
+void Attacking::accept(StateObserver* observer) {
+    observer->stateChanged(*this);
+}
+

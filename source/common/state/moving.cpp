@@ -1,4 +1,5 @@
 #include "moving.h"
+#include "stateobserver.h"
 #include "../commands/move.h"
 #include "../model/gamemanager.h"
 #include "../model/armybonuscalculator.h"
@@ -74,4 +75,7 @@ bool Moving::move(Move & command){
 }
 
 
+void Moving::accept(StateObserver* observer) {
+    observer->stateChanged(*this);
+}
 

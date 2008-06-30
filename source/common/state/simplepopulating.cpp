@@ -1,4 +1,5 @@
 #include "simplepopulating.h"
+#include "stateobserver.h"
 #include "../commands/populate.h"
 #include "../model/gamemanager.h"
 #include "../model/player.h"
@@ -116,5 +117,9 @@ bool SimplePopulating::populate(Populate & command){
 		cout<<"accion invalida"<<endl;
 	
 	return accionValida;
+}
+
+void SimplePopulating::accept(StateObserver* observer) {
+    observer->stateChanged(*this);
 }
 

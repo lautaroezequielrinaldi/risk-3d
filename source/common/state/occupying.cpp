@@ -1,4 +1,5 @@
 #include "occupying.h"
+#include "stateobserver.h"
 #include "../commands/populate.h"
 #include "../model/gamemanager.h"
 #include "../model/player.h"
@@ -79,5 +80,9 @@ bool Occupying::populate(Populate & command){
 		
 	return accionValida;        
         
+}
+
+void Occupying::accept(StateObserver* observer) {
+    observer->stateChanged(*this);
 }
 

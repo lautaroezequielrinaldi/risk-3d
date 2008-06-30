@@ -26,10 +26,6 @@ class GLSphereWidget: public GL3DWidget {
 		 */
 		double lastTime;
 		/**
-		 * Almacena el delta de tiempo de tick SDL.
-		 */
-		double deltaTime;
-		/**
 		 * Almacena el angulo alfa de la esfera.
 		 */
 		float alpha;

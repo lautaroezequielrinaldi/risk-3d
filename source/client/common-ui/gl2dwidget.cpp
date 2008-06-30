@@ -19,15 +19,17 @@ void GL2DWidget::preDrawWidget() {
     glOrtho(0, 1024, 768, 0, 0, 1);
     // Carga la matriz model view.
     glMatrixMode(GL_MODELVIEW);
+	// Carga la identida.
+	glLoadIdentity();
 }
 
 void GL2DWidget::postDrawWidget() {
     // Carga del stack los atributos.
     glPopAttrib();
     // Carga del sack la matriz actual.
-	glMatrixMode(GL_PROJECTION);
+//	glMatrixMode(GL_PROJECTION);
     glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
+//	glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
 }
 

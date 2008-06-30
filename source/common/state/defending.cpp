@@ -1,4 +1,5 @@
 #include "defending.h"
+#include "stateobserver.h"
 #include "../model/battle.h"
 
 #include<iostream>
@@ -61,5 +62,9 @@ bool Defending::defend(Defend & command){
 	}
 	
 	return accionValida;	
+}
+
+void Defending::accept(StateObserver* observer) {
+    observer->stateChanged(*this);
 }
 

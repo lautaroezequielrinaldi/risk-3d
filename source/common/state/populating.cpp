@@ -1,4 +1,5 @@
 #include "populating.h"
+#include "stateobserver.h"
 #include "../commands/populate.h"
 #include "../model/gamemanager.h"
 #include "../model/player.h"
@@ -67,4 +68,7 @@ bool Populating::populate(Populate & command){
 	return accoinValida;	
 }
 
+void Populating::accept(StateObserver* observer) {
+    observer->stateChanged(*this);
+}
 

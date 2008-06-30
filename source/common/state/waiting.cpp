@@ -1,4 +1,5 @@
 #include "waiting.h"
+#include "stateobserver.h"
 
 Waiting::Waiting(ReferenceCountPtr<GameManager>&gameManager, std::string name):State(gameManager,name)
 {
@@ -92,3 +93,8 @@ bool Waiting::turnToOccupy(TurnToOccupy & command){
 	*/
 	return false;
 }
+
+void Waiting::accept(StateObserver* observer) {
+	observer->stateChanged(*this);
+}
+

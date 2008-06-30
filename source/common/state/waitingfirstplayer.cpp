@@ -1,4 +1,5 @@
 #include "waitingfirstplayer.h"
+#include "stateobserver.h"
 #include <iostream>
 #include <sstream>
 
@@ -45,5 +46,7 @@ bool WaitingFirstPlayer::joinGame(JoinGame & command){
 	return false;
 }
 
-
+void WaitingFirstPlayer::accept(StateObserver* observer) {
+	observer->stateChanged(*this);
+}
 

@@ -15,8 +15,8 @@ class Attacking : public State
 		virtual bool attack(Attack & command);
 		
 		virtual bool noMore(NoMore & command);
-		
-	    
+
+		virtual void accept(StateObserver* observer);
 };
 
 #endif /*ATTACKING_H_*/

@@ -16,16 +16,18 @@ void GL3DWidget::preDrawWidget() {
     glLoadIdentity();
     // Carga la matriz model view.
     glMatrixMode(GL_MODELVIEW);
+	// Carga la matriz de identidad.
+	glLoadIdentity();
 }
 
 void GL3DWidget::postDrawWidget() {
     // Carga del stack los atributos.
     glPopAttrib();
     // Carga del stack la matriz de proyeccion.
-    glMatrixMode(GL_PROJECTION);
+//  glMatrixMode(GL_PROJECTION);
     glPopMatrix();
 	// Carga del stack la matriz de model view.
-    glMatrixMode(GL_MODELVIEW);
+//  glMatrixMode(GL_MODELVIEW);
     glPopMatrix();
 }
 
