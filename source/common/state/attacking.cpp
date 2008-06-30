@@ -98,7 +98,7 @@ bool Attacking::attack(Attack & command){
 		
 	
 		//notificar error
-		cout<<"ataque invalido"<<endl;
+		cerr<<"ataque invalido"<<endl;
 	}
 		
 	return accionValida;	
@@ -109,7 +109,7 @@ bool Attacking::noMore(NoMore & command){
 	
 	//cambio a proximo estado : mover
 	this->gameManager->setCurrentState("moving");
-	cout<<"HORA DE MOVER EJERCITOS"<<endl;
+	cerr<<"HORA DE MOVER EJERCITOS"<<endl;
 		
 }
 

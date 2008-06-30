@@ -151,8 +151,6 @@ bool Occupying::populate(Populate & command){
 		gameManager->notify(&command);	
 	}
 		
-		
-		
 	return accionValida;        
         
 }
