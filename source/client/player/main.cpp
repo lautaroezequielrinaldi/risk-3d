@@ -31,84 +31,65 @@
 #include "../common-ui/mouseobserver.h"
 #include "../../common/smartpointer/referencecountptr.h"
 
-class ReadyToPlayOnClickObserver: public MouseObserver {
+class UIObserver: public MouseObserver {
+	public:
+		UIObserver(){};
+		virtual ~UIObserver(){};
+
+		void setGameManager(ReferenceCountPtr<GameManager> gamemanager) {
+			this->gamemanager = gamemanager;
+		}
+	protected:
+		ReferenceCountPtr<GameManager> gamemanager;
+};
+
+
+class ReadyToPlayOnClickObserver: public UIObserver {
 	public:
 		void mousePressed(const SDL_MouseButtonEvent& event) {
 			gamemanager->execute(new UIReadyToPlay());
 		}
-		void setGameManager(ReferenceCountPtr<GameManager> gamemanager) {
-			this->gamemanager = gamemanager;
-		}
-	private:
-		ReferenceCountPtr<GameManager> gamemanager;
 };
 
-class QuitOnClickObserver: public MouseObserver {
+class QuitOnClickObserver: public UIObserver {
 	public:
 		void mousePressed(const SDL_MouseButtonEvent& event) {
 			gamemanager->execute(new UIQuit());
 		}
-		void setGameManager(ReferenceCountPtr<GameManager> gamemanager) {
-			this->gamemanager = gamemanager;
-		}
-	private:
-		ReferenceCountPtr<GameManager> gamemanager;
 };
 
-class SurrenderOnClickObserver: public MouseObserver {
+class SurrenderOnClickObserver: public UIObserver {
 	public:
 		void mousePressed(const SDL_MouseButtonEvent& event) {
 			gamemanager->execute(new UISurrender());
 		}
-		void setGameManager(ReferenceCountPtr<GameManager> gamemanager) {
-			this->gamemanager = gamemanager;
-		}
-	private:
-		ReferenceCountPtr<GameManager> gamemanager;
 };
 
-class NoMoreOnClickObserver: public MouseObserver {
+class NoMoreOnClickObserver: public UIObserver {
 	public:
 		void mousePressed(const SDL_MouseButtonEvent& event) {
 			gamemanager->execute(new UINoMore());
 		}
-		void setGameManager(ReferenceCountPtr<GameManager> gamemanager) {
-			this->gamemanager = gamemanager;
-		}
-	private:
-		ReferenceCountPtr<GameManager> gamemanager;
 };
 
-class DidIWinOnClickObserver: public MouseObserver {
+class DidIWinOnClickObserver: public UIObserver {
 	public:
 		void mousePressed(const SDL_MouseButtonEvent& event) {
 			gamemanager->execute(new UIDidIWin());
 		}
-		void setGameManager(ReferenceCountPtr<GameManager> gamemanager) {
-			this->gamemanager = gamemanager;
-		}
-	private:
-		ReferenceCountPtr<GameManager> gamemanager;
 };
 
 
-class SelectMapOnClickObserver: public MouseObserver {
+class SelectMapOnClickObserver: public UIObserver {
     public:
         void mousePressed(const SDL_MouseButtonEvent& event) {
 		std::vector<std::string> parameters;
 	
 		parameters.push_back("0");
 		parameters.push_back("mapa 1"); // seleccion hardcodeada de mapa
-	
-		gamemanager->notify(new UISelectMap(parameters));
+		std::cerr << "SelectMapOnClickObserver::mousePressed" << std::endl;
+		gamemanager->execute(new UISelectMap(parameters));
         }
-
-        void setGameManager(ReferenceCountPtr<GameManager> gamemanager) {
-            this->gamemanager = gamemanager;
-        }
-
-    private:
-        ReferenceCountPtr<GameManager> gamemanager;
 };
 
 
@@ -168,20 +149,17 @@ if (false) {
 	Socket * socket = new Socket("localhost", 2000);
 	std::cerr<< "Socket created" << std::endl;
 
+	// que pasa si ...
+	// serverProxy= new ServerProxy(new Socket("localhost", 2000), gamemanager); ?
+
 	ReferenceCountPtr<ServerProxy> serverProxy= new ServerProxy(socket, gamemanager);
 	std::cerr<< "ServerProxy created" << std::endl;
 
 	gamemanager->add(serverProxy);
 
-	JoinGame * joinGame = new JoinGame();
-
-	serverProxy->notify(joinGame);
-	delete joinGame;
-	std::cerr << "Escrito..." << std::endl;
+	serverProxy->notify(new JoinGame());
 
 	serverProxy->start();
-
-
 	
 //	serverProxy->cancel();
 //	std::cerr << "Canceled" << std::endl;

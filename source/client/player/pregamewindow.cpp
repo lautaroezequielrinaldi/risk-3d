@@ -44,6 +44,10 @@ void PreGameWindow::showConnectionDialog() {
 			std::cout << "Se llego a tranformar en string" << std::endl;
 			Socket* socket = new Socket(url, 2000);
 			std::cout << "Se va a crear socket" << std::endl;
+
+			// que pasa si ...
+			//                  = new ServerProxy(new Socket("localhost", 2000), gamemanager); ?
+
 			ReferenceCountPtr<ServerProxy> serverProxy = new ServerProxy(socket, gameManager);
 			gameManager->add(serverProxy);
 			gameManager->execute(new UIJoinGame());
