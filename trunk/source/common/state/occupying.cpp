@@ -2,6 +2,7 @@
 #include "stateobserver.h"
 #include "../commands/populate.h"
 #include "../commands/turntooccupy.h"
+#include "../commands/turntopopulate.h"
 #include "../model/gamemanager.h"
 #include "../model/player.h"
 #include <list>
@@ -20,7 +21,7 @@ Occupying::~Occupying()
 
 bool Occupying::populate(Populate & command){
 	
-	std::ostringstream strFrom;
+	std::ostringstream strComodin;
 
 	bool accionValida = command.validateOccupy(this->gameManager);
 		
@@ -63,8 +64,8 @@ bool Occupying::populate(Populate & command){
 		command.setMainMsg(mainMsg);
 		
 		//seteo mje secundario
-   		strFrom << playerActual->getColor();
-		std::string secMsg = "El jugador * " +strFrom.str() +" * ocupo el pais: "+command.getCountryDestination();
+   		strComodin << playerActual->getColor();
+		std::string secMsg = "El jugador * " +strComodin.str() +" * ocupo el pais: "+command.getCountryDestination();
 		command.setSecMsg(secMsg);	
 		
 		//notifico cambios y mensajes
@@ -81,29 +82,29 @@ bool Occupying::populate(Populate & command){
 			//cambio de turno al 1er jugador
 			this->gameManager->getTurnManager()->changeTurn( this->gameManager->getTurnManager()->getFirstPlayer() );
 					
-			//preparo parametros para turnToOccupy que jugara de turnToSimplePopulate
+			//preparo parametros para turnToPopulate  ( simple )
 			std::vector<string> vecParam;
 			
 			//conversion de entero a string
-			strFrom << gameManager->getTurnManager()->getCurrentPlayer();
+			strComodin << gameManager->getTurnManager()->getCurrentPlayer();
 			
 			//seteo jugador al que le toca jugar.
-			vecParam.push_back(strFrom.str());
+			vecParam.push_back(strComodin.str());
 			
 			//creo comando para notificar
-			TurnToOccupy turnToOc(vecParam);
+			TurnToPopulate turnToFirstPopu(vecParam);
 			
 			//seteo los mensajes
-			turnToOc.setValid(1);
-			turnToOc.setMainMsg("Tenes el turno para poblar");
+			turnToFirstPopu.setValid(1);
+			turnToFirstPopu.setMainMsg("Tenes el turno para poblar");
    			
-			std::string secMsg = "El jugador * " + strFrom.str() + " * esta poblando";
-			turnToOc.setSecMsg(secMsg);
+			std::string secMsg = "Todos los Paises fueron ocupados. El jugador * " + strComodin.str() + " * esta poblando";
+			turnToFirstPopu.setSecMsg(secMsg);
 			
 			//notifico 
-			gameManager->notify(&turnToOc);	
+			gameManager->notify(&turnToFirstPopu);	
 			
-			cout<<"HORA DE POBLAR INICIAL"<<endl;	
+			cerr<<"HORA DE POBLAR INICIAL"<<endl;	
 		}
 		else{
 			//cambio de turno 
@@ -113,10 +114,10 @@ bool Occupying::populate(Populate & command){
 			std::vector<string> vecParam;
 		
 			//conversion de entero a string
-			strFrom << gameManager->getTurnManager()->getCurrentPlayer();
+			strComodin << gameManager->getTurnManager()->getCurrentPlayer();
 			
 			//seteo jugador al que le toca jugar.
-			vecParam.push_back(strFrom.str());
+			vecParam.push_back(strComodin.str());
 
 			//creo comando para notificar
 			TurnToOccupy turnToOc(vecParam);
@@ -124,18 +125,14 @@ bool Occupying::populate(Populate & command){
 			//seteo los mensajes
 			turnToOc.setValid(1);
 			turnToOc.setMainMsg("Tenes el turno para ocupar un territorio");
-			strFrom << gameManager->getTurnManager()->getCurrentPlayer();
-			std::string secMsg = "El jugador * "+ strFrom.str() +" * esta ocupando un territorio";
+			strComodin << gameManager->getTurnManager()->getCurrentPlayer();
+			std::string secMsg = "El jugador * "+ strComodin.str() +" * esta ocupando un territorio";
 			turnToOc.setSecMsg(secMsg);
 			
 			//notifico 
 			gameManager->notify(&turnToOc);	
 
 		}
-
-		//notificacion
-		cout<<"---->  Le toca jugar al jugador: "<<gameManager->getTurnManager()->getCurrentPlayer()<<endl;	
-				
 	}
 	//comando invalido
 	else{
@@ -146,8 +143,8 @@ bool Occupying::populate(Populate & command){
 		command.setMainMsg(mainMsg);
 		
 		//seteo mje secundario
-		strFrom << gameManager->getTurnManager()->getCurrentPlayer();
-		std::string secMsg = "El jugador * "+ strFrom.str() +" realizo un ocupamiento invalido";
+		strComodin << gameManager->getTurnManager()->getCurrentPlayer();
+		std::string secMsg = "El jugador * "+ strComodin.str() +" realizo un ocupamiento invalido";
 		command.setSecMsg(secMsg);	
 		
 		//notifico cambios y mensajes
