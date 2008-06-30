@@ -34,9 +34,7 @@
 class ReadyToPlayOnClickObserver: public MouseObserver {
 	public:
 		void mousePressed(const SDL_MouseButtonEvent& event) {
-			UIReadyToPlay * cmd = new UIReadyToPlay();
-			gamemanager->execute("uiReadyToPlay", cmd->serialize());
-			delete(cmd);
+			gamemanager->execute(new UIReadyToPlay());
 		}
 		void setGameManager(ReferenceCountPtr<GameManager> gamemanager) {
 			this->gamemanager = gamemanager;
@@ -48,9 +46,7 @@ class ReadyToPlayOnClickObserver: public MouseObserver {
 class QuitOnClickObserver: public MouseObserver {
 	public:
 		void mousePressed(const SDL_MouseButtonEvent& event) {
-			UIQuit * cmd = new UIQuit();
-			gamemanager->execute("uiQuit", cmd->serialize());
-			delete(cmd);
+			gamemanager->execute(new UIQuit());
 		}
 		void setGameManager(ReferenceCountPtr<GameManager> gamemanager) {
 			this->gamemanager = gamemanager;
@@ -62,9 +58,7 @@ class QuitOnClickObserver: public MouseObserver {
 class SurrenderOnClickObserver: public MouseObserver {
 	public:
 		void mousePressed(const SDL_MouseButtonEvent& event) {
-			UISurrender * cmd = new UISurrender();
-			gamemanager->execute("uiSurrender", cmd->serialize());
-			delete(cmd);
+			gamemanager->execute(new UISurrender());
 		}
 		void setGameManager(ReferenceCountPtr<GameManager> gamemanager) {
 			this->gamemanager = gamemanager;
@@ -76,9 +70,7 @@ class SurrenderOnClickObserver: public MouseObserver {
 class NoMoreOnClickObserver: public MouseObserver {
 	public:
 		void mousePressed(const SDL_MouseButtonEvent& event) {
-			UINoMore * cmd = new UINoMore();
-			gamemanager->execute("uiNoMore", cmd->serialize());
-			delete(cmd);
+			gamemanager->execute(new UINoMore());
 		}
 		void setGameManager(ReferenceCountPtr<GameManager> gamemanager) {
 			this->gamemanager = gamemanager;
@@ -90,9 +82,7 @@ class NoMoreOnClickObserver: public MouseObserver {
 class DidIWinOnClickObserver: public MouseObserver {
 	public:
 		void mousePressed(const SDL_MouseButtonEvent& event) {
-			UIDidIWin * cmd = new UIDidIWin();
-			gamemanager->execute("uiDidIWin", cmd->serialize());
-			delete(cmd);
+			gamemanager->execute(new UIDidIWin());
 		}
 		void setGameManager(ReferenceCountPtr<GameManager> gamemanager) {
 			this->gamemanager = gamemanager;

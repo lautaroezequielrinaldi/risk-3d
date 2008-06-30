@@ -22,14 +22,14 @@
 #include "turntooccupy.h"
 #include "win.h"
 #include "youare.h"
-
+/*
 #include "uireadytoplay.h"
 #include "uiquit.h"
 #include "uisurrender.h"
 #include "uinomore.h"
 #include "uididiwin.h"
 #include "uijoingame.h"
-
+*/
 /*
 #include "uicountryselect.h"
 #include "uiquantityselect.h"
