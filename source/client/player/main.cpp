@@ -5,10 +5,10 @@
 #include "../../common/commands/uisurrender.h"
 #include "../../common/commands/uinomore.h"
 #include "../../common/commands/uididiwin.h"
+#include "../../common/commands/uiselectmap.h"
 
 
 
-#include "../../common/commands/selectmap.h"
 #include "../../common/model/randomdice.h"
 #include "../../common/model/gamemanager.h"
 #include "../../common/model/game.h"
@@ -100,7 +100,7 @@ class SelectMapOnClickObserver: public MouseObserver {
 		parameters.push_back("0");
 		parameters.push_back("mapa 1"); // seleccion hardcodeada de mapa
 	
-		gamemanager->notify(new SelectMap(parameters));
+		gamemanager->notify(new UISelectMap(parameters));
         }
 
         void setGameManager(ReferenceCountPtr<GameManager> gamemanager) {
