@@ -40,6 +40,9 @@ bool Moving::move(Move & command){
 		cout<<"ejercitos a mover: "<<command.getArmyCount()<<endl;
 		cout<<"pais destino: "<<paisD->getNombre()<<endl;
 	
+
+		// gameManager->notify(command);
+
 		//cambio de turno
 		this->gameManager->getTurnManager()->changeTurn();
 		
@@ -55,6 +58,8 @@ bool Moving::move(Move & command){
 		//cambio a proximo estado
 		this->gameManager->setCurrentState("populating");
 		
+		// crear comando turn to populate pasarle el armyCountBonus y el from y el to
+
 		cout<<"HORA DE POBLAR"<<endl;	
 		cout<<"Juega el jugador: "<< playerActual->getColor()<<" con bonus: "<<playerActual->getArmyCount()<<endl;
 	

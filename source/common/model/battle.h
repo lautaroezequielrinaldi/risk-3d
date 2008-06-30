@@ -52,7 +52,7 @@ class Battle
 		 * Metodo cuyo proposito es iniciar la batalla entre atacante y defensor.
 		 * Devuelve el resultado de la batalla.
 		 */
-		BattleResult start(ReferenceCountPtr<GameManager>& gameMAnager); 
+		BattleResult start(ReferenceCountPtr<GameManager>& gameManager); 
 		
 	/**
 	 * Metodos privados de la clase
@@ -61,10 +61,10 @@ class Battle
 		
 		/**
 		 * Metodo cuyo proposito es comparar los dados del atacante con los del defensor para definir la batalla.
-		 * Recibe un vector con los dados del atacante y otro con los dados del defensor.
+		 * Recibe un vector con los dados del atacante , otro con los dados del defensor, el id jugador atacante y el id jugador * *defensor.
 		 * Devuelve un objeto Resultado en el cual esta seteado el resultado de la batalla.
 		 */
-		BattleResult compareDice(std::list<int>attackerDice, std::list<int> defenderDice);
+		BattleResult compareDice(std::list<int>attackerDice, std::list<int> defenderDice, int attackerPlayer, int defenderPlayer);
 		
 };
 
