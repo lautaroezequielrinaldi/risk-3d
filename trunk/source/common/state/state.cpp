@@ -18,6 +18,7 @@
 #include "../commands/turntoattack.h"
 #include "../commands/turntomove.h"
 #include "../commands/turntooccupy.h"
+#include "../commands/turntopopulate.h"
 #include "../commands/didiwin.h"
 #include "../commands/maplist.h"
 
@@ -160,6 +161,10 @@ bool State::turnToMove(TurnToMove & command) {
 }
 
 bool State::turnToOccupy(TurnToOccupy & command) {
+	return false;
+}
+
+bool State::turnToPopulate(TurnToPopulate & command) {
 	return false;
 }
 

@@ -1,45 +1,40 @@
-#ifndef __TURNTOOCCUPY_H__
-#define __TURNTOOCCUPY_H__
+#ifndef TURNTOPOPULATE_H_
+#define TURNTOPOPULATE_H_
 
-/**
- * server => client
- *
- * Indicacion del servidor de pasaje a estado Ocupying
- * hay que ver que pasa con Populating...
- */
-
-#include <string>
-#include <vector>
 #include "command.h"
 #include "../model/gamemanager.h"
+#include <string>
+#include <vector>
 
-class TurnToOccupy : public Command
+class TurnToPopulate : public Command
 {
 	
 	private:
-		int numeroJugador;
 	
+		int numeroJugador;
+
 	public:
+	
 		
 		/*
-		 * Constructor de la clase
+		 * Constructor de la clase.
 		 * Recibe lista de parametros para crear el comando.
 		 */
-		TurnToOccupy(std::vector<std::string> &parameterList);
+		TurnToPopulate(std::vector<std::string> &parameterList);
 		
 		/**
 		 * Constructor de la clase.
 		 * La misma se construye a partir del Xml especificado.
 		 */
-		TurnToOccupy( std::string xml);
+		TurnToPopulate( std::string xml);
 		
 
-		TurnToOccupy();
+		TurnToPopulate();
 		/*
 		 * Destructor de la clase
 		 */
 		 
-		virtual ~TurnToOccupy();
+		virtual ~TurnToPopulate();
 		
 		/**
 		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un string.
@@ -62,7 +57,6 @@ class TurnToOccupy : public Command
 		 */
 		virtual std::string getName();
 		
-		
 };
 
-#endif /*__TURNTOOCCUPY_H__*/
+#endif /*TURNTOPOPULATE_H_*/

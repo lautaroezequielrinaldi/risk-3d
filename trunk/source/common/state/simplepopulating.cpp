@@ -1,11 +1,12 @@
 #include "simplepopulating.h"
 #include "stateobserver.h"
 #include "../commands/populate.h"
+#include "../commands/turntooccupy.h"
 #include "../model/gamemanager.h"
 #include "../model/player.h"
 #include "../model/armybonuscalculator.h"
 #include <list>
-
+#include<sstream>
 
 #include<iostream>
 
@@ -22,6 +23,9 @@ SimplePopulating::~SimplePopulating()
 
 bool SimplePopulating::populate(Populate & command){
 	std::cerr << "Evento SimplePopulating::populate" << std::endl;
+	
+	std::ostringstream strFrom;
+	
 	bool accionValida =  command.validate(this->gameManager);
 	
 	//si la accion es valida
@@ -55,8 +59,26 @@ bool SimplePopulating::populate(Populate & command){
 		cout<<"ejercitos despues de poblar: "<<paisD->getArmyCount()<<endl;
 		cout<<"Al jugador "<<playerActual->getColor()<<" le quedan: "<<playerActual->getArmyCount()<<" ejerctos para ubicar"<<endl;
 		
-	
-	
+		// -------- Para actualizar modelo y mensajear al cliente--------------
+		
+		//seteo al commando como valido
+		command.setValid(1);
+		
+		//seteo mje principal
+		std::string mainMsg = "Pais poblado: "+command.getCountryDestination();
+		command.setMainMsg(mainMsg);
+		
+		//seteo mje secundario
+   		strFrom << playerActual->getColor();
+		std::string secMsg = "El jugador * " +strFrom.str() +" * poblo el pais: "+command.getCountryDestination();
+		command.setSecMsg(secMsg);	
+		
+		//notifico cambios y mensajes
+		gameManager->notify(&command);
+		
+		//------- fin actualizacion modelo para cliente ------------------------
+		
+
 		//obtengo lista de jugadores
 		std::list< ReferenceCountPtr<Player> > listaJug = game->getPlayerList();
 		std::list<ReferenceCountPtr<Player> >::iterator it;	
@@ -96,14 +118,41 @@ bool SimplePopulating::populate(Populate & command){
 				
 			//cambio a proximo estado
 			this->gameManager->setCurrentState("populating");
-		
+			
+			/*
+			//preparo parametros para turnToOccupy que jugara de turnToPopulate
+			std::vector<string> vecParam;
+			//seteo jugador al que le toca jugar.
+			vecParam.push_back(strFrom.str());
+			
+			//creo comando para notificar
+			TurnToOccupy turnToOc(vecParam);
+			
+			//seteo los mensajes
+			turnToOc.setValid(1);
+			
+			//convierto el bonus en un string.
+			strFrom << playerActual->getArmyCount();
+			std::string mainMsg = "Tenes el turno para poblar. Bonus de ejercitos a ubicar = " + strFrom.str();
+			turnToOc.setMainMsg(mainMsg);
+   			
+   			//conversion de entero a string para el numero de jugador
+			strFrom << gameManager->getTurnManager()->getCurrentPlayer();
+			std::string secMsg = "El jugador * " + strFrom.str() + " * esta poblando";
+			turnToOc.setSecMsg(secMsg);
+			
+			//notifico 
+			gameManager->notify(&turnToOc);	
+			*/
+			
+			//para tests
 			cout<<"Turno de poblar juego para el jugador: "<<playerActual->getColor()<<endl;
 			cout<<"El bonus de ejercitos es: "<<playerActual->getArmyCount()<<endl;
 		}
 		//si todavia quedan jugadores con ejercitos a ubucar
 		else{
 			
-			// si luego de actualizar cant de ejercitos restantes del jugadorq  poblo, se quedo en cero.
+			// si luego de actualizar cant de ejercitos restantes del jugador q  poblo, se quedo en cero.
 			if ( playerActual->getArmyCount() == 0 ){
 
 				//cambio de turno
