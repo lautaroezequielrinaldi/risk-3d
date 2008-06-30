@@ -11,12 +11,13 @@
 #include<gtkmm/dialog.h>
 #include "../../common/commands/uijoingame.h"
 #include "../../common/model/gamemanager.h"
+#include "../../common/state/stateobserver.h"
 #include "../../common/smartpointer/referencecountptr.h"
 
 /**
  * Representa la presala del juego donde puede haber chat y seleccion de mapa.
  */
-class PreGameWindow: public Gtk::Window {
+class PreGameWindow: public StateObserver, public Gtk::Window {
 	/**
 	 * Atributos privados de la clase PreGameWindow.
 	 */
@@ -64,7 +65,7 @@ class PreGameWindow: public Gtk::Window {
 		/**
 		 * Constructor de la clase PreGameWindow.
 		 */
-		PreGameWindow(const ReferenceCountPtr<GameManager>& gameManager);
+		PreGameWindow(ReferenceCountPtr<GameManager>& gameManager);
 		/**
 		 * Obtiene el game manager usado durante la presala.
 		 */

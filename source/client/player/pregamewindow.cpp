@@ -1,10 +1,15 @@
 #include "pregamewindow.h"
 
-PreGameWindow::PreGameWindow(const ReferenceCountPtr<GameManager>& gameManager):
+PreGameWindow::PreGameWindow(ReferenceCountPtr<GameManager>& gameManager):
+	StateObserver(),
 	Gtk::Window(),
 	gameManager(gameManager),
 	verticalBox(),
 	connectionDialogButton() {
+	// Se registra como listener de cambios de estados en el game manager.
+	if (gameManager != NULL) {
+		gameManager->registerObserver(this);
+	}
 	// Establece el titulo de la ventana
 	this->set_title("Pre sala de juego Risk3d");
 	
