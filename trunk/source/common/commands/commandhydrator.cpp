@@ -1,5 +1,6 @@
 #include "commandhydrator.h"
 #include<iostream>
+
 CommandHydrator::CommandHydrator(){
 	commands.insert(std::make_pair("attack",new Attack()));
 	//commands.insert(std::make_pair("chat",new Chat()));

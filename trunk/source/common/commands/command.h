@@ -17,7 +17,15 @@ class GameManager;
  */ 
 class Command : public Serializable
 {
-		
+	private:
+	
+		int to;
+		int from;
+		int valid;
+		std::string name;
+		std::string mainmsg;
+		std::string secmsg;
+			
 	public:
 		
 		/*
@@ -72,13 +80,7 @@ class Command : public Serializable
 	protected:
 		xmlDocPtr hydrateCommon(std::string xml);
 
-	private:
-		int to;
-		int from;
-		int valid;
-		std::string name;
-		std::string mainmsg;
-		std::string secmsg;
+	
 
 };
 
