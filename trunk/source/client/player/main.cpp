@@ -138,7 +138,7 @@ int main(int argc, char** argv) {
 	std::cerr<< "StateMachine asigned" << std::endl;
 	Gtk::Main main(argc, argv);
 
-if (false) {
+if (true) {
 	PreGameWindow preGameWindow(gamemanager);
 	Gtk::Main::run(preGameWindow);
 
