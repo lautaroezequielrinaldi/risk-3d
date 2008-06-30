@@ -28,6 +28,7 @@ class Win;
 class TurnToAttack;
 class TurnToMove;
 class TurnToOccupy;
+class TurnToPopulate;
 
 class UIReadyToPlay;
 class UIQuit;
@@ -93,6 +94,7 @@ class State {
 		virtual bool turnToAttack(TurnToAttack & command);
 		virtual bool turnToMove(TurnToMove & command);
 		virtual bool turnToOccupy(TurnToOccupy & command);
+		virtual bool turnToPopulate(TurnToPopulate & command);
 		virtual bool win(Win & command);
 		virtual bool didIWin(DidIWin & command);
 		virtual bool noRoom(NoRoom & command);
