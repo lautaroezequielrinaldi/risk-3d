@@ -5,6 +5,7 @@
 #include<gtkmm/box.h>
 #include<gtkmm/button.h>
 #include<gtkmm/label.h>
+#include<gtkmm/textview.h>
 #include<gtkmm/entry.h>
 #include<gtkmm/stock.h>
 #include<gtkmm/messagedialog.h>
@@ -30,6 +31,26 @@ class PreGameWindow: public StateObserver, public Gtk::Window {
 		 * Almacena el layout vertical de la ventana.
 		 */
 		Gtk::VBox verticalBox;
+		/**
+		 * Almacena el layout horizontal de la ventana.
+		 */
+		Gtk::HBox horizontalBox;
+		/**
+		 * Almacena el textview para mostrar los mensajes de chat.
+		 */
+		Gtk::TextView messageTextView;
+		/**
+		 * Almacena el entry para ingresar los mensajes de chat.
+		 */
+		Gtk::Entry messageEntry;
+		/**
+		 * Almacena el boton para enviar mensajes de chat.
+		 */
+		Gtk::Button sendMessageButton;
+		/**
+		 * Almacena el boton para enviar ready to play.
+		 */
+		Gtk::Button readyToPlayButton;
 		/**
 		 * Almacena una referencia al boton de dialogo de conexion.
 		 */

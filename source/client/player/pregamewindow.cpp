@@ -5,6 +5,11 @@ PreGameWindow::PreGameWindow(ReferenceCountPtr<GameManager>& gameManager):
 	Gtk::Window(),
 	gameManager(gameManager),
 	verticalBox(),
+	horizontalBox(),
+	messageTextView(),
+	messageEntry(),
+	sendMessageButton(),
+	readyToPlayButton(),
 	connectionDialogButton() {
 	// Se registra como listener de cambios de estados en el game manager.
 	if (gameManager != NULL) {
@@ -12,11 +17,25 @@ PreGameWindow::PreGameWindow(ReferenceCountPtr<GameManager>& gameManager):
 	}
 	// Establece el titulo de la ventana
 	this->set_title("Pre sala de juego Risk3d");
-	
+	// Establece el label del boton send message.
+	sendMessageButton.set_label("Send Message");
+	// Establece el label del boton ready to play.
+	readyToPlayButton.set_label("Ready To Play");
 	// Establece el label del boton de dialogo de conexion.
 	connectionDialogButton.set_label("Connect to server...");
-	// Agrega el boton de dialogo de conexion al vertical box.
-	verticalBox.pack_end(connectionDialogButton, Gtk::PACK_SHRINK);
+
+	// Agrega el entry de mensajes al horizontal box.
+	horizontalBox.pack_start(messageEntry, Gtk::PACK_SHRINK);
+	// Agrega el button de enviar mensajes al horizontal box.
+	horizontalBox.pack_start(sendMessageButton, Gtk::PACK_SHRINK);
+	// Agrega el button ready to play al horizontal box.
+	horizontalBox.pack_start(readyToPlayButton, Gtk::PACK_SHRINK);
+	// Agrega el boton de dialogo de conexion al horizontal box.
+	horizontalBox.pack_start(connectionDialogButton, Gtk::PACK_SHRINK);
+	// Agrega el text view de mensajes al vertical box.
+	verticalBox.pack_start(messageTextView, Gtk::PACK_SHRINK);
+	// Agrega el horizontal box al vertical box.
+	verticalBox.pack_start(horizontalBox, Gtk::PACK_SHRINK);
 	// Agrega el vertical layout a la ventana.
 	add(verticalBox);
 	// Conecta el signal_clicked del boton connnectionDialogButton con su manejador.
@@ -52,6 +71,7 @@ void PreGameWindow::showConnectionDialog() {
 			gameManager->add(serverProxy);
 			gameManager->execute(new UIJoinGame());
 	        	connectionDialogButton.set_sensitive(false);
+			serverProxy->start();
 		} catch (SocketConnectionException& exception) {
 			Gtk::MessageDialog errorDialog(*this, "No se pudo conectar al servidor!!!", false,
 				Gtk::MESSAGE_ERROR);
