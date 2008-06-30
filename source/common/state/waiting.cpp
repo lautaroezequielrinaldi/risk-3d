@@ -51,10 +51,10 @@ bool Waiting::mapList(MapList & command){
 
 
 bool Waiting::youAre(YouAre & command){
-	std::cerr << "Evento Waiting::youAre" << std::endl;
+	std::cerr << "Evento Waiting::youAre : " << command.getTo() << std::endl;
 
 	// como este mensaje solo puede ser para mi, tomar nota de quien soy
-	gameManager->setMe(command.getJugador());
+	gameManager->setMe(command.getTo());
 	
 	return false;
 }
