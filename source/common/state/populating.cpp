@@ -1,8 +1,11 @@
 #include "populating.h"
 #include "stateobserver.h"
+#include "../commands/turntopopulate.h"
+#include "../commands/turntoattack.h"
 #include "../commands/populate.h"
 #include "../model/gamemanager.h"
 #include "../model/player.h"
+#include<sstream>
 
 #include<iostream>
 
@@ -16,14 +19,19 @@ Populating::~Populating()
 {
 }
 bool Populating::populate(Populate & command){
+
+	std::ostringstream strComodin;
+		
+	
 	std::cerr << "Evento Populating::populate" << std::endl;
-	bool accoinValida =false;
+	
+	bool accoinValida = command.validate(this->gameManager);
 	
 	//si la accion es valida
-	if ( command.validate(this->gameManager) ){
+	if (accoinValida){
 		
-		cout<<"Estado: populating"<<endl;
-		cout<<"Jugador: "<<gameManager->getTurnManager()->getCurrentPlayer()<<endl;
+		cerr<<"Estado: populating"<<endl;
+		cerr<<"Jugador: "<<gameManager->getTurnManager()->getCurrentPlayer()<<endl;
 		
 		//actualiza modelo:
 		ReferenceCountPtr<Game> game = gameManager->getGame();
@@ -31,9 +39,9 @@ bool Populating::populate(Populate & command){
 		//obtengo pais a poblar
 		ReferenceCountPtr<Pais> paisD = map->obtenerPais(command.getCountryDestination());	
 		
-		cout<<"pais destino: "<<paisD->getNombre()<<endl;
-		cout<<"ejercitos antes de poblar: "<<paisD->getArmyCount()<<endl;
-		cout<<"Cantidad de ejercitos a ubicar: "<<command.getArmyCount() <<endl;
+		cerr<<"pais destino: "<<paisD->getNombre()<<endl;
+		cerr<<"ejercitos antes de poblar: "<<paisD->getArmyCount()<<endl;
+		cerr<<"Cantidad de ejercitos a ubicar: "<<command.getArmyCount() <<endl;
 		
 		//agrego al pais destino la cantidad de ejercitos solicitados
 		paisD->addArmies(command.getArmyCount() );
@@ -47,23 +55,84 @@ bool Populating::populate(Populate & command){
 		//seteo al jugador actual la cant de ejercitos que le quedan por ubicar
 		playerActual->setArmyCount( ejercitosRestantes );
 		
-		cout<<"ejercitos despues de poblar: "<<paisD->getArmyCount()<<endl;
-		cout<<"Al jugador "<<playerActual->getColor()<<" le quedan: "<<playerActual->getArmyCount()<<" ejerctos para ubicar"<<endl;
+		// -------- Para actualizar modelo y mensajear al cliente--------------
+		
+		//seteo al commando como valido
+		command.setValid(1);
+		
+		//seteo mje principal
+		std::ostringstream strEjer;
+		strEjer << command.getArmyCount();
+		
+		std::string mainMsg = "Se poblo el pais : "+command.getCountryDestination() +" con "+strEjer.str() + " ejercitos" ;
+		command.setMainMsg(mainMsg);
+		
+		//seteo mje secundario
+   		strComodin << playerActual->getColor();
+		std::string secMsg = "El jugador * " +strComodin.str() +" * poblo el pais: "+command.getCountryDestination()+" con "+strEjer.str() + " ejercitos";
+		command.setSecMsg(secMsg);	
+		
+		//notifico cambios y mensajes
+		gameManager->notify(&command);
+		
+		//------- fin actualizacion modelo para cliente ------------------------
+		
+		//para tests		
+		cerr<<"ejercitos despues de poblar: "<<paisD->getArmyCount()<<endl;
+		cerr<<"Al jugador "<<playerActual->getColor()<<" le quedan: "<<playerActual->getArmyCount()<<" ejerctos para ubicar"<<endl;
 		
 		
 		// si luego de actualizar cant de ejercitos restantes del jugador, se quedo en cero.
 		if ( playerActual->getArmyCount() == 0 ){
 
 			//cambio al proximo estado: attacking
-			gameManager->setCurrentState("attacking");		
+			gameManager->setCurrentState("attacking");
 			
-			cout<<"HORA DE ATACAR"<<endl;
+			//preparo parametros para turnToPopulate  ( simple )
+			std::vector<string> vecParam;
+								
+			//seteo jugador al que le toca jugar.
+			vecParam.push_back(strComodin.str());
+				
+			//creo comando para notificar
+			TurnToAttack turnToAttack(vecParam);
+				
+			//seteo los mensajes
+			turnToAttack.setValid(1);
+			turnToAttack.setMainMsg("Hora de atacar");
+	   			
+			std::string secMsg = "El jugador * " + strComodin.str() + " * esta etacando";
+			turnToAttack.setSecMsg(secMsg);
+				
+			//notifico 
+			gameManager->notify(&turnToAttack);	
+				
+			cerr<<"HORA DE ATACAR"<<endl;
 		}
-		//notificar cambios
+		
 	}
-	else
-		//notificar error
-		cout<<"poblamiento invalido"<<endl;
+	//populate invalido
+	else{
+		
+		command.setValid(0);
+		
+		//seteo mje principal
+		std::string mainMsg = "Error! Poblamiento invalido ";
+		command.setMainMsg(mainMsg);
+		
+		//seteo mje secundario
+		strComodin << gameManager->getTurnManager()->getCurrentPlayer();
+		std::string secMsg = "El jugador * "+ strComodin.str() +" realizo un poblamiento invalido";
+		command.setSecMsg(secMsg);	
+		
+		//notifico cambios y mensajes
+		gameManager->notify(&command);	
+		
+		
+		//notificar error test
+		cerr<<"poblamiento invalido"<<endl;	
+	}	
+	
 	
 	return accoinValida;	
 }
