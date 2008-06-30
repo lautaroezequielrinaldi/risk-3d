@@ -1,12 +1,12 @@
 #ifndef BATTLERESULT_H_
 #define BATTLERESULT_H_
 
-#include "../parser/serializable.h"
+#include "../commands/command.h"
 
 /**
  * Clase que representa el resultado de una batalla dentro del modelo del juego
  */
-class BattleResult : public Serializable
+class BattleResult : public Command
 {
 	
 	/**
@@ -20,6 +20,12 @@ class BattleResult : public Serializable
 	 	/*nombre del pais defensor*/
 	 	std::string paisDefensor;
 	 	
+		/* color jugador atacante*/
+		int jugadorAtacante;
+	
+		/* color jugador defensor*/
+		int jugadorDefensor;
+
 	 	/*cantidad de ejercitos perdidos del atacante en la batalla.
 	 	 * Puede ser un numero  negativo en caso que haya perdido ejercitos
 	 	 */
@@ -46,7 +52,7 @@ class BattleResult : public Serializable
 		/**
 		 * Constructor de la clase
 		 */
-		BattleResult(std::string attackerLand ,std::string defenderLand);
+		BattleResult( std::string attackerLand , std::string defenderLand, int jugadorAtacante, int jugadorDefensor);
 
 		/**
 		 * Constructor de la clase
@@ -101,7 +107,14 @@ class BattleResult : public Serializable
 		/**
 		 * Metodo cuyo proposito es hidratar un objeto a partir de un archivo XML.
 		 */
-		void* hydrate(std::string fileName) ;
+		void* hydrate(std::string xml) ;
+
+	 
+		bool validate(ReferenceCountPtr<GameManager>& gameMAnager);
+		
+		void execute(ReferenceCountPtr<State>& state);
+
+		virtual std::string getName();
 };
 
 #endif /*BATTLERESULT_H_*/

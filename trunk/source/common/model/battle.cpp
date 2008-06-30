@@ -25,10 +25,10 @@ Battle::~Battle()
 	// no realiza ninguna accion
 }
 
-BattleResult Battle::compareDice(std::list<int>attackerDice, std::list<int> defenderDice){
+BattleResult Battle::compareDice(std::list<int> attackerDice, std::list<int> defenderDice, int attackerPlayer, int defenderPlayer){
 	
 	//creo instancia de BattleResult para almacenar el resultado de la batalla.
-	BattleResult resultadoBatalla(this->ataque.getAttackerLand(),this->defensa.getDefenderdLand() );
+	BattleResult resultadoBatalla(this->ataque.getAttackerLand(),this->defensa.getDefenderdLand(),attackerPlayer,defenderPlayer );
 	
 	// iteradores para recorrer lista de valores de dados
 	std::list<int>::reverse_iterator itDef;
@@ -87,7 +87,7 @@ BattleResult Battle::start(ReferenceCountPtr<GameManager>& gameManager){
 		dadosDefensor.push_back(this->dice.roll() );
 		
 	// compara dados de atacante y defensor y obtiene el resultado de la batalla
-	BattleResult resultadoBatalla = compareDice(dadosAtacante, dadosDefensor);	
+BattleResult resultadoBatalla = compareDice(dadosAtacante,dadosDefensor,playerAtacante->getColor(),playerDefensor->getColor());	
 	
 	// actualizacion del modelo con respecto al resultado de la batalla
 
