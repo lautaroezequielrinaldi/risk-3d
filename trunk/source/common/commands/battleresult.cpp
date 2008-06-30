@@ -8,8 +8,6 @@ paisDefensor(defenderLand),
 jugadorAtacante(jugadorAtacante),
 jugadorDefensor(jugadorDefensor)
 {
-	//this->jugadorAtacante = jugadorAtacante;
-	//this->jugadorDefensor= jugadorDefensor;
 	this->resultadoAtacante=0;
 	this->resultadoDefensor=0;
 	this->conquista=0;
@@ -54,7 +52,9 @@ void BattleResult::setConquest ( int armyCount ){
 	this->conquista = armyCount;
 }
 
-
+int BattleResult::getConquest(){
+	return this->conquista;	
+}
 
 std::string BattleResult::serialize(){
 

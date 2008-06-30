@@ -1,7 +1,7 @@
 #ifndef BATTLERESULT_H_
 #define BATTLERESULT_H_
 
-#include "../commands/command.h"
+#include "command.h"
 
 /**
  * Clase que representa el resultado de una batalla dentro del modelo del juego
@@ -99,6 +99,14 @@ class BattleResult : public Command
 		 * que se debera mover al pais conquistado.
 		 */
 		void setConquest ( int armyCount );
+
+		/**
+		 * Metodo cuyo proposito es informar si hubo una conquista luego de una batalla.
+ 		 *       0 sino hubo conquista.
+		 * 	     1 si hubo conquista y hay que mover 1 ejercito al pais conquistado.
+		 * 	     2 si hubo conquista y hay que mover 2 ejercitos al pais conquistado.
+		 */
+		 int getConquest();
 
 		/**
 		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.
