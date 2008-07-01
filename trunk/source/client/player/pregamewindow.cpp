@@ -138,6 +138,16 @@ bool PreGameWindow::userHasQuit() {
 	return hasQuit;
 }
 
+void PreGameWindow::commandExecuted(SelectMap& cmd) {
+	
+}
+
+void PreGameWindow::commandExecuted(Chat& cmd) {
+	std::string buffer = messageTextView.get_buffer()->get_text();
+	buffer =  buffer + "/r/n" + "LLEGO MENSAJE PREDEFINIDO";
+	messageTextView.get_buffer()->set_text(buffer);
+}
+
 PreGameWindow::~PreGameWindow() {
 	// No realiza ninguna accion.
 }

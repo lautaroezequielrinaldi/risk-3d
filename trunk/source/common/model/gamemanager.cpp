@@ -122,12 +122,13 @@ void GameManager::execute(const std::string & commandName,const std::string &com
 	std::cerr << "GameManager::execute( " << commandName << ")"<< std::endl;
 	std::cout << commandName << " -> execute("<< currentState->getName()<<")" <<std::endl << std::endl;
 	Command* command = commandHydrator->getCommand(commandName,commandXml);
-	
+	if (command != NULL) {
+		// Notifica a los listeners del comando.
+		CommandObservable::notifyCommandExecuted(command);
+	}	
 	// aca le estamos pidiendo al command que llame al metodo correspondiente
 	// a si mismo del estado actual.
 	command->execute(currentState);
-	
-
 }
 
 /**

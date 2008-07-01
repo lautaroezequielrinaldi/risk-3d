@@ -15,13 +15,14 @@
 #include "../../common/commands/uireadytoplay.h"
 #include "../../common/commands/uiquit.h"
 #include "../../common/model/gamemanager.h"
+#include "../../common/commands/commandobserver.h"
 #include "../../common/state/stateobserver.h"
 #include "../../common/smartpointer/referencecountptr.h"
 
 /**
  * Representa la presala del juego donde puede haber chat y seleccion de mapa.
  */
-class PreGameWindow: public StateObserver, public Gtk::Window {
+class PreGameWindow: public StateObserver, public CommandObserver, public Gtk::Window {
 	/**
 	 * Atributos privados de la clase PreGameWindow.
 	 */
@@ -126,6 +127,14 @@ class PreGameWindow: public StateObserver, public Gtk::Window {
 		 * Devuelve si ha salido el jugador presionando el boton quit.
 		 */
 		bool userHasQuit();
+		/**
+		 * Responde ante la llegada de un commando mapList.
+		 */
+		virtual void commandExecuted(SelectMap& cmd);
+		/**
+		 * Responde ante la ll egada de un comando chat.
+		 */
+		virtual void commandExecuted(Chat& cmd);
 		/**
 		 * Destructor virtual de la clase PreGameWindow.
 		 */

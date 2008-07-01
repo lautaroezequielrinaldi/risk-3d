@@ -1,4 +1,5 @@
 #include "commandobservable.h"
+#include "command.h"
 #include "commandobserver.h"
 
 CommandObservable::CommandObservable() {
@@ -14,11 +15,11 @@ void CommandObservable::notifyCommandExecuted(Command* command) {
 	}
 }
 
-void CommandObservable::registerObserver(CommandObserver* observer) {
+void CommandObservable::registerCommandObserver(CommandObserver* observer) {
 	commandObserverList.push_back(observer);
 }
 
-void CommandObservable::unregisterObserver(CommandObserver* observer)  {
+void CommandObservable::unregisterCommandObserver(CommandObserver* observer)  {
 	commandObserverList.remove(observer);
 }
 
