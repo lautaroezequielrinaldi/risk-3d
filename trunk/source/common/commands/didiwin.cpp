@@ -15,7 +15,7 @@ DidIWin::~DidIWin(){
 }
 
 std::string DidIWin::serialize(){
-	return "<?xml version=\"1.0\"?><didiwin>"+serializeCommon(numeroJugador,0)+"</didiwin>";
+	return "<?xml version=\"1.0\"?><didiwin>"+serializeCommon(getFrom(),getTo())+"</didiwin>";
 }
 bool DidIWin::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return false;

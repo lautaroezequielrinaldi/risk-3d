@@ -115,7 +115,7 @@ std::list< ReferenceCountPtr<Player> >& GameManager::getPlayerList(){
  *
  */
 void GameManager::execute(UICommand * cmd){
-	std::cerr << "GameManager::execute("<< cmd->getName()<< ")"<< cmd->serialize() << std::endl;
+	//std::cerr << "GameManager::execute("<< cmd->getName()<< ")"<< cmd->serialize() << std::endl;
 	ReferenceCountPtr<State> currentState = stateMachine->getCurrentState();
 	cmd->execute(currentState);
 }

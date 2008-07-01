@@ -40,10 +40,9 @@ class UIDidIWin;
 class UIJoinGame;
 class UISelectMap;
 
-/*
 class UICountrySelect;
 class UIQuantitySelect;
-*/
+
 
 class StateObserver;
 
@@ -111,12 +110,9 @@ class State {
 		virtual bool uiNoMore(UINoMore & command);
 		virtual bool uiJoinGame(UIJoinGame & command);
 		virtual bool uiSelectMap(UISelectMap & command);
+		virtual bool uiCountrySelect(UICountrySelect & command);
+		virtual bool uiQuantitySelect(UIQuantitySelect & command);
 
-
-/*
-		virtual bool ( & command);
-		virtual bool ( & command);
-*/
 
 		virtual void accept(StateObserver* observer) = 0;
 

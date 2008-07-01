@@ -206,3 +206,10 @@ void Waiting::accept(StateObserver* observer) {
 	observer->stateChanged(*this);
 }
 
+bool Waiting::uiCountrySelect(UICountrySelect & command){
+	return false;
+}
+
+bool Waiting::uiQuantitySelect(UIQuantitySelect & command){
+	return false;
+}

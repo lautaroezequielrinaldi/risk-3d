@@ -30,10 +30,9 @@
 #include "../commands/uijoingame.h"
 #include "../commands/uiselectmap.h"
 
-/*
-#include "../commands/ui.h"
-#include "../commands/ui.h"
-*/
+#include "../commands/uicountryselect.h"
+#include "../commands/uiquantityselect.h"
+
 
 #include "stateobserver.h"
 
@@ -224,4 +223,10 @@ bool State::uiJoinGame(UIJoinGame & command) {
 bool State::uiSelectMap(UISelectMap & command) {
 	return false;
 }
+bool State::uiCountrySelect(UICountrySelect & command){
+	return false;
+}
 
+bool State::uiQuantitySelect(UIQuantitySelect & command){
+	return false;
+}
