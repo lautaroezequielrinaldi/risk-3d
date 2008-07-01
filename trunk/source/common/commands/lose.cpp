@@ -9,7 +9,7 @@ Lose::Lose(std::vector<std::string> & parameterList):Command ()
 	
 }
 
-Lose::Lose(std::string xml):Command (){
+Lose::Lose(const std::string & xml):Command (){
 
 	// construye el objeto a partir del Xml recibido
 	hydrate(xml);

@@ -32,7 +32,7 @@ class Populate : public Command
 		 * Constructor de la clase.
 		 * La misma se construye a partir del Xml especificado.
 		 */
-		Populate(std::string xml);
+		Populate(const std::string& xml);
 		
 		Populate();
 
@@ -48,16 +48,15 @@ class Populate : public Command
 		/**
 		 * Metodo cuyo proposito es hidratar  un objeto a partir del Xml especificado.
 		 */
-		void* hydrate(std::string xml);
+		void* hydrate(const std::string& xml);
 		
 		/**
 		 * Metodo cuyo proposito es validar la accion de poblar un territorio.
 		 */
 		bool validate(ReferenceCountPtr<GameManager>& gameMAnager);
 
+		
 		/**
-		* NOTA: ESTE METODO ES SOLO POR EL MOMENTO. A REFACTORIZAR.	
-		*
 		 * Metodo cuyo proposito es validar la accion de ocupar un territorio vacio.
 		 */
 		bool validateOccupy(ReferenceCountPtr<GameManager>& gameManager);

@@ -7,7 +7,7 @@ Map::Map(std::vector<std::string> & parameterList):Command ()
 	
 }
 
-Map::Map(std::string xml):Command (){
+Map::Map(const std::string & xml):Command (){
 
 	// construye el objeto a partir del Xml recibido
 	hydrate(xml);
@@ -26,7 +26,7 @@ std::string Map::serialize(){
 	 return "<?xml version=\"1.0\"?>mapa....";
 }
 
-void* Map::hydrate(std::string xml){
+void* Map::hydrate(const std::string & xml){
 	
 	
 	return NULL;

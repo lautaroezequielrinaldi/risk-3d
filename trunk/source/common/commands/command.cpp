@@ -45,11 +45,11 @@ void Command::setTo(int to){
 	this->to = to;	
 }
 
-void Command::setMainMsg(std::string msg) {
+void Command::setMainMsg( std::string  msg) {
 	mainmsg=msg;
 }
 
-void Command::setSecMsg(std::string msg) {
+void Command::setSecMsg( std::string  msg) {
 	secmsg=msg;
 }
 
@@ -68,14 +68,14 @@ std::string Command::serialize(int from, int to){
 	
 }
 
-void* Command::hydrate(std::string xml){
+void* Command::hydrate(const std::string &xml){
 	xmlDocPtr document =hydrateCommon(xml);
 	xmlFreeDoc(document);
 	xmlCleanupParser();
 	return NULL;
 }
 
-xmlDocPtr Command::hydrateCommon(std::string xml){
+xmlDocPtr Command::hydrateCommon(const std::string& xml){
 	xmlChar* field;
 	xmlXPathObjectPtr objetoXPath;
 	xmlNodeSetPtr setNodo;

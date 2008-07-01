@@ -6,7 +6,7 @@ using namespace std;
 
 using namespace std;
 
-FileDicePlayerTurn::FileDicePlayerTurn(std::string fileName):Dice()
+FileDicePlayerTurn::FileDicePlayerTurn(const std::string & fileName):Dice()
 {
 			
 	std::string pathName = "/home/analia/Escritorio/risk3d/source/common/model/"+fileName;

@@ -7,7 +7,7 @@ JoinGame::JoinGame(std::vector<std::string> &parameterList) : Command ()
 	this->numeroJugador = atoi (parameterList[0].c_str() );
 }
 
-JoinGame::JoinGame(std::string xml):Command (){
+JoinGame::JoinGame(const std::string & xml):Command (){
 
 	// construye el objeto a partir del Xml recibido
 	hydrate(xml);

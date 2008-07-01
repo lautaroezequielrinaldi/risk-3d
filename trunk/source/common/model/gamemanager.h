@@ -19,58 +19,59 @@ class GameManager: public StateObservable  {
 	
 	private:
 	
-	static const unsigned int CAPACIDAD_MAXIMA=6;
+		static const unsigned int CAPACIDAD_MAXIMA=6;
 
-	ReferenceCountPtr<CommandHydrator> commandHydrator;
+		
+		ReferenceCountPtr<CommandHydrator> commandHydrator;
 
-	/**
+		/**
          * Almacena el juego.
          */
         ReferenceCountPtr<Game> game;
         
         /**
          * Almacena el manejador de turnos.
-	 * (valido en el contexto del server)
+		 * (valido en el contexto del server)
          */
         ReferenceCountPtr<TurnManager> turnManager;
 		
-	/**
-	* Almacena el estado del juego
-	*/
-	ReferenceCountPtr<StateMachine> stateMachine;
+		/**
+		* Almacena el estado del juego
+		*/
+		ReferenceCountPtr<StateMachine> stateMachine;
 			
-	/**
-	* Almacena un ataque.
-	* Inicialmente apunta a null, luego se le seteara el ataque.
-	* No puede ser un ReferenceCountPtr ya que quien lo setea , lo hace con un *attack.
-	* No puede ser una referencia al ataque ya que el ataque no existe al crearse el gameManager. 
-	 * (valido en el contexto del server)
-	*/
-	Attack *attack;
+		/**
+		* Almacena un ataque.
+		* Inicialmente apunta a null, luego se le seteara el ataque.
+		* No puede ser un ReferenceCountPtr ya que quien lo setea , lo hace con un *attack.
+		* No puede ser una referencia al ataque ya que el ataque no existe al crearse el gameManager. 
+		 * (valido en el contexto del server)
+		*/
+		Attack *attack;
 			
-	/**
-	 * Hay lugar aun para conectarse?
-	 * (valido en el contexto del server)
-	 */
-	bool open;
+		/**
+		 * Hay lugar aun para conectarse?
+		 * (valido en el contexto del server)
+		 */
+		bool open;
 
-	/**
-	 * Ya comenzo el juego?
-	 * (valido en el contexto del server)
-	 */
-	bool playing;
+		/**
+		 * Ya comenzo el juego?
+		 * (valido en el contexto del server)
+		 */
+		bool playing;
 
-	/**
-	 * Quien soy
-	 * (valido en el contexto del player)
-	 */
-	int me;
+		/**
+		 * Quien soy
+		 * (valido en el contexto del player)
+		 */
+		int me;
 	
-	/**
-	 * considerar utilizar un map para poder acceder individualmente
-	 *
-	 */
-	std::list< ReferenceCountPtr<Proxy> > proxyList;
+		/**
+		 * considerar utilizar un map para poder acceder individualmente
+		 *
+		 */
+		std::list< ReferenceCountPtr<Proxy> > proxyList;
 
 	public:
 	
@@ -134,9 +135,9 @@ class GameManager: public StateObservable  {
 
 		void notify(Command * command);
 
-		void execute(Command * cmd);
+		void execute(Command * command);
 
-		void execute(std::string commandName, std::string commandXml);
+		void execute(const std::string & commandName,const std::string & commandXml);
 
 		/**
 		 * Metodo cuyo proposito es obtener la lista de jugadores.

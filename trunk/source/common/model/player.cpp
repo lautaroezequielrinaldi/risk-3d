@@ -62,23 +62,23 @@ unsigned int Player::getConqueredContinents(){
 	return this->listaContinentesConquistados.size();
 }
 		 		 
-void Player::addConqueredLand(std::string landName){
+void Player::addConqueredLand(std::string& landName){
 	this->listaPaisesConquistados.push_back(landName);
 }		 
 
-void Player::addConqueredContinent(std::string continenName){
+void Player::addConqueredContinent(std::string& continenName){
 	this->listaContinentesConquistados.push_back(continenName);
 }
 	 
-void Player::removeConqueredLand(std::string landName){
+void Player::removeConqueredLand(std::string &landName){
 	this->listaPaisesConquistados.remove(landName);
 }
 		 
-void Player::removeConqueredContinent(std::string continenName){
+void Player::removeConqueredContinent(std::string& continenName){
 	this->listaContinentesConquistados.remove(continenName);
 }
 
-bool Player::landOwner(std::string landName ){
+bool Player::landOwner(std::string& landName ){
 	
     std::list< std::string>::iterator it;
 
@@ -95,7 +95,7 @@ bool Player::landOwner(std::string landName ){
 	return false;
 }
 	  
-bool Player::continentOwner(std::string continentName ){
+bool Player::continentOwner(std::string& continentName ){
 
 	std::list< std::string>::iterator it;
 

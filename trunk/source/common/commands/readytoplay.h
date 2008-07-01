@@ -27,7 +27,7 @@ class ReadyToPlay : public Command
 		 * Constructor de la clase.
 		 * La misma se construye a partir del Xml especificado.
 		 */
-		ReadyToPlay(std::string xml);
+		ReadyToPlay(const std::string & xml);
 		
 
 		ReadyToPlay();

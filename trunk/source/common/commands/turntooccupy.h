@@ -31,7 +31,7 @@ class TurnToOccupy : public Command
 		 * Constructor de la clase.
 		 * La misma se construye a partir del Xml especificado.
 		 */
-		TurnToOccupy( std::string xml);
+		TurnToOccupy(const std::string& xml);
 		
 
 		TurnToOccupy();

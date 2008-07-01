@@ -26,7 +26,7 @@ class JoinGame : public Command
 		 * Constructor de la clase.
 		 * La misma se construye a partir del Xml especificado.
 		 */
-		JoinGame(std::string xml);
+		JoinGame(const std::string & xml);
 		
 		JoinGame();
 		/*

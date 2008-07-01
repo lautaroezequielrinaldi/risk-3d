@@ -7,7 +7,7 @@ YouAre::YouAre(std::vector<std::string> & parameterList):Command ()
 	this->numeroJugador = atoi (parameterList[0].c_str() );
 }
 
-YouAre::YouAre(std::string xml):Command (){
+YouAre::YouAre(const std::string & xml):Command (){
 
 	// construye el objeto a partir del Xml recibido
 	hydrate(xml);

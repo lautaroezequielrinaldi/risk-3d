@@ -28,7 +28,7 @@ class UISelectMap : public Command
 		 * Constructor de la clase.
 		 * La misma se construye a partir del Xml especificado.
 		 */
-		UISelectMap(std::string xml);
+		UISelectMap(const std::string &xml);
 
 		UISelectMap();
 		
@@ -44,7 +44,7 @@ class UISelectMap : public Command
 		/**
 		 * Metodo cuyo proposito es hidratar  un objeto a partir del Xml especificado.
 		 */
-		void* hydrate(std::string xml);
+		void* hydrate(const std::string &xml);
 		
 		/**
 		 * Metodo cuyo proposito es validar la accion que realice el comando.

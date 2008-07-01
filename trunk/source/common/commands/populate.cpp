@@ -12,7 +12,7 @@ Populate::Populate(std::vector<std::string> &parameterList) : Command ()
 	this->jugadorFrom = atoi( parameterList[2].c_str() );
 }
 
-Populate::Populate(std::string xml):Command (){
+Populate::Populate(const std::string & xml):Command (){
 
 	// construye el objeto a partir del Xml recibido
 	hydrate(xml);
@@ -48,7 +48,7 @@ std::string Populate::serialize(){
   
 }
 
-void* Populate::hydrate(std::string xml){
+void* Populate::hydrate(const std::string &xml){
 	
 
 	xmlDocPtr document= hydrateCommon(xml);
@@ -112,11 +112,8 @@ void* Populate::hydrate(std::string xml){
 	
 	xmlXPathFreeObject(objetoXPathPais);
 	xmlXPathFreeObject(objetoXPathEjer);
-	
 	xmlXPathFreeContext(contextoXPath);
-
     xmlFreeDoc(document);
-
     xmlCleanupParser();
 	
 	return NULL;
@@ -130,16 +127,17 @@ bool Populate::validate(ReferenceCountPtr<GameManager>& gameManager){
 	ReferenceCountPtr<TurnManager> turnManager = gameManager->getTurnManager();
 	ReferenceCountPtr<Player> jugadorActual = game->getPlayer( turnManager->getCurrentPlayer());
 	
+	std::string pDestino = this->paisDestino;
 	//si el pais destino es del jugador actual
-	if( jugadorActual->landOwner(this->paisDestino) ){	
+	if( jugadorActual->landOwner(pDestino) ){	
 		//si la cant de ejercitos a usar es menor o igual que la cantidad disponible del jugador
 		if (this->cantidadEjercitos <=  jugadorActual->getArmyCount() )
 			resul= true;
 		else
-			cout<<"no tenes esa cantidad de ejercitos disponibles!!!!!!!!!!!!!!!!!!!!!!"<<endl;
+			cerr<<"no tenes esa cantidad de ejercitos disponibles!!!!!!!!!!!!!!!!!!!!!!"<<endl;
 	}
 	else
-		cout<<"no es tu pais!!!!!!!!!!!!!!!!!"<<endl;
+		cerr<<"no es tu pais!!!!!!!!!!!!!!!!!"<<endl;
 	
 	return resul;
 	
@@ -161,10 +159,10 @@ bool Populate::validateOccupy(ReferenceCountPtr<GameManager>& gameManager){
 		if ( this->cantidadEjercitos == 1 )
 			res = true;
 		else
-			cout<<"NO PUEDE UBICAR MAS DE UN EJERCITO"<<endl;
+			cerr<<"NO PUEDE UBICAR MAS DE UN EJERCITO"<<endl;
 	}    
 	else
-		cout<<"PAIS YA OCUPADO"<<endl;
+		cerr<<"PAIS YA OCUPADO"<<endl;
 
 
 	return res;

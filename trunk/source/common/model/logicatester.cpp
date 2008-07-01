@@ -190,9 +190,10 @@ void LogicaTester::iniciarTest(){
 	//------------------- fin test mapa.
 	
 	// creo dado para ver q jugador comienza
-	Dice * dadoEmpezar = new FileDicePlayerTurn("dadito");
+	const std::string dadito = "dadito";
+	Dice * dadoEmpezar = new FileDicePlayerTurn(dadito);
 	//creo dado para la batalla
-
+	const std::string dado = "dado";
 	Dice * dadoJuego = new FileDiceBattle("dados");
 	//creo jugadores
 	int bonusInicial = 7;

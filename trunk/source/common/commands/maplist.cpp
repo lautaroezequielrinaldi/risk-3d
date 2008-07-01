@@ -22,7 +22,7 @@ std::string MapList::serialize(){
 bool MapList::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return false;
 }
-void* MapList::hydrate(std::string xml){
+void* MapList::hydrate(const std::string & xml){
 	xmlChar* field;
 	xmlXPathObjectPtr objetoXPath;
 	xmlNodeSetPtr setNodo;

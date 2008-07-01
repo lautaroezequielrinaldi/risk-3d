@@ -52,7 +52,7 @@ class BattleResult : public Command
 		/**
 		 * Constructor de la clase
 		 */
-		BattleResult( std::string attackerLand , std::string defenderLand, int jugadorAtacante, int jugadorDefensor);
+		BattleResult(  std::string  attackerLand , std::string  defenderLand, int jugadorAtacante, int jugadorDefensor);
 
 		/**
 		 * Constructor de la clase
@@ -115,7 +115,7 @@ class BattleResult : public Command
 		/**
 		 * Metodo cuyo proposito es hidratar un objeto a partir de un archivo XML.
 		 */
-		void* hydrate(std::string xml) ;
+		void* hydrate(const std::string & xml) ;
 
 	 
 		bool validate(ReferenceCountPtr<GameManager>& gameMAnager);

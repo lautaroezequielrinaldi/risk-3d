@@ -31,7 +31,7 @@ class TurnToAttack : public Command
 		 * Constructor de la clase.
 		 * La misma se construye a partir del Xml especificado.
 		 */
-		TurnToAttack( std::string xml);
+		TurnToAttack(const std::string & xml);
 		
 
 		TurnToAttack();

@@ -31,7 +31,7 @@ class TurnToMove : public Command
 		 * Constructor de la clase.
 		 * La misma se construye a partir del Xml especificado.
 		 */
-		TurnToMove( std::string xml);
+		TurnToMove(const std::string & xml);
 		
 
 		TurnToMove();

@@ -49,7 +49,7 @@ CommandHydrator::~CommandHydrator(){
 /**
  *
  */
-Command * CommandHydrator::getCommand(std::string name, std::string xml){
+Command * CommandHydrator::getCommand(const std::string &name, const std::string &xml){
 	std::cout << "CommandHydrator::getCommand(" << name << ")" << std::endl;
 	Command * command = commands[name];
 	std::cout << "El comando es de tipo: " << name << std::endl;	

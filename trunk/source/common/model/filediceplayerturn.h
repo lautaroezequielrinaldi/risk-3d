@@ -24,7 +24,7 @@ class FileDicePlayerTurn : public Dice
 		/**
 	 	 * Constructor de la clase.
 	 	 */	
-		FileDicePlayerTurn(std::string fileName);
+		FileDicePlayerTurn(const std::string & fileName);
 		
 		/**
 	 	 * Destructor de la clase.

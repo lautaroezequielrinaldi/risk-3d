@@ -87,7 +87,7 @@ BattleResult Battle::start(ReferenceCountPtr<GameManager>& gameManager){
 		dadosDefensor.push_back(this->dice.roll() );
 		
 	// compara dados de atacante y defensor y obtiene el resultado de la batalla
-BattleResult resultadoBatalla = compareDice(dadosAtacante,dadosDefensor,playerAtacante->getColor(),playerDefensor->getColor());	
+	BattleResult resultadoBatalla = compareDice(dadosAtacante,dadosDefensor,playerAtacante->getColor(),playerDefensor->getColor());	
 	
 	// actualizacion del modelo con respecto al resultado de la batalla
 
@@ -109,10 +109,12 @@ BattleResult resultadoBatalla = compareDice(dadosAtacante,dadosDefensor,playerAt
 		resultadoBatalla.setConquest( this->defensa.getArmyCount() );
 		
 		// elimino al pais defensor de la lista de paises del player defensor
-		playerDefensor->removeConqueredLand(this->defensa.getDefenderdLand());
+		std::string defLand = this->defensa.getDefenderdLand();
+		playerDefensor->removeConqueredLand(defLand);
 		
 		// agrego pais conquistado a la lista de paises del jugador atacante
-		playerAtacante->addConqueredLand( this->ataque.getAttackerLand() );
+		std::string atLand =  this->ataque.getAttackerLand();
+		playerAtacante->addConqueredLand(atLand );
 				
 		// remuevo del pais atacante tantos ejercitos como dados usados en la batalla ( = dant ejercitos defensores )
 		// para "moverlos" al pais conquistado.

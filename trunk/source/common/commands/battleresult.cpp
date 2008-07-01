@@ -1,7 +1,7 @@
 #include "battleresult.h"
 #include <sstream>
 
-BattleResult::BattleResult( std::string attackerLand, std::string defenderLand, int jugadorAtacante, int jugadorDefensor):
+BattleResult::BattleResult( std::string  attackerLand,std::string  defenderLand, int jugadorAtacante, int jugadorDefensor):
 Command(),
 paisAtacante(attackerLand),
 paisDefensor(defenderLand),
@@ -80,7 +80,7 @@ std::string BattleResult::serialize(){
 	
 }
 
-void* BattleResult::hydrate(std::string xml){
+void* BattleResult::hydrate(const std::string &xml){
 	
 
 	xmlDocPtr document= hydrateCommon(xml);
@@ -94,27 +94,27 @@ void* BattleResult::hydrate(std::string xml){
 
     
     // Defino un contexto de XPath.
-    	xmlXPathContextPtr contextoXPath;
+    xmlXPathContextPtr contextoXPath;
     // Defino 2 objetos de XPath.
-    	xmlXPathObjectPtr objetoXPath ;
+    xmlXPathObjectPtr objetoXPath ;
     // Defino el set de nodos devueltos por la expresiòn XPath.(una estructura que tiene un array con los nodos
     //devueltos por la expresion y el numero de nodos.
-    	xmlNodeSetPtr setNodos;
+    xmlNodeSetPtr setNodos;
 	
 	// Obtengo el elemento root del documento XML sobre el cual se va a trabajar.
     	nodoRaiz = xmlDocGetRootElement(document);
 
     // Creo el contexto de XPath.
-   	 contextoXPath = xmlXPathNewContext(document);
+   	contextoXPath = xmlXPathNewContext(document);
 
 	 // Evaluo la expresiòn XPath.
-    	objetoXPath = xmlXPathEvalExpression(BAD_CAST "//resultadoBatalla/pais-atacante", contextoXPath);
+    objetoXPath = xmlXPathEvalExpression(BAD_CAST "//resultadoBatalla/pais-atacante", contextoXPath);
 
 	// Obtengo el set de nodos de paises.
 	setNodos = objetoXPath->nodesetval;
 	
-    	//nodeNr = cantidad de nodos que devolvio la expresion xpath - nodeTab = array de nodos devulto
-    	// Obtengo el nodo del pais actual.
+    //nodeNr = cantidad de nodos que devolvio la expresion xpath - nodeTab = array de nodos devulto
+    // Obtengo el nodo del pais actual.
 	xmlNodePtr nodo = setNodos->nodeTab[0];
 
 	// Obtengo el nombre del pais que defiende y lo seteo en objeto.
@@ -127,11 +127,11 @@ void* BattleResult::hydrate(std::string xml){
 	// Evaluo la expresiòn XPath para la cantidad de ejercitos
    	objetoXPath = xmlXPathEvalExpression(BAD_CAST "//resultadoBatalla/pais-defensor",  contextoXPath);
 
-   	 // Obtengo el set de nodos.
+   	// Obtengo el set de nodos.
   	setNodos = objetoXPath->nodesetval;
 
-    	//nodeNr = cantidad de nodos que devolvio la expresion xpath
-    	//nodeTab = array de nodos devulto
+   	//nodeNr = cantidad de nodos que devolvio la expresion xpath
+    //nodeTab = array de nodos devulto
 	// Obtengo el nodo de la cantidad de ejercitos actual
 	nodo = setNodos->nodeTab[0];
 
@@ -145,54 +145,53 @@ void* BattleResult::hydrate(std::string xml){
 	// Evaluo la expresiòn XPath para la cantidad de ejercitos
    	objetoXPath = xmlXPathEvalExpression(BAD_CAST "//resultadoBatalla/resultado-atacante",  contextoXPath);
 
-   	 // Obtengo el set de nodos.
+   	// Obtengo el set de nodos.
   	setNodos = objetoXPath->nodesetval;
 
-    	//nodeNr = cantidad de nodos que devolvio la expresion xpath
-    	//nodeTab = array de nodos devulto
+    //nodeNr = cantidad de nodos que devolvio la expresion xpath
+    //nodeTab = array de nodos devulto
 	// Obtengo el nodo de la cantidad de ejercitos actual
 	nodo = setNodos->nodeTab[0];
 
 	// Obtengo el nombre del pais que defiende y lo seteo en objeto.
 	resAt = xmlNodeGetContent(nodo);
 
-    	this->resultadoAtacante = atoi((char*) resAt );    
+    this->resultadoAtacante = atoi((char*) resAt );    
 
 	xmlXPathFreeObject(objetoXPath);	
 
 	// Evaluo la expresiòn XPath para la cantidad de ejercitos
    	objetoXPath = xmlXPathEvalExpression(BAD_CAST "//resultadoBatalla/resultado-defensor",  contextoXPath);
 
-   	 // Obtengo el set de nodos.
+   	// Obtengo el set de nodos.
   	setNodos = objetoXPath->nodesetval;
 
-    	//nodeNr = cantidad de nodos que devolvio la expresion xpath
-    	//nodeTab = array de nodos devulto
+    //nodeNr = cantidad de nodos que devolvio la expresion xpath
+    //nodeTab = array de nodos devulto
 	// Obtengo el nodo de la cantidad de ejercitos actual
 	nodo = setNodos->nodeTab[0];
 
 	// Obtengo el nombre del pais que defiende y lo seteo en objeto.
 	resDef = xmlNodeGetContent(nodo);
 
-    	this->resultadoDefensor = atoi((char*) resDef );    
+    this->resultadoDefensor = atoi((char*) resDef );    
 
 	xmlXPathFreeObject(objetoXPath);
 
 	// Evaluo la expresiòn XPath para la cantidad de ejercitos
    	objetoXPath = xmlXPathEvalExpression(BAD_CAST "//resultadoBatalla/conquista",  contextoXPath);
 
-   	 // Obtengo el set de nodos.
+   	// Obtengo el set de nodos.
   	setNodos = objetoXPath->nodesetval;
 
-    	//nodeNr = cantidad de nodos que devolvio la expresion xpath
-    	//nodeTab = array de nodos devulto
+    //nodeNr = cantidad de nodos que devolvio la expresion xpath
+    //nodeTab = array de nodos devulto
 	// Obtengo el nodo de la cantidad de ejercitos actual
 	nodo = setNodos->nodeTab[0];
 
 	// Obtengo el nombre del pais que defiende y lo seteo en objeto.
 	resCon = xmlNodeGetContent(nodo);
-
-    	this->conquista = atoi((char*) resCon );    
+    this->conquista = atoi((char*) resCon );    
 
 	xmlXPathFreeObject(objetoXPath);
 
@@ -205,13 +204,11 @@ void* BattleResult::hydrate(std::string xml){
 	xmlFree(resDef );
 	xmlFree(resCon);
 
-	
 	xmlXPathFreeContext(contextoXPath);
 	xmlFreeDoc(document);
-    	xmlCleanupParser();
+    xmlCleanupParser();
 
 	return NULL;
-
 
 }
 

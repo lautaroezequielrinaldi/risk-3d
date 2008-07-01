@@ -54,6 +54,7 @@ void GameManager::setAttack(Attack& attack){
  *
  */
 void GameManager::add(ReferenceCountPtr<PlayerProxy> & playerProxy) {
+	
 	/* codigo comentado para que compile EDITOR_TARGET, no falla en SERVER_TARGET*/
 	playerProxy->setPlayer(game->addPlayer());
 	proxyList.push_back(playerProxy);
@@ -115,7 +116,7 @@ void GameManager::execute(Command * cmd){
 	cmd->execute(currentState);
 }
 
-void GameManager::execute(std::string commandName, std::string commandXml){
+void GameManager::execute(const std::string & commandName,const std::string &commandXml){
 	// obtener lock
 	ReferenceCountPtr<State> currentState = stateMachine->getCurrentState();
 	std::cerr << "GameManager::execute( " << commandName << ")"<< std::endl;

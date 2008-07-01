@@ -26,7 +26,7 @@ class TurnToPopulate : public Command
 		 * Constructor de la clase.
 		 * La misma se construye a partir del Xml especificado.
 		 */
-		TurnToPopulate( std::string xml);
+		TurnToPopulate(const std::string & xml);
 		
 
 		TurnToPopulate();

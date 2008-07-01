@@ -4,8 +4,6 @@ UISurrender::UISurrender(std::vector<std::string> & parameterList):Command ()
 {
 	/*construyo el objeto a partir de los parametros pasados en la lista*/
 
-
-
 	//this->numeroJugador = atoi (parameterList[0].c_str() );
 }
 
