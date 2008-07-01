@@ -142,8 +142,8 @@ bool State::surrender(Surrender & command){
 	
 	std::ostringstream strComodin, strComodin2 ;
 	
-	//desactivo al jugador de la lista de turnos del juego
-	this->gameManager->getTurnManager()->deletePlayer(command.getSurrenderPlayer());
+	//desactivo al jugador de la lista de turnos del juego - from: player q se rinde
+	this->gameManager->getTurnManager()->deletePlayer(command.getFrom());
 	
 	//se sortea el jugador que se quedara con los paises conquistados por el jugador que se rinde.
 	RandomDice dado; 
@@ -159,16 +159,16 @@ bool State::surrender(Surrender & command){
 	int colorJugadorSuertudo = this->gameManager->getTurnManager()->getColorPlayer(posRandom);
 	
 	ReferenceCountPtr<Player> jugadorSuertudo = gameManager->getGame()->getPlayer(colorJugadorSuertudo);
-	ReferenceCountPtr<Player> jugadorRendido =  gameManager->getGame()->getPlayer(command.getSurrenderPlayer());
+	ReferenceCountPtr<Player> jugadorRendido =  gameManager->getGame()->getPlayer(command.getFrom());
 	
 	jugadorSuertudo->transferLandsFrom(jugadorRendido);
 	
-	//  actualizar modelo y mensajea al cliente --------------
+		// ---- mensajea al cliente --------------
 		
 		//seteo al commando como valido
 		command.setValid(1);
 		command.setTo(colorJugadorSuertudo);
-		command.setFrom(command.getSurrenderPlayer() );
+		//from queda igual
 				
 		//seteo mje principal
    		strComodin << gameManager->getTurnManager()->getCurrentPlayer();
@@ -184,7 +184,7 @@ bool State::surrender(Surrender & command){
 		//notifico cambios y mensajes
 		gameManager->notify(&command);
 		
-		//------- fin actualizacion modelo para cliente ------------------------
+		//------- fin notificacion para cliente ------------------------
 	
 	return true;
 }

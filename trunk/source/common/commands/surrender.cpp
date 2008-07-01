@@ -3,8 +3,7 @@
 
 Surrender::Surrender(std::vector<std::string> & parameterList):Command ()
 {
-	/*construyo el objeto a partir de los parametros pasados en la lista*/
-	this->numeroJugador = atoi (parameterList[0].c_str() );
+	//no realiza ninguna accion
 }
 
 Surrender::Surrender(){
@@ -31,10 +30,6 @@ void Surrender::execute(ReferenceCountPtr<State>& state){
 }
 std::string Surrender::getName() {
 	return "surrender";
-}
-
-int Surrender::getSurrenderPlayer(){
-	return this->numeroJugador;
 }
 
 void Surrender::accept(CommandObserver* observer) {

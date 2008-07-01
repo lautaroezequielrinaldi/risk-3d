@@ -12,7 +12,7 @@ class Surrender:public Command{
 
 	
 	private:
-		int numeroJugador;
+		//int numeroJugador;
 		
 	public:
 
@@ -26,8 +26,6 @@ class Surrender:public Command{
 		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.
 		 */
 		std::string serialize();
-
-		
 		/**
 		 * Metodo cuyo proposito es validar la accion que realice el comando.
 		 */
@@ -36,11 +34,6 @@ class Surrender:public Command{
 		virtual void execute(ReferenceCountPtr<State>& state);
 		
 		virtual std::string getName();
-
-		/**
-		 * Metodo cuyo proposito es obtener el numero de jugador que se rinde.
-		 */
-		 int getSurrenderPlayer();
 
 		/**
 		 * Notifica que se ejecuto un comando.
