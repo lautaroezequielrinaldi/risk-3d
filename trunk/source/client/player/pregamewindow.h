@@ -1,6 +1,7 @@
 #ifndef __PREGAMEWINDOW_H__
 #define __PREGAMEWINDOW_H__
 
+#include<gtkmm/main.h>
 #include<gtkmm/window.h>
 #include<gtkmm/box.h>
 #include<gtkmm/button.h>
@@ -11,7 +12,8 @@
 #include<gtkmm/messagedialog.h>
 #include<gtkmm/dialog.h>
 #include "../../common/commands/uijoingame.h"
-#include "../..//common/commands/uireadytoplay.h"
+#include "../../common/commands/uireadytoplay.h"
+#include "../../common/commands/uiquit.h"
 #include "../../common/model/gamemanager.h"
 #include "../../common/state/stateobserver.h"
 #include "../../common/smartpointer/referencecountptr.h"
@@ -56,6 +58,18 @@ class PreGameWindow: public StateObserver, public Gtk::Window {
 		 * Almacena una referencia al boton de dialogo de conexion.
 		 */
 		Gtk::Button connectionDialogButton;
+		/**
+		 * Almacena una referencia al boton quit para salir.
+		 */
+		Gtk::Button quitButton;
+		/**
+		 * Almacena si se ha conectado.
+		 */
+		bool connected;
+        /**
+		 * Almacena si se ha salido.
+		 */
+        bool hasQuit;
 	/**
 	 * Metodos privados de la clase PreGameWindow.
 	 */
@@ -88,6 +102,10 @@ class PreGameWindow: public StateObserver, public Gtk::Window {
 		 * Manejador de la senial signal_clicked del boton ready to play button.
 		 */
 		void onReadyToPlayButtonClicked();
+		/**
+		 * Manejador de la senial signal_clicked del boton quit.
+		 */
+		void onQuitButtonClicked();
 	/**
 	 * Metodos publicos de la clase PreGameWindow.
 	 */
@@ -100,6 +118,10 @@ class PreGameWindow: public StateObserver, public Gtk::Window {
 		 * Obtiene el game manager usado durante la presala.
 		 */
 		ReferenceCountPtr<GameManager> getGameManager();
+		/**
+		 * Devuelve si ha salido el jugador presionando el boton quit.
+		 */
+		bool userHasQuit();
 		/**
 		 * Destructor virtual de la clase PreGameWindow.
 		 */

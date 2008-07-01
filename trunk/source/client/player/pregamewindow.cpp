@@ -13,7 +13,10 @@ PreGameWindow::PreGameWindow(ReferenceCountPtr<GameManager>& gameManager):
 	messageEntry(),
 	sendMessageButton(),
 	readyToPlayButton(),
-	connectionDialogButton() {
+	connectionDialogButton(),
+	quitButton(),
+	connected(false),
+	hasQuit(false) {
 	// Se registra como listener de cambios de estados en el game manager.
 	if (gameManager != NULL) {
 		gameManager->registerObserver(this);
@@ -28,6 +31,8 @@ PreGameWindow::PreGameWindow(ReferenceCountPtr<GameManager>& gameManager):
 	readyToPlayButton.set_sensitive(false);
 	// Establece el label del boton de dialogo de conexion.
 	connectionDialogButton.set_label("Connect to server...");
+	// Establece el label del boton de salir.
+	quitButton.set_label("Quit");
 
 	// Agrega el entry de mensajes al horizontal box.
 	horizontalBox.pack_start(messageEntry, Gtk::PACK_SHRINK);
@@ -37,6 +42,9 @@ PreGameWindow::PreGameWindow(ReferenceCountPtr<GameManager>& gameManager):
 	horizontalBox.pack_start(readyToPlayButton, Gtk::PACK_SHRINK);
 	// Agrega el boton de dialogo de conexion al horizontal box.
 	horizontalBox.pack_start(connectionDialogButton, Gtk::PACK_SHRINK);
+	// Agrega el boton de quit al horizontal box.
+	horizontalBox.pack_start(quitButton, Gtk::PACK_SHRINK);
+
 	// Agrega el text view de mensajes al vertical box.
 	verticalBox.pack_start(messageTextView, Gtk::PACK_SHRINK);
 	// Agrega el horizontal box al vertical box.
@@ -52,6 +60,9 @@ PreGameWindow::PreGameWindow(ReferenceCountPtr<GameManager>& gameManager):
 	// Conecta el signal_clicked del boton readyToPlayButton con su manejador.
 	readyToPlayButton.signal_clicked().connect(sigc::mem_fun(*this,
 		&PreGameWindow::onReadyToPlayButtonClicked));
+    // Conecta el signal_clicked del boton quit con su manejador.
+    quitButton.signal_clicked().connect(sigc::mem_fun(*this,
+		&PreGameWindow::onQuitButtonClicked));
 	// Muestro todos los widgets.
 	show_all();
 }
@@ -87,6 +98,7 @@ void PreGameWindow::showConnectionDialog() {
 			readyToPlayButton.set_sensitive(true);
         	connectionDialogButton.set_sensitive(false);
 			serverProxy->start();
+			connected = true;
 		} catch (SocketConnectionException& exception) {
 			Gtk::MessageDialog errorDialog(*this, "No se pudo conectar al servidor!!!", false,
 				Gtk::MESSAGE_ERROR);
@@ -106,8 +118,23 @@ void PreGameWindow::onSendMessageButtonClicked() {
 
 void PreGameWindow::onReadyToPlayButtonClicked() {
 	UIReadyToPlay* cmd = new UIReadyToPlay();
-	gameManager->notify(cmd);
+	gameManager->execute(cmd);
 	delete cmd;
+	readyToPlayButton.set_sensitive(false);
+}
+
+void PreGameWindow::onQuitButtonClicked() {
+	if (connected) {
+		UIQuit* cmd = new UIQuit();
+		gameManager->execute(cmd);
+		delete cmd;
+		hasQuit	= true;
+	}
+	Gtk::Main::quit();
+}
+
+bool PreGameWindow::userHasQuit() {
+	return hasQuit;
 }
 
 PreGameWindow::~PreGameWindow() {
