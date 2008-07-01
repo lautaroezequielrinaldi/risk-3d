@@ -71,10 +71,10 @@ class PreGameWindow: public StateObserver, public CommandObserver, public Gtk::W
 		 * Almacena si se ha conectado.
 		 */
 		bool connected;
-        /**
-		 * Almacena si se ha salido.
-		 */
-        bool hasQuit;
+		/**
+			* Almacena si se ha salido.
+			*/
+		bool hasQuit;
 	/**
 	 * Metodos privados de la clase PreGameWindow.
 	 */

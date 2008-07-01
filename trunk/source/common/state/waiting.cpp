@@ -195,7 +195,7 @@ bool Waiting::uiChat(UIChat & command){
 
 	Chat * cmd = new Chat();
 	cmd->setFrom(gameManager->getMe());
-	cmd->setMainMsg("hardcoded");
+	cmd->setMainMsg(command.getMainMsg());
 	this->gameManager->notify(cmd);
 	delete(cmd);
 	return false;
