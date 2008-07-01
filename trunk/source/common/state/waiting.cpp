@@ -72,6 +72,10 @@ bool Waiting::surrender(Surrender & command){
 
 }
 
+bool Waiting::selectMap(SelectMap & command){
+	return false;
+}
+
 bool Waiting::didIWin(DidIWin & command){
 	return false;
 }
