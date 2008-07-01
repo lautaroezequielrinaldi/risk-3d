@@ -2,6 +2,7 @@
 #include "stateobserver.h"
 
 
+
 #include "../commands/uireadytoplay.h"
 #include "../commands/readytoplay.h"
 #include "../commands/uiquit.h"
@@ -55,13 +56,18 @@ bool Waiting::mapList(MapList & command){
 
 bool Waiting::quit(Quit & command) {
 	std::cerr << "Evento Waiting::Quit" << std::endl;
+	// si es valido
+	if (command.getFrom() == gameManager->getMe()) {
+		// cerrar la aplicacion de un modo mas elegante...
+		throw 20;
+	} else {
+		// notificar a la interfaz que el usuario tal se fue del juego
+	}
 	return false;
 }
 
 bool Waiting::youAre(YouAre & command){
 	std::cerr << "Evento Waiting::youAre : " << command.getTo() << std::endl;
-
-	// como este mensaje solo puede ser para mi, tomar nota de quien soy
 	gameManager->setMe(command.getTo());
 	
 	return false;
