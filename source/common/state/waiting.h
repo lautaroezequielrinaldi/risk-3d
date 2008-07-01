@@ -23,6 +23,8 @@ class Waiting : public State
 	bool quit(Quit & command);
 	bool didIWin(DidIWin & command);
 	bool readyToPlay(ReadyToPlay & command);
+	bool selectMap(SelectMap & command);
+
 	/*
 	 * Comandos generados exclusivamente por el servidor
 	 */
