@@ -113,7 +113,13 @@ void PreGameWindow::onConnectionDialogButtonClicked() {
 }
 
 void PreGameWindow::onSendMessageButtonClicked() {
-	std::cout << "TODO: Deberia mandar mensajes pero no esta implementado... Fuck!!!" << std::endl;
+	if (connected) {
+		Chat* chat = new Chat();
+		std::string message = messageEntry.get_text();
+		chat->setMainMsg(message);
+		gameManager->execute(chat);
+		delete chat;
+	}	
 }
 
 void PreGameWindow::onReadyToPlayButtonClicked() {
@@ -126,7 +132,7 @@ void PreGameWindow::onReadyToPlayButtonClicked() {
 void PreGameWindow::onQuitButtonClicked() {
 	if (connected) {
 		UIQuit* cmd = new UIQuit();
-		gameManager->execute(cmd);
+		gameManager->notify(cmd);
 		delete cmd;
 		serverProxy->cancel();
 	}
@@ -144,7 +150,7 @@ void PreGameWindow::commandExecuted(SelectMap& cmd) {
 
 void PreGameWindow::commandExecuted(Chat& cmd) {
 	std::string buffer = messageTextView.get_buffer()->get_text();
-	buffer =  buffer + "/r/n" + "LLEGO MENSAJE PREDEFINIDO";
+	buffer =  buffer + "/r/n" + cmd.getMainMsg();
 	messageTextView.get_buffer()->set_text(buffer);
 }
 

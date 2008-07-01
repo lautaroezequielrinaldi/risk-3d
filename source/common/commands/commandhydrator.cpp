@@ -3,7 +3,7 @@
 
 CommandHydrator::CommandHydrator(){
 	commands.insert(std::make_pair("attack",new Attack()));
-	//commands.insert(std::make_pair("chat",new Chat()));
+	commands.insert(std::make_pair("chat",new Chat()));
 	commands.insert(std::make_pair("defend",new Defend()));
 	commands.insert(std::make_pair("didIWin",new DidIWin()));
 	commands.insert(std::make_pair("joinGame",new JoinGame()));
