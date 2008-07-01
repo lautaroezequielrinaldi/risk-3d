@@ -59,6 +59,8 @@ class Command : public Serializable
 		 */
 		int getFrom();
 
+		std::string getStringFrom();
+
 		/**
 		 * Metodo cuyo proposito es verificar si el comando es valido.
 		 */

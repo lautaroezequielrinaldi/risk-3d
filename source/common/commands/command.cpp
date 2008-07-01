@@ -19,6 +19,13 @@ int Command::getFrom(){
 	return from;
 }
 
+std::string Command::getStringFrom() {
+	std::ostringstream out;
+	out << from;
+	return out.str();
+
+}
+
 int Command::getTo(){
 	return to;
 }
