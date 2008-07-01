@@ -29,15 +29,15 @@ class GameManager: public StateObservable, public CommandObservable {
 		ReferenceCountPtr<CommandHydrator> commandHydrator;
 
 		/**
-         * Almacena el juego.
-         */
-        ReferenceCountPtr<Game> game;
-        
-        /**
-         * Almacena el manejador de turnos.
-		 * (valido en el contexto del server)
-         */
-        ReferenceCountPtr<TurnManager> turnManager;
+		* Almacena el juego.
+		*/
+		ReferenceCountPtr<Game> game;
+		
+		/**
+		* Almacena el manejador de turnos.
+			* (valido en el contexto del server)
+		*/
+		ReferenceCountPtr<TurnManager> turnManager;
 		
 		/**
 		* Almacena el estado del juego
@@ -143,6 +143,7 @@ class GameManager: public StateObservable, public CommandObservable {
 
 		void execute(const std::string & commandName,const std::string & commandXml);
 
+		ReferenceCountPtr<PlayerProxy> getPlayerProxy(int color);
 		/**
 		 * Metodo cuyo proposito es obtener la lista de jugadores.
 		 */
@@ -158,7 +159,7 @@ class GameManager: public StateObservable, public CommandObservable {
 		 */
 		void setCurrentState( std::string stateName  );  
 		
-		
+		void remove(int color);
 };
 
 

@@ -94,6 +94,26 @@ ReferenceCountPtr<Player> Game::getPlayer(int color){
 	
 }
 
+void Game::remove(int color) {
+	playerList.remove(getPlayer(color));
+/*
+	ReferenceCountPtr<Player> actual;
+	std::list<ReferenceCountPtr<Player >::iterator it;
+	it =this->playerList.begin();
+
+	while ( it != this->playerList.end()) {
+		actual = *it;
+		if (actual->getColor() == color) {
+			playerList.remove(it);
+			break;
+		}
+		
+		++it;
+	}
+
+*/	
+}
+
          
 Dice& Game::getDice(){
 	

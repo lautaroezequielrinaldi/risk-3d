@@ -199,7 +199,9 @@ bool State::quit(Quit & command){
 	// se debe eliminar command.getStringFrom() del juego
 	// se debe hacer algo con los ejercitos, que esto lo haga quit en el cliente
 	command.setValid(1);
-	std::cerr << "State::quit() to: "<< command.getTo() << " from: " << command.getStringFrom() << std::endl;
+	std::cerr << "State::quit() to: "<< command.getTo() << " from: " << command.getFrom() << std::endl;
+	gameManager->remove(command.getFrom());
+
 	gameManager->notify(&command);
 
         return true;

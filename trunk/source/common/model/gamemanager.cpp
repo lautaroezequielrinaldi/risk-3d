@@ -168,5 +168,37 @@ void GameManager::setCurrentState( std::string stateName  ){
 	this->notifyStateChanged(*(this->stateMachine->getCurrentState()));
 } 
 
+ReferenceCountPtr<PlayerProxy> GameManager::getPlayerProxy(int color) {
+	bool encontrado = false;
+	ReferenceCountPtr<Proxy> actual;
+	std::list<ReferenceCountPtr<Proxy> >::iterator it;
 
+	it =this->proxyList.begin();
+	/*busco en la lista de jugadores, al actual, usando el color del jugador q tiene el turno*/
+	while ( it != this->proxyList.end() && !encontrado) {
+	
+		actual = *it;
+		
+		/*comparo color del jugador especificado con color del jugador de la iteracion*/
+		if ( color == ((ReferenceCountPtr<PlayerProxy> )actual)->getPlayer()->getColor() )
+			encontrado=true;
+		else
+			++it;
+	}
+	
+	if( !encontrado )
+		actual = NULL;
+		
+	return actual;
+
+
+}
+
+
+void GameManager::remove(int color) {
+	proxyList.remove(getPlayerProxy(color));
+	game->remove(color);
+	
+
+}
 
