@@ -6,11 +6,7 @@ UIReadyToPlay::UIReadyToPlay(std::vector<std::string> &parameterList) : UIComman
 	//this->numeroJugador = atoi (parameterList[0].c_str() );
 }
 
-UIReadyToPlay::UIReadyToPlay(const std::string & xml):UICommand (){
 
-	// construye el objeto a partir del Xml recibido
-	hydrate(xml);
-}
 UIReadyToPlay::UIReadyToPlay(){
 
 }

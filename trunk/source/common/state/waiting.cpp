@@ -122,66 +122,61 @@ bool Waiting::turnToOccupy(TurnToOccupy & command){
 }
 
 bool Waiting::uiReadyToPlay(UIReadyToPlay & command){
-	std::vector<std::string> parameters;
-	std::ostringstream strMe;
-	strMe << gameManager->getMe();
-	parameters.push_back(strMe.str());
-	this->gameManager->notify(new ReadyToPlay(parameters));
+	ReadyToPlay * cmd = new ReadyToPlay();
+	cmd->setFrom(gameManager->getMe());
+	this->gameManager->notify(cmd);
+	delete(cmd);
 	return false;
 }
 
 bool Waiting::uiQuit(UIQuit & command){
 	std::cerr << "Evento Waiting::uiQuit from: "<< gameManager->getMe() << std::endl;
-/*	
-	std::vector<std::string> parameters;
-	std::ostringstream strMe;
-	strMe << gameManager->getMe();
-	parameters.push_back(strMe.str());
-*/
-	Quit *quit = new Quit();
-	quit->setFrom(gameManager->getMe());
-	this->gameManager->notify(quit);
-	delete(quit);
+
+	Quit * cmd = new Quit();
+	cmd->setFrom(gameManager->getMe());
+	this->gameManager->notify(cmd);
+	delete(cmd);
 	return false;
 }
 
 bool Waiting::uiNoMore(UINoMore & command){
 	std::cerr << "Evento Waiting::uiNoMore" << std::endl;
-	std::vector<std::string> parameters;
-	std::ostringstream strMe;
-	strMe << gameManager->getMe();
-	parameters.push_back(strMe.str());
-	this->gameManager->notify(new NoMore(parameters));
+
+	NoMore * cmd = new NoMore();
+	cmd->setFrom(gameManager->getMe());
+	this->gameManager->notify(cmd);
+	delete(cmd);
 	return false;
 }
 
 bool Waiting::uiSurrender(UISurrender & command){
-	std::vector<std::string> parameters;
-	std::ostringstream strMe;
-	strMe << gameManager->getMe();
-	parameters.push_back(strMe.str());
-	this->gameManager->notify(new Surrender(parameters));
+	Surrender * cmd = new Surrender();
+	cmd->setFrom(gameManager->getMe());
+	this->gameManager->notify(cmd);
+	delete(cmd);
 	return false;
 }
 
 bool Waiting::uiDidIWin(UIDidIWin & command){
-	std::vector<std::string> parameters;
-	std::ostringstream strMe;
-	strMe << gameManager->getMe();
-	parameters.push_back(strMe.str());
-	this->gameManager->notify(new DidIWin(parameters));
+	DidIWin * cmd = new DidIWin();
+	cmd->setFrom(gameManager->getMe());
+	this->gameManager->notify(cmd);
+	delete(cmd);
 	return false;
+
 }
 
 bool Waiting::uiSelectMap(UISelectMap & command){
-	std::vector<std::string> parameters;
-	std::ostringstream strMe;
-	strMe << gameManager->getMe();
-	parameters.push_back(strMe.str());
 	std::cerr << "Waiting::uiSelectMap me: " << gameManager->getMe() << std::endl;
-	parameters.push_back(command.getMapName());
-	this->gameManager->notify(new SelectMap(parameters));
+
+	SelectMap * cmd = new SelectMap();
+	cmd->setFrom(gameManager->getMe());
+	cmd->setMapName(command.getMapName());
+	this->gameManager->notify(cmd);
+	delete(cmd);
 	return false;
+
+
 }
 void Waiting::accept(StateObserver* observer) {
 	observer->stateChanged(*this);

@@ -13,7 +13,7 @@ class SelectMap : public Command
 	
 	private:
 	
-		std::string nombreMapa;
+		std::string mapName;
 		int numeroJugador;
 
 	
@@ -57,6 +57,10 @@ class SelectMap : public Command
 		void execute(ReferenceCountPtr<State>& state);
 		
 		virtual std::string getName();
+
+		std::string getMapName();
+
+		void setMapName(const std::string & mapName);
 
 		/**
 		 * Notiifca que se ejecuto un comando.

@@ -4,7 +4,7 @@
 SelectMap::SelectMap(std::vector<std::string> &parameterList) : Command ()
 {
 	this->numeroJugador = atoi (parameterList[0].c_str() );
-	this->nombreMapa = parameterList[1];
+	this->mapName = parameterList[1];
 }
 
 SelectMap::SelectMap(const std::string &xml):Command (){
@@ -21,7 +21,7 @@ SelectMap::~SelectMap()
 }
 
 std::string SelectMap::serialize(){
-	return "<?xml version=\"1.0\"?><selectmap>"+serializeCommon(numeroJugador,0)+"<map>"+nombreMapa+"</map></selectmap>";
+	return "<?xml version=\"1.0\"?><selectmap>"+serializeCommon(numeroJugador,0)+"<map>"+mapName+"</map></selectmap>";
   
 }
 
@@ -39,7 +39,7 @@ void* SelectMap::hydrate(const std::string & xml){
 	setNodo = objetoXPath->nodesetval;
 	nodo = setNodo->nodeTab[0];
 	field = xmlNodeGetContent(nodo);
-	this->nombreMapa.assign( (char*) field );
+	this->mapName.assign( (char*) field );
 
 	xmlFree(field);
 	xmlXPathFreeObject(objetoXPath);
@@ -64,6 +64,13 @@ std::string SelectMap::getName() {
 	return "selectMap";
 }
 
+void SelectMap::setMapName(const std::string & mapName) {
+	this->mapName = mapName;
+}
+
+std::string SelectMap::getMapName(){
+	return mapName;
+}
 
 
 void SelectMap::accept(CommandObserver* observer) {

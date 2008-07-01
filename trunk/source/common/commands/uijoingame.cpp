@@ -6,11 +6,6 @@ UIJoinGame::UIJoinGame(std::vector<std::string> &parameterList) : UICommand (){
 	//this->numeroJugador = atoi (parameterList[0].c_str() );
 }
 
-UIJoinGame::UIJoinGame(const std::string & xml):UICommand (){
-
-	// construye el objeto a partir del Xml recibido
-	hydrate(xml);
-}
 
 UIJoinGame::UIJoinGame(){
 

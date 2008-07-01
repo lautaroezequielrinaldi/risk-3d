@@ -7,11 +7,13 @@ class UICommand: public Command {
 	/**
 	 * Metodos protegidos de la clase UICommand.
 	 */
-	protected:
+	private:
 		/**
 		 * Constructor de la clase UICommand.
 		 */
 		UICommand(std::vector<std::string> &parameterList);
+
+	protected:
 		/**
 		 * Constructor de la clase UICommand.
 		 */
