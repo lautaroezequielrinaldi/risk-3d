@@ -89,7 +89,7 @@ void PreGameWindow::showConnectionDialog() {
 			// que pasa si ...
 			//                  = new ServerProxy(new Socket("localhost", 2000), gamemanager); ?
 
-			ReferenceCountPtr<ServerProxy> serverProxy = new ServerProxy(socket, gameManager);
+			serverProxy = new ServerProxy(socket, gameManager);
 			gameManager->add(serverProxy);
 			UIJoinGame* cmd = new UIJoinGame();
 			gameManager->execute(cmd);
@@ -128,8 +128,9 @@ void PreGameWindow::onQuitButtonClicked() {
 		UIQuit* cmd = new UIQuit();
 		gameManager->execute(cmd);
 		delete cmd;
-		hasQuit	= true;
+		serverProxy->cancel();
 	}
+	hasQuit = true;
 	Gtk::Main::quit();
 }
 

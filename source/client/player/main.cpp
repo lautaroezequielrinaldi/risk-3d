@@ -148,118 +148,92 @@ int main(int argc, char** argv) {
 	std::cerr<< "StateMachine asigned" << std::endl;
 	Gtk::Main main(argc, argv);
 
-if (true) {
 	PreGameWindow preGameWindow(gamemanager);
 	Gtk::Main::run(preGameWindow);
-
-} else {
-	Socket * socket = new Socket("localhost", 2000);
-	std::cerr<< "Socket created" << std::endl;
 
 	// que pasa si ...
 	// serverProxy= new ServerProxy(new Socket("localhost", 2000), gamemanager); ?
 
-	ReferenceCountPtr<ServerProxy> serverProxy= new ServerProxy(socket, gamemanager);
-	std::cerr<< "ServerProxy created" << std::endl;
+	if (!preGameWindow.userHasQuit()) {
+		glutInit(&argc, argv);
+			if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+			return 0;
+		}
+		SDL_Surface* screen = SDL_SetVideoMode(1024, 768, 32, SDL_OPENGL);
 
-	gamemanager->add(serverProxy);
-
-	serverProxy->notify(new JoinGame());
-
-	serverProxy->start();
 	
-//	serverProxy->cancel();
-//	std::cerr << "Canceled" << std::endl;
+		SelectMapOnClickObserver selectMapOnClickObserver; 
+		selectMapOnClickObserver.setGameManager(gamemanager);
 
-	// va a quedar bloqueado aca hasta que reciba un mensaje via socket
-	// para desbloquearse del read()
-	//serverProxy->join();
-	//std::cerr << "Joined" << std::endl;
-	while (false && !serverProxy->isCanceled()) {
-		sleep(10);
-		std::cerr << "looping" << std::endl;
+	
+		ReadyToPlayOnClickObserver readyToPlayOnClickObserver; 
+		readyToPlayOnClickObserver.setGameManager(gamemanager);
+
+		QuitOnClickObserver quitOnClickObserver;
+		quitOnClickObserver.setGameManager(gamemanager);
+
+		NoMoreOnClickObserver noMoreOnClickObserver;
+		noMoreOnClickObserver.setGameManager(gamemanager);
+
+		SurrenderOnClickObserver surrenderOnClickObserver;
+		surrenderOnClickObserver.setGameManager(gamemanager);
+
+		DidIWinOnClickObserver didIWinOnClickObserver;
+		didIWinOnClickObserver.setGameManager(gamemanager);
+
+	
+		ReferenceCountPtr<GLButton> readyToPlayButton( new GLButton("ReadyToPlay"));
+		readyToPlayButton->setX(700);
+		readyToPlayButton->setY(20);
+		readyToPlayButton->addMouseObserver(&readyToPlayOnClickObserver);
+
+
+		ReferenceCountPtr<GLButton> quitButton( new GLButton("Quit"));
+		quitButton->setX(700);
+		quitButton->setY(70);
+		quitButton->addMouseObserver(&quitOnClickObserver);
+
+		ReferenceCountPtr<GLButton> surrenderButton( new GLButton("Surrender"));
+		surrenderButton->setX(700);
+		surrenderButton->setY(130);
+		surrenderButton->addMouseObserver(&surrenderOnClickObserver);
+
+		ReferenceCountPtr<GLButton> noMoreButton( new GLButton("NoMore"));
+		noMoreButton->setX(700);
+		noMoreButton->setY(180);
+		noMoreButton->addMouseObserver(&noMoreOnClickObserver);
+
+		ReferenceCountPtr<GLButton> didIWinButton( new GLButton("DidIWin"));
+		didIWinButton->setX(700);
+		didIWinButton->setY(230);
+		didIWinButton->addMouseObserver(&didIWinOnClickObserver);
+
+		ReferenceCountPtr<GLButton> selectMapButton( new GLButton("Falso Seleccionar mapa 1"));
+		selectMapButton->setX(700);
+		selectMapButton->setY(280);
+		selectMapButton->addMouseObserver(&selectMapOnClickObserver);
+	
+	
+		ReferenceCountPtr<GLLabel> label( new GLLabel("Esto es un label muy largo largo largo Label!!!"));
+		label->setX(10);
+		label->setY(480);
+
+		ReferenceCountPtr<GLSphereWidget> sphere(new GLSphereWidget("mapa.jpg", 0.3));
+	
+		GLWidgetManager::register2DWidget(readyToPlayButton);
+
+
+		GLWidgetManager::register2DWidget(quitButton);
+		GLWidgetManager::register2DWidget(surrenderButton);
+		GLWidgetManager::register2DWidget(noMoreButton);
+		GLWidgetManager::register2DWidget(didIWinButton);
+		GLWidgetManager::register2DWidget(selectMapButton);
+
+		GLWidgetManager::register2DWidget(label);
+		GLWidgetManager::register3DWidget(sphere);
+		GLMainLoop::run();
+	
+		SDL_FreeSurface(screen);
 	}
-}
-
-	glutInit(&argc, argv);
-		if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-		return 0;
-	}
-	SDL_Surface* screen = SDL_SetVideoMode(1024, 768, 32, SDL_OPENGL);
-
-	
-	SelectMapOnClickObserver selectMapOnClickObserver; 
-	selectMapOnClickObserver.setGameManager(gamemanager);
-
-	
-	ReadyToPlayOnClickObserver readyToPlayOnClickObserver; 
-	readyToPlayOnClickObserver.setGameManager(gamemanager);
-
-	QuitOnClickObserver quitOnClickObserver;
-	quitOnClickObserver.setGameManager(gamemanager);
-
-	NoMoreOnClickObserver noMoreOnClickObserver;
-	noMoreOnClickObserver.setGameManager(gamemanager);
-
-	SurrenderOnClickObserver surrenderOnClickObserver;
-	surrenderOnClickObserver.setGameManager(gamemanager);
-
-	DidIWinOnClickObserver didIWinOnClickObserver;
-	didIWinOnClickObserver.setGameManager(gamemanager);
-
-	
-	ReferenceCountPtr<GLButton> readyToPlayButton( new GLButton("ReadyToPlay"));
-	readyToPlayButton->setX(700);
-	readyToPlayButton->setY(20);
-	readyToPlayButton->addMouseObserver(&readyToPlayOnClickObserver);
-
-
-	ReferenceCountPtr<GLButton> quitButton( new GLButton("Quit"));
-	quitButton->setX(700);
-	quitButton->setY(70);
-	quitButton->addMouseObserver(&quitOnClickObserver);
-
-	ReferenceCountPtr<GLButton> surrenderButton( new GLButton("Surrender"));
-	surrenderButton->setX(700);
-	surrenderButton->setY(130);
-	surrenderButton->addMouseObserver(&surrenderOnClickObserver);
-
-	ReferenceCountPtr<GLButton> noMoreButton( new GLButton("NoMore"));
-	noMoreButton->setX(700);
-	noMoreButton->setY(180);
-	noMoreButton->addMouseObserver(&noMoreOnClickObserver);
-
-	ReferenceCountPtr<GLButton> didIWinButton( new GLButton("DidIWin"));
-	didIWinButton->setX(700);
-	didIWinButton->setY(230);
-	didIWinButton->addMouseObserver(&didIWinOnClickObserver);
-
-	ReferenceCountPtr<GLButton> selectMapButton( new GLButton("Falso Seleccionar mapa 1"));
-	selectMapButton->setX(700);
-	selectMapButton->setY(280);
-	selectMapButton->addMouseObserver(&selectMapOnClickObserver);
-	
-	
-	ReferenceCountPtr<GLLabel> label( new GLLabel("Esto es un label muy largo largo largo Label!!!"));
-	label->setX(10);
-	label->setY(480);
-
-	ReferenceCountPtr<GLSphereWidget> sphere(new GLSphereWidget("mapa.jpg", 0.3));
-	
-	GLWidgetManager::register2DWidget(readyToPlayButton);
-
-
-	GLWidgetManager::register2DWidget(quitButton);
-	GLWidgetManager::register2DWidget(surrenderButton);
-	GLWidgetManager::register2DWidget(noMoreButton);
-	GLWidgetManager::register2DWidget(didIWinButton);
-	GLWidgetManager::register2DWidget(selectMapButton);
-
-	GLWidgetManager::register2DWidget(label);
-	GLWidgetManager::register3DWidget(sphere);
-	GLMainLoop::run();
-	
-	SDL_FreeSurface(screen);
-
 }
 
