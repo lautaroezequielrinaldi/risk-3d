@@ -100,9 +100,6 @@ void* BattleResult::hydrate(std::string xml){
     // Defino el set de nodos devueltos por la expresiòn XPath.(una estructura que tiene un array con los nodos
     //devueltos por la expresion y el numero de nodos.
     	xmlNodeSetPtr setNodos;
-
-	//parseo el xml en memoria y se construye el arbol
-   	document = xmlParseMemory(xml.c_str(), xml.size());
 	
 	// Obtengo el elemento root del documento XML sobre el cual se va a trabajar.
     	nodoRaiz = xmlDocGetRootElement(document);

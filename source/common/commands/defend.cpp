@@ -45,53 +45,6 @@ std::string Defend::serialize(){
 
 	defensaSeralizado += xmlComando + xmlDefend;
 
-
-
-/*
-	// creo documento
-	xmlDocPtr docDefensa;
-	// defino nodo raiz
-	xmlNodePtr nodoDefensa;
-	
-	// defino nodos hijos de raiz
-    xmlNodePtr nodoPaisDefensor;
-    xmlNodePtr nodoCantidadEjercitos;
-    
-    // creo xmlChar para persistir a una cadena de caracteres el xml
-    xmlChar *xmlbuff;
-    int buffersize;
-
-    // creo documento
-    docDefensa = xmlNewDoc(BAD_CAST "1.0");
-    
-    //seteo contenido del nodo raiz
-    nodoDefensa = xmlNewNode(NULL, BAD_CAST "defender");
-    
-    //seteo el nodo raiz del documento
-    xmlDocSetRootElement(docDefensa, nodoDefensa);
-    
-    //seteo hijos de nodoDefensa: nodo pais-defensor
-    nodoPaisDefensor = xmlNewChild(nodoDefensa, NULL, BAD_CAST "pais-defensor",(const xmlChar*) this->paisDefensor.c_str() );
-   
-   	//conversion de entero a string para la cantidad de ejercitos
-  	std::ostringstream strCantEjercitos;
-   	strCantEjercitos << this->cantidadEjercitos;
-   
-   //seteo como hijo de nodoDefensa al nodo cantidad-ejercitos
-    nodoCantidadEjercitos = xmlNewChild(nodoDefensa, NULL, BAD_CAST "cantidad-ejercitos",(const xmlChar*)(const xmlChar*)strCantEjercitos.str().c_str() );
-    
-    // dejo el document en un buffer
-    xmlDocDumpFormatMemory(docDefensa, &xmlbuff, &buffersize, 1);
-   
-   //seteo el string que se devolvera almacenando al XML
-    defensaSeralizado.assign((char*)xmlbuff);
-	
-	//libero memoria utilizada
-    xmlFree(xmlbuff);
-    xmlFreeDoc(docDefensa);
-    xmlCleanupParser();
-    
-*/
     return defensaSeralizado;
   
 	
@@ -113,9 +66,7 @@ void* Defend::hydrate(std::string xml){
     //devueltos por la expresion y el numero de nodos.
     xmlNodeSetPtr setNodoDefensa;
 
-	//parseo el xml en memoria y se construye el arbol
-	//document = xmlParseMemory(xml.c_str(), xml.size());
-	
+
 	// Obtengo el elemento root del documento XML sobre el cual se va a trabajar.
     nodoRaiz = xmlDocGetRootElement(document);
 
