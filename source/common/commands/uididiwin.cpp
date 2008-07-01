@@ -15,7 +15,7 @@ UIDidIWin::~UIDidIWin(){
 }
 
 std::string UIDidIWin::serialize(){
-	return "<?xml version=\"1.0\"?><uididiwin>"+Command::serialize(0,0)+"</uididiwin>";
+	return "<?xml version=\"1.0\"?><uididiwin>"+serializeCommon(0,0)+"</uididiwin>";
 }
 bool UIDidIWin::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return false;

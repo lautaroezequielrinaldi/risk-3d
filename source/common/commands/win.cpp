@@ -24,7 +24,7 @@ Win::~Win()
 }
 
 std::string Win::serialize(){
-	 return "<?xml version=\"1.0\"?><win>"+Command::serialize(0,numeroJugador)+"</win>";
+	 return "<?xml version=\"1.0\"?><win>"+serializeCommon(0,numeroJugador)+"</win>";
 }
 
 		

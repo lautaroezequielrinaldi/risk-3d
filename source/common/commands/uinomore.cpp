@@ -16,7 +16,7 @@ UINoMore::~UINoMore(){
 }
 
 std::string UINoMore::serialize(){
-	return "<?xml version=\"1.0\"?><uinomore>"+Command::serialize(0,0)+"</uinomore>";
+	return "<?xml version=\"1.0\"?><uinomore>"+serializeCommon(0,0)+"</uinomore>";
 }
 bool UINoMore::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return false;

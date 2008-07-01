@@ -24,7 +24,7 @@ TurnToOccupy::~TurnToOccupy()
 }
 
 std::string TurnToOccupy::serialize(){
-	 return "<?xml version=\"1.0\"?>"+Command::serialize(0,numeroJugador)+" </turntooccupy>";
+	 return "<?xml version=\"1.0\"?>"+serializeCommon(0,numeroJugador)+" </turntooccupy>";
 }
 
 

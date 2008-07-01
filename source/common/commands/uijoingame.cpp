@@ -20,7 +20,7 @@ UIJoinGame::~UIJoinGame(){
 }
 
 std::string UIJoinGame::serialize(){
-	return "<?xml version=\"1.0\"?><uijoingame>"+Command::serialize(0,0)+"</uijoingame>";
+	return "<?xml version=\"1.0\"?><uijoingame>"+serializeCommon(0,0)+"</uijoingame>";
 
 }
 

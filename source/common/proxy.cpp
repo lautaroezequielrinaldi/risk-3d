@@ -6,6 +6,7 @@
 #include "../common/commands/command.h"
 
 void Proxy::notify(Command * command) {
+	std::cerr << "Proxy::notify() from: " << command->getFrom() << " to: " << command->getTo() << std::endl;
 	std::string cmd = command->serialize();
 	std::cerr << "Proxy::notify(" << command->getName() << ") "<<cmd.size() <<" serializado: " << cmd << std::endl;
 

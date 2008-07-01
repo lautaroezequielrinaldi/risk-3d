@@ -22,7 +22,7 @@ JoinGame::~JoinGame()
 }
 
 std::string JoinGame::serialize(){
-	return "<?xml version=\"1.0\"?><joingame>"+Command::serialize(0,0)+"</joingame>";
+	return "<?xml version=\"1.0\"?><joingame>"+serializeCommon(0,0)+"</joingame>";
 
 }
 

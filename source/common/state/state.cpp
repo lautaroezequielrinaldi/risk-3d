@@ -140,11 +140,7 @@ bool State::youAre(YouAre & command){
 bool State::quit(Quit & command){
 	// debe aplicar surrender y ademas cortar la conexión
 	command.setValid(1);
-	int to = command.getTo();
-	command.setTo(command.getFrom());
-	command.setFrom(to);
-
-	std::cerr << "State::quit() to: "<< command.getTo() << "from: " << command.getFrom() << std::endl;
+	std::cerr << "State::quit() to: "<< command.getTo() << " from: " << command.getFrom() << std::endl;
 	gameManager->notify(&command);
 
         return true;

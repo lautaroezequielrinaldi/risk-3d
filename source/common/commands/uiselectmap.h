@@ -13,9 +13,7 @@ class UISelectMap : public UICommand
 	
 	private:
 	
-		std::string nombreMapa;
-		//int numeroJugador;
-
+		std::string mapName;
 	
 	public:
 	
@@ -59,6 +57,8 @@ class UISelectMap : public UICommand
 		virtual std::string getName();
 
 		std::string getMapName();
+
+		void setMapName(const std::string & mapname);
 };
 
 #endif /*UISELECTMAP_H_*/

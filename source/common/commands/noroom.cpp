@@ -9,7 +9,7 @@ NoRoom::~NoRoom(){
 }
 
 std::string NoRoom::serialize(){
-	return "<?xml version=\"1.0\"?><NoRoom>"+Command::serialize(0,0)+"</NoRoom>";
+	return "<?xml version=\"1.0\"?><NoRoom>"+serializeCommon(0,0)+"</NoRoom>";
 }
 bool NoRoom::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return false;

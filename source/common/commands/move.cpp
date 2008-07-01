@@ -37,7 +37,7 @@ std::string Move::serialize(){
 
 	movimientoSeralizado = "<?xml version=\"1.0\"?><mover>";
 	
-	std::string xmlComando = Command::serialize(this->jugadorFrom, this->jugadorFrom);
+	std::string xmlComando = serializeCommon(this->jugadorFrom, this->jugadorFrom);
 
 	std::string xmlMove = "<pais-origen>"+this->paisOrigen+"</pais-origen><pais-destino>"+
 			      this->paisDestino+"</pais-destino><cantidad-ejercitos>"+strCantEjercitos.str()
