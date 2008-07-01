@@ -61,6 +61,10 @@ class YouAre : public Command
 		virtual std::string getName();
 		
 		int getJugador();
+		/**
+		 * Notifica que se ejecuto un comando.
+		 */
+		virtual void accept(CommandObserver* observer);
 };
 
 #endif /*__YOUARE_H__*/

@@ -7,8 +7,8 @@
  * Comando para indicar el deseo de abandonar el juego y la conexion.
  */
 
-#include "command.h"
-class UIQuit: public Command {
+#include "uicommand.h"
+class UIQuit: public UICommand {
 	
 	//private:
 	//	int numeroJugador;

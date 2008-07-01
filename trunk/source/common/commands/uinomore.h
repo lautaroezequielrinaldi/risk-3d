@@ -1,6 +1,6 @@
 #ifndef __UINOMORE_H__
 #define __UINOMORE_H__
-#include "command.h"
+#include "uicommand.h"
 
 /**
  * client => server => client
@@ -8,7 +8,7 @@
  * Comando utilizado para señalar el fin de Attacking o Moving
  */
 
-class UINoMore: public Command {
+class UINoMore: public UICommand {
 	//private:
 	//	int numeroJugador;
 	public:

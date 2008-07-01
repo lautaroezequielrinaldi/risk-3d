@@ -1,4 +1,5 @@
 #include "noroom.h"
+#include "commandobserver.h"
 
 NoRoom::NoRoom(){
 
@@ -24,3 +25,8 @@ void NoRoom::execute(ReferenceCountPtr<State>& state){
 std::string NoRoom::getName() {
 	return "NoRoom";
 }
+
+void NoRoom::accept(CommandObserver* observer) {
+    observer->commandExecuted(*this);
+}
+

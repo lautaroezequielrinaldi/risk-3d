@@ -1,11 +1,11 @@
 #include "uiselectmap.h"
 
-UISelectMap::UISelectMap(std::vector<std::string> &parameterList) : Command (){
+UISelectMap::UISelectMap(std::vector<std::string> &parameterList) : UICommand (){
 	//this->numeroJugador = atoi (parameterList[0].c_str() );
 	this->nombreMapa = parameterList[1];
 }
 
-UISelectMap::UISelectMap(const std::string& xml):Command (){
+UISelectMap::UISelectMap(const std::string& xml):UICommand (){
 
 	// construye el objeto a partir del Xml recibido
 	hydrate(xml);

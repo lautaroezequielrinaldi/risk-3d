@@ -1,5 +1,6 @@
 #include "turntopopulate.h"
 #include<sstream>
+#include "commandobserver.h"
 
 TurnToPopulate::TurnToPopulate()
 {
@@ -38,5 +39,9 @@ void TurnToPopulate::execute(ReferenceCountPtr<State>& state){
 }
 std::string TurnToPopulate::getName() {
 	return "turnToPopulate";
+}
+
+void TurnToPopulate::accept(CommandObserver* observer) {
+    observer->commandExecuted(*this);
 }
 

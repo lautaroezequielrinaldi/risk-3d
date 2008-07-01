@@ -1,12 +1,12 @@
 #include "uireadytoplay.h"
 
-UIReadyToPlay::UIReadyToPlay(std::vector<std::string> &parameterList) : Command ()
+UIReadyToPlay::UIReadyToPlay(std::vector<std::string> &parameterList) : UICommand()
 {
 
 	//this->numeroJugador = atoi (parameterList[0].c_str() );
 }
 
-UIReadyToPlay::UIReadyToPlay(const std::string & xml):Command (){
+UIReadyToPlay::UIReadyToPlay(const std::string & xml):UICommand (){
 
 	// construye el objeto a partir del Xml recibido
 	hydrate(xml);

@@ -56,7 +56,11 @@ class TurnToPopulate : public Command
 		 * Metodo cuyo proposito es obtener el nombre del comando.
 		 */
 		virtual std::string getName();
-		
+
+		/**
+		 * Notifica que se ejecuto el comando.
+		 */
+		virtual void accept(CommandObserver* observer);		
 };
 
 #endif /*TURNTOPOPULATE_H_*/

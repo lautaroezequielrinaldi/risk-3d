@@ -1,5 +1,5 @@
 #include "joingame.h"
-
+#include "commandobserver.h"
 
 JoinGame::JoinGame(std::vector<std::string> &parameterList) : Command ()
 {
@@ -53,4 +53,7 @@ std::string JoinGame::getName() {
 	return "joinGame";
 }
 
+void JoinGame::accept(CommandObserver* observer) {
+    observer->commandExecuted(*this);
+}
 

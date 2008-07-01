@@ -1,8 +1,9 @@
 #include <sstream>
 #include "../model/armybonuscalculator.h"
 #include "populate.h"
-
+#include "commandobserver.h"
 #include<iostream>
+
 using namespace std;
 
 Populate::Populate(std::vector<std::string> &parameterList) : Command ()
@@ -189,5 +190,9 @@ std::string Populate::getName() {
 
 int Populate::getMoverId(){
 	return this->jugadorFrom;
+}
+
+void Populate::accept(CommandObserver* observer) {
+    observer->commandExecuted(*this);
 }
 

@@ -62,7 +62,10 @@ class TurnToOccupy : public Command
 		 */
 		virtual std::string getName();
 		
-		
+		/**
+		 * Notifica que se ejecuto el comando.
+		 */
+		virtual void accept(CommandObserver* observer);	
 };
 
 #endif /*__TURNTOOCCUPY_H__*/

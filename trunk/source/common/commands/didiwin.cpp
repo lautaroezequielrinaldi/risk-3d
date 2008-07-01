@@ -1,5 +1,5 @@
 #include "didiwin.h"
-
+#include "commandobserver.h"
 
 DidIWin::DidIWin(std::vector<std::string> &parameterList) : Command ()
 {
@@ -30,3 +30,8 @@ void DidIWin::execute(ReferenceCountPtr<State>& state){
 std::string DidIWin::getName() {
 	return "didIWin";
 }
+
+void DidIWin::accept(CommandObserver* observer) {
+    observer->commandExecuted(*this);
+}
+

@@ -59,7 +59,10 @@ class TurnToAttack : public Command
 		
 		virtual std::string getName();
 		
-		
+		/**
+		 * 	Notifica que se ejecuto un comando.
+		 */
+		virtual void accept(CommandObserver* observer);
 };
 
 #endif /*__TURNTOATTACK_H__*/

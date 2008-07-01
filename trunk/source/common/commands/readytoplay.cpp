@@ -1,4 +1,5 @@
 #include "readytoplay.h"
+#include "commandobserver.h"
 
 ReadyToPlay::ReadyToPlay(std::vector<std::string> &parameterList) : Command ()
 {
@@ -41,6 +42,10 @@ void ReadyToPlay::execute(ReferenceCountPtr<State>& state){
 
 std::string ReadyToPlay::getName() {
 	return "readyToPlay";
+}
+
+void ReadyToPlay::accept(CommandObserver* observer) {
+    observer->commandExecuted(*this);
 }
 
 

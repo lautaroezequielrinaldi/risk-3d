@@ -1,5 +1,6 @@
 #include<sstream>
 #include "attack.h"
+#include "commandobserver.h"
 
 #include<iostream>
 
@@ -217,4 +218,7 @@ int Attack::getAttackedId(){
 }
 
 
+void Attack::accept(CommandObserver* observer) {
+	observer->commandExecuted(*this);
+}
 

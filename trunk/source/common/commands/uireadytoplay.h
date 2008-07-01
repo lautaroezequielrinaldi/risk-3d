@@ -7,9 +7,9 @@
  * Indicacion opcional de los clientes para iniciar el juego en caso de que no este completo el cupo
  */
 
-#include "command.h"
+#include "uicommand.h"
 
-class UIReadyToPlay : public Command
+class UIReadyToPlay : public UICommand
 {
 	
 	//private:

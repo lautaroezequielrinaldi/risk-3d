@@ -31,6 +31,10 @@ class NoMore: public Command {
 
 		virtual std::string getName();
 
+		/**
+		 * Notifica que se ejecuto el comando.
+		 */
+		virtual void accept(CommandObserver* observer);
 };
 
 #endif /* __NOMORE_H__*/

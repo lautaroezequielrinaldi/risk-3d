@@ -84,7 +84,10 @@ class Move : public Command
 		 */
 		int getMoverId();
 
-		
+		/**
+		 * Notifica que se ejecuto el comando.
+		 */
+		virtual void accept(CommandObserver* observer);		
 };
 
 #endif /*MOVE_H_*/

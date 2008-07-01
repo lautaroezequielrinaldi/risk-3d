@@ -1,4 +1,5 @@
 #include "selectmap.h"
+#include "commandobserver.h"
 
 SelectMap::SelectMap(std::vector<std::string> &parameterList) : Command ()
 {
@@ -64,4 +65,8 @@ std::string SelectMap::getName() {
 }
 
 
+
+void SelectMap::accept(CommandObserver* observer) {
+    observer->commandExecuted(*this);
+}
 

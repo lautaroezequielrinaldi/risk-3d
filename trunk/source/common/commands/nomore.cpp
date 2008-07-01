@@ -1,4 +1,5 @@
 #include "nomore.h"
+#include "commandobserver.h"
 
 NoMore::NoMore(std::vector<std::string> &parameterList) : Command ()
 {
@@ -32,3 +33,8 @@ void NoMore::execute(ReferenceCountPtr<State>& state){
 std::string NoMore::getName() {
 	return "noMore";
 }
+
+void NoMore::accept(CommandObserver* observer) {
+    observer->commandExecuted(*this);
+}
+

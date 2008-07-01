@@ -29,6 +29,11 @@ class Chat: public Command {
 		
 
 		virtual std::string getName();
+
+		/**
+		 * Notifica que se ejecuto el comando.
+		 */
+		virtual void accept(CommandObserver* observer);
 };
 
 #endif /* __CHAT_H__*/
