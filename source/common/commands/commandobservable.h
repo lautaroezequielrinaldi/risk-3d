@@ -2,8 +2,8 @@
 #define __COMMANDOBSERVABLE_H__
 
 #include<list>
-#include "command.h"
 
+class Command;
 /**
  * Forward declaration de la clase CommandObserver.
  */
@@ -38,11 +38,11 @@ class CommandObservable {
 		/**
 		 * Registra un observer para ser notificado.
 		 */
-		void registerObserver(CommandObserver* observer);
+		void registerCommandObserver(CommandObserver* observer);
 		/**
 		 * Desregistra un observer para ser notificado.
 		 */
-		void unregisterObserver(CommandObserver* observer);
+		void unregisterCommandObserver(CommandObserver* observer);
 		/**
 		 * Destructor virtual de la clase CommandObservable.
 		 */
