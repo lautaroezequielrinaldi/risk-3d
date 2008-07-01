@@ -61,6 +61,15 @@ bool Waiting::noMore(NoMore & command){
 
 bool Waiting::surrender(Surrender & command){
 	return false;
+	//from:quien se rinde
+	//to el suertudo que 
+
+	ReferenceCountPtr<Player> jugadorSuertudo = gameManager->getGame()->getPlayer( command.getTo() );
+	ReferenceCountPtr<Player> jugadorRendido =  gameManager->getGame()->getPlayer(command.getFrom());
+	
+	//actualiza modelo transfiriendo paises del jugador rendido al jugador suertudo que los gano.
+	jugadorSuertudo->transferLandsFrom(jugadorRendido);
+
 }
 
 bool Waiting::didIWin(DidIWin & command){
