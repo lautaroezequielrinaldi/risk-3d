@@ -38,7 +38,7 @@ std::string Populate::serialize(){
 
 	poblarSeralizado = "<?xml version=\"1.0\"?><poblar>";
 	
-	std::string xmlComando = Command::serialize(this->jugadorFrom, this->jugadorFrom);
+	std::string xmlComando = serializeCommon(this->jugadorFrom, this->jugadorFrom);
 
 	std::string xmlPoblar = "<pais-destino>"+this->paisDestino
 				+"</pais-destino><cantidad-ejercitos>"+strCantEjercitos.str()+"</cantidad-ejercitos></poblar>";

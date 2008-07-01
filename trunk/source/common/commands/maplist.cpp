@@ -17,7 +17,7 @@ MapList::~MapList(){
 
 
 std::string MapList::serialize(){
-	return "<?xml version=\"1.0\"?><maplist>"+Command::serialize(0,numeroJugador)+"<maps><map>mapa 1</map><map>mapa 2</map></maps></maplist>";
+	return "<?xml version=\"1.0\"?><maplist>"+serializeCommon(0,numeroJugador)+"<maps><map>mapa 1</map><map>mapa 2</map></maps></maplist>";
 }
 bool MapList::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return false;

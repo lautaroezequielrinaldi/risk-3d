@@ -42,8 +42,13 @@ bool Waiting::attack(Attack & command){
 }
 
 bool Waiting::mapList(MapList & command){
+	
+	std::cerr << "Evento Waiting::mapList" << std::endl;
+	/* Debe hace aparecer un dialogo en la presala
+	 *
+	 *
+	 */
 
-	std::cerr << "Evento Waiting::attack" << std::endl;
 	return false;
 }
 
@@ -126,16 +131,22 @@ bool Waiting::uiReadyToPlay(UIReadyToPlay & command){
 }
 
 bool Waiting::uiQuit(UIQuit & command){
-	std::cerr << "Evento Waiting::uiQuit" << std::endl;
+	std::cerr << "Evento Waiting::uiQuit from: "<< gameManager->getMe() << std::endl;
+/*	
 	std::vector<std::string> parameters;
 	std::ostringstream strMe;
 	strMe << gameManager->getMe();
 	parameters.push_back(strMe.str());
-	this->gameManager->notify(new Quit(parameters));
+*/
+	Quit *quit = new Quit();
+	quit->setFrom(gameManager->getMe());
+	this->gameManager->notify(quit);
+	delete(quit);
 	return false;
 }
 
 bool Waiting::uiNoMore(UINoMore & command){
+	std::cerr << "Evento Waiting::uiNoMore" << std::endl;
 	std::vector<std::string> parameters;
 	std::ostringstream strMe;
 	strMe << gameManager->getMe();

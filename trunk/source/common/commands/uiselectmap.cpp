@@ -1,8 +1,9 @@
 #include "uiselectmap.h"
 
+
 UISelectMap::UISelectMap(std::vector<std::string> &parameterList) : UICommand (){
 	//this->numeroJugador = atoi (parameterList[0].c_str() );
-	this->nombreMapa = parameterList[1];
+	this->mapName = parameterList[1];
 }
 
 UISelectMap::UISelectMap(const std::string& xml):UICommand (){
@@ -18,7 +19,7 @@ UISelectMap::~UISelectMap(){
 }
 
 std::string UISelectMap::serialize(){
-	return "<?xml version=\"1.0\"?><UISelectMap>"+Command::serialize(0,0)+"<map>"+nombreMapa+"</map></UISelectMap>";
+	return "<?xml version=\"1.0\"?><UISelectMap>"+serializeCommon(0,0)+"<map>"+mapName+"</map></UISelectMap>";
   
 }
 
@@ -36,7 +37,7 @@ void* UISelectMap::hydrate(const std::string & xml){
 	setNodo = objetoXPath->nodesetval;
 	nodo = setNodo->nodeTab[0];
 	field = xmlNodeGetContent(nodo);
-	this->nombreMapa.assign( (char*) field );
+	this->mapName.assign( (char*) field );
 
 	xmlFree(field);
 	xmlXPathFreeObject(objetoXPath);
@@ -62,8 +63,14 @@ std::string UISelectMap::getName() {
 }
 
 std::string UISelectMap::getMapName(){
-	return nombreMapa;
+	return mapName;
 }
+
+void UISelectMap::setMapName(const std::string & mapname){
+	this->mapName = mapName;
+}
+
+
 
 
 

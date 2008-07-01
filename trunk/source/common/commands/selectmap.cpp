@@ -21,7 +21,7 @@ SelectMap::~SelectMap()
 }
 
 std::string SelectMap::serialize(){
-	return "<?xml version=\"1.0\"?><selectmap>"+Command::serialize(numeroJugador,0)+"<map>"+nombreMapa+"</map></selectmap>";
+	return "<?xml version=\"1.0\"?><selectmap>"+serializeCommon(numeroJugador,0)+"<map>"+nombreMapa+"</map></selectmap>";
   
 }
 

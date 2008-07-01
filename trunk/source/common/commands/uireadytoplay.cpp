@@ -20,7 +20,7 @@ UIReadyToPlay::~UIReadyToPlay()
 }
 
 std::string UIReadyToPlay::serialize(){
-	return "<?xml version=\"1.0\"?><uireadytoplay>"+Command::serialize(0,0)+"</uireadytoplay>";
+	return "<?xml version=\"1.0\"?><uireadytoplay>"+serializeCommon(0,0)+"</uireadytoplay>";
 }
 
 

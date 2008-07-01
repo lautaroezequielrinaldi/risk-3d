@@ -3,6 +3,8 @@
 
 Command::Command():Serializable() {
 	valid = 0;
+	from = 0;
+	to = 0;
 }
 
 Command::~Command()
@@ -54,7 +56,7 @@ void Command::setSecMsg( std::string  msg) {
 }
 
 
-std::string Command::serialize(int from, int to){
+std::string Command::serializeCommon(int from, int to){
 	std::ostringstream strFrom;
 	std::ostringstream strTo;
 	std::ostringstream strValid;

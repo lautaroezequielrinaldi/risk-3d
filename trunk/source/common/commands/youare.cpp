@@ -24,7 +24,7 @@ YouAre::~YouAre()
 }
 
 std::string YouAre::serialize(){
-	 return "<?xml version=\"1.0\"?><youare>"+Command::serialize(0,numeroJugador)+"</youare>";
+	 return "<?xml version=\"1.0\"?><youare>"+serializeCommon(0,numeroJugador)+"</youare>";
 }
 
 		

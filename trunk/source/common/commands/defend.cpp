@@ -39,7 +39,7 @@ std::string Defend::serialize(){
 
 	defensaSeralizado = "<?xml version=\"1.0\"?><defender>";
 	
-	std::string xmlComando = Command::serialize(this->jugadorDefensor,this->jugadorAtacante);
+	std::string xmlComando = serializeCommon(this->jugadorDefensor,this->jugadorAtacante);
 
 	std::string xmlDefend = "<pais-defensor>"+this->paisDefensor
 				+"</pais-defensor><cantidad-ejercitos>"+strCantEjercitos.str()+"</cantidad-ejercitos></defender>";

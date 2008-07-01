@@ -29,4 +29,11 @@ Documentación Técnica
 	* Encabezados o pie de página que identifique al archivo impreso.
 	* Encabezados o pie de página con número de página.
 	* Índice (ya sea global o por módulo, que diga cada archivo en qué página está impreso)
+
+A ubicar:
+
+
 En caso de cerrarse algun cliente se detecta al momento de escribirle, en el send, habria que convertir ese pais en una republica independiente, en caso de que el atacante se desconecte y haya ganado el pais. Si esta defendiendose y el atacante se cierra la conexion, y gana el pais, se transforma en republica independiente.
+
+
+Ha quedado un constructor de command cuya firma es (std::vector<std::string> &parameterList). Este constructor es inapropiado, pues de todos modos existen los setters de esos campos y su utilizacion lejos de facilitar el uso hace lo contrario, pues suele provocar la necesidad de utilizar ostringstreams.

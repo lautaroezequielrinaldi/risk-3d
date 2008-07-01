@@ -116,7 +116,7 @@ class Command : public Serializable
 		/**
 		 * Metodo cuyo proposito es serializar la parte comun que poseen todos los comandos. 
 		 */
-		std::string serialize(int from, int to);
+		std::string serializeCommon(int from, int to);
 
 		/**
 		 * Accepta un CommandObserver y notifica que se ejecuto el comando.

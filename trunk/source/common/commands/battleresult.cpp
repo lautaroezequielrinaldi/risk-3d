@@ -70,7 +70,7 @@ std::string BattleResult::serialize(){
 
 	resultadoBatallaSeralizado = "<?xml version=\"1.0\"?><resultadoBatalla>";
 	
-	std::string xmlComando = Command::serialize(this->jugadorAtacante, this->jugadorDefensor);
+	std::string xmlComando = serializeCommon(this->jugadorAtacante, this->jugadorDefensor);
 
 	std::string xmlBattleRes = "<pais-atacante>" + this->paisAtacante + "</pais-atacante><pais-defensor>" + this->paisDefensor 
 	+ "</pais-defensor><resultado-atacante>" + strResulAtacante.str() + "</resultado-atacante><resultado-defensor>"+		strResulDefensor.str() + "</resultado-defensor><conquista>" + strConquista.str() + "</conquista></resultadoBatalla>";

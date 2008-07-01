@@ -26,7 +26,7 @@ Lose::~Lose()
 }
 
 std::string Lose::serialize(){
-	 return "<?xml version=\"1.0\"?><lose>"+Command::serialize(0,numeroJugador)+"</lose>";
+	 return "<?xml version=\"1.0\"?><lose>"+serializeCommon(0,numeroJugador)+"</lose>";
 }
 
 		

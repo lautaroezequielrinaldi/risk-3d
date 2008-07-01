@@ -1,5 +1,5 @@
-#ifndef __uididiwin_h__
-#define __uididiwin_h__
+#ifndef __UIDIDIWIN_H__
+#define __UIDIDIWIN_H__
 
 /**
  * client => server 
@@ -31,4 +31,4 @@ class UIDidIWin: public UICommand {
 		virtual std::string getName();
 };
 
-#endif /* __UIDidIWin_H__*/
+#endif /* __UIDIDIWIN_H__*/

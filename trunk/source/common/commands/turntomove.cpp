@@ -24,7 +24,7 @@ TurnToMove::~TurnToMove()
 }
 
 std::string TurnToMove::serialize(){
-	 return "<?xml version=\"1.0\"?><turntomove>"+Command::serialize(0,numeroJugador)+"</turntomove>";
+	 return "<?xml version=\"1.0\"?><turntomove>"+serializeCommon(0,numeroJugador)+"</turntomove>";
 }
 
 

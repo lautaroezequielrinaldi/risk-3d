@@ -16,7 +16,7 @@ UISurrender::~UISurrender(){
 }
 
 std::string UISurrender::serialize(){
-	return "<?xml version=\"1.0\"?><UISurrender>"+Command::serialize(0,0)+"</UISurrender>";
+	return "<?xml version=\"1.0\"?><UISurrender>"+serializeCommon(0,0)+"</UISurrender>";
 	
 }
 bool UISurrender::validate(ReferenceCountPtr<GameManager>& gameManager){

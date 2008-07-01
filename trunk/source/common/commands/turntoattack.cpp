@@ -25,7 +25,7 @@ TurnToAttack::~TurnToAttack()
 }
 
 std::string TurnToAttack::serialize(){
-	 return "<?xml version=\"1.0\"?><turntoattack>"+Command::serialize(0,numeroJugador)+"</turntoattack>";
+	 return "<?xml version=\"1.0\"?><turntoattack>"+serializeCommon(0,numeroJugador)+"</turntoattack>";
 }
 
 
