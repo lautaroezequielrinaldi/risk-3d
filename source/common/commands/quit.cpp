@@ -15,7 +15,7 @@ Quit::~Quit(){
 }
 
 std::string Quit::serialize(){
-	return "<?xml version=\"1.0\"?><quit>"+serializeCommon(getFrom(),0)+"</quit>";
+	return "<?xml version=\"1.0\"?><quit>"+serializeCommon(getFrom(),getTo())+"</quit>";
 
 }
 

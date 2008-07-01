@@ -6,6 +6,7 @@
 //#include "../model/gamemanager.h" // Para definiciòn de gameManager.
 #include "../smartpointer/referencecountptr.h" // Para definiciòn de ReferenceCountPtr
 
+
 /**
  * Forward declaration de la clase State.
  */
@@ -115,7 +116,10 @@ class Command : public Serializable
 
 		/**
 		 * Metodo cuyo proposito es serializar la parte comun que poseen todos los comandos. 
-		 */
+		 * @internal todo indica que podria implementarse serialize() comun,
+		 *  que tome el nombre de getName()
+		 * y from y to de getFrom() y getTo() respectivamente
+ 		 */
 		std::string serializeCommon(int from, int to);
 
 		/**

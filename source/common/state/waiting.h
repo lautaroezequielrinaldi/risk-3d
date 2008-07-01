@@ -30,6 +30,9 @@ class Waiting : public State
 	bool uiDidIWin(UIDidIWin & command);
 	bool uiSelectMap(UISelectMap & command);
 	bool uiChat(UIChat & command);
+	bool uiCountrySelect(UICountrySelect & command);
+	bool uiQuantitySelect(UIQuantitySelect & command);
+
 	virtual void accept(StateObserver* observer);
 };
 
