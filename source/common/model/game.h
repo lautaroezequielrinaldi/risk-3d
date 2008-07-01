@@ -111,20 +111,23 @@ class Game: public Serializable {
         int getCountryOwner(std::string & countryName);
         
        /**
-		* Metodo cuyo proposito es verificar si un conjunto de paises forman uno o mas continentes del mapa del juego.
-		* Retorna un vector con los nombres de los continentes formados por los paises de countryList.
-		*/
-		std::vector<std::string> conformContinent(const std::list<std::string>& countryList);
+	* Metodo cuyo proposito es verificar si un conjunto de paises forman uno o mas continentes del mapa del juego.
+	* Retorna un vector con los nombres de los continentes formados por los paises de countryList.
+	*/
+	std::vector<std::string> conformContinent(const std::list<std::string>& countryList);
 
         /**
-		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.
-		 */
+	* Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.
+	*/
         std::string serialize();
 
-		/**
-		 * Metodo cuyo proposito es hidratar  un objeto a partir del Xml especificado.
-		 */
-		void* hydrate(const std::string & filename);
+	/**
+		* Metodo cuyo proposito es hidratar  un objeto a partir del Xml especificado.
+		*/
+	void* hydrate(const std::string & filename);
+
+
+	void remove(int color);
                 
         /**
          * Destructor virtual de la clase Game.
