@@ -57,15 +57,15 @@ PreGameWindow::PreGameWindow(ReferenceCountPtr<GameManager>& gameManager):
 	// Conecta el signal_clicked del boton connnectionDialogButton con su manejador.
 	connectionDialogButton.signal_clicked().connect(sigc::mem_fun(*this,
 		&PreGameWindow::onConnectionDialogButtonClicked));
-    // Conecta el signal_clicked del boton readyToPlayButton con su manejador.
-    sendMessageButton.signal_clicked().connect(sigc::mem_fun(*this,
-		&PreGameWindow::onSendMessageButtonClicked));
+	// Conecta el signal_clicked del boton readyToPlayButton con su manejador.
+	sendMessageButton.signal_clicked().connect(sigc::mem_fun(*this,
+			&PreGameWindow::onSendMessageButtonClicked));
 	// Conecta el signal_clicked del boton readyToPlayButton con su manejador.
 	readyToPlayButton.signal_clicked().connect(sigc::mem_fun(*this,
 		&PreGameWindow::onReadyToPlayButtonClicked));
-    // Conecta el signal_clicked del boton quit con su manejador.
-    quitButton.signal_clicked().connect(sigc::mem_fun(*this,
-		&PreGameWindow::onQuitButtonClicked));
+	// Conecta el signal_clicked del boton quit con su manejador.
+	quitButton.signal_clicked().connect(sigc::mem_fun(*this,
+			&PreGameWindow::onQuitButtonClicked));
 	// Muestro todos los widgets.
 	show_all();
 }
@@ -89,9 +89,6 @@ void PreGameWindow::showConnectionDialog() {
 			Socket* socket = new Socket(url, 2000);
 			std::cout << "Se va a crear socket" << std::endl;
 
-			// que pasa si ...
-			//                  = new ServerProxy(new Socket("localhost", 2000), gamemanager); ?
-
 			serverProxy = new ServerProxy(socket, gameManager);
 			gameManager->add(serverProxy);
 			UIJoinGame* cmd = new UIJoinGame();
@@ -99,14 +96,14 @@ void PreGameWindow::showConnectionDialog() {
 			delete cmd;
 			sendMessageButton.set_sensitive(true);
 			readyToPlayButton.set_sensitive(true);
-        	connectionDialogButton.set_sensitive(false);
+        		connectionDialogButton.set_sensitive(false);
 			serverProxy->start();
 			connected = true;
 		} catch (SocketConnectionException& exception) {
 			Gtk::MessageDialog errorDialog(*this, "No se pudo conectar al servidor!!!", false,
 				Gtk::MESSAGE_ERROR);
-            errorDialog.set_title("Error");
-            errorDialog.run();
+			errorDialog.set_title("Error");
+			errorDialog.run();
 		}
 	}
 }
