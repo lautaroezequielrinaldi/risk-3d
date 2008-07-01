@@ -33,6 +33,10 @@ std::string Surrender::getName() {
 	return "surrender";
 }
 
+int Surrender::getSurrenderPlayer(){
+	return this->numeroJugador;
+}
+
 void Surrender::accept(CommandObserver* observer) {
     observer->commandExecuted(*this);
 }

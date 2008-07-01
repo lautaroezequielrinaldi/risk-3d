@@ -156,4 +156,14 @@ bool TurnManager::isPlayerActive(int color){
 	
 }
 
+int TurnManager::getActivePlayerCount(){
+	return this->orden.size();	
+}
+
+int TurnManager::getColorPlayer(unsigned int pos){
+	
+	return this->orden.at(pos);	
+	
+}
+
 

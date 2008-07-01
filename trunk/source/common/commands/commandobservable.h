@@ -15,7 +15,7 @@ class CommandObservable {
 	 */
 	private:
 		/**
-		 * Almacena la lista de comman observers.
+		 * Almacena la lista de command observers.
 		 */
 		std::list<CommandObserver*> commandObserverList;
 

@@ -81,3 +81,8 @@ void FileDiceBattle::loadDiceValue(){
 
 }
 
+int FileDiceBattle::roll(int maxLimit){
+}
+
+
+

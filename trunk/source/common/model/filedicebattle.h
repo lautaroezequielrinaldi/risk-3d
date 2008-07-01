@@ -62,6 +62,8 @@ class FileDiceBattle : public Dice
 		 */
 		int roll();
 		
+		int roll(int maxLimit);
+		
 	private:
 	
 		/**

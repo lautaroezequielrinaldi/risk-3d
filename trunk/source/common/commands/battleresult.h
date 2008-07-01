@@ -65,15 +65,25 @@ class BattleResult : public Command
 		~BattleResult();
 		
 		/**
-		 * Metodo cuyo proposito es obtener el nombre del atacante.
+		 * Metodo cuyo proposito es obtener el nombre del pais atacante.
 		 */
 		std::string getAttackerLand();
 		
 		/**
-		 * Metodo cuyo proposito es obtener el nombre del adefensor.
+		 * Metodo cuyo proposito es obtener el nombre del pais defensor.
 		 */		
 		std::string getDefenderLand();
-		
+
+		/**
+		 * Metodo cuyo proposito es obtener el color del atacante.
+		 */		
+		int getAttackercolor();
+
+		/**
+		 * Metodo cuyo proposito es obtener el color del adefensor.
+		 */		
+		int getDefenderColor();
+
 		/**
 		 * Metodo cuyo proposito es obtener el resultado del atacante.
 		 */

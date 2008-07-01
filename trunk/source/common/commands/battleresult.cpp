@@ -33,6 +33,14 @@ std::string BattleResult::getAttackerLand(){
 std::string BattleResult::getDefenderLand(){
 	return this->paisDefensor;	
 }
+		
+int BattleResult::getAttackercolor(){
+	return this->jugadorAtacante;
+}
+
+int BattleResult::getDefenderColor(){
+	return this->jugadorDefensor;
+}
 				
 int BattleResult:: getAttackerResult(){
 	return this->resultadoAtacante;
@@ -220,6 +228,7 @@ bool BattleResult::validate(ReferenceCountPtr<GameManager>& gameMAnager){
 		
 void BattleResult::execute(ReferenceCountPtr<State>& state){
 
+	state->battleResult(*this);
 }
 
 std::string BattleResult::getName(){

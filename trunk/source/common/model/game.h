@@ -88,7 +88,6 @@ class Game: public Serializable {
 		 */
         ReferenceCountPtr<Player> & addPlayer();
 
-        
         /**
          * Obtiene el jugador correspondinte al color especificado.
          * Retorna el jugador correspondiente o NULL en caso de no encontrar jugador con el color especificado.
@@ -116,8 +115,6 @@ class Game: public Serializable {
 		* Retorna un vector con los nombres de los continentes formados por los paises de countryList.
 		*/
 		std::vector<std::string> conformContinent(const std::list<std::string>& countryList);
-
-
 
         /**
 		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.

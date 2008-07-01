@@ -16,10 +16,12 @@
 #include "../commands/didiwin.h"
 #include "../commands/selectmap.h"
 #include "../commands/uiselectmap.h"
+#include "../commands/battleresult.h"
 
 #include "../commands/youare.h"
 
 #include <sstream>
+using namespace std;
 
 Waiting::Waiting(ReferenceCountPtr<GameManager>&gameManager, std::string name):State(gameManager,name)
 {
@@ -126,6 +128,68 @@ bool Waiting::turnToOccupy(TurnToOccupy & command){
 	}
 	*/
 	return false;
+}
+
+bool Waiting::battleResult( BattleResult & command ){
+	
+	// att que necesito para luego de ejecutar la batalla, se actualice el modelo con el resultado
+	ReferenceCountPtr<Game> game = this->gameManager->getGame();
+	ReferenceCountPtr<Mapa> map = game->getMapa();
+	ReferenceCountPtr<Pais> paisAtacante = map->obtenerPais( command.getAttackerLand() );
+	ReferenceCountPtr<Pais> paisDefensor = map->obtenerPais( command.getDefenderLand() );	
+
+	ReferenceCountPtr<Player> playerAtacante = game->getPlayer( command.getAttackercolor() );
+	ReferenceCountPtr<Player> playerDefensor = game->getPlayer( command.getDefenderColor() );
+	
+		
+	// actualizacion del modelo con respecto al resultado de la batalla
+
+	// elimina del pais atacante, los ejercitos perdidos en la batalla . si perdio 0 ejercitos no modifica nada.
+	paisAtacante->removeArmies(command.getAttackerResult());
+
+	// elimina del pais defensor, los ejercitos perdidos en la batalla . si perdio 0 ejercitos no modifica nada.
+	paisDefensor->removeArmies(command.getDefenderResult());
+
+
+	// verifico si hubo conquista de pais defensor
+
+	// si pais defensor se quedo con cero ejercitos
+	if ( paisDefensor->getArmyCount() == 0  ){
+		
+		cerr<<"PAIS CONQUISTADO"<<endl;
+		
+		// elimino al pais defensor de la lista de paises del player defensor
+		std::string defLand = command.getDefenderLand();
+		playerDefensor->removeConqueredLand(defLand);
+		
+		// agrego pais conquistado a la lista de paises del jugador atacante
+		playerAtacante->addConqueredLand(defLand );
+				
+		// remuevo del pais atacante tantos ejercitos como dados usados en la batalla ( = dant ejercitos defensores )
+		// para "moverlos" al pais conquistado.
+		paisAtacante->removeArmies( command.getConquest() );
+		// agrego al pais defensor que fue conquistado por el atacante los ejercitos "movidos"
+		paisDefensor->addArmies(  command.getConquest() );
+
+		cerr<<"EL ATACANTE MOVIO "<<command.getDefenderResult()<<" ejercitos para conquistar."<<endl;
+		cerr<<"el pais "<<command.getAttackerLand()<<"que ataco, se quedo con ejercitos: "<<paisAtacante->getArmyCount()<<endl;
+	
+
+		//verifico si hubo conquista de continente a partir de la conquista de un nuevo pais
+	
+		//  obtengo lista de continentes conquistados, si los hay, a partir de los paises conquistados.
+		std::vector<std::string> vecContinentes = game->conformContinent(playerAtacante->getConqueredLandList() );
+			
+		//veo si la lista de continentes conquistados tiene alguno que no este seteado en los continentes del jugador ( nuevo continente //conquistado.
+		for ( unsigned int i=0; i<vecContinentes.size();i++){
+			//si playerAtacante no es dueño todavia de uno de los continentes conquistados segun vecContinentes
+			if ( !playerAtacante->continentOwner( vecContinentes[i] ) )
+				//seteo al continente actual como conquistado por el player atacante
+				playerAtacante->addConqueredContinent(vecContinentes[i] );
+		}
+	}
+	
+	//falta notificar mensajes que trae battleResult- PARA TODOS el mismo
 }
 
 bool Waiting::uiReadyToPlay(UIReadyToPlay & command){

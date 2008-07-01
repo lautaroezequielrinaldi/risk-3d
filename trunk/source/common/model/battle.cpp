@@ -113,8 +113,7 @@ BattleResult Battle::start(ReferenceCountPtr<GameManager>& gameManager){
 		playerDefensor->removeConqueredLand(defLand);
 		
 		// agrego pais conquistado a la lista de paises del jugador atacante
-		std::string atLand =  this->ataque.getAttackerLand();
-		playerAtacante->addConqueredLand(atLand );
+		playerAtacante->addConqueredLand(defLand );
 				
 		// remuevo del pais atacante tantos ejercitos como dados usados en la batalla ( = dant ejercitos defensores )
 		// para "moverlos" al pais conquistado.
@@ -142,21 +141,7 @@ BattleResult Battle::start(ReferenceCountPtr<GameManager>& gameManager){
 	}
 
 
-	
-
-	// setearle al battle result 0 1 2 3 para saber si hubo conquista:
-/*
-	0: no hubo
-	1:hubo conquista y hay q "mover" un ejercito al pais que fue conquistado
-	2:hubo conquista y hay q "mover" 2 ejercito al pais que fue conquistado
-
-
-*/
-
-
-	
 	return resultadoBatalla;
-	
 
 }
 

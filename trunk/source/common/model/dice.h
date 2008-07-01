@@ -24,9 +24,16 @@ class Dice
 	/**
 	 * Metodo virtual cuyo proposito es simular la tirada de dados.
 	 * Se debera implementar de acuerdo a la forma en que se quiera generar el valor que obtiene el dado.
-	 * Devuelve el numero de dado que se obtuvo.
+	 * Devuelve el numero de dado que se obtuvo, que sera un valor entre 1 y 6, numeros permitidos en el juego.
 	 */
 	virtual int roll() =0 ;
+	
+	/**
+	 * Metodo virtual cuyo proposito es simular la tirada de dados.
+	 * Se debera implementar de acuerdo a la forma en que se quiera generar el valor que obtiene el dado.
+	 * Devuelve el numero de dado que se obtuvo, que sera un valor entre 1 y el limite maximo especificado.
+	 */
+	virtual int roll(int maxLimit) =0 ;
 	
 	
 };
