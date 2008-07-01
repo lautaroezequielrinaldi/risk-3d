@@ -122,6 +122,7 @@ void PreGameWindow::onSendMessageButtonClicked() {
 		cmd->setMainMsg(message);
 		gameManager->execute(cmd);
 		delete cmd;
+		messageEntry.set_text("");
 	}	
 }
 
@@ -153,7 +154,7 @@ void PreGameWindow::commandExecuted(SelectMap& cmd) {
 
 void PreGameWindow::commandExecuted(Chat& cmd) {
 	std::string buffer = messageTextView.get_buffer()->get_text();
-	buffer =  buffer + "/r/n" + cmd.getMainMsg();
+	buffer =  buffer + "\r\n" + cmd.getMainMsg();
 	messageTextView.get_buffer()->set_text(buffer);
 }
 
