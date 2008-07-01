@@ -76,7 +76,9 @@ class State {
 		std::string getName();
 
 		
-		
+		/*
+		 * Comandos generados exclusivamente por el cliente
+		 */
 		virtual bool attack(Attack & command);
 		virtual bool defend(Defend & command);
 		virtual bool joinGame(JoinGame & command);
@@ -88,8 +90,11 @@ class State {
 		virtual bool surrender(Surrender & command);
 		virtual bool quit(Quit & command);
 		virtual bool chat(Chat & command);
-		virtual bool youAre(YouAre & command);
+		virtual bool didIWin(DidIWin & command);
 
+		/*
+		 * Comandos generados exclusivamente por el servidor
+		 */
 		virtual bool battleResult(BattleResult & command);
 		virtual bool lose(Lose & command);
 		virtual bool map(Map & command);
@@ -99,9 +104,12 @@ class State {
 		virtual bool turnToOccupy(TurnToOccupy & command);
 		virtual bool turnToPopulate(TurnToPopulate & command);
 		virtual bool win(Win & command);
-		virtual bool didIWin(DidIWin & command);
+		virtual bool youAre(YouAre & command);
 		virtual bool noRoom(NoRoom & command);
 
+		/*
+		 * Comandos generados exclusivamente por la UI
+		 */
 		virtual bool uiReadyToPlay(UIReadyToPlay & command);
 		virtual bool uiDidIWin(UIDidIWin & command);
 		virtual bool uiQuit(UIQuit & command);

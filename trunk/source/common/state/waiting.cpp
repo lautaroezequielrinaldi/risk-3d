@@ -55,7 +55,17 @@ bool Waiting::mapList(MapList & command){
 
 	return false;
 }
+bool Waiting::noMore(NoMore & command){
 
+}
+
+bool Waiting::surrender(Surrender & command){
+
+}
+
+bool Waiting::didIWin(DidIWin & command){
+
+}
 
 bool Waiting::quit(Quit & command) {
 	std::cerr << "Evento Waiting::Quit" << std::endl;

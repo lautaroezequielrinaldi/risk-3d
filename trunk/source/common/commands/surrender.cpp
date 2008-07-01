@@ -16,7 +16,7 @@ Surrender::~Surrender(){
 }
 
 std::string Surrender::serialize(){
-	return "<?xml version=\"1.0\"?><surrender>"+serializeCommon(numeroJugador,0)+"</surrender>";
+	return "<?xml version=\"1.0\"?><surrender>"+serializeCommon(getFrom(),getTo())+"</surrender>";
 	
 }
 bool Surrender::validate(ReferenceCountPtr<GameManager>& gameManager){

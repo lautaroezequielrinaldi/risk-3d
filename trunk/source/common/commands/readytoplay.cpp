@@ -21,7 +21,7 @@ ReadyToPlay::~ReadyToPlay()
 
 std::string ReadyToPlay::serialize(){
 
-    	return "<?xml version=\"1.0\"?><readytoplay>"+serializeCommon(numeroJugador,0)+"</readytoplay>";
+    	return "<?xml version=\"1.0\"?><readytoplay>"+serializeCommon(getFrom(),getTo())+"</readytoplay>";
 }
 
 
