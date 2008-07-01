@@ -56,21 +56,24 @@ bool Waiting::mapList(MapList & command){
 	return false;
 }
 bool Waiting::noMore(NoMore & command){
-
+	return false;
 }
 
 bool Waiting::surrender(Surrender & command){
-
+	return false;
 }
 
 bool Waiting::didIWin(DidIWin & command){
-
+	return false;
+}
+bool Waiting::readyToPlay(ReadyToPlay & command) {
+	return false;
 }
 
 bool Waiting::quit(Quit & command) {
 	std::cerr << "Evento Waiting::Quit" << std::endl;
 	// si es valido
-	if (command.getFrom() == gameManager->getMe()) {
+	if (command.isValid() && command.getFrom() == gameManager->getMe()) {
 		// cerrar la aplicacion de un modo mas elegante...
 		throw 20;
 	} else {
