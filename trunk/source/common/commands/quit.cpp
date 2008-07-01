@@ -4,7 +4,7 @@
 Quit::Quit(std::vector<std::string> &parameterList) : Command ()
 {
 
-	this->numeroJugador = atoi (parameterList[0].c_str() );
+	//this->numeroJugador = atoi (parameterList[0].c_str() );
 }
 
 Quit::Quit(){

@@ -10,14 +10,13 @@
 #include "uicommand.h"
 class UIQuit: public UICommand {
 	
-	//private:
-	//	int numeroJugador;
+
 	public:
 
 		UIQuit(std::vector<std::string> &parameterList);
 
 		UIQuit();
-	virtual ~UIQuit();
+		virtual ~UIQuit();
 		/**
 		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.
 		 */

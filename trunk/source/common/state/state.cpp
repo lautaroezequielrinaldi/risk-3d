@@ -147,7 +147,13 @@ bool State::quit(Quit & command){
 }
 
 bool State::chat(Chat & command) {
-	return false;
+	if (! command.isValid()) {
+		command.setValid(1);
+		gameManager->notify(&command);
+	}
+	return true;
+
+
 }
 
 bool State::lose(Lose & command) {
@@ -183,6 +189,10 @@ bool State::noRoom(NoRoom & command){
 }
 
 bool State::mapList(MapList & command){
+	return false;
+}
+
+bool State::uiChat(UIChat & command){
 	return false;
 }
 

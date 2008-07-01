@@ -33,6 +33,7 @@ class TurnToPopulate;
 
 class UIReadyToPlay;
 class UIQuit;
+class UIChat;
 class UISurrender;
 class UINoMore;
 class UIDidIWin;
@@ -105,6 +106,7 @@ class State {
 		virtual bool uiReadyToPlay(UIReadyToPlay & command);
 		virtual bool uiDidIWin(UIDidIWin & command);
 		virtual bool uiQuit(UIQuit & command);
+		virtual bool uiChat(UIChat & command);
 		virtual bool uiSurrender(UISurrender & command);
 		virtual bool uiNoMore(UINoMore & command);
 		virtual bool uiJoinGame(UIJoinGame & command);

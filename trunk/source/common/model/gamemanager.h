@@ -3,7 +3,10 @@
 
 class GameManager;
 class CommandHydrator;
+class UICommand;
+
 #include "../smartpointer/referencecountptr.h"
+
 
 #include "game.h"
 #include "turnmanager.h"
@@ -136,7 +139,7 @@ class GameManager: public StateObservable, public CommandObservable {
 
 		void notify(Command * command);
 
-		void execute(Command * command);
+		void execute(UICommand * command);
 
 		void execute(const std::string & commandName,const std::string & commandXml);
 

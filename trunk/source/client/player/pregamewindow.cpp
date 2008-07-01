@@ -1,4 +1,6 @@
 #include "pregamewindow.h"
+#include "../../common/commands/uichat.h"
+#include "../../common/commands/uiquit.h"
 #include<iostream>
 #include<iostream>
 #include<iostream>
@@ -114,11 +116,11 @@ void PreGameWindow::onConnectionDialogButtonClicked() {
 
 void PreGameWindow::onSendMessageButtonClicked() {
 	if (connected) {
-		Chat* chat = new Chat();
+		UIChat* cmd = new UIChat();
 		std::string message = messageEntry.get_text();
-		chat->setMainMsg(message);
-		gameManager->execute(chat);
-		delete chat;
+		cmd->setMainMsg(message);
+		gameManager->execute(cmd);
+		delete cmd;
 	}	
 }
 
@@ -132,8 +134,8 @@ void PreGameWindow::onReadyToPlayButtonClicked() {
 void PreGameWindow::onQuitButtonClicked() {
 	if (connected) {
 		UIQuit* cmd = new UIQuit();
-		gameManager->notify(cmd);
-		delete cmd;
+		gameManager->execute(cmd);
+		delete(cmd);
 		serverProxy->cancel();
 	}
 	hasQuit = true;

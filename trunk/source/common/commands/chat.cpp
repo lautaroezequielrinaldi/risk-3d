@@ -4,7 +4,7 @@
 Chat::Chat(std::vector<std::string> &parameterList) : Command ()
 {
 
-	this->numeroJugador = atoi (parameterList[0].c_str() );
+	//this->numeroJugador = atoi (parameterList[0].c_str() );
 }
 
 Chat::Chat(){
@@ -15,7 +15,7 @@ Chat::~Chat(){
 }
 
 std::string Chat::serialize(){
-	return "<?xml version=\"1.0\"?><chat>"+serializeCommon(numeroJugador,0)+"</chat>";
+	return "<?xml version=\"1.0\"?><chat>"+serializeCommon(getFrom(),0)+"</chat>";
 }
 bool Chat::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return false;

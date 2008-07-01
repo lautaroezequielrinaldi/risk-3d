@@ -2,7 +2,12 @@
 #define __UICOMMAND_H__
 
 #include "command.h"
-
+/**
+ * @todo evaluar si se puede implementar aca serialize
+ * @todo evaluar si se puede exterminar UICommand(std::vector<std::string> &parameterList);
+ * @internal el constructor private es a proposito
+ *
+ */
 class UICommand: public Command {
 	/**
 	 * Metodos protegidos de la clase UICommand.

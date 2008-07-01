@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sstream>
 #include "../commands/commandhydrator.h"
+#include "../commands/uicommand.h"
 
 GameManager::GameManager(): StateObservable(), game (), turnManager ()
 {
@@ -109,8 +110,11 @@ std::list< ReferenceCountPtr<Player> >& GameManager::getPlayerList(){
 	return game->getPlayerList();
 
 }
-
-void GameManager::execute(Command * cmd){
+/**
+ * @todo candidato a execute(UICommand
+ *
+ */
+void GameManager::execute(UICommand * cmd){
 	std::cerr << "GameManager::execute("<< cmd->getName()<< ")"<< cmd->serialize() << std::endl;
 	ReferenceCountPtr<State> currentState = stateMachine->getCurrentState();
 	cmd->execute(currentState);
