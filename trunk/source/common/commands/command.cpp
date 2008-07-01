@@ -122,7 +122,7 @@ xmlDocPtr Command::hydrateCommon(std::string xml){
 	setNodo = objetoXPath->nodesetval;
 	nodo = setNodo->nodeTab[0];
 	field = xmlNodeGetContent(nodo);
-	this->mainmsg.assign( (char*) field );
+	this->secmsg.assign( (char*) field );
 	xmlFree(field);
 	xmlXPathFreeObject(objetoXPath);
 	
