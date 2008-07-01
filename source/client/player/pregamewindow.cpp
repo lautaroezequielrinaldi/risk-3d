@@ -22,6 +22,7 @@ PreGameWindow::PreGameWindow(ReferenceCountPtr<GameManager>& gameManager):
 	// Se registra como listener de cambios de estados en el game manager.
 	if (gameManager != NULL) {
 		gameManager->registerObserver(this);
+		gameManager->registerCommandObserver(this);
 	}
 	// Establece el titulo de la ventana
 	this->set_title("Pre sala de juego Risk3d");

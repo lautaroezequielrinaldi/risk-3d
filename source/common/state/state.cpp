@@ -138,7 +138,8 @@ bool State::youAre(YouAre & command){
 
 
 bool State::quit(Quit & command){
-	// debe aplicar surrender y ademas cortar la conexión
+	// se debe eliminar command.getFrom() del juego
+	// se debe hacer algo con los ejercitos, que esto lo haga quit en el cliente
 	command.setValid(1);
 	std::cerr << "State::quit() to: "<< command.getTo() << " from: " << command.getFrom() << std::endl;
 	gameManager->notify(&command);
