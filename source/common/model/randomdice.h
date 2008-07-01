@@ -24,6 +24,8 @@ class RandomDice : public Dice
 		 * Devuelve el numero aleatorio de dado que se obtuvo.
 		 */
 		int roll();
+		
+		int roll(int maxLimit);
 };
 
 #endif /*RANDOMDICE_H_*/

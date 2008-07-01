@@ -113,5 +113,23 @@ bool Player::continentOwner(std::string& continentName ){
 	return false;
 }
 
-
+void Player::transferLandsFrom(ReferenceCountPtr<Player>& player){
+	
+	std::list<std::string>::iterator it;
+	
+	// traspaso paises del jugador especificado al jugador this
+	for ( it = player->listaPaisesConquistados.begin(); it != player->listaPaisesConquistados.end(); ++it ){
+		
+		std::string nomPaisActual = *it;	
+		this->addConqueredLand(nomPaisActual);
+	}
+	
+	//traspaso continentes del jugador especificado al jugador this.
+	for ( it= player->listaContinentesConquistados.begin(); it !=player->listaContinentesConquistados.end(); ++it ){
+		
+		std::string nomContActual = *it;	
+		this->addConqueredContinent(nomContActual);
+	}
+	
+}
 

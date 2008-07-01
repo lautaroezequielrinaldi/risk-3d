@@ -3,6 +3,7 @@
 
 #include <list>
 #include<string>
+#include "../smartpointer/referencecountptr.h"
 
 /**
  * Clase cuyo proposito es representar a un jugador dentro del modelo del juego.
@@ -85,7 +86,7 @@ class Player
 		/**
 		 * Metodo cuyo proposito es obtener la cantidad de paises conquistados por el jugador
 		 */
-		 unsigned int getConqueredLands();
+		unsigned int getConqueredLands();
 		
 		/**
 		 * Metodo cuyo proposito es obtener la cantidad de continentes conquistados por el jugador
@@ -115,14 +116,18 @@ class Player
 		 /**
 		  * Metodo cuyo proposito es verificar si un determinado pais esta conquistado por el jugador
 		  */
-		  bool landOwner(std::string & landName );
+		 bool landOwner(std::string & landName );
 		  
-		  /**
+		 /**
 		  * Metodo cuyo proposito es verificar si un determinado continente esta conquistado por el jugador
 		  */
-		  bool continentOwner(std::string & continentName );
-
-
+		 bool continentOwner(std::string & continentName );
+	
+		/**
+		 * Metodo cuyo proposito es transfrir los paises conquistados por el player indicado
+		 * al player que invoca.
+		 */
+		 void transferLandsFrom(ReferenceCountPtr<Player>& player);	
 	
 		  
 	private:

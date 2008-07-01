@@ -38,6 +38,8 @@ class FileDicePlayerTurn : public Dice
 		 */
 		int roll();
 		
+		int roll(int maxLimit);
+		
 };
 
 #endif /*FILEDICEPLAYERTURN_H_*/

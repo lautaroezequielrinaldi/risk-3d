@@ -22,6 +22,7 @@
 #include "turntooccupy.h"
 #include "win.h"
 #include "youare.h"
+#include "battleresult.h"
 /*
 #include "uireadytoplay.h"
 #include "uiquit.h"

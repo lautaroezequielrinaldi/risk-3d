@@ -18,6 +18,7 @@ class Waiting : public State
 	bool mapList(MapList & command);
 	bool quit(Quit & command);
 	bool move(Move & command);
+	bool battleResult( BattleResult & command );
 	
 	bool lose(Lose & command);
 	bool map(Map & command);

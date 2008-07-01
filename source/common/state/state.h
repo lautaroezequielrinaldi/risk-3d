@@ -29,7 +29,7 @@ class TurnToAttack;
 class TurnToMove;
 class TurnToOccupy;
 class TurnToPopulate;
-//class BattleResult;
+class BattleResult;
 
 class UIReadyToPlay;
 class UIQuit;
@@ -90,7 +90,7 @@ class State {
 		virtual bool chat(Chat & command);
 		virtual bool youAre(YouAre & command);
 
-		//virtual bool battleResult(BattleResult & command);
+		virtual bool battleResult(BattleResult & command);
 		virtual bool lose(Lose & command);
 		virtual bool map(Map & command);
 		virtual bool mapList(MapList & command);

@@ -61,13 +61,16 @@ bool Defending::defend(Defend & command){
 		
 		cerr<<"PUEDE ATACAR NUEVAMENTE O TERMINAR AHORA."<<endl;
 		
-		// -------- Para actualizar modelo y mensajear al cliente--------------
+		// --------completo battleResult  Para mensajear al cliente--------------
 		
-		//seteo al commando como valido
-		command.setValid(1);
+			
+		//seteo los mensajes
+		resultadoBatalla.setValid(1);
+		resultadoBatalla.setTo(gameManager->getTurnManager()->getCurrentPlayer());//atacante
+		resultadoBatalla.setFrom(0);
+
 				
 		//seteo mje principal
-   		
 		strComodin2 <<  resultadoBatalla.getAttackerResult();
 		strComodin4 <<  resultadoBatalla.getDefenderResult();
 		
@@ -88,22 +91,23 @@ bool Defending::defend(Defend & command){
 			
 		}
 				
-		command.setMainMsg(mainMsg);
+		resultadoBatalla.setMainMsg(mainMsg);
 		
 		//no hay mensaje secundario
-		command.setSecMsg("");	
+		resultadoBatalla.setSecMsg("");	
 		
-		//notifico cambios y mensajes
-		gameManager->notify(&command);
+		//notifico cambios y mensajes --manda un commandResultadoBatalla
+		gameManager->notify(&resultadoBatalla);
 		
-		//------- fin actualizacion modelo para cliente ------------------------
-				
+		//------- fin notificacion al cliente ------------------------
 	
 	}
 	//defensa invalida
 	else {
 		
 		command.setValid(0);
+		//command.setTo(gameManager->getTurnManager()->getDefenderPlayer());//al defensor
+		//command.setFrom(0);
 		
 		//seteo mje principal
 		std::string mainMsg = "Error! Defensa invalida ";

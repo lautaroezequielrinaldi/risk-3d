@@ -45,6 +45,9 @@ int FileDicePlayerTurn::roll(){
 
 }
 
+int FileDicePlayerTurn::roll(int maxLimit){
+}
+
 
 
 

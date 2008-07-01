@@ -37,10 +37,11 @@
 #include "stateobserver.h"
 
 #include "../model/gamemanager.h"
-
-
+#include "../model/randomdice.h"
+#include "../smartpointer/referencecountptr.h"
 
 #include<iostream>
+#include<sstream>
 
 using namespace std;
 
@@ -75,8 +76,6 @@ bool State::defend(Defend & command){
 	return false;
 }
 
-//virtual void State::occupy(Occupy & command);
-
 bool State::joinGame(JoinGame & command){
 	command.setMainMsg("...");
 	command.setSecMsg("Un jugador intentó conectarse con el partido iniciado");
@@ -96,11 +95,11 @@ bool State::selectMap(SelectMap & command){
         return false;
 }
 
-
+//lo implementan:  Occuppying y Populating
 bool State::populate(Populate & command){
 	command.setMainMsg("Intento de poblar en momento inoportuno");
 	command.setSecMsg("El jugador ... intentó poblar cuando no le tocaba");
-	cout<<"	no es momento de atacar"<<endl;
+	
      return false;
 }
 
@@ -126,7 +125,53 @@ bool State::noMore(NoMore & command){
 }
 
 bool State::surrender(Surrender & command){
-	// debe deshabilitar al jugador y convertir sus paises en republicas independientes
+	
+	std::ostringstream strComodin, strComodin2 ;
+	
+	//desactivo al jugador de la lista de turnos del juego
+	this->gameManager->getTurnManager()->deletePlayer(command.getSurrenderPlayer());
+	
+	//se sortea el jugador que se quedara con los paises conquistados por el jugador que se rinde.
+	RandomDice dado; 
+	
+	//tiro dados pidiendo un numero entre 1 y la cantidd de players activos.
+	int posRandom = dado.roll( this->gameManager->getTurnManager()->getActivePlayerCount() );
+	
+	/* obtengo el color del jugador de la posRandom que se obtuvo, del vector que maneja el turnManager
+	   esto es necesario ya que pueden quedar jugadores con ids: 1 3 6 con lo cual no se puede pedir directo un
+	   jugador random ya que solo podrian aceptarse esos 3 valores, en cambio al pedir la pos. del vector random
+	   se puede pedir una posRandom con un limiteMaximo = cant jugadores activos que tiene el turnManager.
+	 */ 
+	int colorJugadorSuertudo = this->gameManager->getTurnManager()->getColorPlayer(posRandom);
+	
+	ReferenceCountPtr<Player> jugadorSuertudo = gameManager->getGame()->getPlayer(colorJugadorSuertudo);
+	ReferenceCountPtr<Player> jugadorRendido =  gameManager->getGame()->getPlayer(command.getSurrenderPlayer());
+	
+	jugadorSuertudo->transferLandsFrom(jugadorRendido);
+	
+	//  actualizar modelo y mensajea al cliente --------------
+		
+		//seteo al commando como valido
+		command.setValid(1);
+		command.setTo(colorJugadorSuertudo);
+		command.setFrom(command.getSurrenderPlayer() );
+				
+		//seteo mje principal
+   		strComodin << gameManager->getTurnManager()->getCurrentPlayer();
+		strComodin2 << colorJugadorSuertudo;
+		
+		//mje para el defensor, para TO
+		std::string mainMsg = "El jugador * " +strComodin.str() +"se rindio y por sorteo, el jugador "+ strComodin2.str()+
+							  "gano todos sus paises";
+		
+		command.setMainMsg(mainMsg);
+		command.setSecMsg("");	
+		
+		//notifico cambios y mensajes
+		gameManager->notify(&command);
+		
+		//------- fin actualizacion modelo para cliente ------------------------
+	
 	return true;
 }
 
@@ -192,6 +237,12 @@ bool State::mapList(MapList & command){
 	return false;
 }
 
+
+bool State::battleResult(BattleResult & command){
+	return false;
+}
+
+
 bool State::uiChat(UIChat & command){
 	return false;
 }
@@ -227,6 +278,8 @@ bool State::uiCountrySelect(UICountrySelect & command){
 	return false;
 }
 
+
 bool State::uiQuantitySelect(UIQuantitySelect & command){
 	return false;
 }
+

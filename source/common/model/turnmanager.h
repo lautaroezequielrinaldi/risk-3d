@@ -79,15 +79,26 @@ class TurnManager
 		 */
 		 bool isPlayerActive(int color);
 		  
-		 /**
-		  * Metodo cuyo proposito es obtener el id del primer jugador de la ronda.
-		  */
-		  int getFirstPlayer(); 
+		  
+		/**
+		 * Metodo cuyo proposito es obtener la cantidad de players activos .
+		 */
+		 int getActivePlayerCount();
 		 
-		 /**
-		  * Metodo cuyo proposito es obtener id del ultimo jugador de la ronda .
-		  */
-		  int getLastPlayer();
+		/**
+		 * Metodo cuyo proposito es obtener el color del jugador almacenado en la posicion especificada. 
+		 */
+		 int getColorPlayer(unsigned int pos);		 
+		 
+		/**
+		 * Metodo cuyo proposito es obtener el id del primer jugador de la ronda.
+		 */
+		int getFirstPlayer(); 
+		 
+		/**
+		 * Metodo cuyo proposito es obtener id del ultimo jugador de la ronda .
+		 */
+		int getLastPlayer();
 		  
 		  
 		/**
@@ -102,7 +113,6 @@ class TurnManager
 		 */
 		 void setDefenderPlayer(int color);
 	
-
 		/**
 		 * Destructor de la clase
 		 */
