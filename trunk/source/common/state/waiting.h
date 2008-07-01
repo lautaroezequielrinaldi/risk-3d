@@ -22,7 +22,7 @@ class Waiting : public State
 	bool surrender(Surrender & command);
 	bool quit(Quit & command);
 	bool didIWin(DidIWin & command);
-
+	bool readyToPlay(ReadyToPlay & command);
 	/*
 	 * Comandos generados exclusivamente por el servidor
 	 */
