@@ -29,6 +29,7 @@ class Waiting : public State
 	bool uiQuit(UIQuit & command);
 	bool uiDidIWin(UIDidIWin & command);
 	bool uiSelectMap(UISelectMap & command);
+	bool uiChat(UIChat & command);
 	virtual void accept(StateObserver* observer);
 };
 

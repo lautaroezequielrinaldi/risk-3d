@@ -10,8 +10,6 @@
 #include "command.h"
 class Quit: public Command {
 	
-	private:
-		int numeroJugador;
 	public:
 
 		Quit(std::vector<std::string> &parameterList);

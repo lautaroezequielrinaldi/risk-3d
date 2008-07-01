@@ -15,7 +15,7 @@ UIQuit::~UIQuit(){
 }
 
 std::string UIQuit::serialize(){
-	return "<?xml version=\"1.0\"?><uiquit>"+serializeCommon(0,0)+"</uiquit>";
+	return "";
 }
 bool UIQuit::validate(ReferenceCountPtr<GameManager>& gameManager){
 	return false;

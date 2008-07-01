@@ -2,7 +2,8 @@
 #include "stateobserver.h"
 
 
-
+#include "../commands/uichat.h"
+#include "../commands/chat.h"
 #include "../commands/uireadytoplay.h"
 #include "../commands/readytoplay.h"
 #include "../commands/uiquit.h"
@@ -140,6 +141,10 @@ bool Waiting::uiQuit(UIQuit & command){
 
 	Quit * cmd = new Quit();
 	cmd->setFrom(gameManager->getMe());
+
+	std::cerr << "Evento Waiting::uiQuit Quit->from: "<< cmd->getFrom() << std::endl;
+
+
 	this->gameManager->notify(cmd);
 	delete(cmd);
 	return false;
@@ -178,6 +183,19 @@ bool Waiting::uiSelectMap(UISelectMap & command){
 	SelectMap * cmd = new SelectMap();
 	cmd->setFrom(gameManager->getMe());
 	cmd->setMapName(command.getMapName());
+	this->gameManager->notify(cmd);
+	delete(cmd);
+	return false;
+
+
+}
+
+bool Waiting::uiChat(UIChat & command){
+	std::cerr << "Waiting::uiChat me: " << gameManager->getMe() << std::endl;
+
+	Chat * cmd = new Chat();
+	cmd->setFrom(gameManager->getMe());
+	cmd->setMainMsg("hardcoded");
 	this->gameManager->notify(cmd);
 	delete(cmd);
 	return false;
