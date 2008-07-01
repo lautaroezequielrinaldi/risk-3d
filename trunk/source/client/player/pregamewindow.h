@@ -27,6 +27,10 @@ class PreGameWindow: public StateObserver, public Gtk::Window {
 	 */
 	private:
 		/**
+		 * Almacena la referencia al server proxy a conectarse.
+		 */
+		ReferenceCountPtr<ServerProxy> serverProxy;
+		/**
 		 * Almacena la referencia al GameManager.
 		 */
 		ReferenceCountPtr<GameManager> gameManager;
