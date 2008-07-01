@@ -1,6 +1,6 @@
 #include "uisurrender.h"
 
-UISurrender::UISurrender(std::vector<std::string> & parameterList):Command ()
+UISurrender::UISurrender(std::vector<std::string> & parameterList):UICommand ()
 {
 	/*construyo el objeto a partir de los parametros pasados en la lista*/
 

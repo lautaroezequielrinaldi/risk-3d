@@ -57,6 +57,11 @@ class SelectMap : public Command
 		void execute(ReferenceCountPtr<State>& state);
 		
 		virtual std::string getName();
+
+		/**
+		 * Notiifca que se ejecuto un comando.
+		 */
+		virtual void accept(CommandObserver* observer);
 };
 
 #endif /*SELECTMAP_H_*/

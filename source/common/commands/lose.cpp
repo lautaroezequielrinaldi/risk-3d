@@ -1,5 +1,6 @@
 #include<sstream>
 #include "lose.h"
+#include "commandobserver.h"
 
 Lose::Lose(std::vector<std::string> & parameterList):Command ()
 {
@@ -43,4 +44,7 @@ std::string Lose::getName() {
 	return "lose";
 }
 
+void Lose::accept(CommandObserver* observer) {
+    observer->commandExecuted(*this);
+}
 

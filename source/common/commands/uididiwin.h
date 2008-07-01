@@ -5,8 +5,8 @@
  * client => server 
  */
 
-#include "command.h"
-class UIDidIWin: public Command {
+#include "uicommand.h"
+class UIDidIWin: public UICommand {
 
 
 	//private:

@@ -1,4 +1,5 @@
 #include "chat.h"
+#include "commandobserver.h"
 
 Chat::Chat(std::vector<std::string> &parameterList) : Command ()
 {
@@ -28,4 +29,8 @@ void Chat::execute(ReferenceCountPtr<State>& state){
 
 std::string Chat::getName() {
 	return "chat";
+}
+
+void Chat::accept(CommandObserver* observer) {
+    observer->commandExecuted(*this);
 }

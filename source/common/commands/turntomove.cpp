@@ -1,5 +1,6 @@
 #include<sstream>
 #include "turntomove.h"
+#include "commandobserver.h"
 
 TurnToMove::TurnToMove(std::vector<std::string> & parameterList):Command ()
 {
@@ -42,4 +43,8 @@ std::string TurnToMove::getName() {
 }
 
 
+
+void TurnToMove::accept(CommandObserver* observer) {
+    observer->commandExecuted(*this);
+}
 

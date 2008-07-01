@@ -5,9 +5,9 @@
  * client => server
  */
 
-#include "command.h"
+#include "uicommand.h"
 
-class UISelectMap : public Command
+class UISelectMap : public UICommand
 {
 
 	

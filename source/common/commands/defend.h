@@ -77,7 +77,10 @@ class Defend : public Command
 		 */
 		int getAttackedId();
 
-		
+		/**
+		 * Notifica que se ejecuto el comando.
+		 */
+		virtual void accept(CommandObserver* observer);		
 };	
 
 #endif /*DEFEND_H_*/

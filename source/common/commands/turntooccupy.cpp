@@ -1,5 +1,6 @@
 #include<sstream>
 #include "turntooccupy.h"
+#include "commandobserver.h"
 
 TurnToOccupy::TurnToOccupy(std::vector<std::string> & parameterList):Command ()
 {
@@ -42,4 +43,8 @@ std::string TurnToOccupy::getName() {
 }
 
 
+
+void TurnToOccupy::accept(CommandObserver* observer) {
+    observer->commandExecuted(*this);
+}
 

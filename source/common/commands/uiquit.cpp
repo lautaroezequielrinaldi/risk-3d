@@ -1,7 +1,7 @@
 #include "uiquit.h"
 
 
-UIQuit::UIQuit(std::vector<std::string> &parameterList) : Command ()
+UIQuit::UIQuit(std::vector<std::string> &parameterList) : UICommand ()
 {
 
 	//this->numeroJugador = atoi (parameterList[0].c_str() );

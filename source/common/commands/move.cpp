@@ -1,5 +1,6 @@
 #include <sstream>
 #include "move.h"
+#include "commandobserver.h"
 
 #include<iostream>
 using namespace std;
@@ -212,4 +213,8 @@ int Move::getMoverId(){
 
 
 
+
+void Move::accept(CommandObserver* observer) {
+    observer->commandExecuted(*this);
+}
 

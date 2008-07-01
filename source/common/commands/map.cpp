@@ -1,5 +1,6 @@
 #include<sstream>
 #include "map.h"
+#include "commandobserver.h"
 
 Map::Map(std::vector<std::string> & parameterList):Command ()
 {
@@ -48,4 +49,7 @@ std::string Map::getName() {
 	return "map";
 }
 
+void Map::accept(CommandObserver* observer) {
+    observer->commandExecuted(*this);
+}
 

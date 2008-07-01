@@ -11,6 +11,7 @@
  */
 class State;
 class GameManager;
+class CommandObserver;
 
 /**
  * Clase abstracta cuyo proposito es brindar la interfaz de un comando serializable.
@@ -116,7 +117,12 @@ class Command : public Serializable
 		 * Metodo cuyo proposito es serializar la parte comun que poseen todos los comandos. 
 		 */
 		std::string serialize(int from, int to);
-				
+
+		/**
+		 * Accepta un CommandObserver y notifica que se ejecuto el comando.
+		 */
+		virtual void accept(CommandObserver* observer) = 0;
+ 				
 	protected:
 
 		/**

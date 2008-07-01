@@ -1,6 +1,6 @@
 #include "uinomore.h"
 
-UINoMore::UINoMore(std::vector<std::string> &parameterList) : Command ()
+UINoMore::UINoMore(std::vector<std::string> &parameterList) : UICommand ()
 {
 
 	//this->numeroJugador = atoi (parameterList[0].c_str() );

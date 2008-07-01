@@ -1,7 +1,7 @@
 #include "uididiwin.h"
 
 
-UIDidIWin::UIDidIWin(std::vector<std::string> &parameterList) : Command ()
+UIDidIWin::UIDidIWin(std::vector<std::string> &parameterList) : UICommand ()
 {
 
 //	this->numeroJugador = atoi (parameterList[0].c_str() );

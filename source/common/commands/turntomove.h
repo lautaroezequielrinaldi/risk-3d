@@ -58,7 +58,11 @@ class TurnToMove : public Command
 		virtual void execute(ReferenceCountPtr<State>& state);
 		
 		virtual std::string getName();
-		
+
+		/**
+		 * Notifica que se ejecuto el comando.
+		 */
+		virtual void accept(CommandObserver* observer); 		
 		
 };
 

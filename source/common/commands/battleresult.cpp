@@ -1,4 +1,6 @@
 #include "battleresult.h"
+#include "commandobserver.h"
+
 #include <sstream>
 
 BattleResult::BattleResult( std::string  attackerLand,std::string  defenderLand, int jugadorAtacante, int jugadorDefensor):
@@ -224,4 +226,7 @@ std::string BattleResult::getName(){
 	return "battleResult";
 }
 
+void BattleResult::accept(CommandObserver* observer) {
+	observer->commandExecuted(*this);
+}
 

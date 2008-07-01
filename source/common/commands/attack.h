@@ -97,7 +97,10 @@ class Attack : public Command
 		 */
 		int getAttackedId();
 
-		
+		/**
+		 * Notifica que se ejecuto el comando.
+		 */
+		virtual void accept(CommandObserver* observer);	
 };
 
 #endif /*ATTACK_H_*/

@@ -1,5 +1,6 @@
 #include<sstream>
 #include "win.h"
+#include "commandobserver.h"
 
 Win::Win(std::vector<std::string> & parameterList):Command ()
 {
@@ -41,4 +42,8 @@ std::string Win::getName() {
 	return "win";
 }
 
+
+void Win::accept(CommandObserver* observer) {
+    observer->commandExecuted(*this);
+}
 

@@ -1,5 +1,6 @@
 #include<sstream>
 #include "defend.h"
+#include "commandobserver.h"
 
 #include<iostream>
 
@@ -185,5 +186,8 @@ int Defend::getAttackedId(){
 	return this->jugadorDefensor;
 }
 
+void Defend::accept(CommandObserver* observer) {
+    observer->commandExecuted(*this);
+}
 
 

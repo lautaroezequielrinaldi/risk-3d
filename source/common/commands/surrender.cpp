@@ -1,4 +1,5 @@
 #include "surrender.h"
+#include "commandobserver.h"
 
 Surrender::Surrender(std::vector<std::string> & parameterList):Command ()
 {
@@ -30,4 +31,8 @@ void Surrender::execute(ReferenceCountPtr<State>& state){
 }
 std::string Surrender::getName() {
 	return "surrender";
+}
+
+void Surrender::accept(CommandObserver* observer) {
+    observer->commandExecuted(*this);
 }

@@ -1,5 +1,5 @@
 #include "quit.h"
-
+#include "commandobserver.h"
 
 Quit::Quit(std::vector<std::string> &parameterList) : Command ()
 {
@@ -29,4 +29,9 @@ void Quit::execute(ReferenceCountPtr<State>& state){
 }
 std::string Quit::getName() {
 	return "quit";
+}
+
+void Quit::accept(CommandObserver* observer) {
+    observer->commandExecuted(*this);
+
 }

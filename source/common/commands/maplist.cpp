@@ -1,5 +1,5 @@
 #include "maplist.h"
-
+#include "commandobserver.h"
 
 MapList::MapList(std::vector<std::string> &parameterList) : Command ()
 {
@@ -58,3 +58,8 @@ void MapList::execute(ReferenceCountPtr<State>& state){
 std::string MapList::getName() {
 	return "mapList";
 }
+
+void MapList::accept(CommandObserver* observer) {
+    observer->commandExecuted(*this);
+}
+

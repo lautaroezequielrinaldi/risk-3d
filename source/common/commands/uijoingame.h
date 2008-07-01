@@ -7,9 +7,9 @@
  * Comando para unirse al juego
  */
 
-#include "command.h"
+#include "uicommand.h"
 
-class UIJoinGame : public Command
+class UIJoinGame : public UICommand
 {
 	
 	//private:

@@ -1,5 +1,6 @@
 #include<sstream>
 #include "turntoattack.h"
+#include "commandobserver.h"
 
 TurnToAttack::TurnToAttack(std::vector<std::string> & parameterList):Command ()
 {
@@ -43,4 +44,8 @@ std::string TurnToAttack::getName() {
 }
 
 
+
+void TurnToAttack::accept(CommandObserver* observer) {
+    observer->commandExecuted(*this);
+}
 

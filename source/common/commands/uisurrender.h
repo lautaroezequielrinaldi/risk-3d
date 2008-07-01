@@ -7,8 +7,8 @@
  * Comando para indicar el deseo de abandonar el juego pero permanecer mirando.
  */
 
-#include "command.h"
-class UISurrender:public Command{
+#include "uicommand.h"
+class UISurrender:public UICommand{
 
 	
 	//private:

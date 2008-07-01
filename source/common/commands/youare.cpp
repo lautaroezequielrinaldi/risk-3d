@@ -1,5 +1,6 @@
 #include<sstream>
 #include "youare.h"
+#include "commandobserver.h"
 
 YouAre::YouAre(std::vector<std::string> & parameterList):Command ()
 {
@@ -42,5 +43,9 @@ std::string YouAre::getName() {
 
 int YouAre::getJugador() {
 	return numeroJugador;
+}
+
+void YouAre::accept(CommandObserver* observer) {
+    observer->commandExecuted(*this);
 }
 

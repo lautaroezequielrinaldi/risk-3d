@@ -51,6 +51,11 @@ class JoinGame : public Command
 		void execute(ReferenceCountPtr<State>& state);
 		
 		virtual std::string getName();
+
+		/**
+		 * Notifica que se ejecuto el comando.
+		 */
+		virtual void accept(CommandObserver* observer);
 };
 
 #endif /*JOINGAME_H_*/
