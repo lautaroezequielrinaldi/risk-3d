@@ -17,7 +17,7 @@ TurnToPopulate::TurnToPopulate(std::vector<std::string> & parameterList):Command
 	this->numeroJugador = atoi (parameterList[0].c_str() );
 }
 
-TurnToPopulate::TurnToPopulate(std::string xml):Command (){
+TurnToPopulate::TurnToPopulate(const std::string & xml):Command (){
 
 	// construye el objeto a partir del Xml recibido
 	hydrate(xml);

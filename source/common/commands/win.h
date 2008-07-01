@@ -31,7 +31,7 @@ class Win : public Command
 		 * Constructor de la clase.
 		 * La misma se construye a partir del Xml especificado.
 		 */
-		Win( std::string xml);
+		Win( const std::string &xml);
 		
 
 		Win();

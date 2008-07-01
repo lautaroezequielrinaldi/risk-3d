@@ -21,7 +21,7 @@ class MapList: public Command {
 		/**
 		 * Metodo cuyo proposito es hidratar  un objeto a partir del Xml especificado.
 		 */
-		void* hydrate(std::string xml);
+		void* hydrate(const std::string & xml);
 		
 		/**
 		 * Metodo cuyo proposito es validar la accion que realice el comando.

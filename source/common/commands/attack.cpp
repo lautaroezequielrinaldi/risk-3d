@@ -15,7 +15,7 @@ Attack::Attack(std::vector<std::string> & parameterList):Command ()
 	this->jugadorDefensor = atoi (parameterList[4].c_str() );
 }
 
-Attack::Attack(std::string xml):Command (){
+Attack::Attack(const std::string & xml):Command (){
 
 	// construye el objeto a partir del Xml recibido
 	hydrate(xml);
@@ -52,7 +52,7 @@ std::string Attack::serialize(){
   
 }
 
-void* Attack::hydrate(std::string xml){
+void* Attack::hydrate(const std::string& xml){
 	
 	
 	xmlDocPtr document = hydrateCommon(xml);
@@ -157,26 +157,29 @@ bool Attack::validate(ReferenceCountPtr<GameManager>& gameManager){
 	ReferenceCountPtr<TurnManager> turnManager = gameManager->getTurnManager();
 	ReferenceCountPtr<Player> jugadorActual = game->getPlayer( turnManager->getCurrentPlayer());
 	
+	std::string paisAt = this->paisAtacante;
+	std::string paisAtacad = this->paisAtacado;
+	
 	//si el pais atacante es del jugador actual
-	if( jugadorActual->landOwner(this->paisAtacante) ){
+	if( jugadorActual->landOwner(paisAt) ){
 	//si el pais defensor NO es del jugador actual
-		if( !jugadorActual->landOwner(this->paisAtacado) ){	
+		if( !jugadorActual->landOwner(paisAtacad) ){	
 			/*si pais atacante es adyacente al pais atacado*/
 			if( paisAtaca->esAdyacente(this->paisAtacado)){
 				/*si pais atacante ataca con 3 o menos ejercitos Y ataca con menos ejercitos de los que tiene*/
 				if ( this->cantidadEjercitos <= 3  && this->cantidadEjercitos < paisAtaca->getArmyCount() )
 					ataqueValido = true;
 				else
-					cout<<"CANTIDAD DE EJERCITOS ATACANTES ( "<<this->cantidadEjercitos<<" ) INVALIDA -"<<paisAtaca->getArmyCount()<<endl;
+					cerr<<"CANTIDAD DE EJERCITOS ATACANTES ( "<<this->cantidadEjercitos<<" ) INVALIDA -"<<paisAtaca->getArmyCount()<<endl;
 			}
 			else
-				cout<<"EL PAIS QUE ATACA NO ES ADYACENTE AL ATACADO"<<endl;
+				cerr<<"EL PAIS QUE ATACA NO ES ADYACENTE AL ATACADO"<<endl;
 		}
 		else
-			cout<<"ESTA INTENTANDO ATACAR UN PAIS SUYO"<<endl;
+			cerr<<"ESTA INTENTANDO ATACAR UN PAIS SUYO"<<endl;
 	}
 	else
-		cout<<"EL PAIS CON EL QUE INTENTA ATACAR NO ES DEL JUGADOR ACTUAL"<<endl;
+		cerr<<"EL PAIS CON EL QUE INTENTA ATACAR NO ES DEL JUGADOR ACTUAL"<<endl;
 	
 	
 	

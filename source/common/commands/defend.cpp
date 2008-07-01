@@ -14,7 +14,7 @@ Defend::Defend(std::vector<std::string> &parameterList) : Command ()
 	
 }
 
-Defend::Defend(std::string xml):Command (){
+Defend::Defend(const std::string & xml):Command (){
 
 	// construye el objeto a partir del Xml recibido
 	hydrate(xml);
@@ -50,7 +50,7 @@ std::string Defend::serialize(){
 	
 }
 
-void* Defend::hydrate(std::string xml){
+void* Defend::hydrate(const std::string & xml){
 		
 	xmlDocPtr document= hydrateCommon(xml);
 	xmlNodePtr nodoRaiz;
@@ -134,7 +134,8 @@ bool Defend::validate(ReferenceCountPtr<GameManager>& gameManager){
 	ReferenceCountPtr<Player> playerDef = game->getPlayer( gameManager->getTurnManager()->getDefenderPlayer() );
 	
 	// si el jugador seteado como defensor, es el dueño del pais con el que se mando la defensa
-	if( playerDef->landOwner( this->paisDefensor ) ){
+	std::string pDef = this->paisDefensor;
+	if( playerDef->landOwner( pDef ) ){
 		
 		//si el pais que fue atacado es igual al pais con el que se esta defendiendo el defensor
 		if( gameManager->getAttack().getAttackedLand() == this->getDefenderdLand()){
@@ -147,13 +148,13 @@ bool Defend::validate(ReferenceCountPtr<GameManager>& gameManager){
 				
 				defensaValida = true;
 			else
-				cout<<"CANTIDAD DE EJERCITOS DEFENSORES INVALIDA"<<endl;
+				cerr<<"CANTIDAD DE EJERCITOS DEFENSORES INVALIDA"<<endl;
 		}
 		else
-			cout<<"DEFENSOR: TE ESTAS DEFENDIENDO CON UN PAIS TUYO QUE NO ES EL ATACADO"<<endl;
+			cerr<<"DEFENSOR: TE ESTAS DEFENDIENDO CON UN PAIS TUYO QUE NO ES EL ATACADO"<<endl;
 	}
 	else
-		cout<<"DEFENSOR: POR QUE INTENTAS DEFENDERTE CON UN PAIS QUE NO ES TUYO? ES INVALIDO."<<endl;
+		cerr<<"DEFENSOR: POR QUE INTENTAS DEFENDERTE CON UN PAIS QUE NO ES TUYO? ES INVALIDO."<<endl;
 	
 	
 	return defensaValida;

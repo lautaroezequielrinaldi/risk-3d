@@ -32,7 +32,7 @@ class Lose : public Command
 		 * Constructor de la clase.
 		 * La misma se construye a partir del Xml especificado.
 		 */
-		Lose( std::string xml);
+		Lose(const std::string & xml);
 		
 
 		Lose();

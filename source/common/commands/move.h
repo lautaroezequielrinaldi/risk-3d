@@ -35,7 +35,7 @@ class Move : public Command
 		 * Constructor de la clase.
 		 * La misma se construye a partir del Xml especificado.
 		 */
-		Move(std::string xml);
+		Move(const std::string &xml);
 		
 		Move();
 		/*
@@ -50,7 +50,7 @@ class Move : public Command
 		/**
 		 * Metodo cuyo proposito es hidratar  un objeto a partir del Xml especificado.
 		 */
-		void* hydrate(std::string xml);
+		void* hydrate(const std::string & xml);
 		
 		/** 
 		 * Metodo cuyo proposito es validar la accion que realice el comando.

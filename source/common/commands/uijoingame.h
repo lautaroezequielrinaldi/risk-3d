@@ -26,7 +26,7 @@ class UIJoinGame : public Command
 		 * Constructor de la clase.
 		 * La misma se construye a partir del Xml especificado.
 		 */
-		UIJoinGame(std::string xml);
+		UIJoinGame(const std::string &xml);
 		
 		UIJoinGame();
 		/*

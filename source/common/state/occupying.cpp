@@ -47,7 +47,8 @@ bool Occupying::populate(Populate & command){
 		ReferenceCountPtr<Player> playerActual = game->getPlayer( this->gameManager->getTurnManager()->getCurrentPlayer() );
 		
 		//agrego a la lista de paises del jugador, el pais ocupado.
-		playerActual->addConqueredLand(command.getCountryDestination());
+		std::string p = command.getCountryDestination();
+		playerActual->addConqueredLand(p);
 		
 		//disminuyo en 1 la cant de ejercitos a ubicar
 		playerActual->setArmyCount( playerActual->getArmyCount() - 1 );

@@ -28,7 +28,7 @@ class SelectMap : public Command
 		 * Constructor de la clase.
 		 * La misma se construye a partir del Xml especificado.
 		 */
-		SelectMap(std::string xml);
+		SelectMap(const std::string &xml);
 
 		SelectMap();
 		
@@ -44,7 +44,7 @@ class SelectMap : public Command
 		/**
 		 * Metodo cuyo proposito es hidratar  un objeto a partir del Xml especificado.
 		 */
-		void* hydrate(std::string xml);
+		void* hydrate(const std::string &xml);
 		
 		/**
 		 * Metodo cuyo proposito es validar la accion que realice el comando.

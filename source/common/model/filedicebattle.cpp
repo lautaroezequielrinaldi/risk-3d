@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 
-FileDiceBattle::FileDiceBattle(std::string fileName): Dice()
+FileDiceBattle::FileDiceBattle(const std::string & fileName): Dice()
 {
 	std::string pathName = "/home/analia/Escritorio/risk3d/source/common/model/"+fileName;
 	//abro archivo del cual se levantaran los valores que toma el dado

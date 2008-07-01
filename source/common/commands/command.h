@@ -95,12 +95,12 @@ class Command : public Serializable
 		/**
 		 * Metodo cuyo proposito es establecer el mensaje principal. 
 		 */
-		void setMainMsg(std::string msg) ;
+		void setMainMsg( std::string  msg) ;
 
 		/**
 		 * Metodo cuyo proposito es establecer el mensaje secundario. 
 		 */
-		void setSecMsg(std::string msg);
+		void setSecMsg( std::string  msg);
 		
 		/**
 		 * Metodo cuyo proposito es serializar un comando a un string xml. 
@@ -110,7 +110,7 @@ class Command : public Serializable
 		/**
 		 * Metodo cuyo proposito es hidratar un comando. 
 		 */
-		void* hydrate(std::string xml);
+		void* hydrate(const std::string  & xml);
 
 		/**
 		 * Metodo cuyo proposito es serializar la parte comun que poseen todos los comandos. 
@@ -122,7 +122,7 @@ class Command : public Serializable
 		/**
 		 * Metodo cuyo proposito es hidratar la parte comun de los comandos. 
 		 */
-		xmlDocPtr hydrateCommon(std::string xml);
+		xmlDocPtr hydrateCommon(const std::string & xml);
 
 	
 

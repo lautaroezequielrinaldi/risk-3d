@@ -106,7 +106,7 @@ void Game::setDice( Dice& dice ){
 	this->dado = dice;	
 }
 
-int Game::getCountryOwner(std::string countryName){
+int Game::getCountryOwner( std::string & countryName){
 	
 	std::list< ReferenceCountPtr<Player> >::iterator it;
 	it = this->playerList.begin();
@@ -188,7 +188,7 @@ std::string Game::serialize() {
     return resultado;
 }
 
-void* Game::hydrate(std::string filename) {
+void* Game::hydrate(const std::string & filename) {
     return NULL;
 }
 

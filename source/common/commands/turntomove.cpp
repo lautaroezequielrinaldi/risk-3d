@@ -7,7 +7,7 @@ TurnToMove::TurnToMove(std::vector<std::string> & parameterList):Command ()
 	this->numeroJugador = atoi (parameterList[0].c_str() );
 }
 
-TurnToMove::TurnToMove(std::string xml):Command (){
+TurnToMove::TurnToMove(const std::string & xml):Command (){
 
 	// construye el objeto a partir del Xml recibido
 	hydrate(xml);

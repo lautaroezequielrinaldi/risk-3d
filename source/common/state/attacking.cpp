@@ -42,7 +42,9 @@ bool Attacking::attack(Attack & command){
 		//almaceno el ataque en el gameManager
 		this->gameManager->setAttack(command);
 	
-		int defensor = this->gameManager->getGame()->getCountryOwner( command.getAttackedLand() );
+	
+		std::string paisAtacado =  command.getAttackedLand();
+		int defensor = this->gameManager->getGame()->getCountryOwner(paisAtacado );
 		//seteo en el turnManager el defensor
 		this->gameManager->getTurnManager()->setDefenderPlayer( defensor  );
 		

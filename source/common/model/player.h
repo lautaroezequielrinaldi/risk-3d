@@ -95,32 +95,32 @@ class Player
 		 /**
 		 * Metodo cuyo proposito es agregar un pais a la lista de paises conquistados del jugador
 		 */
-		 void addConqueredLand(std::string landName);
+		 void addConqueredLand(std::string & landName);
 		 
 		/**
 		 * Metodo cuyo proposito es agregar un continente a la lista de continentes conquistados del jugador
 		 */
-		 void addConqueredContinent(std::string continenName);
+		 void addConqueredContinent(std::string & continenName);
 		 
 		/**
 		 * Metodo cuyo proposito es eliminar un pais a la lista de paises conquistados del jugador
 		 */
-		 void removeConqueredLand(std::string landName);
+		 void removeConqueredLand(std::string & landName);
 		 
 		 /**
 		 * Metodo cuyo proposito es eliminar un continente a la lista de continentes conquistados del jugador
 		 */
-		 void removeConqueredContinent(std::string continenName);
+		 void removeConqueredContinent(std::string & continenName);
 		 
 		 /**
 		  * Metodo cuyo proposito es verificar si un determinado pais esta conquistado por el jugador
 		  */
-		  bool landOwner(std::string landName );
+		  bool landOwner(std::string & landName );
 		  
 		  /**
 		  * Metodo cuyo proposito es verificar si un determinado continente esta conquistado por el jugador
 		  */
-		  bool continentOwner(std::string continentName );
+		  bool continentOwner(std::string & continentName );
 
 
 	

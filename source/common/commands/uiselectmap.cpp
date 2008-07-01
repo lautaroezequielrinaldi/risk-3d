@@ -5,7 +5,7 @@ UISelectMap::UISelectMap(std::vector<std::string> &parameterList) : Command (){
 	this->nombreMapa = parameterList[1];
 }
 
-UISelectMap::UISelectMap(std::string xml):Command (){
+UISelectMap::UISelectMap(const std::string& xml):Command (){
 
 	// construye el objeto a partir del Xml recibido
 	hydrate(xml);
@@ -22,7 +22,7 @@ std::string UISelectMap::serialize(){
   
 }
 
-void* UISelectMap::hydrate(std::string xml){
+void* UISelectMap::hydrate(const std::string & xml){
 	xmlChar* field;
 	xmlXPathObjectPtr objetoXPath;
 	xmlNodeSetPtr setNodo;

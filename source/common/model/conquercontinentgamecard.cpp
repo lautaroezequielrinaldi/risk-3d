@@ -38,9 +38,9 @@ bool ConquerContinentGameCard::execute(ReferenceCountPtr<GameManager>& gameManag
 	ReferenceCountPtr<Player> currentPlayer = gameManager->getGame()->getPlayer(turnManeger->getCurrentPlayer() );
 	
 	
-	
+	std::string cont = this->continentName;
 	// si el jugador conquisto todo el continente
-	if ( currentPlayer->continentOwner( this->continentName ) )
+	if ( currentPlayer->continentOwner( cont ) )
 		res=true;
 		
 	return res;

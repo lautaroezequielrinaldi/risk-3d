@@ -27,7 +27,7 @@ class UIReadyToPlay : public Command
 		 * Constructor de la clase.
 		 * La misma se construye a partir del Xml especificado.
 		 */
-		UIReadyToPlay(std::string xml);
+		UIReadyToPlay(const std::string & xml);
 		
 
 		UIReadyToPlay();

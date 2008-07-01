@@ -6,7 +6,7 @@ SelectMap::SelectMap(std::vector<std::string> &parameterList) : Command ()
 	this->nombreMapa = parameterList[1];
 }
 
-SelectMap::SelectMap(std::string xml):Command (){
+SelectMap::SelectMap(const std::string &xml):Command (){
 
 	// construye el objeto a partir del Xml recibido
 	hydrate(xml);
@@ -24,7 +24,7 @@ std::string SelectMap::serialize(){
   
 }
 
-void* SelectMap::hydrate(std::string xml){
+void* SelectMap::hydrate(const std::string & xml){
 	xmlChar* field;
 	xmlXPathObjectPtr objetoXPath;
 	xmlNodeSetPtr setNodo;

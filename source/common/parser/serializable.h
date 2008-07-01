@@ -37,7 +37,7 @@ class Serializable
 		/**
 		 * Metodo cuyo proposito es hidratar un archivo XML y construir un objeto a partir de el.
 		 */
-		virtual void* hydrate(std::string xml) = 0 ;
+		virtual void* hydrate(const std::string & xml) = 0 ;
 		
 };
 

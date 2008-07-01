@@ -82,10 +82,10 @@ class Game: public Serializable {
          */
         std::list< ReferenceCountPtr<Player> >& getPlayerList();
 
-	/**
-	 * Para solicitarle al Game que cree un nuevo jugador y lo devuelva
-	 *
-	 */
+		/**
+		 * Para solicitarle al Game que cree un nuevo jugador y lo devuelva
+		 *
+		 */
         ReferenceCountPtr<Player> & addPlayer();
 
         
@@ -109,13 +109,13 @@ class Game: public Serializable {
          * Metodo cuyo proposito es devolver el id del jugador dueño del pais countryName.
          * Si el pais no tiene dueño, devuelve cero.
          */
-        int getCountryOwner(std::string countryName);
+        int getCountryOwner(std::string & countryName);
         
        /**
-	* Metodo cuyo proposito es verificar si un conjunto de paises forman uno o mas continentes del mapa del juego.
-	* Retorna un vector con los nombres de los continentes formados por los paises de countryList.
-	*/
-	std::vector<std::string> conformContinent(const std::list<std::string>& countryList);
+		* Metodo cuyo proposito es verificar si un conjunto de paises forman uno o mas continentes del mapa del juego.
+		* Retorna un vector con los nombres de los continentes formados por los paises de countryList.
+		*/
+		std::vector<std::string> conformContinent(const std::list<std::string>& countryList);
 
 
 
@@ -127,7 +127,7 @@ class Game: public Serializable {
 		/**
 		 * Metodo cuyo proposito es hidratar  un objeto a partir del Xml especificado.
 		 */
-		void* hydrate(std::string filename);
+		void* hydrate(const std::string & filename);
                 
         /**
          * Destructor virtual de la clase Game.

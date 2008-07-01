@@ -12,7 +12,7 @@ Move::Move(std::vector<std::string> &parameterList): Command ()
 	this->jugadorFrom = atoi ( parameterList[3].c_str() );
 }
 
-Move::Move(std::string xml):Command (){
+Move::Move(const std::string &xml):Command (){
 
 	// construye el objeto a partir del Xml recibido
 	hydrate(xml);
@@ -49,7 +49,7 @@ std::string Move::serialize(){
 	
 }
 
-void* Move::hydrate(std::string xml){
+void* Move::hydrate(const std::string &xml){
 	
 	
 	xmlDocPtr document = hydrateCommon(xml);
@@ -137,13 +137,10 @@ void* Move::hydrate(std::string xml){
 	xmlXPathFreeObject(objetoXPathEjer);
 	
 	xmlXPathFreeContext(contextoXPath);
-
     xmlFreeDoc(document);
-
     xmlCleanupParser();
 	
 	return NULL;
-	
 	
 }
 		
@@ -157,26 +154,29 @@ bool Move::validate(ReferenceCountPtr<GameManager>& gameManager){
 	ReferenceCountPtr<TurnManager> turnManager = gameManager->getTurnManager();
 	ReferenceCountPtr<Player> jugadorActual = game->getPlayer( turnManager->getCurrentPlayer());
 	
+	std::string pOr =this->paisOrigen;
+	std::string pDe =this->paisDestino;
+	
 	//si el pais origen es del jugador actual
-	if( jugadorActual->landOwner(this->paisOrigen) ){
+	if( jugadorActual->landOwner(pOr) ){
 	//si el pais destino es del jugador actual
-		if( jugadorActual->landOwner(this->paisDestino) ){	
+		if( jugadorActual->landOwner(pDe) ){	
 			//si pais origen es adyacente al pais destino
 			if( paisO->esAdyacente(this->paisDestino)){
 				//si la cantidad de ejercitos a mover es menor a la cantidad de ejercitos que tiene el pais origen
 				if ( this->cantidadEjercitos < paisO->getArmyCount() )
 					movimValido = true;
 				else
-					cout<<"error, solo se puede mover una cantidad de ejercitos MENOR al total que posee el pais"<<endl;
+					cerr<<"error, solo se puede mover una cantidad de ejercitos MENOR al total que posee el pais"<<endl;
 			}
 			else
-				cout<<"solo se permiten movimientos entre paises adyacentes, error."<<endl;
+				cerr<<"solo se permiten movimientos entre paises adyacentes, error."<<endl;
 		}
 		else
-			cout<<"el pais destino al cual queres mover ejercitos......no es tuyo!!!"<<endl;
+			cerr<<"el pais destino al cual queres mover ejercitos......no es tuyo!!!"<<endl;
 	}
 	else
-		cout<<"el pais origen desde el cual queres mover ejercitos......no es tuyo!!!"<<endl;
+		cerr<<"el pais origen desde el cual queres mover ejercitos......no es tuyo!!!"<<endl;
 		
 	return movimValido;
 	

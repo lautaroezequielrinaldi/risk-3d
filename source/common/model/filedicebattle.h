@@ -48,7 +48,7 @@ class FileDiceBattle : public Dice
 		/**
 	 	 * Constructor de la clase.
 	 	 */
-		FileDiceBattle(std::string fileName);
+		FileDiceBattle(const std::string & fileName);
 		
 		/**
 	 	 * Destructor de la clase.
