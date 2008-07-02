@@ -5,11 +5,11 @@
 
 using namespace std;
 
-ServerAttack::ServerAttack(): ServerCommand(), Attack()
+ServerAttack::ServerAttack(): ServerCommand(), Command (), Attack()
 {
 }
 
-ServerAttack::ServerAttack( const std::string & xml ):ServerCommand(), Attack(xml)
+ServerAttack::ServerAttack( const std::string & xml ):ServerCommand(),Command (), Attack(xml)
 
 ServerAttack::~ServerAttack()
 {

@@ -65,16 +65,16 @@ bool Attacking::attack(ServerAttack & command){
 		strComodin2 << defensor;
 		
 		//mje para el defensor, para TO
-		std::string mainMsg = "El jugador * " +strComodin.str() +" * (Pais: " + command.Attack::getAttackerLand() + " ) ataco uno de tus paises: " + 
+		std::string mainMsg = "El jugador * " +strComodin.str() +" * (Pais: " + command.getAttackerLand() + " ) ataco uno de tus paises: " + 
 		command.Attack::getAttackedLand() + " Debes defenderte";
 		
 		command.Attack::setMainMsg(mainMsg);
 		
 		//seteo mje secundario
-		std::string secMsg = "El jugador * " +strComodin.str() + " * (Pais: " + command.Attack::getAttackerLand() + " ) ataco al jugador * " +
-		strComodin2.str() + " * (Pais: " + command.Attack::getAttackedLand() + " )";
+		std::string secMsg = "El jugador * " +strComodin.str() + " * (Pais: " + command.getAttackerLand() + " ) ataco al jugador * " +
+		strComodin2.str() + " * (Pais: " + command.getAttackedLand() + " )";
 		
-		command.Attack::setSecMsg(secMsg);	
+		command.setSecMsg(secMsg);	
 		
 		//notifico cambios y mensajes
 		gameManager->notify(&command);
@@ -94,7 +94,7 @@ bool Attacking::attack(ServerAttack & command){
 		//seteo mje secundario
 		strComodin << gameManager->getTurnManager()->getCurrentPlayer();
 		std::string secMsg = "El jugador * "+ strComodin.str() +" realizo un ataque invalido";
-		command.Attack::setSecMsg(secMsg);	
+		command.setSecMsg(secMsg);	
 		
 		//notifico cambios y mensajes
 		gameManager->notify(&command);	
