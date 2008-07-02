@@ -5,8 +5,8 @@ BattleResultClientCommand::BattleResultClientCommand(ReferenceCountPtr<Game>& ga
 }
 
 void BattleResultClientCommand::execute() {
-    ReferenceCountPtr<Game> game = this->gameManager->getGame();
-    ReferenceCountPtr<Mapa> map = game->getMapa();
+    
+    ReferenceCountPtr<Mapa> map = this->getGame()->getMapa();
     ReferenceCountPtr<Pais> paisAtacante = map->obtenerPais( getAttackerLand() );
     ReferenceCountPtr<Pais> paisDefensor = map->obtenerPais( getDefenderLand() );
 
