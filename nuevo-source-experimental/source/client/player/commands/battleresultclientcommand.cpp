@@ -33,10 +33,6 @@ void BattleResultClientCommand::execute() {
     }
 }
 
-std::string BattleResultClientCommand::getType() {
-	return "BATTLERESULT";
-}
-
 ClientCommand* BattleResultClientCommand::clone() {
 	return new BattleResultClientCommand(getGame());
 }

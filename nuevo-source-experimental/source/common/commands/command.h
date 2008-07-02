@@ -1,6 +1,7 @@
 #ifndef COMMAND_H_
 #define COMMAND_H_
 
+#include<vector>
 #include "../parser/serializable.h"
 #include "../smartpointer/referencecountptr.h" // Para definiciòn de ReferenceCountPtr
 

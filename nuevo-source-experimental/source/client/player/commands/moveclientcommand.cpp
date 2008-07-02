@@ -13,10 +13,6 @@ void MoveClientCommand::execute() {
     paisDest->addArmies(getArmyCount());
 }
 
-std::string MoveClientCommand::getType() {
-	return "MOVE";
-}
-
 ClientCommand* MoveClientCommand::clone() {
 	return new MoveClientCommand(getGame());
 }

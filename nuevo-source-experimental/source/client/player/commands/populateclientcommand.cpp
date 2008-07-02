@@ -10,10 +10,6 @@ void PopulateClientCommand::execute() {
     pais->addArmies(getArmyCount());
 }
 
-std::string PopulateClientCommand::getType() {
-	return "POPULATE";
-}
-
 ClientCommand* PopulateClientCommand::clone() {
 	return new PopulateClientCommand(getGame());
 }

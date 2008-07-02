@@ -19,10 +19,6 @@ class PopulateClientCommand: public Populate, public ClientCommand {
 		 */
 		virtual void execute();
 		/**
-		 * Devuelve el tipo de comando.
-		 */
-		virtual std::string getType();
-		/**
 		 * Clona al comando.
 		 */
 		virtual ClientCommand* clone();
