@@ -70,7 +70,7 @@ bool Occupying::populate(ServerPopulate & command){
 		command.setSecMsg(secMsg);	
 		
 		//notifico cambios y mensajes
-		gameManager->notify(&command);
+		gameManager->notify(reinterpret_cast<Command*>(&command));
 		
 		//------- fin actualizacion para cliente ------------------------
 		
@@ -107,7 +107,7 @@ bool Occupying::populate(ServerPopulate & command){
 			turnToFirstPopu.setSecMsg(secMsg);
 			
 			//notifico 
-			gameManager->notify(&turnToFirstPopu);	
+			gameManager->notify(reinterpret_cast<Command*>(&turnToFirstPopu));	
 			
 			cerr<<"HORA DE POBLAR INICIAL"<<endl;	
 		}
@@ -138,7 +138,7 @@ bool Occupying::populate(ServerPopulate & command){
 			turnToOc.setSecMsg(secMsg);
 			
 			//notifico 
-			gameManager->notify(&turnToOc);	
+			gameManager->notify(reinterpret_cast<Command*>(&turnToOc));	
 
 		}
 	}
@@ -156,7 +156,7 @@ bool Occupying::populate(ServerPopulate & command){
 		command.setSecMsg(secMsg);	
 		
 		//notifico cambios y mensajes
-		gameManager->notify(&command);	
+		gameManager->notify(reinterpret_cast<Command*>(&command));	
 	}
 		
 	return accionValida;        

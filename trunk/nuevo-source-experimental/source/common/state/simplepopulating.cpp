@@ -78,7 +78,7 @@ bool SimplePopulating::populate(ServerPopulate & command){
 		command.setSecMsg(secMsg);	
 		
 		//notifico cambios y mensajes
-		gameManager->notify(&command);
+		gameManager->notify(reinterpret_cast<Command*>(&command));
 		
 		//------- fin actualizacion modelo para cliente ------------------------
 		
@@ -150,7 +150,7 @@ bool SimplePopulating::populate(ServerPopulate & command){
 			turnToPopulate.setSecMsg(secMsg);
 			
 			//notifico 
-			gameManager->notify(&turnToPopulate);	
+			gameManager->notify(reinterpret_cast<Command*>(&turnToPopulate));	
 			
 			
 			//para tests
@@ -189,7 +189,7 @@ bool SimplePopulating::populate(ServerPopulate & command){
 				turnToFirstPopu.setSecMsg(secMsg);
 				
 				//notifico 
-				gameManager->notify(&turnToFirstPopu);	
+				gameManager->notify(reinterpret_cast<Command*>(&turnToFirstPopu));	
 				
 				//para test			
 				cerr<<"Turno de poblar inicial para el jugador: "<<this->gameManager->getTurnManager()->getCurrentPlayer() <<endl;
@@ -215,7 +215,7 @@ bool SimplePopulating::populate(ServerPopulate & command){
 		command.setSecMsg(secMsg);	
 		
 		//notifico cambios y mensajes
-		gameManager->notify(&command);	
+		gameManager->notify(reinterpret_cast<Command*>(&command));	
 	}
 	
 	return accionValida;
