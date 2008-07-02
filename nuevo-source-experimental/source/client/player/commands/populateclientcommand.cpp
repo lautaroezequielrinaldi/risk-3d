@@ -1,12 +1,12 @@
 #include "populateclientcommand.h"
 
-PopulateClientCommand::PopulateClientCommand(ReferenceCountPtr<Game>& game): ClientCommand(game) {
+PopulateClientCommand::PopulateClientCommand(ReferenceCountPtr<Game>& game): Populate(), ClientCommand(game) {
 	/// No realiza ninguna accion.
 }
 
 void PopulateClientCommand::execute() {
-    ReferenceCountPtr<Mapa> map = this->game->getMapa();
-    ReferenceCountptr<Pais> pais = map->obtenerPais(this->paisDestino);
+    ReferenceCountPtr<Mapa> map = this->getGame()->getMapa();
+    ReferenceCountPtr<Pais> pais = map->obtenerPais(this->getCountryDestination());
     pais->addArmies(getArmyCount());
 }
 

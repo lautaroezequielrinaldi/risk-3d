@@ -2,16 +2,12 @@
 #define COMMAND_H_
 
 #include "../parser/serializable.h"
-//#include "../state/state.h"
-//#include "../model/gamemanager.h" // Para definiciòn de gameManager.
 #include "../smartpointer/referencecountptr.h" // Para definiciòn de ReferenceCountPtr
 
 
 /**
  * Forward declaration de la clase State.
  */
-class State;
-class GameManager;
 class CommandObserver;
 
 /**
@@ -131,8 +127,5 @@ class Command : public Serializable
 
 };
 
-#include "../state/state.h"
-#include "../model/gamemanager.h"
-
-
 #endif /*COMMAND_H_*/
+

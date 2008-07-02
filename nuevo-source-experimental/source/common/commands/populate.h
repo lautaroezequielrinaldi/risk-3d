@@ -9,7 +9,6 @@
 
 #include <vector>
 #include "command.h"
-#include "../model/gamemanager.h"
 
 class Populate : public Command
 {

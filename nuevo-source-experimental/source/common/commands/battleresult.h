@@ -127,11 +127,6 @@ class BattleResult : public Command
 		 */
 		void* hydrate(const std::string & xml) ;
 
-	 
-		bool validate(ReferenceCountPtr<GameManager>& gameMAnager);
-		
-		void execute(ReferenceCountPtr<State>& state);
-
 		virtual std::string getName();
 
 		/**
@@ -141,3 +136,4 @@ class BattleResult : public Command
 };
 
 #endif /*BATTLERESULT_H_*/
+
