@@ -79,7 +79,7 @@ bool Attacking::attack(ServerAttack & command){
 		
 		//notifico cambios y mensajes
 		gameManager->notify(reinterpret_cast<Command*>(&command) );
-		)
+		
 		//------- fin actualizacion modelo para cliente ------------------------
 				
 		
