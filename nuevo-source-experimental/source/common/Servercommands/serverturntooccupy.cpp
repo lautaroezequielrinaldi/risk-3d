@@ -1,8 +1,13 @@
 #include "serverturntooccupy.h"
 
-ServerTurnToOccupy::ServerTurnToOccupy()
+ServerTurnToOccupy::ServerTurnToOccupy(): ServerCommand(),TurnToOccupy()
 {
 }
+
+ServerTurnToOccupy::ServerTurnToOccupy(const std::string & xml): ServerCommand(),TurnToOccupy(xml)
+{
+}
+
 
 ServerTurnToOccupy::~ServerTurnToOccupy()
 {

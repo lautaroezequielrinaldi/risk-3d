@@ -1,6 +1,10 @@
 #include "servernomore.h"
 
-ServerNoMore::ServerNoMore()
+ServerNoMore::ServerNoMore(): ServerCommand(), NoMore()
+{
+}
+
+ServerNoMore::ServerNoMore(const std::string & xml): ServerCommand(), NoMore(xml)
 {
 }
 

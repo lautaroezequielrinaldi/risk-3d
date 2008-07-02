@@ -1,8 +1,13 @@
 #include "serverwin.h"
 
-ServerWin::ServerWin()
+ServerWin::ServerWin(): ServerCommand(), Win()
 {
 }
+
+
+ServerWin::ServerWin(const std::string & xml): ServerCommand(), Win(xml)
+{
+} 
 
 ServerWin::~ServerWin()
 {

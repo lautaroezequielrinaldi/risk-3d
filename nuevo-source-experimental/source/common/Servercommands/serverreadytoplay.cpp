@@ -1,6 +1,10 @@
 #include "serverreadytoplay.h"
 
-ServerReadyToPlay::ServerReadyToPlay()
+ServerReadyToPlay::ServerReadyToPlay(): ServerCommand(), ReadyToPlay()
+{
+}
+
+ServerReadyToPlay::ServerReadyToPlay(const std::string & xml): ServerCommand(), ReadyToPlay()
 {
 }
 

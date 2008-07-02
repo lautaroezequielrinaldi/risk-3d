@@ -1,8 +1,13 @@
 #include "serveryouare.h"
 
-ServerYouAre::ServerYouAre()
+ServerYouAre::ServerYouAre(): ServerCommand(), YoAre()
 {
 }
+
+ServerYouAre::ServerYouAre(const std::string & xml ): ServerCommand(), YoAre(xml)
+{
+}
+
 
 ServerYouAre::~ServerYouAre()
 {
