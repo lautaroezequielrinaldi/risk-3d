@@ -10,7 +10,7 @@ class GameManager;
 #include "moving.h"
 #include "occupying.h"
 #include "populating.h"
-#include "waiting.h"
+
 /**
  *
  * 

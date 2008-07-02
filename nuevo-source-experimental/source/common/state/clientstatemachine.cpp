@@ -9,7 +9,7 @@ ClientStateMachine::ClientStateMachine(ReferenceCountPtr<GameManager> & gameMana
         states.insert(std::make_pair("moving",new Moving(gameManager,"moving")));
         states.insert(std::make_pair("occupying",new Occupying(gameManager,"occupying")));
         states.insert(std::make_pair("populating",new Populating(gameManager,"populating")));
-	states.insert(std::make_pair("waiting",new Waiting(gameManager,"waiting")));
+	
 
 }
 
