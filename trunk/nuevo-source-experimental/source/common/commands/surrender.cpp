@@ -9,7 +9,9 @@ Surrender::Surrender(std::vector<std::string> & parameterList):Command ()
 Surrender::Surrender(){
 
 }
-
+Surrender::Surrender(const std::string& xml): Command() {
+    hydrate(xml);
+}
 Surrender::~Surrender(){
 
 }

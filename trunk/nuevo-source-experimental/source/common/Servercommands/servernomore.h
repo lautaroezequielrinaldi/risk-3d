@@ -9,7 +9,7 @@ class ServerNoMore : public NoMore, public ServerCommand
 	public:
 		
 		ServerNoMore();
-	
+        ServerNoMore(const std::string& xml);	
 		~ServerNoMore();
 	
 		/**

@@ -13,7 +13,7 @@ class Quit: public Command {
 	public:
 
 		Quit(std::vector<std::string> &parameterList);
-
+        Quit(const std::string& xml);
 		Quit();
 		
 		virtual ~Quit();

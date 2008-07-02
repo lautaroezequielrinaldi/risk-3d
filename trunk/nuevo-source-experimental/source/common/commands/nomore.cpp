@@ -11,6 +11,9 @@ NoMore::NoMore(std::vector<std::string> &parameterList) : Command ()
 NoMore::NoMore(){
 
 }
+NoMore::NoMore(const std::string& xml) {
+    hydrate(xml);
+}
 
 NoMore::~NoMore(){
 

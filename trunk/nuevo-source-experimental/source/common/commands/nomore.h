@@ -14,6 +14,7 @@ class NoMore: public Command {
 	public:
 
 		NoMore(std::vector<std::string> &parameterList);
+        NoMore(const std::string& xml);
 		NoMore();
 		virtual ~NoMore();
 

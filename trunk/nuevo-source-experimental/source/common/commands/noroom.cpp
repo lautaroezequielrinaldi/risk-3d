@@ -4,6 +4,10 @@
 NoRoom::NoRoom(){
 
 }
+NoRoom::NoRoom(const std::string& xml) {
+    hydrate(xml);
+}
+
 NoRoom::~NoRoom(){
 
 }

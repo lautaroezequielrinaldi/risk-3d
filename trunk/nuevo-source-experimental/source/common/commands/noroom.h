@@ -9,6 +9,7 @@
 class NoRoom: public Command {
 	public:
 	NoRoom();
+    NoRoom(const std::string& xml);
 	virtual ~NoRoom();
 		/**
 		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.

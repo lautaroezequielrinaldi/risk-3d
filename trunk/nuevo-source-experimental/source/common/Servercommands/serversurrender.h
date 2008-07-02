@@ -9,7 +9,7 @@ class ServerSurrender : public ServerCommand, public Surrender
 	public:
 	
 		ServerSurrender();
-		
+        ServerSurrender(const std::string& xml);		
 		~ServerSurrender();
 		
 		/**

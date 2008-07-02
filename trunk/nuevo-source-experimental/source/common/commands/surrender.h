@@ -17,7 +17,7 @@ class Surrender:public Command{
 	public:
 
 		Surrender(std::vector<std::string>& parameterList);
-
+        Surrender(const std::string& xml);
 		Surrender();
 	
 		virtual ~Surrender();
