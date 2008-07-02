@@ -1,8 +1,8 @@
 #include "moveclientcommand.h"
 
-/*MoveClientCommand::PopulateClientCommand() {
+MoveClientCommand::MoveClientCommand(ReferenceCountPtr<Game>& game): ClientCommand(game) {
 	/// No realiza ninguna accion.
-}*/
+}
 
 void MoveClientCommand::execute() {
 	// No realiza ninguna accion.
@@ -13,7 +13,7 @@ std::string MoveClientCommand::getType() {
 }
 
 ClientCommand* MoveClientCommand::clone() {
-	return new MoveClientCommand();
+	return new MoveClientCommand(getGame());
 }
 
 MoveClientCommand::~MoveClientCommand() {

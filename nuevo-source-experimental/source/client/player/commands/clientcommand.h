@@ -2,8 +2,19 @@
 #define __CLIENTCOMMAND_H__
 
 #include<string> // Para definicion de std::string.
+#include "../../../common/smartpointer/referencecountptr.h"
+#include "../../../common/model/game.h"
 
 class ClientCommand {
+    /**
+     * Atributos privados de la clase ClientCommand.
+     */
+    private:
+        /**
+         * Almacena una referencia al game.
+         */
+        ReferenceCountPtr<Game> game;
+
 	/**
 	 * Metodos protegidos de la clase ClientCommand.
 	 */
@@ -11,7 +22,12 @@ class ClientCommand {
 		/**
 		 * Constructor de la clase ClientCommand.
 		 */
-		ClientCommand();
+		ClientCommand(ReferenceCountPtr<Game>& game);
+        /**
+         * Obtiene el game usado por el comando.
+         */
+        ReferenceCountPtr<Game>& getGame();
+
 	/**
 	 * Metodos publicos de la clase ClientCommand.
 	 */
