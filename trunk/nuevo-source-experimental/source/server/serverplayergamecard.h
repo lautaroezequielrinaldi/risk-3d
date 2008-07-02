@@ -6,7 +6,7 @@
 #include<sstream> // Para definicion de std::ostringstream.
 #include "../common/model/conquerplayergamecard.h" // Para definicion de GameCard.
 #include "gamecardvalidator.h"
-#include "../smartpointer/referencecountptr.h" // Para definiciòn de 
+#include "../common/smartpointer/referencecountptr.h" // Para definiciòn de 
 // ReferenceCountPtr.
 
 /**

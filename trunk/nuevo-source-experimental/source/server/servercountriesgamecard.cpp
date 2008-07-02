@@ -15,7 +15,7 @@ bool ServerCountriesGameCard::validate(ReferenceCountPtr<GameManager>& gameManag
 	
 	// si el jugador actual tiene la cantidad de paises necesarios para cumplir el objetivo
 
-	if ( currentPlayer->getServeredLands() == this->getCountryCount() )
+	if ( currentPlayer->getConqueredLands() == this->getCountryCount() )
 		res=true;
 	
 	return res;
@@ -24,5 +24,9 @@ bool ServerCountriesGameCard::validate(ReferenceCountPtr<GameManager>& gameManag
 
 ServerCountriesGameCard::~ServerCountriesGameCard() {
     // No realiza ninguna acciòn.
+}
+
+std::map<std::string, std::string> ServerCountriesGameCard::toString(){
+
 }
 
