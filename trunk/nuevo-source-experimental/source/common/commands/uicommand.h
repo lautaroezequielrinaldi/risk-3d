@@ -2,6 +2,9 @@
 #define __UICOMMAND_H__
 
 #include "command.h"
+#include "../model/gamemanager.h"
+#include "../smartpointer/referencecountptr.h"
+
 /**
  * @todo evaluar si se puede implementar aca serialize
  * @todo evaluar si se puede exterminar UICommand(std::vector<std::string> &parameterList);
