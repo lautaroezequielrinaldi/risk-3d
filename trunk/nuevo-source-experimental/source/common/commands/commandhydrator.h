@@ -59,12 +59,12 @@ class CommandHydrator {
 		 * Metodo cuyo proposito es obtener un comando a partir del nombre proporcionado,
 		 * hidratado a partir del xml proporcionado.
 		 */
-		Command * getCommand(const std::string &name, const std::string & xml);
+		ServerCommand * getCommand(const std::string &name, const std::string & xml);
 	
 	
 	private:
 	
-		std::map <std::string, Command * > commands;
+		std::map <std::string, ServerCommand * > commands;
 
 };
 #endif /*__COMMANDHYDRATOR_H__*/
