@@ -6,7 +6,7 @@ BattleResultClientCommand::BattleResultClientCommand(ReferenceCountPtr<Game>& ga
 
 void BattleResultClientCommand::execute() {
     ReferenceCountPtr<Mapa> map = this->game->getMapa();
-    ReferenceCountptr<Pais> pais = map->obtenerPais(this->paisDestino);
+    ReferenceCountPtr<Pais> pais = map->obtenerPais(this->paisDestino);
     pais->addArmies(getArmyCount());
 }
 

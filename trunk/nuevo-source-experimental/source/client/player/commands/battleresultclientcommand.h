@@ -2,6 +2,8 @@
 #define __BATTLERESULTCLIENTCOMMAND_H__
 
 #include "clientcommand.h"
+#include "../../../common/model/mapa.h"
+
 
 class BattleResultClientCommand: public ClientCommand {
 
