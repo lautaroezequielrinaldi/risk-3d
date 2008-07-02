@@ -87,7 +87,10 @@ class Game: public Serializable {
 		 *
 		 */
         ReferenceCountPtr<Player> & addPlayer();
-
+        /**
+         * Remueve un jugador del Game.
+         */
+        void removePlayer(const ReferenceCountPtr<Player>& player);
         /**
          * Obtiene el jugador correspondinte al color especificado.
          * Retorna el jugador correspondiente o NULL en caso de no encontrar jugador con el color especificado.
