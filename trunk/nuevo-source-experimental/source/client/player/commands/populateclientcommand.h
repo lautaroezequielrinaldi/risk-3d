@@ -1,9 +1,10 @@
 #ifndef __POPULATECLIENTCOMMAND_H__
 #define __POPULATECLIENTCOMMAND_H__
 
+#include "../../../common/commands/populate.h"
 #include "clientcommand.h"
 
-class PopulateClientCommand: public ClientCommand {
+class PopulateClientCommand: public Populate, public ClientCommand {
 
 	/**
 	 * Metodos publicos de la clase PopulateClientCommand.

@@ -1,6 +1,6 @@
 #include "moveclientcommand.h"
 
-MoveClientCommand::MoveClientCommand(ReferenceCountPtr<Game>& game): ClientCommand(game) {
+MoveClientCommand::MoveClientCommand(ReferenceCountPtr<Game>& game): Move(), ClientCommand(game) {
 	/// No realiza ninguna accion.
 }
 

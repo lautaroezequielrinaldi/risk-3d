@@ -1,11 +1,12 @@
 #ifndef __BATTLERESULTCLIENTCOMMAND_H__
 #define __BATTLERESULTCLIENTCOMMAND_H__
 
+#include "../../../common/commands/battleresult.h"
 #include "clientcommand.h"
 #include "../../../common/model/mapa.h"
 
 
-class BattleResultClientCommand: public ClientCommand {
+class BattleResultClientCommand: public BattleResult, public ClientCommand {
 
 	/**
 	 * Metodos publicos de la clase BattleResultClientCommand.
