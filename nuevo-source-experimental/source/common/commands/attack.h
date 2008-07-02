@@ -13,7 +13,7 @@
 #include "command.h"
 #include "../model/gamemanager.h"
 
-class Attack : public Command
+class Attack : virtual public Command
 {
 	
 	private:

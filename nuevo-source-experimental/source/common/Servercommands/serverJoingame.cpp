@@ -1,10 +1,10 @@
 #include "serverJoingame.h"
 
-ServerJoinGame::ServerJoinGame()
+ServerJoinGame::ServerJoinGame() : JoinGame()
 {
 }
 
-ServerJoinGame::~ServerJoinGame()
+ServerJoinGame::~ServerJoinGame(const std::string & xml) : JoinGame ( xml )
 {
 }
 bool ServerJoinGame::validate(ReferenceCountPtr<GameManager>& gameManager){

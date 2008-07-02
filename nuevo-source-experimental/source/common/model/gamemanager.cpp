@@ -40,11 +40,11 @@ ReferenceCountPtr<StateMachine>& GameManager::getStateMachine(){
 	return this->stateMachine;
 }
 
-Attack& GameManager::getAttack(){
+ServerAttack& GameManager::getAttack(){
 	return *attack;
 }
 		 
-void GameManager::setAttack(Attack& attack){
+void GameManager::setAttack(ServerAttack& attack){
 	this->attack = &attack;
 }
 

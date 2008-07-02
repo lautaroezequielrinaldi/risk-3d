@@ -1,10 +1,14 @@
 #include "serverbattleresult.h"
 
-
-
-ServerBattleResult::ServerBattleResult()
+ServerBattleResult::ServerBattleResult() : BattleResult()
 {
 }
+
+ServerBattleResult::ServerBattleResult(const std::string & xml) : BattleResult( xml )
+{
+}
+
+
 
 ServerBattleResult::~ServerBattleResult()
 {

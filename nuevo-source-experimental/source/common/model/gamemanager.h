@@ -14,7 +14,7 @@ class UICommand;
 #include "../state/stateobservable.h"
 #include "../state/statemachine.h"
 #include "../commands/commandobservable.h"
-#include "../commands/attack.h"
+#include "../Servercommands/serverattack.h"
 
 #include "../playerproxy.h"
 #include "../serverproxy.h"
@@ -51,7 +51,7 @@ class GameManager: public StateObservable, public CommandObservable {
 		* No puede ser una referencia al ataque ya que el ataque no existe al crearse el gameManager. 
 		 * (valido en el contexto del server)
 		*/
-		Attack *attack;
+		ServerAttack *attack;
 			
 		/**
 		 * Hay lugar aun para conectarse?
@@ -122,12 +122,12 @@ class GameManager: public StateObservable, public CommandObservable {
 		/**
 		 * Metodo cuyo proposito es obtener el ataque almacenado.
 		 */
-		 Attack& getAttack();
+		 ServerAttack& getAttack();
 		 
 		/**
 		 * Metodo cuyo proposito es establecer un ataque.
 		 */
-		void setAttack(Attack & attack);
+		void setAttack(ServerAttack & attack);
 		
 		bool isPlaying();
 
