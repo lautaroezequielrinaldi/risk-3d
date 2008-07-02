@@ -1,7 +1,7 @@
 #include "messagehydrator.h"
 
-ReferenceCountPtr<Command> MessageHydrator::createMessage(const std::string& commandName, const std::string xml) {
-    ReferenceCountPtr<Attack> cmd
+ReferenceCountPtr<Command> MessageHydrator::createCommand(const std::string& commandName, const std::string& xml) {
+    ReferenceCountPtr<Attack> cmd;
     if (commandName == "attack") {
         cmd = new Attack();
     }
@@ -55,9 +55,6 @@ ReferenceCountPtr<Command> MessageHydrator::createMessage(const std::string& com
     }
     if (commandName == "turnToAttack") {
         cmd = new TurnToAttack();
-    }
-    if (commandName == "turnToDefend") {
-        md = new TurnToDefend();
     }
     if (commandName == "turnToOccupy") {
         cmd = new TurnToOccupy();
