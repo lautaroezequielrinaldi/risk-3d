@@ -9,7 +9,7 @@ class ServerTurnToPopulate : public TurnToPopulate , public ServerCommand
 	public:
 	
 		ServerTurnToPopulate();
-		
+        ServerTurnToPopulate(const std::string& xml);		
 		~ServerTurnToPopulate();
 		/**
 		 * Metodo cuyo proposito es validar la accion que realice el comando.

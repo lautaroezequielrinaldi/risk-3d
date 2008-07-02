@@ -9,7 +9,7 @@ class ServerYouAre : public YouAre, public ServerCommand
 	public:
 	
 		ServerYouAre();
-	
+        ServerYouAre(const std::string& xml);	
 		~ServerYouAre();
 		/**
 		 * Metodo cuyo proposito es validar la accion que realice el comando.

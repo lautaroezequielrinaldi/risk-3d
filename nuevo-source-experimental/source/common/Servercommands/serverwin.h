@@ -10,7 +10,7 @@ class ServerWin : public ServerCommand, public Win
 	public:
 	
 		ServerWin();
-	
+        ServerWin(const std::string& xml);	
 		~ServerWin();
 		/**
 		 * Metodo cuyo proposito es validar la accion que realice el comando.
