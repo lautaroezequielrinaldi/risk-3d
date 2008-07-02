@@ -29,10 +29,6 @@ void StateObserver::stateChanged(const SimplePopulating& state) {
     // No realiza ninguna accion.
 }
 
-void StateObserver::stateChanged(const Waiting& state) {
-    // No realiza ninguna accion.
-}
-
 void StateObserver::stateChanged(const WaitingMapSelection& state) {
     // No realiza ninguna accion.
 }

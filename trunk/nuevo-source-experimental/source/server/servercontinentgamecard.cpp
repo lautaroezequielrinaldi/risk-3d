@@ -3,11 +3,11 @@
 ServerContinentGameCard::ServerContinentGameCard(
     const std::string& name, const std::string& continentName):
     GameCardValidator(),
-    GameCard(name, continentName) {
+    ConquerContinentGameCard(name, continentName) {
     // No realiza ninguna acciòn.
 }
 
-ServerContinentGameCard::~ConquerContinentGameCard() {
+ServerContinentGameCard::~ServerContinentGameCard() {
     // No realiza ninguna acciòn.
 }
 
