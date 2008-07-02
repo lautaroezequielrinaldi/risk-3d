@@ -1,9 +1,9 @@
 #ifndef __PROXY_H__
 #define __PROXY_H__
-#include "../common/thread/threaded.h"
-#include "../common/thread/cancelable.h"
-#include "../common/smartpointer/referencecountptr.h"
-#include "../common/net/sockets/socket.h"
+#include "../thread/threaded.h"
+#include "../thread/cancelable.h"
+#include "../smartpointer/referencecountptr.h"
+#include "sockets/socket.h"
 
 class GameManager;
 class Command;
