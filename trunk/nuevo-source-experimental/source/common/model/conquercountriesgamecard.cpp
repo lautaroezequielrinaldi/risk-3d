@@ -23,21 +23,6 @@ std::map<std::string, std::string> ConquerCountriesGameCard::toString() {
     return result;
 }
 
-bool ConquerCountriesGameCard::execute(ReferenceCountPtr<GameManager>& gameManager){
-	
-	bool res=false;
-	ReferenceCountPtr<TurnManager> turnManeger = gameManager->getTurnManager();
-	ReferenceCountPtr<Player> currentPlayer = gameManager->getGame()->getPlayer(turnManeger->getCurrentPlayer() );
-	
-	// si el jugador actual tiene la cantidad de paises necesarios para cumplir el objetivo
-
-	if ( currentPlayer->getConqueredLands() == this->countryCount )
-		res=true;
-	
-	return res;
-}
-
-
 ConquerCountriesGameCard::~ConquerCountriesGameCard() {
     // No realiza ninguna acciòn.
 }

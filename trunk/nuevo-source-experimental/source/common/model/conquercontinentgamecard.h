@@ -3,11 +3,6 @@
 
 #include<string> // Para definiciòn de std::string.
 #include<map> // Para definicion de std::map.
-#include "player.h" // Para definiciòn de Player.
-#include "game.h" // Para definiciòn de Game.
-#include "gamecard.h" // Para definiciòn de GameCard.
-#include "../smartpointer/referencecountptr.h" // Para definiciòn de
-// ReferenceCountPtr.
 
 /**
  * Clase cuyo proposito es representar la carta de juego conquistar continente.
@@ -50,10 +45,6 @@ class ConquerContinentGameCard: public GameCard {
          */
         ConquerContinentGameCard(const std::string& name,
             const std::string& continentName);
-        /**
-         * Mètodo que valida la carta de juego.
-         */
-        bool execute(ReferenceCountPtr<GameManager>& gameManager);
         /**
          * Se serializa a string.
          */

@@ -11,13 +11,6 @@ std::string ConquerContinentGameCard::getContinentName() {
     return this->continentName;
 }
 
-/* deshabilitado por Charli para compilar
-bool ConquerContinentGameCard::execute(const ReferenceCountPtr<Player>& player,
-    const ReferenceCountPtr<Game>& game) {
-    return false;
-}
-*/
-
 std::map<std::string, std::string> ConquerContinentGameCard::toString() {
     std::map<std::string, std::string> result;
     result["tipo"] = "CONQUERCONTINENTGAMECARD";
@@ -29,21 +22,5 @@ std::map<std::string, std::string> ConquerContinentGameCard::toString() {
 
 ConquerContinentGameCard::~ConquerContinentGameCard() {
     // No realiza ninguna acciòn.
-}
-
-bool ConquerContinentGameCard::execute(ReferenceCountPtr<GameManager>& gameManager){
-	
-	bool res=false;
-	ReferenceCountPtr<TurnManager> turnManeger = gameManager->getTurnManager();
-	ReferenceCountPtr<Player> currentPlayer = gameManager->getGame()->getPlayer(turnManeger->getCurrentPlayer() );
-	
-	
-	std::string cont = this->continentName;
-	// si el jugador conquisto todo el continente
-	if ( currentPlayer->continentOwner( cont ) )
-		res=true;
-		
-	return res;
-	
 }
 
