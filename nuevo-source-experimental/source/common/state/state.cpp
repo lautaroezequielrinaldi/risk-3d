@@ -2,7 +2,7 @@
 #include "../Servercommands/serverattack.h"
 #include "../Servercommands/serverchat.h"
 #include "../Servercommands/serverdefend.h"
-#include "../Servercommands/serverjoingame.h"
+#include "../Servercommands/serverJoingame.h"
 #include "../Servercommands/servermove.h"
 #include "../Servercommands/serverselectmap.h"
 #include "../Servercommands/serverpopulate.h"
@@ -189,7 +189,7 @@ bool State::surrender(ServerSurrender & command){
 	return true;
 }
 
-bool State::youAre(YouAre & command){
+bool State::youAre(ServerYouAre & command){
 	// 
         return true;
 }
@@ -217,44 +217,44 @@ bool State::chat(ServerChat & command) {
 
 }
 
-bool State::lose(Lose & command) {
+bool State::lose(ServerLose & command) {
 	return false;
 }
 
-bool State::map(Map & command) {
+bool State::map(ServerMap & command) {
 	return false;
 }
 
-bool State::turnToAttack(TurnToAttack & command) {
+bool State::turnToAttack(ServerTurnToAttack & command) {
 	return false;
 }
 
-bool State::turnToMove(TurnToMove & command) {
+bool State::turnToMove(ServerTurnToMove & command) {
 	return false;
 }
 
-bool State::turnToOccupy(TurnToOccupy & command) {
+bool State::turnToOccupy(ServerTurnToOccupy & command) {
 	return false;
 }
 
-bool State::turnToPopulate(TurnToPopulate & command) {
+bool State::turnToPopulate(ServerTurnToPopulate & command) {
 	return false;
 }
 
-bool State::win(Win & command) {
+bool State::win(ServerWin & command) {
 	return false;
 }
 
-bool State::noRoom(NoRoom & command){
+bool State::noRoom(ServerNoRoom & command){
 	return false;
 }
 
-bool State::mapList(MapList & command){
+bool State::mapList(ServerMapList & command){
 	return false;
 }
 
 
-bool State::battleResult(BattleResult & command){
+bool State::battleResult(ServerBattleResult & command){
 	return false;
 }
 

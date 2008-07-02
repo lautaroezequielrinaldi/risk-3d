@@ -138,7 +138,7 @@ void GameManager::execute(const std::string & commandName,const std::string &com
  *
  * ojo, esto solo anda en el cliente, en el server hay que hacer el iterador....
  */
-void GameManager::notify(ServerCommand * command) {
+void GameManager::notify(Command * command) {
 	std::cerr << "GameManager::notify(" << command->getName() << ")" << std::endl;
 	std::cerr << "GameManager::notify from: " << command->getFrom() << " to: " << command->getTo() << std::endl;
 	ReferenceCountPtr<Proxy> actualProxy;
@@ -147,7 +147,8 @@ void GameManager::notify(ServerCommand * command) {
 
 	while ( it != this->proxyList.end()) {
 		actualProxy = *it;
-		actualProxy->notify(*command);
+    	Command& cmd = reinterpret_cast<Command&> (*command);	
+        actualProxy->notify(cmd);
 		++it;
 	}
 

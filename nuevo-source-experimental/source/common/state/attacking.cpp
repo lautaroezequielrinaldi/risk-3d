@@ -2,6 +2,7 @@
 #include "attacking.h"
 #include "stateobserver.h"
 #include "../commands/attack.h"
+#include "../Servercommands/serverattack.h"
 #include "../model/gamemanager.h"
 #include "../commands/turntomove.h"
 #include<sstream>
