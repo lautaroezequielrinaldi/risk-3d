@@ -1,12 +1,13 @@
 #include "serverdefend.h"
+#include "serverattack.h"
 #include<sstream>
 #include<iostream>
 
 using namespace std;
-ServerDefend::ServerDefend() :ServerCommand(), Defender()
+ServerDefend::ServerDefend() :ServerCommand(), Defend()
 {
 }
-ServerDefend::ServerDefend(const std::string & xml):ServerCommand(), Defender ( xml )
+ServerDefend::ServerDefend(const std::string & xml):ServerCommand(), Defend ( xml )
 {
 }
 

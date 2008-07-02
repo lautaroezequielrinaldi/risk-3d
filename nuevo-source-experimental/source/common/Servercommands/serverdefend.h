@@ -10,7 +10,7 @@ class ServerDefend : public ServerCommand, public Defend
 	public:
 		
 		ServerDefend();
-		
+        ServerDefend(const std::string& xml);		
 		~ServerDefend();
 		
 		/**
