@@ -1,5 +1,5 @@
 #include "serverattack.h"
-
+#include "../commands/attack.h"
 #include<sstream>
 #include<iostream>
 

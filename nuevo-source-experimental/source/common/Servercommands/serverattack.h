@@ -1,8 +1,11 @@
 #ifndef SERVERATTACK_H_
 #define SERVERATTACK_H_
 
+class Attack;
+
 #include "servercommand.h"
-#include "../commands/attack.h"
+
+//#include "../commands/attack.h"
 
 class ServerAttack : public ServerCommand, public Attack
 {
