@@ -9,6 +9,10 @@ class PopulateClientCommand: public ClientCommand {
 	 * Metodos publicos de la clase PopulateClientCommand.
 	 */
 	public:
+        /**
+         * Constructor de la clase PopulateClientCommand.
+         */
+        PopulateClientCommand(ReferenceCountPtr<Game>& game);
 		/**
 		 * Ejecuta el comando.
 		 */

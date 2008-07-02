@@ -4,11 +4,14 @@
 #include "clientcommand.h"
 
 class MoveClientCommand: public ClientCommand {
-
 	/**
 	 * Metodos publicos de la clase MoveClientCommand.
 	 */
 	public:
+        /**
+         * Crea un comando de tipo MoveClientCommand.
+         */
+        MoveClientCommand(ReferenceCountPtr<Game>& game);
 		/**
 		 * Ejecuta el comando.
 		 */

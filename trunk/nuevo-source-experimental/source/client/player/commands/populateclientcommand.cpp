@@ -1,8 +1,8 @@
 #include "populateclientcommand.h"
 
-/*PopulateClientCommand::PopulateClientCommand() {
+PopulateClientCommand::PopulateClientCommand(ReferenceCountPtr<Game>& game): ClientCommand(game) {
 	/// No realiza ninguna accion.
-}*/
+}
 
 void PopulateClientCommand::execute() {
 	// No realiza ninguna accion.
@@ -13,7 +13,7 @@ std::string PopulateClientCommand::getType() {
 }
 
 ClientCommand* PopulateClientCommand::clone() {
-	return new PopulateClientCommand();
+	return new PopulateClientCommand(getGame());
 }
 
 PopulateClientCommand::~PopulateClientCommand() {
