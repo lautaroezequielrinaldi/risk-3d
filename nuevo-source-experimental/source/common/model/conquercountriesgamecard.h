@@ -3,6 +3,7 @@
 
 #include<string> // Para definicion de std::string
 #include<map> // Para definicion de std::map.
+#include<sstream>
 #include "gamecard.h"
 
 /**
