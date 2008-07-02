@@ -58,6 +58,9 @@ void GLSphereWidget::update() {
     this->alpha = (this->alpha < -2 * PI) ? this->alpha +  2 * PI : this->alpha;
     this->beta = (this->beta > 1.0) ? 1.0 : this->beta;
     this->beta = (this->beta < -1.0) ? -1.0 : this->beta;
+	this->distance = (this->distance > 2.0) ? 2.0 : this->distance;
+	this->distance = (this->distance < -2.0) ? -2.0: this->distance;
+
 	//std::cerr << this->alpha << "--" << this->beta << "--" << this->distance << "--" << deltaTime << std::endl;
 
 }
