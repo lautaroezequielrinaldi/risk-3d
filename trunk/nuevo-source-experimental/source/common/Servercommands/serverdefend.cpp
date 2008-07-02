@@ -3,7 +3,10 @@
 #include<iostream>
 
 using namespace std;
-ServerDefend::ServerDefend()
+ServerDefend::ServerDefend() : Defender()
+{
+}
+ServerDefend::ServerDefend(const std::string & xml): Defender ( xml )
 {
 }
 

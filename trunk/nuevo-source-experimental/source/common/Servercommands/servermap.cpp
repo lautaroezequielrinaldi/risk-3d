@@ -1,6 +1,10 @@
 #include "servermap.h"
 
-ServerMap::ServerMap()
+ServerMap::ServerMap(): Map()
+{
+}
+
+ServerMap::ServerMap(const std::string & xml) : Map( xml )
 {
 }
 

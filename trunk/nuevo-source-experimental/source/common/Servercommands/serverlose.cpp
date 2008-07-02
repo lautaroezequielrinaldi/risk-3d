@@ -1,6 +1,10 @@
 #include "serverlose.h"
 
-ServerLose::ServerLose()
+ServerLose::ServerLose(): Lose()
+{
+}
+
+ServerLose::ServerLose(const std::string & xml) : Lose(xml)
 {
 }
 

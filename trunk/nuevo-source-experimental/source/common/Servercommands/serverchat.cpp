@@ -1,8 +1,13 @@
 #include "serverchat.h"
 
-ServerChat::ServerChat()
+ServerChat::ServerChat(const std::string & xml): Chat (xml )
 {
 }
+
+ServerChat::ServerChat(){
+	
+}
+
 
 ServerChat::~ServerChat()
 {

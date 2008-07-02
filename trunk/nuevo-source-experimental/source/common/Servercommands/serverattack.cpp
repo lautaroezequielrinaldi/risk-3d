@@ -4,9 +4,12 @@
 #include<iostream>
 
 using namespace std;
-ServerAttack::ServerAttack()
+
+ServerAttack::ServerAttack(): ServerCommand(), Attack()
 {
 }
+
+ServerAttack::ServerAttack( const std::string & xml ):ServerCommand(), Attack(xml)
 
 ServerAttack::~ServerAttack()
 {

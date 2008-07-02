@@ -1,8 +1,13 @@
 #include "serverdidiwin.h"
 
-ServerDidIWin::ServerDidIWin()
+ServerDidIWin::ServerDidIWin(): DidIWin()
 {
 }
+
+ServerDidIWin::ServerDidIWin(const std::string & xml) : DidIWin(xml)
+{
+}
+
 
 ServerDidIWin::~ServerDidIWin()
 {

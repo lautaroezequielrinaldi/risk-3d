@@ -10,7 +10,9 @@ class ServerAttack : public ServerCommand, public Attack
 	
 		ServerAttack();
 		
-		~ServerAttack();
+		ServerAttack( const std::string & xml );
+		
+		virtual ~ServerAttack();
 		
 		/**
 		 * Metodo cuyo proposito es validar la accion que realice el comando.
