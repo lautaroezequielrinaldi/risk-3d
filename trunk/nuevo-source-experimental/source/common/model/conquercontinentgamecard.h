@@ -3,6 +3,7 @@
 
 #include<string> // Para definiciòn de std::string.
 #include<map> // Para definicion de std::map.
+#include "gamecard.h"
 
 /**
  * Clase cuyo proposito es representar la carta de juego conquistar continente.
