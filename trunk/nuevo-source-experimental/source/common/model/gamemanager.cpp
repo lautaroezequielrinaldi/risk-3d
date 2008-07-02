@@ -79,10 +79,6 @@ void GameManager::add(ReferenceCountPtr<PlayerProxy> & playerProxy) {
 
 }
 
-void GameManager::add(ReferenceCountPtr<ServerProxy> & serverProxy) {
-	proxyList.push_back(serverProxy);
-}
-
 bool GameManager::isPlaying() {
 	return playing;
 
@@ -127,8 +123,9 @@ void GameManager::execute(const std::string & commandName,const std::string &com
 	std::cout << commandName << " -> execute("<< currentState->getName()<<")" <<std::endl << std::endl;
 	ServerCommand* command = commandHydrator->getCommand(commandName,commandXml);
 	if (command != NULL) {
+        Command& cmd = reinterpret_cast<Command&>(*command);
 		// Notifica a los listeners del comando.
-		CommandObservable::notifyCommandExecuted((Command*) command);
+		CommandObservable::notifyCommandExecuted(cmd);
 	}	
 	// aca le estamos pidiendo al command que llame al metodo correspondiente
 	// a si mismo del estado actual.

@@ -38,7 +38,7 @@ class MessageHydrator {
         /**
          * Destructor virtual de la clase MessageHydrator.
          */
-        virtual ~MessgeHydrator();
+        virtual ~MessageHydrator();
 };
 
 #endif /** __MESSAGEHYDRATOR_H__ */

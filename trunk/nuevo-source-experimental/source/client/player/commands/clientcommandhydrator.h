@@ -33,7 +33,7 @@ class ClientCommandHydrator {
         /**
          * Constructor de la clase ClientCommandHydrator.
          */
-        ClientCommandHydrator(ReferenceCountPtr<Game>& game);
+        ClientCommandHydrator(const ReferenceCountPtr<Game>& game);
         /**
          * Devuelve un booleano indicando si un tipo es un comando de cliente
          * o no.

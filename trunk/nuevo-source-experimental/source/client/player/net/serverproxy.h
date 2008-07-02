@@ -1,17 +1,20 @@
 #ifndef __SERVERPROXY_H__
 #define __SERVERPROXY_H__
 
-#include "proxy.h"
+#include "../../../common/net/proxy.h"
+#include "../../../common/commands/commandobservable.h"
+#include "../commands/clientcommandhydrator.h"
+#include "../../../common/commands/messagehydrator.h"
 
 class Game;
 class ClientCommand;
 class Command;
-class CommandObserver;
+
 /**
  *
  * 
  */
-class ServerProxy:public CommandObserver, public Proxy {
+class ServerProxy:public CommandObservable, public Proxy {
     private:
         ReferenceCountPtr<Game> game;
         ClientCommandHydrator commandHydrator;
