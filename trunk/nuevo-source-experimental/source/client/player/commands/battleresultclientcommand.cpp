@@ -7,22 +7,22 @@ BattleResultClientCommand::BattleResultClientCommand(ReferenceCountPtr<Game>& ga
 void BattleResultClientCommand::execute() {
     ReferenceCountPtr<Game> game = this->gameManager->getGame();
     ReferenceCountPtr<Mapa> map = game->getMapa();
-    ReferenceCountPtr<Pais> paisAtacante = map->obtenerPais( command.getAttackerLand() );
-    ReferenceCountPtr<Pais> paisDefensor = map->obtenerPais( command.getDefenderLand() );
+    ReferenceCountPtr<Pais> paisAtacante = map->obtenerPais( getAttackerLand() );
+    ReferenceCountPtr<Pais> paisDefensor = map->obtenerPais( getDefenderLand() );
 
-    ReferenceCountPtr<Player> playerAtacante = game->getPlayer( command.getAttackercolor() );
-    ReferenceCountPtr<Player> playerDefensor = game->getPlayer( command.getDefenderColor() );
+    ReferenceCountPtr<Player> playerAtacante = game->getPlayer( getAttackercolor() );
+    ReferenceCountPtr<Player> playerDefensor = game->getPlayer( getDefenderColor() );
 
-    paisAtacante->removeArmies(command.getAttackerResult());
-    paisDefensor->removeArmies(command.getDefenderResult());
+    paisAtacante->removeArmies(getAttackerResult());
+    paisDefensor->removeArmies(getDefenderResult());
 
     if ( paisDefensor->getArmyCount() == 0  ){
-        std::string defLand = command.getDefenderLand();
+        std::string defLand = getDefenderLand();
         playerDefensor->removeConqueredLand(defLand);
 
         playerAtacante->addConqueredLand(defLand );
-        paisAtacante->removeArmies( command.getConquest() );
-        paisDefensor->addArmies(  command.getConquest() );
+        paisAtacante->removeArmies( getConquest() );
+        paisDefensor->addArmies(  getConquest() );
         std::vector<std::string> vecContinentes = game->conformContinent(playerAtacante->getConqueredLandList() );
         for ( unsigned int i=0; i<vecContinentes.size();i++){
             //si playerAtacante no es dueño todavia de uno de los continentes conquistados segun vecContinentes
