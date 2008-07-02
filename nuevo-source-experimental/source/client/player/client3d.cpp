@@ -5,7 +5,7 @@
 //=============================================================================
 
 #include "client3d.h"
-
+#include<string>
 template<typename T>
 T sqr(const T& a)
 {
@@ -16,6 +16,26 @@ template<typename T>
 T random(T l, T h)
 {
 	return (T(rand()) / RAND_MAX) * (h - l) + l;
+}
+
+void Client3d::loadTexture(const std::string& imageFileName) {
+    glEnable(GL_TEXTURE_2D);
+    SDL_Surface * mapaSurface = IMG_Load(imageFileName.c_str());
+    if (mapaSurface) {
+        glGenTextures(1, &texture);
+        glBindTexture(GL_TEXTURE_2D, texture);
+
+        SDL_LockSurface(mapaSurface);
+
+        gluBuild2DMipmaps(GL_TEXTURE_2D,3,mapaSurface->w,
+           mapaSurface->h,GL_BGR_EXT, GL_UNSIGNED_BYTE, mapaSurface->pixels);
+
+        SDL_UnlockSurface(mapaSurface);
+        SDL_FreeSurface(mapaSurface);
+
+        glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR_MIPMAP_LINEAR);
+    }
 }
 
 bool Client3d::cityRayIntersection(Pais& city, Point3 rayStart, Vector3 rayDir)
@@ -60,6 +80,7 @@ void Client3d::setup()
     map.agregarPais(pais1);
     map.agregarPais(pais2);
 
+    loadTexture("mapa.jpg");
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(60.0, 1.33, 0.1, 100.0);
@@ -67,7 +88,8 @@ void Client3d::setup()
 	planetQuad = gluNewQuadric();
 	cityQuad = gluNewQuadric();
 
-	gluQuadricDrawStyle(planetQuad, GLU_LINE);
+	gluQuadricDrawStyle(planetQuad, GLU_FILL);
+    gluQuadricTexture(planetQuad, GL_TRUE);
 	gluQuadricDrawStyle(cityQuad, GLU_LINE);
 }
 
@@ -182,7 +204,19 @@ bool Client3d::handleEvent(const SDL_Event& e)
 void Client3d::drawPlanet()
 {
 	glColor3f(1.0, 1.0, 1.0);
+    glBindTexture( GL_TEXTURE_2D, texture);
+    glEnable(GL_TEXTURE_2D);
+
+    glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
+    glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
+    glEnable(GL_TEXTURE_GEN_S);
+    glEnable(GL_TEXTURE_GEN_T);
+
 	gluSphere(planetQuad, 1.0, 64, 64);
+
+    glDisable(GL_TEXTURE_GEN_S);
+    glDisable(GL_TEXTURE_GEN_T);
+    glDisable(GL_TEXTURE_2D);
 }
 
 void Client3d::drawCities()
