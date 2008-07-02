@@ -3,7 +3,7 @@
 ServerPlayerGameCard::ServerPlayerGameCard(const std::string& gameCardName,
     int color):
     GameCardValidator(),
-    GameCard(gameCardName, color) {
+    ConquerPlayerGameCard(gameCardName, color) {
     // No realiza ninguna acciòn.
 }
 
@@ -13,7 +13,7 @@ bool ServerPlayerGameCard::validate(ReferenceCountPtr<GameManager>& gameManager)
 	ReferenceCountPtr<TurnManager> turnManeger = gameManager->getTurnManager();
 	
 	// si el jugador que se debe eliminar, ya no esta activo en la lista de turnos del juego
-	if ( ! turnManeger->isPlayerActive( this->color ) )
+	if ( ! turnManeger->isPlayerActive( this->getColor() ) )
 		// el objetivo se cumplio
 		res= true;
 	
@@ -22,7 +22,7 @@ bool ServerPlayerGameCard::validate(ReferenceCountPtr<GameManager>& gameManager)
 }
 
 
-ServerPlayerGameCard::~ConquerPlayerGameCard() {
+ServerPlayerGameCard::~ServerPlayerGameCard() {
     // No realiza ninguna acciòn.
 }
 
