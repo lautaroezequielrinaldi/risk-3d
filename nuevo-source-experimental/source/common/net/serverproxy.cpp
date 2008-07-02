@@ -1,6 +1,7 @@
 
 #include "serverproxy.h"
-#include "../../common/model/gamemanager.h"
+#include "../../common/model/game.h"
+
 #include<sstream>
 #include <iostream>
 void * ServerProxy::run() {
@@ -24,14 +25,20 @@ void * ServerProxy::run() {
 		commandXml = getSocket()->full_read(msgLen);
 		
 		std::cerr << "serializacion " << commandXml << std::endl;
-		gameManager->execute(commandName, commandXml);
-
+        if (commandHydrator.isClientCommand(commandName)) {
+            ReferenceCountPtr<ClientCommand> command = commandHydrator.createCommand(commandName, commandXml);
+            command->execute();
+            notifyCommandExecuted(*command);
+        } else {
+            ReferenceCountPtr<Command> command = messageHydrator.createCommand(commandName, commandXml);
+            notifyCommandExecuted(*command);
+        }
 	}
 	return 0;
 }
 
 
-ServerProxy::ServerProxy(const ReferenceCountPtr<Socket>& socket,  const ReferenceCountPtr< GameManager> & gameManager):Proxy(socket), gameManager(gameManager) {
+ServerProxy::ServerProxy(const ReferenceCountPtr<Socket>& socket,  const ReferenceCountPtr< Game> & game):Proxy(socket), game(game),commandHydrator(game), messageHydrator() {
 	
 }
 
