@@ -1,6 +1,7 @@
 #include "../model/gamemanager.h"
 #include "defending.h"
 #include "../commands/defend.h"
+#include "../Servercommands/serverattack.h"
 #include "../Servercommands/serverdefend.h"
 #include "stateobserver.h"
 #include "../model/battle.h"

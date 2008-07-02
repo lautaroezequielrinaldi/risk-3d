@@ -2,6 +2,7 @@
 #include "stateobserver.h"
 #include "../commands/move.h"
 #include "../commands/turntopopulate.h"
+#include "../Servercommands/servermove.h"
 #include "../model/gamemanager.h"
 #include "../model/armybonuscalculator.h"
 #include "../model/player.h"

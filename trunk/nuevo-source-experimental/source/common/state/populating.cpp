@@ -3,6 +3,7 @@
 #include "../commands/turntopopulate.h"
 #include "../commands/turntoattack.h"
 #include "../commands/populate.h"
+#include "../Servercommands/serverpopulate.h"
 #include "../model/gamemanager.h"
 #include "../model/player.h"
 #include<sstream>

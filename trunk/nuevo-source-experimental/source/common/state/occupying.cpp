@@ -3,6 +3,7 @@
 #include "../commands/populate.h"
 #include "../commands/turntooccupy.h"
 #include "../commands/turntopopulate.h"
+#include "../Servercommands/serverpopulate.h"
 #include "../model/gamemanager.h"
 #include "../model/player.h"
 #include <list>
