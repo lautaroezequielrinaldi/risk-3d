@@ -5,7 +5,9 @@ PopulateClientCommand::PopulateClientCommand(ReferenceCountPtr<Game>& game): Cli
 }
 
 void PopulateClientCommand::execute() {
-	// No realiza ninguna accion.
+    ReferenceCountPtr<Mapa> map = this->game->getMapa();
+    ReferenceCountptr<Pais> pais = map->obtenerPais(this->paisDestino);
+    pais->addArmies(getArmyCount());
 }
 
 std::string PopulateClientCommand::getType() {
