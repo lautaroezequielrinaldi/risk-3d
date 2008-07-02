@@ -5,7 +5,12 @@ MoveClientCommand::MoveClientCommand(ReferenceCountPtr<Game>& game): ClientComma
 }
 
 void MoveClientCommand::execute() {
-	// No realiza ninguna accion.
+    ReferenceCountPtr<Mapa> map = getGame()->getMapa();
+    ReferenceCountPtr<Pais> paisOrig = map->obtenerPais(getCountryOrigin());
+    ReferenceCountPtr<Pais> paisDest = map->obtenerPais(getCountryDestination());
+
+    paisOrig->removeArmies(getArmyCount());
+    paisDest->addArmies(getArmyCount());
 }
 
 std::string MoveClientCommand::getType() {
