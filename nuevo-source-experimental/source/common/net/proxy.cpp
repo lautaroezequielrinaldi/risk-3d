@@ -12,15 +12,27 @@ ReferenceCountPtr<Socket> Proxy::getSocket() {
 }
 
 void Proxy::notify(Command& command) {
-    std::string header;
-    std::string message;
+    std::cerr << "Proxy::notify() from: " << command.getFrom() << " to: " << command.getTo() << std::endl;
+    std::string cmd = command.serialize();
+    std::cerr << "Proxy::notify(" << command.getName() << ") "<<cmd.size() <<" serializado: " << cmd << std::endl;
 
-    message = command.serialize();
-    
-    header = message.size() + " " + command.getName();
+    std::stringstream header;
+    header << cmd.size() << " " << command.getName() << " ";
 
-    getSocket()->write(header.c_str(), header.size());
-    getSocket()->write(message.c_str(), message.size());
+    std::string msg = header.str();
+
+    // deshardcodear este 30
+    while (msg.size() < 30) {
+        msg.append(".");
+    }
+
+    msg.append("\r\n");
+    msg.append(cmd);
+    //
+    std::cerr << "Proxy::notify socket->write("<< std::endl << msg << std::endl << ")" << std::endl << std::endl;
+    //
+    socket->write(msg);
+    //
 }
     
 Proxy::~Proxy(){
