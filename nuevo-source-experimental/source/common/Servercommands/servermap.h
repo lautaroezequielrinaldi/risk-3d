@@ -9,7 +9,7 @@ class ServerMap : public Map, public ServerCommand
 	public:
 	
 		ServerMap();
-	
+        ServerMap(const std::string& xml);	
 		~ServerMap();
 		/**
 		 * Metodo cuyo proposito es validar la accion que realice el comando.

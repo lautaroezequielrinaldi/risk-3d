@@ -9,7 +9,7 @@ class ServerLose : public ServerCommand, public Lose
 	public:
 	
 		ServerLose();
-	
+        ServerLose(const std::string& xml);	
 		virtual ~ServerLose();
 		
 		/**

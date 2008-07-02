@@ -4,9 +4,13 @@ ServerJoinGame::ServerJoinGame() : ServerCommand(), JoinGame()
 {
 }
 
-ServerJoinGame::~ServerJoinGame(const std::string & xml) :ServerCommand(), JoinGame ( xml )
+ServerJoinGame::ServerJoinGame(const std::string & xml) :ServerCommand(), JoinGame ( xml )
 {
 }
+ServerJoinGame::~ServerJoinGame() {
+
+}
+
 bool ServerJoinGame::validate(ReferenceCountPtr<GameManager>& gameManager){
     // evaluar si hay lugar	
 		return false;

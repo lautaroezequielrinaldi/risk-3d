@@ -9,7 +9,7 @@ class ServerJoinGame : public ServerCommand, public JoinGame
 	public:
 	
 		ServerJoinGame();
-	
+        ServerJoinGame(const std::string& xml);	
 		~ServerJoinGame();
 		
 		/**

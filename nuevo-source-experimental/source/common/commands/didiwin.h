@@ -14,6 +14,7 @@ class DidIWin: public Command {
 	public:
 
 		DidIWin(std::vector<std::string> &parameterList);
+        DidIWin(const std::string& xml);
 		DidIWin();
 	virtual ~DidIWin();
 		/**
