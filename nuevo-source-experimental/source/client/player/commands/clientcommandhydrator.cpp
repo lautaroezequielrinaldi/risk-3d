@@ -1,11 +1,11 @@
 #include "clientcommandhydrator.h"
 
-ClientCommandHydrator::ClientCommandHydrator(ReferenceCountPtr<Game>& game): game(game) {
-    clientCommandList.insert(std::make_pair("battleResult", new BattleResultClientCommand(game)));
-    clientCommandList.insert(std::make_pair("move", new MoveClientCommand(game)));
-    clientCommandList.insert(std::make_pair("pupulate", new PopulateClientCommand(game)));
-    clientCommandList.insert(std::make_pair("surrender", new SurrenderClientCommand(game)));
-    clientCommandList.insert(std::make_pair("quit", new QuitClientCommand(game)));
+ClientCommandHydrator::ClientCommandHydrator(const ReferenceCountPtr<Game>& game): game(game) {
+    clientCommandList.insert(std::make_pair("battleResult", new BattleResultClientCommand(this->game)));
+    clientCommandList.insert(std::make_pair("move", new MoveClientCommand(this->game)));
+    clientCommandList.insert(std::make_pair("pupulate", new PopulateClientCommand(this->game)));
+    clientCommandList.insert(std::make_pair("surrender", new SurrenderClientCommand(this->game)));
+    clientCommandList.insert(std::make_pair("quit", new QuitClientCommand(this->game)));
 }
 
 bool ClientCommandHydrator::isClientCommand(const std::string& commandName) {

@@ -17,7 +17,6 @@ class UICommand;
 #include "../Servercommands/serverattack.h"
 
 #include "../net/playerproxy.h"
-#include "../net/serverproxy.h"
 
 class GameManager: public StateObservable, public CommandObservable {
 	
@@ -106,8 +105,6 @@ class GameManager: public StateObservable, public CommandObservable {
 		*/
 
 		void add(ReferenceCountPtr<PlayerProxy> & playerproxy);	
-
-		void add(ReferenceCountPtr<ServerProxy> & serverproxy);	
 
 		/**
 		 * Metodo cuyo proposito es obtener la partida que se esta jugando.

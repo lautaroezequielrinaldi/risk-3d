@@ -30,7 +30,7 @@ class CommandObservable {
 		/**
 		 * Notifica ejecucion de comando.
 		 */
-		void notifyCommandExecuted(Command* command);
+		void notifyCommandExecuted(Command& command);
 	/**
 	 * Mètodos publicos de la clase CommandObservable.
 	 */

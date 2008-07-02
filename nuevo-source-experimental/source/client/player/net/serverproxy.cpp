@@ -1,9 +1,8 @@
-
 #include "serverproxy.h"
-#include "../../common/model/game.h"
-
+#include "../../../common/model/game.h"
 #include<sstream>
 #include <iostream>
+
 void * ServerProxy::run() {
 	
 
@@ -28,10 +27,12 @@ void * ServerProxy::run() {
         if (commandHydrator.isClientCommand(commandName)) {
             ReferenceCountPtr<ClientCommand> command = commandHydrator.createCommand(commandName, commandXml);
             command->execute();
-            notifyCommandExecuted(*command);
+            Command& cmd = reinterpret_cast<Command&>(*command);
+            notifyCommandExecuted(cmd);
         } else {
             ReferenceCountPtr<Command> command = messageHydrator.createCommand(commandName, commandXml);
-            notifyCommandExecuted(*command);
+            Command& cmd = static_cast<Command&>(*command);
+            notifyCommandExecuted(cmd);
         }
 	}
 	return 0;
