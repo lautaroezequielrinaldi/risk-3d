@@ -9,7 +9,7 @@ class ServerChat : public Chat, public ServerCommand
 	public:
 	
 		ServerChat();
-	
+        ServerChat(const std::string& xml);	
 		~ServerChat();
 		
 		/**

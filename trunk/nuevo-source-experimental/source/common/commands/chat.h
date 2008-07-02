@@ -11,6 +11,7 @@ class Chat: public Command {
 	public:
 
 	Chat(std::vector<std::string> &parameterList);
+    Chat(const std::string& xml);
 	Chat();
 	virtual ~Chat();
 		/**

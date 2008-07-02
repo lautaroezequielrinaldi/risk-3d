@@ -10,6 +10,10 @@ Chat::Chat(std::vector<std::string> &parameterList) : Command ()
 Chat::Chat(){
 
 }
+Chat::Chat(const std::string& xml): Command() {
+    hydrate(xml);
+}
+
 Chat::~Chat(){
 
 }
