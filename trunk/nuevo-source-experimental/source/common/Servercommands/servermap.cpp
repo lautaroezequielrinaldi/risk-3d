@@ -7,13 +7,7 @@ ServerMap::ServerMap(const std::string & xml): ServerCommand(),Map(xml)
 {
 }
 
-
-
-ServerMap::ServerMap(const std::string & xml) :ServerCommand(), Map( xml )
-{
-}
-
-ServerMap::~ServerMap(): 
+ServerMap::~ServerMap() 
 {
 }
 bool ServerMap::validate(ReferenceCountPtr<GameManager>& gameManager){

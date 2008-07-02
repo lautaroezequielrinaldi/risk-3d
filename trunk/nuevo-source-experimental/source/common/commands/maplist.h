@@ -12,6 +12,7 @@ class MapList: public Command {
 		int numeroJugador;
 	public:
 	MapList(std::vector<std::string> &parameterList);
+    MapList(const std::string& xml);
 	MapList();
 	virtual ~MapList();
 		/**

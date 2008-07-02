@@ -10,6 +10,10 @@ DidIWin::DidIWin(std::vector<std::string> &parameterList) : Command ()
 DidIWin::DidIWin(){
 
 }
+DidIWin::DidIWin(const std::string& xml): Command() {
+    hydrate(xml);
+}
+
 DidIWin::~DidIWin(){
 
 }

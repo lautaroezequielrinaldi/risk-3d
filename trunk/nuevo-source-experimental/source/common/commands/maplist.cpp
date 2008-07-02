@@ -11,6 +11,10 @@ MapList::MapList(std::vector<std::string> &parameterList) : Command ()
 MapList::MapList(){
 
 }
+MapList::MapList(const std::string& xml): Command() {
+    hydrate(xml);
+}
+
 MapList::~MapList(){
 
 }

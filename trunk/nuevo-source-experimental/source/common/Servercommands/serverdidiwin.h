@@ -9,7 +9,7 @@ class ServerDidIWin : public DidIWin, public ServerCommand
 	public:
 	
 		ServerDidIWin();
-	
+        ServerDidIWin(const std::string& xml);	
 		~ServerDidIWin();
 		
 		

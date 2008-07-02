@@ -9,7 +9,7 @@ class ServerMapList : public ServerCommand, public MapList
 	public:
 	
 		ServerMapList();
-		
+        ServerMapList(const std::string& xml);		
 		~ServerMapList();
 		
 		/**
