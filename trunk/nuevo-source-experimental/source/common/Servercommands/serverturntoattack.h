@@ -9,7 +9,7 @@ class ServerTurnToAttack : public TurnToAttack, public ServerCommand
 	public:
 	
 		ServerTurnToAttack();
-	
+        ServerTurnToAttack(const std::string& xml);
 		~ServerTurnToAttack();
 		
 		/**

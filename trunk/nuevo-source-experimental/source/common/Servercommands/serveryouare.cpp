@@ -1,10 +1,10 @@
 #include "serveryouare.h"
 
-ServerYouAre::ServerYouAre(): ServerCommand(), YoAre()
+ServerYouAre::ServerYouAre(): ServerCommand(), YouAre()
 {
 }
 
-ServerYouAre::ServerYouAre(const std::string & xml ): ServerCommand(), YoAre(xml)
+ServerYouAre::ServerYouAre(const std::string & xml ): ServerCommand(), YouAre(xml)
 {
 }
 

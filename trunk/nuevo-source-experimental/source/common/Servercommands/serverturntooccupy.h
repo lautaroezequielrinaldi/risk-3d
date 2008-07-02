@@ -9,7 +9,7 @@ class ServerTurnToOccupy : public ServerCommand, public TurnToOccupy
 	public:
 	
 		ServerTurnToOccupy();
-		
+        ServerTurnToOccupy(const std::string& xml);		
 		~ServerTurnToOccupy();
 		/**
 		 * Metodo cuyo proposito es validar la accion que realice el comando.

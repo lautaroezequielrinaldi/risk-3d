@@ -9,7 +9,7 @@ class ServerTurnToMove : public TurnToMove, public ServerCommand
 	public:
 	
 		ServerTurnToMove();
-		
+        ServerTurnToMove(const std::string& xml);		
 		~ServerTurnToMove();
 		
 		/**
