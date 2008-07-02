@@ -7,7 +7,6 @@
 #include "occupying.h"
 #include "populating.h"
 #include "simplepopulating.h"
-#include "waiting.h"
 #include "waitingmapselection.h"
 #include "waitingplayer.h"
 #include "waitingfirstplayer.h"
@@ -55,7 +54,7 @@ class StateObserver {
 		/**
 		 * Recibo un estado Waiting.
 		 */
-		virtual void stateChanged(const Waiting& state);
+		//virtual void stateChanged(const Waiting& state);
 		/**
 		 * Recibo un estado WaitingMapSelection.
 		 */
