@@ -19,10 +19,12 @@ bool ClientCommandHydrator::isClientCommand(const std::string& commandName) {
     }
 }
 
-ReferenceCountPtr<ClientCommand> ClientCommandHydrator::getClientCommand(const std::string& commandName) {
+ReferenceCountPtr<ClientCommand> ClientCommandHydrator::createCommand(const std::string& commandName, const std::string& xml) {
     ReferenceCountPtr<ClientCommand> prototype = clientCommandList[commandName];
 
-    return prototype->clone();
+    ReferenceCountPtr<Serializable> command =  prototype->clone();
+    command->hydrate(xml);
+    return static_cast<ReferenceCountPtr<ClientCommand> >(command);
 }
 
 ClientCommandHydrator::~ClientCommandHydrator() {

@@ -42,7 +42,7 @@ class ClientCommandHydrator {
         /**
          * Crea un comando del cliente y lo devuelve.
          */
-        ReferenceCountPtr<ClientCommand> getClientCommand(const std::string& commandName);
+        ReferenceCountPtr<ClientCommand> createCommand(const std::string& commandName, const std::string& xml);
         /**
          * Destructor virtual de la clase ClientCommandHydrator.
          */
