@@ -1,3 +1,4 @@
+
 #include "attacking.h"
 #include "stateobserver.h"
 #include "../commands/attack.h"
