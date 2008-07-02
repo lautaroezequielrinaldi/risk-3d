@@ -47,7 +47,7 @@ BattleResult Battle::compareDice(std::list<int> attackerDice, std::list<int> def
 	while ( itDef != defenderDice.rend() ){
 
 		//gano el atacante
-		if ( *itAt > *itDef )
+		if ( *itAt >= *itDef )
 			//incremento la cant de ejercitos perdidos por el defensor
 			resultadoBatalla.incrementDefenderLostArmy();
 		// gana defensor
