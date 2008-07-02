@@ -9,7 +9,7 @@ class ServerNoRoom : public ServerCommand, public NoRoom
 	public:
 	
 		ServerNoRoom();
-		
+        ServerNoRoom(const std::string& xml);		
 		~ServerNoRoom();
 		
 		/**

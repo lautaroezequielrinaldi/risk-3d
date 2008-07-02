@@ -10,7 +10,7 @@ class ServerPopulate : public ServerCommand, public Populate
 public:
 
 		ServerPopulate();
-		
+        ServerPopulate(const std::string& xml);		
 		~ServerPopulate();
 		
 		/**

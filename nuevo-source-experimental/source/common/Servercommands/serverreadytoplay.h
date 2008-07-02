@@ -9,7 +9,7 @@ class ServerReadyToPlay : public ReadyToPlay, public ServerCommand
 	public:
 	
 		ServerReadyToPlay();
-			
+        ServerReadyToPlay(const std::string& xml);			
 		~ServerReadyToPlay();
 		
 		/**

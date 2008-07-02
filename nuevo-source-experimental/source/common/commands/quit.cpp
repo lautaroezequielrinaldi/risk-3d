@@ -10,6 +10,11 @@ Quit::Quit(std::vector<std::string> &parameterList) : Command ()
 Quit::Quit(){
 
 }
+
+Quit::Quit(const std::string& xml): Command() {
+    hydrate(xml);
+}
+
 Quit::~Quit(){
 
 }

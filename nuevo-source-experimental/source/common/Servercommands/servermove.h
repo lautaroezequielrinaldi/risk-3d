@@ -12,7 +12,7 @@ class ServerMove : public ServerCommand, public Move
 	public:
 		
 		ServerMove();
-	
+        ServerMove(const std::string& xml);	
 		~ServerMove();
 		
 		/**

@@ -9,7 +9,7 @@ class ServerQuit : public ServerCommand, public Quit
 	public:
 		
 		ServerQuit();
-	
+        ServerQuit(const std::string& xml);	
 		~ServerQuit();
 		
 		/**

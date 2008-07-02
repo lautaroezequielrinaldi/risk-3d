@@ -10,7 +10,7 @@ class ServerSelectMap : public SelectMap, public ServerCommand
 	public:
 	
 		ServerSelectMap();
-			
+		ServerSelectMap(const std::string& xml);
 		~ServerSelectMap();
 		
 		/**
