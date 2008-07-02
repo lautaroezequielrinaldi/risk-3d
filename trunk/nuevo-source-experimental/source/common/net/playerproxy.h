@@ -2,20 +2,22 @@
 #define __PLAYERPROXY_H__
 #include "proxy.h"
 
+class GameManager;
 class Player;
 
 /**
  *
  * 
  */
-class PlayerProxy:public Proxy {
+class PlayerProxy: public Proxy {
 	protected:
+    ReferenceCountPtr<GameManager> gameManager;
 	ReferenceCountPtr<Player> player;
 	protected:
 	void * run();
 
 	public:
-	PlayerProxy(Socket * socket, ReferenceCountPtr<GameManager>& gameManager);
+	PlayerProxy(const ReferenceCountPtr<Socket>& socket, const ReferenceCountPtr<GameManager>& gameManager);
 	void setPlayer(ReferenceCountPtr<Player> & player);
 	ReferenceCountPtr<Player> & getPlayer();
 	virtual ~PlayerProxy();
