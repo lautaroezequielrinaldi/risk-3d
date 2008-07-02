@@ -3,10 +3,6 @@
 
 #include<string> // Para definicion de std::string.
 #include<map> // Para definicion de std::map.
-#include<sstream> // Para definicion de std::ostringstream.
-#include "gamecard.h" // Para definicion de GameCard.
-#include "../smartpointer/referencecountptr.h" // Para definiciòn de 
-// ReferenceCountPtr.
 
 /**
  * Clase cuyo propòsito es definir una carta de juego para eliminar a un
@@ -48,10 +44,6 @@ class ConquerPlayerGameCard: public GameCard {
          * Metodo que devuelve el color del jugador.
          */
         int getColor();
-        /**
-         * Mètodo que valida la carta de juego.
-         */
-        bool execute(ReferenceCountPtr<GameManager>& gameManager);
         /**
          * Se serializa a  un string.
          */
