@@ -4,9 +4,14 @@
 #include<iostream>
 using namespace std;
 
-ServerMove::ServerMove()
+ServerMove::ServerMove() : ServerCommand(), Move()
 {
 }
+
+ServerMove::ServerMove(const std::string & xml) : ServerCommand(), Move(xml)
+{
+}
+
 
 ServerMove::~ServerMove()
 {

@@ -1,8 +1,14 @@
 #include "serversurrender.h"
 
-ServerSurrender::ServerSurrender()
+ServerSurrender::ServerSurrender(): ServerCommand(),, Surrender()
 {
 }
+ServerSurrender::ServerSurrender(const std::string & xml): ServerCommand(), Surrender(xml)
+{
+}
+
+
+
 
 ServerSurrender::~ServerSurrender()
 {

@@ -1,10 +1,11 @@
 #include "serverchat.h"
 
-ServerChat::ServerChat(const std::string & xml): Chat (xml )
+ServerChat::ServerChat(const std::string & xml): ServerCommand(), Chat (xml )
 {
 }
 
-ServerChat::ServerChat(){
+ServerChat::ServerChat() : ServerCommand(), Chat()
+{
 	
 }
 

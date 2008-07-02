@@ -1,8 +1,13 @@
 #include "servermaplist.h"
 
-ServerMapList::ServerMapList()
+ServerMapList::ServerMapList(): ServerCommand(), MapList()
 {
 }
+
+ServerMapList::ServerMapList(const std::string & xml): ServerCommand(), MapList(xml)
+{
+}
+
 
 ServerMapList::~ServerMapList()
 {

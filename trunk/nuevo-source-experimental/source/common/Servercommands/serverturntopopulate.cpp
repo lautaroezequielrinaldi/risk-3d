@@ -1,6 +1,10 @@
 #include "serverturntopopulate.h"
 
-ServerTurnToPopulate::ServerTurnToPopulate()
+ServerTurnToPopulate::ServerTurnToPopulate(): ServerCommand(), TurnToPopulate()
+{
+}
+
+ServerTurnToPopulate::ServerTurnToPopulate(const std::string & xml): ServerCommand(), TurnToPopulate(xml)
 {
 }
 

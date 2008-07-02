@@ -1,8 +1,13 @@
 #include "serverturntoattack.h"
 
-ServerTurnToAttack::ServerTurnToAttack()
+ServerTurnToAttack::ServerTurnToAttack(): ServerCommand(), TurnToAttack()
 {
 }
+
+ServerTurnToAttack::ServerTurnToAttack(const std::string & xml): ServerCommand(), TurnToAttack(xml)
+{
+}
+
 
 ServerTurnToAttack::~ServerTurnToAttack()
 {

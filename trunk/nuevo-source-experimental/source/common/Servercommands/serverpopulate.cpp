@@ -6,9 +6,14 @@
 #include<iostream>
 using namespace std;
 
-ServerPopulate::ServerPopulate()
+ServerPopulate::ServerPopulate(): ServerCommand(), Populate()
 {
 }
+
+ServerPopulate::ServerPopulate(const std::string & xml): ServerCommand(), Populate(xml)
+{
+}
+
 
 ServerPopulate::~ServerPopulate()
 {

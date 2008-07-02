@@ -1,6 +1,9 @@
 #include "servernoroom.h"
 
-ServerNoRoom::ServerNoRoom()
+ServerNoRoom::ServerNoRoom() : ServerCommand(), NoRoom()
+{
+}
+ServerNoRoom::ServerNoRoom(const std::string & xml) : ServerCommand(), NoRoom(xml)
 {
 }
 

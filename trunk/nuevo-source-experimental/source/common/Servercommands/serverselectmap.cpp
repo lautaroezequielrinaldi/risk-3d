@@ -1,8 +1,14 @@
 #include "serverselectmap.h"
 
-ServerSelectMap::ServerSelectMap()
+ServerSelectMap::ServerSelectMap(): ServerCommand(),SelectMap()
 {
 }
+
+
+ServerSelectMap::ServerSelectMap(const std::string & xml): ServerCommand(),SelectMap(xml)
+{
+}
+
 
 ServerSelectMap::~ServerSelectMap()
 {

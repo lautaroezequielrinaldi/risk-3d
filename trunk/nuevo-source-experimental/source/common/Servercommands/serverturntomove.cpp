@@ -1,8 +1,13 @@
 #include "serverturntomove.h"
 
-ServerTurnToMove::ServerTurnToMove()
+ServerTurnToMove::ServerTurnToMove(): ServerCommand(), TurnToMove()
 {
 }
+
+ServerTurnToMove::ServerTurnToMove(const std::string & xml): ServerCommand(), TurnToMove(xml)
+{
+}
+
 
 ServerTurnToMove::~ServerTurnToMove()
 {

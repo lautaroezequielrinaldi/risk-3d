@@ -1,10 +1,10 @@
 #include "serverdidiwin.h"
 
-ServerDidIWin::ServerDidIWin(): DidIWin()
+ServerDidIWin::ServerDidIWin():ServerCommand(), DidIWin()
 {
 }
 
-ServerDidIWin::ServerDidIWin(const std::string & xml) : DidIWin(xml)
+ServerDidIWin::ServerDidIWin(const std::string & xml) :ServerCommand(), DidIWin(xml)
 {
 }
 

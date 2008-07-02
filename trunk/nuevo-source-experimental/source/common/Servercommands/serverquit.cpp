@@ -1,6 +1,10 @@
 #include "serverquit.h"
 
-ServerQuit::ServerQuit()
+ServerQuit::ServerQuit(): ServerCommand(), Quit()
+{
+}
+
+ServerQuit::ServerQuit(const std::string & xml): ServerCommand(), Quit(xml)
 {
 }
 
