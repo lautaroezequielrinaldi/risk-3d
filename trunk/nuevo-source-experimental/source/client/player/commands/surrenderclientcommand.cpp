@@ -5,7 +5,7 @@ SurrenderClientCommand::SurrenderClientCommand(ReferenceCountPtr<Game>& game):
     // No realiza ninguna acciòn.
 }
 
-ClientCommand* SurrenderClientCommand::clone() {
+ReferenceCountPtr<ClientCommand> SurrenderClientCommand::clone() {
     return new SurrenderClientCommand(getGame());
 }
 

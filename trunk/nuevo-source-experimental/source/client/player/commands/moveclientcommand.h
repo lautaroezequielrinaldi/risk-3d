@@ -20,7 +20,7 @@ class MoveClientCommand: public Move, public ClientCommand {
 		/**
 		 * Clona al comando.
 		 */
-		virtual ClientCommand* clone();
+		virtual ReferenceCountPtr<ClientCommand> clone();
 		/**
 		 * Destructor virtual de la clase MoveClientCommand.
 		 */

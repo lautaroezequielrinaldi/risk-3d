@@ -14,6 +14,10 @@ void QuitClientCommand::execute() {
     getGame()->removePlayer(jugadorRendido);
 }
 
+ReferenceCountPtr<ClientCommand> QuitClientCommand::clone() {
+    return new QuitClientCommand(getGame());
+}
+
 QuitClientCommand::~QuitClientCommand() {
     // No realiza ninguna accion.
 }
