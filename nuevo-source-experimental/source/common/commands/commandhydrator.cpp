@@ -1,5 +1,39 @@
 #include "commandhydrator.h"
 #include<iostream>
+#include "../Servercommands/serverattack.h"
+#include "../Servercommands/serverbattleresult.h"
+#include "../Servercommands/serverchat.h"
+#include "../Servercommands/serverdefend.h"
+#include "../Servercommands/serverJoingame.h"
+#include "../Servercommands/servermove.h"
+#include "../Servercommands/serverselectmap.h"
+#include "../Servercommands/serverpopulate.h"
+#include "../Servercommands/serverreadytoplay.h"
+#include "../Servercommands/servernomore.h"
+#include "../Servercommands/servernoroom.h"
+#include "../Servercommands/serversurrender.h"
+#include "../Servercommands/serverquit.h"
+#include "../Servercommands/serverwin.h"
+#include "../Servercommands/serverlose.h"
+#include "../Servercommands/serveryouare.h"
+#include "../Servercommands/servermap.h"
+#include "../Servercommands/serverturntoattack.h"
+#include "../Servercommands/serverturntomove.h"
+#include "../Servercommands/serverturntooccupy.h"
+#include "../Servercommands/serverturntopopulate.h"
+#include "../Servercommands/serverdidiwin.h"
+#include "../Servercommands/servermaplist.h"
+
+#include "../commands/uireadytoplay.h"
+#include "../commands/uididiwin.h"
+#include "../commands/uiquit.h"
+#include "../commands/uisurrender.h"
+#include "../commands/uinomore.h"
+#include "../commands/uijoingame.h"
+#include "../commands/uiselectmap.h"
+
+#include "../commands/uicountryselect.h"
+#include "../commands/uiquantityselect.h"
 
 CommandHydrator::CommandHydrator(){
 	commands.insert(std::make_pair("attack",new ServerAttack()));
@@ -45,7 +79,8 @@ ServerCommand * CommandHydrator::getCommand(const std::string &name, const std::
 	
 	std::cout << "El comando es de tipo: " << name << std::endl;	
 	//hidrato a partir del xml el serverComand del map
-	sCommand->hydrate(xml);
+	Command& cmd = reinterpret_cast<Command&>(*sCommand);
+    cmd.hydrate(xml);
 	
 	return sCommand;
 }

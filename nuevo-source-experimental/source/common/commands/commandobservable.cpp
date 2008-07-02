@@ -6,12 +6,12 @@ CommandObservable::CommandObservable() {
 	// No realiza ninguna accion.
 }
 
-void CommandObservable::notifyCommandExecuted(Command* command) {
+void CommandObservable::notifyCommandExecuted(Command& command) {
 	std::list<CommandObserver*>::iterator iter;
 	for (iter = commandObserverList.begin(); iter != commandObserverList.end();
 		++iter) {
 		CommandObserver* commandObserver = *iter;
-		command->accept(commandObserver);
+		command.accept(commandObserver);
 	}
 }
 
