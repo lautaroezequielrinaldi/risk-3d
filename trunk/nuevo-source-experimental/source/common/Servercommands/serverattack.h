@@ -5,7 +5,7 @@ class Attack;
 
 #include "servercommand.h"
 
-//#include "../commands/attack.h"
+#include "../commands/attack.h"
 
 class ServerAttack : public ServerCommand, public Attack
 {
@@ -30,3 +30,4 @@ class ServerAttack : public ServerCommand, public Attack
 };
 
 #endif /*SERVERATTACK_H_*/
+

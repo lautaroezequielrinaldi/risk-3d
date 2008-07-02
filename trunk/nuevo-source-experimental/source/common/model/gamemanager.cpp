@@ -4,6 +4,7 @@
 #include "../commands/commandhydrator.h"
 #include "../commands/uicommand.h"
 #include "../Servercommands/serverattack.h"
+#include "../commands/youare.h"
 
 GameManager::GameManager(): StateObservable(), game (), turnManager ()
 {
