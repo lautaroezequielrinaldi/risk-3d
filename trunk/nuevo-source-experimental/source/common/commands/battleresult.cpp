@@ -20,6 +20,10 @@ BattleResult::BattleResult()
 	//no realiza ninguna accion
 }
 
+BattleResult::BattleResult(const std::string& xml): Command() {
+    hydrate(xml);
+}
+
 BattleResult::~BattleResult()
 {
 	

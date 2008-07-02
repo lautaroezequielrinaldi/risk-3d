@@ -10,7 +10,7 @@ class ServerBattleResult : public BattleResult, public ServerCommand
 	public:
 	
 		ServerBattleResult();
-	
+        ServerBattleResult(const std::string& xml);	
 		~ServerBattleResult();
 		
 		/**

@@ -58,7 +58,10 @@ class BattleResult : public Command
 		 * Constructor de la clase
 		 */	
 		BattleResult();
-	
+        /**
+         * Constructor de la clase
+         */
+        BattleResult(const std::string& xml);	
 		/**
 		 * Destructor de la clase
 		 */
