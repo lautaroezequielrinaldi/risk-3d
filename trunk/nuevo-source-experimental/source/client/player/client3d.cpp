@@ -90,6 +90,7 @@ void Client3d::setup()
 
 	gluQuadricDrawStyle(planetQuad, GLU_FILL);
     gluQuadricTexture(planetQuad, GL_TRUE);
+    gluQuadricNormals(planetQuad, GLU_SMOOTH);
 	gluQuadricDrawStyle(cityQuad, GLU_LINE);
 }
 
