@@ -16,8 +16,8 @@ class UICommand;
 #include "../commands/commandobservable.h"
 #include "../Servercommands/serverattack.h"
 
-#include "../playerproxy.h"
-#include "../serverproxy.h"
+#include "../net/playerproxy.h"
+#include "../net/serverproxy.h"
 
 class GameManager: public StateObservable, public CommandObservable {
 	
