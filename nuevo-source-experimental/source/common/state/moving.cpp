@@ -18,7 +18,7 @@ Moving::~Moving()
 {
 }
 
-bool Moving::move(Move & command){
+bool Moving::move(ServerMove & command){
 	
 	std::ostringstream strComodin,strComodin2;
 	

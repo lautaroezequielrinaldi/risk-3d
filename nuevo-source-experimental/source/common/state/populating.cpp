@@ -18,7 +18,7 @@ Populating::Populating(ReferenceCountPtr<GameManager>&gameManager, std::string n
 Populating::~Populating()
 {
 }
-bool Populating::populate(Populate & command){
+bool Populating::populate(ServerPopulate & command){
 
 	std::ostringstream strComodin;
 		

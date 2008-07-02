@@ -12,7 +12,7 @@ WaitingPlayer::~WaitingPlayer()
 {
 }
 
-bool WaitingPlayer::readyToPlay(ReadyToPlay & command){
+bool WaitingPlayer::readyToPlay(ServerReadyToPlay & command){
 	std::cerr << "Evento WaitingPlayer::readyToPlay" << std::endl;
 
 /*
@@ -32,7 +32,7 @@ bool WaitingPlayer::readyToPlay(ReadyToPlay & command){
 	return false;
 }
 
-bool WaitingPlayer::joinGame(JoinGame & command){
+bool WaitingPlayer::joinGame(ServerJoinGame & command){
 	std::cerr << "Evento WaitingPlayer::joinGame" << std::endl;
 	// si hay lugar, 
 	//	aceptarlo

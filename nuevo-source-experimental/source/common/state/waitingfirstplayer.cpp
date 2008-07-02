@@ -17,7 +17,7 @@ WaitingFirstPlayer::~WaitingFirstPlayer()
 
 
 
-bool WaitingFirstPlayer::joinGame(JoinGame & command){
+bool WaitingFirstPlayer::joinGame(ServerJoinGame & command){
 	std::cout << "Evento WaitingFirstPlayer::joinGame" << std::endl;
 
 	this->gameManager->getTurnManager()->changeTurn(1);

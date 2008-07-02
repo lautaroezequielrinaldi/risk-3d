@@ -12,7 +12,7 @@ WaitingMapSelection::~WaitingMapSelection()
 {
 }
 
-bool WaitingMapSelection::joinGame(JoinGame & command) {
+bool WaitingMapSelection::joinGame(ServerJoinGame & command) {
 	std::cerr << "Evento WaitingMapSelection::joinGame" << std::endl;
 
 /*	std::vector<std::string> v;
@@ -27,14 +27,14 @@ bool WaitingMapSelection::joinGame(JoinGame & command) {
 }
 
 
-bool WaitingMapSelection::readyToPlay(ReadyToPlay & command) {
+bool WaitingMapSelection::readyToPlay(ServerReadyToPlay & command) {
 	std::cerr << "Evento WaitingMapSelection::readyToPlay" << std::endl;
 	// marcar como ready to play
 	return false;
 }
 
 
-bool WaitingMapSelection::selectMap(SelectMap & command){
+bool WaitingMapSelection::selectMap(ServerSelectMap & command){
 	std::cerr << "Evento WaitingMapSelection::SelectMap" << std::endl;
 	// ver si es el jugador actual
 	// si ahora no hay lugar o todos estan ready to play

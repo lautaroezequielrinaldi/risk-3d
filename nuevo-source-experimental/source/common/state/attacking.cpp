@@ -24,7 +24,7 @@ Attacking::~Attacking()
  *
  */ 
 
-bool Attacking::attack(Attack & command){
+bool Attacking::attack(ServerAttack & command){
 
 	std::ostringstream strComodin,strComodin2;
 
@@ -108,7 +108,7 @@ bool Attacking::attack(Attack & command){
 }
 
 
-bool Attacking::noMore(NoMore & command){
+bool Attacking::noMore(ServerNoMore & command){
 	
 	std::ostringstream strComodin;
 	

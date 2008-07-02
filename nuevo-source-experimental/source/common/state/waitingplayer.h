@@ -12,8 +12,8 @@ class WaitingPlayer : public State
 	
 	virtual ~WaitingPlayer();
 	
-	virtual bool joinGame(JoinGame & command); 
-	virtual bool readyToPlay(ReadyToPlay & command);
+	virtual bool joinGame(ServerJoinGame & command); 
+	virtual bool readyToPlay(ServerReadyToPlay & command);
 	virtual void accept(StateObserver* observer);
 };
 

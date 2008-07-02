@@ -22,7 +22,7 @@ SimplePopulating::~SimplePopulating()
 }
 
 
-bool SimplePopulating::populate(Populate & command){
+bool SimplePopulating::populate(ServerPopulate & command){
 	std::cerr << "Evento SimplePopulating::populate" << std::endl;
 	
 	std::ostringstream strComodin;

@@ -16,7 +16,7 @@ Defending::~Defending()
 {
 }
 
-bool Defending::defend(Defend & command){
+bool Defending::defend(ServerDefend & command){
 	
 	std::ostringstream strComodin,strComodin2,strComodin3,strComodin4;
 	
