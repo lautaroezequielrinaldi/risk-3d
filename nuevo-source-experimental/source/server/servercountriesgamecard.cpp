@@ -3,7 +3,7 @@
 ServerCountriesGameCard::ServerCountriesGameCard(
 	const std::string& gameCardName, int countryCount):
     GameCardValidator(),
-    GameCard(gameCardName, countryCount) {
+    ConquerCountriesGameCard(gameCardName, countryCount) {
     // No realiza ninguna acciòn.
 }
 
@@ -22,7 +22,7 @@ bool ServerCountriesGameCard::validate(ReferenceCountPtr<GameManager>& gameManag
 }
 
 
-ServerCountriesGameCard::~ConquerCountriesGameCard() {
+ServerCountriesGameCard::~ServerCountriesGameCard() {
     // No realiza ninguna acciòn.
 }
 

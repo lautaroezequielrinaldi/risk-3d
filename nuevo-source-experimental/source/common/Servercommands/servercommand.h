@@ -25,12 +25,12 @@ class ServerCommand
 		/**
 		 * Metodo cuyo proposito es validar la accion que realice el comando.
 		 */
-		virtual bool validate(ReferenceCountPtr<GameManager>& gameManager);
+		virtual bool validate(ReferenceCountPtr<GameManager>& gameManager)=0;
 		
 		/**
 		 * Metodo cuyo proposito es ejecutar la accion que realice el comando.
 		 */
-		virtual void execute(ReferenceCountPtr<State>& state);		
+		virtual void execute(ReferenceCountPtr<State>& state)=0;		
 		
 		
 };

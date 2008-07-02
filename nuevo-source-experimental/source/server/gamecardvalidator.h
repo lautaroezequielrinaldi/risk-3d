@@ -16,7 +16,7 @@ class GameCardValidator {
     /**
      * Mètodos publicos de la clase GameCardValidator.
      */
-    ublic:
+    public:
        /**
         * Valida una carta de juego.
         */

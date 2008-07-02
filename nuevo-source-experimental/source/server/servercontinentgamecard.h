@@ -7,7 +7,7 @@
 #include "../common/model/game.h" // Para definiciòn de Game.
 #include "../common/model/conquercontinentgamecard.h" // Para definiciòn de ServerContinentGameCard.
 #include "gamecardvalidator.h"
-#include "../smartpointer/referencecountptr.h" // Para definiciòn de
+#include "../common/smartpointer/referencecountptr.h" // Para definiciòn de
 // ReferenceCountPtr.
 
 /**
