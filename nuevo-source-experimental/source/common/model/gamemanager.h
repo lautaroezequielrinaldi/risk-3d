@@ -14,7 +14,9 @@ class UICommand;
 #include "../state/stateobservable.h"
 #include "../state/statemachine.h"
 #include "../commands/commandobservable.h"
-#include "../Servercommands/serverattack.h"
+//#include "../Servercommands/serverattack.h"
+//
+class ServerAttack;
 
 #include "../net/playerproxy.h"
 

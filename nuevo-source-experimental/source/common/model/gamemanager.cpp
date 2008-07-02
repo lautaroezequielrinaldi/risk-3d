@@ -3,6 +3,7 @@
 #include <sstream>
 #include "../commands/commandhydrator.h"
 #include "../commands/uicommand.h"
+#include "../Servercommands/serverattack.h"
 
 GameManager::GameManager(): StateObservable(), game (), turnManager ()
 {
