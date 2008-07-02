@@ -4,6 +4,7 @@
 #include <cmath>
 #include <list>
 #include <SDL.h>
+#include <SDL/SDL_image.h>
 #include <vector>
 
 #ifdef WIN32
@@ -25,6 +26,7 @@
 class Client3d {
     private:
     Mapa map;
+    GLuint texture;
     double alpha;
     double beta;
     double dist;
@@ -44,6 +46,7 @@ class Client3d {
     static const size_t VRES = 600;
 
     protected:
+        void loadTexture(const std::string& fileName);
         bool cityRayIntersection(Pais& city, Point3 rayStart, Vector3 rayDir);
         void setup();
         void unsetup();
