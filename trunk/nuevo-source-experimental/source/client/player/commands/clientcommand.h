@@ -37,10 +37,6 @@ class ClientCommand {
 		 */
 		virtual void execute() = 0;
 		/**
-		 * Devuelve el tipo de comando que es.
-		 */
-		virtual std::string getType() =0;
-		/**
 		 * Devuelve una nueva instancia de ClientCommand.
 		 */
 		virtual ClientCommand* clone() = 0;
