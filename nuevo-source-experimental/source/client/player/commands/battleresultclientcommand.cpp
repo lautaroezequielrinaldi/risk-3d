@@ -33,7 +33,7 @@ void BattleResultClientCommand::execute() {
     }
 }
 
-ClientCommand* BattleResultClientCommand::clone() {
+ReferenceCountPtr<ClientCommand> BattleResultClientCommand::clone() {
 	return new BattleResultClientCommand(getGame());
 }
 

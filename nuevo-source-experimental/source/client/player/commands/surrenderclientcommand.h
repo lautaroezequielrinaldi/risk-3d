@@ -16,7 +16,7 @@ class SurrenderClientCommand: public Surrender, public ClientCommand {
         /**
          * Clona al comando.
          */
-        virtual ClientCommand* clone();
+        virtual ReferenceCountPtr<ClientCommand> clone();
         /**
          * Ejecuta al comando.
          */

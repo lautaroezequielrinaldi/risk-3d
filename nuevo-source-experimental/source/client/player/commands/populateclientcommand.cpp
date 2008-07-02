@@ -10,7 +10,7 @@ void PopulateClientCommand::execute() {
     pais->addArmies(getArmyCount());
 }
 
-ClientCommand* PopulateClientCommand::clone() {
+ReferenceCountPtr<ClientCommand> PopulateClientCommand::clone() {
 	return new PopulateClientCommand(getGame());
 }
 

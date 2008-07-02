@@ -16,7 +16,11 @@ class QuitClientCommand: public Quit, public ClientCommand {
         /**
          * Ejecuta el comando.
          */
-        void execute();
+        virtual void execute();
+        /**
+         * Clona al comando.
+         */
+        virtual ReferenceCountPtr<ClientCommand> clone();
         /**
          * Destructor virtual de la clase QuitClientCommand.
          */

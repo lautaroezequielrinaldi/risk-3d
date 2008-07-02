@@ -39,7 +39,7 @@ class ClientCommand {
 		/**
 		 * Devuelve una nueva instancia de ClientCommand.
 		 */
-		virtual ClientCommand* clone() = 0;
+		virtual ReferenceCountPtr<ClientCommand> clone() = 0;
 		/**
 		 * Destructor virtual de la clase ClientCommand.
 		 */
