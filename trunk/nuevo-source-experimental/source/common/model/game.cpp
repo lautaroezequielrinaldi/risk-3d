@@ -62,6 +62,9 @@ ReferenceCountPtr<Player> & Game::addPlayer() {
 	return playerList.back();
 }
 
+void Game::removePlayer(const ReferenceCountPtr<Player>& player) {
+    playerList.remove(player);
+}
 
 /**
  * @todo reimplementar utilizando un map <color, player>
