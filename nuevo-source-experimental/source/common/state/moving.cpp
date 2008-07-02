@@ -69,7 +69,7 @@ bool Moving::move(ServerMove & command){
 		command.setSecMsg(secMsg);	
 		
 		//notifico cambios y mensajes
-		gameManager->notify(&command);
+		gameManager->notify(reinterpret_cast<Command*>(&command));
 		
 		//------- fin actualizacion modelo para cliente ------------------------
 
@@ -121,7 +121,7 @@ bool Moving::move(ServerMove & command){
 		turnToPopulate.setSecMsg(secMsg);
 			
 		//notifico 
-		gameManager->notify(&turnToPopulate);		
+		gameManager->notify(reinterpret_cast<Command*>(&turnToPopulate));		
 	
 
 		// crear comando turn to populate pasarle el armyCountBonus y el from y el to
@@ -145,7 +145,7 @@ bool Moving::move(ServerMove & command){
 		command.setSecMsg(secMsg);	
 		
 		//notifico cambios y mensajes
-		gameManager->notify(&command);		
+		gameManager->notify(reinterpret_cast<Command*>(&command));		
 	
 		//notificar error en tests
 		cout<<"movimiento invalido"<<endl;

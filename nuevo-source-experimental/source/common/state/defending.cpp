@@ -101,7 +101,7 @@ bool Defending::defend(ServerDefend & command){
 		resultadoBatalla.setSecMsg("");	
 		
 		//notifico cambios y mensajes --manda un commandResultadoBatalla
-		gameManager->notify(&resultadoBatalla);
+		gameManager->notify(reinterpret_cast<Command*>(&resultadoBatalla));
 		
 		//------- fin notificacion al cliente ------------------------
 	
@@ -124,7 +124,7 @@ bool Defending::defend(ServerDefend & command){
 		command.setSecMsg(secMsg);	
 		
 		//notifico cambios y mensajes
-		gameManager->notify(&command);	
+		gameManager->notify(reinterpret_cast<Command*>(&command) );	
 		
 	}
 	

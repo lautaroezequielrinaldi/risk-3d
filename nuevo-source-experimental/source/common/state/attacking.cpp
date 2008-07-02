@@ -78,8 +78,8 @@ bool Attacking::attack(ServerAttack & command){
 		command.setSecMsg(secMsg);	
 		
 		//notifico cambios y mensajes
-		gameManager->notify(&command);
-		
+		gameManager->notify(reinterpret_cast<Command*>(&command) );
+		)
 		//------- fin actualizacion modelo para cliente ------------------------
 				
 		
@@ -98,7 +98,7 @@ bool Attacking::attack(ServerAttack & command){
 		command.setSecMsg(secMsg);	
 		
 		//notifico cambios y mensajes
-		gameManager->notify(&command);	
+		gameManager->notify(reinterpret_cast<Command*>(&command));	
 		
 	
 		//notificar error
@@ -143,7 +143,7 @@ bool Attacking::noMore(ServerNoMore & command){
 	turnToMove.setSecMsg(secMsg);
 			
 	//notifico 
-	gameManager->notify(&turnToMove);
+	gameManager->notify(reinterpret_cast<Command*>(&turnToMove));
 	
 	
 	cerr<<"HORA DE MOVER EJERCITOS"<<endl;
