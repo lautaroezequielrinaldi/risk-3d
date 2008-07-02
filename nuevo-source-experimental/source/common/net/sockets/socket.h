@@ -29,6 +29,7 @@
 #include "socketconnectionexception.h" // Para definiciòn de
 //SocketConnectionException.
 #include "socketioexception.h" // Para definiciòn de SocketIOException.
+#include "../../smartpointer/referencecountptr.h"
 
 /**
  * Definiciòn de la clase Socket que encapsularà un socket stream sobre el
@@ -100,7 +101,7 @@ class Socket {
          * 
          *
          */
-        Socket * accept()
+        ReferenceCountPtr<Socket> accept()
              throw(SocketConnectionException);
 
     private:
@@ -155,7 +156,7 @@ class Socket {
         std::string full_read(int length)
         	throw(SocketIOException);
 
-	std::string readLine()
+    	std::string readLine()
               throw(SocketIOException);
 
         /**

@@ -101,7 +101,7 @@ Socket::Socket(const int & socketDescriptor) throw(SocketConnectionException){
 	
 }
 
-Socket * Socket::accept() throw(SocketConnectionException) {
+ReferenceCountPtr<Socket> Socket::accept() throw(SocketConnectionException) {
 	if (!this->is_valid() ) {
 		throw SocketConnectionException("accept sobre socket invalido");
 	}
