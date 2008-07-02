@@ -6,7 +6,7 @@
 #include "../commands/defend.h"
 #include "../commands/battleresult.h"
 #include "dice.h"
-
+#include "gamemanager.h"
 /**
  * Clase que representa a la batalla en el modelo del juego.
  */
