@@ -70,7 +70,7 @@ void GameManager::add(ReferenceCountPtr<PlayerProxy> & playerProxy) {
 	v.push_back(numeroJugador.str());
 
 	YouAre * youare = new YouAre(v);
-	playerProxy->notify(youare);
+	playerProxy->notify(*youare);
 	delete(youare);
 
 	// si alcanzado max, open -> false;
@@ -125,10 +125,10 @@ void GameManager::execute(const std::string & commandName,const std::string &com
 	ReferenceCountPtr<State> currentState = stateMachine->getCurrentState();
 	std::cerr << "GameManager::execute( " << commandName << ")"<< std::endl;
 	std::cout << commandName << " -> execute("<< currentState->getName()<<")" <<std::endl << std::endl;
-	Command* command = commandHydrator->getCommand(commandName,commandXml);
+	ServerCommand* command = commandHydrator->getCommand(commandName,commandXml);
 	if (command != NULL) {
 		// Notifica a los listeners del comando.
-		CommandObservable::notifyCommandExecuted(command);
+		CommandObservable::notifyCommandExecuted((Command*) command);
 	}	
 	// aca le estamos pidiendo al command que llame al metodo correspondiente
 	// a si mismo del estado actual.
@@ -148,7 +148,7 @@ void GameManager::notify(Command * command) {
 
 	while ( it != this->proxyList.end()) {
 		actualProxy = *it;
-		actualProxy->notify(command);
+		actualProxy->notify(*command);
 		++it;
 	}
 

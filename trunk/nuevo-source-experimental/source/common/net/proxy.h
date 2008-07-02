@@ -6,6 +6,7 @@
 #include "../../common/smartpointer/referencecountptr.h"
 #include "sockets/socket.h"
 
+class Command;
 
 class Proxy:public Threaded, public Cancelable {
     /**
@@ -36,6 +37,10 @@ class Proxy:public Threaded, public Cancelable {
          * Constructor de la clase Proxy
          */
     	Proxy(const ReferenceCountPtr<Socket>& socket);
+        /**
+         * Notifica un comando.
+         */
+        void notify(Command& command);
         /**
          * Destructor virtual de la clase Proxy.
          */ 
