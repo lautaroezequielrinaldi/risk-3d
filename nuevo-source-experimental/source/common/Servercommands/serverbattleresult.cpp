@@ -1,6 +1,6 @@
 #include "serverbattleresult.h"
 
-ServerBattleResult::ServerBattleResult() : ServerCommand(), BattleResult()
+ServerBattleResult::ServerBattleResult() : BattleResult(), ServerCommand()
 {
 }
 
