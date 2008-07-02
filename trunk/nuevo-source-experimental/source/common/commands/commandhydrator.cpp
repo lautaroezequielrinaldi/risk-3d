@@ -79,8 +79,8 @@ ServerCommand * CommandHydrator::getCommand(const std::string &name, const std::
 	
 	std::cout << "El comando es de tipo: " << name << std::endl;	
 	//hidrato a partir del xml el serverComand del map
-	Command& cmd = reinterpret_cast<Command&>(*sCommand);
-    cmd.hydrate(xml);
+	Command* cmd = dynamic_cast<Command*>(sCommand);
+    cmd->hydrate(xml);
 	
 	return sCommand;
 }
