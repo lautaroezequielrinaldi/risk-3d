@@ -23,7 +23,7 @@ void TurnManager::setTurnOrder(int firstPlayerColor){
 	
 	this->primerJugador = firstPlayerColor;
 	
-	//busco pos en vector del firstPlayerColor	
+	//busco pos del fisrsPlayer en vector del firstPlayerColor	
 	while ( i< this->orden.size() && !encontrado) {
 	
 		if (this->orden.at(i) == firstPlayerColor )

@@ -121,17 +121,27 @@ void GameManager::execute(UICommand * cmd){
 void GameManager::execute(const std::string & commandName,const std::string &commandXml){
 	// obtener lock
 	ReferenceCountPtr<State> currentState = stateMachine->getCurrentState();
+	
 	std::cerr << "GameManager::execute( " << commandName << ")"<< std::endl;
 	std::cout << commandName << " -> execute("<< currentState->getName()<<")" <<std::endl << std::endl;
+	
 	ServerCommand* command = commandHydrator->getCommand(commandName,commandXml);
+	
 	if (command != NULL) {
-        Command& cmd = reinterpret_cast<Command&>(*command);
+        Command& cmd = dynamic_cast<Command&>(*command);
 		// Notifica a los listeners del comando.
 		CommandObservable::notifyCommandExecuted(cmd);
 	}	
+	
+	// se hace un lock para que se ejecute un comando por vez nada mas.
+	this->mutex.lock();
+	
 	// aca le estamos pidiendo al command que llame al metodo correspondiente
 	// a si mismo del estado actual.
 	command->execute(currentState);
+	
+	// deslockeo mutex
+	this->mutex.unlock();
 }
 
 /**
@@ -139,16 +149,25 @@ void GameManager::execute(const std::string & commandName,const std::string &com
  * ojo, esto solo anda en el cliente, en el server hay que hacer el iterador....
  */
 void GameManager::notify(Command * command) {
+	
 	std::cerr << "GameManager::notify(" << command->getName() << ")" << std::endl;
 	std::cerr << "GameManager::notify from: " << command->getFrom() << " to: " << command->getTo() << std::endl;
+	
 	ReferenceCountPtr<Proxy> actualProxy;
+	
 	std::list<ReferenceCountPtr<Proxy> >::iterator it;
+	
 	it =this->proxyList.begin();
 
+	
 	while ( it != this->proxyList.end()) {
+		
 		actualProxy = *it;
-    	Command& cmd = reinterpret_cast<Command&> (*command);	
+		
+    	Command& cmd = dynamic_cast<Command&> (*command);	
+    	
         actualProxy->notify(cmd);
+        
 		++it;
 	}
 
