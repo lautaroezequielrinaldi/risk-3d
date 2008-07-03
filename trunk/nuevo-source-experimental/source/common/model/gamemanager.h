@@ -14,6 +14,8 @@ class UICommand;
 #include "../state/stateobservable.h"
 #include "../state/statemachine.h"
 #include "../commands/commandobservable.h"
+#include "../thread/mutex.h"
+
 //#include "../Servercommands/serverattack.h"
 //
 class ServerAttack;
@@ -77,6 +79,11 @@ class GameManager: public StateObservable, public CommandObservable {
 		 *
 		 */
 		std::list< ReferenceCountPtr<Proxy> > proxyList;
+		
+		/**
+		 * Para poder lockear el thread en ejecucion.
+		 */
+		 Mutex mutex;
 
 	public:
 	

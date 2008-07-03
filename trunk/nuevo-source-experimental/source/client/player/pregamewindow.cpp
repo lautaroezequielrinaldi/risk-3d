@@ -83,9 +83,11 @@ void PreGameWindow::showConnectionDialog() {
 			std::cout << "Se va a crear socket" << std::endl;
 
 			serverProxy = new ServerProxy(socket, game);
+			
 			JoinGame* cmd = new JoinGame();
 			serverProxy->notify(*cmd);
 			delete cmd;
+			
 			sendMessageButton.set_sensitive(true);
 			readyToPlayButton.set_sensitive(true);
         		connectionDialogButton.set_sensitive(false);

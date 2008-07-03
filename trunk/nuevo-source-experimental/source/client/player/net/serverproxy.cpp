@@ -23,15 +23,21 @@ void * ServerProxy::run() {
 		std::cerr << "longitud " << msgLen << " nombre " << commandName << std::endl;
 		commandXml = getSocket()->full_read(msgLen);
 		
-		std::cerr << "serializacion " << commandXml << std::endl;
+		std::cerr << "serializacion: " << commandXml << std::endl;
+		
         if (commandHydrator.isClientCommand(commandName)) {
+           
             ReferenceCountPtr<ClientCommand> command = commandHydrator.createCommand(commandName, commandXml);
+           
             command->execute();
-            Command& cmd = reinterpret_cast<Command&>(*command);
+           
+            Command& cmd = dynamic_cast<Command&>(*command);
+           
             notifyCommandExecuted(cmd);
+            
         } else {
             ReferenceCountPtr<Command> command = messageHydrator.createCommand(commandName, commandXml);
-            Command& cmd = static_cast<Command&>(*command);
+            Command& cmd = dynamic_cast<Command&>(*command);
             notifyCommandExecuted(cmd);
         }
 	}

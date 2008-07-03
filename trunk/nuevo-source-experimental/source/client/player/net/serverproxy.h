@@ -15,17 +15,43 @@ class Command;
  * 
  */
 class ServerProxy:public CommandObservable, public Proxy {
+    
     private:
-        ReferenceCountPtr<Game> game;
-        ClientCommandHydrator commandHydrator;
-        MessageHydrator messageHydrator;
+    		/**
+    		 * Almacena una referencia al juego"
+    		 */
+    	    ReferenceCountPtr<Game> game;
+    	    
+    	    /**
+    	     * Almacena un commandHydrator del Cliente.
+    	     */
+        	ClientCommandHydrator commandHydrator;
+        	
+        	/**
+        	 * Almacena un messageHydrator.
+        	 */
+        	MessageHydrator messageHydrator;
+	
 	protected:
-	void * run();
+	
+			void * run();
 
 	public:
-	ServerProxy(const ReferenceCountPtr<Socket>& socket, const ReferenceCountPtr<Game>& game);
-    ReferenceCountPtr<Game> getGame();
-	virtual ~ServerProxy();
+			
+			/**
+			 * Constructor de la clase.
+			 */
+			ServerProxy(const ReferenceCountPtr<Socket>& socket, const ReferenceCountPtr<Game>& game);
+    
+    		/**
+    		 * Metodo cuyo proposito es obtener el juego.
+    		 */
+    		ReferenceCountPtr<Game> getGame();
+	
+			/**
+			 * Destructor de la clase.
+			 */
+			virtual ~ServerProxy();
 
 };
 

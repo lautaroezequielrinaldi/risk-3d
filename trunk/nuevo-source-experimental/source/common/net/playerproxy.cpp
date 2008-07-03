@@ -5,12 +5,17 @@
 #include<sstream>
 #include <iostream>
 void * PlayerProxy::run() {
+	
+	
 	while (! isCanceled()) {
+	
 		std::stringstream msg;
 		unsigned int msgLen;
 		std::string commandName;
 		std::string commandXml;
+		
 		std::cerr << std::endl << "################################"<< std::endl<< "PlayerProxy leyendo encabezado " << std::endl;
+		
 		// deshardcodear este 32
 		msg << getSocket()->full_read(32);
 		msg >> msgLen;
@@ -21,13 +26,16 @@ void * PlayerProxy::run() {
 		
 		std::cerr << "serializacion " << commandXml << std::endl;
 		// pasar *this para que los waiting·::joingame sepan
+		
 		gameManager->execute(commandName, commandXml);
 
 	}
 	return 0;
 }
 
-PlayerProxy::PlayerProxy(const ReferenceCountPtr<Socket>& socket, const ReferenceCountPtr< GameManager> & gameManager):Proxy(socket), gameManager(gameManager) {
+PlayerProxy::PlayerProxy(const ReferenceCountPtr<Socket>& socket, const ReferenceCountPtr< GameManager> & gameManager):
+Proxy(socket), 
+gameManager(gameManager) {
 
 }
 
