@@ -24,9 +24,25 @@ class GameWindow {
          */
         bool initializeSDL();
         /**
+         * Metodo cuyo proposito es iniciar OpenGL en el mejor modo de video grafico.
+         */
+        void initializeOpenGL();
+        /**
          * Metodo cuyo propòsito es terminar SDL.
          */
         void terminateSDL();
+        /**
+         * Metodo cuyo propòsito es terminar OpenGL.
+         */
+        void terminateOpenGL();
+        /**
+         * Habilita modo 2D.
+         */
+        void enable2D();
+        /**
+         * Deshabilita modo 2D.
+         */
+        void disable2D();
         /**
          * Metodo cuyo propòsito es actualizar la escena grafica.
          */
