@@ -12,7 +12,7 @@
 #include <vector>
 #include "command.h"
 
-class Move : public Command
+class Move : virtual public Command
 {
 	
 	private:

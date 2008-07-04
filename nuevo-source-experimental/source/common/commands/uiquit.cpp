@@ -17,16 +17,7 @@ UIQuit::~UIQuit(){
 std::string UIQuit::serialize(){
 	return "";
 }
-bool UIQuit::validate(ReferenceCountPtr<GameManager>& gameManager){
-	return false;
-}
 
-
-void UIQuit::execute(ReferenceCountPtr<State>& state){
-	
-	state->uiQuit(*this);
-	
-}
 std::string UIQuit::getName() {
 	return "uiQuit";
 }

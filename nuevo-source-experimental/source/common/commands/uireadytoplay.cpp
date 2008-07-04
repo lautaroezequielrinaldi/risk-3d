@@ -20,16 +20,6 @@ std::string UIReadyToPlay::serialize(){
 }
 
 
-bool UIReadyToPlay::validate(ReferenceCountPtr<GameManager>& gameManager){
-    return false;
-	
-}
-
-void UIReadyToPlay::execute(ReferenceCountPtr<State>& state){
-    state->uiReadyToPlay(*this);
-	
-}
-
 std::string UIReadyToPlay::getName() {
 	return "uiReadyToPlay";
 }

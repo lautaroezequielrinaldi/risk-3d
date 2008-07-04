@@ -8,7 +8,7 @@
  */
 
 #include "command.h"
-class Quit: public Command {
+class Quit: public virtual Command {
 	
 	public:
 

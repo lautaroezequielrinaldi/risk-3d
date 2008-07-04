@@ -145,8 +145,6 @@ class GameManager: public StateObservable, public CommandObservable {
 
 		void notify(Command * command);
 
-		void execute(UICommand * command);
-
 		void execute(const std::string & commandName,const std::string & commandXml);
 
 		ReferenceCountPtr<PlayerProxy> getPlayerProxy(int color);

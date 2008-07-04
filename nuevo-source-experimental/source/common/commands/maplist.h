@@ -6,7 +6,7 @@
  */
 
 #include "command.h"
-class MapList: public Command {
+class MapList: virtual public Command {
 
 	private:
 	

@@ -6,7 +6,7 @@
  */
 
 #include "uicommand.h"
-class UICountrySelect: public UICommand {
+class UICountrySelect: virtual public UICommand {
 	public:
 
 		UICountrySelect(std::vector<std::string> &parameterList);
@@ -18,16 +18,7 @@ class UICountrySelect: public UICommand {
 		 */
 		std::string serialize();
 
-		/**
-		 * Metodo cuyo proposito es validar la accion que realice el comando.
-		 */
-		bool validate(ReferenceCountPtr<GameManager>& gameManager);
-		virtual void execute(ReferenceCountPtr<State>& state);
-		
-
 		virtual std::string getName();
-
-
 };
 
 #endif /* __UICOUNTRYSELECT_H__*/

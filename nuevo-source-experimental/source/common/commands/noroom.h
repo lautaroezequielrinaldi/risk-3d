@@ -6,7 +6,7 @@
  */
 
 #include "command.h"
-class NoRoom: public Command {
+class NoRoom: virtual public Command {
 	public:
 	NoRoom();
     NoRoom(const std::string& xml);

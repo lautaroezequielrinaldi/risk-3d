@@ -6,7 +6,7 @@
  */
 
 #include "command.h"
-class DidIWin: public Command {
+class DidIWin: virtual public Command {
 
 
 	private:

@@ -6,7 +6,7 @@
  */
 
 #include "uicommand.h"
-class UIChat: public UICommand {
+class UIChat: virtual public UICommand {
 	public:
 
 		UIChat(std::vector<std::string> &parameterList);
@@ -19,16 +19,6 @@ class UIChat: public UICommand {
 		std::string serialize();
 
 		virtual std::string getName();
-
-		/**
-		 * Metodo cuyo proposito es validar la accion que realice el comando.
-		 */
-		virtual bool validate(ReferenceCountPtr<GameManager>& gameManager);
-		
-		/**
-		 * Metodo cuyo proposito es ejecutar la accion que realice el comando.
-		 */
-		virtual void execute(ReferenceCountPtr<State>& state);
 };
 
 #endif /* __UICHAT_H__*/

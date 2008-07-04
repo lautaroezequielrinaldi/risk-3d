@@ -7,7 +7,7 @@
 
 #include "command.h"
 
-class SelectMap : public Command
+class SelectMap : virtual public Command
 {
 
 	

@@ -9,7 +9,7 @@
 
 #include "command.h"
 
-class ReadyToPlay : public Command
+class ReadyToPlay : virtual public Command
 {
 	
 	private:

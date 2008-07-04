@@ -10,9 +10,8 @@
 #include <string>
 #include <vector>
 #include "command.h"
-#include "../model/gamemanager.h"
 
-class TurnToMove : public Command
+class TurnToMove : virtual public Command
 {
 	
 	

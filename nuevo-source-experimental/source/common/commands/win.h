@@ -10,9 +10,8 @@
 #include <string>
 #include <vector>
 #include "command.h"
-#include "../model/gamemanager.h"
 
-class Win : public Command
+class Win : virtual public Command
 {
 	
 	

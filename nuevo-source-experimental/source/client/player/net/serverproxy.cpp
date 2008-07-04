@@ -5,9 +5,6 @@
 
 void * ServerProxy::run() {
 	
-
-
-
 	while (! isCanceled()) {
 		std::stringstream msg;
 		unsigned int msgLen;
@@ -26,14 +23,16 @@ void * ServerProxy::run() {
 		std::cerr << "serializacion: " << commandXml << std::endl;
 		
         if (commandHydrator.isClientCommand(commandName)) {
-           
+            std::cerr << "Invocando ClientCommandHydrator::createCommand(" << commandName << ", " << commandXml << ");" << std::endl;
             ReferenceCountPtr<ClientCommand> command = commandHydrator.createCommand(commandName, commandXml);
+            std::cerr << "Ejecutando comando..." << std::endl;
+            if (command != NULL) {
+                command->execute();
+            }
+            std::cerr << "Se pudo ejecutar comando..." << std::endl;
            
-            command->execute();
            
-            Command& cmd = dynamic_cast<Command&>(*command);
-           
-            notifyCommandExecuted(cmd);
+            notifyCommandExecuted(*command);
             
         } else {
             ReferenceCountPtr<Command> command = messageHydrator.createCommand(commandName, commandXml);

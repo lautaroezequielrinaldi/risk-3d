@@ -8,7 +8,7 @@
  * Comando utilizado para señalar el fin de Attacking o Moving
  */
 
-class NoMore: public Command {
+class NoMore: virtual public Command {
 	private:
 		int numeroJugador;
 	public:

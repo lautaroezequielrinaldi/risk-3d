@@ -12,9 +12,8 @@
 #include <string>
 #include <vector>
 #include "command.h"
-#include "../model/gamemanager.h"
 
-class Map : public Command
+class Map : virtual public Command
 {
 	
 	

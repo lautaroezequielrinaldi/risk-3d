@@ -6,7 +6,7 @@
  */
 
 #include "command.h"
-class Chat: public Command {
+class Chat: virtual public Command {
 
 	public:
 

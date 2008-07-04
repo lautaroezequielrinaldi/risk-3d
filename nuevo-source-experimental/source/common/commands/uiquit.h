@@ -22,12 +22,6 @@ class UIQuit: public UICommand {
 		 */
 		std::string serialize();
 
-		
-		/**
-		 * Metodo cuyo proposito es validar la accion que realice el comando.
-		 */
-		bool validate(ReferenceCountPtr<GameManager>& gameManager);
-		virtual void execute(ReferenceCountPtr<State>& state);
 		virtual std::string getName();
 };
 
