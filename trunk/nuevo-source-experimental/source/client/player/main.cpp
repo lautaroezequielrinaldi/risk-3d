@@ -14,6 +14,6 @@ int main(int argc, char** argv) {
 
     GameWindow gameWindow; 
 
-    return gameWindow.run();
+    return gameWindow.run(argc, argv);
 }
 

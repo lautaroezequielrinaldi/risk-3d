@@ -2,6 +2,7 @@
 #define __GAMEWINDoW_H__
 
 #include<SDL.h>
+#include<GL/glut.h>
 #include<GL/gl.h>
 #include<GL/glu.h>
 #include "ui/uistate.h"
@@ -32,7 +33,7 @@ class GameWindow {
         /**
          * Metodo cuyo propòsito es iniciar SDL en el mejor modo de video grafico.
          */
-        bool initializeSDL();
+        bool initializeSDL(int argc, char** argv);
         /**
          * Metodo cuyo proposito es iniciar OpenGL en el mejor modo de video grafico.
          */
@@ -112,7 +113,7 @@ class GameWindow {
         /**
          * Ejecuta el main loop del juego.
          */
-        int run();
+        int run(int argc, char** argv);
         /**
          * Destructor virtual de la clase GameWindow.
          */
