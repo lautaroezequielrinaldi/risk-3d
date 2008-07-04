@@ -57,6 +57,10 @@ class Widget {
 		/**
 		 * Constructor de la clase Widget.
 		 */
+		Widget(UIState& uiState);
+		/**
+		 * Constructor de la clase Widget.
+		 */
 		Widget(UIState& uiState, const float& x, const float& y,
 			const float& width, const float& height,
 			const bool& visible = true, const bool& enabled = true);

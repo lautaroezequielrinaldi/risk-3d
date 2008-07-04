@@ -5,6 +5,7 @@
 GameWindow::GameWindow():
 	uiState(),
 	button(uiState, "Hola Mundo", 0.0f, 0.0f, 150.0f, 70.0f),
+	label(uiState, "Label grande", 0.0, 500.0f, 1000.0f,200.0f),
 	running(true) {
     // No realiza ninguna accion.
 }
@@ -76,10 +77,12 @@ void GameWindow::updateScene() {
 void GameWindow::drawScene() {
     this->enable2D();
 
-    this->uiState.prepare();
+	this->uiState.prepare();
 	if( this->button.doProcess() ) {
 		std::cout << "Se presiono boton" << std::endl;
 	}
+	this->label.setWidth(SDL_GetVideoInfo()->current_w);
+	this->label.doProcess();
 	this->uiState.unprepare();
 
 	this->disable2D();

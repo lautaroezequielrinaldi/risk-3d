@@ -1,5 +1,9 @@
 #include "button.h"
 
+Button::Button(UIState& uiState): Widget(uiState), text() {
+	// No realiza ninguna accion.
+}
+
 Button::Button(UIState& uiState, const std::string& text, const float& x,
 	const float& y, const float& width, const float& height,
 	const bool& visible, const bool& enabled):

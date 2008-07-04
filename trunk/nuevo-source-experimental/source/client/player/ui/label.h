@@ -1,13 +1,26 @@
 #ifndef __LABEL_H__
 #define __LABEL_H__
 
+#include<string>
 #include "widget.h"
 
 class Label: public Widget {
 	/**
+	 * Atributos privados de la clase Label.
+	 */
+	private:
+		/**
+		 * Almacena el texto del label.
+		 */
+		std::string text;
+	/**
 	 * Metodos publicos de la clase Label.
 	 */
 	public:
+		/**
+		 * Constructor de la clase Label.
+		 */
+		Label(UIState& uiState);
 		/**
 		 * Constructor de la clase Label.
 		 */
@@ -18,6 +31,10 @@ class Label: public Widget {
 		 * Procesa el widget.
 		 */
 		virtual bool doProcess();
+		/**
+		 * Obtiene el texto del label.
+		 */
+		std::string getText() const;
 		/**
 		 * Destructor virtual de la clase Label.
 		 */
