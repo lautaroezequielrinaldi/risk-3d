@@ -4,12 +4,22 @@
 #include<SDL.h>
 #include<GL/gl.h>
 #include<GL/glu.h>
+#include "ui/uistate.h"
+#include "ui/button.h"
 
 class GameWindow {
     /**
      * Atributos privados de la clase GameWindow.
      */
     private:
+		/**
+		 * Almacena el estado de la UI.
+		 */
+		UIState uiState;
+		/**
+		 * Almacena un boton.
+		 */
+		Button button;
         /**
          * Almacena un flag booleano indicando si esta corriendo el main loop.
          */
