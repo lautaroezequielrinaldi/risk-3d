@@ -45,7 +45,6 @@ ReferenceCountPtr<ClientCommand> ClientCommandHydrator::createCommand(const std:
         std::cerr << "Hidratando comando con el XML: " << xml << std::endl;
         command->hydrate(xml);
         std::cerr << "Comando hidratado..." << std::endl;
-        std::cerr << "Realizando static cast de ReferenceCountPtr<Serializable> a ReferenceCountPtr<ClientCommand>..." << std::endl;
         return command;
     } else {
         std::cerr << "No se encontro comando, devuelvo null..." << std::endl;
