@@ -3,8 +3,12 @@
 
 MapList::MapList(std::vector<std::string> &parameterList) : Command ()
 {
+	//this->numeroJugador = atoi (parameterList[0].c_str() );
+	
+	//cargo lista de mapas
+	for ( unsigned int i=0; i<parameterList.size() ; i++)
+		this->listaMapas.push_back( parameterList[i]  );
 
-	this->numeroJugador = atoi (parameterList[0].c_str() );
 }
 
 
@@ -22,7 +26,15 @@ MapList::~MapList(){
 
 
 std::string MapList::serialize(){
-	return "<?xml version=\"1.0\"?><maplist>"+serializeCommon(0,numeroJugador)+"<maps><map>mapa 1</map><map>mapa 2</map></maps></maplist>";
+	
+	std::string xmlMap = "<?xml version=\"1.0\"?><maplist>"+serializeCommon(0,this->getTo())+"<maps>";
+	
+	for ( int i=0; i< this->listaMapas.size(); i++)
+		xmlMap += "<map>"+ listaMapas.at(i) +"</map>";
+		
+	xmlMap += "</maps></maplist>";
+	
+	return xmlMap;
 }
 
 
@@ -40,10 +52,14 @@ void* MapList::hydrate(const std::string & xml){
 	objetoXPath = xmlXPathEvalExpression(BAD_CAST "//*/maps/map", contextoXPath);
 	setNodo = objetoXPath->nodesetval;
 
-// esto va dentro de un loop
-	nodo = setNodo->nodeTab[0];
-	field = xmlNodeGetContent(nodo);
-	//this->nombreMapa.assign( (char*) field );
+	for ( int i = 0; i< setNodo->nodeNr  ; i++){
+		
+		nodo = setNodo->nodeTab[i];
+		field = xmlNodeGetContent(nodo);
+		this->listaMapas.push_back((char*)field);
+		
+	}
+
 
 	xmlFree(field);
 	xmlXPathFreeObject(objetoXPath);
@@ -60,7 +76,14 @@ std::string MapList::getName() {
 	return "mapList";
 }
 
+const std::vector<std::string>& MapList::getMapList(){
+	return this->listaMapas;
+
+}
+
+
 void MapList::accept(CommandObserver* observer) {
     observer->commandExecuted(*this);
+    std::cerr<<"LLEGO A MAPLIST::ACCEPT"<<std::endl;
 }
 

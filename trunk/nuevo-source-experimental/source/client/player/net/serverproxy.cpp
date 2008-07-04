@@ -36,8 +36,9 @@ void * ServerProxy::run() {
             
         } else {
             ReferenceCountPtr<Command> command = messageHydrator.createCommand(commandName, commandXml);
-            Command& cmd = dynamic_cast<Command&>(*command);
-            notifyCommandExecuted(cmd);
+            std::cerr << "Se pudo crear comando con messageHydrator" << std::endl;
+            
+            notifyCommandExecuted(*command);
         }
 	}
 	return 0;

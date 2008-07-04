@@ -131,9 +131,15 @@ class PreGameWindow: public CommandObserver, public Gtk::Window {
 		 */
 		virtual void commandExecuted(SelectMap& cmd);
 		/**
-		 * Responde ante la ll egada de un comando chat.
+		 * Responde ante la llegada de un comando chat.
 		 */
 		virtual void commandExecuted(Chat& cmd);
+		
+		/**
+		 * Responde ante la llegada de un comando mapList.
+		 */
+		virtual void commandExecuted(MapList& cmd);
+		
 		/**
 		 * Destructor virtual de la clase PreGameWindow.
 		 */

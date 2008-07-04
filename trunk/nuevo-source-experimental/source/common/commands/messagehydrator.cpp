@@ -2,7 +2,9 @@
 #include<iostream>
 ReferenceCountPtr<Command> MessageHydrator::createCommand(const std::string& commandName, const std::string& xml) {
     std::cerr << "Creando un comando de tipo " << commandName << std::endl;
-    ReferenceCountPtr<Attack> cmd;
+    
+    ReferenceCountPtr<Command> cmd;
+    
     if (commandName == "attack") {
         cmd = new Attack();
     }

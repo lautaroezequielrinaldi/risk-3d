@@ -1,6 +1,9 @@
 #include "pregamewindow.h"
 #include "../../common/commands/chat.h"
 #include "../../common/commands/quit.h"
+
+#include<gtkmm/liststore.h> // Para definiciòn de Gtk::ListStore.
+#include<gtkmm/combobox.h> // Para definiciòn de Gtk::ComboBox.
 #include<iostream>
 
 PreGameWindow::PreGameWindow(ReferenceCountPtr<Game>& game):
@@ -93,6 +96,8 @@ void PreGameWindow::showConnectionDialog() {
         		connectionDialogButton.set_sensitive(false);
             serverProxy->registerCommandObserver(this);
 			serverProxy->start();
+
+			
 			connected = true;
 		} catch (SocketConnectionException& exception) {
 			Gtk::MessageDialog errorDialog(*this, "No se pudo conectar al servidor!!!", false,
@@ -105,6 +110,9 @@ void PreGameWindow::showConnectionDialog() {
 
 void PreGameWindow::onConnectionDialogButtonClicked() {
 	this->showConnectionDialog();
+	
+	
+	
 }
 
 void PreGameWindow::onSendMessageButtonClicked() {
@@ -141,6 +149,75 @@ bool PreGameWindow::userHasQuit() {
 }
 
 void PreGameWindow::commandExecuted(SelectMap& cmd) {
+	
+}
+
+void PreGameWindow::commandExecuted(MapList& cmd){
+	
+  	class ModelColumns : public Gtk::TreeModel::ColumnRecord
+  	{
+  		public:
+
+    		ModelColumns(){
+    			add(m_col_name); 
+    		}
+
+    	Gtk::TreeModelColumn<int> m_col_id;
+    	Gtk::TreeModelColumn<Glib::ustring> m_col_name;
+  	};
+
+	//modelo para la columna del combo
+  	ModelColumns m_Column;
+
+ 	//Child widgets:
+  	Gtk::ComboBox m_Combo;
+  	Glib::RefPtr<Gtk::ListStore> m_refTreeModel;
+
+	//creo tree model
+	m_refTreeModel = Gtk::ListStore::create(m_Column);
+  	m_Combo.set_model(m_refTreeModel);
+
+  	//completo el combo box con la lista de paises que trae el comando selectMap
+  	
+  	std::vector<std::string> vecMapas = cmd.getMapList();
+
+  	Gtk::TreeModel::Row row ;//= *(m_refTreeModel->append());
+  		
+	for ( int i =0; i< vecMapas.size() ; i++ ){
+  		
+  		row = *(m_refTreeModel->append());
+  		row[m_Column.m_col_name] = vecMapas.at(i);
+
+	}
+
+  	m_Combo.pack_start(m_Column.m_col_name);
+
+
+  	//conectar señal
+  	//m_Combo.signal_changed().connect( sigc::mem_fun(*this, &ExampleWindow::on_combo_changed) );
+
+			
+	Gtk::Label seleccionLabel("Seleccione el mapa sobre el cual se jugara:");
+	Gtk::Dialog selectMapDialog("Seleccion de mapa");
+	selectMapDialog.get_vbox()->add(seleccionLabel);
+	selectMapDialog.get_vbox()->add(m_Combo);
+	
+	selectMapDialog.add_button(Gtk::Stock::OK, Gtk::RESPONSE_OK);
+	selectMapDialog.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_OK);
+	selectMapDialog.show_all();
+	
+	int result = selectMapDialog.run();
+	
+	if (result == Gtk::RESPONSE_OK) {
+		
+			
+			std::cerr<<"PRESIONO OK DE SELECCION DE MAPA"<<std::endl;
+			
+		
+	}
+	
+		
+	
 	
 }
 

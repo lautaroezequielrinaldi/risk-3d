@@ -10,7 +10,9 @@ class MapList: virtual public Command {
 
 	private:
 	
-		int numeroJugador;
+		//int numeroJugador;
+		
+		std::vector<std::string> listaMapas;
 	
 	public:
 	
@@ -44,8 +46,15 @@ class MapList: virtual public Command {
 		 */
 		void* hydrate(const std::string & xml);
 		
-		
+		/**
+		 * Metodo cuyo proposito es obtener el nombre del comando.
+		 */
 		virtual std::string getName();
+		
+		/**
+		 * Metodo cuyo proposito es obtener la lista de nombres de mapas disponibles.
+		 */
+		 const std::vector<std::string>& getMapList();
 
 		/**
 		 * Notifica que se ejecuto el comando.
