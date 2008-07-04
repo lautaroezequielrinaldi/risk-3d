@@ -20,6 +20,10 @@ class Button: public Widget {
 		/**
 		 * Constructor de la clase Button.
 		 */
+		Button(UIState& uiState);
+		/**
+		 * Constructor de la clase Button.
+		 */
 		Button(UIState& uiState, const std::string& text, const float& x,
 		const float& y, const float& width, const float& height,
 		const bool& visible = true, const bool& enabled = true);

@@ -7,6 +7,7 @@
 #include<GL/glu.h>
 #include "ui/uistate.h"
 #include "ui/button.h"
+#include "ui/label.h"
 
 class GameWindow {
     /**
@@ -21,6 +22,10 @@ class GameWindow {
 		 * Almacena un boton.
 		 */
 		Button button;
+		/**
+		  * Almacena el label.
+		  */
+		Label label;
         /**
          * Almacena un flag booleano indicando si esta corriendo el main loop.
          */

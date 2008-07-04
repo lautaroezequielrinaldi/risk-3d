@@ -1,5 +1,16 @@
 #include "widget.h"
 
+Widget::Widget(UIState& uiState):
+	uiState(uiState),
+	x(0),
+	y(0),
+	width(0),
+	height(0),
+	visible(false),
+	enabled(false) {
+	// No realiza ninguna accion.
+}
+
 Widget::Widget(UIState& uiState, const float& x, const float& y,
 	const float& width, const float& height, const bool& visible,
 	const bool& enabled):
