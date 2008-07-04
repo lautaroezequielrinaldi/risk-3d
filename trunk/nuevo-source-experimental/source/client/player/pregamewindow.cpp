@@ -62,6 +62,9 @@ PreGameWindow::PreGameWindow(ReferenceCountPtr<Game>& game):
 	// Conecta el signal_clicked del boton quit con su manejador.
 	quitButton.signal_clicked().connect(sigc::mem_fun(*this,
 			&PreGameWindow::onQuitButtonClicked));
+	
+	
+			
 	// Muestro todos los widgets.
 	show_all();
 }
@@ -87,14 +90,19 @@ void PreGameWindow::showConnectionDialog() {
 
 			serverProxy = new ServerProxy(socket, game);
 			
+			// conecta la señal lanzada por el dispatcher que maneja la llegada de un map List
+			this->serverProxy->getDispatcherMapList().connect(sigc::mem_fun(*this, &PreGameWindow::on_map_list_selection));
+			
 			JoinGame* cmd = new JoinGame();
 			serverProxy->notify(*cmd);
 			delete cmd;
 			
 			sendMessageButton.set_sensitive(true);
 			readyToPlayButton.set_sensitive(true);
-        		connectionDialogButton.set_sensitive(false);
+        	connectionDialogButton.set_sensitive(false);
+            
             serverProxy->registerCommandObserver(this);
+			
 			serverProxy->start();
 
 			
@@ -154,7 +162,27 @@ void PreGameWindow::commandExecuted(SelectMap& cmd) {
 
 void PreGameWindow::commandExecuted(MapList& cmd){
 	
-  	class ModelColumns : public Gtk::TreeModel::ColumnRecord
+	if ( &cmd == NULL )
+		std::cerr<<"MAPLIST LLEGA A WINDOW COMO NULL....."<<std::endl;
+		
+	this->commandMapList = &cmd;
+	std::cerr<<"almaceno mapList en preGameWindow....."<<std::endl;
+	
+}
+
+ReferenceCountPtr<ServerProxy> PreGameWindow::getServerProxy() {
+    return serverProxy;
+}
+
+void PreGameWindow::commandExecuted(Chat& cmd) {
+	std::string buffer = messageTextView.get_buffer()->get_text();
+	buffer =  buffer + "\r\n" + cmd.getMainMsg();
+	messageTextView.get_buffer()->set_text(buffer);
+}
+
+void PreGameWindow::on_map_list_selection(){
+	
+	class ModelColumns : public Gtk::TreeModel::ColumnRecord
   	{
   		public:
 
@@ -179,7 +207,10 @@ void PreGameWindow::commandExecuted(MapList& cmd){
 
   	//completo el combo box con la lista de paises que trae el comando selectMap
   	
-  	std::vector<std::string> vecMapas = cmd.getMapList();
+  	if ( commandMapList == NULL )
+  		std::cerr<<"COMMAND MAP LIST GUARDADO EN PREGAMEWIN ES NULL....."<<std::endl;
+  	
+  	std::vector<std::string> vecMapas = this->commandMapList->getMapList();
 
   	Gtk::TreeModel::Row row ;//= *(m_refTreeModel->append());
   		
@@ -216,19 +247,6 @@ void PreGameWindow::commandExecuted(MapList& cmd){
 		
 	}
 	
-		
-	
-	
-}
-
-ReferenceCountPtr<ServerProxy> PreGameWindow::getServerProxy() {
-    return serverProxy;
-}
-
-void PreGameWindow::commandExecuted(Chat& cmd) {
-	std::string buffer = messageTextView.get_buffer()->get_text();
-	buffer =  buffer + "\r\n" + cmd.getMainMsg();
-	messageTextView.get_buffer()->set_text(buffer);
 }
 
 PreGameWindow::~PreGameWindow() {

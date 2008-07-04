@@ -6,6 +6,9 @@
 #include "../commands/clientcommandhydrator.h"
 #include "../../../common/commands/messagehydrator.h"
 
+#include <glibmm.h>
+using Glib::Dispatcher;
+
 class Game;
 class ClientCommand;
 class Command;
@@ -31,6 +34,12 @@ class ServerProxy:public CommandObservable, public Proxy {
         	 * Almacena un messageHydrator.
         	 */
         	MessageHydrator messageHydrator;
+        	
+        	/*
+        	 *	Dispatcher encargado de notificar a la preGameWindow cuando recibe un mapList
+        	 */
+			Dispatcher dispatcherMapList;
+        	
 	
 	protected:
 	
@@ -47,6 +56,11 @@ class ServerProxy:public CommandObservable, public Proxy {
     		 * Metodo cuyo proposito es obtener el juego.
     		 */
     		ReferenceCountPtr<Game> getGame();
+	
+			/**
+			 * Metodo cuyo proposito es obtener el dispatcher encargado de notificar sobre la lista de mapas.
+			 */
+			Dispatcher& getDispatcherMapList();
 	
 			/**
 			 * Destructor de la clase.

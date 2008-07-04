@@ -14,6 +14,9 @@ void * ServerProxy::run() {
 		std::cerr<< std::endl << "################################"<< std::endl<<"ServerProxy leyendo encabezado " << std::endl;
 		// deshardcodear este 32
 		msg << getSocket()->full_read(32);
+		
+		std::cerr<<"LLEGO A HACER FULL READ"<<std::endl;
+		
 		msg >> msgLen;
 		msg >> commandName;
 
@@ -36,18 +39,35 @@ void * ServerProxy::run() {
             
         } else {
             ReferenceCountPtr<Command> command = messageHydrator.createCommand(commandName, commandXml);
-            std::cerr << "Se pudo crear comando con messageHydrator" << std::endl;
+            
+            if ( command == NULL )
+            	std::cerr<<"el comando devuelto por messageHydrator es NULL....."<<std::endl;
+            else
+            	std::cerr << "Se pudo crear comando con messageHydrator" << std::endl;
             
             notifyCommandExecuted(*command);
+            
+            if ( command->getName() == "mapList" )  
+            	dispatcherMapList.emit();
         }
 	}
 	return 0;
 }
 
 
-ServerProxy::ServerProxy(const ReferenceCountPtr<Socket>& socket,  const ReferenceCountPtr< Game> & game):Proxy(socket), game(game),commandHydrator(game), messageHydrator() {
-	
+ServerProxy::ServerProxy(const ReferenceCountPtr<Socket>& socket,  const ReferenceCountPtr< Game> & game):
+Proxy(socket), 
+game(game),
+commandHydrator(game),
+messageHydrator() 
+{
+		
 }
+
+Dispatcher& ServerProxy::getDispatcherMapList(){	
+	return this->dispatcherMapList;
+}
+
 
 ServerProxy::~ServerProxy(){
 

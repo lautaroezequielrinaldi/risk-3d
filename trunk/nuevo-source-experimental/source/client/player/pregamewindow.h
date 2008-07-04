@@ -13,6 +13,7 @@
 #include<gtkmm/dialog.h>
 #include "../../common/commands/joingame.h"
 #include "../../common/commands/readytoplay.h"
+#include "../../common/commands/maplist.h"
 #include "../../common/commands/quit.h"
 #include "../../common/commands/commandobserver.h"
 #include "net/serverproxy.h"
@@ -34,6 +35,12 @@ class PreGameWindow: public CommandObserver, public Gtk::Window {
          * Almacena una referencia al game.
          */
         ReferenceCountPtr<Game>& game;
+        
+        /**
+         * Almacena una referencia al comando mapList que se envia al cliente para la seleccion del mapa.
+         */
+         ReferenceCountPtr<MapList> commandMapList;
+        
 		/**
 		 * Almacena el layout vertical de la ventana.
 		 */
@@ -110,6 +117,13 @@ class PreGameWindow: public CommandObserver, public Gtk::Window {
 		 * Manejador de la senial signal_clicked del boton quit.
 		 */
 		void onQuitButtonClicked();
+		
+		/**
+		 * Manejador de la señal realizada por el dispatcher encargado de la notificacion de un map List.
+		 */
+		void on_map_list_selection();
+		
+		
 	/**
 	 * Metodos publicos de la clase PreGameWindow.
 	 */
