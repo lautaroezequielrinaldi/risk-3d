@@ -1,20 +1,19 @@
-#include "client3d.h"
 #include "../../common/model/randomdice.h"
 #include<gtkmm/main.h>
 #include "pregamewindow.h"
-
+#include "gamewindow.h"
 
 int main(int argc, char** argv) {
     Gtk::Main main(argc, argv);
     RandomDice dice;
-    ReferenceCountPtr<Game> game( new Game(new Map(),dice));
+    ReferenceCountPtr<Mapa> map;
+    ReferenceCountPtr<Game> game( new Game(map,dice));
     PreGameWindow window(game);
 
     Gtk::Main::run(window);
 
-    Client3d client;
+    GameWindow gameWindow; 
 
-    client.run();
-    return 0;
+    return gameWindow.run();
 }
 
