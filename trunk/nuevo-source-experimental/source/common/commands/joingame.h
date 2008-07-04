@@ -9,7 +9,7 @@
 
 #include "command.h"
 
-class JoinGame : public Command
+class JoinGame : virtual public Command
 {
 	
 	private:

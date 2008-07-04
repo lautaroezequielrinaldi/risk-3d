@@ -11,7 +11,7 @@
 #include <vector>
 #include "command.h"
 
-class Defend : public Command
+class Defend : virtual public Command
 {
 	
 	private:

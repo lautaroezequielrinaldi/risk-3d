@@ -19,19 +19,6 @@ std::string UIJoinGame::serialize(){
 
 }
 
-bool UIJoinGame::validate(ReferenceCountPtr<GameManager>& gameManager){
-
-		return false;
-	
-}
-
-void UIJoinGame::execute(ReferenceCountPtr<State>& state){
-    state->uiJoinGame(*this);
-
-
-	
-}
-
 std::string UIJoinGame::getName() {
 	return "uiJoinGame";
 }

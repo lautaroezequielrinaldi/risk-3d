@@ -2,10 +2,11 @@
 #define __CLIENTCOMMAND_H__
 
 #include<string> // Para definicion de std::string.
+#include "../../../common/commands/command.h"
 #include "../../../common/smartpointer/referencecountptr.h"
 #include "../../../common/model/game.h"
 
-class ClientCommand {
+class ClientCommand: virtual public Command {
     /**
      * Atributos privados de la clase ClientCommand.
      */
@@ -35,7 +36,7 @@ class ClientCommand {
 		/**
 		 * Ejecuta un comando.
 		 */
-		virtual void execute() = 0;
+		virtual void execute();
 		/**
 		 * Devuelve una nueva instancia de ClientCommand.
 		 */

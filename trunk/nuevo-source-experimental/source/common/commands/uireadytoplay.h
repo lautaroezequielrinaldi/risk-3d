@@ -9,7 +9,7 @@
 
 #include "uicommand.h"
 
-class UIReadyToPlay : public UICommand
+class UIReadyToPlay : virtual public UICommand
 {
 	
 	//private:
@@ -41,17 +41,6 @@ class UIReadyToPlay : public UICommand
 		 */
 		std::string serialize();
 
-		
-		/**
-		 * Metodo cuyo proposito es validar la accion que realice el comando.
-		 */
-		bool validate(ReferenceCountPtr<GameManager>& state);
-		
-		/**
-		 * Metodo cuyo proposito es ejecutar la accion que realice el comando.
-		 */
-		void execute(ReferenceCountPtr<State>& state);
-		
 		virtual std::string getName();
 };
 

@@ -1,13 +1,14 @@
 #ifndef SERVERCOMMAND_H_
 #define SERVERCOMMAND_H_
 
+#include "../commands/command.h"
 #include "../model/gamemanager.h"
 
 /**
  * Clase cuyo proposito es representar a los comandos del servidor .
  */
  
-class ServerCommand
+class ServerCommand: virtual public Command
 {
 	
 	public:

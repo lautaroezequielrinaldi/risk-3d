@@ -1,6 +1,7 @@
 #include "messagehydrator.h"
-
+#include<iostream>
 ReferenceCountPtr<Command> MessageHydrator::createCommand(const std::string& commandName, const std::string& xml) {
+    std::cerr << "Creando un comando de tipo " << commandName << std::endl;
     ReferenceCountPtr<Attack> cmd;
     if (commandName == "attack") {
         cmd = new Attack();
@@ -68,9 +69,12 @@ ReferenceCountPtr<Command> MessageHydrator::createCommand(const std::string& com
     if (commandName == "youAre") {
         cmd = new YouAre();
     }
+    std::cerr << "Verificando que el comando se creo exitosamente..." << std::endl;
     if (cmd != NULL) {
+        std::cerr << "Hidratando comando con el XML: " << xml << std::endl;
         cmd->hydrate(xml);
     }
+    std::cerr << "Devolviendo comando..." << std::endl;
     return cmd;
 }
 

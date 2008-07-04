@@ -8,7 +8,7 @@
  * Comando utilizado para señalar el fin de Attacking o Moving
  */
 
-class UINoMore: public UICommand {
+class UINoMore: virtual public UICommand {
 	//private:
 	//	int numeroJugador;
 	public:
@@ -21,13 +21,6 @@ class UINoMore: public UICommand {
 		 * Metodo cuyo proposito es serializar un objeto y persistirlo a un archivo XML.
 		 */
 		std::string serialize();
-
-		
-		/**
-		 * Metodo cuyo proposito es validar la accion que realice el comando.
-		 */
-		bool validate(ReferenceCountPtr<GameManager>& gameManager);
-		virtual void execute(ReferenceCountPtr<State>& state);
 
 		virtual std::string getName();
 

@@ -10,7 +10,7 @@
 #include <vector>
 #include "command.h"
 
-class Populate : public Command
+class Populate : virtual public Command
 {
 	
 	private:

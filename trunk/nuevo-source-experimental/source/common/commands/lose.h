@@ -11,9 +11,8 @@
 #include <string>
 #include <vector>
 #include "command.h"
-#include "../model/gamemanager.h"
 
-class Lose : public Command
+class Lose : virtual public Command
 {
 	
 	private:

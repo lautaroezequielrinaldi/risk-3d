@@ -108,15 +108,6 @@ std::list< ReferenceCountPtr<Player> >& GameManager::getPlayerList(){
 	return game->getPlayerList();
 
 }
-/**
- * @todo candidato a execute(UICommand
- *
- */
-void GameManager::execute(UICommand * cmd){
-	//std::cerr << "GameManager::execute("<< cmd->getName()<< ")"<< cmd->serialize() << std::endl;
-	ReferenceCountPtr<State> currentState = stateMachine->getCurrentState();
-	cmd->execute(currentState);
-}
 
 void GameManager::execute(const std::string & commandName,const std::string &commandXml){
 	// obtener lock

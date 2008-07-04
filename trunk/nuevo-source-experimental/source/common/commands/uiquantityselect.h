@@ -6,7 +6,7 @@
  */
 
 #include "uicommand.h"
-class UIQuantitySelect: public UICommand {
+class UIQuantitySelect: virtual public UICommand {
 	public:
 
 		UIQuantitySelect(std::vector<std::string> &parameterList);
@@ -18,16 +18,7 @@ class UIQuantitySelect: public UICommand {
 		 */
 		std::string serialize();
 
-		/**
-		 * Metodo cuyo proposito es validar la accion que realice el comando.
-		 */
-		bool validate(ReferenceCountPtr<GameManager>& gameManager);
-		virtual void execute(ReferenceCountPtr<State>& state);
-		
-
 		virtual std::string getName();
-
-
 };
 
 #endif /* __UIQuantitySelect_H__*/

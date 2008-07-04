@@ -11,9 +11,8 @@
 #include <string>
 #include <vector>
 #include "command.h"
-#include "../model/gamemanager.h"
 
-class TurnToOccupy : public Command
+class TurnToOccupy : virtual public Command
 {
 	
 	private:

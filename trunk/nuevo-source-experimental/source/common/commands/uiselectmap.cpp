@@ -19,17 +19,6 @@ std::string UISelectMap::serialize(){
   
 }
 
-bool UISelectMap::validate(ReferenceCountPtr<GameManager>& gameManager){
-    // evaluar que el mapa exista	
-		return false;
-	
-}
-
-void UISelectMap::execute(ReferenceCountPtr<State>& state){
-    state->uiSelectMap(*this);
-
-	
-}
 std::string UISelectMap::getName() {
 	return "uiSelectMap";
 }

@@ -6,7 +6,7 @@
 /**
  * Clase que representa el resultado de una batalla dentro del modelo del juego
  */
-class BattleResult : public Command
+class BattleResult : virtual public Command
 {
 	
 	/**

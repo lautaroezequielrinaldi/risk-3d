@@ -8,7 +8,7 @@
  */
 
 #include "command.h"
-class Surrender:public Command{
+class Surrender: virtual public Command{
 
 	
 	private:
