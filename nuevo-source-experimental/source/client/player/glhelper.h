@@ -17,14 +17,11 @@ typedef struct ColorRGBA {
     GLfloat alpha;
 } ColorRGBA;
 
-void drawRectangle(const GLfloat& x, const GLfloat& y, const GLfloat& width,
-    const GLfloat& height, const ColorRGB& color); 
+void drawRectangle(const GLfloat& width, const GLfloat& height, const ColorRGB& color); 
 
-void drawFilledRectangle(const GLfloat& x, const GLfloat& y,
-    const GLfloat& width, const GLfloat& height, const ColorRGB& color);
+void drawFilledRectangle(const GLfloat& width, const GLfloat& height, const ColorRGB& color);
 
-void drawFilledRectangle(const GLfloat& x, const GLfloat& y,
-    const GLfloat& width, const GLfloat& height, const ColorRGBA& color); 
+void drawFilledRectangle(const GLfloat& width, const GLfloat& height, const ColorRGBA& color); 
 
 #endif /** __GLHELPER_H__ */
 
