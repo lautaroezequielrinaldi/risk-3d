@@ -83,7 +83,8 @@ const std::vector<std::string>& MapList::getMapList(){
 
 
 void MapList::accept(CommandObserver* observer) {
-    observer->commandExecuted(*this);
     std::cerr<<"LLEGO A MAPLIST::ACCEPT"<<std::endl;
+    observer->commandExecuted(*this);
+    
 }
 
