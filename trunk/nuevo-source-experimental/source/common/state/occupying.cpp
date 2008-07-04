@@ -35,14 +35,14 @@ bool Occupying::populate(ServerPopulate & command){
 		//obtengo pais a poblar
 		ReferenceCountPtr<Pais> paisD = map->obtenerPais(command.getCountryDestination());	
 		
-		cout<<"Estado: OCUPANDO"<<endl;
-		cout<<"pais destino: "<<paisD->getNombre()<<endl;
-		cout<<"ejercitos antes de ocupar: "<<paisD->getArmyCount()<<endl;
+		cerr<<"Estado: OCUPANDO"<<endl;
+		cerr<<"pais destino: "<<paisD->getNombre()<<endl;
+		cerr<<"ejercitos antes de ocupar: "<<paisD->getArmyCount()<<endl;
 		
 		//agrego al pais destino la cantidad de ejercitos solicitados
 		paisD->addArmies(command.getArmyCount() );
 		
-		cout<<"ejercitos despues de ocupar: "<<paisD->getArmyCount()<<endl;
+		cerr<<"ejercitos despues de ocupar: "<<paisD->getArmyCount()<<endl;
 		
 		//obtengo jugador actual 
 		ReferenceCountPtr<Player> playerActual = game->getPlayer( this->gameManager->getTurnManager()->getCurrentPlayer() );
@@ -54,7 +54,7 @@ bool Occupying::populate(ServerPopulate & command){
 		//disminuyo en 1 la cant de ejercitos a ubicar
 		playerActual->setArmyCount( playerActual->getArmyCount() - 1 );
 		
-		cout<<"Cantidad de paises conquistados por el jugador "<<playerActual->getColor()<<" :"<<playerActual->getConqueredLands()<<endl;;
+		cerr<<"Cantidad de paises conquistados por el jugador "<<playerActual->getColor()<<" :"<<playerActual->getConqueredLands()<<endl;;
 	
 		// -------- Para actualizar y mensajear al cliente--------------
 		
@@ -71,7 +71,7 @@ bool Occupying::populate(ServerPopulate & command){
 		command.setSecMsg(secMsg);	
 		
 		//notifico cambios y mensajes
-		gameManager->notify(reinterpret_cast<Command*>(&command));
+		gameManager->notify(&command);
 		
 		//------- fin actualizacion para cliente ------------------------
 		
@@ -108,7 +108,7 @@ bool Occupying::populate(ServerPopulate & command){
 			turnToFirstPopu.setSecMsg(secMsg);
 			
 			//notifico 
-			gameManager->notify(reinterpret_cast<Command*>(&turnToFirstPopu));	
+			gameManager->notify(&turnToFirstPopu);	
 			
 			cerr<<"HORA DE POBLAR INICIAL"<<endl;	
 		}
@@ -139,7 +139,7 @@ bool Occupying::populate(ServerPopulate & command){
 			turnToOc.setSecMsg(secMsg);
 			
 			//notifico 
-			gameManager->notify(reinterpret_cast<Command*>(&turnToOc));	
+			gameManager->notify(&turnToOc);	
 
 		}
 	}
@@ -157,7 +157,7 @@ bool Occupying::populate(ServerPopulate & command){
 		command.setSecMsg(secMsg);	
 		
 		//notifico cambios y mensajes
-		gameManager->notify(reinterpret_cast<Command*>(&command));	
+		gameManager->notify(&command);	
 	}
 		
 	return accionValida;        

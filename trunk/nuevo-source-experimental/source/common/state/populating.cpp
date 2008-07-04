@@ -74,7 +74,7 @@ bool Populating::populate(ServerPopulate & command){
 		command.setSecMsg(secMsg);	
 		
 		//notifico cambios y mensajes
-		gameManager->notify(reinterpret_cast<Command*>(&command));
+		gameManager->notify(&command);
 		
 		//------- fin actualizacion modelo para cliente ------------------------
 		
@@ -108,7 +108,7 @@ bool Populating::populate(ServerPopulate & command){
 			turnToAttack.setSecMsg(secMsg);
 				
 			//notifico 
-			gameManager->notify(reinterpret_cast<Command*>(&turnToAttack));	
+			gameManager->notify(&turnToAttack);	
 				
 			cerr<<"HORA DE ATACAR"<<endl;
 		}
@@ -129,7 +129,7 @@ bool Populating::populate(ServerPopulate & command){
 		command.setSecMsg(secMsg);	
 		
 		//notifico cambios y mensajes
-		gameManager->notify(reinterpret_cast<Command*>(&command));	
+		gameManager->notify(&command);	
 		
 		
 		//notificar error test

@@ -38,8 +38,8 @@ bool Attacking::attack(ServerAttack & command){
 	//si es valido
 	if (accionValida){
 		
-		cout<<"Estado: ATACANDO"<<endl;
-		cout<<"Atacante: "<<gameManager->getTurnManager()->getCurrentPlayer()<<endl;
+		cerr<<"Estado: ATACANDO"<<endl;
+		cerr<<"Atacante: "<<gameManager->getTurnManager()->getCurrentPlayer()<<endl;
 				
 		//almaceno el ataque en el gameManager
 		this->gameManager->setAttack(command);
@@ -51,8 +51,8 @@ bool Attacking::attack(ServerAttack & command){
 		this->gameManager->getTurnManager()->setDefenderPlayer( defensor  );
 		
 		//notificar del ataque!!!
-		cout<<"El pais "<<command.getAttackedLand()<<" fue ATACADO"<<endl;
-		cout<<"Se debe defender el jugador: "<<defensor<<endl;
+		cerr<<"El pais "<<command.getAttackedLand()<<" fue ATACADO"<<endl;
+		cerr<<"Se debe defender el jugador: "<<defensor<<endl;
 		
 		//cambio a proximo estado
 		this->gameManager->setCurrentState("defending");
@@ -79,7 +79,7 @@ bool Attacking::attack(ServerAttack & command){
 		command.setSecMsg(secMsg);	
 		
 		//notifico cambios y mensajes
-		gameManager->notify(reinterpret_cast<Command*>(&command) );
+		gameManager->notify(&command);
 		
 		//------- fin actualizacion modelo para cliente ------------------------
 				
@@ -99,7 +99,7 @@ bool Attacking::attack(ServerAttack & command){
 		command.setSecMsg(secMsg);	
 		
 		//notifico cambios y mensajes
-		gameManager->notify(reinterpret_cast<Command*>(&command));	
+		gameManager->notify(&command);	
 		
 	
 		//notificar error
@@ -144,7 +144,7 @@ bool Attacking::noMore(ServerNoMore & command){
 	turnToMove.setSecMsg(secMsg);
 			
 	//notifico 
-	gameManager->notify(reinterpret_cast<Command*>(&turnToMove));
+	gameManager->notify(&turnToMove);
 	
 	
 	cerr<<"HORA DE MOVER EJERCITOS"<<endl;
