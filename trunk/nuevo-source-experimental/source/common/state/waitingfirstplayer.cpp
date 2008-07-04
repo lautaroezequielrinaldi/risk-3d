@@ -34,8 +34,8 @@ bool WaitingFirstPlayer::joinGame(ServerJoinGame & command){
 	std::string linea;
 	
 	//recorro archivo 
-	//while ( ! archivoMapas.eof() ){
-	for( int i=0; i< 6 ;i++){
+	while ( ! archivoMapas.eof() ){
+	//for( int i=0; i< 6 ;i++){
 		
 		getline(archivoMapas, linea);
 		v.push_back(linea);
@@ -51,7 +51,6 @@ bool WaitingFirstPlayer::joinGame(ServerJoinGame & command){
 	// se le envia al jugador de id 1 que es el que selecciona la lista de mapas.
 	mapList->setTo(1);
 	
-	std::cerr << " SE VA A MANDAR EL MAPLIST COMMAND"<< std::endl;
 	this->gameManager->notify(mapList);
 	
 	delete(mapList);

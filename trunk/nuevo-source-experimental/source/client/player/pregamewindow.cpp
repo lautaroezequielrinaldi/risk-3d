@@ -223,11 +223,7 @@ void PreGameWindow::on_map_list_selection(){
 
   	m_Combo.pack_start(m_Column.m_col_name);
 
-
-  	//conectar señal
-  	//m_Combo.signal_changed().connect( sigc::mem_fun(*this, &ExampleWindow::on_combo_changed) );
-
-			
+  			
 	Gtk::Label seleccionLabel("Seleccione el mapa sobre el cual se jugara:");
 	Gtk::Dialog selectMapDialog("Seleccion de mapa");
 	selectMapDialog.get_vbox()->add(seleccionLabel);
@@ -240,14 +236,23 @@ void PreGameWindow::on_map_list_selection(){
 	int result = selectMapDialog.run();
 	
 	if (result == Gtk::RESPONSE_OK) {
-		
-			
-			std::cerr<<"PRESIONO OK DE SELECCION DE MAPA"<<std::endl;
-			
+		//muestro la opcion eleigida
+		Gtk::TreeModel::iterator iter = m_Combo.get_active();
+		if(iter)
+  		{
+    		Gtk::TreeModel::Row row = *iter;
+    		if(row){
+      			//obtengo datos de la fila seleccionada del combo
+      			Glib::ustring mapaSeleccionado = row[m_Column.m_col_name];
+      			std::cerr <<"Mapa seleccionado: "<< mapaSeleccionado << std::endl;
+    		}
+  		}
 		
 	}
 	
 }
+
+
 
 PreGameWindow::~PreGameWindow() {
 	// No realiza ninguna accion.
