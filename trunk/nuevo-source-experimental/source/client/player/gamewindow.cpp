@@ -1,8 +1,11 @@
 #include "gamewindow.h"
-#include "glhelper.h"
+#include "ui/glhelper.h"
 #include<iostream>
 
-GameWindow::GameWindow(): running(true) {
+GameWindow::GameWindow():
+	uiState(),
+	button(uiState, 0.0f, 0.0f, 300.0f, 100.0f),
+	running(true) {
     // No realiza ninguna accion.
 }
 
@@ -71,14 +74,12 @@ void GameWindow::updateScene() {
 
 void GameWindow::drawScene() {
     this->enable2D();
-    ColorRGBA color;
-    color.red = 1.0;
-    color.green = 1.0,
-    color.blue = 0.0;
-    color.alpha = 0.5;
 
-    drawFilledRectangle(0.0f, 0.0f, 200.0f, 200.0f, color);
-    this->disable2D();
+    this->uiState.prepare();
+	this->button.doProcess();
+	this->uiState.unprepare();
+
+	this->disable2D();
     SDL_GL_SwapBuffers();
 }
 
@@ -118,15 +119,16 @@ void GameWindow::processEvents() {
 }
 
 void GameWindow::processMouseDownEvent(const SDL_MouseButtonEvent& event) {
-
+	this->uiState.setMousePressed(true);
 }
 
 void GameWindow::processMouseUpEvent(const SDL_MouseButtonEvent& event) {
-
+	this->uiState.setMousePressed(false);
 }
 
 void GameWindow::processMouseMotionEvent(const SDL_MouseMotionEvent& event) {
-
+	this->uiState.setMouseX(event.x);
+	this->uiState.setMouseY(event.y);
 }
 
 void GameWindow::processKeyDownEvent(const SDL_KeyboardEvent& event) {
