@@ -4,12 +4,12 @@
 
 GameWindow::GameWindow():
 	uiState(),
-	button(uiState, 0.0f, 0.0f, 300.0f, 100.0f),
+	button(uiState, "Hola Mundo", 0.0f, 0.0f, 150.0f, 70.0f),
 	running(true) {
     // No realiza ninguna accion.
 }
 
-bool GameWindow::initializeSDL() {
+bool GameWindow::initializeSDL(int argc, char** argv) {
     // Intento inicializar SDL
     if ( SDL_Init(SDL_INIT_EVERYTHING) < 0 ) {
         std::cerr << "Problemas iniciando SDL, error: " << SDL_GetError() << std::endl;
@@ -24,6 +24,7 @@ bool GameWindow::initializeSDL() {
         std::cerr << "Problemas creando display SDL, error: " << SDL_GetError() << std::endl;
         return false;
     }
+	glutInit(&argc, argv);
     return true;
 }
 
@@ -76,7 +77,9 @@ void GameWindow::drawScene() {
     this->enable2D();
 
     this->uiState.prepare();
-	this->button.doProcess();
+	if( this->button.doProcess() ) {
+		std::cout << "Se presiono boton" << std::endl;
+	}
 	this->uiState.unprepare();
 
 	this->disable2D();
@@ -143,9 +146,9 @@ void GameWindow::processQuitEvent(const SDL_QuitEvent& event) {
     this->stopRunning();
 }
 
-int GameWindow::run() {
+int GameWindow::run(int argc, char** argv) {
     // Verifica si puede iniciar SDL
-    if (! this->initializeSDL() ) {
+    if (! this->initializeSDL(argc, argv) ) {
         return 1;
     } 
     // Inicializa OpenGL
