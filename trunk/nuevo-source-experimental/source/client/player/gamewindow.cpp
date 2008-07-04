@@ -77,7 +77,7 @@ void GameWindow::drawScene() {
     color.blue = 0.0;
     color.alpha = 0.5;
 
-    drawFilledRectangle(20.0f, 20.0f, color);
+    drawFilledRectangle(0.0f, 0.0f, 200.0f, 200.0f, color);
     this->disable2D();
     SDL_GL_SwapBuffers();
 }

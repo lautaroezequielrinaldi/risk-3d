@@ -1,23 +1,25 @@
 #include "glhelper.h"
 
-void drawFilledRectangle(const GLfloat& width, const GLfloat& height, const ColorRGB& color) {
+void drawFilledRectangle(const GLfloat& x, const GLfloat& y, const GLfloat& width, const GLfloat& height, const ColorRGB& color) {
     glColor3f(color.red, color.green, color.blue);
-    glBegin(GL_QUADS);
-        glVertex2d(0,height/2);
-        glVertex2d(0,-height/2);
-        glVertex2d(width,-height/2);
-        glVertex2d(width,height/2);
-    glEnd();
+/*    glBegin(GL_QUADS);
+        glVertex2f(x, y);
+        glVertex2f(x + width, y);
+        glVertex2f(x + width, y - height);
+        glVertex2f(x, y - height);
+    glEnd();*/
+    glRectf(x, y, x + width, y + height);
 }
 
-void drawFilledRectangle(const GLfloat& width, const GLfloat& height, const ColorRGBA& color) {
+
+void drawFilledRectangle(const GLfloat& x, const GLfloat& y, const GLfloat& width, const GLfloat& height, const ColorRGBA& color) {
     glColor4f(color.red, color.green, color.blue, color.alpha);
-    glColor3f(color.red, color.green, color.blue);
-    glBegin(GL_QUADS);
-        glVertex2d(0,height/2);
-        glVertex2d(0,-height/2);
-        glVertex2d(width,-height/2);
-        glVertex2d(width,height/2);
-    glEnd();
+/*    glBegin(GL_QUADS);
+        glVertex2f(x, y);
+        glVertex2f(x + width, y);
+        glVertex2f(x + width, y - height);
+        glVertex2f(x, y - height);
+    glEnd();*/
+    glRectf(x, y, x + width, y + height);
 }
 
