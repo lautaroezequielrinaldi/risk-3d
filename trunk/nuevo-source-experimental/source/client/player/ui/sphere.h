@@ -1,10 +1,11 @@
 #ifndef __SPHERE_H__
 #define __SPHERE_H__
 
+#include<cmath>
 #include "uistate.h"
 #include "texture.h"
 #include "textured.h"
-
+#include "spherestate.h"
 class Sphere: public Textured {
     /**
      * Atributos privados de la clase Sphere.
@@ -14,6 +15,10 @@ class Sphere: public Textured {
          * Almacena el estado de la user interface,
          */
         UIState& uiState;
+        /**
+         * Almacena el esatdo de la esfera.
+         */
+        SphereState sphereState;
         /**
          * Almacena el Quad Object representando a la esfera.
          */
