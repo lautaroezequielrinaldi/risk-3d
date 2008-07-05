@@ -1,11 +1,12 @@
 #include "gamewindow.h"
 #include<GL/glut.h>
+#include<iostream>
 
 GameWindow::GameWindow():
     mainLoopRunning(true),
     uiState(),
     button(uiState),
-    sphere() {
+    sphere(uiState) {
     // No realiza ninguna accion.
 }
 
@@ -48,6 +49,7 @@ void GameWindow::initializeOpenGL() {
     button.setHeight(150);
     button.setVisible(true);
     button.setEnabled(true);
+    button.setText("PRESIONEME!!");
 
     // Cargo las texturas de la esfera.
     sphere.getTexture().load("mapa.jpg");
@@ -126,26 +128,36 @@ void GameWindow::drawScene() {
 void GameWindow::processMouseDown(const SDL_MouseButtonEvent& event) {
     uiState.setMouseX(event.x);
     uiState.setMouseY(event.y);
+    std::cerr << "Posicion del mouse X: " << event.x << " Y: " << event.y << std::endl;
+    std::cerr << "SE HIZO CLICK!!!" << std::endl;
     uiState.setMousePressed(true);
 }
 
 void GameWindow::processMouseUp(const SDL_MouseButtonEvent& event) {
     uiState.setMouseX(event.x);
     uiState.setMouseY(event.y);
+    std::cerr << "Posicion del mouse X: " << event.x << " Y: " << event.y << std
+::endl;
+
     uiState.setMousePressed(false);
 }
 
 void GameWindow::processMouseMotion(const SDL_MouseMotionEvent& event) {
     uiState.setMouseX(event.x);
     uiState.setMouseY(event.y);
+    std::cerr << "Posicion del mouse X: " << event.x << " Y: " << event.y << std
+::endl;
 }
 
 void GameWindow::processKeyDown(const SDL_KeyboardEvent& event)  {
-
+    uiState.setKeyPressed(event.keysym.sym, true);
+    if ( uiState.getKeyPressed(SDLK_ESCAPE) ) {
+        stopMainLoop();
+    }
 }
 
 void GameWindow::processKeyUp(const SDL_KeyboardEvent& event) {
-
+    uiState.setKeyPressed(event.keysym.sym, false);
 }
 
 void GameWindow::processQuit(const SDL_QuitEvent& event) {

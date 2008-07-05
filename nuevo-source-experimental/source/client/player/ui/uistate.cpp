@@ -6,7 +6,10 @@ UIState::UIState():
 	mouseX(0),
 	mouseY(0),
 	mousePressed(false) {
-	// No realiza ninguna accion.
+    // Inicializo mapa de teclas en false
+    for (int counter = 0; counter < SDLK_LAST; ++counter) {
+        keyMap[counter] = false;
+    }
 }
 
 void UIState::setActiveItem(const int& activeItem) {
@@ -61,6 +64,14 @@ void UIState::unprepare() {
 			this->setActiveItem( ItemHandler::INVALID_ID );
 		}
 	}
+}
+
+void UIState::setKeyPressed(const SDLKey& key, bool pressed) {
+    keyMap[key] = pressed;
+}
+
+bool UIState::getKeyPressed(const SDLKey& key) const {
+    return keyMap[key];
 }
 
 UIState::~UIState() {
