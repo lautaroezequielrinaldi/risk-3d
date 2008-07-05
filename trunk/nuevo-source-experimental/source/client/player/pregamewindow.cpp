@@ -216,6 +216,8 @@ void PreGameWindow::on_you_are_arrival(){
 
 void PreGameWindow::on_map_list_selection(){
 	
+	
+	
 	class ModelColumns : public Gtk::TreeModel::ColumnRecord
   	{
   		public:
@@ -265,7 +267,6 @@ void PreGameWindow::on_map_list_selection(){
 	strNumeroJugador << jugNum;
 	
 	std::string saludo = "Sos el jugador numero " + strNumeroJugador.str();
-
 
 	Gtk::Label bienve ( "Bienvenido al Risk-3d");
   	Gtk::Label saludoLabel(saludo);			
