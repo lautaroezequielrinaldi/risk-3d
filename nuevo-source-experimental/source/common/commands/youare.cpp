@@ -37,6 +37,12 @@ int YouAre::getJugador() {
 	return numeroJugador;
 }
 
+/*
+void YouAre::setActivePlayerCount( int playerCount ){
+	this->numeroJugador = playerCount;
+		
+}
+*/
 void YouAre::accept(CommandObserver* observer) {
     observer->commandExecuted(*this);
 }

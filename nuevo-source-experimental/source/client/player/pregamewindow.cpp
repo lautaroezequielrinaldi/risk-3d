@@ -24,6 +24,8 @@ PreGameWindow::PreGameWindow(ReferenceCountPtr<Game>& game):
 		
 	this->mapList = NULL;
 	this->youAre = NULL;
+	this->cantJugadoresConectados=0;
+	this->me =0;
 		
     // Establece el titulo de la ventana
 	this->set_title("Pre sala de juego Risk3d");
@@ -197,20 +199,31 @@ void PreGameWindow::commandExecuted(Chat& cmd) {
 }
 
 void PreGameWindow::on_you_are_arrival(){
-	
-	//obtengo el numero de jugador a quien se le notifica
-	//YouAre * youAre = static_cast<YouAre*>(this->command);
-	if ( youAre == NULL )
-		std::cerr<<"YOU ARE NULLLLLLLLLLLLLL"<<std::endl;
 		
-
-	/*Gtk::Dialog selectMapDialog("Bienvenido!");
-	selectMapDialog.get_vbox()->add(saludoLabel);
+	std::string saludo;
 	
+	//si me=0 es porque el jugador al que se esta notificando es el nuevo 	
+  	if ( this->me == 0 ){		
+  		//cambiar getJugador por getCantPLayersActivos 
+  		this->me = this->youAre->getTo();
+  		std::cerr<<"Se almacena 'me' con valor "<<this->me<<std::endl;
+	}
+	else
+		std::cerr<<"El jugador ya tenia asignado me con valor: "<<this->me<<std::endl;
+  		
+	// si hay que notificar al jugador que se conecto
+	if ( this->me == this->youAre->getTo() )
+  		saludo = this->youAre->getMainMsg();
+  	else
+  		saludo =this->youAre->getSecMsg();		
+  		
+	//creacion del dialogo de bienvenida y aviso de nuevo jugador conectado
+  	Gtk::Label saludoLabel(saludo);	
+	Gtk::Dialog selectMapDialog("Bienvenido al Risk-3d");
+	selectMapDialog.get_vbox()->add(saludoLabel);
 	selectMapDialog.add_button(Gtk::Stock::OK, Gtk::RESPONSE_OK);
 	selectMapDialog.show_all();
-	
-	selectMapDialog.run();*/
+	selectMapDialog.run();
 	
 }
 
@@ -270,7 +283,7 @@ void PreGameWindow::on_map_list_selection(){
 
 	Gtk::Label bienve ( "Bienvenido al Risk-3d");
   	Gtk::Label saludoLabel(saludo);			
-	Gtk::Label seleccionLabel("Seleccione el mapa sobre el cual se jugara:");
+	Gtk::Label seleccionLabel("Selecciona el mapa sobre el cual se jugara:");
 	Gtk::Dialog selectMapDialog("Seleccion de mapa");
 	selectMapDialog.get_vbox()->add(bienve);
 	selectMapDialog.get_vbox()->add(saludoLabel);
@@ -298,9 +311,25 @@ void PreGameWindow::on_map_list_selection(){
 		
 	}
 	
+	this->me =1;
+	
 }
 
+void PreGameWindow::setActivePlayerCount( int playerCount ){
+	this->cantJugadoresConectados = playerCount;
+}
+		
+int PreGameWindow::getActivePlayerCount(){
+	return this->cantJugadoresConectados;
+}		
 
+void PreGameWindow::setMe(int color){
+	this->me = color;
+}		
+	
+int PreGameWindow::getMe(){
+	return this->me;
+} 
 
 PreGameWindow::~PreGameWindow() {
 	// No realiza ninguna accion.

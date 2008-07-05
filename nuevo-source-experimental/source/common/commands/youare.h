@@ -22,8 +22,6 @@ class YouAre : virtual public Command
 		
 		/*
 		 * Constructor de la clase
-		 * la idea es que reciba una lista de parametros y con ellos arme el ataque que se validara, en ppio
-		 * sera una lista de strings y en el caso de necesitar convertir un elemento a int usare atoi.
 		 */
 		YouAre(std::vector<std::string> &parameterList);
 		
@@ -50,6 +48,11 @@ class YouAre : virtual public Command
 		virtual std::string getName();
 		
 		int getJugador();
+		
+		/**
+		 * Metodo cuyo proposito es establecer la cantidad de jugadores activos que hay.
+		 */
+		//void setActivePlayerCount( int playerCount );
 		/**
 		 * Notifica que se ejecuto un comando.
 		 */
