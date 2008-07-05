@@ -11,7 +11,7 @@ int main(int argc, char** argv) {
     PreGameWindow window(game);
 
     Gtk::Main::run(window);
-
+    sleep(2000);
     GameWindow gameWindow; 
 
     return gameWindow.run(argc, argv);

@@ -21,7 +21,7 @@ class PopulateClientCommand: public Populate, public ClientCommand {
 		/**
 		 * Clona al comando.
 		 */
-		virtual ReferenceCountPtr<ClientCommand> clone();
+		virtual ClientCommand* clone();
 		/**
 		 * Destructor virtual de la clase PopulateClientCommand.
 		 */

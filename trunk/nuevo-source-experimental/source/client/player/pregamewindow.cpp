@@ -203,8 +203,8 @@ void PreGameWindow::on_you_are_arrival(){
 	if ( youAre == NULL )
 		std::cerr<<"YOU ARE NULLLLLLLLLLLLLL"<<std::endl;
 		
-/*
-	Gtk::Dialog selectMapDialog("Bienvenido!");
+
+	/*Gtk::Dialog selectMapDialog("Bienvenido!");
 	selectMapDialog.get_vbox()->add(saludoLabel);
 	
 	selectMapDialog.add_button(Gtk::Stock::OK, Gtk::RESPONSE_OK);

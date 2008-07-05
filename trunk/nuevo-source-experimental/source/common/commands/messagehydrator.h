@@ -24,7 +24,6 @@
 #include "win.h"
 #include "youare.h"
 #include "battleresult.h"
-#include "../smartpointer/referencecountptr.h"
 
 class MessageHydrator {
     /**
@@ -34,7 +33,7 @@ class MessageHydrator {
         /**
          * Crea un nuevo mensaje command hidratandolo.
          */
-        ReferenceCountPtr<Command> createCommand(const std::string& commandName, const std::string& xml);
+        Command* createCommand(const std::string& commandName, const std::string& xml);
         /**
          * Destructor virtual de la clase MessageHydrator.
          */
