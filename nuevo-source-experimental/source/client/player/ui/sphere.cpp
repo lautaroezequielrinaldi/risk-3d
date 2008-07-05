@@ -1,5 +1,5 @@
 #include "sphere.h"
-
+#include<iostream>
 Sphere::Sphere(UIState& uiState):
     Textured(),
     uiState(uiState),
@@ -23,6 +23,7 @@ void Sphere::initializeQuad() {
     gluQuadricDrawStyle (sphereQuad, GLU_FILL);
     gluQuadricNormals(sphereQuad, GLU_SMOOTH);
     gluQuadricTexture(sphereQuad, GL_TRUE);
+    gluQuadricOrientation(sphereQuad, GLU_OUTSIDE);
 }
 
 void Sphere::terminateQuad() {
@@ -35,6 +36,7 @@ void Sphere::update() {
     sphereState.setLastTime(newTime);
 
     if ( uiState.getKeyPressed(SDLK_LEFT) ) {
+        std::cerr << "Left presionada" << std::endl;
         sphereState.incrementAlphaInTime(deltaTime);
     }
     if ( uiState.getKeyPressed(SDLK_RIGHT) ) {
@@ -54,14 +56,12 @@ void Sphere::update() {
     }
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    glTranslatef(0.0f, 0.0f, 0.0f);
-
     gluLookAt(
         sphereState.getDistance() * cos(sphereState.getAlpha()) * cos(sphereState.getBeta()),
         sphereState.getDistance() * sin(sphereState.getAlpha()) * cos(sphereState.getBeta()),
         sphereState.getDistance() * sin(sphereState.getBeta()),
         0.0, 0.0, 0.0,
-        0.0, 0.0, 1.0);
+        0.0, 0.0, -1.0);
 }
 
 void Sphere::draw() {
