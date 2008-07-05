@@ -39,7 +39,7 @@ void SphereState::incrementAlphaInTime(double deltaTime) {
 }
 
 void SphereState::decrementAlphaInTime(double deltaTime) {
-    alpha += -0.5 * deltaTime;
+    alpha -= 0.5 * deltaTime;
     adjustAlpha();
 }
 
@@ -49,7 +49,7 @@ void SphereState::incrementBetaInTime(double deltaTime) {
 }
 
 void SphereState::decrementBetaInTime(double deltaTime) {
-    beta += -0.5 * deltaTime;
+    beta -= 0.5 * deltaTime;
     adjustBeta();
 }
 
@@ -59,7 +59,7 @@ void SphereState::incrementDistanceInTime(double deltaTime) {
 }
 
 void SphereState::decrementDistanceInTime(double deltaTime) {
-    distance += -0.5 * deltaTime;
+    distance -= 0.5 * deltaTime;
     adjustDistance();
 }
 

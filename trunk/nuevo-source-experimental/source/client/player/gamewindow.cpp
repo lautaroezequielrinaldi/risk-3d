@@ -32,15 +32,23 @@ bool GameWindow::initializeSDL(int argc, char** argv) {
 
 void GameWindow::initializeOpenGL() {
     // Inicializo el Viewport OpenGL
-    glViewport(0, 0, SDL_GetVideoInfo()->current_w,
-        SDL_GetVideoInfo()->current_h);
+    /*glViewport(0, 0, SDL_GetVideoInfo()->current_w,
+        SDL_GetVideoInfo()->current_h);*/
+
+    // Habilita depth buffer
+    glEnable(GL_DEPTH_TEST);
+    // Habilita estilo de lineas
+    glEnable(GL_LINE_SMOOTH);
+    // Habilita shade model smooth
+    glShadeModel(GL_SMOOTH);
+
+    // Carga la matriz de proyeccion
+    glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
 
     // Da perspectiva
     gluPerspective(60.0, 1.33, 0.1, 100.0);
 
-    // Carga la matriz de proyeccion
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
 
     // Establezco tamaño de boton y posicion.
     button.setX(300);
@@ -78,7 +86,6 @@ void GameWindow::stopMainLoop() {
 
 void GameWindow::enable2D() {
     int vPort[4];
-
     glGetIntegerv(GL_VIEWPORT, vPort);
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
@@ -87,6 +94,7 @@ void GameWindow::enable2D() {
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glLoadIdentity();
+    glDisable(GL_DEPTH_TEST);
 }
 
 void GameWindow::disable2D() {
@@ -94,6 +102,7 @@ void GameWindow::disable2D() {
     glPopMatrix();
     glMatrixMode(GL_MODELVIEW);
     glPopMatrix();
+    glEnable(GL_DEPTH_TEST);
 }
 
 void GameWindow::updateScene() {
@@ -127,7 +136,7 @@ void GameWindow::drawScene() {
 
 void GameWindow::processMouseDown(const SDL_MouseButtonEvent& event) {
     uiState.setMouseX(event.x);
-    uiState.setMouseY(event.y);
+    uiState.setMouseY(SDL_GetVideoInfo()->current_h - event.y);
     std::cerr << "Posicion del mouse X: " << event.x << " Y: " << event.y << std::endl;
     std::cerr << "SE HIZO CLICK!!!" << std::endl;
     uiState.setMousePressed(true);
@@ -135,7 +144,7 @@ void GameWindow::processMouseDown(const SDL_MouseButtonEvent& event) {
 
 void GameWindow::processMouseUp(const SDL_MouseButtonEvent& event) {
     uiState.setMouseX(event.x);
-    uiState.setMouseY(event.y);
+    uiState.setMouseY(SDL_GetVideoInfo()->current_h - event.y);
     std::cerr << "Posicion del mouse X: " << event.x << " Y: " << event.y << std
 ::endl;
 
@@ -144,7 +153,7 @@ void GameWindow::processMouseUp(const SDL_MouseButtonEvent& event) {
 
 void GameWindow::processMouseMotion(const SDL_MouseMotionEvent& event) {
     uiState.setMouseX(event.x);
-    uiState.setMouseY(event.y);
+    uiState.setMouseY(SDL_GetVideoInfo()->current_h - event.y);
     std::cerr << "Posicion del mouse X: " << event.x << " Y: " << event.y << std
 ::endl;
 }
