@@ -16,7 +16,6 @@ Textured::~Textured() {
 
 void Textured::enableTexture() {
     if ( texture.isLoaded() ) {
-        glBindTexture( GL_TEXTURE_2D, texture.getTextureName() );
         glEnable( GL_TEXTURE_2D );
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -24,6 +23,7 @@ void Textured::enableTexture() {
         glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
         glEnable(GL_TEXTURE_GEN_S);
         glEnable(GL_TEXTURE_GEN_T);
+        glBindTexture( GL_TEXTURE_2D, texture.getTextureName() );
     }
 }
 
