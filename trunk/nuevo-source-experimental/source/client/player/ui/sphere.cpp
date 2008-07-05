@@ -1,12 +1,14 @@
 #include "sphere.h"
 
-Sphere::Sphere():
-    Textured() {
+Sphere::Sphere(UIState& uiState):
+    Textured(),
+    uiState(uiState) {
     initializeQuad();
 }
 
-Sphere::Sphere(const Texture& theTexture):
-    Textured(theTexture) {
+Sphere::Sphere(UIState& uiState, const Texture& theTexture):
+    Textured(theTexture),
+    uiState(uiState) {
     initializeQuad();
 }
 

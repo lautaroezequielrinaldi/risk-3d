@@ -1,6 +1,7 @@
 #ifndef __UISTATE_H__
 #define __UISTATE_H__
 
+#include<SDL.h>
 #include "itemhandler.h"
 
 class UIState {
@@ -28,7 +29,10 @@ class UIState {
 		 * Almacena el estado de presion del boton.
 		 */
 		bool mousePressed;
-
+        /**
+         * Mapea el estado de teclas.
+         */
+        bool keyMap[SDLK_LAST];
 	/**
 	 * Metodos publicos de la clase UIState.
 	 */
@@ -82,9 +86,17 @@ class UIState {
 		 */
 		void setMousePressed(const bool& mousePressed);
 		/**
-		 * Establece el estado de presion de mouse.
+		 * Obtiene el estado de presion de mouse.
 		 */
 		int getMousePressed() const;
+        /**
+         * Establece el estado de presion de una tecla.
+         */
+        void setKeyPressed(const SDLKey& key, bool pressed);
+        /**
+         * Obtiene el estado de presion de una tecla.
+         */
+        bool getKeyPressed(const SDLKey& key) const;
 		/**
 		 * Destructor virtual de la clase UIState.
 		 */
