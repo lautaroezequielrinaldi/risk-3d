@@ -1,37 +1,56 @@
 #include "gamewindow.h"
-#include "ui/glhelper.h"
-#include<iostream>
+#include<GL/glut.h>
 
 GameWindow::GameWindow():
-	uiState(),
-	button(uiState, "Hola Mundo", 0.0f, 0.0f, 150.0f, 70.0f),
-	label(uiState, "Label grande", 0.0, 500.0f, 1000.0f,200.0f),
-	running(true) {
+    mainLoopRunning(true),
+    uiState(),
+    button(uiState),
+    sphere() {
+    // No realiza ninguna accion.
+}
+
+GameWindow::~GameWindow() {
     // No realiza ninguna accion.
 }
 
 bool GameWindow::initializeSDL(int argc, char** argv) {
-    // Intento inicializar SDL
-    if ( SDL_Init(SDL_INIT_EVERYTHING) < 0 ) {
-        std::cerr << "Problemas iniciando SDL, error: " << SDL_GetError() << std::endl;
+    // Inicializo SDL
+   if ( SDL_Init( SDL_INIT_EVERYTHING ) < 0) {
         return false;
     }
-
-    // Intengo inicializar una ventana SDL
-    SDL_Surface* screen = SDL_SetVideoMode(SDL_GetVideoInfo()->current_w, SDL_GetVideoInfo()->current_h,
-        SDL_GetVideoInfo()->vfmt->BitsPerPixel, SDL_OPENGL);
-
-    if (! screen ) {
-        std::cerr << "Problemas creando display SDL, error: " << SDL_GetError() << std::endl;
+    // Creo una ventana
+    SDL_Surface* screen = SDL_SetVideoMode( SDL_GetVideoInfo()->current_w,
+        SDL_GetVideoInfo()->current_h, SDL_GetVideoInfo()->vfmt->BitsPerPixel,
+            SDL_OPENGL );
+    if ( screen == NULL ) {
         return false;
     }
-	glutInit(&argc, argv);
+    glutInit(&argc, argv);
     return true;
 }
 
 void GameWindow::initializeOpenGL() {
-    // Inicializo el viewport de OpenGL
-    glViewport(0, 0, SDL_GetVideoInfo()->current_w, SDL_GetVideoInfo()->current_h);
+    // Inicializo el Viewport OpenGL
+    glViewport(0, 0, SDL_GetVideoInfo()->current_w,
+        SDL_GetVideoInfo()->current_h);
+
+    // Da perspectiva
+    gluPerspective(60.0, 1.33, 0.1, 100.0);
+
+    // Carga la matriz de proyeccion
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+
+    // Establezco tamaño de boton y posicion.
+    button.setX(300);
+    button.setY(300);
+    button.setWidth(500);
+    button.setHeight(150);
+    button.setVisible(true);
+    button.setEnabled(true);
+
+    // Cargo las texturas de la esfera.
+    sphere.getTexture().load("mapa.jpg");
 }
 
 void GameWindow::terminateSDL() {
@@ -43,140 +62,142 @@ void GameWindow::terminateOpenGL() {
 
 }
 
+void GameWindow::runMainLoop() {
+    while ( mainLoopRunning ) {
+        processEvents();
+        updateScene();
+        drawScene();
+    }
+}
+
+void GameWindow::stopMainLoop() {
+    mainLoopRunning = false;
+}
+
 void GameWindow::enable2D() {
-    // Pone la matriz actual en el stack
+    int vPort[4];
+
+    glGetIntegerv(GL_VIEWPORT, vPort);
+    glMatrixMode(GL_PROJECTION);
     glPushMatrix();
-    // Guarda los atributos en el stack
-    glPushAttrib(GL_ALL_ATTRIB_BITS);
-    // Carga la matriz de proyeccion
-    glMatrixMode (GL_PROJECTION);
-    // Pone la matriz actual en el stack
-    // carga la identidad
-    glLoadIdentity ();
-    // Visualiza 2d
-    glOrtho (0, SDL_GetVideoInfo()->current_w, SDL_GetVideoInfo()->current_h, 0, 0, 1);
-    // Carga la matriz model view
-    glMatrixMode (GL_MODELVIEW);
+    glLoadIdentity();
+    glOrtho(0, vPort[2], 0, vPort[3], -1, 1);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glLoadIdentity();
 }
 
 void GameWindow::disable2D() {
-    // Carga del stack los atributos.
-    glPopAttrib();
-    // Carga del stack la matriz actual.
     glMatrixMode(GL_PROJECTION);
     glPopMatrix();
-    // Carga del stack la matriz actual.
     glMatrixMode(GL_MODELVIEW);
     glPopMatrix();
 }
 
 void GameWindow::updateScene() {
-
+    sphere.update();
 }
 
 void GameWindow::drawScene() {
-    this->enable2D();
+    // Limpia el fondo
+    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
-	this->uiState.prepare();
-	if( this->button.doProcess() ) {
-		std::cout << "Se presiono boton" << std::endl;
-	}
-	this->label.setWidth(SDL_GetVideoInfo()->current_w);
-	this->label.doProcess();
-	this->uiState.unprepare();
+    // Dibuja la esfera
+    sphere.draw();
 
-	this->disable2D();
+    // Habilita modo 2D
+    enable2D();
+    // Prepara IMGUI
+    uiState.prepare();
+
+    // Dibuja y procesa boton
+    button.doProcess();
+
+    // Termina IMGUI
+    uiState.unprepare();
+
+    // Deshabilita 2D
+    disable2D();
+
+    // Hace swap del buffer
     SDL_GL_SwapBuffers();
 }
 
-bool GameWindow::isRunning() {
-    return this->running;
+void GameWindow::processMouseDown(const SDL_MouseButtonEvent& event) {
+    uiState.setMouseX(event.x);
+    uiState.setMouseY(event.y);
+    uiState.setMousePressed(true);
 }
 
-void GameWindow::stopRunning() {
-    this->running = false;
+void GameWindow::processMouseUp(const SDL_MouseButtonEvent& event) {
+    uiState.setMouseX(event.x);
+    uiState.setMouseY(event.y);
+    uiState.setMousePressed(false);
+}
+
+void GameWindow::processMouseMotion(const SDL_MouseMotionEvent& event) {
+    uiState.setMouseX(event.x);
+    uiState.setMouseY(event.y);
+}
+
+void GameWindow::processKeyDown(const SDL_KeyboardEvent& event)  {
+
+}
+
+void GameWindow::processKeyUp(const SDL_KeyboardEvent& event) {
+
+}
+
+void GameWindow::processQuit(const SDL_QuitEvent& event) {
+    stopMainLoop();
 }
 
 void GameWindow::processEvents() {
+    // Defino el evento a leer
     SDL_Event event;
+    // Si hay evento
     if ( SDL_PollEvent(&event) ) {
+        // Trato cada tipo de evento
         switch (event.type) {
+            // Proceso bonton presionado
             case SDL_MOUSEBUTTONDOWN:
-                processMouseDownEvent(event.button);
+                processMouseDown(event.button);
                 break;
+            // Proceso boton soltado
             case SDL_MOUSEBUTTONUP:
-                processMouseUpEvent(event.button);
+                processMouseUp(event.button);
                 break;
+            // Proceso movimiento de mouse
             case SDL_MOUSEMOTION:
-                processMouseMotionEvent(event.motion);
+                processMouseMotion(event.motion);
                 break;
+            // Proceso tecla presionada
             case SDL_KEYDOWN:
-                processKeyDownEvent(event.key);
+                processKeyDown(event.key);
                 break;
+            // Proceso tecla liberada
             case SDL_KEYUP:
-                processKeyUpEvent(event.key);
+                processKeyUp(event.key);
                 break;
+            // Proceso quit
             case SDL_QUIT:
-                processQuitEvent(event.quit);
-            default:
+                processQuit(event.quit);
                 break;
         }
     }
 }
 
-void GameWindow::processMouseDownEvent(const SDL_MouseButtonEvent& event) {
-	this->uiState.setMousePressed(true);
-}
-
-void GameWindow::processMouseUpEvent(const SDL_MouseButtonEvent& event) {
-	this->uiState.setMousePressed(false);
-}
-
-void GameWindow::processMouseMotionEvent(const SDL_MouseMotionEvent& event) {
-	this->uiState.setMouseX(event.x);
-	this->uiState.setMouseY(event.y);
-}
-
-void GameWindow::processKeyDownEvent(const SDL_KeyboardEvent& event) {
-
-}
-
-void GameWindow::processKeyUpEvent(const SDL_KeyboardEvent& event) {
-
-}
-
-void GameWindow::processQuitEvent(const SDL_QuitEvent& event) {
-    this->stopRunning();
-}
-
 int GameWindow::run(int argc, char** argv) {
-    // Verifica si puede iniciar SDL
-    if (! this->initializeSDL(argc, argv) ) {
+    if ( initializeSDL(argc, argv) ) {
+        initializeOpenGL();
+
+        runMainLoop();
+
+        terminateOpenGL();
+        terminateSDL();
+       return 0;
+    } else {
         return 1;
-    } 
-    // Inicializa OpenGL
-    this->initializeOpenGL();
-
-    // Corre el main loop
-    while ( this->isRunning() ) {
-        // Proceso eventos
-        this->processEvents();
-        // Actualizo la escena
-        this->updateScene();
-        // Dibujo la escena
-        this->drawScene();
     }
-
-    // Termina OpenGL
-    this->terminateOpenGL();
-
-    // Termina SDL
-    this->terminateSDL();
-
-    return 0;
-}
-
-GameWindow::~GameWindow() {
-    // No realiza ninguna accion.
 }
 

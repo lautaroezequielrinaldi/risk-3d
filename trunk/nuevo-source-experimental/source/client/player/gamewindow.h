@@ -1,129 +1,121 @@
 #ifndef __GAMEWINDOW_H__
-#define __GAMEWINDoW_H__
+#define __GAMEWINDOW_H__
 
-#include<SDL.h>
-#include<GL/glut.h>
-#include<GL/gl.h>
-#include<GL/glu.h>
+#include "ui/sphere.h"
 #include "ui/uistate.h"
 #include "ui/button.h"
-#include "ui/label.h"
 
 class GameWindow {
     /**
      * Atributos privados de la clase GameWindow.
      */
     private:
-		/**
-		 * Almacena el estado de la UI.
-		 */
-		UIState uiState;
-		/**
-		 * Almacena un boton.
-		 */
-		Button button;
-		/**
-		  * Almacena el label.
-		  */
-		Label label;
         /**
-         * Almacena un flag booleano indicando si esta corriendo el main loop.
+         * Indica si el main loop esta corriendo,
          */
-        bool running;
+        bool mainLoopRunning;
+        /**
+         * Alamcena el estado de la UI.
+         */
+        UIState uiState;
+        /**
+         * Almacena el boton.
+         */
+        Button button;
+        /**
+         * Almacena la efera.
+         */
+        Sphere sphere;
 
     /**
      * Metodos privados de la clase GameWindow.
      */
     private:
         /**
-         * Metodo cuyo propòsito es iniciar SDL en el mejor modo de video grafico.
+         * Inicializa SDL.
          */
         bool initializeSDL(int argc, char** argv);
         /**
-         * Metodo cuyo proposito es iniciar OpenGL en el mejor modo de video grafico.
+         * Inicializa OpenGL.
          */
         void initializeOpenGL();
         /**
-         * Metodo cuyo propòsito es terminar SDL.
+         * Terminate SDL.
          */
         void terminateSDL();
         /**
-         * Metodo cuyo propòsito es terminar OpenGL.
+         * Termiantes OpenGL.
          */
         void terminateOpenGL();
         /**
-         * Habilita modo 2D.
+         * Corre Main Loop.
+         */
+        void runMainLoop();
+        /**
+         * Termina el main loop.
+         */
+        void stopMainLoop();
+        /**
+         * Habilita el modo 2D.
          */
         void enable2D();
         /**
-         * Deshabilita modo 2D.
+         * Deshabilita el modo 2D.
          */
         void disable2D();
         /**
-         * Metodo cuyo propòsito es actualizar la escena grafica.
+         * Updatea la escena.
          */
         void updateScene();
         /**
-         * Metodo cuyo propòsito es dibujar la escena grafica.
+         * Dibuja la escena.
          */
         void drawScene();
         /**
-         * Metodo cuyo propòsito es ejecutar el main loop del juego.
-         */
-        void mainLoop();
-        /**
-         * Obtiene un flag indicando si esta corriendo o no.
-         */
-        bool isRunning();
-        /**
-         * Mètodo cuyo proposito es cancelar la ejecucion de la aplicacion.
-         */
-        void stopRunning();
-        /**
-         * Process Events.
-         */
-        void processEvents();
-        /**
          * Process mouse down event.
          */
-        void processMouseDownEvent(const SDL_MouseButtonEvent& event);
+        void processMouseDown(const SDL_MouseButtonEvent& event);
         /**
          * Process mouse up event.
          */
-        void processMouseUpEvent(const SDL_MouseButtonEvent& event);
+        void processMouseUp(const SDL_MouseButtonEvent& event);
         /**
          * Process mouse motion event.
          */
-        void processMouseMotionEvent(const SDL_MouseMotionEvent& event);
+        void processMouseMotion(const SDL_MouseMotionEvent& event);
         /**
-         * Process key down event.
+         * Process key down.
          */
-        void processKeyDownEvent(const SDL_KeyboardEvent& event);
+        void processKeyDown(const SDL_KeyboardEvent& event);
         /**
-         * Process key up event.
+         * Process key up.
          */
-        void processKeyUpEvent(const SDL_KeyboardEvent& event);
+        void processKeyUp(const SDL_KeyboardEvent& event);
         /**
-         * Process a quit event.
+         * Process quit,
          */
-        void processQuitEvent(const SDL_QuitEvent& event);
+        void processQuit(const SDL_QuitEvent& event);
+        /**
+         * Process events.
+         */
+        void processEvents();
     /**
-     * Mètodos pùblicos de clase GameWindow.
+     * Metodos publicos de la clase GameWindow.
      */
     public:
         /**
-         * Constructor de la clase GameWindow.
+         *  Constructor de la clase GameWindow.
          */
         GameWindow();
-        /**
-         * Ejecuta el main loop del juego.
-         */
-        int run(int argc, char** argv);
         /**
          * Destructor virtual de la clase GameWindow.
          */
         virtual ~GameWindow();
+        /**
+         * Pone a correr la ventana principal del juego.
+         */
+        int run(int argc, char** argv);
 };
-
+  
 #endif /** __GAMEWINDOW_H__ */
 
