@@ -7,7 +7,9 @@ CommandObservable::CommandObservable() {
 }
 
 void CommandObservable::notifyCommandExecuted(Command& command) {
+	
 	std::list<CommandObserver*>::iterator iter;
+	
 	for (iter = commandObserverList.begin(); iter != commandObserverList.end();
 		++iter) {
 		CommandObserver* commandObserver = *iter;

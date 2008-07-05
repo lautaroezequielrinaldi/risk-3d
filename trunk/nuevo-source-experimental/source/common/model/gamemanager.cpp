@@ -58,12 +58,15 @@ void GameManager::setAttack(ServerAttack& attack){
  */
 void GameManager::add(ReferenceCountPtr<PlayerProxy> & playerProxy) {
 	
-	/* codigo comentado para que compile EDITOR_TARGET, no falla en SERVER_TARGET*/
+	//se crea un player dentro de Game y el mismo se pasa a setPlayer del playerProxy
 	playerProxy->setPlayer(game->addPlayer());
+	
+	//se agrega el playerProxy a la lista que tiene el gameManager
 	proxyList.push_back(playerProxy);
+	
 	//agrega el player a la lista del turnmanager
 	this->turnManager->addPlayer(playerProxy->getPlayer()->getColor());
-	
+	/*
 	std::vector<std::string> v;
 
 	std::ostringstream numeroJugador;
@@ -74,7 +77,7 @@ void GameManager::add(ReferenceCountPtr<PlayerProxy> & playerProxy) {
 	YouAre * youare = new YouAre(v);
 	playerProxy->notify(*youare);
 	delete(youare);
-
+*/
 	// si alcanzado max, open -> false;
 	if ( proxyList.size() == CAPACIDAD_MAXIMA )
 		this->open = false;

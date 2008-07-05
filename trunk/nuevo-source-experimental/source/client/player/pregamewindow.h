@@ -14,6 +14,7 @@
 #include "../../common/commands/joingame.h"
 #include "../../common/commands/readytoplay.h"
 #include "../../common/commands/maplist.h"
+#include "../../common/commands/youare.h"
 #include "../../common/commands/quit.h"
 #include "../../common/commands/commandobserver.h"
 #include "net/serverproxy.h"
@@ -37,9 +38,12 @@ class PreGameWindow: public CommandObserver, public Gtk::Window {
         ReferenceCountPtr<Game>& game;
         
         /**
-         * Almacena una referencia al comando mapList que se envia al cliente para la seleccion del mapa.
+         * Almacena una referencia a un comando que se envia al cliente.
          */
-         ReferenceCountPtr<MapList> commandMapList;
+        // Command* command;
+        ReferenceCountPtr<MapList> mapList;
+        
+        ReferenceCountPtr<YouAre> youAre;
         
 		/**
 		 * Almacena el layout vertical de la ventana.
@@ -123,6 +127,11 @@ class PreGameWindow: public CommandObserver, public Gtk::Window {
 		 */
 		void on_map_list_selection();
 		
+		/**
+		 * Manejador de la señal realizada por el dispatcher encargado de la notificacion de un you are.
+		 */		
+		void on_you_are_arrival();
+		
 		
 	/**
 	 * Metodos publicos de la clase PreGameWindow.
@@ -153,6 +162,8 @@ class PreGameWindow: public CommandObserver, public Gtk::Window {
 		 * Responde ante la llegada de un comando mapList.
 		 */
 		virtual void commandExecuted(MapList& cmd);
+		
+		virtual void commandExecuted(YouAre& cmd);
 		
 		/**
 		 * Destructor virtual de la clase PreGameWindow.

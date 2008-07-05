@@ -5,6 +5,7 @@
 #include<gtkmm/liststore.h> // Para definiciòn de Gtk::ListStore.
 #include<gtkmm/combobox.h> // Para definiciòn de Gtk::ComboBox.
 #include<iostream>
+#include<sstream>
 
 PreGameWindow::PreGameWindow(ReferenceCountPtr<Game>& game):
     CommandObserver(),
@@ -20,6 +21,10 @@ PreGameWindow::PreGameWindow(ReferenceCountPtr<Game>& game):
 	quitButton(),
 	connected(false),
 	hasQuit(false) {
+		
+	this->mapList = NULL;
+	this->youAre = NULL;
+		
     // Establece el titulo de la ventana
 	this->set_title("Pre sala de juego Risk3d");
 	// Establece el label del boton send message.
@@ -92,6 +97,9 @@ void PreGameWindow::showConnectionDialog() {
 			
 			// conecta la señal lanzada por el dispatcher que maneja la llegada de un map List
 			this->serverProxy->getDispatcherMapList().connect(sigc::mem_fun(*this, &PreGameWindow::on_map_list_selection));
+			// conecta la señal lanzada por el dispatcher que maneja la llegada de un you are
+			this->serverProxy->getDispatcherYouAre().connect(sigc::mem_fun(*this, &PreGameWindow::on_you_are_arrival));
+			
 			
 			JoinGame* cmd = new JoinGame();
 			serverProxy->notify(*cmd);
@@ -160,12 +168,20 @@ void PreGameWindow::commandExecuted(SelectMap& cmd) {
 	
 }
 
+void PreGameWindow::commandExecuted(YouAre & cmd){
+	
+	this->youAre = &cmd;
+	std::cerr<<"almaceno youAre en preGameWindow....."<<std::endl;
+	
+}
+
+
 void PreGameWindow::commandExecuted(MapList& cmd){
 	
 	if ( &cmd == NULL )
-		std::cerr<<"MAPLIST LLEGA A WINDOW COMO NULL....."<<std::endl;
+		std::cerr<<"MAPLIST LLEGA A PREGAMEWINDOW COMO NULL....."<<std::endl;
 		
-	this->commandMapList = &cmd;
+	this->mapList = &cmd;
 	std::cerr<<"almaceno mapList en preGameWindow....."<<std::endl;
 	
 }
@@ -178,6 +194,24 @@ void PreGameWindow::commandExecuted(Chat& cmd) {
 	std::string buffer = messageTextView.get_buffer()->get_text();
 	buffer =  buffer + "\r\n" + cmd.getMainMsg();
 	messageTextView.get_buffer()->set_text(buffer);
+}
+
+void PreGameWindow::on_you_are_arrival(){
+	
+	//obtengo el numero de jugador a quien se le notifica
+	//YouAre * youAre = static_cast<YouAre*>(this->command);
+	if ( youAre == NULL )
+		std::cerr<<"YOU ARE NULLLLLLLLLLLLLL"<<std::endl;
+		
+/*
+	Gtk::Dialog selectMapDialog("Bienvenido!");
+	selectMapDialog.get_vbox()->add(saludoLabel);
+	
+	selectMapDialog.add_button(Gtk::Stock::OK, Gtk::RESPONSE_OK);
+	selectMapDialog.show_all();
+	
+	selectMapDialog.run();*/
+	
 }
 
 void PreGameWindow::on_map_list_selection(){
@@ -199,6 +233,7 @@ void PreGameWindow::on_map_list_selection(){
 
  	//Child widgets:
   	Gtk::ComboBox m_Combo;
+  	
   	Glib::RefPtr<Gtk::ListStore> m_refTreeModel;
 
 	//creo tree model
@@ -207,10 +242,11 @@ void PreGameWindow::on_map_list_selection(){
 
   	//completo el combo box con la lista de paises que trae el comando selectMap
   	
-  	if ( commandMapList == NULL )
+  	if ( this->mapList == NULL )
   		std::cerr<<"COMMAND MAP LIST GUARDADO EN PREGAMEWIN ES NULL....."<<std::endl;
   	
-  	std::vector<std::string> vecMapas = this->commandMapList->getMapList();
+  
+  	std::vector<std::string> vecMapas = this->mapList->getMapList();
 
   	Gtk::TreeModel::Row row ;//= *(m_refTreeModel->append());
   		
@@ -222,15 +258,26 @@ void PreGameWindow::on_map_list_selection(){
 	}
 
   	m_Combo.pack_start(m_Column.m_col_name);
+	
+	int jugNum = this->youAre->getTo();
+	
+	std::ostringstream strNumeroJugador;
+	strNumeroJugador << jugNum;
+	
+	std::string saludo = "Sos el jugador numero " + strNumeroJugador.str();
 
-  			
+
+	Gtk::Label bienve ( "Bienvenido al Risk-3d");
+  	Gtk::Label saludoLabel(saludo);			
 	Gtk::Label seleccionLabel("Seleccione el mapa sobre el cual se jugara:");
 	Gtk::Dialog selectMapDialog("Seleccion de mapa");
+	selectMapDialog.get_vbox()->add(bienve);
+	selectMapDialog.get_vbox()->add(saludoLabel);
 	selectMapDialog.get_vbox()->add(seleccionLabel);
 	selectMapDialog.get_vbox()->add(m_Combo);
 	
 	selectMapDialog.add_button(Gtk::Stock::OK, Gtk::RESPONSE_OK);
-	selectMapDialog.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_OK);
+	//selectMapDialog.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_OK);
 	selectMapDialog.show_all();
 	
 	int result = selectMapDialog.run();

@@ -23,20 +23,35 @@ bool WaitingFirstPlayer::joinGame(ServerJoinGame & command){
 	std::cerr << "Evento WaitingFirstPlayer::joinGame" << std::endl;
 
 	this->gameManager->getTurnManager()->changeTurn(1);
+	
+	
+	std::vector<std::string> v;
 
+	std::ostringstream numeroJugador;
+	numeroJugador << "1";
+
+	v.push_back(numeroJugador.str());
+
+	YouAre * youare = new YouAre(v);
+	youare->setTo(1);
+	//se envia por socket al cliente
+	this->gameManager->notify(youare);
+	
+	delete(youare);
+	std::cerr<< "VUELVE A WAITING FIRST PLAYER A LISTA MAPAS "<<std::endl;
+	
 	//creo objeto para manejar archivo que contiene lista de nombres de mapas
 	std::ifstream archivoMapas;
 	
 	std::string pathNom = "./configuration/mapList";
 	
 	archivoMapas.open(pathNom.c_str());
-	std::vector<std::string> v;
+	v.clear();
 	std::string linea;
 	
 	//recorro archivo 
 	while ( ! archivoMapas.eof() ){
-	//for( int i=0; i< 6 ;i++){
-		
+			
 		getline(archivoMapas, linea);
 		v.push_back(linea);
 		std::cerr<< "linea del archivo de mapas: "<<linea<<std::endl;
