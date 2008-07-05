@@ -22,13 +22,27 @@ bool WaitingMapSelection::joinGame(ServerJoinGame & command) {
 
 	std::vector<std::string> v;
 
-	std::ostringstream numeroJugador;
-	numeroJugador << this->gameManager->getTurnManager()->getCurrentPlayer();
+	std::ostringstream jugActivos;
+	jugActivos << this->gameManager->getGame()->getPlayerCount();
 
-	v.push_back(numeroJugador.str());
+	v.push_back(jugActivos.str());
 
 	YouAre * youare = new YouAre(v);
+	
 	youare->setTo(this->gameManager->getTurnManager()->getCurrentPlayer());
+	//obtengo cant de jugadores q hay conectados.
+	//youare->numeroJugador = this->gameManager->getGame()->getPlayerList().size();
+	
+	std::ostringstream strNumeroJugador;
+	strNumeroJugador << this->gameManager->getTurnManager()->getCurrentPlayer();
+	
+	std::string saludoPrncipal = "Sos el jugador numero " + strNumeroJugador.str();
+	youare->setMainMsg(saludoPrncipal);
+	
+	std::string saludoSecu = "Se ha conectado el jugador numero "+ strNumeroJugador.str();
+	youare->setSecMsg(saludoSecu);
+	
+		
 	//se envia por socket al cliente
 	this->gameManager->notify(youare);
 	

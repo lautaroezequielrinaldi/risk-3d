@@ -51,6 +51,10 @@ std::list< ReferenceCountPtr<Player> >& Game::getPlayerList() {
     return this->playerList;
 }
 
+int Game::getPlayerCount(){
+	return this->playerList.size();	
+}
+
 /**
   * @todo falta logica creacion jugador
   *

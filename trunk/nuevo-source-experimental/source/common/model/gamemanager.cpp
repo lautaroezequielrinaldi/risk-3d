@@ -146,6 +146,9 @@ void GameManager::notify(Command * command) {
 	
 	std::cerr << "GameManager::notify(" << command->getName() << ")" << std::endl;
 	std::cerr << "GameManager::notify from: " << command->getFrom() << " to: " << command->getTo() << std::endl;
+		
+	// se hace un lock para que se ejecute un comando por vez nada mas.
+	this->mutex.lock();
 	
 	ReferenceCountPtr<Proxy> actualProxy;
 	
@@ -153,19 +156,18 @@ void GameManager::notify(Command * command) {
 	
 	it =this->proxyList.begin();
 
-	
+	//se notifica a todos los proxyPlayers
 	while ( it != this->proxyList.end()) {
 		
 		actualProxy = *it;
-		
-    	//Command& cmd = dynamic_cast<Command&> (*command);	
-    	
+		    	
         actualProxy->notify(*command);
         
 		++it;
 	}
 
-
+	// deslockeo mutex
+	this->mutex.unlock();
 }
 
 

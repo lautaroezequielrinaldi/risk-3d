@@ -38,12 +38,24 @@ class PreGameWindow: public CommandObserver, public Gtk::Window {
         ReferenceCountPtr<Game>& game;
         
         /**
-         * Almacena una referencia a un comando que se envia al cliente.
+         * Almacena una referencia a un comando mapList que se envia al cliente.
          */
-        // Command* command;
         MapList* mapList;
         
+        /**
+         * Almacena una referencia a un comando youAre que se envia al cliente.
+         */        
         YouAre* youAre;
+        
+        /**
+         * Almacena el numero del ultimo jugador que recibio una notificacion;
+         */
+         int cantJugadoresConectados;
+         
+         /**
+          * Almacena quien es el cliente.
+          */
+         int me;
         
 		/**
 		 * Almacena el layout vertical de la ventana.
@@ -163,7 +175,30 @@ class PreGameWindow: public CommandObserver, public Gtk::Window {
 		 */
 		virtual void commandExecuted(MapList& cmd);
 		
+		/**
+		 * Responde ante la llegada de un comando youAre.
+		 */		
 		virtual void commandExecuted(YouAre& cmd);
+		
+		/**
+		 * Metodo cuyo proposito es establecer la cantidad de jugadores activos que hay.
+		 */
+		void setActivePlayerCount( int playerCount );
+		
+		/**
+		 * Metodo cuyo proposito es obtener la cantidad de jugadores activos que hay.
+		 */
+		int getActivePlayerCount();
+		
+		/**
+		 * Metodo cuyo proposito es establecer que numero de jugador es el cliente.
+		 */		
+		void setMe(int color);
+		
+		/**
+		 * Metodo cuyo proposito es obtener que numero de jugador es el cliente.
+		 */		
+		int getMe(); 
 		
 		/**
 		 * Destructor virtual de la clase PreGameWindow.
