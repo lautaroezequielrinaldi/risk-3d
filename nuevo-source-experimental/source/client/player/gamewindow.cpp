@@ -31,10 +31,6 @@ bool GameWindow::initializeSDL(int argc, char** argv) {
 }
 
 void GameWindow::initializeOpenGL() {
-    // Inicializo el Viewport OpenGL
-    /*glViewport(0, 0, SDL_GetVideoInfo()->current_w,
-        SDL_GetVideoInfo()->current_h);*/
-
     // Habilita depth buffer
     glEnable(GL_DEPTH_TEST);
     // Habilita estilo de lineas
