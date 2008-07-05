@@ -39,6 +39,12 @@ class ServerProxy:public CommandObservable, public Proxy {
         	 *	Dispatcher encargado de notificar a la preGameWindow cuando recibe un mapList
         	 */
 			Dispatcher dispatcherMapList;
+			
+			/*
+        	 *	Dispatcher encargado de notificar a la preGameWindow cuando recibe un youAre
+        	 */
+			Dispatcher dispatcherYouAre;
+        	
         	
 	
 	protected:
@@ -61,6 +67,11 @@ class ServerProxy:public CommandObservable, public Proxy {
 			 * Metodo cuyo proposito es obtener el dispatcher encargado de notificar sobre la lista de mapas.
 			 */
 			Dispatcher& getDispatcherMapList();
+			
+			/**
+			 * Metodo cuyo proposito es obtener el dispatcher encargado de notificar quien es el jugador nuevo.
+			 */
+			Dispatcher& getDispatcherYouAre();
 	
 			/**
 			 * Destructor de la clase.

@@ -13,9 +13,10 @@ void * ServerProxy::run() {
 
 		std::cerr<< std::endl << "################################"<< std::endl<<"ServerProxy leyendo encabezado " << std::endl;
 		// deshardcodear este 32
-		msg << getSocket()->full_read(32);
 		
-		std::cerr<<"LLEGO A HACER FULL READ"<<std::endl;
+		
+		//EL CLIENTE ESPERA ACA!!!!
+		msg << getSocket()->full_read(32);
 		
 		msg >> msgLen;
 		msg >> commandName;
@@ -25,10 +26,14 @@ void * ServerProxy::run() {
 		
 		std::cerr << "serializacion: " << commandXml << std::endl;
 		
+		//aca entran los comandos que modifican el modelo en el cliente
         if (commandHydrator.isClientCommand(commandName)) {
             std::cerr << "Invocando ClientCommandHydrator::createCommand(" << commandName << ", " << commandXml << ");" << std::endl;
+           
             ReferenceCountPtr<ClientCommand> command = commandHydrator.createCommand(commandName, commandXml);
+           
             std::cerr << "Ejecutando comando..." << std::endl;
+            
             if (command != NULL) {
                 command->execute();
             }
@@ -36,6 +41,7 @@ void * ServerProxy::run() {
            
            
             notifyCommandExecuted(*command);
+            
             
         } else {
             ReferenceCountPtr<Command> command = messageHydrator.createCommand(commandName, commandXml);
@@ -49,6 +55,11 @@ void * ServerProxy::run() {
             
             if ( command->getName() == "mapList" )  
             	dispatcherMapList.emit();
+            	
+           // if ( command->getName() == "youAre" ){
+            //	std::cerr << "Verificando si comando es un YouAre....y lo es" << std::endl;
+            //	dispatcherYouAre.emit();
+           // }
         }
 	}
 	return 0;
@@ -66,6 +77,10 @@ messageHydrator()
 
 Dispatcher& ServerProxy::getDispatcherMapList(){	
 	return this->dispatcherMapList;
+}
+
+Dispatcher& ServerProxy::getDispatcherYouAre(){
+	return this->dispatcherYouAre;
 }
 
 
