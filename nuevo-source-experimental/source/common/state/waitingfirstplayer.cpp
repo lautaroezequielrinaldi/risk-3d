@@ -24,7 +24,6 @@ bool WaitingFirstPlayer::joinGame(ServerJoinGame & command){
 
 	this->gameManager->getTurnManager()->changeTurn(1);
 	
-	
 	std::vector<std::string> v;
 
 	std::ostringstream numeroJugador;
@@ -38,8 +37,7 @@ bool WaitingFirstPlayer::joinGame(ServerJoinGame & command){
 	this->gameManager->notify(youare);
 	
 	delete(youare);
-	std::cerr<< "VUELVE A WAITING FIRST PLAYER A LISTA MAPAS "<<std::endl;
-	
+		
 	//creo objeto para manejar archivo que contiene lista de nombres de mapas
 	std::ifstream archivoMapas;
 	
