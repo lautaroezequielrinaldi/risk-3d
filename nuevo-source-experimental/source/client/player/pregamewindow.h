@@ -41,9 +41,9 @@ class PreGameWindow: public CommandObserver, public Gtk::Window {
          * Almacena una referencia a un comando que se envia al cliente.
          */
         // Command* command;
-        ReferenceCountPtr<MapList> mapList;
+        MapList* mapList;
         
-        ReferenceCountPtr<YouAre> youAre;
+        YouAre* youAre;
         
 		/**
 		 * Almacena el layout vertical de la ventana.

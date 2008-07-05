@@ -30,7 +30,7 @@ void * ServerProxy::run() {
         if (commandHydrator.isClientCommand(commandName)) {
             std::cerr << "Invocando ClientCommandHydrator::createCommand(" << commandName << ", " << commandXml << ");" << std::endl;
            
-            ReferenceCountPtr<ClientCommand> command = commandHydrator.createCommand(commandName, commandXml);
+            ClientCommand* command = commandHydrator.createCommand(commandName, commandXml);
            
             std::cerr << "Ejecutando comando..." << std::endl;
             
@@ -44,7 +44,7 @@ void * ServerProxy::run() {
             
             
         } else {
-            ReferenceCountPtr<Command> command = messageHydrator.createCommand(commandName, commandXml);
+            Command* command = messageHydrator.createCommand(commandName, commandXml);
             
             if ( command == NULL )
             	std::cerr<<"el comando devuelto por messageHydrator es NULL....."<<std::endl;

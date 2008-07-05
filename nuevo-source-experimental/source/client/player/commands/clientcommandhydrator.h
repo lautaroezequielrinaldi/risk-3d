@@ -10,7 +10,6 @@
 #include "surrenderclientcommand.h"
 #include "quitclientcommand.h"
 #include "../../../common/model/game.h"
-#include "../../../common/smartpointer/referencecountptr.h"
 
 
 class ClientCommandHydrator {
@@ -25,7 +24,7 @@ class ClientCommandHydrator {
         /**
          * Almacena el mapa de comandos de cliente.
          */
-        std::map<std::string, ReferenceCountPtr<ClientCommand> > clientCommandList;
+        std::map<std::string, ClientCommand* > clientCommandList;
     /**
      * Metodos publicos de la clase ClientCommandHydrator.
      */
@@ -42,7 +41,7 @@ class ClientCommandHydrator {
         /**
          * Crea un comando del cliente y lo devuelve.
          */
-        ReferenceCountPtr<ClientCommand> createCommand(const std::string& commandName, const std::string& xml);
+        ClientCommand* createCommand(const std::string& commandName, const std::string& xml);
         /**
          * Destructor virtual de la clase ClientCommandHydrator.
          */

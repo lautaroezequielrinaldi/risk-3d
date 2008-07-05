@@ -18,7 +18,7 @@ ClientCommandHydrator::ClientCommandHydrator(const ReferenceCountPtr<Game>& game
 
 bool ClientCommandHydrator::isClientCommand(const std::string& commandName) {
     std::cerr << "Definiendo iterador para iterar mapa de comandos..." << std::endl;
-    std::map<std::string, ReferenceCountPtr<ClientCommand> >::iterator iter;
+    std::map<std::string, ClientCommand* >::iterator iter;
 
     std::cerr << "Buscando tipo de comando " << commandName << " en mapas de comandos..." << std::endl;
     iter = clientCommandList.find(commandName);
@@ -32,7 +32,7 @@ bool ClientCommandHydrator::isClientCommand(const std::string& commandName) {
     }
 }
 
-ReferenceCountPtr<ClientCommand> ClientCommandHydrator::createCommand(const std::string& commandName, const std::string& xml) {
+ClientCommand* ClientCommandHydrator::createCommand(const std::string& commandName, const std::string& xml) {
     std::cerr << "Buscando comando " << commandName << " en lista de comandos..." << std::endl;
     ReferenceCountPtr<ClientCommand> prototype = clientCommandList[commandName];
 
@@ -40,7 +40,7 @@ ReferenceCountPtr<ClientCommand> ClientCommandHydrator::createCommand(const std:
     if (prototype != NULL) {
         std::cerr << "Se encontro comando..." << std::endl;
         std::cerr << "Clonando comando..." << std::endl;
-        ReferenceCountPtr<ClientCommand> command =  prototype->clone();
+        ClientCommand* command =  prototype->clone();
         std::cerr << "Comando clonado..." << std::endl;
         std::cerr << "Hidratando comando con el XML: " << xml << std::endl;
         command->hydrate(xml);

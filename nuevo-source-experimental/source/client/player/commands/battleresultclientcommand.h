@@ -23,7 +23,7 @@ class BattleResultClientCommand: public BattleResult, public ClientCommand {
 		/**
 		 * Clona al comando.
 		 */
-		virtual ReferenceCountPtr<ClientCommand> clone();
+		virtual ClientCommand* clone();
 		/**
 		 * Destructor virtual de la clase BattleResultClientCommand.
 		 */

@@ -5,7 +5,7 @@ SurrenderClientCommand::SurrenderClientCommand(ReferenceCountPtr<Game>& game):
     // No realiza ninguna acciòn.
 }
 
-ReferenceCountPtr<ClientCommand> SurrenderClientCommand::clone() {
+ClientCommand* SurrenderClientCommand::clone() {
     return new SurrenderClientCommand(getGame());
 }
 
@@ -13,8 +13,10 @@ void SurrenderClientCommand::execute() {
     ReferenceCountPtr<Player> jugadorSuertudo = getGame()->getPlayer( getTo() );
     ReferenceCountPtr<Player> jugadorRendido =  getGame()->getPlayer(getFrom());
 
-    //actualiza modelo transfiriendo paises del jugador rendido al jugador suertudo que los gano.
-    jugadorSuertudo->transferLandsFrom(jugadorRendido);
+    if (jugadorSuertudo != NULL && jugadorRendido != NULL) {
+        //actualiza modelo transfiriendo paises del jugador rendido al jugador suertudo que los gano.
+        jugadorSuertudo->transferLandsFrom(jugadorRendido);
+    }
 }
 
 SurrenderClientCommand::~SurrenderClientCommand() {

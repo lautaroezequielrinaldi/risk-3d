@@ -13,7 +13,7 @@ void MoveClientCommand::execute() {
     paisDest->addArmies(getArmyCount());
 }
 
-ReferenceCountPtr<ClientCommand> MoveClientCommand::clone() {
+ClientCommand* MoveClientCommand::clone() {
 	return new MoveClientCommand(getGame());
 }
 
