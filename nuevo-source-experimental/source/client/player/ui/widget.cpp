@@ -2,6 +2,7 @@
 
 Widget::Widget(UIState& uiState):
 	uiState(uiState),
+    id(ItemHandler::generateNextItemId()),
 	x(0),
 	y(0),
 	width(0),

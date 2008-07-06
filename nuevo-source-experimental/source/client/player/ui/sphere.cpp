@@ -69,6 +69,10 @@ void Sphere::setGame(const ReferenceCountPtr<Game>& game) {
     this->game = game;
 }
 
+ReferenceCountPtr<Pais> Sphere::getHooverCountry() {
+    return hooverCountry;
+}
+
 void Sphere::update() {
     double newTime = SDL_GetTicks();
     double deltaTime = (newTime - sphereState.getLastTime()) / 1000.0;
@@ -143,12 +147,16 @@ void Sphere::updateCrossHairAndCountries() {
         crossHairState.setInSphere(true);
         if (game != NULL && game->getMapa() != NULL) {
             Mapa::IteradorPais countryIter;
+            bool found = false;
             for (countryIter = game->getMapa()->primerPais();
                 countryIter != game->getMapa()->ultimoPais(); ++countryIter) {
                 MapPosition position = (*countryIter)->getPosition();
                 if (countryRayIntersection(position, viewpoint, rayDir)) {
                     hooverCountry = (*countryIter);
-                    std::cout << "Pais: " << hooverCountry->getNombre() << std::endl;
+                    found = true;
+                }
+                if (!found) {
+                    hooverCountry = NULL;
                 }
             }
         } else {

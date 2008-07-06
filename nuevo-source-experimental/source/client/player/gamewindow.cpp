@@ -10,6 +10,8 @@ GameWindow::GameWindow(const ReferenceCountPtr<ServerProxy>& serverProxy):
     noMoreButton(uiState),
     surrenderButton(uiState),
     quitButton(uiState),
+    hooverCountryLabel(uiState),
+    hooverUnitLabel(uiState),
     messageLabel(uiState),
     sphere(uiState) {
     if (this->serverProxy != NULL) {
@@ -83,9 +85,25 @@ void GameWindow::initializeOpenGL() {
     quitButton.setWidth(200);
     quitButton.setHeight(100);
     quitButton.setVisible(true);
-    quitButton.setEnabled(false);
+    quitButton.setEnabled(true);
     quitButton.setText("QUIT");
 
+    // Establece tamaño de label y posicion
+    hooverCountryLabel.setX(0);
+    hooverCountryLabel.setY(440);
+    hooverCountryLabel.setWidth(200);
+    hooverCountryLabel.setHeight(100);
+    hooverCountryLabel.setVisible(false);
+    hooverCountryLabel.setEnabled(false);
+
+   // Establece tamaño de label y posicion
+    hooverUnitLabel.setX(0);
+    hooverUnitLabel.setY(440);
+    hooverUnitLabel.setWidth(200);
+    hooverUnitLabel.setHeight(100);
+    hooverUnitLabel.setVisible(false);
+    hooverUnitLabel.setEnabled(false);
+    
     // Establezco tamaño de label y posicion.
     messageLabel.setX(210);
     messageLabel.setY(0);
@@ -94,6 +112,7 @@ void GameWindow::initializeOpenGL() {
     messageLabel.setEnabled(false);
     messageLabel.setVisible(true);
     messageLabel.setText("Mensaje de prueba");
+
     // Cargo las texturas de la esfera.
     sphere.getTexture().load("mapa.jpg");
 }
@@ -155,6 +174,14 @@ void GameWindow::drawScene() {
     enable2D();
     // Prepara IMGUI
     uiState.prepare();
+
+    // Dibuja y procesa el label para pais bajo el mouse.
+    if (sphere.getHooverCountry() != NULL) {
+        hooverCountryLabel.setText( sphere.getHooverCountry()->getNombre());
+        hooverCountryLabel.setVisible(true);
+        hooverCountryLabel.setEnabled(true);
+        hooverCountryLabel.doProcess();
+    }
 
     // Dibuja y procesa boton de no more.
     if ( noMoreButton.doProcess() ) {
