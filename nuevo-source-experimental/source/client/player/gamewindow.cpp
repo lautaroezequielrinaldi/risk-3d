@@ -1,5 +1,6 @@
 #include "gamewindow.h"
 #include<GL/glut.h>
+#include<sstream>
 #include<iostream>
 #include "../../common/parser/mapaparser.h"
 #include "../../common/model/randomdice.h"
@@ -98,7 +99,7 @@ void GameWindow::initializeOpenGL() {
 
    // Establece tamaño de label y posicion
     hooverUnitLabel.setX(0);
-    hooverUnitLabel.setY(440);
+    hooverUnitLabel.setY(330);
     hooverUnitLabel.setWidth(200);
     hooverUnitLabel.setHeight(100);
     hooverUnitLabel.setVisible(false);
@@ -181,6 +182,15 @@ void GameWindow::drawScene() {
         hooverCountryLabel.setVisible(true);
         hooverCountryLabel.setEnabled(true);
         hooverCountryLabel.doProcess();
+
+        std::ostringstream unitStr;
+        unitStr << "Unidades: ";
+        unitStr << sphere.getHooverCountry()->getArmyCount();
+
+        hooverUnitLabel.setVisible(true);
+        hooverUnitLabel.setEnabled(true);
+        hooverUnitLabel.setText(unitStr.str());
+        hooverUnitLabel.doProcess();
     }
 
     // Dibuja y procesa boton de no more.
