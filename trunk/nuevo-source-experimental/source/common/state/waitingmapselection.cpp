@@ -1,7 +1,11 @@
 #include "waitingmapselection.h"
 #include "stateobserver.h"
 #include "../commands/youare.h"
+#include "../Servercommands/serverselectmap.h"
 #include "../model/gamemanager.h"
+
+#include "../parser/mapaparser.h"
+
 #include <vector>
 #include <sstream>
 
@@ -62,10 +66,27 @@ bool WaitingMapSelection::readyToPlay(ServerReadyToPlay & command) {
 
 bool WaitingMapSelection::selectMap(ServerSelectMap & command){
 	
-	std::cerr << "Evento WaitingMapSelection::SelectMap" << std::endl;
-	// ver si es el jugador actual
+	std::cerr << "En estado-evento WaitingMapSelection::SelectMap" << std::endl;
+	
+	MapaParser mapaParser;
+	
+	std::cerr << "Bajando xml mapa a memoria......." << std::endl;
+	
+	//levanto el mapa desde archivo xml a memoria
+	ReferenceCountPtr<Mapa> mapa = mapaParser.loadMap(command.getMapName());
+
+	std::cerr << "Guardando mapa bajado en Game.........." << std::endl;
+	
+	//seteo el mapa que se usara en el modelo del juego
+	this->gameManager->getGame()->setMapa(mapa);
+		
+	//cambio a proximo estado
+	this->gameManager->getStateMachine()->setState("waitingPlayer");
+	
+	std::cerr << "Hecho. Cambio el estado a 'WaitingPlayer'" << std::endl;
+
 	// si ahora no hay lugar o todos estan ready to play
-	//    Map
+
 	//     pasar a simplePopulating
 	//     seleccionar primer jugador y TurnToOccupy	
 	return false;

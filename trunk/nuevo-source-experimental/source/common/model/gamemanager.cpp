@@ -117,15 +117,15 @@ void GameManager::execute(const std::string & commandName,const std::string &com
 	ReferenceCountPtr<State> currentState = stateMachine->getCurrentState();
 	
 	std::cerr << "GameManager::execute( " << commandName << ")"<< std::endl;
+
 	std::cout << commandName << " -> execute("<< currentState->getName()<<")" <<std::endl << std::endl;
 	
 	ServerCommand* command = commandHydrator->getCommand(commandName,commandXml);
 	
-	if (command != NULL) {
-        //Command& cmd = dynamic_cast<Command&>(*command);
+	if (command != NULL) 
 		// Notifica a los listeners del comando.
 		CommandObservable::notifyCommandExecuted(*command);
-	}	
+
 	
 	// se hace un lock para que se ejecute un comando por vez nada mas.
 	this->mutex.lock();
@@ -148,7 +148,7 @@ void GameManager::notify(Command * command) {
 	std::cerr << "GameManager::notify from: " << command->getFrom() << " to: " << command->getTo() << std::endl;
 		
 	// se hace un lock para que se ejecute un comando por vez nada mas.
-	this->mutex.lock();
+	//this->mutex.lock();
 	
 	ReferenceCountPtr<Proxy> actualProxy;
 	
@@ -160,14 +160,18 @@ void GameManager::notify(Command * command) {
 	while ( it != this->proxyList.end()) {
 		
 		actualProxy = *it;
+		
+		//this->mutex.lock();
 		    	
         actualProxy->notify(*command);
+        
+        //->mutex.unlock();
         
 		++it;
 	}
 
 	// deslockeo mutex
-	this->mutex.unlock();
+	//this->mutex.unlock();
 }
 
 
