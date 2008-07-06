@@ -79,6 +79,7 @@ bool Button::doProcess() {
 		}
 		return false;
 	}
+    return false;
 }
 Button::~Button() {
 	// No realiza ninguna accion.

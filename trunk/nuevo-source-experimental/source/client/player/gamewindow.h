@@ -39,6 +39,14 @@ class GameWindow: public CommandObserver {
          */
         Button quitButton;
         /**
+         * Almacena el label para el pais bajo el mouse.
+         */
+        Label hooverCountryLabel;
+        /**
+         * Almacena el label para las unidades del pais bajo el mouse.
+         */
+        Label hooverUnitLabel;
+        /**
          * Almacena el label para mensajes.
          */
         Label messageLabel;
