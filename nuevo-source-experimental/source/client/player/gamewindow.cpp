@@ -150,13 +150,18 @@ void GameWindow::drawScene() {
 
     // Dibuja y procesa boton de no more.
     if ( noMoreButton.doProcess() ) {
+        if (serverProxy != NULL) {
+            NoMore noMoreCommand;
+            serverProxy->notify(noMoreCommand);
+        }
+        noMoreButton.setEnabled(false);
         std::cerr << "Se presiono el boton de NO MORE" << std::endl;
     }
 
     // Dibuja y procesa el boton de surrender.
     if ( surrenderButton.doProcess() ) {
-        Surrender surrenderCommand;
         if (serverProxy != NULL) {
+            Surrender surrenderCommand;
             serverProxy->notify(surrenderCommand);
         }
         std::cerr << "Se presiono el boton de SURRENDER" << std::endl;

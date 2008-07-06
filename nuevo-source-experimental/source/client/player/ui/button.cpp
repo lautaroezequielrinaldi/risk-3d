@@ -43,7 +43,7 @@ bool Button::doProcess() {
 		color.blue = 1.0f;
 		// Dibuja el rectangulo
 		drawFilledRectangle(getX() + 8, getY() + 8, getWidth(), getHeight(), color);
-		if ( getUIState().getHotItem() == getId() ) {
+		if ( getEnabled() && getUIState().getHotItem() == getId() ) {
 			if ( getUIState().getActiveItem() == getId() ) {
 				// Defino el color
 				color.red = 1.0;
@@ -72,7 +72,7 @@ bool Button::doProcess() {
 				 color);
 			drawCenteredText(getText(), getX(), getY(), getWidth(), getHeight(), textColor);
 		}
-		if ( !getUIState().getMousePressed() && 
+		if ( getEnabled() && !getUIState().getMousePressed() && 
 	      getUIState().getHotItem() == getId() && 
 		  getUIState().getActiveItem() == getId()) { 
 			return true;
