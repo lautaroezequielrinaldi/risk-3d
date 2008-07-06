@@ -22,6 +22,10 @@ int& MapPosition::getY() {
     return this->y;
 }
 
+bool MapPosition::operator==(const MapPosition& position) {
+    return (this->x == position.x) && (this->y == position.y);
+}
+
 MapPosition::~MapPosition() {
     // No realiza ninguna acciòn.
 }
