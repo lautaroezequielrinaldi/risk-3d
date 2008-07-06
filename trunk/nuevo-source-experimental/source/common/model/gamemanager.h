@@ -153,6 +153,8 @@ class GameManager: public StateObservable, public CommandObservable {
 		 */
 		std::list< ReferenceCountPtr<Player> >& getPlayerList();
 		
+		std::list< ReferenceCountPtr<Proxy> >& getPlayerProxyList();
+		
 		/**
 		 * Metodo cuyo proposito es obtener el estado actual del juego.
 		 */

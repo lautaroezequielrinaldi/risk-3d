@@ -4,6 +4,9 @@
 #include "../../common/model/gamemanager.h"
 #include<sstream>
 #include <iostream>
+
+
+
 void * PlayerProxy::run() {
 	
 	
@@ -37,6 +40,8 @@ PlayerProxy::PlayerProxy(const ReferenceCountPtr<Socket>& socket, const Referenc
 Proxy(socket), 
 gameManager(gameManager) {
 
+	this->readyToPlay=false;
+
 }
 
 PlayerProxy::~PlayerProxy(){
@@ -51,4 +56,15 @@ ReferenceCountPtr<Player> & PlayerProxy::getPlayer(){
 	return player;
 
 }
+
+void PlayerProxy::setReadyToPlay(bool state){
+	this->readyToPlay=state;
+}
+bool PlayerProxy::isReadyToPlay(){
+	return this->readyToPlay;
+}
+
+
+
+
 

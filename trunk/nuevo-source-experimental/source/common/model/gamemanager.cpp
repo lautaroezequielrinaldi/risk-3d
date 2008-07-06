@@ -112,6 +112,10 @@ std::list< ReferenceCountPtr<Player> >& GameManager::getPlayerList(){
 
 }
 
+std::list< ReferenceCountPtr<Proxy> >& GameManager::getPlayerProxyList(){
+	return this->proxyList;
+}	
+
 void GameManager::execute(const std::string & commandName,const std::string &commandXml){
 
 	ReferenceCountPtr<State> currentState = stateMachine->getCurrentState();

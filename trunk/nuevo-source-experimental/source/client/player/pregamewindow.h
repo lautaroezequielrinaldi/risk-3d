@@ -144,6 +144,10 @@ class PreGameWindow: public CommandObserver, public Gtk::Window {
 		 */		
 		void on_you_are_arrival();
 		
+		/**
+		 * Manejador de la señal realizada por el dispatcher encargado de la notificacion de un ready to play.
+		 */
+		 void on_Ready_to_play_arrival();
 		
 	/**
 	 * Metodos publicos de la clase PreGameWindow.

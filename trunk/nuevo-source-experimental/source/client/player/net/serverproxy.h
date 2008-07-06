@@ -45,7 +45,11 @@ class ServerProxy:public CommandObservable, public Proxy {
         	 */
 			Dispatcher dispatcherYouAre;
         	
-        	
+			/*
+        	 *	Dispatcher encargado de notificar a la preGameWindow cuando recibe un readyToPlay
+        	 */
+			Dispatcher dispatcherReadyToPlay;        	
+	
 	
 	protected:
 	
@@ -73,6 +77,11 @@ class ServerProxy:public CommandObservable, public Proxy {
 			 */
 			Dispatcher& getDispatcherYouAre();
 	
+			/**
+			 * Metodo cuyo proposito es obtener el dispatcher encargado de notificar que todos los jugadores estan listos.
+			 */
+			Dispatcher& getDispatcherReadyToPlay();
+			
 			/**
 			 * Destructor de la clase.
 			 */
