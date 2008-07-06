@@ -2,7 +2,7 @@
 #include "../../common/commands/chat.h"
 #include "../../common/commands/quit.h"
 #include "../../common/commands/selectmap.h"
-
+#include "gamewindow.h"
 #include<gtkmm/liststore.h> // Para definiciòn de Gtk::ListStore.
 #include<gtkmm/combobox.h> // Para definiciòn de Gtk::ComboBox.
 #include<iostream>
@@ -102,14 +102,17 @@ void PreGameWindow::showConnectionDialog() {
 			this->serverProxy->getDispatcherMapList().connect(sigc::mem_fun(*this, &PreGameWindow::on_map_list_selection));
 			// conecta la señal lanzada por el dispatcher que maneja la llegada de un you are
 			this->serverProxy->getDispatcherYouAre().connect(sigc::mem_fun(*this, &PreGameWindow::on_you_are_arrival));
-			
+
+			// conecta la señal lanzada por el dispatcher que maneja la llegada de un ready to play
+			this->serverProxy->getDispatcherReadyToPlay().connect(sigc::mem_fun(*this, &PreGameWindow::on_Ready_to_play_arrival));
+		
 			
 			JoinGame* cmd = new JoinGame();
 			serverProxy->notify(*cmd);
 			delete cmd;
 			
 			sendMessageButton.set_sensitive(true);
-			readyToPlayButton.set_sensitive(true);
+			readyToPlayButton.set_sensitive(false);
         	connectionDialogButton.set_sensitive(false);
             
             serverProxy->registerCommandObserver(this);
@@ -146,8 +149,16 @@ void PreGameWindow::onSendMessageButtonClicked() {
 }
 
 void PreGameWindow::onReadyToPlayButtonClicked() {
-	ReadyToPlay cmd;
-	serverProxy->notify(cmd);
+
+	
+	ReadyToPlay* cmd = new ReadyToPlay();
+	//indico que cliente manda el ready para saber a cual marcar en el servidor
+	cmd->setFrom(this->me);	
+	
+	serverProxy->notify(*cmd);
+	
+	delete cmd;
+	
 	readyToPlayButton.set_sensitive(false);
 }
 
@@ -223,6 +234,33 @@ void PreGameWindow::on_you_are_arrival(){
 	selectMapDialog.add_button(Gtk::Stock::OK, Gtk::RESPONSE_OK);
 	selectMapDialog.show_all();
 	selectMapDialog.run();
+	
+	readyToPlayButton.set_sensitive(true);
+	
+}
+
+void PreGameWindow::on_Ready_to_play_arrival(){
+	
+			
+	//creacion del dialogo de ready to play para todos.
+	Gtk::Dialog selectMapDialog("Aviso!");
+	Gtk::Label readyLabel("Todos los jugadores estan listos para jugar,Se Pasara a modo juego");	
+	selectMapDialog.get_vbox()->add(readyLabel);
+	selectMapDialog.add_button(Gtk::Stock::OK, Gtk::RESPONSE_OK);
+	selectMapDialog.show_all();
+	selectMapDialog.run();
+	
+	//se cierra pre sala
+	Gtk::Main::quit();
+	
+	//se abre vista 3d
+	
+    //GameWindow gameWindow; 
+	//int argc;
+	//char** argv;
+    //gameWindow.run(argc, argv);
+    
+	
 	
 }
 
@@ -320,14 +358,14 @@ void PreGameWindow::on_map_list_selection(){
       			
       			serverProxy->notify(*commandMap);
       			delete commandMap;
-
     		}
   		}
-		
+  		
+  		readyToPlayButton.set_sensitive(true);
 	}
 	
 	this->me =1;
-	std::cerr <<"ultima linea metodo llamado por disparcherMapList .... "<< std::endl;
+	
 }
 
 void PreGameWindow::setActivePlayerCount( int playerCount ){

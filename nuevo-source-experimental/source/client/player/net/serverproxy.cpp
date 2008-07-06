@@ -58,10 +58,9 @@ void * ServerProxy::run() {
             if ( command->getName() == "mapList" )  
             	dispatcherMapList.emit();
             	
-            	
-            	
-            std::cerr <<"Volvio del dispatcherMapList.emit......." << std::endl;
-            	
+            if ( command->getName() == "readyToPlay" )  
+            	dispatcherReadyToPlay.emit();	
+            
             //si llego un YouAre y NO es para el 1er jugador
             if ( command->getName() == "youAre" && command->getTo() > 1 ){
             	std::cerr << "Verificando si comando es un YouAre....y lo es" << std::endl;
@@ -69,10 +68,7 @@ void * ServerProxy::run() {
             }
 
         }
-        
-        std::cerr <<"HOLAAAAAAAAAAAAAAAaa¡¡¡¡¡¡????????????????????????" << std::endl;
-        
-        
+               
 	}
 	return 0;
 }
@@ -93,6 +89,10 @@ Dispatcher& ServerProxy::getDispatcherMapList(){
 
 Dispatcher& ServerProxy::getDispatcherYouAre(){
 	return this->dispatcherYouAre;
+}
+
+Dispatcher& ServerProxy::getDispatcherReadyToPlay(){
+	return this->dispatcherReadyToPlay;
 }
 
 

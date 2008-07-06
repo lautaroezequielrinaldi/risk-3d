@@ -2,6 +2,7 @@
 #include "stateobserver.h"
 #include "../commands/youare.h"
 #include "../Servercommands/serverselectmap.h"
+#include "../Servercommands/serverreadytoplay.h"
 #include "../model/gamemanager.h"
 
 #include "../parser/mapaparser.h"
@@ -34,9 +35,7 @@ bool WaitingMapSelection::joinGame(ServerJoinGame & command) {
 	YouAre * youare = new YouAre(v);
 	
 	youare->setTo(this->gameManager->getTurnManager()->getCurrentPlayer());
-	//obtengo cant de jugadores q hay conectados.
-	//youare->numeroJugador = this->gameManager->getGame()->getPlayerList().size();
-	
+		
 	std::ostringstream strNumeroJugador;
 	strNumeroJugador << this->gameManager->getTurnManager()->getCurrentPlayer();
 	
@@ -58,8 +57,50 @@ bool WaitingMapSelection::joinGame(ServerJoinGame & command) {
 
 
 bool WaitingMapSelection::readyToPlay(ServerReadyToPlay & command) {
+
 	std::cerr << "Evento WaitingMapSelection::readyToPlay" << std::endl;
-	// marcar como ready to play
+
+	//obtengo playerProxy que envio el readyToPlay
+	ReferenceCountPtr<PlayerProxy> playerProxyFrom = this->gameManager->getPlayerProxy(command.getFrom());
+	//lo seteo en ready to play
+	playerProxyFrom->setReadyToPlay(true);
+	
+	//verifico si todos esta ready to play para pasar a modo juego
+	std::list<ReferenceCountPtr<Proxy> > listaPlayerProxy = this->gameManager->getPlayerProxyList();
+	std::list<ReferenceCountPtr<Proxy> >::iterator it;
+	it = listaPlayerProxy.begin();
+	bool todosListos = true;
+	
+	while ( it != listaPlayerProxy.end() && todosListos ){
+		
+		ReferenceCountPtr<Proxy> actual = *it;
+		if ( ! ((ReferenceCountPtr<PlayerProxy> )actual)->isReadyToPlay() )
+			todosListos = false;
+		else
+			++it;
+	}
+	
+	//si todos los clientes ya esta listos para jugar y hay mas de 1
+	if ( todosListos &&  listaPlayerProxy.size() > 1){
+	
+		ReadyToPlay* ready =new ReadyToPlay();
+		
+		//std::string mje = "Todos los jugadores estan listos para jugar,Se Pasara a modo juego";
+		//ready->setMainMsg(mje);
+		
+		//se envia por socket al cliente
+		this->gameManager->notify(ready);
+	
+		delete(ready);	
+		
+		//cambio a proximo estado que es ocupar
+		this->gameManager->getStateMachine()->setState("Occupying");
+	
+		std::cerr << "Cambio el estado a 'Occupying'" << std::endl;
+		//ver turn tu occuppy
+		
+	}	
+	
 	return false;
 }
 
