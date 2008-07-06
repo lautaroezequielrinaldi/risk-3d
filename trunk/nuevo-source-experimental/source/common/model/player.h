@@ -43,6 +43,11 @@ class Player
 		Player(int color,int armyCount);
 		
 		/**
+		 * Constructor de la clase
+		 */
+		Player(int color);
+				
+		/**
 		 * Constructor de la clase. 
 		 * Asigna al jugador, un color que todavia no haya sido asignado.
 		 */

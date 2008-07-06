@@ -52,7 +52,10 @@ class ServerProxy:public CommandObservable, public Proxy {
 	
 	
 	protected:
-	
+			
+			/**
+			 * Metodo invocado al iniciarse el thread.
+			 */
 			void * run();
 
 	public:

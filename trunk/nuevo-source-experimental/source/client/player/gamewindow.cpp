@@ -75,7 +75,7 @@ void GameWindow::initializeOpenGL() {
     quitButton.setWidth(200);
     quitButton.setHeight(100);
     quitButton.setVisible(true);
-    quitButton.setEnabled(false);
+    quitButton.setEnabled(true);
     quitButton.setText("QUIT");
 
     // Establezco tamaño de label y posicion.
