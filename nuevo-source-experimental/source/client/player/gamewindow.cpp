@@ -164,6 +164,7 @@ void GameWindow::drawScene() {
             Surrender surrenderCommand;
             serverProxy->notify(surrenderCommand);
         }
+        surrenderButton.setEnabled(false);
         std::cerr << "Se presiono el boton de SURRENDER" << std::endl;
     }
 
