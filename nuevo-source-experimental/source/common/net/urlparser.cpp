@@ -2,7 +2,7 @@
  * Project Includes.
  */
 #include "urlparser.h"
-
+#include<iostream>
 UrlParser::UrlParser(const char* url) {
     // Genra un string std a partir de la url provista.
     std::string stringUrl(url);
@@ -23,6 +23,10 @@ void UrlParser::parseUrl(const std::string& url) {
     int resourceSeparatorIndex;
     // Defino posicion inicial de dominio.
     int domainInitialIndex;
+    // Defino posicion inicial de puerto.
+    int portSeparatorIndex;
+    // Almacena el puerto como string.
+    std::string portStr;
 
     // Busco separador de protocolo, siempre es un colon o dos puntos.
     // Como en http://www.example.com/index.html
@@ -31,7 +35,7 @@ void UrlParser::parseUrl(const std::string& url) {
     // Verifico que se encontró y si se encontro obtengo protocolo.
     // Puede que una url no tenga especificado protocolo, como en
     // www.example.com
-    if (protocolSeparatorIndex != std::string::npos) {
+    if (protocolSeparatorIndex != std::string::npos && protocolSeparatorIndex <= 4) {
         this->protocol = url.substr(0, protocolSeparatorIndex);
     } else {
         // Si no encuentra el separador asigno -1 asi al buscar
@@ -50,20 +54,42 @@ void UrlParser::parseUrl(const std::string& url) {
 
     // Verifico que se encontrò  y si se encontrò procedo a buscar el resource.
     if (domainInitialIndex != std::string::npos) {
+        // Busco separador de puerto, siempre es :
+        portSeparatorIndex = url.find_first_of(":", domainInitialIndex);
+        
         // Busco el separador de resource, siempre es /
         // Como en http://www.example.com/index.html
         resourceSeparatorIndex = url.find_first_of("/", domainInitialIndex);
-        
+       
+        // No se encontro puerto, default 80
+        if (portSeparatorIndex != std::string::npos) {
+            this->domain = url.substr(domainInitialIndex,
+                portSeparatorIndex - domainInitialIndex);
+            if (resourceSeparatorIndex != std::string::npos) {
+                portStr = url.substr(portSeparatorIndex + 1,
+                resourceSeparatorIndex - portSeparatorIndex);
+            } else {
+                portStr = url.substr(portSeparatorIndex + 1);
+            }
+        }
+        std::cout << portStr << std::endl;
+        this->port = atoi(portStr.c_str());
+ 
         // Verifico que se encontrò, si se encontro obtengo resource y admeàs
         // obtengo el domain.
         if (resourceSeparatorIndex != std::string::npos) {
             this->resource = "/" + url.substr(resourceSeparatorIndex);
-
-            this->domain = url.substr(domainInitialIndex,
-                resourceSeparatorIndex - domainInitialIndex);
+            if (portSeparatorIndex == std::string::npos) {
+                this->port = 80;
+                this->domain = url.substr(domainInitialIndex,
+                    resourceSeparatorIndex - domainInitialIndex);
+            }
         } else {
             this->resource += "/";
-            this->domain = url.substr(domainInitialIndex);
+            if (portSeparatorIndex == std::string::npos) {
+                this->port = 80;
+                this->domain = url.substr(domainInitialIndex);
+            }
         }
     }
 }
@@ -78,6 +104,10 @@ std::string UrlParser::getDomain() {
 
 std::string UrlParser::getResource() {
     return this->resource;
+}
+
+int UrlParser::getPort() {
+    return this->port;
 }
 
 UrlParser::~UrlParser() {
