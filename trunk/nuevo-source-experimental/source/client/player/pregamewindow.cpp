@@ -154,9 +154,8 @@ void PreGameWindow::onReadyToPlayButtonClicked() {
 
 void PreGameWindow::onQuitButtonClicked() {
 	if (connected) {
-		Quit* cmd = new Quit();
-	    serverProxy->notify(*cmd);	
-		delete(cmd);
+		Quit cmd;
+	    serverProxy->notify(cmd);	
 		serverProxy->cancel();
 	}
 	hasQuit = true;

@@ -4,12 +4,20 @@
 #include "ui/sphere.h"
 #include "ui/uistate.h"
 #include "ui/button.h"
+#include "ui/label.h"
+#include "net/serverproxy.h"
+#include "../../common/smartpointer/referencecountptr.h"
+#include "../../common/commands/commandobserver.h"
 
-class GameWindow {
+class GameWindow: public CommandObserver {
     /**
      * Atributos privados de la clase GameWindow.
      */
     private:
+        /**
+         * Almacena el server proxy con el cual se va a comunicar.
+         */
+        ReferenceCountPtr<ServerProxy> serverProxy;
         /**
          * Indica si el main loop esta corriendo,
          */
@@ -19,9 +27,21 @@ class GameWindow {
          */
         UIState uiState;
         /**
-         * Almacena el boton.
+         * Almacena  el boton para fin de accion,
          */
-        Button button;
+        Button noMoreButton;
+        /**
+         * Almacena el boton para surrender.
+         */
+        Button surrenderButton;
+        /**
+         * Almacena el boton para quit.
+         */
+        Button quitButton;
+        /**
+         * Almacena el label para mensajes.
+         */
+        Label messageLabel;
         /**
          * Almacena la efera.
          */
@@ -99,14 +119,18 @@ class GameWindow {
          * Process events.
          */
         void processEvents();
+        /**
+         * Disconnects and quits from the gane,
+         */
+        void disconnectAndQuit();
     /**
      * Metodos publicos de la clase GameWindow.
      */
     public:
         /**
          *  Constructor de la clase GameWindow.
-         */
-        GameWindow();
+          */
+        GameWindow(const ReferenceCountPtr<ServerProxy>& = NULL);
         /**
          * Destructor virtual de la clase GameWindow.
          */

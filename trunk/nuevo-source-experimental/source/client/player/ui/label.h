@@ -31,6 +31,10 @@ class Label: public Widget {
 		 * Procesa el widget.
 		 */
 		virtual bool doProcess();
+        /**
+         * Establece el texto del label.
+         */
+        void setText(const std::string& text);
 		/**
 		 * Obtiene el texto del label.
 		 */
