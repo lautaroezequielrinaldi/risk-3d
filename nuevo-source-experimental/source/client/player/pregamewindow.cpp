@@ -1,6 +1,7 @@
 #include "pregamewindow.h"
 #include "../../common/commands/chat.h"
 #include "../../common/commands/quit.h"
+#include "../../common/commands/selectmap.h"
 
 #include<gtkmm/liststore.h> // Para definiciòn de Gtk::ListStore.
 #include<gtkmm/combobox.h> // Para definiciòn de Gtk::ComboBox.
@@ -265,7 +266,7 @@ void PreGameWindow::on_map_list_selection(){
 
   	Gtk::TreeModel::Row row ;//= *(m_refTreeModel->append());
   		
-	for ( int i =0; i< vecMapas.size() ; i++ ){
+	for ( unsigned int i =0; i< vecMapas.size() ; i++ ){
   		
   		row = *(m_refTreeModel->append());
   		row[m_Column.m_col_name] = vecMapas.at(i);
@@ -291,7 +292,6 @@ void PreGameWindow::on_map_list_selection(){
 	selectMapDialog.get_vbox()->add(m_Combo);
 	
 	selectMapDialog.add_button(Gtk::Stock::OK, Gtk::RESPONSE_OK);
-	//selectMapDialog.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_OK);
 	selectMapDialog.show_all();
 	
 	int result = selectMapDialog.run();
@@ -305,14 +305,31 @@ void PreGameWindow::on_map_list_selection(){
     		if(row){
       			//obtengo datos de la fila seleccionada del combo
       			Glib::ustring mapaSeleccionado = row[m_Column.m_col_name];
-      			std::cerr <<"Mapa seleccionado: "<< mapaSeleccionado << std::endl;
+      			//std::cerr <<"Mapa seleccionado: "<< mapaSeleccionado << std::endl;
+      			
+      			std::vector<std::string> vecParam;
+      			
+      			std::ostringstream strNumeroJugador;
+				strNumeroJugador << "1";
+
+				//agrego al vec los parametros para construir selectMap
+				vecParam.push_back(strNumeroJugador.str());
+				vecParam.push_back(mapaSeleccionado);
+
+      			
+      			//construyo comando selectMap para notificar al servidor el mapa elegido.
+      			SelectMap* commandMap = new SelectMap(vecParam);
+      			
+      			serverProxy->notify(*commandMap);
+      			delete commandMap;
+
     		}
   		}
 		
 	}
 	
 	this->me =1;
-	
+	std::cerr <<"ultima linea metodo llamado por disparcherMapList .... "<< std::endl;
 }
 
 void PreGameWindow::setActivePlayerCount( int playerCount ){

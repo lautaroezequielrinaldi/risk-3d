@@ -43,8 +43,9 @@ void * ServerProxy::run() {
            
             notifyCommandExecuted(*command);
             
+		}
+		else{
             
-        } else {
             Command* command = messageHydrator.createCommand(commandName, commandXml);
             
             if ( command == NULL )
@@ -57,12 +58,21 @@ void * ServerProxy::run() {
             if ( command->getName() == "mapList" )  
             	dispatcherMapList.emit();
             	
+            	
+            	
+            std::cerr <<"Volvio del dispatcherMapList.emit......." << std::endl;
+            	
             //si llego un YouAre y NO es para el 1er jugador
             if ( command->getName() == "youAre" && command->getTo() > 1 ){
             	std::cerr << "Verificando si comando es un YouAre....y lo es" << std::endl;
             	dispatcherYouAre.emit();
             }
+
         }
+        
+        std::cerr <<"HOLAAAAAAAAAAAAAAAaa¡¡¡¡¡¡????????????????????????" << std::endl;
+        
+        
 	}
 	return 0;
 }

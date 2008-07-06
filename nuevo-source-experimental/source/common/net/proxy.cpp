@@ -34,6 +34,9 @@ void Proxy::notify(Command& command) {
     //
     socket->write(msg);
     //
+     std::cerr << "VOLVIO DE ESCRIBIR EN SOCKET: "<<  msg << std::endl;
+    
+    
 }
     
 Proxy::~Proxy(){
