@@ -17,6 +17,10 @@ struct Point3 {
 typedef Point3 Vector3;
 
 
+struct Plane {          /* Plane: ax + by + cz + d = 0  */
+    double  a ,b ,c, d;
+};
+
 Vector3* V3Normalize(Vector3* v);
 double V3Length(const Vector3* a);
 double V3Dot(const Vector3* a, const Vector3* b);

@@ -1,15 +1,18 @@
 #include "sphere.h"
 #include<iostream>
-Sphere::Sphere(UIState& uiState):
+Sphere::Sphere(UIState& uiState, const ReferenceCountPtr<Game>& game):
     Textured(),
+    game(game),
     uiState(uiState),
     sphereState(),
     crossHairState() {
     initializeQuad();
 }
 
-Sphere::Sphere(UIState& uiState, const Texture& theTexture):
+Sphere::Sphere(UIState& uiState, const Texture& theTexture,
+    const ReferenceCountPtr<Game>& game):
     Textured(theTexture),
+    game(game),
     uiState(uiState),
     sphereState() {
     initializeQuad();
@@ -21,6 +24,7 @@ Sphere::~Sphere() {
 
 void Sphere::initializeQuad() {
     sphereQuad = gluNewQuadric();
+    countryQuad = gluNewQuadric();
     gluQuadricDrawStyle (sphereQuad, GLU_FILL);
     gluQuadricNormals(sphereQuad, GLU_SMOOTH);
     gluQuadricTexture(sphereQuad, GL_TRUE);
@@ -29,6 +33,40 @@ void Sphere::initializeQuad() {
 
 void Sphere::terminateQuad() {
     gluDeleteQuadric(sphereQuad);
+    gluDeleteQuadric(countryQuad);
+}
+
+bool Sphere::countryRayIntersection(MapPosition& position,
+    Point3 rayStart, Vector3 rayDir) {
+    Point3 countryBase;
+    Vector3 countryAxis;
+    Plane bot, top;
+    double in, out;
+    int dummy;
+    countryBase.x = cos(position.getY() * PI / 180.0) * cos(position.getX() * PI / 180.0);
+    countryBase.y = cos(position.getY() * PI / 180.0) * sin(position.getX() * PI / 180.0);
+    countryBase.z = sin(position.getY() * PI / 180.0);
+    countryAxis = countryBase;
+    V3Normalize(&countryAxis);
+    V3Normalize(&rayDir);
+
+    if (!intcyl(&rayStart, &rayDir, &countryBase, &countryAxis, 0.01, &in, &out))
+        return 0;
+
+    bot.a = -countryAxis.x;
+    bot.b = -countryAxis.y;
+    bot.c = -countryAxis.z;
+    bot.d = 1.0;
+    top.a = countryAxis.x;
+    top.b = countryAxis.y;
+    top.c = countryAxis.z;
+    top.d = -1.0 - 0.1;
+
+    return clipobj(&rayStart, &rayDir, &bot, &top, &in, &out, &dummy, &dummy);
+}
+
+void Sphere::setGame(const ReferenceCountPtr<Game>& game) {
+    this->game = game;
 }
 
 void Sphere::update() {
@@ -37,33 +75,27 @@ void Sphere::update() {
     sphereState.setLastTime(newTime);
 
     updateSphere(deltaTime);
-    updateCrossHair();
+    updateCrossHairAndCountries();
 }
 
 void Sphere::updateSphere(const double& deltaTime) {
     if ( uiState.getKeyPressed(SDLK_LEFT) ) {
         sphereState.incrementAlphaInTime(deltaTime);
-        std::cout << "ALPHA: " << sphereState.getAlpha() << std::endl;
     }
     if ( uiState.getKeyPressed(SDLK_RIGHT) ) {
         sphereState.decrementAlphaInTime(deltaTime);
-        std::cout << "ALPHA: " << sphereState.getAlpha() << std::endl;
     }
     if ( uiState.getKeyPressed(SDLK_UP) ) {
         sphereState.incrementBetaInTime(deltaTime);
-        std::cout << "BETA: " << sphereState.getBeta() << std::endl;
     }
     if ( uiState.getKeyPressed(SDLK_DOWN) ) {
         sphereState.decrementBetaInTime(deltaTime);
-        std::cout << "BETA: " << sphereState.getBeta() << std::endl;
     }
     if ( uiState.getKeyPressed(SDLK_PAGEUP) ) {
         sphereState.incrementDistanceInTime(deltaTime);
-        std::cout << "DISTANCE: " << sphereState.getDistance() << std::endl;
     }
     if ( uiState.getKeyPressed(SDLK_PAGEDOWN) ) {
         sphereState.decrementDistanceInTime(deltaTime);
-        std::cout << "DISTANCE: " << sphereState.getDistance() << std::endl;
     }
 
     viewpoint.x = sphereState.getDistance() * cos(sphereState.getAlpha())
@@ -82,7 +114,7 @@ void Sphere::updateSphere(const double& deltaTime) {
         0.0, 0.0, 1.0);
 }
 
-void Sphere::updateCrossHair() {
+void Sphere::updateCrossHairAndCountries() {
     double mm[16], pm[16];
     int v[4];
     Point3 fp, np;
@@ -109,16 +141,31 @@ void Sphere::updateCrossHair() {
         crossHairState.setLatitude(90.0 - acos(intPoint.z) * 180.0 / PI);
         crossHairState.setLongitude(atan2(intPoint.y, intPoint.x) * 180.0 / PI);
         crossHairState.setInSphere(true);
+        if (game != NULL && game->getMapa() != NULL) {
+            Mapa::IteradorPais countryIter;
+            for (countryIter = game->getMapa()->primerPais();
+                countryIter != game->getMapa()->ultimoPais(); ++countryIter) {
+                MapPosition position = (*countryIter)->getPosition();
+                if (countryRayIntersection(position, viewpoint, rayDir)) {
+                    hooverCountry = (*countryIter);
+                    std::cout << "Pais: " << hooverCountry->getNombre() << std::endl;
+                }
+            }
+        } else {
+            hooverCountry = NULL;
+        }
     }
     else
     {
         crossHairState.setInSphere(false);
+        hooverCountry = NULL;
     }
 }
 
 void Sphere::draw() {
     drawSphere();
     drawCrossHair();
+    drawCountries();
 }
 
 void Sphere::drawSphere() {
@@ -164,3 +211,34 @@ void Sphere::drawCrossHair() {
                     1.0 * cos(clatRad));
     glEnd();
 }
+
+void Sphere::drawCountries() {
+    // Si hay un juego y mapa disponible
+    if (game != NULL && game->getMapa() != NULL) {
+        // Obtengo mapa
+        ReferenceCountPtr<Mapa> map = game->getMapa();
+        // Obtengo iterador de paises.
+        Mapa::IteradorPais countryIter;
+
+        // Itero por cada pais.
+        for (countryIter = map->primerPais(); countryIter != map->ultimoPais();
+            ++countryIter) {
+            // Obtiene la pisicion del pais.
+            MapPosition position = (*countryIter)->getPosition();
+            // Hago push de matriz actual
+            glPushMatrix();
+            // Rota la matriz
+            glRotated(position.getX(), 0.0, 0.0, 1.0);
+            // Rota la matriz
+            glRotated(90.0 - position.getY(), 0.0, 1.0, 0.0);
+            // Translada origen de coordenadas
+            glTranslatef(0.0, 0.0, 1.0);
+            glColor3f(1.0f, 1.0f, 1.0f);
+            // Dibuja cilindro
+            gluCylinder(countryQuad, 0.01, 0.01, 0.1, 16, 1);
+            // Hago pop de matriz actual
+            glPopMatrix();
+        }
+    } 
+}
+

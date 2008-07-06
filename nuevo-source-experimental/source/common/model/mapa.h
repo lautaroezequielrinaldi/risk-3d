@@ -87,6 +87,10 @@ class Mapa {
          */
         ReferenceCountPtr<Pais> obtenerPais(const std::string& nombre);
         /**
+         * Metodo cuyo propòsito es obtener un pais del Mapa.
+         */
+        ReferenceCountPtr<Pais> obtenerPais(const MapPosition& position);
+        /**
          * Mètodo cuyo propòsito es agregar un continente al Mapa.
         */
         void agregarContinente(const ReferenceCountPtr<Continente>& continente);

@@ -40,6 +40,10 @@ class MapPosition {
          */
         int& getY();
         /**
+         * Operador de igualdad.
+         */
+        bool operator==(const MapPosition& position);
+        /**
          * Destructor virtual de la clase MapPosition.
          */
         virtual ~MapPosition();

@@ -1,7 +1,8 @@
 #include "gamewindow.h"
 #include<GL/glut.h>
 #include<iostream>
-
+#include "../../common/parser/mapaparser.h"
+#include "../../common/model/randomdice.h"
 GameWindow::GameWindow(const ReferenceCountPtr<ServerProxy>& serverProxy):
     serverProxy(serverProxy),
     mainLoopRunning(true),
@@ -14,6 +15,13 @@ GameWindow::GameWindow(const ReferenceCountPtr<ServerProxy>& serverProxy):
     if (this->serverProxy != NULL) {
         this->serverProxy->registerCommandObserver(this);
     }
+    // Creo a duras penas un GameManager y un Mapa
+    MapaParser parser;
+
+    ReferenceCountPtr<Mapa> map = parser.loadMap("mapa.xml");
+    RandomDice* dice = new RandomDice();
+    ReferenceCountPtr<Game> game = new Game(map, *dice);
+    sphere.setGame(game);
 }
 
 GameWindow::~GameWindow() {
@@ -75,7 +83,7 @@ void GameWindow::initializeOpenGL() {
     quitButton.setWidth(200);
     quitButton.setHeight(100);
     quitButton.setVisible(true);
-    quitButton.setEnabled(true);
+    quitButton.setEnabled(false);
     quitButton.setText("QUIT");
 
     // Establezco tamaño de label y posicion.

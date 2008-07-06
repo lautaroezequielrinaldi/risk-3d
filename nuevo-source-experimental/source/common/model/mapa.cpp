@@ -32,6 +32,24 @@ ReferenceCountPtr<Pais> Mapa::obtenerPais(const std::string& nombre) {
     // Si no encontre pais, devuelvo NULL.
     return NULL;
 }
+
+ReferenceCountPtr<Pais> Mapa::obtenerPais(const MapPosition& position) {
+    // Defino iterador
+    IteradorPais iter;
+
+    // Itero por aca pais.
+    for (iter = this->primerPais(); iter != this->ultimoPais(); ++iter) {
+        // Obtengo pais actual.
+        ReferenceCountPtr<Pais> actual = *iter;
+        // Si la posicion del pais actual coincide con la posicion a buscar.
+        if (actual->getPosition() == position) {  
+            // Retorno actual
+            return actual;
+        }
+    }
+    // Si no encontre pais retorno NULL
+    return NULL;
+}
                                                                      
 void Mapa::agregarContinente(const ReferenceCountPtr<Continente>& continente) {
     this->continentes.push_back(continente);
