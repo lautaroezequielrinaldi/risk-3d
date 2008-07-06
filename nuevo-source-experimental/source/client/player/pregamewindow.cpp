@@ -146,9 +146,8 @@ void PreGameWindow::onSendMessageButtonClicked() {
 }
 
 void PreGameWindow::onReadyToPlayButtonClicked() {
-	ReadyToPlay* cmd = new ReadyToPlay();
-	serverProxy->notify(*cmd);
-	delete cmd;
+	ReadyToPlay cmd;
+	serverProxy->notify(cmd);
 	readyToPlayButton.set_sensitive(false);
 }
 
