@@ -80,7 +80,7 @@ PreGameWindow::PreGameWindow(ReferenceCountPtr<Game>& game):
 void PreGameWindow::showConnectionDialog() {
 	Gtk::Label serverUrlLabel("Url del servidor:");
 	Gtk::Entry serverUrlEntry;
-	serverUrlEntry.set_text("localhost");
+	serverUrlEntry.set_text("localhost:2000");
 	Gtk::Dialog connectionDialog("Conectar al servidor");
 	connectionDialog.get_vbox()->add(serverUrlLabel);
 	connectionDialog.get_vbox()->add(serverUrlEntry);
@@ -90,11 +90,14 @@ void PreGameWindow::showConnectionDialog() {
 	int result = connectionDialog.run();
 	if (result == Gtk::RESPONSE_OK) {
 		try {
-			std::cout << "Se va a transformar en string" << std::endl;
 			std::string url = serverUrlEntry.get_text();
-			std::cout << "Se llego a tranformar en string" << std::endl;
-			Socket* socket = new Socket(url, 2000);
-			std::cout << "Se va a crear socket" << std::endl;
+            // Parsea la URL
+            UrlParser parser(url);
+            // Conecta el socket
+            std::cout << parser.getDomain() << std::endl;
+            std::cout << parser.getPort() << std::endl;
+
+			Socket* socket = new Socket(parser.getDomain(), parser.getPort());
 
 			serverProxy = new ServerProxy(socket, game);
 			

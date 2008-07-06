@@ -18,6 +18,7 @@
 #include "../../common/commands/quit.h"
 #include "../../common/commands/commandobserver.h"
 #include "net/serverproxy.h"
+#include "../../common/net/urlparser.h"
 #include "../../common/smartpointer/referencecountptr.h"
 
 /**

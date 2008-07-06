@@ -30,7 +30,10 @@ class UrlParser {
          * la url.
          */
         std::string resource;
-
+        /**
+         * Almacena el puerto de la URL.
+         */
+        int port;
     /**
      * Mètodos privados de la clase UrlParser.
      */
@@ -76,6 +79,10 @@ class UrlParser {
          */
         std::string getDomain();
 
+        /**
+         * Metodo cuyo proposito es devolver el port parseado de la url.
+         */
+        int getPort();
         /**
          * Mètodo cuyo propòsito es devolver el resource parseado de la url.
          * Devuelve un string vacìo si no tiene resource la url.
