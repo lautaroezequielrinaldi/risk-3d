@@ -2,10 +2,13 @@
 #define __SPHERE_H__
 
 #include<cmath>
+#include "math3d.h"
 #include "uistate.h"
 #include "texture.h"
 #include "textured.h"
 #include "spherestate.h"
+#include "crosshairstate.h"
+
 class Sphere: public Textured {
     /**
      * Atributos privados de la clase Sphere.
@@ -19,6 +22,14 @@ class Sphere: public Textured {
          * Almacena el esatdo de la esfera.
          */
         SphereState sphereState;
+        /**
+         * Almacena el estado del cross hair.
+         */
+        CrossHairState crossHairState;
+        /**
+         * Almacena el viewpoint de la esfera.
+         */
+        Point3 viewpoint;
         /**
          * Almacena el Quad Object representando a la esfera.
          */
@@ -58,9 +69,25 @@ class Sphere: public Textured {
          */
         void update();
         /**
+         * Updatea la esfera.
+         */
+        void updateSphere(const double& deltaTime);
+        /**
+         * Actualiza el crosshair.
+         */
+        void updateCrossHair();
+        /**
          * Dibuja.
          */
         void draw();
+        /**
+         * Dibuja la esfera.
+         */
+        void drawSphere(); 
+        /**
+         * Dibuja el crosshair.
+         */
+        void drawCrossHair();
 };
 
 #endif /** __SPHERE_H__ */
