@@ -21,9 +21,6 @@ std::string Button::getText() const {
 }
 
 bool Button::doProcess() {
-    std::cerr << "BOTON : Posicion del mouse X: " << getUIState().getMouseX() << " Y: " << getUIState().getMouseY() << std
-::endl;
-
 	if ( getVisible() ) {
 		// Define el color
 		ColorRGB color;

@@ -1,6 +1,6 @@
 #include "label.h"
 
-Label::Label(UIState& uiState): Widget(uiState), text(text) {
+Label::Label(UIState& uiState): Widget(uiState), text() {
 	// No realiza ninguna accion.
 }
 
@@ -28,6 +28,10 @@ bool Label::doProcess() {
 		drawCenteredText(getText(), getX(), getY(), getWidth(), getHeight(), textColor);
 	}
 	return false;
+}
+
+void Label::setText(const std::string& text) {
+    this->text = text;
 }
 
 std::string Label::getText() const {

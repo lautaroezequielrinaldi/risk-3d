@@ -2,12 +2,18 @@
 #include<GL/glut.h>
 #include<iostream>
 
-GameWindow::GameWindow():
+GameWindow::GameWindow(const ReferenceCountPtr<ServerProxy>& serverProxy):
+    serverProxy(serverProxy),
     mainLoopRunning(true),
     uiState(),
-    button(uiState),
+    noMoreButton(uiState),
+    surrenderButton(uiState),
+    quitButton(uiState),
+    messageLabel(uiState),
     sphere(uiState) {
-    // No realiza ninguna accion.
+    if (this->serverProxy != NULL) {
+        this->serverProxy->registerCommandObserver(this);
+    }
 }
 
 GameWindow::~GameWindow() {
@@ -22,7 +28,7 @@ bool GameWindow::initializeSDL(int argc, char** argv) {
     // Creo una ventana
     SDL_Surface* screen = SDL_SetVideoMode( SDL_GetVideoInfo()->current_w,
         SDL_GetVideoInfo()->current_h, SDL_GetVideoInfo()->vfmt->BitsPerPixel,
-            SDL_OPENGL );
+            SDL_OPENGL | SDL_FULLSCREEN );
     if ( screen == NULL ) {
         return false;
     }
@@ -45,16 +51,41 @@ void GameWindow::initializeOpenGL() {
     // Da perspectiva
     gluPerspective(60.0, 1.33, 0.1, 100.0);
 
+    // Establezco tamaño de boton iquit y posicion.
+    noMoreButton.setX(0);
+    noMoreButton.setY(220);
+    noMoreButton.setWidth(200);
+    noMoreButton.setHeight(100);
+    noMoreButton.setVisible(true);
+    noMoreButton.setEnabled(true);
+    noMoreButton.setText("END ACTION");
 
-    // Establezco tamaño de boton y posicion.
-    button.setX(300);
-    button.setY(300);
-    button.setWidth(500);
-    button.setHeight(150);
-    button.setVisible(true);
-    button.setEnabled(true);
-    button.setText("PRESIONEME!!");
+    // Establezco tamaño de boton iquit y posicion.
+    surrenderButton.setX(0);
+    surrenderButton.setY(110);
+    surrenderButton.setWidth(200);
+    surrenderButton.setHeight(100);
+    surrenderButton.setVisible(true);
+    surrenderButton.setEnabled(true);
+    surrenderButton.setText("SURRENDER");
 
+    // Establezco tamaño de boton iquit y posicion.
+    quitButton.setX(0);
+    quitButton.setY(0);
+    quitButton.setWidth(200);
+    quitButton.setHeight(100);
+    quitButton.setVisible(true);
+    quitButton.setEnabled(true);
+    quitButton.setText("QUIT");
+
+    // Establezco tamaño de label y posicion.
+    messageLabel.setX(210);
+    messageLabel.setY(0);
+    messageLabel.setWidth(SDL_GetVideoInfo()->current_w - 210);
+    messageLabel.setHeight(100);
+    messageLabel.setEnabled(false);
+    messageLabel.setVisible(true);
+    messageLabel.setText("Mensaje de prueba");
     // Cargo las texturas de la esfera.
     sphere.getTexture().load("mapa.jpg");
 }
@@ -117,8 +148,28 @@ void GameWindow::drawScene() {
     // Prepara IMGUI
     uiState.prepare();
 
-    // Dibuja y procesa boton
-    button.doProcess();
+    // Dibuja y procesa boton de no more.
+    if ( noMoreButton.doProcess() ) {
+        std::cerr << "Se presiono el boton de NO MORE" << std::endl;
+    }
+
+    // Dibuja y procesa el boton de surrender.
+    if ( surrenderButton.doProcess() ) {
+        Surrender surrenderCommand;
+        if (serverProxy != NULL) {
+            serverProxy->notify(surrenderCommand);
+        }
+        std::cerr << "Se presiono el boton de SURRENDER" << std::endl;
+    }
+
+    // Dibuja y procesa el boton de quit,
+    if ( quitButton.doProcess() ) {
+        disconnectAndQuit();
+        std::cerr << "Se presiono el boton de QUIT" << std::endl;
+    }
+
+    // Dibuja el label
+    messageLabel.doProcess();
 
     // Termina IMGUI
     uiState.unprepare();
@@ -133,31 +184,24 @@ void GameWindow::drawScene() {
 void GameWindow::processMouseDown(const SDL_MouseButtonEvent& event) {
     uiState.setMouseX(event.x);
     uiState.setMouseY(SDL_GetVideoInfo()->current_h - event.y);
-    std::cerr << "Posicion del mouse X: " << event.x << " Y: " << event.y << std::endl;
-    std::cerr << "SE HIZO CLICK!!!" << std::endl;
     uiState.setMousePressed(true);
 }
 
 void GameWindow::processMouseUp(const SDL_MouseButtonEvent& event) {
     uiState.setMouseX(event.x);
     uiState.setMouseY(SDL_GetVideoInfo()->current_h - event.y);
-    std::cerr << "Posicion del mouse X: " << event.x << " Y: " << event.y << std
-::endl;
-
     uiState.setMousePressed(false);
 }
 
 void GameWindow::processMouseMotion(const SDL_MouseMotionEvent& event) {
     uiState.setMouseX(event.x);
     uiState.setMouseY(SDL_GetVideoInfo()->current_h - event.y);
-    std::cerr << "Posicion del mouse X: " << event.x << " Y: " << event.y << std
-::endl;
 }
 
 void GameWindow::processKeyDown(const SDL_KeyboardEvent& event)  {
     uiState.setKeyPressed(event.keysym.sym, true);
     if ( uiState.getKeyPressed(SDLK_ESCAPE) ) {
-        stopMainLoop();
+        disconnectAndQuit();
     }
 }
 
@@ -166,7 +210,7 @@ void GameWindow::processKeyUp(const SDL_KeyboardEvent& event) {
 }
 
 void GameWindow::processQuit(const SDL_QuitEvent& event) {
-    stopMainLoop();
+    disconnectAndQuit();
 }
 
 void GameWindow::processEvents() {
@@ -202,6 +246,15 @@ void GameWindow::processEvents() {
                 break;
         }
     }
+}
+
+void GameWindow::disconnectAndQuit() {
+    if (serverProxy != NULL) {
+        Quit quitCommand;
+        serverProxy->notify(quitCommand);
+        serverProxy->cancel();
+    }
+    stopMainLoop();
 }
 
 int GameWindow::run(int argc, char** argv) {
