@@ -1,5 +1,5 @@
 #ifndef __MATHCONSTANTS_H__
-#define __NATHCONSTANTS_H__
+#define __MATHCONSTANTS_H__
 
 const double PI = 3.1415926535897932384626433832795;
 
