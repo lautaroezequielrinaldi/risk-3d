@@ -66,6 +66,13 @@ ReferenceCountPtr<Player> & Game::addPlayer() {
 	return playerList.back();
 }
 
+ReferenceCountPtr<Player> & Game::addPlayer(int color){
+	
+	ReferenceCountPtr<Player> player = new Player(color);
+	playerList.push_back(player);
+	return playerList.back();	
+}
+
 void Game::removePlayer(const ReferenceCountPtr<Player>& player) {
     playerList.remove(player);
 }

@@ -40,7 +40,6 @@ void * ServerProxy::run() {
             }
             std::cerr << "Se pudo ejecutar comando..." << std::endl;
            
-           
             notifyCommandExecuted(*command);
             
 		}
@@ -81,6 +80,10 @@ commandHydrator(game),
 messageHydrator() 
 {
 		
+}
+
+ReferenceCountPtr<Game> ServerProxy::getGame(){
+	return this->game;
 }
 
 Dispatcher& ServerProxy::getDispatcherMapList(){	

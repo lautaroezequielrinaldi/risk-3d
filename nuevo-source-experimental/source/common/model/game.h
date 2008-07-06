@@ -89,13 +89,19 @@ class Game: public Serializable {
 
 		/**
 		 * Para solicitarle al Game que cree un nuevo jugador y lo devuelva
-		 *
 		 */
         ReferenceCountPtr<Player> & addPlayer();
+        
+        /**
+		 * Metodo cuyo proposito es solicitarle al Game que cree un nuevo jugador con el color proporcionado y lo devuelva
+		 */
+        ReferenceCountPtr<Player> & addPlayer(int color);
+        
         /**
          * Remueve un jugador del Game.
          */
         void removePlayer(const ReferenceCountPtr<Player>& player);
+        
         /**
          * Obtiene el jugador correspondinte al color especificado.
          * Retorna el jugador correspondiente o NULL en caso de no encontrar jugador con el color especificado.

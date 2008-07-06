@@ -25,6 +25,7 @@ PreGameWindow::PreGameWindow(ReferenceCountPtr<Game>& game):
 		
 	this->mapList = NULL;
 	this->youAre = NULL;
+	this->readyToPlay=NULL;
 	this->cantJugadoresConectados=0;
 	this->me =0;
 		
@@ -100,7 +101,7 @@ void PreGameWindow::showConnectionDialog() {
 			Socket* socket = new Socket(parser.getDomain(), parser.getPort());
 
 			serverProxy = new ServerProxy(socket, game);
-			
+						
 			// conecta la señal lanzada por el dispatcher que maneja la llegada de un map List
 			this->serverProxy->getDispatcherMapList().connect(sigc::mem_fun(*this, &PreGameWindow::on_map_list_selection));
 			// conecta la señal lanzada por el dispatcher que maneja la llegada de un you are
@@ -113,6 +114,8 @@ void PreGameWindow::showConnectionDialog() {
 			JoinGame* cmd = new JoinGame();
 			serverProxy->notify(*cmd);
 			delete cmd;
+			
+			std::cerr<<"paso envio de joinGame"<<std::endl;
 			
 			sendMessageButton.set_sensitive(true);
 			readyToPlayButton.set_sensitive(false);
@@ -188,8 +191,8 @@ void PreGameWindow::commandExecuted(YouAre & cmd){
 	this->youAre = &cmd;
 	std::cerr<<"almaceno youAre en preGameWindow....."<<std::endl;
 	
+	
 }
-
 
 void PreGameWindow::commandExecuted(MapList& cmd){
 	
@@ -199,6 +202,17 @@ void PreGameWindow::commandExecuted(MapList& cmd){
 	this->mapList = &cmd;
 	std::cerr<<"almaceno mapList en preGameWindow....."<<std::endl;
 	
+}
+
+
+void PreGameWindow::commandExecuted(ReadyToPlay & cmd){
+	
+	this->readyToPlay = &cmd;
+	std::cerr<<"almaceno readyToPlay en preGameWindow....."<<std::endl;
+	
+	
+	if ( this->readyToPlay == NULL )
+		std::cerr<<"PERO ES NULL....."<<std::endl;
 }
 
 ReferenceCountPtr<ServerProxy> PreGameWindow::getServerProxy() {
@@ -252,6 +266,15 @@ void PreGameWindow::on_Ready_to_play_arrival(){
 	selectMapDialog.add_button(Gtk::Stock::OK, Gtk::RESPONSE_OK);
 	selectMapDialog.show_all();
 	selectMapDialog.run();
+	
+	
+	//creo todos los players en el game del serverProxy
+	for (int i=0; i < this->readyToPlay->getTo() ; i++){
+		
+		this->serverProxy->getGame()->addPlayer();
+		std::cerr<<"Se creo jugador numero "<<i+1<<"en game del ServerProxy....."<<std::endl;
+	} 
+	
 	
 	//se cierra pre sala
 	Gtk::Main::quit();

@@ -1,24 +1,33 @@
 #include "player.h"
 
+#include<iostream>
+
 
 // definicion del atributo estatico para que el linker lo encuentre.
 int Player::ultimoColorAsignado = 0;
+
+Player::~Player()
+{
+}
+
+
+Player::Player()
+{
+	this->color = getNewColor();
+	std::cerr<<"Player creado con numero: "<<color<<std::endl;
+}
+
+Player::Player(int color){
+
+	this->color = color;	
+	std::cerr<<"Player creado con numero: "<<color<<std::endl;
+}
 
 Player::Player(int color, int armyCount)
 {
 	this->color = color;
 	this->ejercitosAUbicar = armyCount;
 		
-}
-
-Player::Player()
-{
-	this->color = getNewColor();
-}
-
-
-Player::~Player()
-{
 }
 
 int Player::getNewColor(){

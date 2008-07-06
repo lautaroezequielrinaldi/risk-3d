@@ -85,8 +85,8 @@ bool WaitingMapSelection::readyToPlay(ServerReadyToPlay & command) {
 	
 		ReadyToPlay* ready =new ReadyToPlay();
 		
-		//std::string mje = "Todos los jugadores estan listos para jugar,Se Pasara a modo juego";
-		//ready->setMainMsg(mje);
+		//uso el campo TO para setear la cantidad de players que hicieron readyToPlay
+		ready->setTo(listaPlayerProxy.size());
 		
 		//se envia por socket al cliente
 		this->gameManager->notify(ready);

@@ -44,6 +44,9 @@ bool WaitingPlayer::readyToPlay(ServerReadyToPlay & command){
 	
 		ReadyToPlay* ready =new ReadyToPlay();
 		
+		//uso el campo TO para setear la cantidad de players que hicieron readyToPlay
+		ready->setTo(listaPlayerProxy.size());
+		
 		//se envia por socket al cliente
 		this->gameManager->notify(ready);
 	

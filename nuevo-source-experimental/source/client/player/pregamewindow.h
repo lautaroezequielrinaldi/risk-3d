@@ -49,6 +49,11 @@ class PreGameWindow: public CommandObserver, public Gtk::Window {
         YouAre* youAre;
         
         /**
+         * Almacena una referencia a un comando readyToPlay que se envia al cliente.
+         */        
+        ReadyToPlay* readyToPlay;
+                
+        /**
          * Almacena el numero del ultimo jugador que recibio una notificacion;
          */
          int cantJugadoresConectados;
@@ -184,6 +189,11 @@ class PreGameWindow: public CommandObserver, public Gtk::Window {
 		 * Responde ante la llegada de un comando youAre.
 		 */		
 		virtual void commandExecuted(YouAre& cmd);
+		
+		/**
+		 * Responde ante la llegada de un comando youAre.
+		 */		
+		virtual void commandExecuted(ReadyToPlay & cmd);
 		
 		/**
 		 * Metodo cuyo proposito es establecer la cantidad de jugadores activos que hay.
