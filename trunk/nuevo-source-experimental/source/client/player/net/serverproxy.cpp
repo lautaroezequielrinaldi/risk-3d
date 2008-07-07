@@ -89,14 +89,23 @@ ServerProxy::ServerProxy(const ReferenceCountPtr<Socket>& socket,  const Referen
 Proxy(socket), 
 game(game),
 commandHydrator(game),
-messageHydrator() 
-{
-		
+messageHydrator() {
+	
+	this->me =0;
+	
 }
 
 ReferenceCountPtr<Game> ServerProxy::getGame(){
 	return this->game;
 }
+
+void ServerProxy::setMe(int color){
+	this->me = color;
+}		
+	
+int ServerProxy::getMe(){
+	return this->me;
+} 
 
 Dispatcher& ServerProxy::getDispatcherMapList(){	
 	return this->dispatcherMapList;

@@ -25,6 +25,11 @@ class ServerProxy:public CommandObservable, public Proxy {
     		 */
     	    ReferenceCountPtr<Game> game;
     	    
+         	/**
+          	* Almacena quien es el cliente.
+          	*/
+         	int me;    	    
+    	    
     	    /**
     	     * Almacena un commandHydrator del Cliente.
     	     */
@@ -74,7 +79,16 @@ class ServerProxy:public CommandObservable, public Proxy {
     		 * Metodo cuyo proposito es obtener el juego.
     		 */
     		ReferenceCountPtr<Game> getGame();
-	
+			
+			/**
+			 * Metodo cuyo proposito es establecer que numero de jugador es el cliente.
+			 */		
+			void setMe(int color);
+			
+			/**
+			 * Metodo cuyo proposito es obtener que numero de jugador es el cliente.
+			 */		
+			int getMe(); 			
 			/**
 			 * Metodo cuyo proposito es obtener el dispatcher encargado de notificar sobre la lista de mapas.
 			 */
