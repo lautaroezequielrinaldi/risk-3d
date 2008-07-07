@@ -241,7 +241,30 @@ void Sphere::drawCountries() {
             glRotated(90.0 - position.getY(), 0.0, 1.0, 0.0);
             // Translada origen de coordenadas
             glTranslatef(0.0, 0.0, 1.0);
-            glColor3f(1.0f, 1.0f, 1.0f);
+            int color = game->getCountryOwner((*countryIter)->getNombre());
+            switch (color) {
+                case 1:
+                    glColor3f(1.0f, 0.0f, 0.0f);
+                    break;
+                case 2:
+                    glColor3f(0.0f, 0.0f, 0.0f);
+                    break;
+                case 3:
+                    glColor3f(0.0f, 1.0f, 0.0f);
+                    break;
+                case 4:
+                    glColor3f(1.0f, 1.0f, 0.0f);
+                    break;
+                case 5:
+                    glColor3f(0.0f, 0.0f, 1.0f);
+                    break;
+                 case 6:
+                    glColor3f(1.0f, 1.0f, 1.0f);
+                    break;
+                default:
+                    glColor3f(0.5f, 0.5f, 0.5f);
+                    break;
+            }
             // Dibuja cilindro
             gluCylinder(countryQuad, 0.01, 0.01, 0.1, 16, 1);
             // Hago pop de matriz actual

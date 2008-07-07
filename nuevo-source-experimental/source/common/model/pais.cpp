@@ -8,7 +8,7 @@ Pais::Pais(const std::string& nombre, const MapPosition& position):
     // No realiza ninguna acciòn.
 }
 
-std::string Pais::getNombre() {
+std::string& Pais::getNombre() {
     return this->nombre;
 }
 

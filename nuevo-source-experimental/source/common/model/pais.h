@@ -65,7 +65,7 @@ class Pais {
         /**
          * Mètodo cuyo propòsito es obtiener el nombre del Pais.
          */
-        std::string getNombre();
+        std::string& getNombre();
         /**
          * Mètodo cuyo propòsito es establecer el nombre del Pais.
          */
