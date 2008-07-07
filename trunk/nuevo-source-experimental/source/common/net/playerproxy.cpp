@@ -27,7 +27,7 @@ void * PlayerProxy::run() {
 		std::cerr << "longitud " << msgLen << " nombre " << commandName << std::endl;
 		commandXml = getSocket()->full_read(msgLen);
 		
-		std::cerr << "serializacion " << commandXml << std::endl;
+		//std::cerr << "serializacion " << commandXml << std::endl;
 		// pasar *this para que los waiting·::joingame sepan
 		
 		gameManager->execute(commandName, commandXml);

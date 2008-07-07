@@ -42,7 +42,7 @@ ClientCommand* ClientCommandHydrator::createCommand(const std::string& commandNa
         std::cerr << "Clonando comando..." << std::endl;
         ClientCommand* command =  prototype->clone();
         std::cerr << "Comando clonado..." << std::endl;
-        std::cerr << "Hidratando comando con el XML: " << xml << std::endl;
+        //std::cerr << "Hidratando comando con el XML: " << xml << std::endl;
         command->hydrate(xml);
         std::cerr << "Comando hidratado..." << std::endl;
         return command;

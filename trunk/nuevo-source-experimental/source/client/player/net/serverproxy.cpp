@@ -25,7 +25,7 @@ void * ServerProxy::run() {
 		std::cerr << "longitud " << msgLen << " nombre " << commandName << std::endl;
 		commandXml = getSocket()->full_read(msgLen);
 		
-		std::cerr << "serializacion: " << commandXml << std::endl;
+		//std::cerr << "serializacion: " << commandXml << std::endl;
 		
 		//aca entran los comandos que modifican el modelo en el cliente
         if (commandHydrator.isClientCommand(commandName)) {

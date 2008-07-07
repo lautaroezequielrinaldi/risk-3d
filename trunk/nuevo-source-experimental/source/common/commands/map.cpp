@@ -4,18 +4,18 @@
 
 Map::Map(std::vector<std::string> & parameterList):Command ()
 {
-	/*construyo el objeto a partir de los parametros pasados en la lista*/
-	
+		
 }
 
 Map::Map(const std::string & xml):Command (){
 
 	// construye el objeto a partir del Xml recibido
-	hydrate(xml);
+	//hydrate(xml);
+	this->mapa = xml;
+	
 }
 
 Map::Map(){
-
 }
 
 Map::~Map()
@@ -24,21 +24,23 @@ Map::~Map()
 }
 
 std::string Map::serialize(){
-	 return "<?xml version=\"1.0\"?>mapa....";
+	 
+	 return  this->mapa ;
 }
 
 void* Map::hydrate(const std::string & xml){
 	
-	
+	this->mapa = xml;	
+
 	return NULL;
-;
-	
 }
 		
-
-
 std::string Map::getName() {
 	return "map";
+}
+
+std::string Map::getMap(){
+	return this->mapa;
 }
 
 void Map::accept(CommandObserver* observer) {

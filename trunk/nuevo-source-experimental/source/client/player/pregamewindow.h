@@ -196,6 +196,10 @@ class PreGameWindow: public CommandObserver, public Gtk::Window {
 		virtual void commandExecuted(ReadyToPlay & cmd);
 		
 		/**
+		 * Responde ante la llegada de un comando Map para almacenar el mapa enviado por el servidor en el Game.
+		 */		
+		virtual void commandExecuted(Map & cmd);		
+		/**
 		 * Metodo cuyo proposito es establecer la cantidad de jugadores activos que hay.
 		 */
 		void setActivePlayerCount( int playerCount );

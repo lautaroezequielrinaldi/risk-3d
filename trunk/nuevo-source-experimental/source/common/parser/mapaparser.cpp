@@ -550,9 +550,8 @@ ReferenceCountPtr<Mapa> MapaParser::loadMap(
     xmlNodePtr mapNode;
 
     // Leo el documento XML de disco
-    std::string pathName = "./maps/"+fileName;
     
-    this->document = xmlReadFile(pathName.c_str(), NULL, 0);
+    this->document = xmlReadFile(fileName.c_str(), NULL, 0);
     // Si no se pudo leer el documento lanzo excepcion
     if (this->document == NULL) {
         throw ParserException("Error al cargar el mapa");

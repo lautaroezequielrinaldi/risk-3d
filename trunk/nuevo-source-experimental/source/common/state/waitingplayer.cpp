@@ -1,10 +1,12 @@
 #include "waitingplayer.h"
 #include "stateobserver.h"
 #include "../commands/youare.h"
+#include "../commands/map.h"
 #include "../model/gamemanager.h"
 #include "../Servercommands/serverreadytoplay.h"
 #include <vector>
 #include <sstream>
+#include <fstream>
 
 WaitingPlayer::WaitingPlayer(ReferenceCountPtr<GameManager>&gameManager, std::string name):State(gameManager,name)
 {
@@ -51,6 +53,39 @@ bool WaitingPlayer::readyToPlay(ServerReadyToPlay & command){
 		this->gameManager->notify(ready);
 	
 		delete(ready);	
+		
+		//mando mapa a todos los clientes
+	
+		std::ifstream fileMap;
+	
+		std::string linea;
+		std::string strMapa;
+		strMapa.clear();
+		
+		//pido nombre del mapa seleccionado x 1er jugador a game
+		std::string pathNom = "./maps/"+this->gameManager->getGame()->getMapa()->getMapName();
+		
+		fileMap.open(pathNom.c_str());
+		
+		//recorro archivo xml del mapa y lo voy guardando en un string
+		while ( ! fileMap.eof() ){
+				
+			getline(fileMap, linea);
+			strMapa += linea;		
+		
+		}
+		
+		//creo comando para enviar mapa a los clientes
+		Map *mapaSeleccionado = new Map(strMapa);
+		
+		this->gameManager->notify(mapaSeleccionado);
+	
+		delete mapaSeleccionado;
+		
+		
+		std::cerr<< "Se envio el siguiente mapa a todos los clientes:"<< std::endl << strMapa<<std::endl;		
+		
+		
 		
 		//cambio a proximo estado que es ocupar
 		this->gameManager->getStateMachine()->setState("Occupying");

@@ -15,7 +15,7 @@ void Proxy::notify(Command& command) {
     
     std::cerr << "Proxy::notify() from: " << command.getFrom() << " to: " << command.getTo() << std::endl;
     std::string cmd = command.serialize();
-    std::cerr << "Proxy::notify(" << command.getName() << ") "<<cmd.size() <<" serializado: " << cmd << std::endl;
+   // std::cerr << "Proxy::notify(" << command.getName() << ") "<<cmd.size() <<" serializado: " << cmd << std::endl;
 
     std::stringstream header;
     header << cmd.size() << " " << command.getName() << " ";
@@ -34,7 +34,7 @@ void Proxy::notify(Command& command) {
     //
     socket->write(msg);
     //
-     std::cerr << "VOLVIO DE ESCRIBIR EN SOCKET: "<<  msg << std::endl;
+   //  std::cerr << "VOLVIO DE ESCRIBIR EN SOCKET: "<<  msg << std::endl;
     
     
 }
