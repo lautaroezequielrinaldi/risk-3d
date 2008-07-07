@@ -177,21 +177,21 @@ void PreGameWindow::onReadyToPlayButtonClicked() {
 
 void PreGameWindow::onQuitButtonClicked() {
 	if (connected) {
-		Quit cmd;
-	    serverProxy->notify(cmd);	
+		//Quit cmd;
+	    //serverProxy->notify(cmd);	
 		serverProxy->cancel();
+		this->serverProxy->join();
+		this->serverProxy->kill();
+
 	}
 	hasQuit = true;
-	Gtk::Main::quit();
+//	Gtk::Main::quit();
 }
 
 bool PreGameWindow::userHasQuit() {
 	return hasQuit;
 }
 
-void PreGameWindow::commandExecuted(SelectMap& cmd) {
-	
-}
 
 
 void PreGameWindow::commandExecuted(Map & cmd){
@@ -311,13 +311,7 @@ void PreGameWindow::on_no_room_arrival(){
 		selectMapDialog.run();
 	}
 
-	//cancelo thread.
-	/*
-	this->serverProxy->cancel();
-	this->serverProxy->join();
-	this->serverProxy->kill();
-		*/
-	//Gtk::Main::quit();
+
 }
 
 void PreGameWindow::on_Ready_to_play_arrival(){
@@ -341,15 +335,16 @@ void PreGameWindow::on_Ready_to_play_arrival(){
 	
 	
 	//se cierra pre sala
-	Gtk::Main::quit();
-	
+	//Gtk::Main::quit();
+
+
 	//se abre vista 3d
 
 	int argc;
 	char** argv;
 
-     //GameWindow gameWindow; 
-     //gameWindow.run(argc, argv);
+     GameWindow gameWindow; 
+     gameWindow.run(argc, argv);
     
 	
 	

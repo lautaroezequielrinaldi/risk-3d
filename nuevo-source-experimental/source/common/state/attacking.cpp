@@ -44,13 +44,11 @@ bool Attacking::attack(ServerAttack & command){
 		//almaceno el ataque en el gameManager
 		this->gameManager->setAttack(command);
 	
-	
 		std::string paisAtacado =  command.getAttackedLand();
 		int defensor = this->gameManager->getGame()->getCountryOwner(paisAtacado );
 		//seteo en el turnManager el defensor
 		this->gameManager->getTurnManager()->setDefenderPlayer( defensor  );
 		
-		//notificar del ataque!!!
 		cerr<<"El pais "<<command.getAttackedLand()<<" fue ATACADO"<<endl;
 		cerr<<"Se debe defender el jugador: "<<defensor<<endl;
 		
@@ -61,7 +59,10 @@ bool Attacking::attack(ServerAttack & command){
 		
 		//seteo al commando como valido
 		command.setValid(1);
-				
+		
+		//seteo que el mensaje principal sea para el jugador atacado
+		command.setTo(defensor);
+		
 		//seteo mje principal
    		strComodin << gameManager->getTurnManager()->getCurrentPlayer();
 		strComodin2 << defensor;
@@ -98,6 +99,11 @@ bool Attacking::attack(ServerAttack & command){
 		std::string secMsg = "El jugador * "+ strComodin.str() +" realizo un ataque invalido";
 		command.setSecMsg(secMsg);	
 		
+		//seteo para quien sera el mensaje principal
+		std::string paisAtacante =  command.getAttackerLand();
+		int atacante = this->gameManager->getGame()->getCountryOwner( paisAtacante );
+		command.setTo(atacante);
+		
 		//notifico cambios y mensajes
 		gameManager->notify(&command);	
 		
@@ -117,7 +123,7 @@ bool Attacking::noMore(ServerNoMore & command){
 	//cambio a proximo estado : mover
 	this->gameManager->setCurrentState("moving");
 	
-	//preparo parametros para turnToPopulate
+	//preparo parametros para moving
 	std::vector<string> vecParam;
 			
 	//conversion de entero a string
@@ -134,7 +140,6 @@ bool Attacking::noMore(ServerNoMore & command){
 	turnToMove.setTo(gameManager->getTurnManager()->getCurrentPlayer());
 	turnToMove.setFrom(0);
 			
-	//convierto el bonus en un string.
 	std::string mainMsg = "Hora de Fortificar unidades, podes mover ejercitos de un solo pais hacia otro";
 	turnToMove.setMainMsg(mainMsg);
    			
