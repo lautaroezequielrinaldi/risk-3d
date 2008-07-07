@@ -80,10 +80,6 @@ class GameWindow: public CommandObserver {
          */
         void runMainLoop();
         /**
-         * Termina el main loop.
-         */
-        void stopMainLoop();
-        /**
          * Habilita el modo 2D.
          */
         void enable2D();
@@ -124,6 +120,10 @@ class GameWindow: public CommandObserver {
          */
         void processQuit(const SDL_QuitEvent& event);
         /**
+         * Process sphere click.
+         */
+        void processSphereClick(); 
+        /**
          * Process events.
          */
         void processEvents();
@@ -143,6 +143,14 @@ class GameWindow: public CommandObserver {
          * Destructor virtual de la clase GameWindow.
          */
         virtual ~GameWindow();
+        /**
+         * Termina el main loop.
+         */
+        void stopMainLoop();
+        /**
+         * Obtiene el proxy server usado en el juego.
+         */
+        ReferenceCountPtr<ServerProxy> getServerProxy() const;
         /**
          * Pone a correr la ventana principal del juego.
          */

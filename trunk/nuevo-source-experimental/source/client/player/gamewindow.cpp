@@ -236,6 +236,7 @@ void GameWindow::processMouseDown(const SDL_MouseButtonEvent& event) {
     uiState.setMouseX(event.x);
     uiState.setMouseY(SDL_GetVideoInfo()->current_h - event.y);
     uiState.setMousePressed(true);
+    processSphereClick();
 }
 
 void GameWindow::processMouseUp(const SDL_MouseButtonEvent& event) {
@@ -262,6 +263,12 @@ void GameWindow::processKeyUp(const SDL_KeyboardEvent& event) {
 
 void GameWindow::processQuit(const SDL_QuitEvent& event) {
     disconnectAndQuit();
+}
+
+void GameWindow::processSphereClick() {
+    if (sphere.getHooverCountry() != NULL) {
+        std::cout << "Se hizo click en el pais: " << sphere.getHooverCountry()->getNombre() << std::endl;
+    }
 }
 
 void GameWindow::processEvents() {
@@ -306,6 +313,10 @@ void GameWindow::disconnectAndQuit() {
         serverProxy->cancel();
     }
     stopMainLoop();
+}
+
+ReferenceCountPtr<ServerProxy> GameWindow::getServerProxy() const {
+    return serverProxy;
 }
 
 int GameWindow::run(int argc, char** argv) {
