@@ -43,7 +43,7 @@ void ClientState::executeNoMore() {
 void ClientState::executeDidIWin() {
     if (getGameWindow().getServerProxy() != NULL) {
         DidIWin didIWin;
-        getGameWindow.getServerProxy()->notify(didIWin);
+        getGameWindow().getServerProxy()->notify(didIWin);
     }
 }
 
