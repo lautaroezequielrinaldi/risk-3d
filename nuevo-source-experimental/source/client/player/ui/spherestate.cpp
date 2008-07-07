@@ -74,7 +74,6 @@ void SphereState::adjustBeta() {
 }
 
 void SphereState::adjustDistance() {
-    distance = (distance > 2.0) ? 2.0 : distance;
-    distance = (distance < -2.0) ? -2.0: distance;
+    distance = (distance < -1.1) ? -1.1: distance;
 }
 
