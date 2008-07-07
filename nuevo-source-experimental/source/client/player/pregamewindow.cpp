@@ -30,7 +30,7 @@ PreGameWindow::PreGameWindow(ReferenceCountPtr<Game>& game):
 	this->youAre = NULL;
 	this->readyToPlay=NULL;
 	this->cantJugadoresConectados=0;
-	this->me =0;
+
 		
     // Establece el titulo de la ventana
 	this->set_title("Pre sala de juego Risk3d");
@@ -166,7 +166,7 @@ void PreGameWindow::onReadyToPlayButtonClicked() {
 	
 	ReadyToPlay* cmd = new ReadyToPlay();
 	//indico que cliente manda el ready para saber a cual marcar en el servidor
-	cmd->setFrom(this->me);	
+	cmd->setFrom(this->serverProxy->getMe());	
 	
 	serverProxy->notify(*cmd);
 	
@@ -271,16 +271,16 @@ void PreGameWindow::on_you_are_arrival(){
 	std::string saludo;
 	
 	//si me=0 es porque el jugador al que se esta notificando es el nuevo 	
-  	if ( this->me == 0 ){		
+  	if ( this->serverProxy->getMe() == 0 ){		
   		//cambiar getJugador por getCantPLayersActivos 
-  		this->me = this->youAre->getTo();
-  		std::cerr<<"Se almacena 'me' con valor "<<this->me<<std::endl;
+  		this->serverProxy->setMe( this->youAre->getTo() );
+  		std::cerr<<"Se almacena 'me' con valor "<< this->serverProxy->getMe() <<std::endl;
 	}
 	else
-		std::cerr<<"El jugador ya tenia asignado me con valor: "<<this->me<<std::endl;
+		std::cerr<<"El jugador ya tenia asignado me con valor: "<< this->serverProxy->getMe() <<std::endl;
   		
 	// si hay que notificar al jugador que se conecto
-	if ( this->me == this->youAre->getTo() )
+	if ( this->serverProxy->getMe() == this->youAre->getTo() )
   		saludo = this->youAre->getMainMsg();
   	else
   		saludo =this->youAre->getSecMsg();		
@@ -300,7 +300,7 @@ void PreGameWindow::on_you_are_arrival(){
 void PreGameWindow::on_no_room_arrival(){
 	
 	// si hay que notificar al jugador que no tiene lugar en la sala
-	if ( this->me == 0 ){		
+	if ( this->serverProxy->getMe() == 0 ){		
   		
 		//creacion del dialogo 
 	  	Gtk::Label noRoomLabel("No hay mas lugar en la sala, intenta en otro momento");	
@@ -460,7 +460,7 @@ void PreGameWindow::on_map_list_selection(){
   		readyToPlayButton.set_sensitive(true);
 	}
 	
-	this->me =1;
+	this->serverProxy->setMe(1);
 	
 }
 
@@ -473,13 +473,7 @@ int PreGameWindow::getActivePlayerCount(){
 	return this->cantJugadoresConectados;
 }		
 
-void PreGameWindow::setMe(int color){
-	this->me = color;
-}		
-	
-int PreGameWindow::getMe(){
-	return this->me;
-} 
+
 
 PreGameWindow::~PreGameWindow() {
 	// No realiza ninguna accion.

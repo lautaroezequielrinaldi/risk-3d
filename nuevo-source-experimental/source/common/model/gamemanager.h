@@ -26,7 +26,7 @@ class GameManager: public StateObservable, public CommandObservable {
 	
 	private:
 	
-		static const unsigned int CAPACIDAD_MAXIMA=1;
+		static const unsigned int CAPACIDAD_MAXIMA=3;
 
 		
 		ReferenceCountPtr<CommandHydrator> commandHydrator;

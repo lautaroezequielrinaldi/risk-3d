@@ -56,12 +56,9 @@ class PreGameWindow: public CommandObserver, public Gtk::Window {
         /**
          * Almacena el numero del ultimo jugador que recibio una notificacion;
          */
-         int cantJugadoresConectados;
+		int cantJugadoresConectados;
          
-         /**
-          * Almacena quien es el cliente.
-          */
-         int me;
+
         
 		/**
 		 * Almacena el layout vertical de la ventana.
@@ -160,10 +157,7 @@ class PreGameWindow: public CommandObserver, public Gtk::Window {
 		 */
 		 void on_no_room_arrival();
 		 
-		 /**
-		 *Manejador de la señal de cambio de opcion sobre el combo.
-		 */
-		// virtual void on_combo_changed();
+
 		
 	/**
 	 * Metodos publicos de la clase PreGameWindow.
@@ -218,17 +212,7 @@ class PreGameWindow: public CommandObserver, public Gtk::Window {
 		 * Metodo cuyo proposito es obtener la cantidad de jugadores activos que hay.
 		 */
 		int getActivePlayerCount();
-		
-		/**
-		 * Metodo cuyo proposito es establecer que numero de jugador es el cliente.
-		 */		
-		void setMe(int color);
-		
-		/**
-		 * Metodo cuyo proposito es obtener que numero de jugador es el cliente.
-		 */		
-		int getMe(); 
-		
+			
 		/**
 		 * Destructor virtual de la clase PreGameWindow.
 		 */
