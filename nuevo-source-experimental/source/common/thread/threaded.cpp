@@ -1,10 +1,7 @@
-/**
- * TP3 - 2008.1
- * Taller de programación - 7542
- * @author dado en clase martes
- */
+
 #include "threaded.h"
 #include <iostream>
+#include <sys/signal.h>
 
 Threaded::Threaded(){
 	last_error=0;
@@ -26,3 +23,10 @@ void * Threaded::join(){
 	last_error = pthread_join(thread, &result);
 	return result;
 }
+
+void Threaded::kill(){
+
+	pthread_kill(thread,SIGKILL);		
+}
+
+

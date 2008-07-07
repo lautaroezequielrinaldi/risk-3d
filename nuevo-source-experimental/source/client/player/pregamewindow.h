@@ -95,6 +95,7 @@ class PreGameWindow: public CommandObserver, public Gtk::Window {
 		 * Almacena una referencia al boton quit para salir.
 		 */
 		Gtk::Button quitButton;
+
 		/**
 		 * Almacena si se ha conectado.
 		 */
@@ -154,6 +155,15 @@ class PreGameWindow: public CommandObserver, public Gtk::Window {
 		 * Manejador de la señal realizada por el dispatcher encargado de la notificacion de un ready to play.
 		 */
 		 void on_Ready_to_play_arrival();
+		/**
+		 * Manejador de la señal realizada por el dispatcher encargado de la notificacion de un no room.
+		 */
+		 void on_no_room_arrival();
+		 
+		 /**
+		 *Manejador de la señal de cambio de opcion sobre el combo.
+		 */
+		// virtual void on_combo_changed();
 		
 	/**
 	 * Metodos publicos de la clase PreGameWindow.

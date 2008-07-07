@@ -60,6 +60,15 @@ void * ServerProxy::run() {
             if ( command->getName() == "readyToPlay" )  
             	dispatcherReadyToPlay.emit();	
             
+            if ( command->getName() == "noRoom" ){
+            	dispatcherNoRoom.emit();
+            	/*
+					//cancelo thread.
+				this->serverProxy->cancel();
+				this->serverProxy->join();
+				this->serverProxy->kill();*/
+            }
+            
             //si llego un YouAre y NO es para el 1er jugador
             if ( command->getName() == "youAre" && command->getTo() > 1 ){
             	std::cerr << "Verificando si comando es un YouAre....y lo es" << std::endl;
@@ -98,6 +107,9 @@ Dispatcher& ServerProxy::getDispatcherReadyToPlay(){
 	return this->dispatcherReadyToPlay;
 }
 
+Dispatcher& ServerProxy::getDispatcherNoRoom(){
+	return this->dispatcherNoRoom;
+}
 
 ServerProxy::~ServerProxy(){
 

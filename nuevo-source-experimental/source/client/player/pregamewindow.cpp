@@ -112,7 +112,10 @@ void PreGameWindow::showConnectionDialog() {
 
 			// conecta la señal lanzada por el dispatcher que maneja la llegada de un ready to play
 			this->serverProxy->getDispatcherReadyToPlay().connect(sigc::mem_fun(*this, &PreGameWindow::on_Ready_to_play_arrival));
-		
+
+			// conecta la señal lanzada por el dispatcher que maneja la llegada de un ready to play
+			this->serverProxy->getDispatcherNoRoom().connect(sigc::mem_fun(*this, &PreGameWindow::on_no_room_arrival));		
+			
 			
 			JoinGame* cmd = new JoinGame();
 			serverProxy->notify(*cmd);
@@ -130,6 +133,7 @@ void PreGameWindow::showConnectionDialog() {
 
 			
 			connected = true;
+			
 		} catch (SocketConnectionException& exception) {
 			Gtk::MessageDialog errorDialog(*this, "No se pudo conectar al servidor!!!", false,
 				Gtk::MESSAGE_ERROR);
@@ -189,12 +193,13 @@ void PreGameWindow::commandExecuted(SelectMap& cmd) {
 	
 }
 
+
 void PreGameWindow::commandExecuted(Map & cmd){
 
 
 	// grabo en un archivo el contenido del xml que contiene map
 	std::ofstream fileTempMapa;
-	std::string pathNom = "./maps/mapaTemporal";
+	std::string pathNom = "mapa.xml";    // "./maps/mapaTemporal";
 	fileTempMapa.open(pathNom.c_str(),std::ios_base::out);
 	
 	//grabo en el archivo el mapa que trajo el comando.
@@ -207,7 +212,7 @@ void PreGameWindow::commandExecuted(Map & cmd){
 	MapaParser mapaParser;
 	
 	//levanto el mapa desde archivo xml a memoria
-	ReferenceCountPtr<Mapa> mapa = mapaParser.loadMap("./maps/mapaTemporal");
+	ReferenceCountPtr<Mapa> mapa = mapaParser.loadMap("mapa.xml");//("./maps/mapaTemporal");
 
 	//seteo el mapa que se usara en el modelo del juego
 	this->serverProxy->getGame()->setMapa(mapa);
@@ -292,11 +297,34 @@ void PreGameWindow::on_you_are_arrival(){
 	
 }
 
+void PreGameWindow::on_no_room_arrival(){
+	
+	// si hay que notificar al jugador que no tiene lugar en la sala
+	if ( this->me == 0 ){		
+  		
+		//creacion del dialogo 
+	  	Gtk::Label noRoomLabel("No hay mas lugar en la sala, intenta en otro momento");	
+		Gtk::Dialog selectMapDialog("-Aviso-");
+		selectMapDialog.get_vbox()->add(noRoomLabel);
+		selectMapDialog.add_button(Gtk::Stock::OK, Gtk::RESPONSE_OK);
+		selectMapDialog.show_all();
+		selectMapDialog.run();
+	}
+
+	//cancelo thread.
+	this->serverProxy->cancel();
+	this->serverProxy->join();
+	this->serverProxy->kill();
+	
+	
+	Gtk::Main::quit();
+}
+
 void PreGameWindow::on_Ready_to_play_arrival(){
 	
 			
 	//creacion del dialogo de ready to play para todos.
-	Gtk::Dialog selectMapDialog("Aviso!");
+	Gtk::Dialog selectMapDialog("-Aviso-");
 	Gtk::Label readyLabel("Todos los jugadores estan listos para jugar,Se Pasara a modo juego");	
 	selectMapDialog.get_vbox()->add(readyLabel);
 	selectMapDialog.add_button(Gtk::Stock::OK, Gtk::RESPONSE_OK);
@@ -316,11 +344,12 @@ void PreGameWindow::on_Ready_to_play_arrival(){
 	Gtk::Main::quit();
 	
 	//se abre vista 3d
-	
-    //GameWindow gameWindow; 
-	//int argc;
-	//char** argv;
-    //gameWindow.run(argc, argv);
+
+	int argc;
+	char** argv;
+
+     //GameWindow gameWindow; 
+     //gameWindow.run(argc, argv);
     
 	
 	
@@ -347,7 +376,8 @@ void PreGameWindow::on_map_list_selection(){
 
  	//Child widgets:
   	Gtk::ComboBox m_Combo;
-  	
+  	//m_Combo.signal_changed().connect( sigc::mem_fun(*this, &PreGameWindow::on_combo_changed) );
+  	  
   	Glib::RefPtr<Gtk::ListStore> m_refTreeModel;
 
 	//creo tree model
@@ -371,7 +401,9 @@ void PreGameWindow::on_map_list_selection(){
 
 	}
 
+
   	m_Combo.pack_start(m_Column.m_col_name);
+	m_Combo.set_active(0);
 	
 	int jugNum = this->youAre->getTo();
 	
@@ -390,6 +422,10 @@ void PreGameWindow::on_map_list_selection(){
 	selectMapDialog.get_vbox()->add(m_Combo);
 	
 	selectMapDialog.add_button(Gtk::Stock::OK, Gtk::RESPONSE_OK);
+	//botonOk.set_label(Gtk::Stock::OK);
+	//botonOk.set_sensitive(false);
+	//selectMapDialog.get_vbox()->add(botonOk);
+	
 	selectMapDialog.show_all();
 	
 	int result = selectMapDialog.run();
@@ -429,6 +465,12 @@ void PreGameWindow::on_map_list_selection(){
 	this->me =1;
 	
 }
+/*
+void PreGameWindow::on_combo_changed()
+{
+  	botonOk.set_sensitive(false);
+}
+*/
 
 void PreGameWindow::setActivePlayerCount( int playerCount ){
 	this->cantJugadoresConectados = playerCount;
