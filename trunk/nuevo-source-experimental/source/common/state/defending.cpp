@@ -27,6 +27,7 @@ bool Defending::defend(ServerDefend & command){
 	
 	std::cerr << "Evento Defending::defend" << std::endl;
 	
+	//valida defensa
 	bool accionValida = command.validate(this->gameManager);
 	
 	//si es valido
@@ -42,8 +43,12 @@ bool Defending::defend(ServerDefend & command){
 		cerr<<"Pais atacado tiene: "<< paisA->getArmyCount() <<" ejercitos"<<endl;
 		cerr<<"Pais atacante tiene: "<<paisD->getArmyCount() <<" ejercitos"<<endl;		
 				
+		cerr<<"Creando batalla....."<<endl;	
+				
 		//creo batalla
 		Battle batalla(this->gameManager->getAttack(),command, this->gameManager->getGame()->getDice());
+		
+		cerr<<"Iniciando batalla....."<<endl;	
 		
 		// inicio batalla. el modelo se actualiza automaticamente.
 		BattleResult resultadoBatalla = batalla.start(this->gameManager);

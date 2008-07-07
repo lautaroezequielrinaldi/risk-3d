@@ -175,10 +175,7 @@ class PreGameWindow: public CommandObserver, public Gtk::Window {
 		 * Devuelve si ha salido el jugador presionando el boton quit.
 		 */
 		bool userHasQuit();
-		/**
-		 * Responde ante la llegada de un commando mapList.
-		 */
-		virtual void commandExecuted(SelectMap& cmd);
+
 		/**
 		 * Responde ante la llegada de un comando chat.
 		 */
