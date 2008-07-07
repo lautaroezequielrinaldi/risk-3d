@@ -26,7 +26,7 @@ class GameManager: public StateObservable, public CommandObservable {
 	
 	private:
 	
-		static const unsigned int CAPACIDAD_MAXIMA=3;
+		static const unsigned int CAPACIDAD_MAXIMA=1;
 
 		
 		ReferenceCountPtr<CommandHydrator> commandHydrator;
@@ -67,6 +67,9 @@ class GameManager: public StateObservable, public CommandObservable {
 		 * (valido en el contexto del server)
 		 */
 		bool playing;
+
+
+		bool waitingPlay;
 
 		/**
 		 * Quien soy
@@ -135,9 +138,30 @@ class GameManager: public StateObservable, public CommandObservable {
 		 */
 		void setAttack(ServerAttack & attack);
 		
+		/**
+		 * Metodo cuyo proposito es obtener la capacidad maxima del juego.
+		 */
+		const unsigned int getGameCapacity();
+		
+		/**
+		 * Metodo cuyo proposito es verificar si el servidor esta en estado de juego.
+		 */
 		bool isPlaying();
 
+		/**
+		 * Metodo cuyo proposito es verificar si el servidor esta abierto a aceptar nuevas conexiones para el juego.
+		 */
 		bool isOpen();
+		
+		/**
+		 * Metodo cuyo proposito es verificar si el servidor paso la etapa de aceptar conexiones
+		 * para el juego y esta esperando que todos los jugadores conectados esten listos para jugar.
+		 */
+		bool isWaitingPlay();
+		
+		void setWaitingPlay(bool state);
+		
+		void setPlaying(bool state);		
 
 		void setMe(int me);
 

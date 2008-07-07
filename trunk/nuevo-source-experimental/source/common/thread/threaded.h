@@ -10,20 +10,34 @@
 #include <pthread.h>
 
 class Threaded {
+	
 	public:
-	Threaded();
-	virtual ~Threaded(){};
-	int start();
-	void * join();
+		
+		Threaded();
+		
+		
+		virtual ~Threaded(){};
+	
+		int start();
+	
+		void * join();
+		
+		void kill();
 
 	protected:
-	virtual void * run()=0;
-	int last_error;
+	
+		virtual void * run()=0;
+		
+		int last_error;
 
 	private:
-	pthread_t thread;
-	static void * start_routine(void * arg);
-	Threaded(const Threaded&);
-	Threaded& operator=(const Threaded&);
+	
+		pthread_t thread;
+	
+		static void * start_routine(void * arg);
+	
+		Threaded(const Threaded&);
+	
+		Threaded& operator=(const Threaded&);
 };
 #endif /* __THREADED__*/

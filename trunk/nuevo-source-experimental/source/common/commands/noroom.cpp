@@ -18,7 +18,7 @@ std::string NoRoom::serialize(){
 
 
 std::string NoRoom::getName() {
-	return "NoRoom";
+	return "noRoom";
 }
 
 void NoRoom::accept(CommandObserver* observer) {

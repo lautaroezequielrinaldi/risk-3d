@@ -85,6 +85,10 @@ bool WaitingMapSelection::readyToPlay(ServerReadyToPlay & command) {
 	//si todos los clientes ya esta listos para jugar y hay mas de 1
 	if ( todosListos &&  listaPlayerProxy.size() > 1){
 	
+			
+		gameManager->setWaitingPlay(false);
+		gameManager->setPlaying(true);
+	
 		ReadyToPlay* ready =new ReadyToPlay();
 		
 		//uso el campo TO para setear la cantidad de players que hicieron readyToPlay
@@ -125,7 +129,8 @@ bool WaitingMapSelection::readyToPlay(ServerReadyToPlay & command) {
 		delete mapaSeleccionado;
 		
 		
-		std::cerr<< "Se envio el siguiente mapa a todos los clientes:"<< std::endl << strMapa<<std::endl;		
+		//std::cerr<< "Se envio el siguiente mapa a todos los clientes:"<< std::endl << strMapa<<std::endl;
+		std::cerr<< "Se envio el  mapa a todos los clientes"<<std::endl;		
 		
 		//cambio a proximo estado que es ocupar
 		this->gameManager->getStateMachine()->setState("Occupying");

@@ -6,6 +6,7 @@
 #include "../common/smartpointer/referencecountptr.h"
 #include "../common/net/playerproxy.h"
 #include "../common/state/serverstatemachine.h"
+#include "../common/commands/noroom.h"
 
 #include <iostream>
 //#include <vector>
@@ -41,7 +42,9 @@ try {
 	ReferenceCountPtr<PlayerProxy>  playerProxy;
 	std::cerr<< "PlayerProxy created" << std::endl;
 
+	//mientras no se llegue a la cantidad maxima de jugadores se aceptan nuevas conexiones que perduraran
 	while (gamemanager->isOpen() ) {
+		
 		std::cerr<< "Accepting connection" << std::endl;
 		playerProxy = new PlayerProxy(socket.accept(), gamemanager);
 		std::cerr<< "Connection accepted" << std::endl;
@@ -53,8 +56,34 @@ try {
 		std::cerr<< "PlayerProxy started" << std::endl;
 	}
 
+	std::cerr<<"Capacidad para jugar completa....."<<std::endl;
+
+	// cuando se haya completado la cantidad maxima de jugadores:
+	//mientras no esten listos para jugaro los conectados
+	while( gamemanager->isWaitingPlay() ){
+		
+		std::cerr<< "Accepting connection - pero.. juego completo" << std::endl;
+		
+		//se acepta una conexion para notificar que el juego esta completo, luego sera eliminada.
+		playerProxy = new PlayerProxy(socket.accept(), gamemanager);
+		
+		NoRoom *noRoom = new NoRoom();
+		
+		std::string mje = "Lo siento, no hay mas lugar en la sala, intenta luego";
+		noRoom->setTo(0);//gamemanager->getGameCapacity() );
+		noRoom->setMainMsg(mje);
+		
+		playerProxy->notify(*noRoom);
+		delete(noRoom);
+		
+		
+		std::cerr<< "Esperando que todos los jugadores esten ready to play......" << std::endl;
+	}
 
 	while (gamemanager->isPlaying()) {
+		
+		std::cerr<< "ESTAMOS JUGANDO" << std::endl;
+		
 		// preguntarle a cada jugador si aun esta conectado, 
 		// hacer join en los que no
 	}

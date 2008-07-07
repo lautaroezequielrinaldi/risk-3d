@@ -1,15 +1,12 @@
-/**
- * TP4 - 2008.1
- * Taller de programación - 7542
- * @author Carlos Pantelides 74901
- */
-
 #include "lock.h"
 #include "cancelable.h"
+
+#include <iostream>
 
 void Cancelable::cancel() {
 	Lock (*this->getMutex());
 	canceled=true;
+	std::cerr<<" thread cancelado" <<std::endl;
 }
 
 bool Cancelable::isCanceled() {

@@ -15,6 +15,7 @@ game (game),
 turnManager (turnManager){
 	commandHydrator = new CommandHydrator();
 	open = true;
+	waitingPlay=false;
 	playing = false;
 	attack = NULL;
 }
@@ -50,13 +51,24 @@ void GameManager::setAttack(ServerAttack& attack){
 	this->attack = &attack;
 }
 
+const unsigned int GameManager::getGameCapacity(){
+	return CAPACIDAD_MAXIMA;
+}
+
+void GameManager::setWaitingPlay(bool state){
+	this->waitingPlay = state;	
+}
+		
+void GameManager::setPlaying(bool state){
+	this->playing = state;
+}
 
 /**
  * @todo evaluar impacto contra reutilizacion en cliente
- *
- *
  */
 void GameManager::add(ReferenceCountPtr<PlayerProxy> & playerProxy) {
+	
+	std::cerr<< "Cantidad de proxy playares en lista del GM: "<< proxyList.size()<<std::endl;
 	
 	//se crea un player dentro de Game y el mismo se pasa a setPlayer del playerProxy
 	playerProxy->setPlayer(game->addPlayer());
@@ -79,21 +91,24 @@ void GameManager::add(ReferenceCountPtr<PlayerProxy> & playerProxy) {
 	delete(youare);
 */
 	// si alcanzado max, open -> false;
-	if ( proxyList.size() == CAPACIDAD_MAXIMA )
+	if ( proxyList.size() == CAPACIDAD_MAXIMA ){
 		this->open = false;
+		this->waitingPlay = true;
+	}
 
 }
 
 bool GameManager::isPlaying() {
 	return playing;
-
 }
 
 bool GameManager::isOpen() {
 	return open;
-
 }
 
+bool GameManager::isWaitingPlay(){
+	return this->waitingPlay;
+}
 
 void GameManager::setMe(int me) {
 	this->me = me;

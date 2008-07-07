@@ -44,6 +44,10 @@ bool WaitingPlayer::readyToPlay(ServerReadyToPlay & command){
 	//si todos los clientes ya esta listos para jugar y hay mas de 1
 	if ( todosListos &&  listaPlayerProxy.size() > 1){
 	
+			
+		gameManager->setWaitingPlay(false);
+		gameManager->setPlaying(true);
+	
 		ReadyToPlay* ready =new ReadyToPlay();
 		
 		//uso el campo TO para setear la cantidad de players que hicieron readyToPlay
@@ -83,8 +87,8 @@ bool WaitingPlayer::readyToPlay(ServerReadyToPlay & command){
 		delete mapaSeleccionado;
 		
 		
-		std::cerr<< "Se envio el siguiente mapa a todos los clientes:"<< std::endl << strMapa<<std::endl;		
-		
+		//std::cerr<< "Se envio el siguiente mapa a todos los clientes:"<< std::endl << strMapa<<std::endl;		
+		std::cerr<< "Se envio el  mapa a todos los clientes"<<std::endl;
 		
 		
 		//cambio a proximo estado que es ocupar
@@ -99,20 +103,13 @@ bool WaitingPlayer::readyToPlay(ServerReadyToPlay & command){
 
 
 /*
-	std::vector<std::string> v;
-	v.push_back("3");
-
-
-	YouAre * youare = new YouAre(v);
-	this->gameManager->notify(youare);
-	delete(youare);
-	return false;*/
+	
 	// marcar como ready to play
 	// si todos listos, 
 	//     Map 
 	//     pasar a simplePopulating
 	//     seleccionar primer jugador y TurnToOccupy
-	return false;
+	return false;*/
 }
 
 bool WaitingPlayer::joinGame(ServerJoinGame & command){
