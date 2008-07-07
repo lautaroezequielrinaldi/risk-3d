@@ -62,11 +62,14 @@ void * ServerProxy::run() {
             
             if ( command->getName() == "noRoom" ){
             	dispatcherNoRoom.emit();
-            	/*
-					//cancelo thread.
-				this->serverProxy->cancel();
-				this->serverProxy->join();
-				this->serverProxy->kill();*/
+            	
+            	// doy tiempo a que el emit del dispatcher informe antes de matar thread.
+            	sleep(3);
+            	
+				//cancelo thread.
+				this->cancel();
+				this->join();
+				this->kill();
             }
             
             //si llego un YouAre y NO es para el 1er jugador
