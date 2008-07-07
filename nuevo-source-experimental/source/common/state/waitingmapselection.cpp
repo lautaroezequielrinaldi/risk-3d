@@ -1,6 +1,7 @@
 #include "waitingmapselection.h"
 #include "stateobserver.h"
 #include "../commands/youare.h"
+#include "../commands/map.h"
 #include "../Servercommands/serverselectmap.h"
 #include "../Servercommands/serverreadytoplay.h"
 #include "../model/gamemanager.h"
@@ -9,6 +10,7 @@
 
 #include <vector>
 #include <sstream>
+#include <fstream>
 
 WaitingMapSelection::WaitingMapSelection(ReferenceCountPtr<GameManager>&gameManager, std::string name):State(gameManager,name)
 {
@@ -93,6 +95,38 @@ bool WaitingMapSelection::readyToPlay(ServerReadyToPlay & command) {
 	
 		delete(ready);	
 		
+		
+		//mando mapa a todos los clientes
+	
+		std::ifstream fileMap;
+	
+		std::string linea;
+		std::string strMapa;
+		strMapa.clear();
+		
+		//pido nombre del mapa seleccionado x 1er jugador a game
+		std::string pathNom = "./maps/"+this->gameManager->getGame()->getMapa()->getMapName();
+		
+		fileMap.open(pathNom.c_str());
+		
+		//recorro archivo xml del mapa y lo voy guardando en un string
+		while ( ! fileMap.eof() ){
+				
+			getline(fileMap, linea);
+			strMapa += linea;		
+		
+		}
+		
+		//creo comando para enviar mapa a los clientes
+		Map *mapaSeleccionado = new Map(strMapa);
+		
+		this->gameManager->notify(mapaSeleccionado);
+	
+		delete mapaSeleccionado;
+		
+		
+		std::cerr<< "Se envio el siguiente mapa a todos los clientes:"<< std::endl << strMapa<<std::endl;		
+		
 		//cambio a proximo estado que es ocupar
 		this->gameManager->getStateMachine()->setState("Occupying");
 	
@@ -114,17 +148,31 @@ bool WaitingMapSelection::selectMap(ServerSelectMap & command){
 	std::cerr << "Bajando xml mapa a memoria......." << std::endl;
 	
 	//levanto el mapa desde archivo xml a memoria
-	ReferenceCountPtr<Mapa> mapa = mapaParser.loadMap(command.getMapName());
+	std::string pathName = "./maps/"+ command.getMapName();
+	ReferenceCountPtr<Mapa> mapa = mapaParser.loadMap(pathName);
 
 	std::cerr << "Guardando mapa bajado en Game.........." << std::endl;
 	
 	//seteo el mapa que se usara en el modelo del juego
 	this->gameManager->getGame()->setMapa(mapa);
+
+
+	std::cerr << "Guardando nombre del mapa bajado en Game..........: " <<command.getMapName()<< std::endl;
+	
+	//seteo nombre del mapa que se usara
+	this->gameManager->getGame()->getMapa()->setMapName(command.getMapName());
+	
+
+		
+		
+		
 		
 	//cambio a proximo estado
 	this->gameManager->getStateMachine()->setState("waitingPlayer");
 	
 	std::cerr << "Hecho. Cambio el estado a 'WaitingPlayer'" << std::endl;
+
+	
 
 	// si ahora no hay lugar o todos estan ready to play
 

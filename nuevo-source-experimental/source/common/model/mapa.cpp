@@ -120,6 +120,14 @@ std::list<ReferenceCountPtr<Pais> >& Mapa::getCountryList(){
 	return this->paises;
 }
 
+std::string Mapa::getMapName(){
+	return this->nombre;	
+}
+         
+void Mapa::setMapName( const std::string& name ){
+	this->nombre = name;
+}
+
 
 Mapa::IteradorPais Mapa::primerPais() {
     return this->paises.begin();

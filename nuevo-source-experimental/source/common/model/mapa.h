@@ -52,6 +52,10 @@ class Mapa {
          * Almacena la lista de game cards del Mapa.
          */
         std::list< ReferenceCountPtr<GameCard> > gameCards;
+        /**
+         * Almacena el nombre del mapa .
+         */
+         std::string nombre;
 
     /**
      * Mètodos privados de la clase Mapa.
@@ -124,6 +128,17 @@ class Mapa {
          * Metodo cuyo proposito es obtener la lista de paises del mapa.
          */
          std::list<ReferenceCountPtr<Pais> >& getCountryList();
+        
+        /**
+         * Metodo cuyo proposito es obtener el nombre del mapa.
+         */
+         std::string getMapName();
+         
+         /**
+          * Metodo cuyo proposito es establecer el nombre del mapa.
+          */
+          void setMapName( const std::string& name );
+        
         
         /**
          * Mètodo cuyo propòsito es obtener un iterador apuntando al primer

@@ -68,9 +68,7 @@ void* Move::hydrate(const std::string &xml){
     //devueltos por la expresion y el numero de nodos.
     xmlNodeSetPtr setNodoMove;
 
-	//parseo el xml en memoria y se construye el arbol
-	//document = xmlParseMemory(xml.c_str(), xml.size());
-	
+
 	// Obtengo el elemento root del documento XML sobre el cual se va a trabajar.
     nodoRaiz = xmlDocGetRootElement(document);
 

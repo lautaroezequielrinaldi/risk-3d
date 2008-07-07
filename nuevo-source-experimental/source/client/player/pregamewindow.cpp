@@ -3,10 +3,13 @@
 #include "../../common/commands/quit.h"
 #include "../../common/commands/selectmap.h"
 #include "gamewindow.h"
+
+#include "../../common/parser/mapaparser.h"
 #include<gtkmm/liststore.h> // Para definiciòn de Gtk::ListStore.
 #include<gtkmm/combobox.h> // Para definiciòn de Gtk::ComboBox.
 #include<iostream>
 #include<sstream>
+#include<fstream>
 
 PreGameWindow::PreGameWindow(ReferenceCountPtr<Game>& game):
     CommandObserver(),
@@ -183,6 +186,39 @@ bool PreGameWindow::userHasQuit() {
 }
 
 void PreGameWindow::commandExecuted(SelectMap& cmd) {
+	
+}
+
+void PreGameWindow::commandExecuted(Map & cmd){
+
+
+	// grabo en un archivo el contenido del xml que contiene map
+	std::ofstream fileTempMapa;
+	std::string pathNom = "./maps/mapaTemporal";
+	fileTempMapa.open(pathNom.c_str(),std::ios_base::out);
+	
+	//grabo en el archivo el mapa que trajo el comando.
+	std::string contenido ( cmd.getMap() );
+	
+	std::cerr<<"CONTENIDO:"<< std::endl << contenido << std::endl;
+	
+	fileTempMapa <<  contenido;
+	
+	MapaParser mapaParser;
+	
+	//levanto el mapa desde archivo xml a memoria
+	ReferenceCountPtr<Mapa> mapa = mapaParser.loadMap("./maps/mapaTemporal");
+
+	//seteo el mapa que se usara en el modelo del juego
+	this->serverProxy->getGame()->setMapa(mapa);
+	
+	std::cerr<<"Cantidad de paises en el game que se jugara: "<<this->serverProxy->getGame()->getMapa()->getCantidadPaises() <<std::endl;
+	
+	fileTempMapa.flush();
+	fileTempMapa.close();
+	
+	std::cerr<<"Termino de cargar el mapa en todos los clientes....."<<std::endl;
+	
 	
 }
 

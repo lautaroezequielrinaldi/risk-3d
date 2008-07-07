@@ -16,13 +16,14 @@
 class Map : virtual public Command
 {
 	
+	private:
+		
+		std::string mapa;
 	
 	public:
 		
 		/*
 		 * Constructor de la clase
-		 * la idea es que reciba una lista de parametros y con ellos arme el ataque que se validara, en ppio
-		 * sera una lista de strings y en el caso de necesitar convertir un elemento a int usare atoi.
 		 */
 		Map(std::vector<std::string> &parameterList);
 		
@@ -51,6 +52,10 @@ class Map : virtual public Command
 		
 		virtual std::string getName();
 		
+		/**
+		 * Metodo cuyo proposito es obtener el mapa que almacena el comando.
+		 */
+		std::string getMap();
 		/**
 		 * Notifica que se ejecuto el comando.
 		 */
