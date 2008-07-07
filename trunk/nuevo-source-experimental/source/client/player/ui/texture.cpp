@@ -62,6 +62,12 @@ void Texture::load(const std::string& fileName) {
                          GL_UNSIGNED_BYTE, image->pixels);
         // Libera la surface.
         SDL_FreeSurface(image);
+        // Cambia a matriz de textura y rota la textura.
+        glMatrixMode(GL_TEXTURE);
+        glRotatef(180.0f,0.0f,0.0f,1.0f);
+        glScalef(-1.0f,1.0f,1.0f);
+        // Vuelve a la matriz de model view
+        glMatrixMode(GL_MODELVIEW);
         // Mark the image as loaded
         loaded = true;
     }

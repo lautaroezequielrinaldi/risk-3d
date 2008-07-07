@@ -179,7 +179,6 @@ void Sphere::draw() {
 void Sphere::drawSphere() {
     // Habilito textura
     enableTexture();
-    // Rotate in te  axis
     // Dibujo la esfera
     gluSphere(sphereQuad, 1.0, 64, 64);
     // Deshabilito textura
@@ -194,7 +193,7 @@ void Sphere::drawCrossHair() {
     double lonRad = crossHairState.getLongitude() * PI / 180.0;
     double da = PI / 32.0;
     
-    glColor3f(1.0, 0.0, 0.0);
+    glColor3f(0.0, 0.0, 0.5);
     
     glBegin(GL_LINE_STRIP);
     for (int i = 0; i <= 64; i++)
