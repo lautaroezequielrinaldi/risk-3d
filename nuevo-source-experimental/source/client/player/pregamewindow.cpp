@@ -306,18 +306,18 @@ void PreGameWindow::on_no_room_arrival(){
 	  	Gtk::Label noRoomLabel("No hay mas lugar en la sala, intenta en otro momento");	
 		Gtk::Dialog selectMapDialog("-Aviso-");
 		selectMapDialog.get_vbox()->add(noRoomLabel);
-		selectMapDialog.add_button(Gtk::Stock::OK, Gtk::RESPONSE_OK);
+		//selectMapDialog.add_button(Gtk::Stock::OK, Gtk::RESPONSE_OK);
 		selectMapDialog.show_all();
 		selectMapDialog.run();
 	}
 
 	//cancelo thread.
+	/*
 	this->serverProxy->cancel();
 	this->serverProxy->join();
 	this->serverProxy->kill();
-	
-	
-	Gtk::Main::quit();
+		*/
+	//Gtk::Main::quit();
 }
 
 void PreGameWindow::on_Ready_to_play_arrival(){
@@ -403,6 +403,7 @@ void PreGameWindow::on_map_list_selection(){
 
 
   	m_Combo.pack_start(m_Column.m_col_name);
+  	//seteo quue por defecto este seleccionado el 1er mapa de la lista
 	m_Combo.set_active(0);
 	
 	int jugNum = this->youAre->getTo();
@@ -422,9 +423,6 @@ void PreGameWindow::on_map_list_selection(){
 	selectMapDialog.get_vbox()->add(m_Combo);
 	
 	selectMapDialog.add_button(Gtk::Stock::OK, Gtk::RESPONSE_OK);
-	//botonOk.set_label(Gtk::Stock::OK);
-	//botonOk.set_sensitive(false);
-	//selectMapDialog.get_vbox()->add(botonOk);
 	
 	selectMapDialog.show_all();
 	
@@ -465,12 +463,7 @@ void PreGameWindow::on_map_list_selection(){
 	this->me =1;
 	
 }
-/*
-void PreGameWindow::on_combo_changed()
-{
-  	botonOk.set_sensitive(false);
-}
-*/
+
 
 void PreGameWindow::setActivePlayerCount( int playerCount ){
 	this->cantJugadoresConectados = playerCount;
