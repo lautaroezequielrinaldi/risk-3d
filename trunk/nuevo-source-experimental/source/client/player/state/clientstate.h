@@ -61,6 +61,10 @@ class ClientState {
          */
         virtual void executeNoMore();
         /**
+         * Ejecuta did I win.
+         */
+        virtual void executeDidIWin();
+        /**
          * Obtiene la cantidad de unidades procesadas en un pais.
          */
         int getArmyCount() const;

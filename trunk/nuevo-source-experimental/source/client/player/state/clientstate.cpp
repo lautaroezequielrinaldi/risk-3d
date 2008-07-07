@@ -40,6 +40,14 @@ void ClientState::executeNoMore() {
     }
 }
 
+void ClientState::executeDidIWin() {
+    if (getGameWindow().getServerProxy() != NULL) {
+        DidIWin didIWin;
+        getGameWindow.getServerProxy()->notify(didIWin);
+    }
+}
+
+
 int ClientState::getArmyCount() const {
     return armyCount;
 }
