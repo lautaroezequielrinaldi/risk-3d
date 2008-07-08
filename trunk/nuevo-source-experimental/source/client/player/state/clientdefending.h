@@ -3,6 +3,7 @@
 
 #include<string>
 #include "clientstate.h"
+#include "clientwaiting.h"
 
 class ClientDefending: public ClientState {
     /**

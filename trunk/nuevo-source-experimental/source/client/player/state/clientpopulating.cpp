@@ -19,6 +19,8 @@ void ClientPopulating::selectCountry(ReferenceCountPtr<Pais>& country) {
 
         Populate populate(parameters);
         getGameWindow().getServerProxy()->notify(populate);
+        ReferenceCountPtr<ClientState> waiting = new ClientWaiting(getGameWindow());
+        getGameWindow().setState(waiting);
     }
 }
 

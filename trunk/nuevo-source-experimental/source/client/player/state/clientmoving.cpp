@@ -34,6 +34,8 @@ void ClientMoving::selectCountry(ReferenceCountPtr<Pais>& country) {
                 Move move(parameters);
                 move.setFrom(getGameWindow().getServerProxy()->getMe());
                 getGameWindow().getServerProxy()->notify(move);
+                ReferenceCountPtr<ClientState> waiting = new ClientWaiting(getGameWindow());
+                getGameWindow().setState(waiting);
             }
         }
     }       

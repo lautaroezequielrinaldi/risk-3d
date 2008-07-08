@@ -38,6 +38,8 @@ void ClientAttacking::selectCountry(ReferenceCountPtr<Pais>& country) {
                 attack.setFrom(getGameWindow().getServerProxy()->getMe());
                 attack.setTo(getGameWindow().getServerProxy()->getGame()->getCountryOwner(getSecondCountry()->getNombre()));
                 getGameWindow().getServerProxy()->notify(attack);
+                ReferenceCountPtr<ClientState> waiting = new ClientWaiting(getGameWindow());
+                getGameWindow().setState(waiting);
             }
         }
     }       

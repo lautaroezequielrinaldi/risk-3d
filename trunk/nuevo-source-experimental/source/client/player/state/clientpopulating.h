@@ -2,6 +2,7 @@
 #define __CLIENTPOPULATING_H__
 
 #include "clientstate.h"
+#include "clientwaiting.h"
 
 class ClientPopulating: public ClientState {
     /**
