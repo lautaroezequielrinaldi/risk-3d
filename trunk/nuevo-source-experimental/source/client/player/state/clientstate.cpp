@@ -21,6 +21,8 @@ void ClientState::selectCountry(ReferenceCountPtr<Pais>& country) {
 void ClientState::executeQuit() {
     if (getGameWindow().getServerProxy() != NULL) {
         Quit quit;
+        quit.setFrom(getGameWindow().getServerProxy()->getMe());
+    
         getGameWindow().getServerProxy()->notify(quit);
         getGameWindow().stopMainLoop();
     }
@@ -30,13 +32,21 @@ void ClientState::executeQuit() {
 void ClientState::executeSurrender() {
     if (getGameWindow().getServerProxy() != NULL) {
         Surrender surrender;
+        surrender.setFrom(getGameWindow().getServerProxy()->getMe());
         getGameWindow().getServerProxy()->notify(surrender);
     }
 }
 
 void ClientState::executeNoMore() {
     if (getGameWindow().getServerProxy() != NULL) {
-        NoMore noMore;
+
+        std::vector<std::string> parameters;
+        std::ostringstream playerNrStr;
+        playerNrStr << getGameWindow().getServerProxy()->getMe();
+        parameters.push_back(playerNrStr.str());
+
+        NoMore noMore(parameters);
+        noMore.setFrom(getGameWindow().getServerProxy()->getMe());
         getGameWindow().getServerProxy()->notify(noMore);
     }
 }
@@ -44,6 +54,7 @@ void ClientState::executeNoMore() {
 void ClientState::executeDidIWin() {
     if (getGameWindow().getServerProxy() != NULL) {
         DidIWin didIWin;
+        didIWin.setFrom(getGameWindow().getServerProxy()->getMe());
         getGameWindow().getServerProxy()->notify(didIWin);
     }
 }

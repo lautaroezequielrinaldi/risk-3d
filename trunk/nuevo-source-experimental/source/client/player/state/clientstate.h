@@ -1,6 +1,9 @@
 #ifndef __CLIENTSTATE_H__
 #define __CLIENTSTATE_H__
 
+#include<vector>
+#include<string>
+#include<sstream>
 #include "../../../common/model/pais.h"
 #include "../../../common/smartpointer/referencecountptr.h"
 
