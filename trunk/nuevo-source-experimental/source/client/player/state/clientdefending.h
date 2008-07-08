@@ -13,7 +13,10 @@ class ClientDefending: public ClientState {
          * Almacena el nombre del pais a defender.
          */
         std::string attackedCountry;
-
+        /**
+         * Almacena el Id del jugador atacante.
+         */
+        int attackerId;
     /**
      * Mètodos publicos de la clase ClientDefending.
      */
@@ -21,7 +24,7 @@ class ClientDefending: public ClientState {
         /**
          * Constructor de la clase ClientDefending.
          */
-        ClientDefending(GameWindow& gameWindow, const std::string& attackedCountry);
+        ClientDefending(GameWindow& gameWindow, const std::string& attackedCountry, const int& attackerId);
         /**
          * Procesa la seleccion de un pais.
          */
