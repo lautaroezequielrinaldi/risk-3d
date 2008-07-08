@@ -40,6 +40,7 @@ std::string Defend::serialize(){
 	defensaSeralizado = "<?xml version=\"1.0\"?><defender>";
 	
 	std::string xmlComando = serializeCommon(this->jugadorDefensor,this->jugadorAtacante);
+//	std::string xmlComando = serializeCommon(this->getFrom(),this->getTo());
 
 	std::string xmlDefend = "<pais-defensor>"+this->paisDefensor
 				+"</pais-defensor><cantidad-ejercitos>"+strCantEjercitos.str()+"</cantidad-ejercitos></defender>";
@@ -105,6 +106,8 @@ void* Defend::hydrate(const std::string & xml){
     cantE = xmlNodeGetContent(nodoCantEj);
     this->cantidadEjercitos = atoi((char*) cantE );    
 
+	this->jugadorAtacante = this->to;
+	this->jugadorDefensor = this->from;
 	
 	/*libero recursos*/
 	

@@ -106,6 +106,7 @@ void* Populate::hydrate(const std::string &xml){
     cantE = xmlNodeGetContent(nodoCantEj);
     this->cantidadEjercitos = atoi((char*) cantE);
 
+	this->jugadorFrom =  this->from;
 	
 	/*libero recursos*/
 

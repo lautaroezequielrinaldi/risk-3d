@@ -124,6 +124,7 @@ void* Move::hydrate(const std::string &xml){
     
     this->cantidadEjercitos = atoi((char*) cantE );
 
+	this->jugadorFrom  = this->from;
 	
 	/*libero recursos*/
 
