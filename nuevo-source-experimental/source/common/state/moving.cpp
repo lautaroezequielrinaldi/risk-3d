@@ -29,7 +29,7 @@ bool Moving::move(ServerMove & command){
 	
 	if( accionValida ){
 
-		cout<<"Estado: MOVIENDO"<<endl;
+		cerr<<"Movimiento valido, actualizando modelo....."<<endl;
 		
 		//actualiza modelo:
 		ReferenceCountPtr<Game> game = gameManager->getGame();
@@ -37,21 +37,26 @@ bool Moving::move(ServerMove & command){
 		ReferenceCountPtr<Pais> paisD = map->obtenerPais(command.getCountryDestination());
 		ReferenceCountPtr<Pais> paisO = map->obtenerPais(command.getCountryOrigin());
 		
+		cerr<<"pais origen: "<<paisO->getNombre()<<endl;
+		cerr<<"ejercitos a mover: "<<command.getArmyCount()<<endl;
+		cerr<<"pais destino: "<<paisD->getNombre()<<endl;
+		
 		// elimina la cantidad de ejercitos que mueve del pais origen
+		cerr<<" Eliminando ejercitos del pais origen....."<<endl;
 		paisO->removeArmies(command.getArmyCount());
 		
 		// agrega la cantidad de ejercitos que se mueven, al pais destino
+		cerr<<"Agregando ejercitos al pais destino....."<<endl;
 		paisD->addArmies(command.getArmyCount());
 	
-		cout<<"pais origen: "<<paisO->getNombre()<<endl;
-		cout<<"ejercitos a mover: "<<command.getArmyCount()<<endl;
-		cout<<"pais destino: "<<paisD->getNombre()<<endl;
-	
-
-		// -------- Para actualizar modelo y mensajear al cliente--------------
+		
+		// ----- mensajear al cliente--------------
+		cerr<<"Preparando mensajes para notificar al cliente....."<<endl;
 		
 		//seteo al commando como valido
 		command.setValid(1);
+		//seteo a quien se envia el mensaje principal
+		command.setTo( gameManager->getTurnManager()->getCurrentPlayer() );
 				
 		//seteo mje principal
    		strComodin << gameManager->getTurnManager()->getCurrentPlayer();
@@ -69,12 +74,14 @@ bool Moving::move(ServerMove & command){
 			
 		command.setSecMsg(secMsg);	
 		
+		cerr<<"Notificando al cliente sobre el movimiento....."<<endl;
 		//notifico cambios y mensajes
 		gameManager->notify(&command);
 		
-		//------- fin actualizacion modelo para cliente ------------------------
+		//------- fin mensaje para cliente -------------
 
 
+		cerr<<"Cambiando de turno....."<<endl;
 		//cambio de turno
 		this->gameManager->getTurnManager()->changeTurn();
 		
@@ -84,9 +91,12 @@ bool Moving::move(ServerMove & command){
 		//obtengo jugador actual ( el que jugara )
 		ReferenceCountPtr<Player> playerActual = game->getPlayer( this->gameManager->getTurnManager()->getCurrentPlayer() );
 		
+		cerr<<"Seteandole al jugador N°"<< calculadorBonus.getArmyBonus(this->gameManager) << " ejercitos de bonus....."<<endl;
+		
 		//le asigno al jugador que ahora tiene el turno, el bonus de ejercitos que usara para poblar.
 		playerActual->setArmyCount(calculadorBonus.getArmyBonus(this->gameManager));
 		
+		cerr<< "Cambiando de estado a Populating....." <<endl;
 		//cambio a proximo estado
 		this->gameManager->setCurrentState("populating");
 		
@@ -98,6 +108,8 @@ bool Moving::move(ServerMove & command){
 			
 		//seteo jugador al que le toca jugar.
 		vecParam.push_back(strComodin.str());
+			
+		cerr<<"Preparando comando TurnToPopulate para enviar al cliente....."<<endl;
 			
 		//creo comando para notificar
 		TurnToPopulate turnToPopulate(vecParam);
@@ -121,35 +133,39 @@ bool Moving::move(ServerMove & command){
 		
 		turnToPopulate.setSecMsg(secMsg);
 			
-		//notifico 
+		//notifico
+		cerr<<"Notificando al cliente sobre el TurnToPoplate......."<<endl; 
 		gameManager->notify(&turnToPopulate);		
 	
 
 		// crear comando turn to populate pasarle el armyCountBonus y el from y el to
 
-		cout<<"HORA DE POBLAR"<<endl;	
+		cout<<"Hora de poblar....."<<endl;	
 		cout<<"Juega el jugador: "<< playerActual->getColor()<<" con bonus: "<<playerActual->getArmyCount()<<endl;
 	
 	} 
 	else {
 	
+		
+		
 		command.setValid(0);
+		command.setTo( gameManager->getTurnManager()->getCurrentPlayer() );
 		
 		//seteo mje principal
 		std::string mainMsg = "Error! movimiento invalido ";
 		command.setMainMsg(mainMsg);
 		
 		//seteo mje secundario
-		strComodin << gameManager->getTurnManager()->getDefenderPlayer();
+		strComodin << gameManager->getTurnManager()->getCurrentPlayer();
 		
 		std::string secMsg = "El jugador * "+ strComodin.str() +" realizo un movimiento invalido";
 		command.setSecMsg(secMsg);	
-		
+				
 		//notifico cambios y mensajes
 		gameManager->notify(&command);		
+		
+		cerr<<"Movimiento invalido...."<<endl;
 	
-		//notificar error en tests
-		cout<<"movimiento invalido"<<endl;
 	}
 
 

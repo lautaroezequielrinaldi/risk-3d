@@ -115,9 +115,10 @@ bool Defending::defend(ServerDefend & command){
 	//defensa invalida
 	else {
 		
+				
 		command.setValid(0);
-		//command.setTo(gameManager->getTurnManager()->getDefenderPlayer());//al defensor
-		//command.setFrom(0);
+		command.setTo(gameManager->getTurnManager()->getDefenderPlayer());//al defensor
+		command.setFrom(0);
 		
 		//seteo mje principal
 		std::string mainMsg = "Error! Defensa invalida ";
@@ -132,6 +133,7 @@ bool Defending::defend(ServerDefend & command){
 		//notifico cambios y mensajes
 		gameManager->notify(&command);	
 		
+		cerr<<"Defensa invalida....."<<endl;
 	}
 	
 	return accionValida;	

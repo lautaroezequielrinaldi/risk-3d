@@ -31,7 +31,8 @@ bool Populating::populate(ServerPopulate & command){
 	//si la accion es valida
 	if (accoinValida){
 		
-		cerr<<"Estado: populating"<<endl;
+		cerr<<"Poblamiento valido..."<<endl;
+		
 		cerr<<"Jugador: "<<gameManager->getTurnManager()->getCurrentPlayer()<<endl;
 		
 		//actualiza modelo:
@@ -44,23 +45,33 @@ bool Populating::populate(ServerPopulate & command){
 		cerr<<"ejercitos antes de poblar: "<<paisD->getArmyCount()<<endl;
 		cerr<<"Cantidad de ejercitos a ubicar: "<<command.getArmyCount() <<endl;
 		
+		std::cerr << "Agregando ejercitos a pais destino..." << std::endl;
+		
 		//agrego al pais destino la cantidad de ejercitos solicitados
 		paisD->addArmies(command.getArmyCount() );
 		
 		//obtengo jugador actual 
 		ReferenceCountPtr<Player> playerActual = game->getPlayer( this->gameManager->getTurnManager()->getCurrentPlayer() );
 		
+		std::cerr << "Calculando cantidad de ejercitos restantes que tiene para poblar" << std::endl;
+		
 		//calculo ejercitos restantes del jugador actual, restandole los que se ubucaron en esta ronda.
 		int ejercitosRestantes = playerActual->getArmyCount() - command.getArmyCount();
+		
+		std::cerr << "Seteandole al jugador la cantidad de ejercitos restantes que tiene para poblar" << std::endl;
 		
 		//seteo al jugador actual la cant de ejercitos que le quedan por ubicar
 		playerActual->setArmyCount( ejercitosRestantes );
 		
-		// -------- Para actualizar modelo y mensajear al cliente--------------
+		// -------- mensajear al cliente--------------
+		
+		std::cerr << "Preparando mensajes para los clientes...." << std::endl;
 		
 		//seteo al commando como valido
 		command.setValid(1);
-		
+		command.setTo( playerActual->getColor() );
+		command.setFrom(0);
+				
 		//seteo mje principal
 		std::ostringstream strEjer;
 		strEjer << command.getArmyCount();
@@ -76,7 +87,7 @@ bool Populating::populate(ServerPopulate & command){
 		//notifico cambios y mensajes
 		gameManager->notify(&command);
 		
-		//------- fin actualizacion modelo para cliente ------------------------
+		//------- fin mensajes para cliente ------------------------
 		
 		//para tests		
 		cerr<<"ejercitos despues de poblar: "<<paisD->getArmyCount()<<endl;
@@ -86,8 +97,13 @@ bool Populating::populate(ServerPopulate & command){
 		// si luego de actualizar cant de ejercitos restantes del jugador, se quedo en cero.
 		if ( playerActual->getArmyCount() == 0 ){
 
+			std::cerr << "el jugador se quedo sin ejercitos para poblar..." << std::endl;
+			std::cerr << "Cambiando estado a attacking......." << std::endl;
+
 			//cambio al proximo estado: attacking
 			gameManager->setCurrentState("attacking");
+			
+			std::cerr << "Preparando comando turnToAttck para enviar...." << std::endl;
 			
 			//preparo parametros para turnToPopulate  ( simple )
 			std::vector<string> vecParam;
@@ -110,7 +126,8 @@ bool Populating::populate(ServerPopulate & command){
 			//notifico 
 			gameManager->notify(&turnToAttack);	
 				
-			cerr<<"HORA DE ATACAR"<<endl;
+				
+			cerr<<"Hora de atacar...."<<endl;
 		}
 		
 	}
