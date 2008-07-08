@@ -24,6 +24,7 @@ void ClientState::executeQuit() {
         getGameWindow().getServerProxy()->notify(quit);
         getGameWindow().stopMainLoop();
     }
+    getGameWindow().stopMainLoop();
 }
 
 void ClientState::executeSurrender() {

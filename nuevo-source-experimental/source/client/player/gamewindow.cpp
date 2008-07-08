@@ -8,6 +8,7 @@ GameWindow::GameWindow(const ReferenceCountPtr<ServerProxy>& serverProxy):
     serverProxy(serverProxy),
     mainLoopRunning(true),
     uiState(),
+    didIWinButton(uiState),
     noMoreButton(uiState),
     surrenderButton(uiState),
     quitButton(uiState),
@@ -66,7 +67,16 @@ void GameWindow::initializeOpenGL() {
     // Da perspectiva
     gluPerspective(60.0, 1.33, 0.1, 100.0);
 
-    // Establezco tamaño de boton iquit y posicion.
+    // Establezco tamaño de boton did i win y posicion.
+    didIWinButton.setX(0);
+    didIWinButton.setY(330);
+    didIWinButton.setWidth(200);
+    didIWinButton.setHeight(100);
+    didIWinButton.setVisible(true);
+    didIWinButton.setEnabled(true);
+    didIWinButton.setText("DID I WIN");
+
+    // Establezco tamaño de boton no more y posicion.
     noMoreButton.setX(0);
     noMoreButton.setY(220);
     noMoreButton.setWidth(200);
@@ -75,7 +85,7 @@ void GameWindow::initializeOpenGL() {
     noMoreButton.setEnabled(true);
     noMoreButton.setText("END ACTION");
 
-    // Establezco tamaño de boton iquit y posicion.
+    // Establezco tamaño de boton surrender y posicion.
     surrenderButton.setX(0);
     surrenderButton.setY(110);
     surrenderButton.setWidth(200);
@@ -84,7 +94,7 @@ void GameWindow::initializeOpenGL() {
     surrenderButton.setEnabled(true);
     surrenderButton.setText("SURRENDER");
 
-    // Establezco tamaño de boton iquit y posicion.
+    // Establezco tamaño de boton quit y posicion.
     quitButton.setX(0);
     quitButton.setY(0);
     quitButton.setWidth(200);
@@ -95,7 +105,7 @@ void GameWindow::initializeOpenGL() {
 
     // Establece tamaño de label y posicion
     hooverCountryLabel.setX(0);
-    hooverCountryLabel.setY(440);
+    hooverCountryLabel.setY(550);
     hooverCountryLabel.setWidth(200);
     hooverCountryLabel.setHeight(100);
     hooverCountryLabel.setVisible(false);
@@ -103,7 +113,7 @@ void GameWindow::initializeOpenGL() {
 
    // Establece tamaño de label y posicion
     hooverUnitLabel.setX(0);
-    hooverUnitLabel.setY(330);
+    hooverUnitLabel.setY(440);
     hooverUnitLabel.setWidth(200);
     hooverUnitLabel.setHeight(100);
     hooverUnitLabel.setVisible(false);
@@ -197,6 +207,11 @@ void GameWindow::drawScene() {
         hooverUnitLabel.doProcess();
     }
 
+    // Dibuja y procesa boton de did i win.
+    if ( didIWinButton.doProcess() ) {
+        state->executeDidIWin();
+    }
+
     // Dibuja y procesa boton de no more.
     if ( noMoreButton.doProcess() ) {
         state->executeNoMore();
@@ -246,7 +261,7 @@ void GameWindow::processMouseMotion(const SDL_MouseMotionEvent& event) {
 void GameWindow::processKeyDown(const SDL_KeyboardEvent& event)  {
     uiState.setKeyPressed(event.keysym.sym, true);
     if ( uiState.getKeyPressed(SDLK_ESCAPE) ) {
-        disconnectAndQuit();
+       state->executeQuit(); 
     }
 }
 
