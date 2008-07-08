@@ -20,6 +20,9 @@ class Command;
 class ServerProxy:public CommandObservable, public Proxy {
     
     private:
+    
+    		
+    
     		/**
     		 * Almacena una referencia al juego"
     		 */
@@ -69,6 +72,7 @@ class ServerProxy:public CommandObservable, public Proxy {
 			void * run();
 
 	public:
+	
 			
 			/**
 			 * Constructor de la clase.

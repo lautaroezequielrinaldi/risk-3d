@@ -5,7 +5,7 @@
 
 void * ServerProxy::run() {
 	
-	while (! isCanceled()) {
+	while (! isCanceled() ) {
 		
 		std::stringstream msg;
 		unsigned int msgLen;
@@ -94,6 +94,7 @@ commandHydrator(game),
 messageHydrator() {
 	
 	this->me =0;
+
 	
 }
 

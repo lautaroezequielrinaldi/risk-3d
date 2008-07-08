@@ -121,7 +121,7 @@ void PreGameWindow::showConnectionDialog() {
 			serverProxy->notify(*cmd);
 			delete cmd;
 			
-			std::cerr<<"paso envio de joinGame"<<std::endl;
+			
 			
 			sendMessageButton.set_sensitive(true);
 			readyToPlayButton.set_sensitive(false);
@@ -131,7 +131,7 @@ void PreGameWindow::showConnectionDialog() {
 			
 			serverProxy->start();
 
-			
+			std::cerr<<"INICIO THREAD"<<std::endl;
 			connected = true;
 			
 		} catch (SocketConnectionException& exception) {
@@ -179,13 +179,16 @@ void PreGameWindow::onQuitButtonClicked() {
 	if (connected) {
 		//Quit cmd;
 	    //serverProxy->notify(cmd);	
-		serverProxy->cancel();
-		this->serverProxy->join();
+		//serverProxy->cancel();
+		//this->serverProxy->join();
+		//	Gtk::Main::quit();
 		this->serverProxy->kill();
-
+		//serverProxy->meTenesHarta = false;
 	}
-	hasQuit = true;
-//	Gtk::Main::quit();
+	//std::cerr<<"llegue a quit!!!!!!!!!!!!!!!!!!!!!!"<<std::endl;
+	
+	//hasQuit = true;
+
 }
 
 bool PreGameWindow::userHasQuit() {
@@ -205,7 +208,7 @@ void PreGameWindow::commandExecuted(Map & cmd){
 	//grabo en el archivo el mapa que trajo el comando.
 	std::string contenido ( cmd.getMap() );
 	
-	std::cerr<<"CONTENIDO:"<< std::endl << contenido << std::endl;
+	//std::cerr<<"CONTENIDO:"<< std::endl << contenido << std::endl;
 	
 	fileTempMapa <<  contenido;
 	
@@ -224,6 +227,10 @@ void PreGameWindow::commandExecuted(Map & cmd){
 	
 	std::cerr<<"Termino de cargar el mapa en todos los clientes....."<<std::endl;
 	
+	//oculta pre sala
+	this->hide();
+	
+    iniciarOpenGL();
 	
 }
 
@@ -316,15 +323,15 @@ void PreGameWindow::on_no_room_arrival(){
 
 void PreGameWindow::on_Ready_to_play_arrival(){
 	
-			
+/*			
 	//creacion del dialogo de ready to play para todos.
 	Gtk::Dialog selectMapDialog("-Aviso-");
 	Gtk::Label readyLabel("Todos los jugadores estan listos para jugar,Se Pasara a modo juego");	
 	selectMapDialog.get_vbox()->add(readyLabel);
 	selectMapDialog.add_button(Gtk::Stock::OK, Gtk::RESPONSE_OK);
 	selectMapDialog.show_all();
-	selectMapDialog.run();
-	
+	int resul = selectMapDialog.run();
+*/
 	
 	//creo todos los players en el game del serverProxy
 	for (int i=0; i < this->readyToPlay->getTo() ; i++){
@@ -333,25 +340,17 @@ void PreGameWindow::on_Ready_to_play_arrival(){
 		std::cerr<<"Se creo jugador numero "<<i+1<<"en game del ServerProxy....."<<std::endl;
 	} 
 	
+
+}
+
+void PreGameWindow::iniciarOpenGL(){
 	
-	//se cierra pre sala
-
-	//Gtk::Main::quit();
-	//Gtk::Main::quit();
-
-	//se abre vista 3d
-
-	//int argc;
-	//char** argv;
-
-     //GameWindow gameWindow; 
-    // gameWindow.run(argc, argv);
-    
+		GameWindow gameWindow(this->serverProxy); 
 	
-
-    Gtk::Main::quit();
-    Gtk::Main::quit();
-
+		char* argv = "risk3d-client";
+	
+    	gameWindow.run(1, &argv);	
+	
 }
 
 void PreGameWindow::on_map_list_selection(){

@@ -137,7 +137,7 @@ void GameManager::execute(const std::string & commandName,const std::string &com
 	
 	std::cerr << "GameManager::execute( " << commandName << ")"<< std::endl;
 
-	std::cout << commandName << " -> execute("<< currentState->getName()<<")" <<std::endl << std::endl;
+	std::cerr << commandName << " -> execute("<< currentState->getName()<<")" <<std::endl << std::endl;
 	
 	ServerCommand* command = commandHydrator->getCommand(commandName,commandXml);
 	
@@ -145,6 +145,7 @@ void GameManager::execute(const std::string & commandName,const std::string &com
 		// Notifica a los listeners del comando.
 		CommandObservable::notifyCommandExecuted(*command);
 
+	
 	
 	// se hace un lock para que se ejecute un comando por vez nada mas.
 	this->mutex.lock();

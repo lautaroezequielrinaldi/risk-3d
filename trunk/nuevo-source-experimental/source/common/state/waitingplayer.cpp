@@ -92,10 +92,17 @@ bool WaitingPlayer::readyToPlay(ServerReadyToPlay & command){
 		
 		
 		//cambio a proximo estado que es ocupar
-		this->gameManager->getStateMachine()->setState("Occupying");
+		this->gameManager->getStateMachine()->setState("occupying");
 	
 		std::cerr << "Cambio el estado a 'Occupying'" << std::endl;
 		//ver turn tu occuppy
+		
+		//sorteo a ver que jugador empieza la ronda
+		int jugadorEmpieza = this->gameManager->getGame()->getDice().roll( this->gameManager->getTurnManager()->getActivePlayerCount() );
+		
+		this->gameManager->getTurnManager()->setTurnOrder(jugadorEmpieza );
+		
+		std::cerr<< " Por sorteo empezara a jugar el jugador N° " << jugadorEmpieza << std::endl;
 		
 	}	
 	

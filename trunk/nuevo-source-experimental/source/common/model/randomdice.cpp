@@ -3,6 +3,8 @@
 #include <time.h>
 #include <stdio.h>
 
+#include <iostream>
+using namespace std;
 
 RandomDice::RandomDice():
 Dice()
@@ -41,6 +43,8 @@ int RandomDice::roll(int maxLimit){
 	valor = rand();
 	// aplico mod maxLimit  al numero devuelto por random y sumo 1 para que me devuelva un numero entre 1 y maxLimit
 	res = (valor % maxLimit)+1;
+	
+	cerr<<"Pos random devuelta: "<< res << endl;
 	
 	return res;
 	
