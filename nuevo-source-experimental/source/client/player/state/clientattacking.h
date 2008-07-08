@@ -2,6 +2,7 @@
 #define __CLIENTATTACKING_H__
 
 #include "clientstate.h"
+#include "clientwaiting.h"
 
 class ClientAttacking: public ClientState {
     /**

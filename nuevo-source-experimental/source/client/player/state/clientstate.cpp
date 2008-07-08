@@ -1,4 +1,5 @@
 #include "clientstate.h"
+#include "clientwaiting.h"
 #include "../gamewindow.h"
 
 ClientState::ClientState(GameWindow& gameWindow): gameWindow(gameWindow), armyCount(0), armyIncrement(-1) {
@@ -34,6 +35,8 @@ void ClientState::executeSurrender() {
         Surrender surrender;
         surrender.setFrom(getGameWindow().getServerProxy()->getMe());
         getGameWindow().getServerProxy()->notify(surrender);
+        ReferenceCountPtr<ClientState> waiting = new ClientWaiting(getGameWindow());
+        getGameWindow().setState(waiting);
     }
 }
 
@@ -48,6 +51,8 @@ void ClientState::executeNoMore() {
         NoMore noMore(parameters);
         noMore.setFrom(getGameWindow().getServerProxy()->getMe());
         getGameWindow().getServerProxy()->notify(noMore);
+        ReferenceCountPtr<ClientState> waiting = new ClientWaiting(getGameWindow());
+        getGameWindow().setState(waiting);
     }
 }
 

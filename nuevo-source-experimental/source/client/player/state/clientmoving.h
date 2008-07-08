@@ -2,6 +2,7 @@
 #define __CLIENTMOVING_H__
 
 #include "clientstate.h"
+#include "clientwaiting.h"
 
 class ClientMoving: public ClientState {
     /**

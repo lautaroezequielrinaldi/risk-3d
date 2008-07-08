@@ -36,7 +36,9 @@ void * ServerProxy::run() {
             std::cerr << "Ejecutando comando..." << std::endl;
             
             if (command != NULL) {
-                command->execute();
+                if (command->isValid()) {
+                    command->execute();
+                }
             }
             std::cerr << "Se pudo ejecutar comando..." << std::endl;
            

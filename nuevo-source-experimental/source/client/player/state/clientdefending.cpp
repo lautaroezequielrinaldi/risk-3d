@@ -37,6 +37,8 @@ void ClientDefending::executeNoMore() {
         defend.setFrom(getGameWindow().getServerProxy()->getMe());
         defend.setTo(attackerId);
         getGameWindow().getServerProxy()->notify(defend);
+        ReferenceCountPtr<ClientState> waiting = new ClientWaiting(getGameWindow());
+        getGameWindow().setState(waiting);
     }
 }
 
