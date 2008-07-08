@@ -186,7 +186,7 @@ bool SimplePopulating::populate(ServerPopulate & command){
 			// si luego de actualizar cant de ejercitos restantes del jugador q  poblo, se quedo en cero.
 			if ( playerActual->getArmyCount() == 0 ){
 
-				std::cerr << "Jugador N°"<< playerActual.getColor()<< " termino de poblar inicial." << std::endl;
+				std::cerr << "Jugador N°"<< playerActual->getColor()<< " termino de poblar inicial." << std::endl;
 
 				std::cerr << "Cambiando de turno....." << std::endl;
 		
