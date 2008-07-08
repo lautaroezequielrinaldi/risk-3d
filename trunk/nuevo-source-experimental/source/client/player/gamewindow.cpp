@@ -133,7 +133,7 @@ void GameWindow::initializeOpenGL() {
     messageLabel.setText("Mensaje de prueba");
 
     // Cargo las texturas de la esfera.
-    sphere.getTexture().load("mapa.jpg");
+    sphere.getTexture().load("./image");
 }
 
 void GameWindow::terminateSDL() {
