@@ -8,6 +8,10 @@
 #include "net/serverproxy.h"
 #include "state/clientstate.h"
 #include "state/clientwaiting.h"
+#include "state/clientdefending.h"
+#include "state/clientattacking.h"
+#include "state/clientpopulating.h"
+#include "state/clientmoving.h"
 #include "../../common/smartpointer/referencecountptr.h"
 #include "../../common/commands/commandobserver.h"
 
@@ -169,6 +173,48 @@ class GameWindow: public CommandObserver {
          * Pone a correr la ventana principal del juego.
          */
         int run(int argc, char** argv);
+		/**
+		 * Responde ante la llegada de un comando Attack.
+		 */		
+		void commandExecuted(Attack& cmd);
+		/**
+		 * Responde ante la llegada de un comando BattleResult.
+		 */				
+		void commandExecuted(BattleResult& cmd);
+		/**
+		 * Responde ante la llegada de un comando Defend.
+		 */				
+		void commandExecuted(Defend& cmd);
+		/**
+		 * Responde ante la llegada de un comando Move.
+		 */				
+		void commandExecuted(Move& cmd);
+		/**
+		 * Responde ante la llegada de un comando Populate.
+		 */				
+		void commandExecuted(Populate& cmd);
+		/**
+		 * Responde ante la llegada de un comando Surrender.
+		 */				
+		void commandExecuted(Surrender& cmd);
+		/**
+		 * Responde ante la llegada de un comando TurnToAttack
+		 */				  
+		void commandExecuted(TurnToAttack& cmd);
+		/**
+		 * Responde ante la llegada de un comando TurnToMove.
+		 */		
+		void commandExecuted(TurnToMove& cmd);
+		/**
+		 * Responde ante la llegada de un comando TurnToOccupy.
+		 */				
+		void commandExecuted(TurnToOccupy& cmd);
+		/**
+		 * Responde ante la llegada de un comando TurnToPopulate.
+		 */				
+		void commandExecuted(TurnToPopulate& cmd);
+
+
 };
   
 #endif /** __GAMEWINDOW_H__ */

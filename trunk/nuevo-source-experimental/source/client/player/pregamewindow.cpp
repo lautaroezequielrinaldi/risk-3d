@@ -335,8 +335,23 @@ void PreGameWindow::on_Ready_to_play_arrival(){
 	
 	
 	//se cierra pre sala
+
+	//Gtk::Main::quit();
+	//Gtk::Main::quit();
+
+	//se abre vista 3d
+
+	//int argc;
+	//char** argv;
+
+     //GameWindow gameWindow; 
+    // gameWindow.run(argc, argv);
+    
+	
+
     Gtk::Main::quit();
     Gtk::Main::quit();
+
 }
 
 void PreGameWindow::on_map_list_selection(){

@@ -345,3 +345,126 @@ int GameWindow::run(int argc, char** argv) {
     }
 }
 
+
+	
+void GameWindow::commandExecuted(Attack& cmd){
+	
+	if( this->serverProxy->getMe() == cmd.getTo() )
+		messageLabel.setText(cmd.getMainMsg());
+	else
+		messageLabel.setText(cmd.getSecMsg());
+	
+	if ( cmd.isValid() ){
+		//cambia de estado a defending
+		ReferenceCountPtr<ClientState> defending = new ClientDefending(*this, cmd.getAttackedLand(), cmd.getFrom() );
+		this->setState(defending);
+	}
+	//sino fue valido el ataque queda en mismo estado.
+	
+	
+		
+}
+void GameWindow::commandExecuted(Defend& cmd){
+
+	if( this->serverProxy->getMe() == cmd.getTo() )
+		messageLabel.setText(cmd.getMainMsg());
+	else
+		messageLabel.setText(cmd.getSecMsg());
+		
+	//si llega un defend es xq el anterior fue invalido. Queda en mismo estado defending
+}
+
+void GameWindow::commandExecuted(BattleResult& cmd){
+
+	//se muestra a todos el mismo mensaje
+	messageLabel.setText(cmd.getMainMsg());
+	
+	//cambia a estado attacking
+	ReferenceCountPtr<ClientState> attacking = new ClientAttacking(*this);
+	this->setState(attacking);
+	
+}
+
+void GameWindow::commandExecuted(TurnToMove& cmd){
+	
+	if( this->serverProxy->getMe() == cmd.getTo() )
+		messageLabel.setText(cmd.getMainMsg());
+	else
+		messageLabel.setText(cmd.getSecMsg());
+		
+	//cambiar a estado moving
+	ReferenceCountPtr<ClientState> moving = new ClientMoving(*this);
+	this->setState(moving);
+}
+
+
+void GameWindow::commandExecuted(Move& cmd){
+   
+   	if( this->serverProxy->getMe() == cmd.getTo() )
+		messageLabel.setText(cmd.getMainMsg());
+	else
+		messageLabel.setText(cmd.getSecMsg());
+		
+	if ( cmd.isValid() ){	
+		//cambia estado a populating 
+		ReferenceCountPtr<ClientState> popu = new ClientPopulating(*this);
+		this->setState(popu);
+	}
+	//sino es valido sigo en mismo estado
+}
+
+void GameWindow::commandExecuted(Populate& cmd){
+
+	if( this->serverProxy->getMe() == cmd.getTo() )
+		messageLabel.setText(cmd.getMainMsg());
+	else
+		messageLabel.setText(cmd.getSecMsg());
+		
+	//no cambia de estado, sigue en el mismo porque le quedan ejercitos para poblar.
+}
+
+void GameWindow::commandExecuted(Surrender& cmd){
+
+	//muestra a todos el mismo
+	messageLabel.setText(cmd.getMainMsg());
+	
+	//cambia a estado waiting
+	ReferenceCountPtr<ClientState> waiting = new ClientWaiting(*this);
+	this->setState(waiting);
+
+} 
+  
+void GameWindow::commandExecuted(TurnToAttack& cmd){
+
+	if( this->serverProxy->getMe() == cmd.getTo() )
+		messageLabel.setText(cmd.getMainMsg());
+	else
+		messageLabel.setText(cmd.getSecMsg());
+	
+	//cambia a estado attacking
+	ReferenceCountPtr<ClientState> attacking = new ClientAttacking(*this);
+	this->setState(attacking);
+}
+
+void GameWindow::commandExecuted(TurnToOccupy& cmd){
+   
+	if( this->serverProxy->getMe() == cmd.getTo() )
+		messageLabel.setText(cmd.getMainMsg());
+	else
+		messageLabel.setText(cmd.getSecMsg());
+	
+	//pasar a estado occupying   ??????????????
+}
+
+void GameWindow::commandExecuted(TurnToPopulate& cmd){
+
+	if( this->serverProxy->getMe() == cmd.getTo() )
+		messageLabel.setText(cmd.getMainMsg());
+	else
+		messageLabel.setText(cmd.getSecMsg());
+		
+	//cambia estado a populating 
+	ReferenceCountPtr<ClientState> popu = new ClientPopulating(*this);
+	this->setState(popu);	
+}
+

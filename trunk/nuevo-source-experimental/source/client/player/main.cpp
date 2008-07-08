@@ -14,6 +14,10 @@ int main(int argc, char** argv) {
     sleep(2000);*/
   
 
+	Gtk::Main::quit();
+
+
+
     GameWindow gameWindow; 
     return gameWindow.run(argc, argv);
 }

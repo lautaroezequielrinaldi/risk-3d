@@ -76,7 +76,8 @@ bool Defending::defend(ServerDefend & command){
 			
 		//seteo los mensajes
 		resultadoBatalla.setValid(1);
-		resultadoBatalla.setTo(gameManager->getTurnManager()->getCurrentPlayer());//atacante
+		//resultadoBatalla.setTo(gameManager->getTurnManager()->getCurrentPlayer());//atacante
+		resultadoBatalla.setTo(0);
 		resultadoBatalla.setFrom(0);
 
 				

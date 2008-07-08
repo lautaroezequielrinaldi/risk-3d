@@ -42,7 +42,8 @@ std::string Attack::serialize(){
 
 	ataqueSeralizado = "<?xml version=\"1.0\"?><atacar>";
 	
-	std::string xmlComando = serializeCommon(this->jugadorAtacante, this->jugadorDefensor);
+//	std::string xmlComando = serializeCommon(this->jugadorAtacante, this->jugadorDefensor);
+	std::string xmlComando = serializeCommon(this->getFrom(), this->getTo());
 
 	std::string xmlAttack = "<pais-atacante>"+this->paisAtacante+"</pais-atacante><pais-atacado>"+this->paisAtacado
 				+"</pais-atacado><cantidad-ejercitos>"+strCantEjercitos.str()+"</cantidad-ejercitos></atacar>";
