@@ -167,7 +167,9 @@ bool State::surrender(ServerSurrender & command){
 		
 		//seteo al commando como valido
 		command.setValid(1);
-		command.setTo(colorJugadorSuertudo);
+		//command.setTo(colorJugadorSuertudo);
+		//a todos
+		command.setTo(0);
 		//from queda igual
 				
 		//seteo mje principal

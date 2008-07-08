@@ -120,7 +120,7 @@ bool Occupying::populate(ServerPopulate & command){
 			turnToFirstPopu.setTo(gameManager->getTurnManager()->getCurrentPlayer());
 			turnToFirstPopu.setFrom(0);
 			
-			turnToFirstPopu.setMainMsg("Tenes el turno para poblar");
+			turnToFirstPopu.setMainMsg("Todos los Paises fueron ocupados. Tenes el turno para poblar");
    			
 			std::string secMsg = "Todos los Paises fueron ocupados. El jugador * " + strComodin.str() + " * esta poblando";
 			turnToFirstPopu.setSecMsg(secMsg);
