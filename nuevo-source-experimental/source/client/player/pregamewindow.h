@@ -210,6 +210,8 @@ class PreGameWindow: public CommandObserver, public Gtk::Window {
 		 */
 		int getActivePlayerCount();
 			
+		void iniciarOpenGL();
+			
 		/**
 		 * Destructor virtual de la clase PreGameWindow.
 		 */

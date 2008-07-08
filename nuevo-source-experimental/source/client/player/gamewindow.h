@@ -152,7 +152,8 @@ class GameWindow: public CommandObserver {
         /**
          *  Constructor de la clase GameWindow.
           */
-        GameWindow(const ReferenceCountPtr<ServerProxy>& = NULL);
+        //GameWindow(const ReferenceCountPtr<ServerProxy>& = NULL);
+        GameWindow(const ReferenceCountPtr<ServerProxy>& serverProxy);
         /**
          * Destructor virtual de la clase GameWindow.
          */

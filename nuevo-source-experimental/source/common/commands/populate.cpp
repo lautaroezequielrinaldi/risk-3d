@@ -8,7 +8,7 @@ using namespace std;
 
 Populate::Populate(std::vector<std::string> &parameterList) : Command ()
 {
-	cout<<"llego"<<endl;
+
 	this->paisDestino = parameterList[0];
 	this->cantidadEjercitos = atoi( parameterList[1].c_str() );
 	this->jugadorFrom = atoi( parameterList[2].c_str() );

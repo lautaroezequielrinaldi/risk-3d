@@ -4,6 +4,10 @@
 #include<iostream>
 #include "../../common/parser/mapaparser.h"
 #include "../../common/model/randomdice.h"
+
+#include <iostream>
+using namespace std;
+
 GameWindow::GameWindow(const ReferenceCountPtr<ServerProxy>& serverProxy):
     serverProxy(serverProxy),
     mainLoopRunning(true),
@@ -44,7 +48,7 @@ bool GameWindow::initializeSDL(int argc, char** argv) {
     // Creo una ventana
     SDL_Surface* screen = SDL_SetVideoMode( SDL_GetVideoInfo()->current_w,
         SDL_GetVideoInfo()->current_h, SDL_GetVideoInfo()->vfmt->BitsPerPixel,
-            SDL_OPENGL | SDL_FULLSCREEN );
+            SDL_OPENGL  ); //| SDL_FULLSCREEN
     if ( screen == NULL ) {
         return false;
     }
@@ -425,21 +429,27 @@ void GameWindow::commandExecuted(Populate& cmd){
 
 void GameWindow::commandExecuted(Surrender& cmd){
 
+	cerr<<"En commandExecute ( Surrender )"<<endl;
+	
 	//muestra a todos el mismo
 	messageLabel.setText(cmd.getMainMsg());
 	
 	//cambia a estado waiting
 	ReferenceCountPtr<ClientState> waiting = new ClientWaiting(*this);
 	this->setState(waiting);
+	
+	cerr<<"deberia mostrarse en los clientes el mensaje de surrender..."<<endl;
 
 } 
   
 void GameWindow::commandExecuted(TurnToAttack& cmd){
 
+	
 	if( this->serverProxy->getMe() == cmd.getTo() )
 		messageLabel.setText(cmd.getMainMsg());
 	else
 		messageLabel.setText(cmd.getSecMsg());
+
 	
 	//cambia a estado attacking
 	ReferenceCountPtr<ClientState> attacking = new ClientAttacking(*this);

@@ -140,10 +140,16 @@ bool State::noMore(ServerNoMore & command){
 
 bool State::surrender(ServerSurrender & command){
 	
+	cerr<<"State::surrender..."<<endl;
+	
 	std::ostringstream strComodin, strComodin2 ;
+	
+	cerr<<"intentando eliminar de la lista de players activos al jugador "<<command.getFrom() <<endl;
 	
 	//desactivo al jugador de la lista de turnos del juego - from: player q se rinde
 	this->gameManager->getTurnManager()->deletePlayer(command.getFrom());
+	
+	cerr<<"Player eliminado.."<<endl;
 	
 	//se sortea el jugador que se quedara con los paises conquistados por el jugador que se rinde.
 	RandomDice dado; 
@@ -151,17 +157,25 @@ bool State::surrender(ServerSurrender & command){
 	//tiro dados pidiendo un numero entre 1 y la cantidd de players activos.
 	int posRandom = dado.roll( this->gameManager->getTurnManager()->getActivePlayerCount() );
 	
+	//si solo queda un jugador posRandom debe ser 0 porque funcionara como indice de vector de players activos.
+	if ( posRandom == 1 &&  this->gameManager->getTurnManager()->getActivePlayerCount() == 1 )
+		posRandom--;
+	
 	/* obtengo el color del jugador de la posRandom que se obtuvo, del vector que maneja el turnManager
 	   esto es necesario ya que pueden quedar jugadores con ids: 1 3 6 con lo cual no se puede pedir directo un
 	   jugador random ya que solo podrian aceptarse esos 3 valores, en cambio al pedir la pos. del vector random
 	   se puede pedir una posRandom con un limiteMaximo = cant jugadores activos que tiene el turnManager.
-	 */ 
+	 */ 	 
 	int colorJugadorSuertudo = this->gameManager->getTurnManager()->getColorPlayer(posRandom);
+	
+	cerr<<"Jugador suertudo: " << colorJugadorSuertudo <<endl;
 	
 	ReferenceCountPtr<Player> jugadorSuertudo = gameManager->getGame()->getPlayer(colorJugadorSuertudo);
 	ReferenceCountPtr<Player> jugadorRendido =  gameManager->getGame()->getPlayer(command.getFrom());
 	
 	jugadorSuertudo->transferLandsFrom(jugadorRendido);
+	
+	cerr<<"se trasfirieron las tierras al jugador: " << colorJugadorSuertudo << endl;
 	
 		// ---- mensajea al cliente --------------
 		
@@ -169,16 +183,16 @@ bool State::surrender(ServerSurrender & command){
 		command.setValid(1);
 		//command.setTo(colorJugadorSuertudo);
 		//a todos
-		command.setTo(0);
+		command.setTo(colorJugadorSuertudo);
 		//from queda igual
 				
 		//seteo mje principal
-   		strComodin << gameManager->getTurnManager()->getCurrentPlayer();
+   		strComodin << command.getFrom();
 		strComodin2 << colorJugadorSuertudo;
 		
 		//mje para el defensor, para TO
-		std::string mainMsg = "El jugador * " +strComodin.str() +"se rindio y por sorteo, el jugador "+ strComodin2.str()+
-							  "gano todos sus paises";
+		std::string mainMsg = "El jugador * " +strComodin.str() +" * se rindio y por sorteo, el jugador "+ strComodin2.str()+
+							  " gano todos sus paises";
 		
 		command.setMainMsg(mainMsg);
 		command.setSecMsg("");	
