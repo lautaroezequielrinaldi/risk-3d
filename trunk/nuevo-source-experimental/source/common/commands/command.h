@@ -16,7 +16,7 @@ class CommandObserver;
  */ 
 class Command : public Serializable
 {
-	private:
+	protected:
 	
 		int to;
 		int from;
