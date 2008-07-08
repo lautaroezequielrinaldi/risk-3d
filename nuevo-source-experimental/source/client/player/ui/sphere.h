@@ -96,7 +96,7 @@ class Sphere: public Textured {
         /**
          * Obtiene el pais bajo el cursor.
          */
-        ReferenceCountPtr<Pais> getHooverCountry();
+        ReferenceCountPtr<Pais>& getHooverCountry();
         /**
          * Hace update.
          */
