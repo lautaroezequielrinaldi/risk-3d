@@ -8,7 +8,16 @@ ClientPopulating::ClientPopulating(GameWindow& gameWindow):
 
 void ClientPopulating::selectCountry(ReferenceCountPtr<Pais>& country) {
     if (getGameWindow().getServerProxy() != NULL) {
-        Populate populate;
+        std::vector<std::string> parameters;
+        std::ostringstream playerStr;
+
+        playerStr << getGameWindow().getServerProxy()->getMe();
+
+        parameters.push_back(country->getNombre());
+        parameters.push_back("1");
+        parameters.push_back(playerStr.str());
+
+        Populate populate(parameters);
         getGameWindow().getServerProxy()->notify(populate);
     }
 }
