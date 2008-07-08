@@ -109,7 +109,7 @@ bool Attacking::attack(ServerAttack & command){
 		
 	
 		//notificar error
-		cerr<<"ataque invalido"<<endl;
+		cerr<<"ataque invalido......"<<endl;
 	}
 		
 	return accionValida;	

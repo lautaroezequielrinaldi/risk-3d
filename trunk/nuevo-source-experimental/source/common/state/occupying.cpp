@@ -22,6 +22,8 @@ Occupying::~Occupying()
 
 bool Occupying::populate(ServerPopulate & command){
 	
+	std::cerr << "Evento Occupyinhg::populate" << std::endl;	
+	
 	std::ostringstream strComodin;
 
 	bool accionValida = command.validateOccupy(this->gameManager);
@@ -35,10 +37,12 @@ bool Occupying::populate(ServerPopulate & command){
 		//obtengo pais a poblar
 		ReferenceCountPtr<Pais> paisD = map->obtenerPais(command.getCountryDestination());	
 		
-		cerr<<"Estado: OCUPANDO"<<endl;
+		std::cerr << "Ocupamiento valido....." << std::endl;	
+		
 		cerr<<"pais destino: "<<paisD->getNombre()<<endl;
 		cerr<<"ejercitos antes de ocupar: "<<paisD->getArmyCount()<<endl;
 		
+		std::cerr << "Agregando ejercitos al pais destino...." << std::endl;	
 		//agrego al pais destino la cantidad de ejercitos solicitados
 		paisD->addArmies(command.getArmyCount() );
 		
@@ -48,18 +52,23 @@ bool Occupying::populate(ServerPopulate & command){
 		ReferenceCountPtr<Player> playerActual = game->getPlayer( this->gameManager->getTurnManager()->getCurrentPlayer() );
 		
 		//agrego a la lista de paises del jugador, el pais ocupado.
+		std::cerr << "Agregando pais ocupado a la lista de paises del jugador....." << std::endl;
 		std::string p = command.getCountryDestination();
 		playerActual->addConqueredLand(p);
 		
 		//disminuyo en 1 la cant de ejercitos a ubicar
+		std::cerr << "Disminuyendo 1 armada de las disponibles para ocupar......" << std::endl;
 		playerActual->setArmyCount( playerActual->getArmyCount() - 1 );
 		
-		cerr<<"Cantidad de paises conquistados por el jugador "<<playerActual->getColor()<<" :"<<playerActual->getConqueredLands()<<endl;;
+		cerr<<"Cantidad de paises ocupados por el jugador "<<playerActual->getColor()<<" :"<<playerActual->getConqueredLands()<<endl;;
 	
-		// -------- Para actualizar y mensajear al cliente--------------
+		// --------mensajear al cliente--------------
+		
+		std::cerr << "Armando mensajes para el cliente....." << std::endl;
 		
 		//seteo al commando como valido
 		command.setValid(1);
+		command.setTo( gameManager->getTurnManager()->getCurrentPlayer() );
 		
 		//seteo mje principal
 		std::string mainMsg = "Pais Ocupado: "+command.getCountryDestination();
@@ -73,17 +82,26 @@ bool Occupying::populate(ServerPopulate & command){
 		//notifico cambios y mensajes
 		gameManager->notify(&command);
 		
+		std::cerr << "Clientes notificados...." << std::endl;
 		//------- fin actualizacion para cliente ------------------------
 		
 		
 		// si ya se habitaron todos los paises del mapa
 		if ( !map->areUninhabitedCountries() ){
 			
+			std::cerr << "Todos los paises del mapa ya fueron ocupados" << std::endl;
+			
+			std::cerr << "Cambiando a estado SimplePopulating......" << std::endl;
+			
 			// cambio alproximo estado: simplePopulating
 			this->gameManager->setCurrentState("simplePopulating");
 			
+			std::cerr << "Cambiando el turno al primer jugador de la ronda......" << std::endl;
+			
 			//cambio de turno al 1er jugador
 			this->gameManager->getTurnManager()->changeTurn( this->gameManager->getTurnManager()->getFirstPlayer() );
+					
+			std::cerr << "Armando comando TurnToPopulate Simple......." << std::endl;
 					
 			//preparo parametros para turnToPopulate  ( simple )
 			std::vector<string> vecParam;
@@ -110,9 +128,14 @@ bool Occupying::populate(ServerPopulate & command){
 			//notifico 
 			gameManager->notify(&turnToFirstPopu);	
 			
+			std::cerr << "Clientes notificados sobre turnToPopulate inicial" << std::endl;
+			
 			cerr<<"HORA DE POBLAR INICIAL"<<endl;	
 		}
 		else{
+			
+			std::cerr << "Cambiando turno al proximo jugador....." << std::endl;
+			
 			//cambio de turno 
 			this->gameManager->getTurnManager()->changeTurn();
 
@@ -124,6 +147,8 @@ bool Occupying::populate(ServerPopulate & command){
 			
 			//seteo jugador al que le toca jugar.
 			vecParam.push_back(strComodin.str());
+
+			std::cerr << "Creando comando TurnToOccuupy para enviar al cliente......" << std::endl;
 
 			//creo comando para notificar
 			TurnToOccupy turnToOc(vecParam);
@@ -140,12 +165,16 @@ bool Occupying::populate(ServerPopulate & command){
 			
 			//notifico 
 			gameManager->notify(&turnToOc);	
+			
+			std::cerr << "Clientes notificados de turnToOccupy....." << std::endl;
 
 		}
 	}
 	//comando invalido
 	else{
+		
 		command.setValid(0);
+		command.setTo( gameManager->getTurnManager()->getCurrentPlayer() );
 		
 		//seteo mje principal
 		std::string mainMsg = "Error! Ocupamiento invalido ";
@@ -158,6 +187,8 @@ bool Occupying::populate(ServerPopulate & command){
 		
 		//notifico cambios y mensajes
 		gameManager->notify(&command);	
+		
+		std::cerr << "Ocupamiento invalido..." << std::endl;
 	}
 		
 	return accionValida;        
