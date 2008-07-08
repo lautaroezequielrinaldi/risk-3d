@@ -29,6 +29,10 @@ class GameWindow: public CommandObserver {
          */
         UIState uiState;
         /**
+         * Almacena el boton did i win.
+         */
+        Button didIWinButton;
+        /**
          * Almacena  el boton para fin de accion,
          */
         Button noMoreButton;
