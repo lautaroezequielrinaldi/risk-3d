@@ -6,6 +6,8 @@
 #include "ui/button.h"
 #include "ui/label.h"
 #include "net/serverproxy.h"
+#include "state/clientstate.h"
+#include "state/clientwaiting.h"
 #include "../../common/smartpointer/referencecountptr.h"
 #include "../../common/commands/commandobserver.h"
 
@@ -54,6 +56,10 @@ class GameWindow: public CommandObserver {
          * Almacena la efera.
          */
         Sphere sphere;
+        /**
+         * Almacena el estado de la interfaz grafica.
+         */
+        ReferenceCountPtr<ClientState> state;
 
     /**
      * Metodos privados de la clase GameWindow.
@@ -151,6 +157,10 @@ class GameWindow: public CommandObserver {
          * Obtiene el proxy server usado en el juego.
          */
         ReferenceCountPtr<ServerProxy> getServerProxy() const;
+        /**
+         * Establece el nuevo estado de la interfaz grafica.
+         */
+        void setState(ReferenceCountPtr<ClientState>& state);
         /**
          * Pone a correr la ventana principal del juego.
          */

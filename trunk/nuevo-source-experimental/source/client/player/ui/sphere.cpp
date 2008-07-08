@@ -69,7 +69,7 @@ void Sphere::setGame(const ReferenceCountPtr<Game>& game) {
     this->game = game;
 }
 
-ReferenceCountPtr<Pais> Sphere::getHooverCountry() {
+ReferenceCountPtr<Pais>& Sphere::getHooverCountry() {
     return hooverCountry;
 }
 

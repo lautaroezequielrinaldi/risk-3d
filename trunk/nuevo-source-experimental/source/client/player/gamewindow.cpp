@@ -21,6 +21,10 @@ GameWindow::GameWindow(const ReferenceCountPtr<ServerProxy>& serverProxy):
     // Creo a duras penas un GameManager y un Mapa
     MapaParser parser;
 
+    // Estado inicial ClientWaiting
+    ReferenceCountPtr<ClientState> initialState = new ClientWaiting(*this);
+    setState(initialState);
+
     ReferenceCountPtr<Mapa> map = parser.loadMap("mapa.xml");
     RandomDice* dice = new RandomDice();
     ReferenceCountPtr<Game> game = new Game(map, *dice);
@@ -195,28 +199,17 @@ void GameWindow::drawScene() {
 
     // Dibuja y procesa boton de no more.
     if ( noMoreButton.doProcess() ) {
-        if (serverProxy != NULL) {
-            NoMore noMoreCommand;
-            serverProxy->notify(noMoreCommand);
-        }
-        noMoreButton.setEnabled(false);
-        std::cerr << "Se presiono el boton de NO MORE" << std::endl;
+        state->executeNoMore();
     }
 
     // Dibuja y procesa el boton de surrender.
     if ( surrenderButton.doProcess() ) {
-        if (serverProxy != NULL) {
-            Surrender surrenderCommand;
-            serverProxy->notify(surrenderCommand);
-        }
-        surrenderButton.setEnabled(false);
-        std::cerr << "Se presiono el boton de SURRENDER" << std::endl;
+        state->executeSurrender();
     }
 
     // Dibuja y procesa el boton de quit,
     if ( quitButton.doProcess() ) {
-        disconnectAndQuit();
-        std::cerr << "Se presiono el boton de QUIT" << std::endl;
+        state->executeQuit();
     }
 
     // Dibuja el label
@@ -267,7 +260,7 @@ void GameWindow::processQuit(const SDL_QuitEvent& event) {
 
 void GameWindow::processSphereClick() {
     if (sphere.getHooverCountry() != NULL) {
-        std::cout << "Se hizo click en el pais: " << sphere.getHooverCountry()->getNombre() << std::endl;
+        state->selectCountry(sphere.getHooverCountry());
     }
 }
 
@@ -317,6 +310,10 @@ void GameWindow::disconnectAndQuit() {
 
 ReferenceCountPtr<ServerProxy> GameWindow::getServerProxy() const {
     return serverProxy;
+}
+
+void GameWindow::setState(ReferenceCountPtr<ClientState>& state) {
+    this->state = state;
 }
 
 int GameWindow::run(int argc, char** argv) {
