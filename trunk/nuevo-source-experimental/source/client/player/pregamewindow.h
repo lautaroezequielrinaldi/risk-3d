@@ -16,6 +16,7 @@
 #include "../../common/commands/maplist.h"
 #include "../../common/commands/youare.h"
 #include "../../common/commands/quit.h"
+#include "../../common/commands/turntooccupy.h"
 #include "../../common/commands/commandobserver.h"
 #include "net/serverproxy.h"
 #include "../../common/net/urlparser.h"
@@ -204,6 +205,8 @@ class PreGameWindow: public CommandObserver, public Gtk::Window {
 		 * Metodo cuyo proposito es establecer la cantidad de jugadores activos que hay.
 		 */
 		void setActivePlayerCount( int playerCount );
+		
+		void commandExecuted(TurnToOccupy & cmd);
 		
 		/**
 		 * Metodo cuyo proposito es obtener la cantidad de jugadores activos que hay.

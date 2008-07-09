@@ -227,11 +227,18 @@ void PreGameWindow::commandExecuted(Map & cmd){
 	
 	std::cerr<<"Termino de cargar el mapa en todos los clientes....."<<std::endl;
 	
+
+	
+}
+
+void PreGameWindow::commandExecuted(TurnToOccupy & cmd){
+	
+	std::cerr<<"Termina presala, llego TurnToOccupy........"<<std::endl;
+	
 	//oculta pre sala
 	this->hide();
 	
     iniciarOpenGL();
-	
 }
 
 void PreGameWindow::commandExecuted(YouAre & cmd){
