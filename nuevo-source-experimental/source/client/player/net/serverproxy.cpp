@@ -46,6 +46,7 @@ void * ServerProxy::run() {
 
             std::cerr << "Se notifico comando..." << std::endl;
             
+            std::cerr << "salio de mostarr cambios" << std::endl;
 		}
 		else{
             
