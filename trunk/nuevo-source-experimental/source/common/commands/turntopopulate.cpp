@@ -25,7 +25,7 @@ TurnToPopulate::TurnToPopulate(const std::string & xml):Command (){
 }
 
 std::string TurnToPopulate::serialize(){
-	 return "<?xml version=\"1.0\"?>"+serializeCommon(0,numeroJugador)+" </turntopopulate>";
+	 return "<?xml version=\"1.0\"?></turntopopulate>"+serializeCommon(0,numeroJugador)+"</turntopopulate>";
 }
 		
 
