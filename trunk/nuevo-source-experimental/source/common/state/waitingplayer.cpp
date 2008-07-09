@@ -2,6 +2,7 @@
 #include "stateobserver.h"
 #include "../commands/youare.h"
 #include "../commands/map.h"
+#include "../commands/turntooccupy.h"
 #include "../model/gamemanager.h"
 #include "../Servercommands/serverreadytoplay.h"
 #include <vector>
@@ -104,6 +105,18 @@ bool WaitingPlayer::readyToPlay(ServerReadyToPlay & command){
 		
 		std::cerr<< " Por sorteo empezara a jugar el jugador N° " << jugadorEmpieza << std::endl;
 		
+				//creo comando para enviar turn to occupy a los clientes
+		std::vector<std::string> param;
+		std::ostringstream jugOcupa;
+		jugOcupa << jugadorEmpieza;
+		
+		param.push_back( jugOcupa.str() );
+		
+		TurnToOccupy *turnToOc = new TurnToOccupy(param);
+		
+		this->gameManager->notify(turnToOc);
+	
+		delete turnToOc;
 	}	
 	
 	return false;
