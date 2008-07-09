@@ -21,6 +21,7 @@ GameWindow::GameWindow(const ReferenceCountPtr<ServerProxy>& serverProxy):
     messageLabel(uiState),
     sphere(uiState) {
     if (this->serverProxy != NULL) {
+        std::cerr << "Se registra como listener de comandos" << std::endl;
         this->serverProxy->registerCommandObserver(this);
     }
     // Creo a duras penas un GameManager y un Mapa
@@ -463,7 +464,9 @@ void GameWindow::commandExecuted(TurnToOccupy& cmd){
 	else
 		messageLabel.setText(cmd.getSecMsg());
 	
-	//pasar a estado occupying   ??????????????
+    ReferenceCountPtr<ClientState> occupying = new ClientPopulating(*this);
+    this->setState(occupying);
+    std::cerr << "SE PASO A OCCUPYING" << std::endl;	
 }
 
 void GameWindow::commandExecuted(TurnToPopulate& cmd){

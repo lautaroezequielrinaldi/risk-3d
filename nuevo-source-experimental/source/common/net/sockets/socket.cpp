@@ -11,7 +11,7 @@
  * Project Includes.
  */
 #include "socket.h"
-
+#include<iostream>
 /*
  * Client socket
  *
@@ -167,8 +167,16 @@ int Socket::write(const std::string & data) throw(SocketIOException) {
 std::string Socket::full_read(int length)
 	throw(SocketIOException) {
 
+    std::cerr << "A PUNTO DE CREAR BUFFER" << std::endl;
 	char * buffer = new char[length];
+    if (buffer != NULL) {
+        std::cerr << "BUFFER CREADO" << std::endl;
+    } else {
+        std::cerr << "BUFFER NO CREADO" << std::endl;
+    }
+    std::cerr << "A PUNTO DE INVOCAR FULL READ INNER" << std::endl;
 	full_read(buffer,length);
+    std::cerr << "SE INVOCO FULL READ INNER" << std::endl;
 
 	std::string result;
 	result.append(buffer, length);
@@ -179,16 +187,29 @@ std::string Socket::full_read(int length)
 
 void Socket::full_read(char* data, int length)
 	throw(SocketIOException) {
-
+    if (data == NULL) {
+        std::cerr << "******** KERNEL PANIC.. DATA ERA NULL" << std::endl << std::endl;
+    } else {
+        std::cerr << "DATA NO ES NULL" << std::endl;
+    }
 	int read = 0;
 	int index = 0;
 	int toread = length;
-
+    std::cerr << "***** A PUNTO DE LEER: " << length << " BYTES EN SOCKET::FULL_READ INTERNO" << std::endl;
 	while (toread) {
+        std::cerr << "**** ANTES *** TOREAD: " << toread << " READ: " << read << " INDEX: " << index << std::endl;
+        if (this == NULL) {
+            std::cerr << "KERNEL PANIC: THIS ES NULL" << std::endl;
+        } else {
+            std::cerr << "THIS NO ES NULL" << std::endl;
+        }
 		read   = this->read(data + index,toread);
 		toread -= read;
 		index  +=read;
+        std::cerr << "**** DESPUES *** TOREAD: " << toread << " READ: " << read << " INDEX: " << index << std::endl;
+        std::cerr << std::endl;
 	}
+    std::cerr << "***** SE LEYO: " << length << " BYTES EN SOCKET::FULL_READ INTERNO" << std::endl;
 }
 
 int Socket::read(char* data, int length)

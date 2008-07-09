@@ -43,6 +43,8 @@ void * ServerProxy::run() {
             std::cerr << "Se pudo ejecutar comando..." << std::endl;
            
             notifyCommandExecuted(*command);
+
+            std::cerr << "Se notifico comando..." << std::endl;
             
 		}
 		else{
@@ -54,7 +56,9 @@ void * ServerProxy::run() {
             else
             	std::cerr << "Se pudo crear comando con messageHydrator" << std::endl;
             
+            std::cerr << "Se esta por notificar comando" << std::endl;
             notifyCommandExecuted(*command);
+            std::cerr << "Se notifico comando" << std::endl;
             
             if ( command->getName() == "mapList" )  
             	dispatcherMapList.emit();
