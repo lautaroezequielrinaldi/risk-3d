@@ -20,7 +20,14 @@ void * PlayerProxy::run() {
 		std::cerr << std::endl << "################################"<< std::endl<< "PlayerProxy leyendo encabezado " << std::endl;
 		
 		// deshardcodear este 32
+		std::cerr << "********** A PUNTO DE INVOCAR A SOCKET::FULL_READ(32)" << std::endl << std::endl;
+        if (getSocket() != NULL) {
+            std::cerr << "********* SOCKET ERA NULL" << std::endl;
+        } else {
+            std::cerr << "********* SOCKET NOOOO ES NULL" << std::endl;
+        }
 		msg << getSocket()->full_read(32);
+        std::cerr << "********** SE INVOCO CORRECTAMENTE A SOCKET::FULL_READ(32)" << std::endl << std::endl;
 		msg >> msgLen;
 		msg >> commandName;
 

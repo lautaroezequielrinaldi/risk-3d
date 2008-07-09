@@ -1,7 +1,7 @@
 #include "commandobservable.h"
 #include "command.h"
 #include "commandobserver.h"
-
+#include<iostream>
 CommandObservable::CommandObservable() {
 	// No realiza ninguna accion.
 }
@@ -13,7 +13,9 @@ void CommandObservable::notifyCommandExecuted(Command& command) {
 	for (iter = commandObserverList.begin(); iter != commandObserverList.end();
 		++iter) {
 		CommandObserver* commandObserver = *iter;
+        std::cerr << "A punto de notificar comando en CommandObservable" << std::endl;
 		command.accept(commandObserver);
+        std::cerr << "Se notifico comando en CommandObservable" << std::endl;
 	}
 }
 

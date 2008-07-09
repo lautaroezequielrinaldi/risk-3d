@@ -113,7 +113,7 @@ bool WaitingPlayer::readyToPlay(ServerReadyToPlay & command){
 		param.push_back( jugOcupa.str() );
 		
 		TurnToOccupy *turnToOc = new TurnToOccupy(param);
-		sleep(5);
+		sleep(20);
 		this->gameManager->notify(turnToOc);
 	
 		delete turnToOc;
