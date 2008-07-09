@@ -14,11 +14,12 @@ Condition_Variable::~Condition_Variable()
 
 int Condition_Variable::wait(Mutex & mutex) {
 	
-	return pthread_cond_wait(& this->condicion , & mutex.getPthreadMutex() );
+	return pthread_cond_wait(& this->condicion , &mutex.mutex );
 }
 
 int Condition_Variable::signal (){
 	
 	return pthread_cond_signal(& this->condicion);
 }
+
 
