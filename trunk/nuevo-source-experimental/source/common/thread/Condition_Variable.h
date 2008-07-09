@@ -1,7 +1,7 @@
 #ifndef CONDITION_VARIABLE_H_
 #define CONDITION_VARIABLE_H_
 
-#include "Mutex.h"
+#include "mutex.h"
 #include <pthread.h>
 
 class Condition_Variable

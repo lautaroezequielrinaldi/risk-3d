@@ -10,6 +10,7 @@
  * POSIX Thread Library Includes.
  */
 #include<pthread.h>
+#include "Condition_Variable.h"
 
 /**
  * Project Includes.
@@ -17,6 +18,9 @@
 // No necesita incluir ninguna declaraciòn del proyecto.
 
 class Mutex {
+	
+friend class Condition_Variable;
+	
 /**
  * Definiciòn de atributos privados de la clase Mutex.
  */
