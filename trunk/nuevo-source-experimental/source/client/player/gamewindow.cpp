@@ -151,6 +151,7 @@ void GameWindow::runMainLoop() {
         processEvents();
         updateScene();
         drawScene();
+        SDL_Delay(10);
     }
 }
 
